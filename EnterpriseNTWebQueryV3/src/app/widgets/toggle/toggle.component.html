@@ -1,0 +1,6 @@
+<input type="checkbox" id="{{id}}" [ngModel]="status" (change)="changed.emit($any($event.target)?.checked)">
+<label class="toggle-button-switch" for="{{id}}"></label>
+<div class="toggle-button-text">
+  <div class="toggle-button-text-on">{{'0259' | translate}}</div>
+  <div class="toggle-button-text-off">No</div>
+</div>

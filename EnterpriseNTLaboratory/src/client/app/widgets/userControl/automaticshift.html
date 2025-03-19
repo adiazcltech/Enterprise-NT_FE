@@ -1,0 +1,489 @@
+<style>
+  .k-numerictextbox .k-input {
+    margin-top: 0px !important;
+  }
+
+  .md-input-wrapper.md-input-wrapper-disabled>label {
+    color: #aaa;
+  }
+
+</style>
+<modalexceptions idcontrol="'modalautomaticshift'" openmodal="automaticshift.ShowPopupError"
+  detailerror="automaticshift.Error"></modalexceptions>
+<loadpage view="automaticshift.loading"></loadpage>  
+<div id="automaticshift" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <loadpage view="automaticshift.loadingturn"></loadpage>
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-teal-800">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-blue-50" ng-click="automaticshift.closed()"
+              data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-light-blue-50 md-33">record_voice_over</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          {{'0885' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" ng-show="automaticshift.listshift.length > 0">
+        <div class="md-card  md-card-hover" style="height: calc(100vh - 83px);">
+          <div class="md-card-content fullheight" style="padding: 0px;">
+            <div class="uk-grid div-head-zone uk-flex uk-flex-middle" style="margin-left: 0px;">
+              <div class="uk-width-1-10 uk-text-bold uk-text-truncate" style="padding-left: 54px;">
+                {{'0886' | translate}}
+              </div>
+              <div class="uk-width-2-10 uk-text-bold uk-text-truncate" style="margin-left: 19px;">
+                {{'0090' | translate}}
+              </div>
+              <div class="uk-width-4-10 uk-text-bold uk-text-truncate" style="width: 36%;margin-left: -14px;">
+                {{'0887' | translate}}
+              </div>
+              <div class="uk-width-1-10 uk-text-bold uk-text-truncate" style="padding-left: 50px;">
+                {{'0888' | translate}}
+              </div>
+              <div class="uk-width-1-10 uk-text-bold uk-text-center" style="padding-left: 8px;">
+                {{'0889' | translate}}
+                ({{'0478' | translate}})
+              </div>
+              <div class="uk-width-1-10 uk-text-bold uk-text-truncate">
+              </div>
+            </div>
+            <div class="vs-repeat-zone-scroll" style="height: calc(100% - 57px)">
+              <div ng-repeat="items in automaticshift.listshift"
+                class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table-zone" style="margin-top: 0px;">
+                <div class="md-card md-card-primary"
+                  style="width: 97%;margin-left: 1px;border-left-color:{{items.turnType.color}}">
+                  <div class="md-card-content" style="padding: 5px;">
+                    <div class="uk-grid uk-grid uk-flex uk-flex-middle">
+                      <div class="uk-width-1-10">
+                        {{items.turnType.code}}{{items.number}}
+                      </div>
+                      <div class="uk-width-2-10" data-ng-bind="items.service.name">
+                      </div>
+                      <div class="uk-width-4-10">
+                        {{items.turnType.name}}
+                      </div>
+                      <div class="uk-width-1-10" data-ng-bind="items.priority">
+                      </div>
+                      <div class="uk-width-1-10" data-ng-bind="items.standbyTime">
+                      </div>
+                      <div class="uk-width-1-10">
+                        <a class="md-btn md-btn-small md-btn-wave-light md-btn-icon"
+                          ng-click="automaticshift.call(items)" style="background-color: {{items.turnType.color}}">
+                          <i class="uk-icon-male  md-color-blue-50"></i>
+                          {{'0890' | translate}}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md-card  md-card-hover fullheight" ng-show="automaticshift.listshift.length === 0">
+        <div class="md-card-content fullheight">
+          <div class="uk-grid fullheight ">
+            <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+              <img class="img-responsive" style="height: 90px; width: 90px;" src="images/database.png">
+            </div>
+            <div class="uk-width-1-1 uk-text-center">
+              <h3>({{'0891' | translate}})</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="modalattendshift">
+  <div class="uk-modal-dialog" style="padding: 0px 20px 0px 0px;">
+    <div class="uk-modal-body">
+      <div class="uk-grid uk-grid-divider" style="margin-left: 0px;margin-right: 0px;">
+        <div class="uk-width-5-10 uk-text-center"
+          style="padding: 57px 0px;background-color: {{automaticshift.dataturn.turnType.color}}">
+          <span>{{'0886' | translate}}</span><br>
+          <h5 style="font-size: 67px; color: white">
+            {{automaticshift.dataturn.turnType.code}}-{{automaticshift.dataturn.number}}</h5>
+        </div>
+        <div class="uk-width-5-10">
+          <ul class="md-list md-list-addon">
+            <li>
+              <div class="md-list-addon-element">
+                <img class="material-icons md-24" ng-src="images/Menu/siga/typeturn.png" />
+              </div>
+              <div class="md-list-content">
+                <span class="md-list-heading">{{'0887' | translate}}</span>
+                <span class="uk-text-small uk-text-muted">{{automaticshift.dataturn.turnType.name}}</span>
+              </div>
+            </li>
+            <li>
+              <div class="md-list-addon-element">
+                <img class="material-icons md-24" ng-src="images/order/service.png" />
+              </div>
+              <div class="md-list-content">
+                <span class="md-list-heading">{{'0090' | translate}}</span>
+                <span class="uk-text-small uk-text-muted">{{automaticshift.dataturn.service.name}}</span>
+              </div>
+            </li>
+            <li>
+              <div class="md-list-addon-element">
+                <img class="material-icons md-24" ng-src="images/Menu/siga/timer.png" />
+              </div>
+              <div class="md-list-content">
+                <span class="md-list-heading">{{'0892' | translate}}</span>
+                <span class="uk-text-small uk-text-muted" ng-if="automaticshift.showCountTicket">
+                  <timer ng-if="automaticshift.lenguaje === 'esCo'" interval="1000" language="es">{{secondUnit}}</timer>
+                  <timer ng-if="automaticshift.lenguaje === 'enUsa'" interval="1000">{{secondUnit}}</timer>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer" style="margin: 0px -20px -20px 0px;">
+      <div class="uk-grid uk-grid-small uk-flex uk-flex-center uk-flex-middle">
+        <div class="uk-width-1-10">
+          <button type="button" class="md-fab md-fab-small md-fab-success" 
+            ng-click="automaticshift.attend()"
+            ng-class="{'md-bg-blue-grey-100' : automaticshift.isDisableattend}"
+            ng-disabled="automaticshift.isDisableattend">
+            <i class="uk-icon-street-view md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0899' | translate}}"></i>
+          </button>
+        </div>
+        <div class="uk-width-1-10">
+          <button type="button" class="md-fab md-fab-small md-fab-danger"
+            data-uk-modal="{target:'#motivecancel',bgclose: false}">
+            <i class="uk-icon-remove  md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0008' | translate}}"></i>
+          </button>
+        </div>
+        <div class="uk-width-1-10">
+          <button type="button" class="md-fab md-fab-small md-bg-purple-300"
+            data-uk-modal="{target:'#modalreserverturn',bgclose: false}"
+            ng-class="{'md-bg-blue-grey-100' : automaticshift.isDisableAplazar}"
+            ng-disabled="automaticshift.isDisableAplazar">
+            <i class="uk-icon-pencil-square-o  md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0900' | translate}}"></i>
+          </button>
+        </div>
+        <div class="uk-width-1-10">
+          <button type="button" class="md-fab md-fab-small md-fab-warning"
+            data-uk-modal="{target:'#motivepostponeturn',bgclose: false}" ng-click="automaticshift.time=1"
+            ng-class="{'md-bg-blue-grey-100' : automaticshift.isDisableAplazar}"
+            ng-disabled="automaticshift.isDisableAplazar">
+            <i class="uk-icon-share-square-o md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0901' | translate}}"></i>
+          </button>
+        </div>
+        <div class="uk-width-1-10" ng-if="automaticshift.viewbuttonentry">
+          <button type="button" class="md-fab md-fab-small md-fab-primary" ng-click="automaticshift.getOrdersTurn()"
+            ng-class="{'md-bg-blue-grey-100' : automaticshift.isDisableAplazar}"
+            ng-disabled="automaticshift.isDisableAplazar">
+            <i class="uk-icon-paste  md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0902' | translate}}"></i>
+          </button>
+        </div>
+        <div class="uk-width-1-10" ng-if="automaticshift.viewbuttonentry">
+          <button type="button" class="md-fab md-fab-small md-fab-danger md-bg-teal-700"
+            ng-click="automaticshift.enterOrderTurn()"
+            ng-class="{'md-bg-blue-grey-100' : automaticshift.isDisableAplazar}"
+            ng-disabled="automaticshift.isDisableAplazar">
+            <i class="uk-icon-files-o  md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0903' | translate}}"></i>
+          </button>
+        </div>
+        <div class="uk-width-1-10" ng-if="!automaticshift.viewbuttonentry">
+          <button type="button" class="md-fab md-fab-small md-fab-danger md-bg-teal-700"
+            ng-click="automaticshift.getOrdersattend()"
+            ng-class="{'md-bg-blue-grey-100' : automaticshift.isDisableAplazar}"
+            ng-disabled="automaticshift.isDisableAplazar">
+            <i class="uk-icon-files-o  md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0916' | translate}}"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="motivecancel" bg-close="false">
+  <loadpage view="vm.loadingturn"></loadpage>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 1px solid #f5f5f5;">
+      <h3 class="uk-modal-title">
+        <i class="material-icons md-color-light-blue-50">&#xE5CD;</i>
+        {{'0893' | translate}}
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <div class="uk-form-row">
+        <form class="form" name="myForm">
+          <div class="uk-form-row">
+            <select class="md-input"
+              ng-options="obj as obj.name for obj in automaticshift.listMotiveCancel track by obj.id"
+              data-ng-model="automaticshift.motiveCancel" class="form-control"></select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-bg-red-A700 md-btn-wave-light waves-effect waves-button waves-light md-color-light-blue-50"
+        ng-click="automaticshift.cancel()" ng-disabled="automaticshift.motiveCancel===undefined"
+        ng-class="{'md-bg-blue-grey-100' : automaticshift.motiveCancel===undefined}">{{'0246' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default" ng-click="automaticshift.motiveCancel=undefined"
+        data-uk-modal="{target:'#modalattendshift',bgclose: false}">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div id="modalreserverturn" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div ng- class="uk-overflow-container" style="margin-top: 0px">
+        <div style="width: 80px; float: left;">
+          <img class="img-responsive" src="images/iconinfo.png">
+        </div>
+        <div class="uk-text-center" style="margin-top: 26px">
+          <h4>{{'0894' | translate}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="automaticshift.reserverturn()">{{'0246' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default"
+        data-uk-modal="{target:'#modalattendshift',bgclose: false}">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="motivepostponeturn" bg-close="false">
+  <loadpage view="vm.loadingturn"></loadpage>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-orange-A700" style="border-bottom: 1px solid #f5f5f5;">
+      <h3 class="uk-modal-title">
+        <i class="uk-icon-share-square-o md-color-grey-50"></i>
+        {{'0895' | translate}}
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <div class="uk-form-row">
+        <form class="form" name="Form">
+          <div class="uk-form-row">
+            <div class="uk-modal-content">{{'0896' | translate}} ({{'0478' | translate}}):</div>
+            <input kendo-numeric-text-box k-format="'n0'" k-min="1" k-max="100" k-ng-model="automaticshift.time"
+              k-on-change="automaticshift.change(automaticshift.time)" style="width: 100%;" />
+          </div>
+          <div class="uk-form-row">
+            <div class="uk-modal-content">{{'0113' | translate}}:</div>
+            <select class="md-input"
+              ng-options="obj as obj.name for obj in automaticshift.listMotiveponeturn track by obj.id"
+              data-ng-model="automaticshift.motiveponeturn" class="form-control"></select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-bg-orange-A700 md-btn-wave-light waves-effect waves-button waves-light md-color-light-blue-50"
+        ng-click="automaticshift.poneturn()" ng-disabled="automaticshift.motiveponeturn===undefined"
+        ng-class="{'md-bg-blue-grey-100' : automaticshift.motiveponeturn===undefined}">{{'0246' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default"
+        ng-click="automaticshift.motiveponeturn=undefined;automaticshift.time=1"
+        data-uk-modal="{target:'#modalattendshift',bgclose: false}">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="lisrorderassign" bg-close="false">
+  <loadpage view="vm.loadingturn"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-header md-bg-blue-500" style="border-bottom: 1px solid #f5f5f5;">
+      <h3 class="uk-modal-title">
+        <i class="uk-icon-paste md-color-grey-50"></i>
+        {{'0897' | translate}}
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <div class="uk-form-row">
+        <form class="form" name="Form">
+          <div class="uk-grid uk-container-center ordersearch-filter-padding">
+            <div class="uk-width-1-2 uk-row-first" ng-if="automaticshift.showDocumentType">
+              <label>{{'0233' | translate}}</label>
+              <select id="txt_ordersearch_patient_doc" class="md-input" ng-model="automaticshift.patientDocToSearch"
+                ng-change="automaticshift.consultorder()">
+                <option ng-repeat="doc in automaticshift.documentTypes" value="{{doc.id}}">
+                  {{doc.name.toUpperCase()}}
+                </option>
+              </select>
+              <span class="md-input-bar"></span>
+            </div>
+            <div class="uk-width-1-1 uk-row-first"
+              ng-class="{'uk-width-1-2' :automaticshift.showDocumentType}">
+              <div class="md-input-wrapper">
+                <label>{{'0117' | translate}}</label>
+                <input  type="text" class="md-input ordersearch-uppercase"
+                  ng-model="automaticshift.patientIdToSearch"
+                  ng-keypress="$event.keyCode === 13 && automaticshift.searchByPatientId()">
+                <span class="md-input-bar"></span>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1" style="height: 230px">
+            <div class="md-card md-card-hover fullheight"
+              ng-show="automaticshift.orders.length !== 0 || automaticshift.orders===undefined "
+              style="margin-top: 25px;">
+              <div class="md-card-content" style="height: 100%;padding: 0px;">
+                <div class="uk-grid div-head-zone" style="height: 25px;">
+                  <div class="uk-width-1-10 uk-text-bold uk-text-truncate"
+                    ng-show="automaticshift.orders.length === 0 || automaticshift.orders===undefined"
+                    style="width: 5%;">
+                    <input type="checkbox" icheck ng-model="order.turnsMovement" ng-disabled="true" class="check_row"
+                      table-check-row>
+                  </div>
+                  <div class="uk-width-1-10 uk-text-bold uk-text-truncate"
+                    ng-show="automaticshift.orders.length !== 0 && automaticshift.orders!==undefined"
+                    style="width: 5%;">
+                    <input type="checkbox" icheck ng-model="automaticshift.selectAllcheck"
+                      ng-change="automaticshift.selectall()" class="check_row" table-check-row>
+                  </div>
+                  <div class="uk-width-2-10 uk-text-bold uk-text-truncate">
+                    {{'0061' | translate}}
+                  </div>
+                  <div class="uk-width-3-10 uk-text-bold uk-text-truncate" style="width: 35%;">
+                    {{'0133' | translate}}
+                  </div>
+                  <div class="uk-width-2-10 uk-text-bold uk-text-truncate">
+                    {{'0426' | translate}}
+                  </div>
+                  <div class="uk-width-2-10 uk-text-bold uk-text-truncate">
+                    {{'0120' | translate}}
+                  </div>
+                </div>
+                <div class="vs-repeat-zone-scroll" vs-repeat="20" data-scroll-to-top='automaticshift.orders.length' style="height: calc(100% - 42px)" >
+                  <div ng-repeat="order in  automaticshift.orders" 
+                    class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table-zone" style="margin-top: 0px;">
+                    <div class="uk-width-1-10" style="width: 5%;">
+                      <input type="checkbox" icheck ng-model="order.select">
+                    </div>
+                    <div class="uk-width-2-10" data-ng-bind="order.orderNumber"></div>
+                    <div class="uk-width-3-10" style="width: 35%;">{{order.patient.name1}} {{order.patient.name2}}
+                      {{order.patient.lastName}} {{order.patient.surName}} </div>
+                    <div class="uk-width-2-10">{{order.patient.sex.sexlanguaje}}</div>
+                    <div class="uk-width-2-10">{{ order.patient.birthday | date: 'dd/MM/yyyy' }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md-card md-card-hover md-card-hover fullheight" ng-show="automaticshift.orders.length === 0">
+              <div class="md-card-content fullheight">
+
+                <div class="uk-grid fullheight ">
+                  <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                    <img class="img-responsive" style="height: 90px; width: 90px;"
+                      src="images/inconsistency/lasname.png">
+                  </div>
+                  <div class="uk-width-1-1 uk-text-center">
+                    <h3>{{'0898' | translate}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-color-light-blue-50"
+        ng-click="automaticshift.saveorderasing()"
+        ng-class="{'md-bg-blue-grey-100' :((automaticshift.orders | filter:{ select: true}).length === 0 ) || automaticshift.orders === undefined}"
+        ng-disabled="(automaticshift.orders | filter:{ select: true}).length === 0 || automaticshift.orders === undefined">{{'0246' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default" data-uk-modal="{target:'#modalattendshift',bgclose: false}"
+        ng-click="automaticshift.selectAllcheck=false">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="orderassignverification" bg-close="false">
+  <loadpage view="vm.loadingturn"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-header md-bg-blue-500" style="border-bottom: 1px solid #f5f5f5;">
+      <h3 class="uk-modal-title">
+        <i class="uk-icon-paste md-color-grey-50"></i>
+        {{'0916' | translate}}
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <div class="uk-form-row">
+        <form class="form" name="Form">
+          <div class="uk-width-1-1" style="height: 230px">
+            <div class="md-card md-card-hover fullheight"
+              ng-show="automaticshift.dataorder.length !== 0 || automaticshift.dataorder===undefined">
+              <div class="md-card-content" style="height: 100%;padding: 0px;">
+                <div class="uk-grid div-head-zone" style="height: 25px;">
+                  <div class="uk-width-1-10 uk-text-bold uk-text-truncate" style="width: 5%;">
+
+                  </div>
+                  <div class="uk-width-2-10 uk-text-bold uk-text-truncate">
+                    {{'0061' | translate}}
+                  </div>
+                  <div class="uk-width-3-10 uk-text-bold uk-text-truncate" style="width: 35%;">
+                    {{'0133' | translate}}
+                  </div>
+                  <div class="uk-width-2-10 uk-text-bold uk-text-truncate">
+                    {{'0426' | translate}}
+                  </div>
+                  <div class="uk-width-2-10 uk-text-bold uk-text-truncate">
+                    {{'0120' | translate}}
+                  </div>
+                </div>
+                <div class="vs-repeat-zone-scroll" style="height: calc(100% - 42px)">
+                  <div ng-repeat="order in  automaticshift.dataorder"
+                    class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table-zone" style="margin-top: 0px;">
+                    <div class="uk-width-1-10" style="width: 5%;">
+                      <input type="checkbox" icheck ng-model="order.select"
+                        ng-change="automaticshift.viewverification(order)" style="width: 5%;">
+                    </div>
+                    <div class="uk-width-2-10" data-ng-bind="order.orderNumber"></div>
+                    <div class="uk-width-3-10" style="width: 35%;">{{order.patient.name1}} {{order.patient.name2}}
+                      {{order.patient.lastName}} {{order.patient.surName}} </div>
+                    <div class="uk-width-2-10">{{order.patient.sex.sexlanguaje}}</div>
+                    <div class="uk-width-2-10">{{ order.patient.birthday | date: 'dd/MM/yyyy' }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md-card md-card-hover md-card-hover fullheight" ng-show="automaticshift.dataorder.length === 0">
+              <div class="md-card-content fullheight">
+
+                <div class="uk-grid fullheight ">
+                  <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                    <img class="img-responsive" style="height: 90px; width: 90px;"
+                      src="images/inconsistency/lasname.png">
+                  </div>
+                  <div class="uk-width-1-1 uk-text-center">
+                    <h3>{{'0898' | translate}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-color-light-blue-50"
+        ng-click="automaticshift.selectOrder()"
+        ng-class="{'md-bg-blue-grey-100' :((automaticshift.dataorder | filter:{ select: true}).length === 0 )}"
+        ng-disabled="(automaticshift.dataorder | filter:{ select: true}).length === 0">{{'0246' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default" data-uk-modal="{target:'#modalattendshift',bgclose: false}"
+        ng-click="automaticshift.selectAllcheck=false">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>

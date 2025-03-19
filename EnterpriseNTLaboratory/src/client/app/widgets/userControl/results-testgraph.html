@@ -1,0 +1,18 @@
+<div class="uk-modal" id="rs-modal-testgraph">
+  <div class="uk-modal-dialog" style="width: 60%;">
+    <div class="uk-modal-header md-bg-orange-400 md-color-blue-50 uk-inline">
+        <div style="position:relative !important">
+        {{resultstestgraph.currenttest.testName}}            
+        </div>
+        <div class="uk-position-fixed uk-position-top-right">
+            <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}" ng-click="resultstestgraph.closemodaltestgraph()">&#xE5CD;</i>
+        </div>
+    </div>
+    <!-- Gráfica de tendencia -->
+    <div class="md-card">
+      <div class="md-card-content" ng-repeat="graph in resultstestgraph.listgraphics">
+        <echart  style="height: 400px; width: 100%;" data="graph.datagraphics" options="graph.options"></echart>
+      </div>
+    </div>
+  </div>
+</div>

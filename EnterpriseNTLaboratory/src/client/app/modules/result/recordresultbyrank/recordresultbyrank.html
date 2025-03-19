@@ -1,0 +1,354 @@
+<style>
+  span.k-combobox-wrap,
+  span.k-state-default,
+  span.k-state-default:hover,
+  span.k-state-default:focus {
+    padding: 0px !important;
+    height: 30px !important;
+    border-style: none;
+    background-color: #fff !important
+  }
+
+  span.md-input-bar {
+    display: none;
+  }
+
+  .k-dropdown-wrap .k-input,
+  .k-dropdown-wrap.k-state-focused .k-input,
+  .k-dropdown-wrap.k-state-focused .k-input,
+  .k-dropdown-wrap.k-state-focused .k-input,
+  .k-textbox>input {
+    margin-top: -44px;
+    height: 30px;
+    padding: 0px;
+  }
+
+
+
+  span>div.md-input-wrapper {
+    top: 0px !important;
+    width: 101% !important;
+    padding-top: 3px;
+    margin-top: 3px;
+  }
+
+  span.k-widget,
+  span.k-combobox,
+  span.k-numeric,
+  span.k-autocomplete,
+  span.k-header {
+    padding-bottom: 0px;
+    margin-top: 8px !important;
+    background-color: transparent;
+    margin-top: -2px
+  }
+
+
+  .k-input {
+    background-color: transparent;
+    padding-bottom: 0px;
+    margin-top: -6px;
+    width: 113%;
+  }
+
+  .k-numerictextbox .k-input {
+    margin-top: -52px;
+    height: 52px;
+  }
+
+
+  .k-block,
+  .k-draghandle,
+  .k-grid-header,
+  .k-grouping-header,
+  .k-header,
+  .k-pager-wrap,
+  .k-treemap-tile,
+  html .km-pane-wrapper .k-header {
+    background-color: #2196f3;
+  }
+</style>
+<div id="page_content" style="overflow-y: hidden;">
+  <loadpage view="vm.loading"></loadpage>
+  <div id="page_content_inner">
+    <div style="height: 100%" class="uk-grid">
+      <div class="uk-width-1-1" style="height: 100%" >
+        <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1_content'}" id="tabs_1">
+          <li class="uk-active" ng-click="vm.tabresul=1"><a href="#">{{'0027' | translate}}</a></li>
+          <li><a href="#" ng-click="vm.tabresul=2">{{'0312' | translate}}</a></li>
+        </ul>
+        <ul id="tabs_1_content" class="uk-switcher uk-margin"
+          style="height: calc(100% - 37px) !important; margin-top: 8px">
+          <li style="height: 100%;">
+            <div class="uk-grid" style="height: 100%;">
+              <div class="uk-width-1-1 " style="height: 100px">
+                <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+                  <div style="height: auto" class="md-card-content">
+                    <div class="uk-grid" style="height: 100%">
+                      <div class="uk-width-1-1" ng-if="vm.tabresul===1">
+                        <fieldset class="">
+                          <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                            isopenreport="vm.isOpenReport" typeview="1"></orderfilter>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-width-1-1 " style="height: calc(100% - 184px); margin-top: 10px">
+                <form style="height: 100%; overflow-y: auto"
+                  class="md-card md-card-content uk-animation-scale-up uk-animation-40">
+                  <div style="height: calc(100% - 35px)" class="md-card-content uk-grid">
+                    <div class="uk-width-1-2" style="height: 70px">
+                      <label style="font-size: 12px; margin-left: 55px">{{'0013' | translate}}</label>
+                      <div class="uk-input-group">
+                        <span style="padding-top: 10px" class="uk-input-group-addon">
+                          <img ng-if="vm.typeresult === 0" ng-src="images/analytical/resultsentry/filterresult.png"
+                            alt="" />
+                          <img ng-if="vm.typeresult === 2"
+                            ng-src="images/analytical/recordresultbyrank/typeresulttext.png" alt="" />
+                          <img ng-if="vm.typeresult === 1"
+                            ng-src="images/analytical/recordresultbyrank/typeresultnumber.png" alt="" />
+                          <img ng-if="vm.typeresult === 3"
+                            ng-src="images/analytical/recordresultbyrank/typeresultlist.png" alt="" />
+                        </span>
+                        <div class="md-input-wrapper">
+                          <loadcombobox change="vm.gettype()" listorigin="vm.dataTest" placeholder="'0253'"
+                            ng-model="vm.dataTestid"></loadcombobox>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-2 uk-grid" style="font-size: 12px; height: 70px">
+                      <label>{{'0289' | translate}}</label>
+                      <div ng-if="vm.typeresult === 0" class="uk-width-1-1">
+                        <hr style="margin-top: 46px">
+                      </div>
+                      <div ng-if="vm.typeresult === 2" class="uk-width-1-1">
+                        <input md-input label-fixed class="md-input  label-fixed" ng-init="vm.validusername = true"
+                          type="text" data-ng-model="vm.dataliteralresult" maxlength="16" required />
+                      </div>
+                      <div ng-if="vm.typeresult === 3" class="uk-width-1-1">
+                        <select md-input class="md-input"
+                          ng-options="obj as obj.literalResult.name for obj in vm.dataliteralresult track by obj.literalResult.id"
+                          data-ng-model="vm.literalresult" class="form-control"></select>
+                      </div>
+                      <div ng-if="vm.typeresult === 1" class="uk-width-1-1">
+                        <input md-input label-fixed class="md-input label-fixed" k-format="vm.format"
+                          k-decimals="vm.decimaltest" k-step="vm.decimaltest" kendo-numeric-text-box
+                          k-ng-model="vm.dataliteralresult" maxlength="16" style="width: 100%">
+                      </div>
+                    </div>
+                    <div class="uk-width-1-1" style="margin-top: 10px; height: calc(100% - 75px)">
+                      <codedcomment comment="vm.comment"></codedcomment>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="uk-width-1-1 " style="height: 63px; margin-top: 10px">
+                <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+                  <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                    <div class="uk-grid" style="height: 100%">
+                      <div class="uk-width-1-1">
+                        <button style="float: right;" type="button"
+                          ng-disabled="!vm.isOpenReport || (vm.dataTest.id === '-1') || vm.typeresult === 0 || (vm.typeresult === 3 && vm.literalresult.literalResult.id === undefined) || (vm.typeresult !== 3 && (vm.dataliteralresult === '' || vm.dataliteralresult === undefined) )"
+                          class="md-fab md-fab-small md-fab-primary"
+                          ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport || (vm.dataTest.id === '-1') || vm.typeresult === 0 || (vm.typeresult === 3 && vm.literalresult.literalResult.id === undefined) || (vm.typeresult !== 3 && (vm.dataliteralresult === '' || vm.dataliteralresult === undefined ))}"
+                          data-uk-modal="{target:'#confirmationmodal'}"><i class="material-icons"
+                            data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}">&#xE161;</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li style="height: 100%;">
+            <div style="height: 100%;">
+              <div class="uk-width-1-1 " style="height: 100%">
+                <div style="height: 93px;" class="md-card uk-animation-scale-up uk-animation-40">
+                  <div style="height: auto" class="md-card-content">
+                    <div class="uk-grid" style="height: 100%">
+                      <div class="uk-width-7-10" style="margin-top: 11px;" ng-if="vm.tabresul===2">
+                        <fieldset class="">
+                          <orderfilter  rangeinit="vm.rangeInit1" rangeend="vm.rangeEnd1" typefilter="vm.filterRange1"
+                            isopenreport="vm.isOpenReport1"></orderfilter>
+                        </fieldset>
+                      </div>
+                      <div class="uk-width-3-10">
+                        <label style="font-size: 12px; margin-left: 55px">{{'0013' | translate}}</label>
+                        <div class="uk-input-group">
+                          <span style="padding-top: 10px" class="uk-input-group-addon">
+                            <img ng-if="vm.typeresult === 0" ng-src="images/analytical/resultsentry/filterresult.png"
+                              alt="" />
+                            <img ng-if="vm.typeresult === 2"
+                              ng-src="images/analytical/recordresultbyrank/typeresulttext.png" alt="" />
+                            <img ng-if="vm.typeresult === 1"
+                              ng-src="images/analytical/recordresultbyrank/typeresultnumber.png" alt="" />
+                            <img ng-if="vm.typeresult === 3"
+                              ng-src="images/analytical/recordresultbyrank/typeresultlist.png" alt="" />
+                          </span>
+                          <div class="md-input-wrapper">
+                            <loadcombobox change="vm.gettypevalid()" listorigin="vm.dataTest" placeholder="'0253'"
+                              ng-model="vm.datatestvalidated"></loadcombobox>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-width-1-1" style="height: calc(100% - 164px);margin-top: 10px;"
+                  ng-if="vm.valid.length!==0">
+                  <div class="md-card  md-card-hover fullheight">
+                    <div class="md-card-content fullheight" style="padding: 0px;">
+                      <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head" style="height: 38px;">
+                        <div class="uk-width-2-10" style="width: 2%;padding-left: 0px;">
+                          <input type="checkbox" icheck ng-model="vm.selectAllcheck"
+                          ng-change="vm.selectall()">
+                        </div>
+                        <div class="uk-width-3-10">
+                          <a
+                            ng-click="$event.stopPropagation(); vm.sortType = 'order'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                            <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                            <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                            <span ng-show="vm.sortType == 'order' && !sortReverse"></span>
+                            <span ng-show="vm.sortType == 'order' && sortReverse"></span>
+                          </a>{{'0110' | translate}}
+                        </div>
+                        <div class="uk-width-3-10">
+                          <a
+                            ng-click="$event.stopPropagation(); vm.sortType = 'takenDate'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                            <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                            <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                            <span ng-show="vm.sortType == 'takenDate' && !sortReverse"></span>
+                            <span ng-show="vm.sortType == 'takenDate' && sortReverse"></span>
+                          </a>{{'0182' | translate}}
+                        </div>
+                        <div class="uk-width-3-10">
+                          {{'0426' | translate}}
+                        </div>
+                      </div>
+                      <div class="vs-repeat-custom-scroll contentscroll" vs-repeat="20"
+                        data-scroll-to-top='vm.filtered.length' style="height: calc(100% - 38px);">
+                        <div ng-repeat="test in vm.valid"
+                          class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table" style="margin-top: 0px;">
+                          <div style="width: 2%; padding-left: 0px;">
+                            <input type="checkbox" icheck ng-model="test.check" class="check_row" table-check-row>
+                          </div>
+                          <div class="uk-width-3-10">{{test.order}}</div>
+                          <div class="uk-width-3-10">{{test.takenDate | date: vm.formatDate}}</div>
+                          <div class="uk-width-3-10">{{test.patient.sex.esCo}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-width-1-1" style="height: calc(100% - 164px);margin-top: 10px;"
+                  ng-if="vm.valid.length===0">
+                </div>
+                <div class="uk-width-1-1" style="margin-top: 10px;">
+                  <div class="uk-float-right">
+                    <button style="float: right;margin-left: 10px;" type="button"
+                      ng-disabled="(vm.valid | filter:{ check: true}).length === 0"
+                      class="md-fab md-fab-small md-fab-primary"
+                      ng-class="{'md-bg-blue-grey-100' : (vm.valid | filter:{ check: true}).length === 0 }"
+                      data-uk-modal="{target:'#confirmationmodalvalid'}">
+                        <i class="material-icons md-color-brown-50" data-uk-tooltip="{pos:'top'}" title="{{'1741' | translate}}">&#xE877;</i>
+                    </button>
+                    <button style="float: right;" type="button"
+                      ng-disabled="!vm.isOpenReport1 || (vm.datatestvalidated === undefined)"
+                      class="md-fab md-fab-small md-fab-success" ng-click="vm.validblock()"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport1 || (vm.datatestvalidated === undefined) }"><i
+                        class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0154' | translate}}">search</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalprogressprintexport" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress uk-progress-striped uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;">
+        {{vm.porcent}}%
+      </div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      {{vm.index}} {{vm.prepotition}}
+      {{vm.testvalidated.length}}
+    </div>
+  </div>
+</div>
+<div id="confirmationmodalvalid" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-3-10">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-7-10" style="margin-top: 3%;">
+            <span>{{'1829' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="vm.validated()">{{'0246' | translate}}</button>
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div id="confirmationmodal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-3-10">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-7-10" style="margin-top: 3%;">
+            <span>{{vm.messageconfirm}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="vm.saveresult()">{{'0246' | translate}}</button>
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0008' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div id="infomodal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-3-10">
+            <img src="images/iconinfo.png" height="90" width="90">
+          </div>
+          <div class="uk-width-7-10" style="margin-top: 3%;">
+            <span>{{vm.messageinfo}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<resultswarnings openmodal="vm.openalarmvalidate" order="vm.order" currentwarnings="vm.alarms" questions="vm.panicQuestions"
+  panictest="vm.panicTest" functionexecute="vm.validateTestsquestion"></resultswarnings>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

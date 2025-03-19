@@ -1,0 +1,25 @@
+{
+  "name": "enterprisentautomaticresult",
+  "version": "1.0.0",
+  "description": "Proyecto para el envio automatico de ordenes a tableros",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Angelica Diaz",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "btoa": "^1.2.1",
+    "change": "0.0.0",
+    "express": "^4.17.3",
+    "moment": "^2.29.2",
+    "node-blob": "0.0.2",
+    "node-cron": "^3.0.0",
+    "node-fetch": "^2.6.7",
+    "rgbcolor": "^1.0.1",
+    "simple-node-logger": "^21.8.12",
+    "stackblur": "^1.0.0"
+
+  }
+}

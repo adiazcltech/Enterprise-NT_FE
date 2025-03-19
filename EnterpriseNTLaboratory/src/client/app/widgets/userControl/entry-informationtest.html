@@ -1,0 +1,301 @@
+<div id="modalinformationtest" class="uk-modal uk-modal-card-fullscreen">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-blue-300">
+                <div class="md-card-toolbar-actions uk-modal-close" style="padding-top: 0px">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 " data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-24 md-color-blue-50">style</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0839' | translate}}
+                </h3>
+            </div>
+
+            <div class="md-card-content" style="overflow: hidden">
+                <div class="uk-grid uk-grid-small fullheight">
+                    <div class="uk-width-4-10">
+                        <div class="uk-grid uk-grid-small fullheight">
+                            <div class="uk-width-1-1" style="margin-bottom: 5px">
+                                <div class="md-card">
+                                    <div class="md-card-content">
+                                        <angucomplete-alt id="ex1" pause="100" placeholder="{{'0655' | translate}}"
+                                            selected-object="entryinformationtest.testChanged"
+                                            local-data="entryinformationtest.listtest" search-fields="code,name"
+                                            title-field="code,name" minlength="1" input-class="md-input"
+                                            focus-first="true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-1" style="height: calc(100% - 83px)">
+                                <div class="md-card md-card-hover fullheight">
+                                    <div class="md-card-content">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-1-2" style="padding-left: 0px">
+                                                <ul class="md-list md-list-addon">
+                                                    <li>
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/abbreviation.png" />
+                                                        </div>
+                                                        <div class="md-list-content orderinfo-list-content">
+                                                            <span class="md-list-heading">
+                                                                {{'0198' | translate}}:
+                                                            </span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted orderinfo-list-content">{{entryinformationtest.detailtest.abbr}}</span>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/patient/genders.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0426' | translate}}</span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted ng-binding">{{entryinformationtest.detailtest.namegender}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/patient/age.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0840' | translate}}</span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted ng-binding">{{entryinformationtest.detailtest.rangeage}}</span>
+                                                        </div>
+                                                    </li>
+
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/unit.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0125' | translate}}</span>
+                                                            <span class="uk-text-small uk-text-muted ng-binding"
+                                                                ng-bind-html="entryinformationtest.detailtest.unitname | trust"></span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/automaticresult.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0856' | translate}}</span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted ng-binding">{{entryinformationtest.detailtest.automaticResult}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/resultentry.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0857' | translate}}</span>
+                                                            <i ng-if="entryinformationtest.detailtest.resultRequest === true"
+                                                                class="material-icons md-color-green-600">check_circle</i>
+                                                            <i ng-if="entryinformationtest.detailtest.resultRequest === false"
+                                                                class="material-icons md-color-red-A700">cancel</i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/processday.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0851' | translate}}</span>
+                                                            <div class="uk-width-1-1">
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary':entryinformationtest.detailtest.processingDaysMonday,'md-bg-blue-grey-100':!entryinformationtest.detailtest.processingDaysMonday}">L</span>
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary':entryinformationtest.detailtest.processingDaysTuesday,'md-bg-blue-grey-100':!entryinformationtest.detailtest.processingDaysTuesday}">M</span>
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary':entryinformationtest.detailtest.processingDaysWednesday,'md-bg-blue-grey-100':!entryinformationtest.detailtest.processingDaysWednesday}">M</span>
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary': entryinformationtest.detailtest.processingDaysThursday ,'md-bg-blue-grey-100':! entryinformationtest.detailtest.processingDaysThursday }">J</span>
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary':entryinformationtest.detailtest.processingDaysFriday,'md-bg-blue-grey-100':!entryinformationtest.detailtest.processingDaysFriday}">V</span>
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary':entryinformationtest.detailtest.processingDaysSaturday,'md-bg-blue-grey-100':!entryinformationtest.detailtest.processingDaysSaturday}">S</span>
+                                                                <span style="float: left; margin-right: 1px"
+                                                                    class="uk-badge"
+                                                                    ng-class="{'uk-badge-primary': entryinformationtest.detailtest.processingDaysSunday,'md-bg-blue-grey-100':! entryinformationtest.detailtest.processingDaysSunday}">D</span>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <ul class="md-list md-list-addon">
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest !== 2">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/area.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0866' | translate}}</span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted ng-binding">{{entryinformationtest.detailtest.area.name}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/sample.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">
+                                                                {{'0205' | translate}}
+                                                            </span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted uk-text-truncate ng-binding">{{entryinformationtest.detailtest.listSample[0].name}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/tube.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">
+                                                                {{'0867' | translate}}
+                                                            </span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted uk-text-truncate ng-binding">{{entryinformationtest.detailtest.listSample[0].container.name}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/resulttype.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0854' | translate}}</span>
+                                                            <span
+                                                                class="uk-text-small uk-text-muted ng-binding">{{entryinformationtest.detailtest.resultTypeName}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-22"
+                                                                ng-src="images/test/technique.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">{{'0740' | translate}}</span>
+                                                            <span class="uk-text-small uk-text-muted ng-binding"
+                                                                ng-bind-html="entryinformationtest.detailtest.techniquename | trust"></span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-3-10">
+                        <div class="uk-grid fullheight">
+                            <div class="uk-width-1-1 fullheight">
+                                <div class="md-card fullheight">
+                                    <div class="md-card-toolbar" style="height: 35px">
+                                        <h3 class="md-card-toolbar-heading-text" style="height: 35px;line-height: 35px">
+                                            {{'0858' | translate}}
+                                        </h3>
+                                    </div>
+                                    <div class="md-card-content" style="overflow: auto;height: 78%;margin-right: 6px;">
+                                        <ul class="md-list">
+                                            <li ng-repeat="item in entryinformationtest.detailtest.requirements">
+                                                <div class="md-list-content">
+                                                    <div class="uk-text-muted" ng-bind-html="item.requirement  | trust">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-3-10">
+                        <div class="uk-grid fullheight">
+                            <div class="uk-width-1-1 fullheight" ng-if="entryinformationtest.detailtest.typeTest === 0">
+                                <div class="md-card fullheight">
+                                    <div class="md-card-toolbar" style="height: 35px">
+                                        <h3 class="md-card-toolbar-heading-text" style="height: 35px;line-height: 35px">
+                                            {{'0861' | translate}}
+                                        </h3>
+                                    </div>
+                                    <div class="md-card-content" style="overflow: auto;height: 65%;">
+                                        <div ng-bind-html="entryinformationtest.detailtest.generalInformation | trust">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-1" style="height: calc(100% / 2)"
+                                ng-if="entryinformationtest.detailtest.typeTest !== 0">
+                                <div class="md-card fullheight">
+                                    <div class="md-card-toolbar" style="height: 35px">
+                                        <h3 class="md-card-toolbar-heading-text" style="height: 35px;line-height: 35px">
+                                            {{'0013' | translate}}
+                                        </h3>
+                                    </div>
+                                    <div class="md-card-content" style="overflow: auto;height: 65%;">
+                                        <ul class="md-list">
+                                            <li ng-repeat="item in entryinformationtest.detailtest.tests">
+                                                <div class="md-list-content">
+                                                    <span class="uk-text-muted">{{item.code}}. {{item.name}} </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-1 uk-margin-small-top" style="height: calc((100% / 2) - 5px)"
+                                ng-if="entryinformationtest.detailtest.typeTest !== 0">
+                                <div class="md-card fullheight">
+                                    <div class="md-card-toolbar" style="height: 35px">
+                                        <h3 class="md-card-toolbar-heading-text" style="height: 35px;line-height: 35px">
+                                            {{'0451' | translate}}
+                                        </h3>
+                                    </div>
+                                    <div class="md-card-content" style="overflow: auto;height: 65%;">
+                                        <ul class="md-list">
+                                            <li ng-repeat="item in entryinformationtest.detailtest.listSample">
+                                                <div class="md-list-content">
+                                                    <span class="uk-text-muted">{{item.name}} </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<modalexceptions idcontrol="'taskmodal'" openmodal="modaltask.ShowPopupError" detailerror="modaltask.Error">
+</modalexceptions>

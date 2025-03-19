@@ -1,0 +1,112 @@
+
+<style type="text/css">
+  .headertable{
+	font-style: normal;
+    font-weight: bold;
+    font-size: 6pt;
+    color: #1e90ff;
+	border-top: 1px solid #1e90ff;
+	border-bottom: 1px solid #1e90ff;
+	font-family: Arial;
+  }
+  .headerorder {
+    line-height: 0.17in; 
+	font-style:normal;
+	font-weight:bold;
+	font-size:6pt;
+	color:#000000;
+	font-family: Arial;
+  }
+  .headertest {
+   	line-height: 0.17in; 
+	font-style:normal;
+	font-size:6pt;
+	color:#000000;
+	font-family: Arial;
+	vertical-align:top;
+	text-align:top;
+  }
+  
+
+  
+</style>
+
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+		{{#each variables}}
+		<table style="width: 100%">
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial;color:#000000;text-align:center">
+					Tiempo de oportunidad
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial;color:#000000">
+					{{this.customer}}
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:8pt;font-family:Arial;color:#664d26">
+					{{this.username}}, {{this.now}} 
+				</td>
+		    </tr>
+			
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:8pt;font-family:Arial;color:#000000">
+					{{this.rangeInit}}, {{this.rangeEnd}}
+				</td>
+		    </tr>
+		</table>
+		{{/each}}
+			
+
+		<table>
+		  <tr>
+				<td class="headertable" style="width: 1in;">FECHA DE SOLICITUD</td>
+				<td class="headertable" style="width: 1in;">FECHA DE VERIFICACIÓN</td>
+				<td class="headertable" style="width: 1in;">FECHA DE VALIDACIÓN</td>
+				<td class="headertable" style="width: 1in;">NÚMERO DE ORDEN</td>
+				<td class="headertable" style="width: 2in;">SEDE</td>
+				<td class="headertable" style="width: 1in;">LLAVE_INTERFAZ</td>
+				<td class="headertable" style="width: 2in;">SERVICIOS</td>
+				<td class="headertable" style="width: 1in;">CAMA</td>
+				<td class="headertable" style="width: 1in;">PRUEBA</td>
+				<td class="headertable" style="width: 1in;">AREA</td>
+				<td class="headertable" style="width: 1in;">DIAGNOSTICO</td>
+				<td class="headertable" style="width: 1in;">VERIFICACIÓN - RESULTADO</td>
+				<td class="headertable" style="width: 1in;">RESULTADO - VALIDACIÓN</td>
+				
+		  </tr>
+		  {{#each orders}}
+		  {{#each this.results}}
+		  <tr>
+			<td class="headertest" style="width: 1in;">{{this.opportunityTimes.entryDate}}</td>
+			<td class="headertest" style="width: 1in;">{{this.opportunityTimes.verifyDate}}</td>
+			<td class="headertest" style="width: 1in;">{{this.opportunityTimes.validDate}}</td>
+			<td class="headertest" style="width: 1in;">{{../orderNumber}}</td>
+			<td class="headertest" style="width: 2in;">{{../branchName}}</td>
+			<td class="headertest" style="width: 1in;">{{../demo_10_value}}</td>
+			<td class="headertest" style="width: 2in;">{{../serviceName}}</td>
+			<td class="headertest" style="width: 1in;">{{../demo_6_value}}</td>
+			<td class="headertest" style="width: 1in;">{{this.name}}</td>
+			<td class="headertest" style="width: 1in;">{{this.sectionName}}</td>
+			<td class="headertest" style="width: 1in;">{{../demo_8_value}}</td>
+			<td class="headertest" style="width: 1in;">{{this.opportunityTimes.resultElapsedTime}}</td>
+			<td class="headertest" style="width: 1in;">{{this.opportunityTimes.validElapsedTime}}</td>		
+		  </tr>
+		  {{/each}}
+		  {{/each}}
+		</table>
+	   
+      
+      <br />
+    
+   
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+    <div class="md-card-content" >
+        <div class="uk-grid" style="width: 100%; margin-left: 0px;height: 100%">
+            <div class="uk-width-1-1" style="padding-left: 0px">
+                <ul class="md-list md-list-addon  uk-text-center">
+                    <div class="uk-badge" style="background-color: {{cardorder.typeordercolor}}; font-size: 33px;margin-right: 10px;font-weight: 500;padding: 11px 8px 13px; border-radius: 10px;display: inline-block; margin-top: -21px;">       {{cardorder.typeordercode}}
+                    </div>
+                    <div style="display: inline-block;">
+                        <h1 class="uk-text-center"> 
+                            {{cardorder.order}}
+                        </h1>
+                    </div>
+                    <p style="margin-top: 0px" ng-if="cardorder.testcode !== undefined">{{cardorder.testcode}} - {{cardorder.testname}}</p>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

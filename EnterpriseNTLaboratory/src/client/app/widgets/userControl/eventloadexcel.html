@@ -1,0 +1,322 @@
+<style>
+  .drop-box {
+    background: #f8f8f8;
+    border: 5px dashed #ddd;
+    width: 50%;
+    height: 146px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+  }
+
+  .dragover {
+    border: 5px dashed blue;
+  }
+
+  th {
+    background: white;
+    position: sticky;
+    top: 0;
+    /* Don't forget this, required for the stickiness */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  .disablepagination {
+    background-color: #cfdade !important;
+    background-image: linear-gradient(to bottom, #c1c6c7, #8e9da2) !important;
+  }
+
+  .uk-button-primary:focus,
+  .uk-button-primary:hover {
+    background-color: #5464bb;
+    color: #fff;
+    background-image: none;
+  }
+
+  .uk-button-primary.uk-active,
+  .uk-button-primary:active {
+    background-color: #5464bb;
+    color: #fff;
+  }
+
+  .uk-button-primary {
+    background-color: #5464bb;
+    color: #fff;
+    background-image: linear-gradient(to bottom, #5767be, #5767be);
+    border-color: rgba(0, 0, 0, 0.2);
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<div id="eventloadexcel" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+  <loadpage view="eventloadexcel.loading"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-teal-500">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}" style="margin: 0px">&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-light-blue-50 md-33">&#xE916;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          {{'2028' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="top: 33px; height: 90%">
+        <div class="uk-grid" style="height: 100%">
+          <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle" ng-show="!IsVisible">
+            <div ngf-drop ngf-select ng-model="file" class="drop-box" ngf-drag-over-class="'dragover'"
+              ngf-multiple="false" ngf-allow-dir="false" accept=".xlsx" ngf-pattern="'.xlsx'">
+              <h5 class="uk-text-bold uk-text-center">
+                {{'2030' | translate}}
+              </h5>
+              <img src="images/download.png" style="height: 40px; width: 42px" />
+            </div>
+          </div>
+          <div ng-show="IsVisible">
+            <table
+              class="table_table uk-table uk-table-striped uk-table-condensed uk-text-nowrap vs-repeat-custom-scroll"
+              style="width:200px: overflow: auto">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>{{'0833' | translate}}</th>
+                  <th>{{'0117' | translate}}</th>
+                  <th>{{'0236' | translate}}</th>
+                  <th>{{'0237' | translate}}</th>
+                  <th>{{'0234' | translate}}</th>
+                  <th>{{'0235' | translate}}</th>
+                  <th>{{'0976' | translate}}</th>
+                  <th>{{'0124' | translate}}</th>
+                  <th>{{'2031' | translate}}</th>
+                  <th>{{'2032' | translate}}</th>
+                  <th>{{'2033' | translate}}</th>
+                  <th>{{'2034' | translate}}</th>
+                  <th>{{'0188' | translate}}</th>
+                  <th>{{'2035' | translate}}</th>
+                  <th>{{'2036' | translate}}</th>
+                  <th>{{'2037' | translate}}</th>
+                  <th>{{'2038' | translate}}</th>
+                  <th>{{'0289' | translate}}</th>
+                  <th>{{'0519' | translate}}</th>
+                  <th>{{'2039' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody class="body_table">
+                <tr
+                  ng-repeat="m in eventloadexcel.demo | startFrom:eventloadexcel.currentPage*eventloadexcel.pageSize | limitTo:eventloadexcel.pageSize">
+                  <td>
+                    <md-checkbox class="md-primary" ng-model="m.select" aria-label="seleccionar"></md-checkbox>
+                  </td>
+                  <td>{{m.tipodedocumento}}</td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': m.RegExp}">{{m.cedula}}</td>
+                  <td>
+                    <div>{{m.primernombre}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?eventloadexcel.nofound:m.patient.name1}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.segundonombre}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'': m.patient.name2}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.primerapellido}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'':m.patient.lastName}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.segundoapellido}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'':m.patient.surName}}</div>
+                  </td>
+                  <td>
+                    <div ng-class="{'md-color-red-400 uk-text-bold': !m.validbirthday}">{{m.fechadenacimiento}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'':m.patient.birthday | date:'dd/MM/yy'}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.genero}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0 ? '': m.patient.sex.codifiedName|uppercase}}</div>
+                  </td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': !m.validsintomas}">{{m.fechadesintomas}}</td>
+                  <td>{{m.region}}</td>
+                  <td>{{m.distrito}}</td>
+                  <td>{{m.corregimiento}}</td>
+                  <td>{{m.telefono}}</td>
+                  <td>{{m.sede}}</td>
+                  <td>{{m.procedenciamuestra}}</td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': !m.validfechadetoma}">{{m.fechadetoma}}</td>
+                  <td>{{m.tipodeprueba}}</td>
+                  <td>{{m.resultado}}</td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': !m.validfefechaderesultado}">{{m.fechaderesultado}}
+                  </td>
+                  <td>{{m.numerointerno}}</td>
+                <tr>
+                </tr>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle" ng-show="IsVisible">
+            <button class="uk-button-primary" ng-disabled="eventloadexcel.currentPage == 0"
+              ng-click="eventloadexcel.currentPage=eventloadexcel.currentPage-1" style="float: left;font-size: medium;"
+              ng-class="{'disablepagination': eventloadexcel.currentPage == 0}">
+              <i class="uk-icon-angle-double-left" style="color: #fff;"></i> {{'0213' | translate}}
+            </button>
+            <div style="padding: 10px;font-size: medium;"> {{eventloadexcel.demo.length===0 ?
+              '':eventloadexcel.currentPage+1}}{{eventloadexcel.demo.length===0 ?
+              '':'/'}}{{eventloadexcel.demo.length===0
+              ?'':eventloadexcel.viewpagination=eventloadexcel.numberOfPages()}}
+            </div>
+            <button class="uk-button-primary"
+              ng-disabled="eventloadexcel.currentPage >= eventloadexcel.demo.length/eventloadexcel.pageSize - 1"
+              ng-click="eventloadexcel.currentPage=eventloadexcel.currentPage+1" style="float: right;font-size: medium;"
+              ng-class="{'disablepagination': eventloadexcel.currentPage >= eventloadexcel.demo.length/eventloadexcel.pageSize - 1}">
+              {{'1525' | translate}} <i class="uk-icon-angle-double-right" style="color: #fff;"></i>
+            </button>
+          </div>
+        </div>
+        <div class="md-fab-wrapper md-fab-speed-dial" ng-show="eventloadexcel.demo.length!==0">
+          <button type="button"
+            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-teal-500"
+            ng-click="eventloadexcel.saveexcel()" hotkey="F9">
+            <i class="material-icons md-24 md-light no_margin">playlist_add_check</i>
+            <span class="uk-text-middle textbutton md-color-grey-50" style="margin-top: 35px"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalprogressprintexport" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress uk-progress-striped uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{eventloadexcel.porcent}}%;">
+        {{eventloadexcel.porcent}}%
+      </div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      {{eventloadexcel.count}} {{eventloadexcel.prepotition}}
+      {{eventloadexcel.dataadd.length}}
+    </div>
+  </div>
+</div>
+<div id="reviewdata" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+  <loadpage view="eventloadexcel.load"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-red-500">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              style="margin: 0px">&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-light-blue-50 md-33">&#xE916;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          Error
+        </h3>
+      </div>
+      <div class="md-card-content" style="top: 33px; height: 90%">
+        <div class="uk-grid" style="height: 100%">
+          <div>
+            <h3 class="md-card-toolbar-heading-text">
+              Revise los datos que se encuentran a continuación, contienen datos vacíos que son requeridos.
+            </h3>
+            <table
+              class="table_table uk-table uk-table-striped uk-table-condensed uk-text-nowrap vs-repeat-custom-scroll"
+              style="width:200px; overflow: auto">
+              <thead>
+                <tr>
+                  <th>index</th>
+
+                  <th>{{'0833' | translate}}</th>
+                  <th>{{'0117' | translate}}</th>
+                  <th>{{'0236' | translate}}</th>
+                  <th>{{'0237' | translate}}</th>
+                  <th>{{'0234' | translate}}</th>
+                  <th>{{'0235' | translate}}</th>
+                  <th>{{'0976' | translate}}</th>
+                  <th>{{'0124' | translate}}</th>
+                  <th>{{'2031' | translate}}</th>
+                  <th>{{'2032' | translate}}</th>
+                  <th>{{'2033' | translate}}</th>
+                  <th>{{'2034' | translate}}</th>
+                  <th>{{'0188' | translate}}</th>
+                  <th>{{'2035' | translate}}</th>
+                  <th>{{'2036' | translate}}</th>
+                  <th>{{'2037' | translate}}</th>
+                  <th>{{'2038' | translate}}</th>
+                  <th>{{'0289' | translate}}</th>
+                  <th>{{'0519' | translate}}</th>
+                  <th>{{'2039' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody class="body_table" style="overflow: auto;">
+                <tr ng-repeat="m in eventloadexcel.validData">
+                  <td>{{m.idx}}</td>
+                  <td>{{m.tipodedocumento}}</td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': m.RegExp}">{{m.cedula}}</td>
+                  <td>
+                    <div>{{m.primernombre}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?eventloadexcel.nofound:m.patient.name1}} {{m.patient.idsearch}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.segundonombre}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'': m.patient.name2}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.primerapellido}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'':m.patient.lastName}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.segundoapellido}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'':m.patient.surName}}</div>
+                  </td>
+                  <td>
+                    <div ng-class="{'md-color-red-400 uk-text-bold': !m.validbirthday}">{{m.fechadenacimiento}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0?'':m.patient.birthday | date:'dd/MM/yyyy'}}</div>
+                  </td>
+                  <td>
+                    <div>{{m.genero}}</div>
+                    <div class="uk-text-bold" style="color: #5666bd;">
+                      {{m.patient.length===0 ? '': m.patient.sex.codifiedName|uppercase}}</div>
+                  </td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': !m.validsintomas}">{{m.fechadesintomas}}</td>
+                  <td>{{m.region}}</td>
+                  <td>{{m.distrito}}</td>
+                  <td>{{m.corregimiento}}</td>
+                  <td>{{m.telefono}}</td>
+                  <td>{{m.sede}}</td>
+                  <td>{{m.procedenciamuestra}}</td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': !m.validfechadetoma}">{{m.fechadetoma}}</td>
+                  <td>{{m.tipodeprueba}}</td>
+                  <td>{{m.resultado}}</td>
+                  <td ng-class="{'md-color-red-400 uk-text-bold': !m.validfefechaderesultado}">{{m.fechaderesultado}}
+                  </td>
+                  <td>{{m.numerointerno}}</td>
+                <tr>
+                </tr>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

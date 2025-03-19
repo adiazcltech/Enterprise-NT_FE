@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  position: relative;
+  width: 100px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-button-switch {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 40%;
+  cursor: pointer;
+  z-index: 100;
+  transition: left 0.3s;
+}
+
+.toggle-button-text {
+  overflow: hidden;
+  background-color: #c9c9c9;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px 0 rgba(50, 50, 50, 0.75);
+  transition: background-color 0.3s;
+  width: 80%;
+}
+
+.toggle-button-text-on,
+.toggle-button-text-off {
+  float: left;
+  width: 50%;
+  height: 100%;
+  line-height: 30px;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+}
+
+.toggle-button-text-on {
+  color: #ffff !important;
+}
+
+input[type="checkbox"]:checked~.toggle-button-switch {
+  left: 41px;
+}
+
+input[type="checkbox"]:checked~.toggle-button-text {
+  background-color: #428bca;
+}

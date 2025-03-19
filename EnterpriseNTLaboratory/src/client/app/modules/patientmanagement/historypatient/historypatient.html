@@ -1,0 +1,129 @@
+<style type="text/css">
+  .hierarchical_slide>* {
+    visibility: inherit !important;
+  }
+
+  .measureButtons {
+    height: 90px
+  }
+
+  .measureButtons>div {
+    margin-top: 5px;
+    margin-left: 4px
+  }
+
+  .measureButtons>div>span {
+    font-size: 9px;
+    text-align: center;
+    width: 60px;
+    max-height: 40px;
+    line-height: 10px;
+    margin-top: 6px;
+  }
+
+  button {
+    margin-left: 5px
+  }
+
+  .orderentry-tests-table-header {
+    font-size: 12px !important;
+    font-weight: bold !important;
+  }
+
+  .orderentry-tests-table-body {
+    font-size: 11px;
+  }
+
+  .orderentry-footer {
+    height: 75px;
+  }
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+
+<div id="page_content">
+  <div id="page_content_inner" class="cltech-order-entry-page-padding" style="overflow: hidden">
+    <div id="cltech-form-card" class="uk-grid uk-margin-small-top" style="height: calc(100% - 0px);" pdk-next-input-on-enter>
+      <div class="uk-width-1-4" style="width: 31%; height: calc(100% - 158px);" >
+        <orderfield type="'H'" statecontrol="vm.patientDemosDisabled" values="vm.patientDemosValues"
+          data="vm.patientDemos" selectedpatientid="vm.selectedPatientId" selectedpatientname="vm.selectedPatientName"
+          listenerdate="vm.eventSelectDate" patientphoto="vm.patientPhoto"></orderfield>
+        <div class="md-card md-card-primary" style="width: 100%; height: 96px; margin-top: 5px">
+          <commentOrder idcontrol="'diagnostic'" size="1" type="2" idpatient="vm.patientDemosValues[-99]"
+            state="vm.statediagnostic">
+          </commentOrder>
+        </div>
+      </div>
+
+      <div class="uk-width-3-5 order-entry-order-padding" style="width: 69%; padding-left: 15px; height: 100%">
+        <div class="md-card md-card-warning" style="width: 100%; height: calc(100% - 58px);">
+          <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+              <strong>{{'0424' | translate}}</strong>
+            </h3>
+          </div>
+          <patientsearch openmodal="vm.showModalSearch" listener="vm.historySearchEvent" cancel="vm.cancel"
+            namespatient="vm.namesPatient"></patientsearch>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="orderentry-footer">
+      <div class="uk-grid">
+        <div class="uk-width-1-1">
+          <div class="uk-flex uk-flex-center measureButtons">
+            <div class="uk-flex uk-flex-column ">
+              <button type="submit"
+                class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light"
+                ng-disabled="vm.newDisabled" ng-click="vm.eventNew()"
+                ng-class="{'md-bg-blue-grey-100': vm.newDisabled}">
+                <i class="material-icons" style="font-weight: bold; ">&#xE145;</i>
+              </button>
+              <span>{{'0005' | translate}}</span>
+            </div>
+            <div class="uk-flex uk-flex-column ">
+              <button type="button"
+                class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light"
+                ng-click="vm.eventEdit()" ng-disabled="vm.editDisabled"
+                ng-class="{'md-bg-blue-grey-100': vm.editDisabled}">
+                <i class="material-icons">&#xE254;</i>
+              </button>
+              <span>{{'0006' | translate | trim}}</span>
+            </div>
+            <div class="uk-flex uk-flex-column ">
+              <button type="submit"
+                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                ng-click="vm.eventSave()" ng-disabled="vm.saveDisabled"
+                ng-class="{'md-bg-blue-grey-100': vm.saveDisabled}">
+                <i class="material-icons">&#xE161;</i>
+              </button>
+              <span>{{'0007' | translate | trim}}</span>
+            </div>
+            <div class="uk-flex uk-flex-column ">
+              <button type="button"
+                class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-purple-700"
+                ng-click="vm.eventUndo()" ng-disabled="vm.undoDisabled"
+                ng-class="{'md-bg-blue-grey-100': vm.undoDisabled}">
+                <i class="material-icons md-24 md-light no_margin">&#xE166;</i>
+              </button>
+              <span>{{'0776' | translate}}</span>
+            </div>
+            <div class="uk-flex uk-flex-column ">
+              <button type="button" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light"
+                ng-click="vm.cancel = true; vm.eventCancel()" ng-disabled="false">
+                <i class="material-icons" style="font-weight: bold;">&#xE14C;</i>
+              </button>
+              <span>{{'0008' | translate | trim}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+<dependencedemo listdemographics="vm.patientDemos"></dependencedemo>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

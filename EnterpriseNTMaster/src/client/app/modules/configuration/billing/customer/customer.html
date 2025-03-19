@@ -1,0 +1,468 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<section class="row general-container">
+  <div class="panel panel-primary panel-principal">
+    <div class="panel-heading row">
+      <div class="col-md-4 text-left">
+        <strong id="titleCustomer" class="panel-title text-left title-bar">{{'0248' | translate | uppercase}}</strong>
+      </div>
+      <div class="col-md-8 text-right" style="padding-top: 5px;">
+        <strong ng-bind="vm.usuario" class="text-right"></strong>
+        <span class="panel-title glyphicon glyphicon-question-sign question-style" data-toggle="tooltip"
+          data-placement="bottom" title="Ctrl + B"
+          onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/customer/customer.htm','','width=1200,height=600,left=50,top=50,toolbar=yes');"></span>
+      </div>
+    </div>
+    <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+      <div class="col-md-4 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container">
+              <div>
+                <div class="input-group right-bar">
+                  <input data-ng-model="vm.search" class="form-control" type="text"
+                    placeholder="{{'0015' | translate}}">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </div>
+                </div>
+                <div class="number-bage">
+                  <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                </div>
+              </div>
+              <table class="table table-list table-hover ">
+                <thead>
+                  <tr>
+                    <th class="col-md-10">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                      </a>{{'0011' | translate}}
+                    </th>
+                    <th class="col-md-2" style="white-space: nowrap">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.state"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.state && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.state && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.state && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.state && vm.sortReverse"></span>
+                      </a> {{'0014' | translate}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tbody-list contentscroll" style="width: 94%">
+                  <tr class="row-list"
+                    data-ng-repeat="Customer in vm.filtered =(vm.dataCustomer | filter: vm.search) | orderBy:vm.sortType:vm.sortReverse"
+                    data-ng-click="vm.getCustomerId(Customer.id, $index, CustomerForm)"
+                    ng-class="{info: Customer.id == vm.selected, danger: Customer.state == 0 && $index != vm.selected }">
+                    <td class="col-md-10" data-ng-bind="Customer.name"></td>
+                    <td class="col-md-2 text-center">
+                      <i ng-if="Customer.state == true" class="glyphicon glyphicon-ok green"></i>
+                      <i ng-if="Customer.state == false" class="glyphicon glyphicon-ban-circle red"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container panel-padding panel-scroll contentscroll"
+              style="height: calc(100% - 55px);">
+              <form name="CustomerForm" id="CustomerForm" class="form-horizontal panel-body panel-padding">
+                <div class="form-group-min form-group-sm">
+                  <div class="form-group-min" style="margin-top: 7px">
+                    <div class="form-group-min col-sm-6 text-left  has-feedback"
+                      ng-class="{'has-error': CustomerForm.nit.$invalid && CustomerForm.nit.$touched || vm.nitRepeat }">
+                      <label class="col-sm-4 text-right">NIT-RFC:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="nit" name="nit" data-ng-model="vm.customerDetail.nit" maxlength="60"
+                          ng-disabled="vm.isDisabled" ng-required="true" class="form-control" type="text"
+                          ng-focus="vm.nitRepeat = false">
+                        <span ng-if="CustomerForm.nit.$invalid && CustomerForm.nit.$touched || vm.nitRepeat"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="CustomerForm.nit.$invalid && CustomerForm.nit.$touched" class="help-block">{{'0016'
+                          | translate}}</span>
+                        <span ng-if="vm.nitRepeat" class="help-block">{{'0038' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left has-feedback "
+                      ng-class="{'has-error': vm.epsCodeRepeat }">
+                      <label class="col-sm-4 text-right" style="white-space: nowrap;">{{'0252' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="epsCode" name="epsCode" data-ng-model="vm.customerDetail.epsCode" maxlength="60"
+                          ng-disabled="vm.isDisabled" ng-required="false" class="form-control" type="text"
+                          ng-focus="vm.epsCodeRepeat = false">
+                        <span ng-if="vm.epsCodeRepeat" class="glyphicon glyphicon-remove form-control-feedback"
+                          aria-hidden="true"></span>
+                        <span ng-if="vm.epsCodeRepeat" class="help-block">{{'0038' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left  has-feedback "
+                      ng-class="{'has-error': CustomerForm.name.$invalid && CustomerForm.name.$touched || vm.nameRepeat }">
+                      <label class="col-sm-4 text-right">{{'0011' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="name" name="name" data-ng-model="vm.customerDetail.name" maxlength="60"
+                          ng-disabled="vm.isDisabled" ng-required="true" class="form-control" type="text"
+                          ng-focus="vm.nameRepeat = false">
+                        <span ng-if="CustomerForm.name.$invalid && CustomerForm.name.$touched || vm.nameRepeat"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="CustomerForm.name.$invalid && CustomerForm.name.$touched"
+                          class="help-block">{{'0016' | translate}}</span>
+                        <span ng-if="vm.nameRepeat" class="help-block">{{'0038' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left has-feedback "
+                      ng-class="{'has-error': CustomerForm.namePrint.$invalid && CustomerForm.namePrint.$touched }">
+                      <label class="col-sm-4 text-right" style="white-space: nowrap;">{{'0249' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="namePrint" name="namePrint" style="padding-right: 4px"
+                          data-ng-model="vm.customerDetail.namePrint" ng-disabled="vm.isDisabled" ng-required="true"
+                          class="form-control" type="text">
+                        <span ng-if="CustomerForm.namePrint.$invalid && CustomerForm.namePrint.$touched"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="CustomerForm.namePrint.$invalid && CustomerForm.namePrint.$touched"
+                          class="help-block">{{'0016' | translate}}</span>
+                        <span
+                          ng-if="(CustomerForm.name.$invalid && CustomerForm.name.$touched || vm.nameRepeat) && (!CustomerForm.namePrint.$invalid || !CustomerForm.namePrint.$touched)"
+                          class="help-block">.</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left ">
+                      <label class="col-sm-4 text-right">{{'0076' | translate}} 1:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="address" name="address" data-ng-model="vm.customerDetail.address" maxlength="60"
+                          ng-disabled="vm.isDisabled" ng-required="false" class="form-control" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left ">
+                      <label class="col-sm-4 text-right">{{'0076' | translate}} 2:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="additionalAddress" name="additionalAddress"
+                          data-ng-model="vm.customerDetail.additionalAddress" maxlength="60" ng-disabled="vm.isDisabled"
+                          ng-required="false" class="form-control" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left has-feedback">
+                      <label class="col-sm-4 text-right">{{'0077' | translate}}:</label>
+                      <div class="col-sm-8 text-left" ng-if="vm.maskphone ===''">
+                        <input id="phone" name="phone" class="form-control" ng-model="vm.customerDetail.phone"
+                          maxlength="32" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                      </div>
+                      <div class="col-sm-8 text-left" ng-if="vm.maskphone !==''">
+                        <input id="phone" name="phone" class="form-control" mask="vm.maskphone"
+                          ng-model="vm.customerDetail.phone" ng-disabled="vm.isDisabled" class="form-control"
+                          type="text" restrict="reject" placeholder="{{vm.maskphone}}">
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left has-feedback"
+                      ng-class="{'has-error': CustomerForm.email.$invalid && CustomerForm.email.$touched }">
+                      <label class="col-sm-4 text-right">{{'0086' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="email" name="email" data-ng-model="vm.customerDetail.email"
+                          ng-disabled="vm.isDisabled" class="form-control" type="email" ng-pattern="vm.validMail"
+                          placeholder="{{'0275' | translate}}" ng-change="vm.changeEmail()" style="padding-right: 2px"
+                          ng-focus="vm.emailInvalid = false" ng-required="true">
+                        <span ng-if="CustomerForm.email.$error.pattern && CustomerForm.email.$touched"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="CustomerForm.email.$error.pattern && CustomerForm.email.$touched"
+                          class="help-block">{{'0088' | translate}}</span>
+                        <span
+                          ng-if="(CustomerForm.email.$invalid && CustomerForm.email.$touched)&&!(CustomerForm.email.$error.pattern && CustomerForm.email.$touched)"
+                          class="help-block">{{'0016'
+                          | translate}}</span>
+                        <span class="help-block " ng-if="vm.emailInvalid">
+                          {{'1230' | translate}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left ">
+                      <label class="col-sm-4 text-right">{{'0226' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="fax" name="fax" data-ng-model="vm.customerDetail.fax" maxlength="60"
+                          ng-disabled="vm.isDisabled" ng-required="false" class="form-control" type="text"
+                          ng-change="vm.changeFax()">
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left has-feedback">
+                      <label class="col-sm-4 text-right">{{'0229' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="postalCode" name="postalCode" data-ng-model="vm.customerDetail.postalCode"
+                          maxlength="60" ng-disabled="vm.isDisabled" ng-required="false" class="form-control"
+                          type="text">
+
+                      </div>
+                    </div>
+                    <div ng-if="false" class="form-group-min col-md-6 text-left has-feedback "
+                      ng-class="{'has-error': (CustomerForm.username.$invalid && CustomerForm.username.$touched) || vm.usersNameRepeat }">
+                      <label class="col-sm-4 text-right">{{'0001' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="username" name="username" data-ng-model="vm.customerDetail.username"
+                          ng-disabled="vm.isDisabled" ng-required="false" class="form-control" type="text"
+                          ng-focus="vm.usersNameRepeat = false">
+                        <span
+                          ng-if="CustomerForm.username.$invalid && CustomerForm.username.$touched || vm.usersNameRepeat"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="CustomerForm.username.$invalid && CustomerForm.username.$touched"
+                          class="help-block">{{'0016' | translate}}</span>
+                        <span ng-if="vm.usersNameRepeat" class="help-block">{{'0038' | translate}}</span>
+                      </div>
+                    </div>
+                    <div ng-if="false" class="form-group-min col-md-6 text-left  has-feedback "
+                      ng-class="{'has-error': CustomerForm.password.$invalid && CustomerForm.password.$touched && vm.isRequiredPassword && vm.customerDetail.username != '' && vm.customerDetail.username != undefined}">
+                      <label class="col-sm-4 text-right">{{'0002' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="password" name="password" data-ng-model="vm.customerDetail.password"
+                          ng-disabled="vm.isDisabled"
+                          ng-required="vm.isRequiredPassword  && vm.customerDetail.username != '' && vm.customerDetail.username != undefined"
+                          class="form-control" type="password">
+                        <span
+                          ng-if="((CustomerForm.username.$invalid && CustomerForm.username.$touched) || vm.usersNameRepeat) && vm.customerDetail.password ==''"
+                          class="help-block">.</span>
+                        <span
+                          ng-if="CustomerForm.password.$invalid && CustomerForm.password.$touched  && vm.isRequiredPassword && vm.customerDetail.username != '' && vm.customerDetail.username != undefined"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span
+                          ng-if="CustomerForm.password.$invalid && CustomerForm.password.$touched && vm.isRequiredPassword  && vm.customerDetail.username != '' && vm.customerDetail.username != undefined"
+                          class="help-block">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-left ">
+                      <label class="col-sm-4 text-right">{{'0085' | translate}}:</label>
+                      <div class="col-sm-8 text-left" style="margin-bottom: 10px;">
+                        <input id="responsable" name="responsable" data-ng-model="vm.customerDetail.responsable"
+                          maxlength="60" ng-disabled="vm.isDisabled" ng-required="false" class="form-control"
+                          type="text">
+                      </div>
+                      <label class="col-sm-4 text-right">{{'0280' | translate}}:</label>
+                      <div class="col-sm-8 text-right" style="margin-bottom: 10px;">
+                        <select id="areas" name="areas" charset="utf-8"
+                          ng-options="obj.id as obj.name for obj in vm.listcentralsytem"
+                          data-ng-model="vm.customerDetail.centralSystem" class="form-control"
+                          ng-disabled="vm.isDisabled" placeholder="{{'0015' | translate}}"></select>
+                      </div>
+                      <label class="col-md-4 text-right" style="white-space: nowrap;">{{'1253' | translate}}:</label>
+                      <div class="col-md-3 text-left" style="margin-bottom: 10px;">
+                        <toggle ng-model="vm.customerDetail.agreement" on="{{'0068' | translate}}"
+                          off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" ng-change="vm.changue()"
+                          size="btn-sm">
+                        </toggle>
+                      </div>
+                      <label class="col-md-2 text-right ">{{'1254' | translate}}:</label>
+                      <div class="col-md-3 text-right">
+                        <toggle ng-model="vm.customerDetail.invoice" on="{{'0068' | translate}}"
+                          off="{{'0492' | translate}}" ng-disabled="vm.isDisabled || vm.customerDetail.agreement"
+                          size="btn-sm">
+                        </toggle>
+                      </div>
+                      <div class="form-group-min col-md-12 text-left ">
+                        <label class="col-md-4 text-right" style="white-space: nowrap;">{{'0250' | translate}}:</label>
+                        <div class="col-md-3 text-left" style="margin-bottom: 10px;">
+                          <toggle ng-model="vm.customerDetail.selfPay" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm">
+                          </toggle>
+                        </div>
+                        <label class="col-md-2 text-right ">{{'0014' | translate}}:</label>
+                        <div class="col-md-3 text-right">
+                          <toggle ng-model="vm.customerDetail.state" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}" ng-disabled="vm.isDisabledState" ng-change="vm.changeState()"
+                            size="btn-sm"></toggle>
+                          <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.customerDetail.state">
+                          </modalstate>
+                        </div>
+                      </div>
+                      <!-- Notificacion de resultados y retomas -->
+                      <div class="form-group-min col-md-12 text-left ">
+                        <label class="col-md-4 text-right" style="white-space: nowrap;">{{'1374' | translate}}:</label>
+                        <div class="col-md-3 text-left" style="margin-bottom: 10px;">
+                          <toggle ng-model="vm.customerDetail.notificationResults" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm">
+                          </toggle>
+                        </div>
+                        <label class="col-md-2 text-right ">{{'1375' | translate}}:</label>
+                        <div class="col-md-3 text-right">
+                          <toggle ng-model="vm.customerDetail.notificationRetake" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm">
+                          </toggle>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="form-group-min col-md-6 text-right ">
+                      <label class="col-sm-4 text-right">CFDI:</label>
+                      <div class="col-sm-8 text-right">
+                        <select id="areas" name="areas" charset="utf-8"
+                          ng-options="obj.id as obj.name for obj in vm.cfdi" data-ng-model="vm.customerDetail.usoCfdi"
+                          class="form-control" ng-disabled="vm.isDisabledState"
+                          placeholder="{{'0015' | translate}}"></select>
+                      </div>
+                    </div>
+                    <!--REGIMEN -->
+                    <div class="form-group-min col-md-6 text-right ">
+                      <label class="col-sm-4 text-right">{{'3142' | translate}}:</label>
+                      <div class="col-sm-8 text-right">
+                        <select id="areas" name="areas" charset="utf-8"
+                          ng-options="obj.id as obj.name for obj in vm.regimenFiscal"
+                          data-ng-model="vm.customerDetail.usoRegimenFiscal" class="form-control"
+                          ng-disabled="vm.isDisabledState" placeholder="{{'0015' | translate}}"></select>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-6 text-right ">
+                      <label class="col-sm-4 text-right">{{'0083' | translate}}:</label>
+                      <div class="col-sm-8 text-right">
+                        <textarea id="observation" name="observation" data-ng-model="vm.customerDetail.observation"
+                          ng-disabled="vm.isDisabled" placeholder="" ng-required="false" class="form-control"
+                          type="text" style="height: 140px"></textarea>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- Acordion *************************-->
+                <div id="accordion" role="tablist" aria-multiselectable="false" class="panel" ng-show="vm.haspKey">
+                  <div class="panel panel-principal panel-primary panel-padding panel-second"
+                    style="padding-left: 5px;">
+                    <div class=" panel-heading row" id="headingThree">
+                      <h4 class="panel-title panel-third">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#titleCustomer #collapseThree">
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                          {{'0118' | translate }}
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" aria-labelledby="headingThree"
+                      class="form-group form-group-sm text-left panel-padding panel-collapse collapse"
+                      style="margin-top: 10px; font-size: 13.5px; margin-bottom: 6px">
+                      <div class="form-group-min form-group-sm text-left panel-padding col-md-6">
+                        <label class="col-md-5 text-left" style="white-space: nowrap; ">{{'0260' | translate}}:</label>
+                        <div class="btn-group " style="width: 58%; background-color: transparent;"
+                          ng-class="{'disabled': vm.isDisabled}">
+                          <label class="btn btn-primary radio-button"
+                            ng-class="{'active': CustomerForm.option1.value || !vm.customerDetail.institutional, 'disabled': vm.isDisabled  }"
+                            style="width: 50%">
+                            <span ng-if="!vm.customerDetail.institutional" class="glyphicon glyphicon-ok"
+                              aria-hidden="true"></span>
+                            <input type="radio" name="options" id="option1" autocomplete="off"
+                              ng-model="vm.customerDetail.institutional" ng-disabled="vm.isDisabled"
+                              style="display: none;"> {{'0261' | translate}}
+                          </label>
+                          <label class="btn btn-primary radio-button"
+                            ng-class="{'active': CustomerForm.option2.value || vm.customerDetail.institutional, 'disabled': vm.isDisabled  }"
+                            style="width: 50%">
+                            <span ng-if="vm.customerDetail.institutional" class="glyphicon glyphicon-ok"
+                              aria-hidden="true"></span>
+                            <input type="radio" name="options" id="option2" autocomplete="off" value="true" checked
+                              ng-model="vm.customerDetail.institutional" ng-disabled="vm.isDisabled"
+                              style="display: none;"> {{'0262' | translate}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group-min form-group-sm text-right panel-padding col-md-6">
+                        <label class="col-md-9 text-right" style="white-space: nowrap; ">{{'0263' | translate}}:</label>
+                        <div class="col-md-2 form-group-min" style="margin-bottom: 4px">
+                          <toggle ng-model="vm.customerDetail.connectivityEMR" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm"></toggle>
+                        </div>
+                      </div>
+                      <div class="form-group-min form-group-sm text-right panel-padding col-md-6">
+                        <label class="col-md-8 text-left" style="white-space: nowrap;">{{'0264' | translate}}:</label>
+                        <div class="col-md-4 form-group-min" style="margin-bottom: 1px">
+                          <toggle ng-model="vm.customerDetail.faxSend" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-disabled="vm.isDisabled || vm.customerDetail.fax =='' || vm.customerDetail.fax == undefined"
+                            size="btn-sm"></toggle>
+                        </div>
+                      </div>
+                      <div class="form-group-min form-group-sm text-right panel-padding col-md-6">
+                        <label class="col-md-9 text-right" style="white-space: nowrap;">{{'0265' | translate}}:</label>
+                        <div class="col-md-2 form-group-min" style="margin-bottom: 1px">
+                          <toggle ng-model="vm.customerDetail.automaticEmail" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-disabled="vm.isDisabled || vm.customerDetail.email =='' || vm.customerDetail.email == undefined"
+                            size="btn-sm"></toggle>
+                        </div>
+                      </div>
+                      <div class="form-group-min form-group-sm col-md-6 text-left panel-padding">
+                        <label class="col-md-5 text-left" style="white-space: nowrap; ">{{'0267' | translate}}:</label>
+                        <div class="btn-group " style="width: 58%; background-color: transparent;"
+                          ng-class="{'disabled': vm.isDisabled}">
+                          <label class="btn btn-primary radio-button"
+                            ng-class="{'active': CustomerForm.option01.value || !vm.customerDetail.sendEnd, 'disabled': vm.isDisabled }"
+                            style="width: 50%">
+                            <span ng-if="!vm.customerDetail.sendEnd" class="glyphicon glyphicon-ok"
+                              aria-hidden="true"></span>
+                            <input type="radio" name="options0" id="option01" autocomplete="on"
+                              ng-model="vm.customerDetail.sendEnd" ng-disabled="vm.isDisabled" style="display: none;">
+                            {{'0268' | translate}}
+                          </label>
+                          <label class="btn btn-primary radio-button"
+                            ng-class="{'active': CustomerForm.option02.value || vm.customerDetail.sendEnd, 'disabled': vm.isDisabled }"
+                            style="width: 50%">
+                            <span ng-if="vm.customerDetail.sendEnd" class="glyphicon glyphicon-ok"
+                              aria-hidden="true"></span>
+                            <input type="radio" name="options0" id="option02" autocomplete="on" value="true" checked
+                              ng-model="vm.customerDetail.sendEnd" ng-disabled="vm.isDisabled" style="display: none;">
+                            {{'0271' | translate}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group-min form-group-sm text-right panel-padding col-md-6">
+                        <label class="col-md-9 text-right" style="white-space: nowrap;">{{'0266' | translate}}:</label>
+                        <div class="col-md-2 form-group-min" style="margin-bottom: 0px">
+                          <toggle ng-model="vm.customerDetail.print" on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" ng-change="vm.changeEditPatients()"
+                            size="btn-sm"></toggle>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="panel-footer general-container" style="height: 55px;">
+              <button type="button" class=" btn btn-success button-list" ng-click="vm.NewCustomer(CustomerForm)"
+                ng-disabled="vm.isDisabledAdd">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{'0005' | translate}}
+              </button>
+              <button type="button" class="btn btn-warning button-list" ng-click="vm.EditCustomer()"
+                ng-disabled="vm.isDisabledEdit">
+                <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+              </button>
+              <button type="button" class="btn btn-primary button-list" ng-click="vm.saveCustomer(CustomerForm)"
+                ng-disabled="vm.isDisabledSave">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+              </button>
+              <button type="button" class="btn btn-info  button-list" ng-click="vm.cancelCustomer(CustomerForm)"
+                ng-disabled="vm.isDisabledCancel">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+              </button>
+              <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                ng-disabled="vm.isDisabledPrint">
+                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>

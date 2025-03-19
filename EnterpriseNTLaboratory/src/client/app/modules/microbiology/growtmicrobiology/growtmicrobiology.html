@@ -1,0 +1,237 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner">
+        <div style="height: 100%; margin-left: 0px;" class="uk-grid">
+
+            <div style="height: 100%; width: 29%; margin-left: -38px;" class="uk-width-3-10">
+
+                <div style="height: 141px; margin-top: 0px;" class="md-card  md-card-hover">
+                    <div class="md-card-content">
+                        <ordersample order="vm.order" disabled="vm.Listdestination.length === 0" sample="vm.sample"
+                            size='30' functionexecute="vm.verification" classdanger="vm.menssageinformative !=='' ">
+                        </ordersample>
+                        <span ng-if="vm.menssageinformative!==''"
+                            class="uk-container-center help-block">{{vm.menssageinformative}}</span>
+                    </div>
+                </div>
+                <div style="height: calc(100% - 143px); margin-top: 6px; width: 100%" ng-show="vm.numberOrder!=null">
+                    <patient order="vm.numberOrder" orderdemo="vm.demopatient"></patient>
+                </div>
+            </div>
+            <div style="height: 100%; width: 73%; padding-left: 10px;" class="uk-width-8-10 ">
+                <div style="height: 141px; width: 100%;" class="uk-width-4-6" ng-if="vm.detail.length!==0">
+                    <div class="md-card" style="height: 100%">
+                        <div class="md-card-content large-padding" style="padding: 10px 10px;">
+                            <div class="uk-grid uk-grid-divider uk-grid-medium" style="width: 100%; margin-left: 0px;">
+                                <div class="uk-width-1-3"
+                                    style="padding-left: 0px; padding-right: 24px; width: 31.333%;">
+                                    <ul class="md-list md-list-addon" style="height: 89%">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-list-addon-icon material-icons"
+                                                    ng-src="images/microbiology/blood-sample.png" />
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span
+                                                    class="uk-text-small uk-text-primary">{{'0111' | translate}}</span>
+                                                <span class="md-list-heading">{{vm.detail.sample.name}}</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-list-addon-icon material-icons"
+                                                    ng-src="images/microbiology/medical-history.png" />
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span
+                                                    class="uk-text-small uk-text-primary">{{'0459' | translate}}</span>
+                                                <span
+                                                    class="md-list-heading">{{vm.detail.test.code}}\{{vm.detail.test.name}}</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="uk-width-1-3"
+                                    style="padding-left: 0px; padding-right: 24px; width: 35.333%;">
+                                    <ul class="md-list md-list-addon" style="height: 89%">
+                                        <li>
+                                            <div class="md-list-addon-element">
+                                                <img class="md-list-addon-icon material-icons"
+                                                    ng-src="images/microbiology/calendaringreso.png" />
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span
+                                                    class="uk-text-small uk-text-primary">{{'0189' | translate}}</span>
+                                                <span class="md-list-heading">{{vm.createdDate}}</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-addon-element" style="font-size: 21px;">
+                                                <img ng-src="images/microbiology/calendar.png" style="height: 28px;" />
+
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span
+                                                    class="uk-text-small uk-text-primary">{{'0119' | translate}}</span>
+                                                <span class="md-list-heading">{{vm.dateverification}}</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="uk-width-1-3" style="padding-left: 0px; padding-right: 0px">
+                                    <ul class="md-list md-list-addon" style="height: 89%">
+                                        <li>
+                                            <div class="md-list-addon-element" style="font-size: 21px;">
+                                                <img ng-src="images/microbiology/anatomy.png" style="height: 28px;" />
+                                            </div>
+                                            <div class="md-list-content">
+                                                <span
+                                                    class="uk-text-small uk-text-primary">{{'0462' | translate}}</span>
+                                                <span class="md-list-heading">{{vm.detail.anatomicalSite.name}}</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid uk-grid-width-large-1-2 uk-grid-medium" ng-if="vm.detail.length!==0"
+                    style="margin-top: 6px; height: calc(100% - 248px);">
+                    <div style="width: 33%;height: 100%;">
+                        <div class="md-card" style="height: calc(50% - 3px);">
+                            <div class="md-card-content" style="height: 100%;width: 100%;padding: 0px;">
+                                <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                    style="height:100%">
+                                    <thead class="theadscrollable">
+                                        <tr>
+                                            <th class="uk-width-1-10" style="color: #212121;">
+                                                <strong>{{'0487' | translate}}</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyscrollable contentscroll" style="height:  calc(100% - 39px);">
+                                        <tr data-ng-repeat="procedure in vm.procedure">
+                                            <td class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                                <input type="checkbox" icheck
+                                                    ng-model="procedure.procedure.defaultvalue" class="check_row"
+                                                    table-check-row>
+                                            </td>
+                                            <td class="uk-width-7-10" data-ng-bind="procedure.procedure.name"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="md-card" style="height: calc(50% - 3px);;margin-top: 7.5px">
+                            <div class="md-card-content" style="height: 100%;width: 100%;padding: 0px;">
+                                <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                    style="height:100%">
+                                    <thead class="theadscrollable">
+                                        <tr>
+                                            <th class="uk-width-1-10" style="color: #212121;">
+                                                <strong>{{'0486' | translate}}</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyscrollable contentscroll" style="height:  calc(100% - 39px);;">
+                                        <tr data-ng-repeat="mediaCultures in vm.mediaCultures">
+                                            <td class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                                <input type="checkbox" icheck ng-model="mediaCultures.defectValue"
+                                                    class="check_row" table-check-row>
+                                            </td>
+                                            <td class="uk-width-7-10" data-ng-bind="mediaCultures.name"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-left: 6px;width: 67%;height: 100%">
+                        <commentmicrobiology orderhistory="vm.order" idsample="vm.sample" state="2" setnotes="vm.notes"
+                            idtest="vm.detail.test.id">
+                        </commentmicrobiology>
+                    </div>
+                </div>
+                <div style="height: 82%;" ng-if="vm.detail.length===0"></div>
+                <div style="height: 60px; margin-top: 15px" class="md-card">
+                    <div class="md-card">
+                        <div class="md-card-content" style="padding-top: 8px; padding-bottom: 8px; display: flex;">
+                            <div class="uk-grid uk-grid-small uk-container-center">
+
+                                <div class="uk-text-center buttonNormalLine">
+                                    <button type="button"
+                                        ng-disabled="((vm.procedure | filter:{ procedure: { defaultvalue: true}}).length === 0 )||((vm.mediaCultures | filter:{ defectValue: true}).length === 0 )"
+                                        class="md-fab md-fab-small md-fab-success"
+                                        ng-class="{'md-bg-blue-grey-100' : ((vm.procedure | filter:{ procedure: { defaultvalue: true}}).length === 0 )||((vm.mediaCultures | filter:{ defectValue: true}).length === 0 )}"
+                                        ng-click="vm.insertdatamicrobiology()">
+                                        <i class="material-icons">&#xE876;</i>
+                                    </button>
+                                    <span class="uk-text-middle textbutton">{{'0509' | translate}}</span>
+                                </div>
+                                <div class="uk-text-center buttonNormalLine">
+                                    <button type="button" ng-disabled="!vm.Butonbarcode"
+                                        class="md-fab md-fab-small md-fab-primary"
+                                        ng-class="{'md-bg-blue-grey-100' : !vm.Butonbarcode}"
+                                        ng-click="vm.openmodalbarcode = true">
+                                        <i class="uk-icon-barcode"></i>
+                                    </button>
+                                    <span class="uk-text-middle textbutton" style="">{{'0211' | translate}}</span>
+                                </div>
+                                <div class="uk-text-center buttonNormalLine">
+                                    <button type="button" ng-disabled="!vm.Butondemographics"
+                                        class="md-fab md-fab-small"
+                                        ng-class="{'md-bg-blue-grey-100' : !vm.Butondemographics,'md-bg-blue-grey-400' : vm.Butondemographics}"
+                                        data-uk-modal="{target:'#demographics'}">
+                                        <i class="material-icons md-color-light-blue-50">&#xE03F;</i>
+                                    </button>
+                                    <span class="uk-text-middle textbutton">{{'0083' | translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal uk-modal-card-fullscreen" id="demographics">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-blue-grey-400">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" style="margin: 0px;"
+                            data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-light-blue-50" style="font-size: 33px;">&#xE03F;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0083' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid" style="height: 100%;">
+                    <div class="uk-width-1-3">
+                        <patient order="vm.numberOrder"></patient>
+                    </div>
+                    <div class="uk-width-1-3">
+                        <orderinfo ordernumber="vm.numberOrder"></orderinfo>
+                    </div>
+                    <div class="uk-width-1-3">
+                        <interview order="vm.numberOrder" state="true"></interview>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<orderinterview order="vm.order" openmodal="vm.openinterview" state="vm.state"></orderinterview>
+<modalbarcode openmodal="vm.openmodalbarcode" order="vm.order"></modalbarcode>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

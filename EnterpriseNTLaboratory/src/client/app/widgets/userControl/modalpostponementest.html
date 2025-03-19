@@ -1,0 +1,151 @@
+<loadpage view="modalpostponementest.loading"></loadpage>
+<modalexceptions idcontrol="'modalpostponementest'" openmodal="modalpostponementest.ShowPopupError"
+    detailerror="modalpostponementest.Error"></modalexceptions>
+<div id="rp-modal-advertencia" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-grid uk-container-center">
+            <div class="uk-width-3-10">
+                <img src="images/iconinfo.png" height="90" width="90">
+            </div>
+            <div class="uk-width-7-10" style="margin-top: 3%;">
+                <span>{{'1146' | translate}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalpostponementestmodal" class="uk-modal uk-modal-card-fullscreen">
+    <loadpage view="modalpostponementest.loadingdata"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-purple-300">
+                <div class="md-card-toolbar-actions" style="padding-top: 0px">
+                    <div>
+                        <i class="md-icon material-icons md-color-grey-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                        ng-click="modalpostponementest.loading = false; modalpostponementest.loadingdata = false;"
+                            title="{{'0329'| translate}}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="line-height: 32px; font-size: 30px">&#xE889;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0169' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: 87%;">
+                <div class="uk-grid uk-grid-small" style="height: 100%;">
+                    <div class="uk-width-3-10" style="padding-left: 0px">
+                        <cardordersample order="modalpostponementest.order"
+                            typeordercode="modalpostponementest.patient.typeordercode"
+                            typeordercolor="modalpostponementest.patient.typeordercolor"
+                            samplename="modalpostponementest.sampleName" listsamples="modalpostponementest.listSamples"
+                            active="modalpostponementest.active" multiple="modalpostponementest.multipleSample"
+                            sample="modalpostponementest.sample" functionexecute="modalpostponementest.selectSample"
+                            changuemodel="modalpostponementest.changuemodel">
+                        </cardordersample>
+                    </div>
+                    <div class="uk-width-3-10" style="z-index: 100">
+                        <cardpatient patientname="modalpostponementest.patient.name"
+                            patientdocument="modalpostponementest.patient.document"
+                            patientage="modalpostponementest.patient.age" patientgender="modalpostponementest.patient.gender"
+                            photopatient="modalpostponementest.photopatient" patientid="modalpostponementest.patient.id" orderpatient="modalpostponementest.order" >
+                        </cardpatient>
+                    </div>
+                    <div class="uk-width-4-10">
+                        <div class="md-card md-card-hover">
+                            <div class="md-card-content" style="padding: 0px;">
+                                <div class="uk-grid uk-grid-small">
+                                    <div class="uk-width-1-2"
+                                        style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding: 16px">
+                                        <div class="uk-form-row">
+                                            <label class="uk-modal-content">{{'0113' | translate}}:</label>
+                                            <select class="md-input form-control"
+                                                ng-options="obj as obj.name for obj in modalpostponementest.Listmotive track by obj.id"
+                                                data-ng-model="modalpostponementest.motive"
+                                                style="font-size: 14px !important"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2" style="padding: 16px;">
+                                        <div class="uk-form-row">
+                                            <label>{{'0114' | translate}}:</label>
+                                            <div class="md-input-wrapper">
+                                                <textarea cols="30" rows="2" data-ng-model="modalpostponementest.Comment"
+                                                    class="md-input no_autosize"
+                                                    style="margin: 0px -10.5px 0px 0px; width: 100%; height: 80px; font-size: 14px !important"></textarea><span
+                                                    class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="form" name="myForm"
+                        style="height: calc(100% - 157px); padding: 15px 0px 10px 0px;width: 100%">
+                        <div class="md-card" style="height: calc(100% - 55px)">
+                            <table class="uk-table uk-table-small uk-table-middle tablescrollable" style="height: 100%">
+                                <thead class="theadscrollable">
+                                    <tr>
+                                        <th class="uk-width-1-10 uk-text-center small_col">
+
+                                        </th>
+                                        <th class="uk-width-2-10 uk-text-bold" style="padding-left: 25px">
+                                            {{'0098' | translate}}</th>
+                                        <th class="uk-width-2-10 uk-text-bold">{{'0198' | translate}}</th>
+                                        <th class="uk-width-6-10 uk-text-bold">{{'0013' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyscrollable" style="height: calc(100% - 40px);overflow-y: scroll;">
+                                    <tr ng-repeat="Test in modalpostponementest.Detail.tests | orderBy:'profileId'">
+                                         <td colspan="18" style="background-color: rgb(198, 217, 253)" 
+                                        class="uk-padding-remove ng-binding uk-text-primary" ng-if="Test.viewprofil" style="margin-right: 7px;">
+                                            <md-checkbox ng-model="Test.selecprofil" aria-label="Finished?"
+                                                class="md-primary" ng-if="Test.viewselectall"
+                                                ng-change="modalpostponementest.selectprofiltall(Test,Test.selecprofil)"
+                                                style="margin-bottom: 0px;margin-left: 7px;">
+                                            </md-checkbox>
+                                            {{Test.profileName}}
+                                        </td> 
+                                        <td ng-if="Test.sampleState === 1 && !Test.viewprofil" 
+                                            class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                            <i title="{{'1144' | translate}}"
+                                                data-uk-tooltip="{cls:'uk-tooltip-small long-text', pos:'top'}"
+                                                class="material-icons md-color-purple-300"
+                                                style="font-weight: bold">&#xE889;</i>
+                                        </td>
+                                        <td ng-if="Test.sampleState !== 1 && Test.testState >= 4 && !Test.viewprofil"
+                                            class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                            <i title="{{'1145' | translate}}"
+                                                data-uk-tooltip="{cls:'uk-tooltip-small long-text', pos:'top'}"
+                                                class="material-icons md-color-red-600"
+                                                style="font-weight: bold">&#xE14B;</i>
+                                        </td>
+                                        <td ng-if="Test.sampleState !== 1 && Test.testState < 4 && !Test.viewprofil"
+                                            class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                            <input type="checkbox" icheck ng-model="Test.select" 
+                                            ng-change="modalpostponementest.selecttest(Test)"
+                                               class="check_row"
+                                                table-check-row>
+                                        </td>
+                                        <td class="uk-width-2-10" ng-if="!Test.viewprofil" data-ng-bind="Test.code"></td>
+                                        <td class="uk-width-2-10" ng-if="!Test.viewprofil" data-ng-bind="Test.abbr"></td>
+                                        <td class="uk-width-6-10" ng-if="!Test.viewprofil" data-ng-bind="Test.name"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    <div class="md-fab-wrapper md-fab-in-card" style="top: calc(100% - 69px);">
+                        <button type="button" class="md-fab md-fab-small md-fab"
+                            ng-click="modalpostponementest.Savepostponement()"
+                            ng-disabled="(modalpostponementest.motive.id === -1 || (modalpostponementest.Detail.tests | filter:{ select: true}).length === 0 )"
+                            ng-class="{'md-color-grey-50 md-bg-blue-grey-100': (modalpostponementest.motive.id === -1 || (modalpostponementest.Detail.tests | filter:{ select: true}).length === 0 ),
+                                       'md-color-grey-50 md-bg-purple-300': (modalpostponementest.motive.id !== -1  && (modalpostponementest.Detail.tests | filter:{ select: true}).length !== 0 )}">
+                            <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                title=" {{'0007' | translate}} ">&#xE161;</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

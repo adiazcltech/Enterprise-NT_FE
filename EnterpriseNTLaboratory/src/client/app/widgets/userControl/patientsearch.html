@@ -1,0 +1,291 @@
+<style>
+    .patientsearch-padding-search {
+        padding-top: 5px;
+    }
+
+    .patientsearch-uppercase {
+        text-transform: uppercase;
+        font-size: 12px !important;
+        padding-bottom: 0px !important
+    }
+
+    .patientsearch-table-row {
+        margin-top: 10px !important;
+    }
+
+    .patientsearch-table-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: 100px !important;
+        font-size: 12px !important;
+        /*        max-height: 412px !important;*/
+    }
+
+    .patientsearch-filter-margin {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .patientsearch-filter-padding {
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    .k-picker-wrap {
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .k-picker-wrap.k-state-hover {
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .k-datepicker .k-input,
+    .k-timepicker .k-input {
+        background-color: white;
+    }
+
+    a.uk-text-center {
+        font-size: 12px !important
+    }
+
+    thead.bold-text>tr>th {
+        font-weight: bold;
+        font-size: 13PX;
+    }
+
+    .tbody-patient {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: calc(100% - 250px);
+        display: -webkit-inline-box;
+        width: 100%;
+    }
+
+    .tr-style-row {
+        display: inline-table;
+        font-size: 11px !important;
+        position: absolute;
+        width: 94% !important;
+    }
+
+    .tr-style-multirow {
+        display: inline-table;
+        font-size: 11px !important;
+        width: 100%
+    }
+
+    .my-tooltip {
+        max-width: 100%;
+        word-break: break-all
+    }
+</style>
+
+
+
+<div id="patientsearch" class="md-card-content" style="height: 100%">
+    <div class="uk-form-row" style="height: 136px">
+        <div class="md-card md-card-hover">
+            <div class="md-card-content">
+                <div>
+                    <ul class="uk-tab uk-text-center" data-uk-tab="{connect:'#tabs_filter', animation:'scale'}"
+                        change.uk.tab="">
+                        <li class="uk-active">
+                            <a ng-click="patientsearch.eventSelectPatientId()" class="uk-text-center">{{'0117' |
+                                translate}}</a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="patientsearch.eventSelectPatient()" class="uk-text-center">{{'0398' |
+                                translate}}</a>
+                        </li>
+                        <!--                         <li>
+                            <a href="#" ng-click="patientsearch.eventSelectOrder()" class="uk-text-center">{{'0110' | translate}}</a>
+                        </li> -->
+                    </ul>
+                </div>
+                <ul id="tabs_filter" class="uk-switcher uk-margin patientsearch-filter-margin">
+                    <li class="patientsearch-padding-search">
+                        <div class="uk-form-row">
+                            <div class="uk-grid uk-container-center patientsearch-filter-padding">
+                                <div class="uk-width-2-5 uk-row-first md-input-filled"
+                                    ng-if="patientsearch.managedocumenttype">
+                                    <label>{{'0233' | translate}}</label>
+                                    <select id="txt_patientsearch_patient_doc" class="md-input patientsearch-uppercase"
+                                        ng-model="patientsearch.patientDocToSearch"
+                                        ng-change="patientsearch.searchByHistory()">
+                                        <option ng-repeat="doc in patientsearch.documentTypes" value="{{doc.id}}">
+                                            {{doc.name.toUpperCase()}}
+                                        </option>
+                                    </select>
+                                    <span class="md-input-bar"></span>
+                                </div>
+                                <div class="uk-width-1-3 uk-row-first" >
+                                    <div class="md-input-wrapper md-input-filled">
+                                        <label>{{'0117' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_id" type="text"
+                                            class="md-input patientsearch-uppercase"
+                                            ng-model="patientsearch.patientIdToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByHistory()"
+                                            style="font-size: 12px">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-5" style="padding-top: 10px;">
+                                    <button type="button"
+                                        class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                                        ng-click="patientsearch.searchByHistory()">
+                                        <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="patientsearch-padding-search">
+                        <div class="uk-form-row">
+                            <div class="uk-grid uk-container-center patientsearch-filter-padding">
+                                <div class="uk-width-1-5 uk-row-first" ng-if="patientsearch.twosurnames">
+                                    <div class="md-input-wrapper">
+                                        <label for="txt_patientsearch_patient_last_name">{{'0234' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_last_name" type="text"
+                                            class="md-input label-fixed patientsearch-uppercase"
+                                            ng-model="patientsearch.lastNameToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByPatient()">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-5" ng-if="patientsearch.twosurnames">
+                                    <div class="md-input-wrapper">
+                                        <label for="txt_patientsearch_patient_sur_name">{{'0235' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_sur_name" type="text"
+                                            class="md-input label-fixed patientsearch-uppercase"
+                                            ng-model="patientsearch.surNameToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByPatient()">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-2-5 uk-row-first" ng-if="!patientsearch.twosurnames">
+                                    <div class="md-input-wrapper">
+                                        <label for="txt_patientsearch_patient_last_name">{{'3657' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_last_name" type="text"
+                                            class="md-input label-fixed patientsearch-uppercase"
+                                            ng-model="patientsearch.lastNameToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByPatient()">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-5" ng-if="patientsearch.twoNames">
+                                    <div class="md-input-wrapper">
+                                        <label for="txt_patientsearch_patient_name1">{{'0236' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_name1" type="text"
+                                            class="md-input label-fixed patientsearch-uppercase"
+                                            ng-model="patientsearch.name1ToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByPatient()">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-5"  ng-if="patientsearch.twoNames">
+                                    <div class="md-input-wrapper">
+                                        <label for="txt_patientsearch_patient_name2">{{'0237' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_name2" type="text"
+                                            class="md-input label-fixed patientsearch-uppercase"
+                                            ng-model="patientsearch.name2ToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByPatient()">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-2-5" ng-if="!patientsearch.twoNames">
+                                    <div class="md-input-wrapper">
+                                        <label for="txt_patientsearch_patient_name1">{{'3656' | translate}}</label>
+                                        <input id="txt_patientsearch_patient_name1" type="text"
+                                            class="md-input label-fixed patientsearch-uppercase"
+                                            ng-model="patientsearch.name1ToSearch"
+                                            ng-keypress="$event.keyCode === 13 && patientsearch.searchByPatient()">
+                                        <span class="md-input-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-5" style="padding-top: 10px;">
+                                    <button type="button"
+                                        class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                                        ng-click="patientsearch.searchByPatient()">
+                                        <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>                  
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="uk-form-row patientsearch-table-row" style="height: 100%">
+        <div class="uk-overflow-container patientsearch-table-container" style="overflow: hidden; height: 100%">
+            <table class="uk-table uk-table-nowrap uk-table-small uk-table-middle tablescrollable" style="height: 100%">
+                <thead class="bold-text" style="width: 100%; display: inline-table;">
+                    <tr>
+                        <th hidden>Document Type Id</th>
+                        <th class="uk-text-center uk-width-1-6" ng-if="patientsearch.managedocumenttype">{{'0233'
+                            | translate}}</th>
+                        <th hidden>Patient Id</th>
+                        <th class="uk-text-center uk-width-1-6">{{'0117' | translate}}</th>
+                        <th class="uk-text-center uk-width-1-4">{{'0398' | translate}}</th>
+                        <th class="uk-text-center uk-width-1-6"
+                            ng-class="{'uk-width-1-4': !patientsearch.managedocumenttype}">{{'0120' | translate}}
+                        </th>
+                        <th class="uk-text-center uk-width-1-6"
+                            ng-class="{'uk-width-1-5': !patientsearch.managedocumenttype}" style="width: 20%">
+                            {{'0426' | translate}}</th>
+                        <!--                         <th class="uk-text-center uk-width-1-6" ng-class="{'uk-width-1-4': !patientsearch.managedocumenttype}" >{{'0110' | translate}}</th> -->
+                        <!-- <th class="uk-text-center uk-width-1-5" ng-if="patientsearch.managedocumenttype"></th> -->
+                    </tr>
+                </thead>
+                <tbody class="tbody-patient">
+                    <tr ng-repeat="history in patientsearch.patients" class="tr-style-multirow"
+                        ng-class="{'tr-style-row': patientsearch.patients.length === 1, 'tr-style-multirow': patientsearch.patients.length > 1}">
+                        <td hidden>{{history.documentTypeId}}</td>
+                        <td class="uk-text-center uk-width-1-5" ng-if="patientsearch.managedocumenttype"
+                            style="min-width: 150px; width: 18%">{{history.documentType.toUpperCase() === 'DEFECTO' ?
+                            'SIN TIPO DE DOCUMENTO' : history.documentType.toUpperCase()}}</td>
+                        <td hidden>{{history.patientIdDB}}</td>
+                        <td class="uk-text-center uk-width-1-6" style="{{patientsearch.maxWidth}}">
+                            <a href="#" ng-if="history.documentTypeId > 1 && patientsearch.managedocumenttype"
+                                ng-click="patientsearch.selectHistory(history.history, history.documentTypeId, history.patientIdDB)"
+                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                title="{{history.tooltip}}">{{history.patientId}}</a>
+                            <a href="#"
+                                ng-if="history.documentTypeId === 1 && !patientsearch.managedocumenttype && !patientsearch.managehistoryauto"
+                                ng-click="patientsearch.selectHistory(history.history, history.documentTypeId, history.patientIdDB)"
+                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                title="{{history.tooltip}}">{{history.patientId}}</a>
+                            <a href="#"
+                                ng-if="history.documentTypeId === 1 && !patientsearch.managedocumenttype && patientsearch.managehistoryauto"
+                                ng-click="patientsearch.selectHistory(history.history, history.documentTypeId, history.patientIdDB)"
+                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                title="{{history.tooltip}}">{{history.patientId}}</a>
+                            <label
+                                ng-show="(history.documentTypeId > 1 && !patientsearch.managedocumenttype) || (history.documentTypeId <= 1 && patientsearch.managedocumenttype) || (history.documentTypeId > 1 && patientsearch.managehistoryauto)"
+                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                title="{{history.tooltip}}">{{history.patientId}}</label>
+                        </td>
+                        <td class="uk-text-center uk-width-1-4">
+                            {{history.lastName.toUpperCase() + ' ' + (history.surName === null || history.surName === ''
+                            ? '' : history.surName.toUpperCase()
+                            + ' ') + history.name1.toUpperCase() + ' ' + ((history.name1 === null || history.name2 ===
+                            '' ? '' : history.name2.toUpperCase()))
+                            }}
+                        </td>
+                        <td class="uk-text-center uk-width-1-5"
+                            ng-class="{'uk-width-1-4': !patientsearch.managedocumenttype}">{{history.birthday}}
+                        </td>
+                        <td class="uk-text-center uk-width-1-6"
+                            ng-class="{'uk-width-1-5': !patientsearch.managedocumenttype}">{{history.sex}}</td>
+                        <!--                         <td class="uk-text-center uk-width-1-6" ng-class="{'uk-width-1-5': !patientsearch.managedocumenttype}"  style="min-width: 91px">{{history.order}}</td>  -->
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

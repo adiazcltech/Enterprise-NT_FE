@@ -1,0 +1,224 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0310' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/feeschedules/feeschedules.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.namefeeschedules; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.namefeeschedules"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.namefeeschedules"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.namefeeschedules && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.namefeeschedules && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.namefeeschedules && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.namefeeschedules && vm.sortReverse"></span>
+                        </a> {{'0310' | translate}}
+                      </th>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.initialDate; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.initialDate"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.initialDate"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.initialDate && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.initialDate && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.initialDate && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.initialDate && vm.sortReverse"></span>
+                        </a> {{'0588' | translate}}
+                      </th>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.endDate; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.endDate"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.endDate"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.endDate && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.endDate && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.endDate && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.endDate && vm.sortReverse"></span>
+                        </a>{{'0589' | translate}}
+                      </th>
+                      <th class="col-md-3" style="padding-left: 0px">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.state && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.state && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.state && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.state && vm.sortReverse"></span>
+                        </a>{{'0647' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll">
+                    <tr class="row-list"
+                      data-ng-repeat="feeschedule in vm.filtered = ((vm.data | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getId(feeschedule.id,$index,Form)"
+                      ng-class="{info: feeschedule.id == vm.selected}">
+                      <td class="col-md-3" data-ng-bind="feeschedule.name"></td>
+                      <td class="col-md-3" data-ng-bind="feeschedule.initialDate"></td>
+                      <td class="col-md-3" data-ng-bind="feeschedule.endDate"></td>
+                      <td class="col-md-3 text-center" style="padding-left: 0px; padding-right: 0px">
+                        <i ng-if="feeschedule.state == true" class="glyphicon glyphicon-ok green"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form contentscroll" style="overflow:auto">
+                <form name="Form" id="Form" class="form-horizontal panel-body">
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': Form.name.$invalid && Form.name.$touched||vm.Repeat }">
+                    <label class="col-md-4 text-right">{{'0310' | translate}}:</label>
+                    <div class="col-md-8">
+                      <input class="form-control" maxlength="60" data-ng-model="vm.Detail.name" ng-required="true"
+                        ng-disabled="vm.isDisabled" name="name" id="name" class="form-control" type="text"
+                        ng-focus="vm.Repeat = false">
+                      <span ng-if="Form.name.$invalid && Form.name.$touched ||vm.Repeat"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="Form.name.$invalid && Form.name.$touched"
+                        class="help-block ">{{'0016' | translate}}</span>
+                      <span ng-if="vm.Repeat" class="help-block ">{{'0038' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': vm.validrequeridDateinit  || vm.showInvaliddate || vm.showrangedate}">
+                    <label class="col-md-4 text-right">{{'0588' | translate}}:</label>
+                    <div class="col-md-8">
+                      <div class="col-md-5 input-group help-block">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDateControl}}"
+                          ng-model="vm.dateinitial" is-open="vm.openinit" datepicker-options="vm.optionsDateInit"
+                          ng-disabled="vm.isDisabled" ng-focus="vm.openinit = true;  vm.showInvaliddate = false"
+                          ng-blur="vm.openinit = false; vm.validDateinit()" on-open-focus="false"
+                          clear-text="{{'1013' | translate}}" close-text="{{'0022' | translate}}"
+                          current-text="{{'1014' | translate}}" ng-required="true" />
+                        <div class="input-group-addon " ng-click="vm.openinit = true">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </div>
+                      </div>
+                      <span ng-if="vm.showInvaliddate" class="help-block ">{{'0592' | translate}} ({{vm.name}})</span>
+                      <span ng-if="vm.showrangedate" class="help-block ">{{'0593' | translate}}</span>
+                      <span ng-if="vm.validrequeridDateinit" class="help-block ">{{'0016' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': vm.validrequeriddateend}">
+                    <label class="col-md-4 text-right">{{'0589' | translate}}: </label>
+                    <div class="col-md-8">
+                      <div class="col-md-5 input-group help-block">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDateControl}}"
+                          ng-model="vm.dateend" is-open="vm.openend" datepicker-options="vm.optionsDateEnd"
+                          ng-disabled="vm.isDisabled" ng-focus="vm.openend = true; vm.showInvaliddate = false"
+                          ng-blur="vm.openend = false; vm.validDateEnd()" on-open-focus="false"
+                          clear-text="{{'1013' | translate}}" close-text="{{'0022' | translate}}"
+                          current-text="{{'1014' | translate}}" ng-required="true" />
+                        <div class="input-group-addon " ng-click="vm.openend = true">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </div>
+                      </div>
+                      <span ng-if="vm.showInvaliddate" class="help-block ">{{'0592' | translate}} ({{vm.name}})</span>
+                      <span ng-if="vm.validrequeriddateend" class="help-block ">{{'0016' | translate}} </span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="col-md-4 text-right">{{'0587' | translate}}:</label>
+                    <div class="col-md-5">
+                      <toggle ng-model="vm.Detail.automatically" on="{{'0032' | translate}}"
+                        off="{{'0033' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm"></toggle>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="col-md-4 text-right">{{'0647' | translate}}:</label>
+                    <div class="col-md-5">
+                      <toggle ng-model="vm.Detail.state" on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                        ng-disabled="true" size="btn-sm"></toggle>
+                    </div>
+                  </div>
+                </form>
+                <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.Detail.state"></modalstate>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class=" btn btn-success button-list" ng-click="vm.New(Form)"
+                    ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'0005' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-warning button-list" ng-click="vm.Edit()"
+                    ng-disabled="vm.isDisabledEdit">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary button-list" ng-click="vm.save(Form)"
+                    ng-disabled="!Form.$valid || vm.isDisabledSave">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" ng-click="vm.cancel(Form)"
+                    ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                    ng-disabled="vm.isDisabledPrint">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

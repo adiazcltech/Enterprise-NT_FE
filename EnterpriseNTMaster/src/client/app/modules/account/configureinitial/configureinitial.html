@@ -1,0 +1,724 @@
+<style type="text/css">
+    .help-botton {
+        float: right !important;
+        color: #68B3C8;
+        white-space: nowrap;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .successfullicon {
+        color: #7AC29A;
+    }
+
+    .erroricon {
+        color: #ff0000;
+    }
+
+    .errorsegurity {
+        border: 1px solid #e81111;
+    }
+
+    #body-content {
+        height: 100%;
+    }
+
+    .input-group-addon,
+    .input-group-btn {
+        width: 1%;
+        white-space: nowrap;
+        vertical-align: top;
+    }
+
+
+    .wizard-card .disabled {
+        display: inline-block !important;
+    }
+
+    tooltip tip {
+        border-radius: 5px;
+        background: rgb(104, 179, 200);
+        min-width: 300px;
+    }
+
+    .has-error .help-block {
+        color: #EB5E28 !important;
+        border-color: #EB5E28 !important;
+    }
+
+
+    .button-error {
+        border-color: #da5721;
+        color: rgba(230, 26, 26, 0.85);
+        background-color: #FFC0A4;
+    }
+
+    .form-group {
+        margin-bottom: 0px !important;
+    }
+
+
+
+    .button-position-collapse {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        white-space: nowrap;
+    }
+
+
+    @media screen and (min-height: 620px) and (max-height: 2000px) {
+        .button-position {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+    }
+
+    @media screen and (min-height: 100px) and (max-height: 619px) {
+        .button-position {
+            position: fixed;
+            top: 87%;
+            left: 70%;
+            width: 25%;
+            white-space: nowrap;
+        }
+
+    }
+
+    div.form-group>label {
+        vertical-align: middle;
+    }
+</style>
+<!-- CSS Files -->
+<link href="assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+<!-- Fonts and Icons -->
+<link href="assets/css/themify-icons.css" rel="stylesheet">
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<loadpage view="vm.loadpage"></loadpage>
+<section class="general-container" ng-show="!vm.loadpage">
+    <div class="row" style="height: 100%">
+        <div class="col-sm-12" style="height: 100%">
+            <div class="card wizard-card" data-color="blue" id="wizardProfile" style="height: calc(100% - 55px)">
+                <form name="Form" id="Form" style="height: 100%">
+                    <div class="wizard-header text-right" style="height: 75px;">
+                        <h3 class="col-sm-11 wizard-title" style="padding-left: 10%">{{'0902' | translate}}</h3>
+                        <p class="col-sm-1 category">
+                            <div class="col-sm-offset-1">
+                                <div ng-click="vm.changeLanguage('es')"
+                                    style="float: left; text-align: center; font-size: 10px">
+                                    <img src="images/esinit_CO.png" style="width: 25px; cursor: pointer"><br />
+                                    <label translate="0106"></label>
+                                </div>
+                                <div ng-click="vm.changeLanguage('en')" style="text-align: center; font-size: 10px">
+                                    <img src="images/eninit_US.png" style="width: 25px; cursor: pointer"><br />
+                                    <label translate="0107"></label>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="wizard-navigation" id="wizardnavigation">
+                        <div class="progress-with-circle">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1"
+                                aria-valuemax="3" style="width: 21%;">
+                            </div>
+                        </div>
+                        <ul>
+                            <li>
+                                <a data-parent="#wizardnavigation" href="#titleconfigure #settingslaboratory"
+                                    aria-expanded="false" data-toggle="tab" ng-click="vm.value=1">
+                                    <div class="icon-circle">
+                                        <i class="ti-numberone" style="font-size: 38px; top:8px"></i>
+                                    </div>
+                                    {{'0285' | translate}}
+                                </a>
+                            </li>
+                            <li>
+                                <a data-parent="#wizardnavigation" href="#titleconfigure #titleconfigure #branch"
+                                    data-toggle="tab" ng-click="vm.value=2">
+                                    <div class="icon-circle">
+                                        <i class="ti-numbertwo" style="font-size: 38px; top:8px"></i>
+                                    </div>
+                                    {{'0003' | translate}}
+                                </a>
+                            </li>
+                            <li>
+                                <a data-parent="#wizardnavigation" href="#titleconfigure #user" data-toggle="tab"
+                                    ng-click="vm.value=3">
+                                    <div class="icon-circle">
+                                        <i class="ti-numbertree" style="font-size: 38px; top:8px"></i>
+                                    </div>
+                                    {{'0122' | translate}}
+                                </a>
+                            </li>
+                            <li>
+                                <a data-parent="#wizardnavigation" href="#titleconfigure #segurity" data-toggle="tab"
+                                    ng-click="vm.value=4">
+                                    <div class="icon-circle">
+                                        <i class="ti-numberfour" style="font-size: 38px; top:8px"></i>
+                                    </div>
+                                    {{'1065' | translate}}
+                                </a>
+                            </li>
+
+                            <li>
+                                <a data-parent="#wizardnavigation" href="#titleconfigure #resume" data-toggle="tab"
+                                    ng-click="vm.value=5">
+                                    <div class="icon-circle">
+                                        <i class="ti-check"></i>
+                                    </div>
+                                    {{'0903' | translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" style="height: calc(100% - 125px); padding-top: 80px">
+                        <div class="tab-pane" id="settingslaboratory" style="height: 100%">
+                            <div class="row" style="height: 100%">
+                                <h5 class="info-text" style="height: 2%; margin: 0; padding: 0"></h5>
+                                <h5 class="info-text" style="margin-bottom: 5px; padding-bottom: 12px; height: 15%;">
+                                    {{'0904' | translate}}</h5>
+                                <div class="col-sm-12" style="height: calc(100% - 70px); max-height: 500px">
+                                    <div class="col-sm-12"
+                                        style="border-bottom: solid 1px; border-color: #d6d3d6b3; height: 30%; padding-top: 0.4%;">
+                                        <div class="col-sm-1">
+                                            <h5>{{'0204' | translate}}: </h5>
+                                        </div>
+                                        <div class="col-sm-4" style="height: 75px">
+                                            <div class="form-group">
+                                                <label>{{'0676' | translate}}</label>
+                                                <span class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0905' | translate}} <br> ({{'0346' | translate}} 40 {{'1019' | translate}})"></span>
+                                                <input name="entity" type="text" class="form-control" maxlength="40"
+                                                    ng-model="vm.dataconfig.config[0].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="height: 75px">
+                                            <div class="form-group">
+                                                <label>{{'0019' | translate}}</label>
+                                                <span class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0906' | translate}} <br>  ({{'0346' | translate}} 8 {{'1019' | translate}})"></span>
+                                                <input name="Abbreviation" type="text" maxlength="8"
+                                                    class="form-control" ng-model="vm.dataconfig.config[1].value">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2" style="height: 75px; width: 20%">
+                                            <div class="form-group">
+                                                <label>{{'0771' | translate}}</label>
+                                                <span class="help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0907' | translate}}"></span>
+                                                <span style="cursor: pointer;"
+                                                    class=" help-botton glyphicon glyphicon-question-sign" tooltips
+                                                    tooltip-template="{{'0908' | translate}}" data-toggle='modal'
+                                                    data-target='#myModal'></span>
+                                                <br>
+                                                <input name="phone" type="text" maxlength="40" class="form-control"
+                                                    ng-model="vm.dataconfig.config[2].value">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="height: 75px">
+                                            <div class="form-group">
+                                                <label>{{'0703' | translate}}</label>
+                                                <span class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0909' | translate}}"></span><br>
+                                                <select name="FormatoFecha"
+                                                    ng-options="obj.id as obj.name for obj in vm.listFormatDate"
+                                                    class="form-control"
+                                                    data-ng-model="vm.dataconfig.config[3].value"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12"
+                                        style="border-bottom: solid 1px; border-color: #d6d3d6b3; margin-top: 10px; height: 30%;padding-top: 0.4%;">
+                                        <div class="col-sm-1">
+                                            <h5>{{'0673' | translate}}: </h5>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="margin-right: 5px">{{'0694' | translate}} </label><span
+                                                    class=" help-botton glyphicon glyphicon-info-sign"
+                                                    style="margin-right: 10px" tooltips
+                                                    tooltip-template="{{'0919' | translate}}"></span>
+                                                <br>
+                                                <toggle ng-model="vm.dataconfig.config[6].value"
+                                                    on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                                                    size="btn-sm">
+                                                </toggle>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="margin-right: 5px">{{'0695' | translate}} </label><span
+                                                    class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0911' | translate}}"></span>
+                                                <br>
+                                                <toggle ng-model="vm.dataconfig.config[7].value"
+                                                    on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                                                    size="btn-sm">
+                                                </toggle>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label style="margin-right: 5px">{{'0696' | translate}} </label><span
+                                                    class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0912' | translate}}"></span>
+                                                <br>
+                                                <toggle ng-model="vm.dataconfig.config[8].value"
+                                                    on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                                                    size="btn-sm">
+                                                </toggle>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" style=" margin-top: 10px; height: 30%;padding-top: 0.4%;">
+                                        <div class="col-sm-1 ">
+                                            <h5>{{'0665' | translate}}: </h5>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="margin-right: 5px">{{'0897' | translate}} </label><span
+                                                    class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0913' | translate}}"></span><br>
+                                                <toggle ng-model="vm.dataconfig.config[4].value"
+                                                    on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                                                    size="btn-sm"
+                                                    ng-change="vm.dataconfig.config[5].value = vm.dataconfig.config[4].value === true ? false : vm.dataconfig.config[5].value ">
+                                                </toggle>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="margin-right: 5px">{{'0914' | translate}} </label><span
+                                                    class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                    tooltip-template="{{'0915' | translate}}"></span><br>
+                                                <toggle ng-model="vm.dataconfig.config[5].value"
+                                                    on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                                                    ng-disabled="vm.dataconfig.config[4].value" size="btn-sm"></toggle>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="branch" style="height: 100%">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h5 class="info-text">{{'0916' | translate}}</h5>
+                                </div>
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="margin-right: 5px">{{'0018' | translate}}</label><span
+                                                class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                tooltip-template="{{'0917' | translate}}"></span>
+                                            <input type="text" class="form-control" maxlength="20"
+                                                ng-model="vm.dataconfig.branch.code" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="margin-right: 5px">{{'0011' | translate}}</label><span
+                                                class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                tooltip-template="{{'0918' | translate}} <br>  ({{'0346' | translate}} 60 {{'1019' | translate}})"></span>
+                                            <input name="name" id="name" maxlength="60" type="text" class="form-control"
+                                                ng-model="vm.dataconfig.branch.name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="margin-right: 5px">{{'0019' | translate}}</label><span
+                                                class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                tooltip-template="{{'0920' | translate}}"></span>
+                                            <input type="text" class="form-control" maxlength="20"
+                                                ng-model="vm.dataconfig.branch.abbreviation">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="margin-right: 5px">{{'0085' | translate}}</label><span
+                                                class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                tooltip-template="{{'0921' | translate}}"></span>
+                                            <input type="text" class="form-control" maxlength="20"
+                                                ng-model="vm.dataconfig.branch.responsable">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="margin-right: 5px">{{'0077' | translate}}</label><span
+                                                class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                tooltip-template="{{'0922' | translate}}"></span>
+                                            <input type="text" class="form-control" maxlength="20"
+                                                ng-model="vm.dataconfig.branch.phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="margin-right: 5px">{{'0076' | translate}}</label><span
+                                                class=" help-botton glyphicon glyphicon-info-sign" tooltips
+                                                tooltip-template="{{'0923' | translate}}"></span>
+                                            <input type="text" class="form-control" maxlength="20"
+                                                ng-model="vm.dataconfig.branch.address">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="user" style="height: 100%">
+                            <div class="row">
+                                <h5 class="info-text">{{'0925' | translate}}</h5>
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <div class="col-sm-4 col-sm-offset-1">
+                                        <div class="picture-container">
+                                            <div class="picture">
+                                                <img src="images/configurate.png" class="picture-src"
+                                                    id="wizardPicturePreview" title="" />
+                                            </div>
+                                            <h6 class="description"><small>{{'0001' | translate}}: admin</small></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>{{'0002' | translate}}</label>
+                                                <input id="password" name="password" maxlength="20" type="password"
+                                                    class="form-control" ng-model="vm.dataconfig.user.password">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>{{'0125' | translate}}</label>
+                                                <input name="password2" type="password" maxlength="20"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="segurity" style="height: 100%">
+                            <div class="row">
+                                <h5 class="info-text">{{'1066' | translate}}</h5>
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>{{'1060' | translate}}</label>
+                                            <input id="UrlDischarge" name="UrlDischarge" type="text"
+                                                ng-class="{'errorsegurity':vm.errorsegurity}" class="form-control"
+                                                ng-model="vm.dataconfig.config[9].value">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>{{'1061' | translate}}</label>
+                                            <input id="UrlSecurity" name="UrlSecurity" type="text" class="form-control"
+                                                ng-model="vm.dataconfig.config[10].value">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="resume" style="height: 100%">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h5 class="info-text" style="padding-bottom: 0px">{{'0926' | translate}}</h5>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="col-sm-2">
+                                        <div class="picture-container">
+                                            <div class="picture">
+                                                <img src="images/configurate.png" class="picture-src"
+                                                    id="wizardPicturePreview" title="" />
+                                            </div>
+                                            <h6 class="description"><small>{{'0001' | translate}}: admin</small></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <div class="col-sm-12">
+                                                <h6>{{'0204' | translate}}</h6>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0676' | translate}}: {{vm.dataconfig.config[0].value}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0019' | translate}}: {{vm.dataconfig.config[1].value}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0771' | translate}}: {{vm.dataconfig.config[2].value}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0703' | translate}}: {{vm.dataconfig.config[3].value}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <h6> {{'1065' | translate | uppercase}}:
+                                                    <img ng-if="vm.errorsegurity" style="height: 17px;"
+                                                        class="material-icons md-36" ng-src="images/Warning.png" /></h6>
+
+                                            </div>
+                                            <div class="col-sm-12" ng-if="vm.errorsegurity">
+                                                <h5 class="help-block" ng-if="vm.errorsegurity">
+                                                    {{'1070' | translate}}
+                                                </h5>
+                                            </div>
+                                            <div class="col-sm-12" ng-if="!vm.errorsegurity">
+                                                {{'1060' | translate}}:{{vm.dataconfig.config[9].value}}
+                                            </div>
+                                            <div class="col-sm-12" ng-if="!vm.errorsegurity">
+                                                {{'1061' | translate}}:{{vm.dataconfig.config[10].value}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="col-sm-12">
+                                                <h6>{{'0673' | translate}}</h6>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0694' | translate}}:
+                                                <i ng-if="vm.dataconfig.config[6].value"
+                                                    class="glyphicon glyphicon-ok successfullicon"></i>
+                                                <i ng-if="!vm.dataconfig.config[6].value"
+                                                    class="glyphicon glyphicon-remove erroricon"></i>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0695' | translate}}:
+                                                <i ng-if="vm.dataconfig.config[7].value"
+                                                    class="glyphicon glyphicon-ok successfullicon"></i>
+                                                <i ng-if="!vm.dataconfig.config[7].value"
+                                                    class="glyphicon glyphicon-remove erroricon"></i>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                {{'0696' | translate}}:
+                                                <i ng-if="vm.dataconfig.config[8].value"
+                                                    class="glyphicon glyphicon-ok successfullicon"></i>
+                                                <i ng-if="!vm.dataconfig.config[8].value"
+                                                    class="glyphicon glyphicon-remove erroricon"></i>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <h6>{{'0665' | translate}}: </h6>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0897' | translate}}:
+                                                <i ng-if="vm.dataconfig.config[4].value"
+                                                    class="glyphicon glyphicon-ok successfullicon"></i>
+                                                <i ng-if="!vm.dataconfig.config[4].value"
+                                                    class="glyphicon glyphicon-remove erroricon"></i>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0914' | translate}}:
+                                                <i ng-if="vm.dataconfig.config[5].value"
+                                                    class="glyphicon glyphicon-ok successfullicon"></i>
+                                                <i ng-if="!vm.dataconfig.config[5].value"
+                                                    class="glyphicon glyphicon-remove erroricon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="col-sm-12">
+                                                <h6>{{'0075' | translate}}: </h6>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0018' | translate}}: {{vm.dataconfig.branch.code}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0011' | translate}}: {{vm.dataconfig.branch.name}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0019' | translate}}: {{vm.dataconfig.branch.abbreviation}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0085' | translate}}: {{vm.dataconfig.branch.responsable}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0077' | translate}}: {{vm.dataconfig.branch.phone}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{'0076' | translate}}: {{vm.dataconfig.branch.address}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-footer button-position">
+                        <div class="pull-right">
+                            <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' name='next'
+                                value="{{'0927' | translate}}" ng-click="vm.idnext()" />
+                            <input type='button' ng-click="vm.save()" ng-disabled="vm.errorsegurity"
+                                class='btn btn-finish btn-fill btn-warning btn-wd' name='finish'
+                                value="{{'0007' | translate}}" />
+                        </div>
+                        <div class="pull-left">
+                            <input type='button' class='btn btn-previous btn-default btn-wd' name='previous'
+                                value="{{'0929' | translate}}" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Patrones disponibles</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <p style="margin-left: 14px;">
+                            Puedes hacer tu máscara usando algunos patrones disponibles. Si usa un patrón no
+                            especificado a continuación para construir su máscara, se considerará un divisor. Un divisor
+                            es un carácter usado para agrupar elementos semánticos, por ejemplo: "-" en SSN para separar
+                            el área, el grupo y los números de serie o "." en IPv4 para crear 4 grupos de 8 bits.
+                            <div class="col-sm-6">
+                                <h5>Patrones comunes</h5>
+                                <ul>
+                                    <li>
+                                        <span>
+                                            <strong>'*'</strong> =&gt; /./
+                                        </span>
+                                        <span class="help-block">Cualquier personaje individual</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'w'</strong> =&gt; / \ w /
+                                        </span>
+                                        <span class="help-block">Cualquier carácter de palabra (letra, número, guión
+                                            bajo)</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'W'</strong> =&gt; / \ W /
+                                        </span>
+                                        <span class="help-block">Cualquier carácter no verbal</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'d'</strong> =&gt; / \ d /
+                                        </span>
+                                        <span class="help-block">Cualquier dígito</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'D'</strong> =&gt; / \ D /
+                                        </span>
+                                        <span class="help-block">Cualquier no dígito</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'s'</strong> =&gt; / \ s /
+                                        </span>
+                                        <span class="help-block">Cualquier carácter en blanco</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'S'</strong> =&gt; / \ S /
+                                        </span>
+                                        <span class="help-block">Cualquier carácter que no sea de espacio en
+                                            blanco</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'b'</strong> =&gt; / \ b /
+                                        </span>
+                                        <span class="help-block">Cualquier límite de palabra</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-3">
+                                <h5>Patrones numéricos</h5>
+                                <ul>
+                                    <li>
+                                        <span>
+                                            <strong>'9'</strong> =&gt; / [0-9] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3,4,5,6,7,8,9</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'8'</strong> =&gt; / [0-8] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3,4,5,6,7,8</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'7'</strong> =&gt; / [0-7] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3,4,5,6,7</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'6'</strong> =&gt; / [0-6] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3,4,5,6</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'5'</strong> =&gt; / [0-5] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3,4,5</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'4'</strong> =&gt; / [0-4] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3,4</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'3'</strong> =&gt; / [0-3] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2,3</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-3">
+                                <h5 class="text-left" style="color: aliceblue;">.</h5>
+                                <ul>
+                                    <li>
+                                        <span>
+                                            <strong>'2'</strong> =&gt; / [0-2] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1,2</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'1'</strong> =&gt; / [0-1] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0,1</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <strong>'0'</strong> =&gt; / [0] /
+                                        </span>
+                                        <span class="help-block">{{'0930' | translate}}: 0</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</section>
+<!--   Core JS Files   -->
+<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+<script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>

@@ -1,0 +1,265 @@
+<style>
+  .k-autocomplete.k-state-default,
+  .k-dropdown-wrap.k-state-default,
+  .k-numeric-wrap.k-state-default,
+  .k-picker-wrap.k-state-default {
+    background-color: transparent;
+    border: 0px
+  }
+
+  .k-input {
+    background-color: transparent;
+    padding-bottom: 0px;
+    margin-top: -6px;
+    width: 113%;
+  }
+
+  .k-numerictextbox .k-input {
+    margin-top: -52px;
+    height: 35px;
+    padding-bottom: 0px !important;
+    font-size: 12px !important;
+    min-height: 47px !important;
+  }
+
+  .md-input-wrapper {
+    padding-top: 0px !important;
+  }
+</style>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden">
+    <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+      <div style="height:100%" class="uk-width-1-1">
+        <div class="md-card contentscroll" style="margin-bottom: 5px ;height: 100%;overflow: auto;">
+          <div class="md-card-content uk-grid uk-grid-small" style="padding: 5px 16px">
+            <div ng-class="{'uk-width-5-10': vm.detail.length === 1, 'uk-width-1-1': vm.detail.length === 0 || vm.detail.length > 1 }">
+              <fieldset class="fieldset uk-grid" style="height: 92px;padding: 12px 15px 1px 0px;margin-left: 0px;margin-bottom: 10px;">
+                <div class="uk-width-5-10 uk-flex uk-flex-middle">
+                  <div class="uk-input-group" style="width: 100%;">
+                    <span class="uk-input-group-addon" style="min-width: 28px; padding: 10px;">
+                      <img class="md-list-addon-icon material-icons md-24" ng-src="images/order/invoice.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled">
+                      <label class="uk-text-bold uk-text-truncate"
+                        style="top: -6px; font-size: 11px;padding-bottom: 5px">{{'1533' | translate}}: </label>
+                      <input type="text" class="md-input label-fixed" data-ng-model="vm.bill"
+                        ng-keypress="vm.getinvoice($event)" md-input />
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-width-5-10" style="padding: 17px;">
+                  <h6 style="margin: -1px 0px -2px 59px;">{{'0325' | translate}}</h6>
+                  <md-datepicker ng-model="vm.dateToSearch" name="dateField1" md-open-on-focus md-is-open="vm.isOpen2"
+                    ng-disabled="vm.detail.length===0" ng-required="true" md-max-date="vm.maxDate"
+                    ng-blur="vm.searchByDate()" style="width: 100%" md-open-on-focus>
+                  </md-datepicker>
+                </div>
+
+              </fieldset>
+            </div>
+            <div class="uk-width-5-10" ng-if="vm.detail.length === 1">
+              <fieldset class="fieldset uk-grid" style="height: 92px;padding: 12px 15px 1px 0px;margin-left: 0px;place-content: center;">
+                <div class="uk-width-5-10 uk-flex uk-flex-middle">
+                  <div class="uk-input-group" style="width: 100%;">
+                    <span class="uk-input-group-addon" style="min-width: 28px; padding: 10px;">
+                      <img class="md-list-addon-icon material-icons md-24" ng-src="images/order/currency.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled">
+                      <label class="uk-text-bold uk-text-truncate"
+                        style="top: -6px; font-size: 11px;padding-bottom: 5px">{{'0580' | translate}}: </label>
+                      <input md-input label-fixed class="md-input label-fixed" k-min="0" k-format="vm.isPenny"
+                        k-decimals="vm.decimal" kendo-numeric-text-box k-ng-model="vm.notevalue" maxlength="16"
+                        k-rebind="vm.maxdinner" style="width: 100%" k-max="vm.maxdinner"
+                        ng-disabled="vm.detail.length===0">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="uk-width-5-10" ng-if="vm.detail.length!==0">
+
+              <div class="contentscroll" style="height: 310px;overflow: auto;">
+
+                <fieldset class="fieldset" style="padding: 3px 5px;margin-left: 0px;margin-top: 0px;">
+
+                  <span class="uk-text-bold uk-text-truncate"
+                    style="top: -6px; font-size: 13px;padding-bottom: 5px;text-align: center;text-transform: uppercase;">
+                    {{'2010' | translate}} {{ vm.invoice.invoiceNumber }}
+                  </span>
+
+                  <ul class="md-list md-list-addon" style="width: 95%;">
+
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/company.png" />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'0085' | translate}}</span>
+                        <span class="uk-text-small uk-text-muted">{{ vm.invoice.accountName }}</span>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/patient/age.png" />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'0325' | translate}}</span>
+                        <span class="uk-text-small uk-text-muted">{{ vm.invoice.dateOfInvoice }}</span>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/deletespecial/datedelete.png" />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'1543' | translate}}</span>
+                        <span class="uk-text-small uk-text-muted">{{ vm.invoice.dueDate }}</span>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/cash.png"  />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'2011' | translate}} </span>
+                        <span class="uk-text-small uk-text-muted">{{ vm.invoice.total | currency : vm.simbolmoney : vm.decimal}}</span>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/formpayment.png"  />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'0820' | translate}} </span>
+                        <span class="uk-text-small uk-text-muted">{{vm.invoice.formOfPay }}</span>
+                      </div>
+                    </li>
+
+
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/period.png"  />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'2012' | translate}} </span>
+                        <span class="uk-text-small uk-text-muted">{{vm.invoice.billingPeriod }}</span>
+                      </div>
+                    </li>
+
+                  </ul>
+
+                </fieldset>
+
+                <fieldset class="fieldset uk-grid" style="padding: 3px 5px;margin-left: 0px;"
+                  ng-repeat="detail in vm.detail">
+                  <ul class="md-list md-list-addon" style="width: 95%;">
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/contract.png" />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'1636' | translate}}</span>
+                        <span class="uk-text-small uk-text-muted">{{ detail.contractName }}</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/rate.png" />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'0087' | translate}}</span>
+                        <ul class="md-list-addon" style="width: 95%;margin: 0;">
+                          <li ng-repeat="rate in detail.rates" style="margin: 0;">
+                            <span class="uk-text-small uk-text-muted">{{ rate.nameRate }}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="md-list-addon-element">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/cash.png" />
+                      </div>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{'0580' | translate}}</span>
+                        <span class="uk-text-small uk-text-muted">{{ detail.total | currency : vm.simbolmoney :
+                          vm.decimal}}</span>
+                      </div>
+                    </li>
+                  </ul>
+
+                </fieldset>
+              </div>
+            </div>
+            <div ng-class="{'uk-width-5-10': vm.detail.length!==0, 'uk-width-1-1': vm.detail.length===0}">
+              <textarea ng-required="true" name="name" id="name" ui-tinymce="vm.customMenu" ng-model="vm.comment"
+                ng-disabled="vm.detail.length===0"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+        <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+          <div style="height: 100%; padding-top: 5px" class="md-card-content">
+            <div class="uk-grid" style="height: 100%">
+              <div class="uk-width-1-1" style="float: right">
+                <button style="float: right; margin-left: 10px" type="button" data-uk-tooltip="{pos:'top'}"
+                  title="{{'1611' | translate}}"
+                  class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-light-blue-A700"
+                  ng-disabled="vm.detail.length===0 || ( vm.detail.length === 1 && vm.notevalue===null ) ||vm.comment==='' || vm.maxdinner === 0"
+                  ng-class="{'md-bg-blue-grey-100' : vm.detail.length===0 ||( vm.detail.length === 1 && vm.notevalue===null )||vm.comment==='' || vm.maxdinner === 0}"
+                  ng-click="vm.creditnote()">
+                  <i class="material-icons md-24 no_margin">&#xE227;</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal-error" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ vm.dataerror}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{'0962' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

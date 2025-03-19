@@ -1,0 +1,81 @@
+<style>
+    .profileinfo_tests_input {
+        padding: 15px;
+        margin-right: 20px;
+        transition: all 0.30s ease-in-out;
+        outline: none;
+        border: 1px solid #DDDDDD;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .profileinfo_tests_input:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    #profileinfo_tests_dropdown {
+        width: 500px;
+    }
+
+    .profileinfo-table-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: 310px !important;
+        max-height: 310px !important;
+    }
+</style>
+
+<div id="profileinfo" class="uk-modal" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header md-bg-blue-grey-300" style="border-bottom: 0px;">
+            <h3 class="uk-modal-title ">Informacion de Perfiles y Paquetes</h3>
+        </div>
+        <div class="uk-modal-body">
+            <div class="uk-form-row">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-form-row">
+                            <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                                <div class="uk-width-1-2 uk-row-first">
+                                    <div angucomplete-alt id="profileinfo_tests"
+                                        placeholder="Busca pruebas por codigo o nombre" class="uk-width-1-1"
+                                        input-class="profileinfo_tests_input uk-width-1-1" pause="20"
+                                        selected-object="profileinfo.selectTest" local-data="profileinfo.tests"
+                                        search-fields="code,name" title-field="showValue" description-field="area.name"
+                                        image-field="colorType" minlength="1" match-class="highlight" focus-first="true"
+                                        clear-selected="true" override-suggestions="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-row ordersearch-table-row">
+                    <div class="uk-overflow-container profileinfo-table-container">
+                        <table class="uk-table uk-table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th hidden>Test Id</th>
+                                    <th class="uk-text-center">{{'0098' | translate}}</th>
+                                    <th class="uk-text-center">{{'0118' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="test in profileinfo.selectedTests">
+                                    <td hidden>{{test.id}}</td>
+                                    <td class="uk-text-center">{{test.code}}</td>
+                                    <td class="uk-text-left">{{test.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="uk-modal-close md-btn md-btn-flat">
+                    {{'0425' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>   

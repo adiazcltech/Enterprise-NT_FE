@@ -1,0 +1,228 @@
+<style type="text/css">
+	#capa1{ position:absolute; z-index:1; background-color:#FFFFFF; }
+	#generalContent {
+			position:relative;
+			z-index:0;
+			background-image: url("images/fontticket.png");
+	        background-repeat: repeat;
+	    }
+	.estiloCuadro {
+       width: auto;
+       border: 1px solid #ababab;
+       position: absolute;
+       top: 0px;
+       left: 0px;
+       cursor: pointer;
+       z-index:10;
+       font-size: 12px
+       -moz-user-select: none;     /* Mozilla */
+       -khtml-user-select: none;   /* Chrome */
+       -o-user-select: none;       /* Opera */
+    }
+
+    .estiloCuadroSeleccionado {
+	    border: 1px solid #c2d5f2;
+	    background-color: #a3bde3 !important;
+	    color: white !important;
+    }
+
+    .barcode-list {
+      height: 140px;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+
+    .width-tooltip{
+        max-width: 300px !important;
+    }
+</style>
+<div id="page_content" style="overflow-x: hidden;">
+  <div id="page_content_inner">
+    <div class="uk-grid uk-grid-small uk-grid-divider">
+      <div class="uk-width-1-1" style="padding-right: 12px;">
+        <div class="uk-grid">
+          <div class="uk-width-1-1 uk-margin-small-bottom uk-text-center">
+            <h2>{{'0211' | translate}}</h2>
+          </div>
+          <div class="uk-width-1-1 uk-margin-small-bottom uk-text-center" style="height: calc(100vh - 165px);overflow: auto; padding-right: 15px;">
+            <div class="uk-grid">
+              <div ng-repeat="barcode in vm.listbarcode" class="uk-width-1-4 uk-margin-small-bottom" ng-if="vm.prueba">
+                <div class="md-card" >
+                    <div class="md-card-toolbar" ng-class="{'md-bg-light-green-100' : barcode.active === true}">
+                        <div class="md-card-toolbar-actions">
+                          <i class="md-icon material-icons md-color-orange-A700" ng-click="vm.editBarcode(barcode)" data-uk-tooltip="{pos:'top'}" title="{{'0006'| translate}}">edit</i>
+                          <div class="image-radio" id="radio{{barcode.version}}" ng-disabled="vm.barcodepreview.active">
+                              <input type="radio" ng-disabled="vm.barcodepreview.active" id="activeBarcode{{barcode.version}}" name="activeBarcode" ng-model="barcode.active" value="{{barcode.version}}" >
+                              <label ng-disabled="vm.barcodepreview.active" for="activeBarcode{{barcode.version}}" class="md-icon material-icons" ng-class="{'md-color-green-A700': barcode.active, 'border-image': !barcode.active }" data-uk-tooltip="{pos:'top', cls: 'width-tooltip'}" title="{{ barcode.active ? '0211' : '1081'| translate}}"  ng-click="vm.beforeChangeBarcode(barcode);" >check_circle</label>
+                          </div>
+                        </div>
+                        <h3 class="md-card-toolbar-heading-text">
+                            {{barcode.version}}
+                        </h3>
+                    </div>
+                    <div class="md-card-content barcode-list">
+                       <div class="uk-flex uk-flex-center" ng-bind-html="barcode.template | trust" style="zoom: 40%">
+                       </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1 uk-flex uk-flex-right" style="background-color: #fff;height: 60px;padding-top: 8px;padding-right: 10px;">
+            <button ng-click="vm.newBarcode()" class="md-fab md-fab-small md-fab-success">
+                <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0005' | translate}}" style="font-weight: bold;">add</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="uk-modal uk-modal-card-fullscreen" id="editbarcode">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+      <div class="md-card uk-height-viewport">
+          <div class="md-card-toolbar md-bg-green-600" ng-class="{'md-bg-light-green-600': vm.typeTransaction === 'N', 'md-bg-orange-600': vm.typeTransaction === 'E'}">
+              <div class="md-card-toolbar-actions">
+                  <div>
+                      <i class="md-icon material-icons  md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}" ng-click="vm.closemodal(Form)" >&#xE5CD;</i>
+                  </div>
+              </div>
+              <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                  <i class="material-icons md-color-grey-50" style="font-size: 28px; margin-top: 2px" ng-if="vm.typeTransaction === 'N'">&#xE145;</i>
+                  <i class="material-icons md-color-grey-50" style="font-size: 26px; margin-top: 2px" ng-if="vm.typeTransaction === 'E'">edit</i>
+              </span>
+              <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                {{'0979' | translate}}
+              </h3>
+          </div>
+          <div class="md-card-content" >
+            <div class="uk-grid uk-grid-small" style="height: calc(100% - 65px)" >
+              <div class="uk-width-1-5">
+                <div class="md-card md-card-hover uk-animation-fade fullheight">
+                    <div style="height: 85vh;padding: 9px" class="md-card-content">
+                        <div class="uk-input-group" style="padding-left: 24px;">
+                            <label>{{'0154' | translate}}</label>
+                            <input type="text" class="md-input" ng-model="vm.options.filter.name" md-input>
+                            <span class="uk-input-group-addon" style="padding: 0 0px;">
+                                <i class="material-icons md-24">&#xE8B6;</i>
+                            </span>
+                        </div>
+                        <div class="tree-container" style="height: calc(100% - 48px);overflow: auto;">
+                            <tree nodes='vm.basicTree' options="vm.options"></tree>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="uk-width-3-5 fullheight" style="overflow: auto" id="contentBarcode">
+                  <div id="generalContent" style=" background-color: white; border: 1px solid #80808063;padding: 0px;width:  {{vm.widthticket}}; height: {{vm.heightticket}}"></div>
+              </div>
+              <div class="uk-width-1-5">
+                <div class="md-card">
+                    <div class="md-card-toolbar" style="height: 30px">
+                        <h3 class="md-card-toolbar-heading-text" style="line-height: 30px;font-size: 12px;">
+                            {{'0078' | translate}}
+                        </h3>
+                    </div>
+                    <div class="md-card-content">
+                        <div  class="uk-form-row md-input-wrapper md-input-filled">
+                            <span style="padding-left: 2px">Version</span> {{vm.selectbarcode.version}}
+                        </div>
+                        <div  class="uk-form-row md-input-wrapper md-input-filled">
+                            <label style="padding-left: 2px">{{'0980' | translate}}</label>
+                            <select class="md-input" charset="utf-8" ng-options="obj.Value as obj.Text for obj in vm.Etiquetas" data-ng-model="vm.ticketsize" class="form-control" ng-change="vm.changeTicket()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-card uk-margin-small-top" ng-if="vm.itemSelect !== null">
+                    <div class="md-card-toolbar" style="height: 30px">
+                        <h3 class="md-card-toolbar-heading-text" style="line-height: 30px;font-size: 12px;">
+                            {{'0981' | translate}}
+                        </h3>
+                    </div>
+
+                    <div class="md-card-content">
+                      <div class="uk-dropdown-grid uk-child-width-1-2">
+                        <div  class="uk-form-row md-input-wrapper md-input-filled">
+                            <label style="padding-left: 2px">{{'0982' | translate}}</label>
+
+                        </div>
+                        <div class="md-btn-group">
+                              <button class="md-btn md-btn-primary md-btn-mini" ng-click="vm.rotateElement('left')" ><i class="uk-icon-rotate-left"></i></button>
+                              <button class="md-btn md-btn-primary md-btn-mini" ng-click="vm.rotateElement('right')"><i class="uk-icon-rotate-right"></i></button>
+                          </div>
+                      </div>
+
+                      <div class="uk-dropdown-grid uk-child-width-1-1 md-input-wrapper md-input-filled" ng-if="vm.typeelement !== '{barcode}' && vm.typeelement !== '{barcodeText}'">
+                          <label style="padding-left: 2px">{{'0983' | translate}}</label>
+                          <select class="md-input" charset="utf-8" ng-options="obj.Value as obj.Text for obj in  vm.listFont" data-ng-model="vm.fontsize" class="form-control" ng-change="vm.changeFont()">
+                          </select>
+                      </div>
+                       <div class="uk-dropdown-grid uk-child-width-1-2" ng-if="vm.typeelement !== '{barcode}' && vm.typeelement !== '{barcodeText}'">
+                            <input type="checkbox" icheck ng-model="vm.reverse" ng-change="vm.changeReverse()" class="check_row" table-check-row>
+                            <span style="padding-left: 2px">Reverse</span>
+                      </div>
+                      <div class="uk-dropdown-grid uk-child-width-1-1 md-input-wrapper md-input-filled" ng-if="vm.typeelement === '{barcode}' || vm.typeelement === '{barcodeText}'">
+                              <label style="padding-left: 2px">{{'0098' | translate}}</label>
+                              <select class="md-input" charset="utf-8" ng-options="obj.Value as obj.Text for obj in  vm.listTypeBarcode" data-ng-model="vm.typeBarcode" class="form-control" ng-change="vm.changeTypeBarcode()" >
+                              </select>
+                      </div>
+                      <div class="uk-grid uk-grid-small uk-margin-small-bottom uk-margin-small-top" ng-if="vm.typeelement === '{barcode}' || vm.typeelement === '{barcodeText}'">
+                        <div class="uk-width-1-2" >
+                          <label style="padding-left: 2px; font-size: 12px">Grosor lineas</label>
+                          <select class="md-input" charset="utf-8" ng-options="obj as obj.Text for obj in vm.narrowWidthBarcode track by obj.Value" data-ng-model="vm.widthbarcode" class="form-control" ng-change="vm.changewidthbarcode()">
+                          </select>
+                          <input ng-if="false" kendo-numeric-text-box k-min="1" k-max="10" k-ng-model="vm.imageWidth"  style="width: 100%;" k-on-change="vm.changeSizeBarcode()"/>
+                        </div>
+                        <div class="uk-width-1-2">
+                          <label style="padding-left: 2px; font-size:12px">{{'0984' | translate}}(px)</label>
+                              <input kendo-numeric-text-box k-min="0" k-ng-model="vm.imageHeight" style="width: 100%;"  k-on-change="vm.changeSizeBarcode()"/>
+                        </div>
+
+                      </div>
+                      <div class="uk-dropdown-grid uk-child-width-1-1 md-input-wrapper md-input-filled" ng-if="vm.typeelement === '{text}'">
+                          <label for="username">{{'0648' | translate}}</label>
+                          <input md-input label-fixed class="md-input  label-fixed" type="text" id="username" name="username" ng-blur="vm.changeText()"  data-ng-model="vm.textopen" required/>
+                      </div>
+                      <div class="uk-dropdown-grid uk-child-width-1-1">
+                        <button class="md-btn md-btn-warning md-btn-mini" ng-click="vm.removeElement()" >{{'0588' | translate}}</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="uk-grid">
+              <div class="uk-width-1-1 uk-flex uk-flex-right" >
+                  <button type="button" class="md-fab md-fab-small md-fab-success" ng-click="vm.saveBarcode()" ng-class="{'md-fab-success': vm.typeTransaction === 'N', 'md-bg-orange-600': vm.typeTransaction === 'E'}">
+                      <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}">save</i>
+                  </button>
+                  <button ng-if="vm.selectbarcode.id !== null" type="button" class="md-fab md-fab-small md-fab-primary uk-margin-small-left" ng-click="vm.selectbarcode.id = null; vm.selectbarcode.active = false; vm.saveBarcode()">
+                      <i class="uk-icon-external-link  md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0985' | translate}}"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div id="modalconfirmpreviebarcode" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+      <div class="uk-overflow-container" style="margin-top: 0px">
+          <div style="float: left;">
+                <img class="img-responsive" src="images/Question.png">
+          </div>
+          <div class="uk-grid">
+              <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+                  <h5 class="uk-text-bold" >{{'0986' | translate}}</h5>
+              </div>
+          </div>
+      </div>
+      <div class="uk-modal-footer uk-text-right">
+          <button class="md-btn md-btn-primary" type="button" ng-click="vm.changebarcodepreview()">{{ '0219' | translate }}</button>
+          <button class="md-btn md-btn-default uk-modal-close" type="button" ng-click="vm.getBarcode()" >{{ '0220' | translate }}</button>
+      </div>
+  </div>
+</div>

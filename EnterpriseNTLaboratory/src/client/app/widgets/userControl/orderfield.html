@@ -1,0 +1,1093 @@
+<style>
+  .orderfield-label {
+    font-weight: bold !important;
+    font-size: 11px;
+    text-transform: capitalize;
+    width: 100%;
+    text-align: right;
+  }
+
+  .orderfield-label-required {
+    color: crimson;
+  }
+
+  .orderfield-input-not-codified {
+    width: 100%;
+    padding: 2px;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+
+  .orderfield-input-not-codified-upper {
+    text-transform: uppercase;
+  }
+
+  .orderfield_mark_required {
+    color: crimson;
+  }
+
+  .orderfield-input-not-codified:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+  }
+
+  .orderfield-input-codified {
+    width: 100%;
+  }
+
+  .orderfield-input-codified-input {
+    text-transform: uppercase;
+    width: 100%;
+    padding: 2px;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    font-size: 11px;
+    background-color: #FFFFE0;
+  }
+
+  .orderfield-input-codified-input:disabled {
+    background-color: #EBEBE4;
+  }
+
+  .orderfield-input-codified-input:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+  }
+
+  .orderfield-table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .orderfield-table-no-spacing {
+    margin: 0px;
+  }
+
+  .orderfield-selected-date-padding {
+    padding-top: 5px !important;
+  }
+
+  .orderfield-comment {
+    margin-top: 5px !important;
+  }
+
+  .orderfield-uppercase {
+    text-transform: uppercase;
+  }
+
+  .orderfield-table-container {
+    margin-top: 0px;
+    height: 100%;
+    width: 100% !important;
+  }
+
+  .orderfield-style-order {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2196f3;
+    height: 14px;
+  }
+
+  .orderfield-style-order:disabled {
+    color: #19478a;
+  }
+
+  .labelmessageText {
+    margin-top: 20px;
+    margin-left: 5px;
+    font-size: 14px;
+    line-height: 40px;
+  }
+
+  .messageRepeatDemo {
+    height: auto;
+    top: 10px !important;
+    width: 500px !important;
+  }
+
+  .messageRepeatText {
+    width: 300px;
+    float: left;
+    padding-top: 5%;
+    white-space: nowrap;
+  }
+
+  .tbody-style-demo {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    width: calc(100% - 10px) !important;
+  }
+
+  .td-label {
+    width: 110px !important;
+    max-width: 110px !important white-space: nowrap;
+  }
+
+  .td-input {
+    width: calc(100% - 132px) !important;
+    white-space: nowrap;
+    position: absolute;
+  }
+
+  .td-input-scroll {
+    width: calc(100% - 122px) !important;
+    white-space: nowrap;
+    position: absolute;
+  }
+
+  .td-input-scroll-vertical {
+    width: calc(100% - 122px) !important;
+    position: absolute;
+    scroll-behavior: smooth;
+  }
+
+  input.orderfield-data-input {
+    padding-bottom: 5px !important;
+    margin-top: -6px !important;
+    background-color: transparent !important;
+    width: 100% !important;
+    border-bottom-width: 1px !important;
+    position: relative !important;
+    top: -38px !important;
+    border-bottom-color: #ccc !important;
+  }
+
+  span.k-picker-wrap,
+  span.k-state-default,
+  span.k-state-default:hover,
+  span.k-state-default:focus {
+    padding: 0px !important;
+    height: 35px !important;
+    border-style: none;
+    background-color: #fff !important
+  }
+
+  span.k-widget,
+  span.k-datepicker,
+  span.k-header {
+    padding-bottom: 0px;
+    margin-top: 0px !important;
+  }
+
+  span.k-picker-wrap,
+  span.k-state-default,
+  span.k-state-default:hover,
+  span.k-state-default:focus {
+    height: 23px !important;
+  }
+
+  .k-input,
+  .k-multiselect-wrap,
+  .k-textbox>input,
+  input.k-textbox,
+  input.k-textbox:hover,
+  textarea.k-textbox,
+  textarea.k-textbox:hover {
+    background-color: #fff;
+    color: #444;
+    padding: 2px;
+    label transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px;
+    font-size: 11px;
+    height: 1.894em;
+    text-indent: 0.1em;
+    line-height: 1.6em;
+    margin-bottom: 2px;
+  }
+
+  .dateorderfield-table {
+    width: calc(100% - 116px) !important;
+  }
+
+  .dateorderfield-unscrolltable {
+    width: calc(100% - 126px) !important;
+  }
+
+  .dateorderfield-table1 {
+    width: calc(100% - 126px) !important;
+  }
+
+  .td-label1 {
+    width: 112px !important;
+    max-width: 112px !important white-space: nowrap;
+  }
+
+  .td-label2 {
+    width: 113px !important;
+    max-width: 113px !important;
+  }
+</style>
+<loadpage view="orderfield.loading"></loadpage>
+<modalexceptions openmodal="orderfield.ShowPopupError" detailerror="orderfield.Error"></modalexceptions>
+<div class="md-card" ng-class="{'md-card-primary':orderfield.type ===
+  'H','md-card-success': orderfield.type === 'O'}" style="width: 100%; height: 100%">
+  <div class="md-card-toolbar">
+    <div ng-if="orderfield.viewnewturn(orderfield.type,orderfield.dataturn.number,orderfield.editturn2)" ng-if="orderfield.serviceEntrySiga===1 && orderfield.turnfilter &&
+      orderfield.activesigaorder ===1" class="md-card-toolbar-actions" style="
+        padding-top: 7px;
+        height: 38px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: normal;
+        background-color: rgb(33, 150, 243);
+        color: white;
+        padding: 5px;
+        padding-top: 5px;
+        cursor: pointer;
+        margin-right: -16px;
+        border: 1px;
+      ">
+      <div class="uk-width-1-1 uk-text-center uk-text-small uk-text-meta">
+        {{'0886' | translate}}
+      </div>
+      <div class="uk-width-1-1 uk-text-center uk-text-bold">
+        {{orderfield.dataturn.number}}
+      </div>
+    </div>
+    <div ng-if="orderfield.type === 'O' && orderfield.editturn2 !== '' ||
+      orderfield.type === 'O' && orderfield.dataturn.number === undefined &&
+      orderfield.editturn2 !== ''" class="md-card-toolbar-actions" style="
+        padding-top: 7px;
+        height: 38px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: normal;
+        background-color: #c6c6c6;
+        color: white;
+        padding: 5px;
+        padding-top: 5px;
+        cursor: pointer;
+        margin-right: -16px;
+        border: 1px;
+      ">
+      <div class="uk-width-1-1 uk-text-center uk-text-small uk-text-meta">
+        {{'0886' | translate}}
+      </div>
+      <div class="uk-width-1-1 uk-text-center uk-text-bold">
+        {{orderfield.editturn2}}
+      </div>
+    </div>
+    <div ng-if="orderfield.viewphoto === true && orderfield.statecontrol.photo
+      === true" class="md-card-toolbar-actions" ng-class="orderfield.type ===
+      'O' ? 'orderfield-selected-date-padding' : ''">
+      <i class="md-icon material-icons md-color-blue-grey-500" ng-if="orderfield.type === 'H'"
+        ng-click="orderfield.loadtakephotopatient()">&#xE412;</i>
+    </div>
+    <div class="md-card-toolbar-actions" ng-class="orderfield.type === 'O' ?
+      'orderfield-selected-date-padding' : ''">
+      <a ng-if="orderfield.viewsearch === true" title="{{'1141' | translate}}" data-uk-tooltip="{pos:'top-left'}">
+        <img style="width: 25px; height: 25px" src="images/patient/searchpatient.png" ng-if="orderfield.type === 'H'"
+          ng-click="orderfield.getDocumentType()" />
+      </a>
+
+      <a ng-if="orderfield.viewphoto === true && orderfield.photopatient !== ''" data-lightbox-type="image"
+        data-uk-lightbox href="{{orderfield.photopatient}}">
+        <img class="md-user-image md-list-addon-avatar" src="{{orderfield.photopatient}}"
+          ng-if="orderfield.type === 'H'" draggable="false" />
+      </a>
+    </div>
+    <h3 class="md-card-toolbar-heading-text">
+      <strong>{{orderfield.title}}</strong><br />
+      <span style="
+        margin-top: -36px;
+        position: absolute;
+        font-size: 11px;
+        color: rgb(0 0 0);
+        text-transform: uppercase;
+        " ng-if="orderfield.dateorderentry && orderfield.createdUser">{{orderfield.dateorderentry}} -
+        {{orderfield.createdUser}}</span>
+    </h3>
+  </div>
+  <div class="md-card-content contentscroll" style="height: calc(100% - 58px); padding: 5px;overflow: auto;">
+    <form name="Form{{orderfield.type}}" id="Form{{orderfield.type}}" style="height: 100%">
+      <table class="orderfield-table">
+        <tbody>
+          <tr ng-repeat="demo in orderfield.demographicsStatic" class="orderfield-table-no-spacing">
+            <td class="orderfield-table-no-spacing" ng-class="{'td-label':
+            orderfield.type === 'H','td-label2':orderfield.type === 'O'}" ng-if="demo.id
+                !== -997 && demo.id !== -996 && demo.id !== -108">
+              <label class="orderfield-label" ng-class="{'orderfield-label-required': demo.showRequired}">
+                {{demo.name}}
+                <span ng-if="demo.obligatory" ng-class="{'orderfield_mark_required': demo.showRequired}">
+                  *</span>
+                <span ng-if="orderfield.viewformat=demo.id===-100 && orderfield.RegExp && orderfield.integrationMINSA"
+                  class="orderfield_mark_required" style="font-size: 11px !important;;">
+                  {{'2027' | translate}}</span>
+              </label>
+            </td>
+            <td class="orderfield-table-no-spacing td-input" ng-class="{'dateorderfield-table1':
+            demo.date,'dateorderfield-unscrolltable':demo.id===-105}">
+              <div ng-if="demo.id===-107" class="uk-badge" style="padding: 2px 1px;background: #1976d2;"
+                ng-click="orderfield.selectOrderprevius()" title="{{orderfield.previus}}"
+                data-uk-tooltip="{pos:'top-left'}"
+                ng-class="{'md-bg-blue-grey-100': orderfield.ordersday.length===0|| orderfield.ordersday.length===1}">
+                <i class="material-icons  md-color-grey-50" style="font-size: 16px !important;">skip_previous</i>
+              </div>
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===-105 && demo.id!==orderfield.fechasintomas && demo.id!==orderfield.fechatoma && demo.id!==orderfield.fecharesultado"
+                class="orderentrytab" k-on-change="orderfield.validateddate(demo)"
+                k-options="orderfield.monthSelectorOptions" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'" k-max="orderfield.maxend"
+                style="width: 100%; background-color: #fafafa" />
+
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id!==-105 demo.id!==orderfield.fechasintomas && demo.id!==orderfield.fechatoma && demo.id!==orderfield.fecharesultado"
+                class="orderentrytab" k-options="orderfield.monthSelectorOptions"
+                k-ng-disabled="orderfield.statecontrol[demo.id]" k-ng-model="orderfield.values[demo.id]"
+                k-format="'{{demo.format}}'" style="width: 100%; background-color: #fafafa" />
+
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===vm.fechasintomas" class="orderentrytab" k-max="orderfield.maxend"
+                k-min="orderfield.tomorrow" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'"
+                k-on-change="orderfield.startChange(orderfield.values)" style="width:
+                  100%;background-color: #fafafa;" k-options="orderfield.monthSelectorOptions" />
+
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===vm.fechatoma" class="orderentrytab" k-max="orderfield.maxend"
+                k-rebind="orderfield.tomorrowchange" k-min="orderfield.tomorrowchange"
+                k-on-change="orderfield.startChange(orderfield.values)" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'" style="width:
+                  100%;background-color: #fafafa;" k-options="orderfield.monthSelectorOptions" />
+
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===vm.fecharesultado" class="orderentrytab" k-max="orderfield.maxend"
+                k-rebind="orderfield.tomorrowchangeresul" k-min="orderfield.tomorrowchange"
+                k-on-change="orderfield.startChange(orderfield.values)" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'" style="width:
+                100%;background-color: #fafafa;" k-options="orderfield.monthSelectorOptions" />
+
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded && (orderfield.isOrderAutomatic &&
+                  demo.id === -107) && demo.id !== -108 && demo.format==='' && !demo.date"
+                style="width: calc(100% - 42px);" type="text" class="orderfield-input-not-codified orderentrytab"
+                ng-model="orderfield.values[demo.id]" ng-disabled="orderfield.statecontrol[demo.id]" ng-keydown="orderfield.selectNotCodified($event , demo.id,
+                  orderfield.values[demo.id])" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder !== undefined ?
+                  demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+                  -106), 'orderfield-style-order': demo.id === -107}" autocomplete="off" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded && (!orderfield.isOrderAutomatic &&
+                  demo.id === -107) && !demo.date" type="text" class="orderfield-input-not-codified orderentrytab"
+                style="width: calc(100% - 42px);" ng-model="orderfield.values[demo.id]"
+                ng-disabled="orderfield.statecontrol[demo.id]" ng-keypress="orderfield.keyselectOrder($event)"
+                ng-blur="orderfield.keyselectOrder(null)" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder
+                  !== undefined ? demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+                  -106), 'orderfield-style-order': demo.id === -107}" autocomplete="off"
+                maxlength="{{orderfield.maxLength}}" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="!demo.encoded &&  demo.id !== -107 && demo.id !== -108  && demo.format!=='' && !demo.date"
+                type="text" class="orderfield-input-not-codified orderentrytab" ng-model="orderfield.values[demo.id]"
+                ng-disabled="orderfield.statecontrol[demo.id]" ng-keydown="orderfield.selectNotCodified($event , demo.id,
+              orderfield.values[demo.id])" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder !== undefined ?
+              demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+              -106), 'orderfield-style-order': demo.id === -107}" mask="{{demo.format}}"  
+                autocomplete="off" /> 
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded &&
+              demo.id !== -107 && demo.id !== -108 && demo.format==='' && !demo.date" type="text"
+                class="orderfield-input-not-codified orderentrytab" ng-model="orderfield.values[demo.id]"
+                ng-disabled="orderfield.statecontrol[demo.id]" ng-keydown="orderfield.selectNotCodified($event , demo.id,
+              orderfield.values[demo.id])" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder !== undefined ?
+              demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+              -106), 'orderfield-style-order': demo.id === -107}" ng-keypress="orderfield.keyselect($event,demo)"  autocomplete="off" />
+
+              <angucomplete-alt id="{{'demo_'+demo.id}}" class="orderfield-input-codified"
+                ng-if="demo.encoded && demo.items.length> 0  && !orderfield.democode" focus-first="true" pause="100"
+                selected-object="orderfield.selectCodified" local-data="demo.items"
+                local-search="orderfield.filterListdemographicscode" minlength="1"
+                input-class="orderfield-input-codified-input orderentrytab"
+                disable-input="orderfield.statecontrol[demo.id] || demo.id === -5" match-class="highlight"
+                field-tabindex="{{demo.tabIndex}}" focus-in="orderfield.focusInListDemographics(demo.id,demo.items)"
+                focus-out="orderfield.focusOutListDemographics(demo.id,demo.idOrigin)"
+                input-changed="orderfield.inputChangedDemographics" title-field="name" override-suggestions="false"
+                auto-match="false" initial-value="orderfield.values[demo.id].name">
+              </angucomplete-alt>
+
+              <angucomplete-alt id="{{'demo_'+demo.id}}" class="orderfield-input-codified" ng-if="demo.encoded &&
+              demo.items.length> 0 && orderfield.democode" focus-first="true" pause="100"
+                selected-object="orderfield.selectCodified" local-data="demo.items"
+                local-search="orderfield.filterListdemographics" minlength="1"
+                input-class="orderfield-input-codified-input orderentrytab" disable-input="orderfield.statecontrol[demo.id] || demo.id ===
+              -5" match-class="highlight" field-tabindex="{{demo.tabIndex}}" focus-in="orderfield.focusInListDemographics(demo.id,
+              demo.items)" focus-out="orderfield.focusOutListDemographics(demo.id,
+              demo.idOrigin)" input-changed="orderfield.inputChangedDemographics" title-field="showValue"
+                override-suggestions="false" auto-match="false" initial-value="orderfield.values[demo.id].showValue">
+              </angucomplete-alt>
+              <div ng-if="demo.id===-107" class="uk-badge" style="padding: 2px 1px;background: #1976d2;"
+                title="{{orderfield.next}}" data-uk-tooltip="{pos:'top-left'}" ng-click="orderfield.selectOrdernext()"
+                ng-class="{'md-bg-blue-grey-100': orderfield.ordersday.length===0 || orderfield.ordersday.length===1 && orderfield.values[-107]!==''}">
+                <i class="material-icons  md-color-grey-50" style="font-size: 16px !important;">skip_next</i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="orderfield-table">
+        <tbody class="tbody-style-demo contentscroll" style="height:{{orderfield.heightTbody}}">
+          <tr ng-repeat="demo in orderfield.demographicsScroll" class="orderfield-table-no-spacing"
+            ng-if="!demo.encoded ||  (demo.encoded && demo.items.length> 0)">
+            <td class="orderfield-table-no-spacing" ng-class="{'td-label':
+            orderfield.type === 'H','td-label1':orderfield.type === 'O'}" ng-if="demo.id
+                  !== -997 && demo.id !== -996  && demo.id !== -108">
+              <label class="orderfield-label" ng-class="{'orderfield-label-required': demo.showRequired}">
+                {{demo.name}}
+                <span ng-if="demo.obligatory" ng-class="{'orderfield_mark_required':
+                      demo.showRequired}">
+                  *</span>
+              </label>
+              <span ng-if="orderfield.viewformat=demo.id===-100 && orderfield.RegExp && orderfield.integrationMINSA"
+                class="orderfield_mark_required">
+                {{'2027' | translate}}</span>
+              </label>
+            </td>
+            <td class="orderfield-table-no-spacing td-input-scroll-vertical" ng-class="{'dateorderfield-table':
+            demo.date}">
+              <div ng-if="demo.id===-107" class="uk-badge" style="padding: 2px 1px;background: #1976d2;"
+                ng-click="orderfield.selectOrderprevius()" title="{{orderfield.previus}}"
+                data-uk-tooltip="{pos:'top-left'}"
+                ng-class="{'md-bg-blue-grey-100': orderfield.ordersday.length===0|| orderfield.ordersday.length===1}">
+                <i class="material-icons  md-color-grey-50" style="font-size: 16px !important;">skip_previous</i>
+              </div>
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded && (orderfield.isOrderAutomatic &&
+              demo.id === -107) && demo.id !== -108 && demo.format==='' && !demo.date"
+                style="width: calc(100% - 50px);" type="text" class="orderfield-input-not-codified orderentrytab"
+                ng-model="orderfield.values[demo.id]" ng-disabled="orderfield.statecontrol[demo.id]" ng-keydown="orderfield.selectNotCodified($event , demo.id,
+              orderfield.values[demo.id])" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder !== undefined ?
+              demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+              -106), 'orderfield-style-order': demo.id === -107}" autocomplete="off" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="demo.id === -100" style="width:100%"
+                type="text" class="orderfield-input-not-codified orderentrytab" ng-model="orderfield.values[demo.id]"
+                ng-disabled="orderfield.statecontrol[demo.id]" ng-keydown="orderfield.selectNotCodified($event , demo.id,
+              orderfield.values[demo.id])" tabindex="{{demo.tabIndex}}" ng-keypress="orderfield.keyselect($event,demo)"  placeholder="{{(demo.placeholder !== undefined ?
+              demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+              -106), 'orderfield-style-order': demo.id === -107}" autocomplete="off" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded && (!orderfield.isOrderAutomatic &&
+              demo.id === -107) && !demo.date" type="text" class="orderfield-input-not-codified orderentrytab"
+                style="width: calc(100% - 42px);" ng-model="orderfield.values[demo.id]"
+                ng-disabled="orderfield.statecontrol[demo.id]" ng-keypress="orderfield.keyselectOrder($event)"
+                ng-blur="orderfield.keyselectOrder(null)" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder
+              !== undefined ? demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id !==
+              -106), 'orderfield-style-order': demo.id === -107}" autocomplete="off"
+                maxlength="{{orderfield.maxLength}}" />
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===-105 && demo.id!==orderfield.fechasintomas && demo.id!==orderfield.fechatoma && demo.id!==orderfield.fecharesultado"
+                class="orderentrytab" k-on-change="orderfield.validateddate(demo)"
+                k-options="orderfield.monthSelectorOptions" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'" k-max="orderfield.maxend"
+                style="width: 100%; background-color: #fafafa" />
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date&& demo.id!==-105 && demo.id!==orderfield.fechasintomas && demo.id!==orderfield.fechatoma && demo.id!==orderfield.fecharesultado"
+                class="orderentrytab" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'"
+                style="width: 100%; background-color: #fafafa" k-options="orderfield.monthSelectorOptions" />
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===orderfield.fechasintomas" class="orderentrytab" k-max="orderfield.maxend"
+                k-min="orderfield.tomorrow" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'"
+                k-on-change="orderfield.startChange(orderfield.values)" style="width:
+                  100%;background-color: #fafafa;" k-options="orderfield.monthSelectorOptions" />
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===orderfield.fechatoma" class="orderentrytab" k-max="orderfield.maxend"
+                k-rebind="orderfield.tomorrowchange" k-min="orderfield.tomorrowchange"
+                k-on-change="orderfield.startChange(orderfield.values)" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'" style="width:
+                  100%;background-color: #fafafa;" k-options="orderfield.monthSelectorOptions" />
+
+              <input kendo-date-input tabindex="{{demo.tabIndex}}" id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="demo.date && demo.id===orderfield.fecharesultado" class="orderentrytab" k-max="orderfield.maxend"
+                k-rebind="orderfield.tomorrowchangeresul" k-min="orderfield.tomorrowchange"
+                k-on-change="orderfield.startChange(orderfield.values)" k-ng-disabled="orderfield.statecontrol[demo.id]"
+                k-ng-model="orderfield.values[demo.id]" k-format="'{{demo.format}}'" style="width:
+                100%;background-color: #fafafa;" k-options="orderfield.monthSelectorOptions" />
+
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" type="text"
+                ng-if="!demo.encoded && (demo.id !== -107 && (demo.id !==-111 || orderfield.maskphone === ''))&& demo.format===''&& !demo.date && demo.id !== -100 && demo.id !== -108"
+                class="orderfield-input-not-codified orderentrytab" ng-model="orderfield.values[demo.id]"
+                ng-disabled="orderfield.statecontrol[demo.id]" ng-keypress="$event.keyCode === 13 &&
+                    orderfield.selectNotCodified(demo.id)" tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder !== undefined ?
+                    demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id
+                    !== -106)}" autocomplete="off" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded && (!orderfield.isOrderAutomatic &&
+                    demo.id === -107)&& !demo.date" type="text" class="orderfield-input-not-codified orderentrytab"
+                ng-model="orderfield.values[demo.id]" ng-disabled="orderfield.statecontrol[demo.id]"
+                ng-keypress="orderfield.keyselectOrder($event)" ng-blur="orderfield.keyselectOrder(null)"
+                tabindex="{{demo.tabIndex}}" placeholder="{{(demo.placeholder !== undefined ?
+                    demo.placeholder.toUpperCase() : '')}}" ng-class="{'orderfield-input-not-codified-upper': (demo.id
+                    !== -106)}" autocomplete="off" maxlength="{{orderfield.maxLength}}" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}"
+                ng-if="!demo.encoded && (demo.id !== -107 && (demo.id !==-111 || orderfield.maskphone === '')) && demo.format!==''&& !demo.date"
+                type="text" ng-model="orderfield.values[demo.id]"
+                ng-keypress="$event.keyCode === 13 &&orderfield.selectNotCodified(demo.id)"
+                class="orderfield-input-not-codified orderentrytab" ng-disabled="orderfield.statecontrol[demo.id]"
+                tabindex="{{demo.tabIndex}}"
+                placeholder="{{(demo.placeholder !== undefined ?demo.placeholder.toUpperCase() : '')}}"
+                ng-class="{'orderfield-input-not-codified-upper': (demo.id!== -106)}" mask="{{demo.format}}"
+                autocomplete="off" />
+
+              <input id="{{'demo_'+demo.id}}" name="{{'demo'+$index}}" ng-if="!demo.encoded && demo.id === -111 &&
+                    orderfield.maskphone !== ''&& !demo.date" type="text"
+                class="orderfield-input-not-codified orderentrytab orderfield-input-not-codified-upper"
+                ng-model="orderfield.values[demo.id]" ng-disabled="orderfield.statecontrol[demo.id]"
+                tabindex="{{demo.tabIndex}}" placeholder="{{orderfield.maskphone}}" mask="{{orderfield.maskphone}}"
+                restrict="reject" />
+
+              <angucomplete-alt id="{{'demo_'+demo.id}}" class="orderfield-input-codified"
+                ng-if="demo.encoded && !orderfield.democode" focus-first="true" pause="100"
+                selected-object="orderfield.selectCodified" local-data="demo.items"
+                local-search="orderfield.filterListdemographicscode" minlength="1"
+                input-class="orderfield-input-codified-input orderentrytab"
+                disable-input="orderfield.statecontrol[demo.id] || demo.id === -5" match-class="highlight"
+                field-tabindex="{{demo.tabIndex}}" focus-in="orderfield.focusInListDemographicscode(demo.id,demo.items)"
+                focus-out="orderfield.focusOutListDemographics(demo.id,demo.idOrigin)"
+                input-changed="orderfield.inputChangedDemographics" title-field="name" override-suggestions="false"
+                auto-match="false" initial-value="orderfield.values[demo.id].name">
+              </angucomplete-alt>
+
+              <!-- MEDICOS -->
+              <angucomplete-alt id="{{'demo_'+demo.id}}" class="orderfield-input-codified"
+                ng-if="demo.encoded && orderfield.democode" focus-first="true" pause="100"
+                selected-object="orderfield.selectCodified" local-data="demo.items"
+                local-search="orderfield.filterListdemographics" minlength="1"
+                input-class="orderfield-input-codified-input orderentrytab"
+                disable-input="orderfield.statecontrol[demo.id] || demo.id === -5" match-class="highlight"
+                field-tabindex="{{demo.tabIndex}}" focus-in="orderfield.focusInListDemographics(demo.id,demo.items)"
+                focus-out="orderfield.focusOutListDemographics(demo.id,demo.idOrigin)"
+                input-changed="orderfield.inputChangedDemographics" title-field="showValue" override-suggestions="false"
+                auto-match="false" initial-value="orderfield.values[demo.id].showValue">
+              </angucomplete-alt>
+              <div ng-if="demo.id===-107" class="uk-badge" style="padding: 2px 1px;background: #1976d2;"
+                title="{{orderfield.next}}" data-uk-tooltip="{pos:'top-left'}" ng-click="orderfield.selectOrdernext()"
+                ng-class="{'md-bg-blue-grey-100': orderfield.ordersday.length===0 || orderfield.ordersday.length===1 && orderfield.values[-107]!==''}">
+                <i class="material-icons  md-color-grey-50" style="font-size: 16px !important;">skip_next</i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<div id="modalRepeat" class="uk-modal" tabindex="1" aria-hidden="false" bg-close="false" modal="false">
+  <div class="uk-modal-dialog messageRepeatDemo">
+    <button type="button" class="uk-close" ng-class="{'disabled':
+            vm.ButonReject}" ng-click="orderfield.closemodalrepeat()"></button>
+    <div class="uk-modal-body" style="height: 100px; top: 0px">
+      <div style="width: 18%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png" />
+      </div>
+      <div class="messageRepeatText">
+        <label class="labelmessageText">{{'0800' | translate}}</label>
+      </div>
+    </div>
+    <div class="uk-modal-footer"></div>
+  </div>
+</div>
+<div id="modalsearchpatient" class="uk-modal uk-modal-card-fullscreen" bg-close="false" aria-hidden="false"
+  modal="false">
+  <loadpage view="orderfield.loadingsearchpatient"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-orange-600">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i style="margin-top: 0px" class="md-icon material-icons md-color-light-green-50 uk-modal-close"
+              data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="float: left; margin: 13px 6px 0px 0px; display: block">
+          <i class="material-icons md-24 md-color-light-green-50">search</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-light-green-50">
+          {{'0832' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="overflow: hidden">
+        <div class="uk-grid" style="height: 100%">
+          <div class="uk-width-1-1" style="height: 90px">
+            <div class="md-card md-card-hover">
+              <div class="md-card-content">
+                <div class="uk-form-row">
+                  <div class="uk-grid uk-container-center patientsearch-filter-padding">
+                    <div class="uk-width-1-5 uk-row-first" ng-if="orderfield.twosurnames">
+                      <div class="md-input-wrapper">
+                        <label class="label-fixed">{{'0234' | translate}}</label>
+                        <input type="text" md-input id="lastName" class="md-input orderfield-uppercase orderentrytab"
+                          ng-model="orderfield.lastNameToSearch"
+                          ng-keypress="$event.keyCode === 13 && orderfield.searchByPatient()" />
+                        <span class="md-input-bar"></span>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-5" ng-if="orderfield.twosurnames">
+                      <div class="md-input-wrapper">
+                        <label>{{'0235' | translate}}</label>
+                        <input type="text" id="surName" md-input class="md-input orderfield-uppercase orderentrytab"
+                          ng-model="orderfield.surNameToSearch"
+                          ng-keypress="$event.keyCode === 13 && orderfield.searchByPatient()" />
+                        <span class="md-input-bar"></span>
+                      </div>
+                    </div>
+                    <div class="uk-width-2-5 uk-row-first" ng-if="!orderfield.twosurnames">
+                      <div class="md-input-wrapper">
+                        <label class="label-fixed">{{'3657' | translate}}</label>
+                        <input type="text" md-input id="lastName" class="md-input orderfield-uppercase orderentrytab"
+                          ng-model="orderfield.lastNameToSearch"
+                          ng-keypress="$event.keyCode === 13 && orderfield.searchByPatient()" />
+                        <span class="md-input-bar"></span>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-5" ng-if="orderfield.twoNames">
+                      <div class="md-input-wrapper">
+                        <label>{{'0236' | translate}}</label>
+                        <input type="text" md-input id="name1" class="md-input orderfield-uppercase orderentrytab"
+                          ng-model="orderfield.name1ToSearch"
+                          ng-keypress="$event.keyCode === 13 && orderfield.searchByPatient()" />
+                        <span class="md-input-bar"></span>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-5" ng-if="orderfield.twoNames">
+                      <div class="md-input-wrapper">
+                        <label>{{'0237' | translate}}</label>
+                        <input type="text" md-input class="md-input orderfield-uppercase orderentrytab" id="name2"
+                          ng-model="orderfield.name2ToSearch"
+                          ng-keypress="$event.keyCode === 13 && orderfield.searchByPatient()" />
+                        <span class="md-input-bar"></span>
+                      </div>
+                    </div>
+                    <div class="uk-width-2-5" ng-if="!orderfield.twoNames">
+                      <div class="md-input-wrapper">
+                        <label>{{'3656' | translate}}</label>
+                        <input type="text" md-input id="name1" class="md-input orderfield-uppercase orderentrytab"
+                          ng-model="orderfield.name1ToSearch"
+                          ng-keypress="$event.keyCode === 13 && orderfield.searchByPatient()" />
+                        <span class="md-input-bar"></span>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-5" style="margin-top: -6px">
+                      <label style="font-size: 12px; margin-top: -14px;color: #727272;">{{'0120' | translate}}</label>
+                      <div class="uk-width-1-1 uk-row-first">
+                        <input kendo-date-picker k-ng-model="orderfield.selectedDateSerch" id="date"
+                          k-format="'{{orderfield.dateFormat}}'" k-on-change="orderfield.searchByPatient()" style="width: 100%;
+                          border-width: 0 0 1px;
+                          border-style: solid;
+                          border-color: rgba(0, 0, 0, 0.12);" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1" style="height: 100%">
+            <table class="uk-table uk-table-small uk-table-middle tablescrollable" style="height: 83%">
+              <thead style="display: inline-block; width: 100%; height: 39px">
+                <tr class="uk-grid" style="margin-left: 0px; background-color: #eee">
+                  <th ng-if="orderfield.showDocumentType" class="uk-width-2-6" ng-click="orderfield.sortType=
+                          'documentType.name'; orderfield.sortReverse=
+                          !orderfield.sortReverse">
+                    <resultssort sortvalue="'documentType.name'" sorttype="orderfield.sortType"
+                      sortreverse="orderfield.sortReverse"></resultssort>{{'0233' | translate}}
+                  </th>
+                  <th class="uk-width-1-6" ng-click="orderfield.sortType=
+                          'patientId'; orderfield.sortReverse=
+                          !orderfield.sortReverse">
+                    <resultssort sortvalue="'patientId'" sorttype="orderfield.sortType"
+                      sortreverse="orderfield.sortReverse"></resultssort>{{'0117' | translate}}
+                  </th>
+                  <th ng-class="{'uk-width-1-6':orderfield.showDocumentType,
+                          'uk-width-3-6': !orderfield.showDocumentType }" ng-click="orderfield.sortType= 'lastName';
+                          orderfield.sortReverse= !orderfield.sortReverse">
+                    <resultssort sortvalue="'lastName'" sorttype="orderfield.sortType"
+                      sortreverse="orderfield.sortReverse"></resultssort>{{'0398' | translate}}
+                  </th>
+                  <th class="uk-width-1-6" ng-click="orderfield.sortType=
+                          'birthday'; orderfield.sortReverse=
+                          !orderfield.sortReverse">
+                    <resultssort sortvalue="'birthday'" sorttype="orderfield.sortType"
+                      sortreverse="orderfield.sortReverse"></resultssort>{{'0120' | translate}}
+                  </th>
+                  <th class="uk-width-1-6" ng-click="orderfield.sortType=
+                          'sex'; orderfield.sortReverse=
+                          !orderfield.sortReverse">
+                    <resultssort sortvalue="'sex'" sorttype="orderfield.sortType" sortreverse="orderfield.sortReverse">
+                    </resultssort>{{'0426' | translate}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="tbodyscrollable orderfield-table-container" vs-repeat="20">
+                <tr ng-repeat="history in orderfield.filtered= (
+                        orderfield.listpatients | orderBy:orderfield.sortType :
+                        orderfield.sortReverse)" class="uk-grid" style="margin-left: 0px; margin-top: 0px">
+                  <td class="uk-width-2-6" ng-if="orderfield.showDocumentType">
+                    {{history.documentType.name.toUpperCase()}}
+                  </td>
+                  <td class="uk-width-1-6">
+                    <a href="#" ng-click="orderfield.selectSearchpatient(history)">{{history.patientId}}</a>
+                  </td>
+                  <td ng-class="{'uk-width-1-6':orderfield.showDocumentType,
+                          'uk-width-3-6': !orderfield.showDocumentType }">
+                    {{history.lastName.toUpperCase() + ' ' + (history.surName
+                    === null || history.surName === '' ? '' :
+                    history.surName.toUpperCase() + ' ') +
+                    history.name1.toUpperCase() + ' ' + ((history.name1 === null
+                    || history.name2 === '' ? '' : history.name2.toUpperCase()))
+                    }}
+                  </td>
+                  <td class="uk-width-1-6">{{history.birthdaydata}}</td>
+                  <td class="uk-width-1-6">{{history.sexdata}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalpatientnotfound" class="uk-modal" aria-hidden="false" bg-close="false" modal="false">
+  <loadpage view="orderfield.loadingsearchpatient"></loadpage>
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px; margin-bottom: 0px">
+      <div class="md-card md-card-hover md-card-horizontal uk-flex uk-flex-middle"
+        ng-if="orderfield.newhistory !== '-1'">
+        <div class="md-card-head">
+          <div class="uk-text-center">
+            <img class="md-card-head-avatar" style="margin-top: 0px" ng-src="images/Question.png" alt="" />
+            <h4 style="padding-right: 10px">{{'0828' | translate}}</h4>
+          </div>
+        </div>
+        <div class="md-card-content" style="width: 100%">
+          <ul class="md-list md-list-addon">
+            <li style="border-bottom: 0px" ng-if="orderfield.showDocumentType">
+              <div class="md-list-addon-element">
+                <img class="md-list-addon-icon material-icons md-24" src="images/patient/documenttype.png" />
+              </div>
+              <div class="md-list-content">
+                <span class="md-list-heading">{{'0833' | translate}}</span>
+                <span class="uk-text-small uk-text-muted" style="margin-top: -10px">
+                  <select class="md-input" ng-options="obj as obj.name for
+                          obj in orderfield.listDocumentType track by obj.id"
+                    data-ng-model="orderfield.selectDocumentType" class="form-control"></select>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="md-list-addon-element">
+                <img class="md-list-addon-icon material-icons md-24" src="images/patient/history.png" />
+              </div>
+              <div class="md-list-content">
+                <span class="md-list-heading">{{'0117' | translate}}</span>
+                <span class="uk-text-small uk-text-muted" style="margin-top: -10px">
+                  <input type="text" class="md-input" ng-model="orderfield.newhistory" md-input=""
+                    ng-focus="orderfield.validhistorysearch= true" ng-disabled="orderfield.managehistoryauto" />
+                </span>
+              </div>
+            </li>
+          </ul>
+          <div class="uk-text-center" style="margin-left: 30px" ng-if="!orderfield.validhistorysearch">
+            <i class="material-icons uk-text-danger">highlight_off</i>
+            <span class="uk-text-small uk-text-danger">{{'0829' | translate}}
+            </span>
+            <u style="cursor: pointer" class="uk-text-small uk-text-danger"
+              ng-click="orderfield.selectHistory(orderfield.patientfound)">
+              {{'0830' | translate | uppercase}}</u>
+          </div>
+        </div>
+      </div>
+      <div class="md-card md-card-hover uk-flex uk-flex-middle" ng-if="orderfield.newhistory === '-1'">
+        <div class="uk-grid uk-margin-top">
+          <div class="uk-width-1-5">
+            <img class="md-card-head-avatar" style="margin-top: 0px" ng-src="images/Question.png" alt="" />
+          </div>
+          <div class="uk-width-4-5">
+            <h4 style="padding-right: 10px">{{'0828' | translate}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="orderfield.validNewPatient()" ng-disabled="(orderfield.selectDocumentType === undefined &&
+              orderfield.showDocumentType === true) || orderfield.newhistory ===
+              ''" ng-class="{'md-bg-blue-grey-100' :
+              (orderfield.selectDocumentType === undefined &&
+              orderfield.showDocumentType === true) || orderfield.newhistory ===
+              ''}">
+        {{'0246' | translate}}
+      </button>
+      <button type="button" class="md-btn md-btn-default uk-modal-close">
+        {{'0008' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modalphoto" class="uk-modal" aria-hidden="true" style="overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">Foto paciente</h3>
+    </div>
+    <div class="uk-grid">
+      <div class="uk-width-5-10">
+        <video ng-if="orderfield.validcamera" id="cameraphotopatient"></video>
+      </div>
+      <div class="uk-width-5-10">
+        <img ng-if="orderfield.validcamera" ng-src="images/order/attacmentphoto.png" width="" height="" alt=""
+          id="idphotopatient" />
+        <canvas id="canvas" style="display: none"></canvas>
+      </div>
+      <div class="uk-width-1-1" style="padding-top: 8px; padding-bottom: 8px; display: flex">
+        <div class="uk-grid uk-grid-small uk-container-center">
+          <div class="uk-text-center buttonNormalLine">
+            <button type="button" class="md-fab md-fab-small md-fab-primary" ng-click="orderfield.takephotopatient()">
+              <i class="uk-icon-camera"></i>
+            </button>
+          </div>
+          <div class="uk-text-center buttonNormalLine">
+            <button type="button" class="md-fab md-fab-small md-fab-success uk-modal-close uk-close"
+              ng-click="orderfield.savephoto()">
+              <i class="uk-icon-save"></i>
+            </button>
+          </div>
+          <div class="uk-text-center buttonNormalLine">
+            <button type="button" class="md-fab md-fab-small md-fab-danger uk-modal-close uk-close">
+              <i class="uk-icon-close"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="{{'modaladddemo' + orderfield.idcontrol }}" tabindex="1" aria-hidden="false" bg-close="false"
+  modal="false">
+  <loadpage view="orderfield.loading"></loadpage>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">
+        {{'1537' | translate|uppercase}} {{orderfield.detailitem.demographicName}}
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <form name="DemographicsItemsForm" pdk-next-input-on-enter>
+        <div class="uk-grid" data-uk-grid-margin>
+          <div class="uk-form-row uk-width-1-1">
+            <div class="uk-input-group uk-width-1-1 ">
+              <label> {{'0098' | translate}}</label>
+              <input type="text" name="code" id="code" class="md-input orderentrytab"
+                ng-model="orderfield.detailitem.code" maxlength="10" ng-focus="orderfield.codeRepeat = false"
+                ng-class="{'md-input-danger':DemographicsItemsForm.code.$invalid && DemographicsItemsForm.code.$touched || orderfield.codeRepeat}"
+                ng-required="true" md-input />
+              <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                ng-if="DemographicsItemsForm.code.$invalid && DemographicsItemsForm.code.$touched">
+                {{'0060' | translate}}
+              </span>
+              <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                ng-if="orderfield.codeRepeat">
+                {{'1538' | translate}}
+              </span>
+            </div>
+          </div>
+          <div class="uk-form-row uk-width-1-1">
+            <div class="uk-input-group uk-width-1-1 ">
+              <label>{{'0118' | translate}}</label>
+              <input type="text" name="name" id="name" class="md-input orderentrytab"
+                ng-model="orderfield.detailitem.name" maxlength="60" ng-focus="orderfield.nameRepeat = false" ng-class="{'md-input-danger':DemographicsItemsForm.name.$invalid && DemographicsItemsForm.name.$touched
+                ||orderfield.nameRepeat}" ng-required="true" md-input />
+              <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                ng-if="DemographicsItemsForm.name.$invalid && DemographicsItemsForm.name.$touched">
+                {{'0060' | translate}}
+              </span>
+              <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                ng-if="orderfield.nameRepeat">
+                {{'1538' | translate}}
+              </span>
+            </div>
+          </div>
+          <div class="uk-form-row uk-width-1-1">
+            <div class="uk-input-group uk-width-1-1 ">
+              <label>{{'0597' | translate}}</label>
+              <textarea cols="20" rows="2" name="description" id="description" class="md-input orderentrytab"
+                ng-model="orderfield.detailitem.description" md-input textarea-autosize></textarea>
+            </div>
+          </div>
+          <div class="uk-form-row uk-width-1-1">
+            <div class="uk-input-group uk-width-1-1 ">
+              <label>{{'1165' | translate}}</label>
+              <md-switch class="md-primary" name="defaultItem" ng-model="orderfield.detailitem.defaultItem">
+              </md-switch>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="orderfield.loading=true;orderfield.adddemo(DemographicsItemsForm)" ng-disabled="false"
+        ng-class="{'md-bg-blue-grey-100' : false}">{{'0007' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default uk-modal-close"
+        ng-click="orderfield.loading=false;orderfield.detailitem=[]; DemographicsItemsForm.$setUntouched()">{{'0008' |
+        translate}}</button>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="{{'modaladdcustomer' + orderfield.idcontrol }}" tabindex="1" aria-hidden="false"
+  bg-close="false" modal="false">
+  <loadpage view="orderfield.loading"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">
+        {{'1640' | translate}} {{orderfield.detailitem.name}}
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <form name="DemographicscustomerForm" pdk-next-input-on-enter>
+        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+          <div class="uk-form-row uk-width-5-10">
+            <fieldset class="fieldset uk-grid uk-grid-small" style="height: 407px;padding: 15px 5px;margin-left: 0px;">
+              <div class="uk-form-row uk-width-1-1">
+                <label> NIT</label>
+                <input type="text" name="code" id="code" class="md-input orderentrytab"
+                  ng-model="orderfield.detailitem.nit" maxlength="60" ng-focus="orderfield.codeRepeat = false"
+                  ng-class="{'md-input-danger':DemographicscustomerForm.code.$invalid && DemographicscustomerForm.code.$touched || orderfield.codeRepeat}"
+                  ng-required="true" md-input />
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="DemographicscustomerForm.code.$invalid && DemographicscustomerForm.code.$touched">
+                  {{'0060' | translate}}
+                </span>
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="orderfield.codeRepeat">
+                  {{'1538' | translate}}
+                </span>
+              </div>
+              <div class="uk-form-row uk-width-1-1" style="margin-top: 5px;">
+                <label>{{'0118' | translate}}</label>
+                <input type="text" name="name" id="name" class="md-input orderentrytab"
+                  ng-model="orderfield.detailitem.name" maxlength="60" ng-focus="orderfield.nameRepeat = false"
+                  ng-class="{'md-input-danger':DemographicscustomerForm.name.$invalid && DemographicscustomerForm.name.$touched
+              ||orderfield.nameRepeat}" ng-required="true" md-input />
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="DemographicsItemsForm.name.$invalid && DemographicscustomerForm.name.$touched">
+                  {{'0060' | translate}}
+                </span>
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="orderfield.nameRepeat">
+                  {{'1538' | translate}}
+                </span>
+              </div>
+              <div class="uk-form-row uk-width-1-1" style="margin-top: 5px;">
+                <label>{{'1233' | translate}}</label>
+                <input type="text" name="namePrint" id="namePrint" class="md-input orderentrytab"
+                  ng-model="orderfield.detailitem.namePrint" maxlength="60"
+                  ng-class="{'md-input-danger':DemographicscustomerForm.namePrint.$invalid && DemographicscustomerForm.namePrint.$touched}"
+                  ng-required="true" md-input />
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="DemographicscustomerForm.namePrint.$invalid && DemographicscustomerForm.namePrint.$touched">
+                  {{'0060' | translate}}
+                </span>
+              </div>
+              <div class="uk-form-row uk-width-1-1" style="margin-top: 5px;">
+                <label>{{'0135' | translate}}</label>
+                <input type="email" name="email" id="email" class="md-input orderentrytab"
+                  ng-model="orderfield.detailitem.email" maxlength="60" ng-focus="orderfield.emailInvalid = false"
+                  ng-class="{'md-input-danger':DemographicscustomerForm.email.$invalid && DemographicscustomerForm.email.$touched }"
+                  ng-required="true" md-input />
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="(DemographicscustomerForm.email.$invalid && DemographicscustomerForm.email.$touched) && !(DemographicscustomerForm.email.$error.email && DemographicscustomerForm.$error.email)">
+                  {{'0060' | translate}}
+                </span>
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="DemographicscustomerForm.email.$error.email && DemographicscustomerForm.$error.email">
+                  {{'0689' | translate}}
+                </span>
+                <span class="help-block " ng-if="orderfield.emailInvalid">
+                  {{'1638' | translate}}
+                </span>
+              </div>
+              <div class="uk-form-row uk-width-1-1" style="margin-top: 5px;">
+                <label>{{'1157' | translate}}</label>
+                <input type="text" name="postalCode" id="postalCode" class="md-input orderentrytab"
+                  ng-model="orderfield.detailitem.postalCode" maxlength="60"
+                  ng-class="{'md-input-danger':DemographicscustomerForm.postalCode.$invalid && DemographicscustomerForm.postalCode.$touched}"
+                  ng-required="true" md-input />
+                <span class="uk-form-help-block uk-text-danger span-help-block" style="margin-top: 0px;"
+                  ng-if="DemographicscustomerForm.postalCode.$invalid && DemographicscustomerForm.postalCode.$touched">
+                  {{'0060' | translate}}
+                </span>
+              </div>
+              <div class="uk-form-row uk-width-1-1" style="margin-top: 5px;">
+                <label>CFDI</label>
+                <select md-input label-fixed class="md-input label-fixed" charset="utf-8"
+                  ng-options="obj.id as obj.name for obj in orderfield.cfdi"
+                  data-ng-model="orderfield.detailitem.usoCfdi" md-input class="md-input"
+                  style="padding-bottom: 2px;"></select>
+              </div>
+              <div class="uk-form-row uk-width-1-1" style="margin-top: 5px;">
+                <label> {{'3262' | translate}}</label>
+                <select md-input label-fixed class="md-input label-fixed" charset="utf-8"
+                  ng-options="obj.id as obj.name for obj in orderfield.regimenFiscal"
+                  data-ng-model="orderfield.detailitem.usoRegimenFiscal" md-input class="md-input"
+                  style="padding-bottom: 2px;"></select>
+              </div>
+              <div class="uk-form-row uk-width-5-10" style="margin-top: 5px;">
+                <md-switch md-invert ng-model="orderfield.detailitem.agreement" class="md-primary"
+                  ng-change="orderfield.changue()" aria-label="{{'1705' | translate}}">
+                  {{'1705' | translate}}:
+                </md-switch>
+              </div>
+              <div class="uk-form-row uk-width-5-10" style="margin-top: 5px;">
+                <md-switch md-invert ng-model="orderfield.detailitem.invoice"
+                  ng-disabled="orderfield.detailitem.agreement" class="md-primary" aria-label="{{'1706' | translate}}">
+                  {{'1706' | translate}}:
+                </md-switch>
+              </div>
+            </fieldset>
+          </div>
+          <div class="uk-form-row uk-width-5-10" style="margin-top: 0px;">
+            <fieldset class="fieldset uk-grid uk-grid-small" style="height: 407px;padding: 15px 5px;margin-left: 0px;">
+              <table class="uk-table uk-table-small uk-table-middle tablescrollable" style="height: 100%;">
+                <thead class="theadscrollable" style="height: 35px;">
+                  <tr class="uk-width-1-1" style="display: inline-table;">
+                    <th class="uk-width-7-10"> {{'0087' | translate}}</th>
+                    <th class="uk-width-3-10">{{'1639' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody class="tbodyscrollable contentscroll" style="height: 351px;margin-top: 0px;">
+                  <tr class="uk-grid" data-ng-repeat="rate in orderfield.newrates | filter: {name: vm.filter1}"
+                    style="margin-left: 0px; margin-top: 0px; height: 32px;">
+                    <td class="uk-width-8-10">
+                      {{rate.name}}
+                    </td>
+                    <td class="uk-width-2-10 uk-text-center">
+                      <md-checkbox ng-model="rate.apply" aria-label="Finished?" class="md-primary"></md-checkbox>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="orderfield.loading=true;orderfield.adddemocutomer(DemographicscustomerForm)"
+        ng-disabled="orderfield.validatesstyle()"
+        ng-class="{'md-bg-blue-grey-100' : orderfield.validatesstyle()}">{{'0007' | translate}}</button>
+      <button type="button" class="md-btn md-btn-default uk-modal-close"
+        ng-click="orderfield.loading=false;orderfield.detailitem=[]; DemographicscustomerForm.$setUntouched()">
+        {{'0008'|translate}}</button>
+    </div>
+  </div>
+</div>

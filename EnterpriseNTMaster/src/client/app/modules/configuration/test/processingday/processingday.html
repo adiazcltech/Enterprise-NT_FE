@@ -1,0 +1,431 @@
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div id="titleProcessingDay" class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0301' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/processingday/processingday.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-md-4 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}" ng-change="vm.changeSearch()">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top: 10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table id="tableArea" class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.ordering; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.ordering"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.ordering"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.ordering && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.ordering && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.ordering && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.ordering && vm.sortReverse"></span>
+                        </a>{{'0018' | translate}}
+                      </th>
+                      <th class="col-md-9">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="width: 94.5%">
+                    <tr class="row-list contentscroll"
+                      data-ng-repeat="Area in vm.filtered = ((vm.dataAreas | filter: vm.search) |  orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getTestArea(Area.id, $index, ProcessingDayForm)"
+                      ng-class="{info: Area.id == vm.selected }">
+                      <td class="col-md-3  text-center" data-ng-bind="Area.ordering"></td>
+                      <td class="col-md-9" data-ng-bind="Area.name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form contentscroll" style="overflow: auto; padding-top: 0px;">
+                <form name="ProcessingDayForm" id="ProcessingDayForm" class="form-horizontal panel-body"
+                  style="padding-left: 0px; padding-right: 0px;">
+                  <div class="col-md-11" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                      <input data-ng-model="vm.searchTest" class="form-control" type="text"
+                        placeholder="{{'0015' | translate}}">
+                      <div class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top: 10px;" class="badge" data-ng-bind="vm.filteredTest.length"></span>
+                  </div>
+                  <div id="content">
+                    <table class="table table-list">
+                      <thead>
+                        <tr>
+                          <th class="col-md-5 text-left" style="padding-bottom: 3px;">
+                            <label class="btn btn-primary button-list panel-padding"
+                              style="height: 30px; width: 100px; padding-top: 4px !important"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              {{'0209' | translate}}
+                              <input type="checkbox" autocomplete="off" ng-model="vm.daysAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckAll()">
+                              <i ng-if="vm.daysAll" class="glyphicon glyphicon-ok white"></i>
+                              <i ng-if="!vm.daysAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.monAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckMon()">
+                              <i ng-if="vm.monAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.monAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.tueAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckTue()">
+                              <i ng-if="vm.tueAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.tueAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.wedAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckWed()">
+                              <i ng-if="vm.wedAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.wedAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.thuAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckThu()">
+                              <i ng-if="vm.thuAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.thuAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.friAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckFri()">
+                              <i ng-if="vm.friAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.friAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.satAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckSat()">
+                              <i ng-if="vm.satAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.satAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="vm.sunAll" style="display: none;"
+                                ng-disabled="vm.dataTestDays.length === 0" ng-change="vm.changeCheckSun()">
+                              <i ng-if="vm.sunAll" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!vm.sunAll" class="glyphicon"></i>
+                            </label>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th class="col-md-5 ">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.nametest; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.nametest"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.nametest"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.nametest && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.nametest && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.nametest && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.nametest && vm.sortReverse1"></span>
+                            </a>{{'0402' | translate }}
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.monday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.monday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.monday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.monday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.monday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.monday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.monday && vm.sortReverse1"></span>
+                            </a>{{'0507' | translate}}
+                          </th>
+                          <th class="col-md-1 text-center" style="white-space: nowrap">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.tuesday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.tuesday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.tuesday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.tuesday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.tuesday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.tuesday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.tuesday && vm.sortReverse1"></span>
+                            </a> {{'0508' | translate}}
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.wednesday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.wednesday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.wednesday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.wednesday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.wednesday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.wednesday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.wednesday && vm.sortReverse1"></span>
+                            </a>{{'0509' | translate}}
+                          </th>
+                          <th class="col-md-1 text-center" style="white-space: nowrap">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.thursday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.thursday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.thursday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.thursday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.thursday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.thursday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.thursday && vm.sortReverse1"></span>
+                            </a> {{'0510' | translate}}
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.friday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.friday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.friday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.friday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.friday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.friday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.friday && vm.sortReverse1"></span>
+                            </a>{{'0511' | translate}}
+                          </th>
+                          <th class="col-md-1 text-center" style="white-space: nowrap">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.saturday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.saturday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.saturday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.saturday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.saturday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.saturday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.saturday && vm.sortReverse1"></span>
+                            </a> {{'0512' | translate}}
+                          </th>
+                          <th class="col-md-1 text-center">
+                            <a
+                              ng-click="$event.stopPropagation(); vm.sortType1 =  vm.sunday; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                              <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.sunday"
+                                class="glyphicon glyphicon-sort-by-alphabet"></i>
+                              <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.sunday"
+                                class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                              <i ng-if="vm.sortType1 == vm.sunday && !vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                              <i ng-if="vm.sortType1 == vm.sunday && vm.sortReverse1"
+                                class="glyphicon glyphicon-triangle-top"></i>
+                              <span ng-show="vm.sortType1 == vm.sunday && !vm.sortReverse1"></span>
+                              <span ng-show="vm.sortType1 == vm.sunday && vm.sortReverse1"></span>
+                            </a>{{'0513' | translate}}
+                          </th>
+                        </tr>
+                      </thead>
+
+                      <tbody vs-repeat data-scroll-to-top='vm.filteredTest.length' class="tbody-list contentscroll"
+                        style="height: calc(100% - 241px); overflow-y: scroll; width: 96.5%">
+                        <tr class="row-list"
+                          data-ng-repeat="TestDays in vm.filteredTest = (vm.dataTestDays | filter: vm.searchTest) |  orderBy:vm.sortType1:vm.sortReverse1">
+                          <td class="col-md-5" data-ng-bind="TestDays.name"></td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.monday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.monday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.monday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.tuesday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.tuesday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.tuesday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.wednesday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.wednesday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.wednesday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.thursday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.thursday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.thursday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.friday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.friday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.friday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.saturday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.saturday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.saturday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                          <td class="col-md-1 text-center">
+                            <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                              ng-disabled="vm.dataTestDays.length === 0">
+                              <input type="checkbox" autocomplete="off" ng-model="TestDays.sunday"
+                                style="display: none;" ng-disabled="vm.dataTestDays.length === 0"
+                                ng-change="vm.stateButton('edit')">
+                              <i ng-if="TestDays.sunday" class="glyphicon glyphicon-ok green"></i>
+                              <i ng-if="!TestDays.sunday" class="glyphicon"></i>
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container text-right" style="width: 100%">
+                  <button type="submit" style="width: calc(100% / 2 - 4px)" class="btn btn-primary button-list"
+                    ng-click="vm.save(ProcessingDayForm)"
+                    ng-disabled="vm.filteredTest.length == 0 || vm.isDisabledSave">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" style="width: calc(100% / 2 - 4px)" class="btn btn-info button-list"
+                    ng-click="vm.cancel(ProcessingDayForm)" ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a ng-click="close('area')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/Recipiente.png">
+                                <h6 class="text-center">{{'0037' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

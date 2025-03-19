@@ -1,0 +1,382 @@
+<style>
+    .form-hint {
+        font-size: 7pt;
+        line-height: 9pt;
+        margin: 1px auto 0px;
+        color: #999;
+    }
+
+    .form-hint.error {
+        color: #C00;
+        font-weight: bold;
+        font-size: 8pt;
+    }
+
+    .password-count {
+        float: right;
+        position: relative;
+        bottom: 24px;
+        right: 10px;
+    }
+
+    .strength-meter {
+        position: relative;
+        height: 7px;
+        background: #DDD;
+        margin: 1px auto 5px;
+        border-radius: 3px;
+    }
+
+    .strength-meter:before,
+    .strength-meter:after {
+        content: '';
+        height: inherit;
+        background: transparent;
+        display: block;
+        border-color: #FFF;
+        border-style: solid;
+        border-width: 0 5px 0 5px;
+        position: absolute;
+        width: 107px;
+        z-index: 10;
+    }
+
+    .strength-meter:before {
+        left: 104px;
+    }
+
+    .strength-meter:after {
+        right: 104px;
+    }
+
+    .strength-meter-fill {
+        background: transparent;
+        height: inherit;
+        position: absolute;
+        width: 0;
+        border-radius: inherit;
+        transition: width 0.5s ease-in-out, background 0.25s;
+    }
+
+    .strength-meter-fill[data-strength='0'] {
+        background: red;
+        width: 20%;
+    }
+
+    .strength-meter-fill[data-strength='1'] {
+        background: orangered;
+        width: 40%;
+    }
+
+    .strength-meter-fill[data-strength='2'] {
+        background: orange;
+        width: 60%;
+    }
+
+    .strength-meter-fill[data-strength='3'] {
+        background: yellowgreen;
+        width: 80%;
+    }
+
+    .strength-meter-fill[data-strength='4'] {
+        background: green;
+        width: 100%;
+    }
+
+    input.ng-pristine+ul#strength {
+        display: none;
+    }
+
+    ul#strength {
+        display: inline;
+        list-style: none;
+        margin: 0;
+        margin-left: 15px;
+        padding: 0;
+        vertical-align: 2px;
+    }
+
+    .point:last {
+        margin: 0 !important;
+    }
+
+    .point {
+        background: #DDD;
+        border-radius: 2px;
+        display: inline-block;
+        height: 5px;
+        margin-right: 1px;
+        width: 20px;
+    }
+
+
+    .md-list .uk-nestable-list>li,
+    .md-list>li {
+        padding: 0px 4px;
+        min-height: 31px;
+    }
+</style>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content" style="margin-left: 0px;height: calc(100% - 2px);overflow: auto;">
+    <div id="page_content_inner" style="padding: 0px 20px;">
+        <div class="uk-grid" style="margin-top: 20px;">
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="user_heading user_heading_bg"
+                        style="background-image: url('images/imagen_login_3.png')">
+                        <div class="bg_overlay">
+
+                            <div class="user_heading_avatar">
+                                <div class="thumbnail">
+                                    <img ng-src="images/user1.png" alt="user avatar" />
+                                </div>
+                            </div>
+                            <div class="user_heading_content">
+                                <h2 class="heading_b uk-margin-bottom">
+                                    <span class="uk-text-truncate">{{vm.user.userName|uppercase}}</span>
+                                    <span class="sub-heading">{{vm.ipuser}}</span>
+                                </h2>
+                            </div>
+                            <button type="button" class="md-fab md-fab-small"
+                                ng-class="{'md-bg-blue-grey-100': vm.strength!=='' || vm.userchangepassword.password1!==vm.userchangepassword.password2 || vm.userchangepassword.password2===undefined || vm.userchangepassword.password2==='' || vm.userchangepassword.afterpassword===undefined || vm.userchangepassword.afterpassword===''}"
+                                ng-disabled="vm.strength!=='' || vm.userchangepassword.password1!==vm.userchangepassword.password2 || vm.userchangepassword.password2===undefined || vm.userchangepassword.password2==='' || vm.userchangepassword.afterpassword===undefined || vm.userchangepassword.afterpassword===''"
+                                ng-click="vm.changepassword(Formchange)" ng-style="{'background' : vm.colorbutton}">
+                                <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                    title="{{'0007' | translate}}">&#xE161;</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="user_content">
+                        <div class="uk-grid" ng-if="vm.keySecurityPolitics">
+                            <div class="uk-width-medium-4-10">
+                                <form class="form" name="Formchange">
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="material-icons">&#xE899;</i>
+                                            </span>
+                                            <label>{{ '0002' | translate }}</label>
+                                            <input type="password" name="afterpassword" id="afterpassword"
+                                                class="md-input label-fixed"
+                                                ng-model="vm.userchangepassword.afterpassword"
+                                                ng-class="{'md-input-danger':Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched || vm.errorpasword}"
+                                                ng-required="true" ng-focus="vm.errorpasword=false" md-input /> </div>
+                                        <span class="help-block"
+                                            ng-show="Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched"
+                                            style="padding: 0px; margin-top: 0px;margin-left: 54px;">{{ '0020' | translate }}</span>
+                                        <span style="margin-left: 54px;" ng-if="vm.errorpasword"
+                                            class="help-block">{{ '0018' | translate }}</span>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="material-icons">&#xE899;</i>
+                                            </span>
+                                            <label>{{'0103' | translate}}</label>
+                                            <input type="password" name="pswd" id="pswd" class="md-input label-fixed"
+                                                ng-model="vm.userchangepassword.password1"
+                                                ng-change="vm.CheckStrngth1()" ng-focus="vm.viewvalited=false"
+                                                ng-class="{'md-input-danger':Formchange.pswd.$invalid && Formchange.pswd.$touched || Formchange.pswd.$touched && vm.strength!=='' || vm.viewvalited}"
+                                                ng-required="true" md-input />
+                                            <span class="help-block"
+                                                ng-show="Formchange.pswd.$invalid && Formchange.pswd.$touched"
+                                                style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                                            <span ng-if="vm.viewvalited"
+                                                class="help-block">{{'0154' | translate}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="material-icons">&#xE899;</i>
+                                            </span>
+                                            <label>{{'0167' | translate}}</label>
+                                            <input type="password" name="password" id="password"
+                                                class="md-input label-fixed" ng-model="vm.userchangepassword.password2"
+                                                ng-class="{'md-input-danger':Formchange.password.$invalid && Formchange.password.$touched || vm.userchangepassword.password1!==vm.userchangepassword.password2}"
+                                                ng-required="true" md-input />
+                                            <span class="uk-form-help-block uk-text-danger label-error"
+                                                ng-show="vm.test=Formchange.password.$invalid && Formchange.password.$touched"
+                                                style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                                            <span class="uk-form-help-block uk-text-danger label-error"
+                                                ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && !vm.test && Formchange.password.$touched"
+                                                style="padding: 0px; margin-top: 0px;">
+                                                {{'0162' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="uk-width-medium-1-10">
+                            </div>
+                            <div class="uk-width-medium-5-10">
+                                <div class="uk-form-row">
+                                    <h6>
+                                        {{'0153' | translate}}.
+                                    </h6>
+                                </div>
+                                <div class="uk-form-row">
+
+                                    <div class="form-hint" ng-style="{'color' : vm.color}">
+                                        {{vm.strengthlabel}}
+                                    </div>
+                                    <div class="strength-meter">
+                                        <div class="strength-meter-fill" data-strength="{{vm.data}}"></div>
+                                    </div>
+                                </div>
+                                <ul class="md-list">
+                                    <li class="ng-scope">
+                                        <div class="md-list-content">
+                                            <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength0"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength0"></i>
+                                                    <span class="uk-text-muted uk-text-small ng-binding">
+                                                        {{'0156' | translate}} {{vm.lettersize}} {{'0157' | translate}}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ng-scope">
+                                        <div class="md-list-content">
+                                            <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength1"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength1"></i>
+                                                    <span class="uk-text-muted uk-text-small ng-binding">
+                                                        {{'0158' | translate}}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ng-scope">
+                                        <div class="md-list-content">
+                                            <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength2"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength2"></i>
+
+                                                    <span class="uk-text-muted uk-text-small ng-binding">
+                                                        {{'0159' | translate}}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ng-scope">
+                                        <div class="md-list-content">
+                                            <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength3"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength3"></i>
+
+                                                    <span class="uk-text-muted uk-text-small ng-binding">
+                                                        {{'0160' | translate}}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ng-scope">
+                                        <div class="md-list-content">
+                                            <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength4"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength4"></i>
+                                                    <span class="uk-text-muted uk-text-small ng-binding">
+                                                        {{'0161' | translate}}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="uk-grid" ng-if="!vm.keySecurityPolitics">
+                            <div class="uk-width-medium-1-1">
+                                <form class="form" name="Formchange">
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="material-icons">&#xE048;</i>
+                                            </span>
+                                            <label>Contraseña Anterior</label>
+                                            <input type="password" name="afterpassword" id="afterpassword"
+                                                class="md-input label-fixed"
+                                                ng-model="vm.userchangepassword.afterpassword"
+                                                ng-class="{'md-input-danger':Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched || vm.errorpasword}"
+                                                ng-required="true" ng-focus="vm.errorpasword=false" md-input /> </div>
+                                        <span class="help-block"
+                                            ng-show="Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched"
+                                            style="padding: 0px; margin-top: 0px;margin-left: 54px;">{{ '0020' | translate }}</span>
+                                        <span style="margin-left: 54px;" ng-if="vm.errorpasword"
+                                            class="help-block">Contraseña incorrecta</span>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="material-icons">&#xE048;</i>
+                                            </span>
+                                            <label>{{'0103' | translate}}</label>
+                                            <input type="password" name="pswd" id="pswd" class="md-input label-fixed"
+                                                ng-model="vm.userchangepassword.password1"
+                                                ng-change="vm.CheckStrngth1()" ng-focus="vm.viewvalited=false"
+                                                ng-class="{'md-input-danger':Formchange.pswd.$invalid && Formchange.pswd.$touched || Formchange.pswd.$touched && vm.strength!=='' || vm.viewvalited}"
+                                                ng-required="true" md-input />
+                                            <span class="help-block"
+                                                ng-show="Formchange.pswd.$invalid && Formchange.pswd.$touched"
+                                                style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                                            <span ng-if="vm.viewvalited"
+                                                class="help-block">{{'0154' | translate}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="material-icons">&#xE048;</i>
+                                            </span>
+                                            <label>{{'0167' | translate}}</label>
+                                            <input type="password" name="password" id="password"
+                                                class="md-input label-fixed" ng-model="vm.userchangepassword.password2"
+                                                ng-class="{'md-input-danger':Formchange.password.$invalid && Formchange.password.$touched || vm.userchangepassword.password1!==vm.userchangepassword.password2}"
+                                                ng-required="true" md-input />
+                                            <span class="uk-form-help-block uk-text-danger label-error"
+                                                ng-show="vm.test=Formchange.password.$invalid && Formchange.password.$touched"
+                                                style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                                            <span class="uk-form-help-block uk-text-danger label-error"
+                                                ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && !vm.test && Formchange.password.$touched"
+                                                style="padding: 0px; margin-top: 0px;">
+                                                {{'0162' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.min.js"></script>
+<script src="assets/js/custom/uikit_fileinput.js"></script>

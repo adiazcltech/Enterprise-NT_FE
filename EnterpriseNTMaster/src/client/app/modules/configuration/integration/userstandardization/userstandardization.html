@@ -1,0 +1,217 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0359' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/userstandardization/userstandardization.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-12">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'name' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'name' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'name' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'name' && vm.sortReverse"></span>
+                        </a>{{'0280' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll contentscroll">
+                    <tr class="row-list"
+                      data-ng-repeat="centralsystem in vm.filtered = ((vm.data | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getId(centralsystem,$index)"
+                      ng-class="{info: $index == vm.selected, danger: centralsystem.state == 0 }">
+                      <td class="col-md-8" data-ng-bind="centralsystem.name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form">
+                <div style="white-space: nowrap;">
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search2" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered1.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list table-hover">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3">
+                        <a ng-click="vm.sortType1 = 'userNameStandardization'; vm.sortReverse1 = !vm.sortReverse1">
+                          <i ng-if="!vm.sortReverse1 && vm.sortType1 != 'userNameStandardization'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse1 && vm.sortType1 != 'userNameStandardization'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType1 == 'userNameStandardization' && !vm.sortReverse1 "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType1 == 'userNameStandardization' && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType1 == 'userNameStandardization' && !vm.sortReverse1"></span>
+                          <span ng-show="vm.sortType1 == 'userNameStandardization' && vm.sortReverse1"></span>
+                        </a> {{'0122' | translate}}
+                      </th>
+                      <th class="col-md-4">
+                        <a ng-click="vm.sortType1 = 'name'; vm.sortReverse1 = !vm.sortReverse1">
+                          <i ng-if="!vm.sortReverse1 && vm.sortType1 != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse1 && vm.sortType1 != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType1 == 'name' && !vm.sortReverse1 "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType1 == 'name' && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType1 == 'name' && !vm.sortReverse1"></span>
+                          <span ng-show="vm.sortType1 == 'name' && vm.sortReverse1"></span>
+                        </a> {{'0011' | translate}}
+                      </th>
+                      <th class="col-md-5">
+                        <a ng-click="vm.sortType1 = 'centralCode'; vm.sortReverse1 = !vm.sortReverse1 ">
+                          <i ng-if="!vm.sortReverse1 && vm.sortType1 != 'centralCode'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse1 && vm.sortType1 != 'centralCode'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType1 == 'centralCode' && !vm.sortReverse1 "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType1 == 'centralCode' && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType1 == 'centralCode' && !vm.sortReverse1"></span>
+                          <span ng-show="vm.sortType1 == 'centralCode' && vm.sortReverse1"></span>
+                        </a>{{'0525' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody vs-repeat="30" class="tbody-list contentscroll"
+                    style="width: 97%; height: calc(100% - 19rem);">
+                    <tr class="row-list"
+                      data-ng-repeat="userStandardization in vm.filtered1 = ((vm.Detail | filter: vm.search2 )| orderBy:vm.sortType1:vm.sortReverse1)"
+                      data-ng-click="vm.selected1=userStandardization.iduserStandardization; ">
+                      <td class="col-md-3" data-ng-bind="userStandardization.userNameStandardization"></td>
+                      <td class="col-md-4" data-ng-bind="userStandardization.name"></td>
+                      <td class="col-md-5" ng-if="vm.selected1 === userStandardization.iduserStandardization"
+                        style="padding: 0px;">
+                        <input id="name" name="name" data-ng-model="userStandardization.centralCode" maxlength="60"
+                          ng-disabled="vm.isDisabled" class="form-control" type="text"
+                          ng-blur="vm.update($index,userStandardization);">
+                      </td>
+                      <td class="col-md-5" data-ng-bind="userStandardization.centralCode"
+                        ng-if="vm.selected1 !== userStandardization.iduserStandardization"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" style="width: calc(100% / 1 - 3px)" class="btn btn-violet button-list"
+                    ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="row modal-body">
+                    <div class="row row-center col-md-12">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4" ng-hide="hidecentralsystem > 0">
+                            <a ng-click="close('centralsystem')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/CentralSystem.png">
+                                <h6 class="text-center"> {{'0280' | translate}}</h6>
+                            </a>
+                        </div>
+                        <div class="col-md-4" ng-hide="hideuser > 0">
+                            <a ng-click="close('user')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/user.png">
+                                <h6 class="text-center"> {{'0122' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="Informat.html">
+  <div class="modal fade" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/iconinfo.png">
+                        </div>
+                        <div style="width: 80%; float: left">
+                            <label style="margin-top: 10px;margin-left: 10px">{{'0606' | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,111 @@
+/* jshint ignore:start */
+{
+  "_args": [
+    [
+      {
+        "raw": "tata-js",
+        "scope": null,
+        "escapedName": "tata-js",
+        "name": "tata-js",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\proyectos\\EntrepriseNT2\\01_Fuentes\\02_EnterpriseNT_FE\\EnterpriseNTLaboratory"
+    ]
+  ],
+  "_from": "tata-js@latest",
+  "_id": "tata-js@0.1.5",
+  "_inCache": true,
+  "_location": "/tata-js",
+  "_nodeVersion": "8.7.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/tata-js-0.1.5.tgz_1512745469658_0.9088577555958182"
+  },
+  "_npmUser": {
+    "name": "xrr2016",
+    "email": "xiaoranran1993@gmail.com"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "tata-js",
+    "scope": null,
+    "escapedName": "tata-js",
+    "name": "tata-js",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/tata-js/-/tata-js-0.1.5.tgz",
+  "_shasum": "4374f1e424aed0ba066d2e831fd2b25ce10210cc",
+  "_shrinkwrap": null,
+  "_spec": "tata-js",
+  "_where": "D:\\proyectos\\EntrepriseNT2\\01_Fuentes\\02_EnterpriseNT_FE\\EnterpriseNTLaboratory",
+  "author": {
+    "name": "xrr2016",
+    "email": "xiaoranran1993@163.com"
+  },
+  "bugs": {
+    "url": "https://github.com/xrr2016/tata/issues"
+  },
+  "dependencies": {},
+  "description": "[Live Demo](http://xiaoranran.site/tata/)",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "compression-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.2.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "jest": "^21.2.1",
+    "postcss": "^6.0.14",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-loader": "^2.0.8",
+    "precss": "^2.0.0",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-e9O09ZY8D+LX3kyFfLE//LcWI0M23V2XpAyrSDm7cZJH1xaCoFwAD7j/s0FV9v72BJ0PnCOYkA+BaCZ5BNdvGg==",
+    "shasum": "4374f1e424aed0ba066d2e831fd2b25ce10210cc",
+    "tarball": "https://registry.npmjs.org/tata-js/-/tata-js-0.1.5.tgz"
+  },
+  "gitHead": "f325677c62a012db426034c0ee6150310e497a1c",
+  "homepage": "https://github.com/xrr2016/tata#readme",
+  "license": "MIT",
+  "main": "dist/tata.js",
+  "maintainers": [
+    {
+      "name": "xrr2016",
+      "email": "xiaoranran1993@gmail.com"
+    }
+  ],
+  "module": "src/tata.js",
+  "name": "tata-js",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/xrr2016/tata.git"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.build.js",
+    "dev": "webpack-dev-server --config webpack.dev.js --open",
+    "test": "jest --watchAll --colors --coverage"
+  },
+  "version": "0.1.5"
+}
+/* jshint ignore:end */

@@ -1,0 +1,334 @@
+<style type="text/css">
+  .aselect {
+    background: rgb(192, 192, 192);
+  }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div id="titleTestEdition" class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0302' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/testedition/testedition.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-md-3 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}" ng-change="vm.changeSearch()">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top: 10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table id="tableArea" class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3" style="white-space: nowrap">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.ordering; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.ordering"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.ordering"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.ordering && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.ordering && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.ordering && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.ordering && vm.sortReverse"></span>
+                        </a>{{'0018' | translate}}
+                      </th>
+                      <th class="col-md-9" style="white-space: nowrap">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="width: 92.5%">
+                    <tr class="row-list"
+                      data-ng-repeat="Area in vm.filtered = ((vm.dataAreas | filter: vm.search) |  orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getTestArea(Area.id,TestEditionForm)"
+                      ng-class="{info: Area.id == vm.selected }">
+                      <td class="col-md-3  text-center" data-ng-bind="Area.ordering"></td>
+                      <td class="col-md-9" data-ng-bind="Area.name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form contentscroll" style="overflow: auto; padding-top: 0px;">
+                <form name="TestEditionForm" id="TestEditionForm" class="form-horizontal panel-body"
+                  style="padding-left: 0px; padding-right: 0px;">
+                  <div class="col-md-11" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                      <input data-ng-model="vm.searchTest" class="form-control" type="text"
+                        placeholder="{{'0015' | translate}}">
+                      <div class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top: 10px;" class="badge" data-ng-bind="vm.filteredTest.length"></span>
+                  </div>
+                  <div id="content">
+                    <table class="table table-list" style="font-size: 12px;">
+                      <thead>
+                        <tr>
+                          <th class="col-md-1" style="white-space: nowrap">
+                            {{'0018' | translate}}
+                          </th>
+                          <th class="col-md-1" style="white-space: nowrap;">
+                            {{'0568' | translate}}
+                          </th>
+                          <th class="col-md-5">
+                            {{'0402' | translate }}
+                          </th>
+                          <th class="col-md-2 text-left">
+                            {{'0037' | translate}}
+                          </th>
+                          <th class="col-md-2 text-left" style="white-space: nowrap">
+                            {{'0052' | translate}}
+                          </th>
+                          <th class="col-md-1 text-left" style="white-space: nowrap">
+                           {{'0010' | translate}}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody vs-repeat="30" class="tbody-list contentscroll"
+                        style="height: calc(100% - 144px); overflow-y: scroll; width: 96.5%; ">
+                        <tr class="row-list"
+                          data-ng-repeat="TestEdit in vm.filteredTest = (vm.dataTestEdit | filter: vm.searchTest)"
+                          data-ng-click="vm.getTestEdition(TestEdit.id, $index, TestEditionForm)">
+                          <td class="col-md-1 text-center  panel-padding-important" data-ng-click="vm.viewcontrol(TestEdit,'code')">
+                            <label ng-if="TestEdit.id != vm.selectedTest" data-ng-bind="TestEdit.code"
+                              style="padding-top: 8px; padding-bottom: 0px"></label>
+                            <div class="text-center panel-padding" 
+                                  ng-if="TestEdit.id == vm.selectedTest"
+                              ng-class="{'has-error': TestEditionForm.{{'Testcode' + TestEdit.id }}.$invalid && TestEditionForm.{{'Testcode' + TestEdit.id }}.$touched || TestEdit.errorcode }">
+                              <input type="text" id="{{'Testcode' + TestEdit.id }}" name="{{'Testcode' + TestEdit.id }}"
+                                ng-model="TestEdit.code" maxlength="10" ng-focus="TestEdit.errorcode = false"
+                                class="form-control text-center grid-Edit-control" ng-required="true"
+                                ng-blur="vm.validatedinput(TestEdit,'code',TestEditionForm)" />
+                              <span
+                                ng-show="TestEditionForm.{{'Testcode' + TestEdit.id }}.$invalid && TestEditionForm.{{'Testcode' + TestEdit.id }}.$touched"
+                                class="help-block">{{'0016' | translate}}</span>
+                              <span ng-show="TestEdit.errorcode" class="help-block"
+                                style="white-space: nowrap;">{{'0038' |
+                                translate}}</span>
+                            </div>
+                          </td>
+                          <td class="col-md-1 text-center panel-padding-important" data-ng-click="vm.viewcontrol(TestEdit,'abbr')">
+                            <label ng-if="TestEdit.id != vm.selectedTest" data-ng-bind="TestEdit.abbr"
+                              style="padding-top: 8px; padding-bottom: 0px"></label>
+                            <div class="text-center panel-padding" ng-if="TestEdit.id == vm.selectedTest"
+                              ng-class="{'has-error': TestEditionForm.{{'Testabbr' + TestEdit.id }}.$invalid && TestEditionForm.{{'Testabbr' + TestEdit.id }}.$touched || TestEdit.errorabbreviation}">
+                              <input type="text" id="{{'Testabbr' + TestEdit.id }}" name="{{'Testabbr' + TestEdit.id }}"
+                                ng-model="TestEdit.abbr" maxlength="15" ng-focus="TestEdit.errorabbreviation = false"
+                                class="form-control text-center grid-Edit-control" ng-required="true"
+                                ng-blur="vm.validatedinput(TestEdit,'abbr',TestEditionForm)" />
+                              <span
+                                ng-show="TestEditionForm.{{'Testabbr' + TestEdit.id }}.$invalid && TestEditionForm.{{'Testabbr' + TestEdit.id }}.$touched"
+                                class="help-block">{{'0016' | translate}}</span>
+                              <span ng-show="TestEdit.errorabbreviation" class="help-block"
+                                style="white-space: nowrap;">{{'0038' |
+                                translate}}</span>
+                            </div>
+                          </td>
+                          <td class="col-md-5 panel-padding-important" data-ng-click="vm.viewcontrol(TestEdit,'name')">
+                            <label ng-if="TestEdit.id != vm.selectedTest" data-ng-bind="TestEdit.name"
+                              style="padding-top: 8px; padding-bottom: 0px; padding-left: 6px"></label>
+                            <div class="text-left panel-padding" ng-if="TestEdit.id == vm.selectedTest"
+                              ng-class="{'has-error': TestEditionForm.{{'Testname' + TestEdit.id }}.$invalid && TestEditionForm.{{'Testname' + TestEdit.id }}.$touched || TestEdit.errorname }">
+                              <input type="text" id="{{'Testname' + TestEdit.id }}" name="{{'Testname' + TestEdit.id }}"
+                                ng-model="TestEdit.name" maxlength="150" ng-focus="TestEdit.errorname = false"
+                                class="form-control text-center grid-Edit-control" ng-required="true"
+                                ng-blur="vm.validatedinput(TestEdit,'name',TestEditionForm)" />
+                              <span
+                                ng-show="TestEditionForm.{{'Testname' + TestEdit.id }}.$invalid && TestEditionForm.{{'Testname' + TestEdit.id }}.$touched"
+                                class="help-block">{{'0016' | translate}}</span>
+                              <span ng-show="TestEdit.errorname" class="help-block"
+                                style="white-space: nowrap;">{{'0038' |
+                                translate}}</span>
+                            </div>
+                          </td>
+                          <td class="col-md-2 text-left panel-padding-important">
+                            <label ng-if="TestEdit.id != vm.selectedTest" data-ng-bind="TestEdit.area.name"
+                              style="padding-top: 8px; padding-bottom: 0px; padding-left: 10px"></label>
+                            <div class="text-left  panel-padding" ng-if="TestEdit.id == vm.selectedTest">
+                              <select id="area" name="area" charset="utf-8"
+                                ng-options="obj.id as obj.name for obj in vm.dataAreas" data-ng-model="TestEdit.area.id"
+                                class="form-control grid-Edit-control" ng-required="true"
+                                ng-change="vm.saveinput(TestEdit,TestEditionForm)"></select>
+                            </div>
+                          </td>
+                          <td class="col-md-2 text-left  panel-padding-important">
+                            <label ng-if="TestEdit.id != vm.selectedTest" data-ng-bind="TestEdit.sample.name"
+                              style="padding-top: 8px; padding-bottom: 0px; padding-left: 10px"></label>
+                            <div class="text-left  panel-padding" ng-if="TestEdit.id == vm.selectedTest">
+                              <select id="sample" name="sample" charset="utf-8"
+                                ng-options="obj.id as obj.name for obj in vm.ListSamples"
+                                data-ng-model="TestEdit.sample.id" class="form-control grid-Edit-control"
+                                ng-required="true" ng-change="vm.saveinput(TestEdit,TestEditionForm)"></select>
+                            </div>
+                          </td>
+                          <td class="col-md-1 text-left  panel-padding-important">
+                            <label ng-if="TestEdit.id != vm.selectedTest" ng-bind-html="TestEdit.unit.name | trust"
+                              style="padding-top: 8px; padding-bottom: 0px; padding-left: 10px;white-space: nowrap; overflow: hidden;text-overflow: ellipsis"></label>
+                            <div class="text-left panel-padding " ng-if="TestEdit.id == vm.selectedTest">
+                              <div class="btn-group" style="
+                                                                border-radius: 3px;
+                                                                width: 100%;
+                                                                border: 1px solid rgb(204, 204, 204);" uib-dropdown>
+                                <button id="btn-append-to-single-button" type="button" class="btn" style="
+                                                                        font-size: 12px;
+                                                                        line-height: 1.5;
+                                                                        border-radius: 3px;
+                                                                        color: #555;
+                                                                        background-color: #fff;
+                                                                        background-image: none;
+                                                                        padding: 1px 1px 3px 13px;
+                                                                        width: 100%;
+                                                                        height: 28px" uib-dropdown-toggle>
+                                  <div class="col-md-11 text-left" style="width: 91.333333%;
+                                                                         padding-right: 0px;
+                                                                         padding-left: 0px;all;
+                                                                         white-space: nowrap;
+                                                                         overflow: hidden;
+                                                                         text-overflow: ellipsis"
+                                    ng-bind-html="TestEdit.unit.name | trust"></div>
+                                  <div class="col-md-1" style="width: 7.333333%;
+                                                                         padding-right: 0px;
+                                                                         padding-left: 0px;">
+                                    <span class="caret"></span>
+                                  </div>
+                                </button>
+                                <ul class="dropdown-menu" uib-dropdown-menu role="menu"
+                                  aria-labelledby="btn-append-to-single-button" style="left: -65%;
+                                                                      overflow: auto;
+                                                                      height: 150px;">
+                                  <li role="menuitem" ng-repeat="Unit in vm.ListUnits"><a href="#"
+                                      ng-click="TestEdit.unit = Unit;vm.saveinput(TestEdit,TestEditionForm)"
+                                      ng-bind-html="Unit.name | trust"
+                                      ng-class="{'aselect':Unit.id === TestEdit.unit.id}"></a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a ng-click="close('area')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/Recipiente.png">
+                                <h6 class="text-center">{{'0037' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="Advertence.html">
+  <div class="modal fade" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/iconinfo.png">
+                        </div>
+                        <div style="width: 80%; float: left">
+                            <label style="margin-top: 10px;margin-left: 10px">{{'0567' | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="Confirmation.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/Question.png">
+                        </div>
+                        <div style="width: 80%; float: left; padding-top: 20px">
+                            <span style="margin-top: 10px; margin-left: 10px">{{'1029' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="close('yes')" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" class="btn btn-default" ng-click="close('no')" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

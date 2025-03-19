@@ -1,0 +1,58 @@
+<style type="text/css">
+
+
+ #routedContent.ng-enter{
+    transform: translateX(-500px);
+    opacity: 0;
+
+    -webkit-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    -moz-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    -ms-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    -o-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    transition: all 0.35s cubic-bezier(1,.01,0,.99);
+}
+
+#routedContent.ng-enter-active{
+    transform: translateX(0px);
+    opacity: 1;
+}
+
+#routedContent.ng-leave{
+    transform: translateX(0);
+    opacity: 1;
+
+    -webkit-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    -moz-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    -ms-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    -o-transition: all 0.35s cubic-bezier(1,.01,0,.99);
+    transition: all 0.35s cubic-bezier(1,.01,0,.99);
+}
+
+#routedContent.ng-leave-active{
+    transform: translateX(500px);
+    opacity: 0;
+}
+
+</style>
+<div class="general-container" ng-controller="ShellController as vm" >
+
+  <header id="header-container" class="clearfix header-color">
+		<div class="header-image">
+		     <img class="img-responsive" src="images/logo_.png">
+		</div>
+		<div class="header-text text-right">
+			<strong>Laboratory Information Management System</strong>
+		</div>
+		
+  </header>
+
+  <div id="body-content">
+	<treasure-overlay-spinner active='vm.blockView'>       
+   		<div ng-include="'app/layout/sidebar.html'"></div>
+   		
+	    <div id="routedContent" class="general-container" ui-view ng-if="vm.viewcontent">
+	    </div>
+		
+	</treasure-overlay-spinner>
+  </div>
+</div>

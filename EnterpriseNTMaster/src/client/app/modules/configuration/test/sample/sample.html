@@ -1,0 +1,461 @@
+<style>
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  #container {
+    overflow: auto;
+    height: 90%;
+  }
+</style>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<modalreport openmodal="vm.open"></modalreport>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class="col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0052' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class="col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/sample/sample.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll
+        contentscroll">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-4">
+                        <a ng-click="$event.stopPropagation(); vm.sortType=
+                          vm.codesample; vm.sortReverse= !vm.sortReverse;
+                          $event.stopPropagation()">
+                          <i ng-if="!vm.sortReverse && vm.sortType !=
+                            vm.codesample" class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType !=
+                            vm.codesample" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.codesample &&
+                            !vm.sortReverse" class="glyphicon
+                            glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.codesample &&
+                            vm.sortReverse" class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.codesample &&
+                            !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.codesample &&
+                            vm.sortReverse"></span>
+                        </a> {{'0018' | translate}}
+                      </th>
+                      <th class="col-md-4">
+                        <a ng-click="$event.stopPropagation(); vm.sortType=
+                          vm.name; vm.sortReverse= !vm.sortReverse;
+                          $event.stopPropagation()">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse" class="glyphicon
+                            glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name &&
+                            !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name &&
+                            vm.sortReverse"></span>
+                        </a> {{'0011' | translate}}
+                      </th>
+                      <th class="col-md-4">
+                        <a ng-click="$event.stopPropagation(); vm.sortType=
+                          vm.state; vm.sortReverse= !vm.sortReverse;
+                          $event.stopPropagation()">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.state && !vm.sortReverse" class="glyphicon
+                            glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.state && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.state &&
+                            !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.state &&
+                            vm.sortReverse"></span>
+                        </a>{{'0014' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="height:
+                    calc(100% - 15rem);width: 92.5%;">
+                    <tr class="row-list" data-ng-repeat="sample in vm.filtered= ((vm.data | filter:
+                      vm.search )| orderBy:vm.sortType:vm.sortReverse)" data-ng-click="vm.getId(sample.id,$index,Form)"
+                      ng-class="{info: sample.id == vm.selected, danger:
+                      sample.state == 0 }">
+
+                      <td class="col-md-4" data-ng-bind="sample.codesample"></td>
+                      <td class="col-md-4" data-ng-bind="sample.name"></td>
+                      <td class="col-md-4" style="text-align:center;">
+                        <i ng-if="sample.state == true" class="glyphicon
+                          glyphicon-ok green"></i>
+                        <i ng-if="sample.state == false" class="glyphicon
+                          glyphicon-ban-circle red"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container panel-padding
+                panel-scroll contentscroll" style="height: calc(100% - 55px);overflow-y: hidden">
+                <form name="Form" id="Form" class="form-horizontal panel-body" style="padding: 14px; height: 100%;">
+                  <div class="form-group-min form-group-sm" style="height:
+                    148px;margin-top: 10px;">
+                    <div class="form-group form-group-sm has-feedback">
+                      <div class="col-md-2 text-right" style="padding:0px">
+                        <label>{{'0018' | translate}}:</label>
+                      </div>
+                      <div class="col-md-1" style="padding-left: 7px;
+                        padding-right:0px" ng-class="{'has-error': vm.codesampleRepeat }">
+                        <number-input ng-model="vm.Detail.codesample" max="999" min="0" step="1" start="0"
+                          disabledecimal="true" decimalplaces="1" disable="vm.isDisabled">
+                        </number-input>
+                        <span ng-if="vm.codesampleRepeat" class="help-block">{{'0038'
+                          | translate}}</span>
+                      </div>
+                      <div class="col-md-2 text-right" style="padding:0px">
+                        <label>{{'0011' | translate}}:</label>
+                      </div>
+                      <div class="col-md-3" ng-class="{'has-error': Form.name.$invalid &&
+                        Form.name.$touched||vm.nameRepeat}">
+                        <input class="form-control" maxlength="60" data-ng-model="vm.Detail.name" ng-required="true"
+                          ng-disabled="vm.isDisabled" name="name" id="name" class="form-control" type="text"
+                          ng-focus="vm.nameRepeat= false">
+                        <span ng-if="Form.name.$invalid && Form.name.$touched
+                          ||vm.nameRepeat" class="glyphicon glyphicon-remove
+                          form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="Form.name.$invalid && Form.name.$touched" class="help-block">{{'0016' |
+                          translate}}</span>
+                        <span ng-if="vm.nameRepeat" class="help-block">{{'0038'
+                          | translate}}</span>
+                      </div>
+                      <div class="col-md-1 text-right" style="padding:0px;
+                        width: 11%">
+                        <label>{{'0046' | translate}}:</label>
+                      </div>
+                      <div class="col-md-2" style="width:22%" ng-class="{'has-error':Form.container.$invalid &&
+                        Form.container.$touched}">
+                        <select charset="utf-8" ng-options="obj as obj.name for
+                          obj in vm.Listcontainer track by obj.id" data-ng-model="vm.Detail.container"
+                          class="form-control" ng-required="true" ng-disabled="vm.isDisabled"></select>
+                      </div>
+                    </div>
+                    <div class="form-group form-group-sm has-feedback">
+                      <div class="col-md-2 text-right" style="padding:0px">
+                        <label>Cantidad de etiquetas:</label>
+                      </div>
+                      <div class="col-md-1" style="padding-left: 7px;
+                        padding-right:0px">
+                        <number-input ng-model="vm.Detail.canstiker" max="99" min="0" step="1" start="0"
+                          disabledecimal="true" decimalplaces="1" disable="vm.isDisabled">
+                        </number-input>
+                        <span ng-if="Form.canstiker.$invalid &&
+                          Form.canstiker.$touched" class="glyphicon glyphicon-remove
+                          form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="Form.canstiker.$invalid &&
+                          Form.canstiker.$touched" class="help-block">{{'0041' | translate}}</span>
+                      </div>
+                      <div class="col-md-2 text-right" style="padding-right:0px">
+                        <label>Dias de almacenamiento:</label>
+                      </div>
+                      <div class="col-md-3">
+                        <number-input ng-model="vm.Detail.daysstored" max="9999" min="0" step="1" start="0"
+                          disabledecimal="true" decimalplaces="1" disable="vm.isDisabled">
+                        </number-input>
+                        <span ng-if="Form.daysstored.$invalid &&
+                          Form.daysstored.$touched" class="help-block">{{'0041' | translate}}</span>
+                      </div>
+                      <div class="col-md-2 text-right" style="padding:0px;
+                        width: 11%">
+                        <label>{{'0441' | translate}}:</label>
+                      </div>
+                      <div class="col-md-1 text-left">
+                        <toggle ng-model="vm.Detail.specialStorage" on="{{'0068'
+                          | translate}}" off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm">
+                        </toggle>
+                      </div>
+                    </div>
+                    <div class="form-group form-group-sm" ng-if="false">
+                      <label class="col-md-2 text-right" style="width: 30.666667%;padding-right: 0px;">{{'0027' |
+                        translate}}:</label>
+                      <div class="col-md-1" style="width:
+                        12.333333%;padding-left: 10px;">
+                        <toggle ng-model="vm.Detail.printable" on="{{'0068' |
+                          translate}}" off="{{'0492' | translate}}"
+                          ng-disabled="vm.isDisabled||vm.Detail.canstiker == 0" size="btn-sm"
+                          ng-change="vm.changebarcode()"></toggle>
+                      </div>
+                      <label class="col-md-1 text-right" style="padding-right:
+                        14px;padding-left: 0px;
+                        width: 9.333333%;">{{'0057' | translate}}:</label>
+                      <div class="col-md-1" style="padding-left: 2px;">
+                        <toggle ng-model="vm.Detail.typebarcode" on="{{'0068' |
+                          translate}}" off="{{'0492' | translate}}" ng-disabled="vm.isDisabled || vm.Detail.canstiker == 0
+                          || !vm.Detail.printable" size="btn-sm">
+                        </toggle>
+                      </div>
+                    </div>
+                    <div class="form-group form-group-sm has-feedback" ng-class="{'has-error':Form.laboratorytype.$invalid &&
+                      Form.laboratorytype.$touched}">
+                      <div class="col-md-2 text-right" style="padding: 0px">
+                        <label>{{'1059' | translate}}: </label>
+                      </div>
+                      <div class="col-md-8" style="padding-left: 7px;
+                        padding-right:0px; width:48.5%">
+                        <div multiselect disable="vm.isDisabled" list="vm.laboratorytype"
+                          ng-model="vm.Detail.laboratorytype"></div>
+                        <span ng-if="vm.Detail.laboratorytype == ''" class="help-block">{{'0016'
+                          | translate}}</span>
+                      </div>
+                      <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.Detail.state"></modalstate>
+                      <div class="col-md-2 text-right" style="width:12.5%;
+                        padding:0px">
+                        <label>{{'0014' | translate}}:</label>
+                      </div>
+                      <div class="col-md-1">
+                        <toggle ng-model="vm.Detail.state" on="{{'0068' |
+                          translate}}" off="{{'0492' | translate}}" ng-disabled="vm.isDisabledState" size="btn-sm"
+                          ng-change="vm.changeState()"></toggle>
+                      </div>
+
+                    
+
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="height: calc(100% -
+                    155px);padding-right: 0px;
+                    padding-left: 5px;">
+                    <div class="Scrollspymaster" style="height: 100%; overflow:hidden;position:
+                      relative;margin-left: -10px">
+                      <nav class="nav navscrollspy" du-scroll-container="container"
+                        style="border-radius: 0px;min-height: 33px">
+                        <ul>
+                          <li style="width: 43%; font-size: 1em">
+                            <a style="padding: 0px 1%; width: 100%" href="#section-1" du-smooth-scroll du-scrollspy>
+                              <span style="font-size: 19px;">①</span>
+                              {{'0058' | translate}}
+                              <span ng-if="vm.Detail.managementsample=='' &&
+                                !vm.isDisabled" class="label label-danger">R</span>
+                            </a>
+                          </li>
+                          <li style="width: 56%">
+                            <a style="padding: 0px 1%; width: 100%" class="text-middle" href="#section-2"
+                              du-smooth-scroll du-scrollspy>
+                              <span style="font-size: 19px;">②</span>
+                              {{'0799' | translate}}
+                              <span ng-if="vm.Detail.minimumTemperature>=vm.Detail.maximumTemperature
+                                && vm.temperature && !vm.isDisabled" class="label label-danger">R</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                      <div du-scroll-container="" id="container" style="overflow: hidden;height: calc(100% - 30px);">
+                        <section id="section-1" style="padding: 15px 5px;height:
+                          100%;overflow-y: auto;" class="contentscroll">
+                          <div style="border: 1px solid #ddd; border-radius:
+                            4px; padding: 3px">
+                            <wysiwyg textarea-id="managementsample" charset="utf-8" maxlength="2555"
+                              textarea-class="form-control" textarea-height="150px" textarea-name="managementsample"
+                              textarea-required="false" ng-model="vm.Detail.managementsample" disabled="vm.isDisabled"
+                              enable-bootstrap-title="true" textarea-menu="vm.customMenu"
+                              ng-keyup="vm.keyPressTextarea($event)"></wysiwyg>
+                          </div>
+                        </section>
+                        <section id="section-2" style="padding: 15px 5px;height:
+                          100%;" class="contentscroll">
+                          <div class="form-group form-group-sm">
+                            <div class="col-md-2 text-right" style="padding:0px">
+                              <label>{{'1057' | translate}}:</label>
+                            </div>
+                            <div class="col-md-1" style="padding-left: 7px">
+                              <toggle ng-model="vm.Detail.check" on="{{'0068' |
+                                translate}}" off="{{'0492' | translate}}" ng-disabled="vm.isDisabled || vm.CheckKey"
+                                size="btn-sm" ng-change="vm.changecheck()">
+                              </toggle>
+                            </div>
+                            <modalstate openstatemodal="vm.check" detailstate="vm.Detail.check">
+                            </modalstate>
+                            <div class="col-md-2 text-right" style="padding-right:0px">
+                              <label>{{'0854' | translate}}:</label>
+                            </div>
+                            <div class="col-md-1">
+                              <number-input ng-model="vm.qualityTime" max=vm.maxtime min="1" step="0.01" start="1"
+                                disabledecimal="false" decimalplaces="2" disable="vm.isDisabled || !vm.Detail.check">
+                              </number-input>
+                            </div>
+                            <div class="col-md-2" style="padding-left:0px">
+                              <select charset="utf-8" ng-options="obj.id as
+                                obj.name for obj in vm.unittime" data-ng-model="vm.unittimeid" class="form-control"
+                                ng-required="false" ng-disabled="vm.isDisabled || !vm.Detail.check"
+                                ng-change="vm.validunittime()"></select>
+                            </div>
+                            <div class="col-md-2 text-right" style="width:11%;
+                              padding:0px">
+                              <label>{{'1058' | translate}}:</label>
+                            </div>
+                            <div class="col-md-3" style="width:13.6%">
+                              <div class="input-group">
+                                <number-input ng-model="vm.Detail.qualityPercentage" max="100" min="50" step="1"
+                                  disabledecimal="false" decimalplaces="2" disable="vm.isDisabled || !vm.Detail.check">
+                                </number-input>
+                                <div class="input-group-addon">%</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group form-group-sm" ng-if="vm.temperature">
+                            <div class="col-md-2 text-right" style="padding:0px;width: 15.8%;">
+                              <label>{{'1148' | translate}}:</label>
+                            </div>
+                            <div class="col-md-1" style="padding-left: 14px;">
+                              <number-input ng-model="vm.Detail.minimumTemperature" max=999999 min="-200" step="0.01"
+                                start="1" disabledecimal="false" decimalplaces="2"
+                                disable="vm.isDisabled || !vm.temperature">
+                              </number-input>
+                            </div>
+                            <div class="col-md-2 text-right" style="padding:0px;width: 17.666667%">
+                              <label>{{'1149' | translate}}:</label>
+                            </div>
+                            <div class="col-md-1" style="padding-left: 14px;">
+                              <number-input ng-model="vm.Detail.maximumTemperature" max=999999 min="-200" step="0.01"
+                                start="1" disabledecimal="false" decimalplaces="2"
+                                disable="vm.isDisabled || !vm.temperature">
+                              </number-input>
+                            </div>
+                            <span ng-if="vm.Detail.minimumTemperature>=vm.Detail.maximumTemperature
+                              && vm.temperature && !vm.isDisabled" class="help-block "
+                              style="margin-left: 140px;">{{'1150'| translate}}</span>
+                          </div>
+                          <div class="form-group form-group-sm">
+                            <div class="col-md-2 text-right" style="padding:0px">
+                              <label>{{'1171' | translate}}:</label>
+                            </div>
+                            <div class="col-md-1" style="padding-left: 7px">
+                              <toggle ng-model="vm.Detail.coveredSample" on="{{'1131' |
+                                translate}}" off="{{'1132' | translate}}" ng-disabled="vm.isDisabled" size="btn-sm">
+                              </toggle>
+                            </div>
+
+                            <div class="col-md-2 text-right" style="padding:0px">
+                              <label>{{'3224'| translate}}:</label>
+                            </div>
+                            <div class="col-md-1" style="padding-left: 7px">
+                              <toggle ng-model="vm.Detail.printSeparator" on="{{'1131' |
+                                translate}}" off="{{'1132' | translate}}" size="btn-sm">
+                              </toggle>
+                            </div>
+
+                            <div class="col-md-2 text-right" style="width:auto; padding:0px">
+                              <label>{{'3223' | translate}}:</label>
+                            </div>
+      
+                            <div class="col-md-1">
+                              <toggle ng-model="vm.Detail.printCodeSticker" on="{{'0068' |translate}}"
+                               off="{{'0492' | translate}}" ng-disabled="vm.isDisabledState" size="btn-sm"
+                                ng-change="vm.changeprintCodeSticker()"></toggle>
+                            </div>
+
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="panel-footer general-container" style="height: 55px;">
+                <div class="container" style="width: 100%">
+                  <button type="button" class="btn btn-success button-list" ng-click="vm.New(Form)"
+                    ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    {{'0005' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-warning button-list" ng-click="vm.Edit()"
+                    ng-disabled="vm.isDisabledEdit">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006'
+                    | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary button-list" ng-click="vm.save(Form)" ng-disabled="!Form.$valid || vm.isDisabledSave ||
+                    vm.Detail.laboratorytype == '' ||
+                    vm.Detail.minimumTemperature>=vm.Detail.maximumTemperature
+                    && vm.temperature">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" ng-click="vm.cancel(Form)"
+                    ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008'
+                    | translate}}
+                  </button>
+                  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                    ng-disabled="vm.isDisabledPrint">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009'
+                    | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5 col-md-offset-3">
+                                <a ng-click="close('No')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/Recipiente.png">
+                                    <h6 class="text-center"> {{'0046' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

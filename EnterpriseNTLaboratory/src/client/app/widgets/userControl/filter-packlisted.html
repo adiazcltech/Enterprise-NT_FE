@@ -1,0 +1,25 @@
+  <fieldset class="fieldset uk-width-1-1 ">
+     <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+        <input  type="checkbox" name="filterPackages{{filterpacklisted.id}}" id="filterPackages{{filterpacklisted.id}}" ng-model="filterpacklisted.isPackage" ng-focus = "filterpacklisted.checkPackage()" ng-show="filterpacklisted.viewPackage" />
+        <label for="filterPackages{{filterpacklisted.id}}" ng-click = "filterpacklisted.checkPackage()" ng-show="filterpacklisted.viewPackage">{{'0092' | translate}}</label>
+
+        <input type="radio" name="filterListeds{{filterpacklisted.id}}" id="filterListeds_1{{filterpacklisted.id}}" value="0" checked ng-focus="filterpacklisted.clickFilterListed(0)" ng-show="filterpacklisted.viewListedNormal"/>
+        <label for="filterListeds_1{{filterpacklisted.id}}" ng-click="filterpacklisted.clickFilterListed(0)" ng-show="filterpacklisted.viewListedNormal">{{'0093' | translate}}</label>
+
+        <input type="radio" name="filterListeds{{filterpacklisted.id}}" id="filterListeds_2{{filterpacklisted.id}}" value="1" ng-focus="filterpacklisted.clickFilterListed(1)" ng-show="filterpacklisted.viewListedAreas"/>
+        <label for="filterListeds_2{{filterpacklisted.id}}" ng-click="filterpacklisted.clickFilterListed(1)" ng-show="filterpacklisted.viewListedAreas">{{'0094' | translate}}</label>
+
+        <input type="radio" name="filterListeds{{filterpacklisted.id}}" id="filterListeds_3{{filterpacklisted.id}}" value="2" ng-focus="filterpacklisted.clickFilterListed(2)" ng-show="filterpacklisted.viewListedTests"/>
+        <label for="filterListeds_3{{filterpacklisted.id}}" ng-click="filterpacklisted.clickFilterListed(2)" ng-show="filterpacklisted.viewListedTests">{{'0095' | translate}}</label>
+
+        <input type="radio" name="filterListeds{{filterpacklisted.id}}" id="filterListeds_4{{filterpacklisted.id}}" value="3" ng-focus="filterpacklisted.clickFilterListed(3)" ng-show="filterpacklisted.viewListedNotGroup"/>
+        <label for="filterListeds_4{{filterpacklisted.id}}" ng-click="filterpacklisted.clickFilterListed(3)" ng-show="filterpacklisted.viewListedNotGroup">{{'0096' | translate}}</label>
+
+        <input type="radio" name="filterListeds{{filterpacklisted.id}}" id="filterListeds_5{{filterpacklisted.id}}" value="4" ng-focus="filterpacklisted.clickFilterListed(4)" ng-show="filterpacklisted.viewListedContainers"/>
+        <label for="filterListeds_5{{filterpacklisted.id}}" ng-click="filterpacklisted.clickFilterListed(4)" ng-show="filterpacklisted.viewListedContainers">{{'0186' | translate}}</label>        
+
+        <input type="radio" name="filterListeds{{filterpacklisted.id}}" id="filterListeds_6{{filterpacklisted.id}}" value="5" checked ng-focus="filterpacklisted.clickFilterListed(5)" ng-show="filterpacklisted.viewListedSamples"/>
+        <label for="filterListeds_6{{filterpacklisted.id}}" ng-click="filterpacklisted.clickFilterListed(5)" ng-show="filterpacklisted.viewListedSamples">{{'0185' | translate}}</label>
+
+     </div>
+ </fieldset>  

@@ -1,0 +1,1450 @@
+/*!
+
+ =========================================================
+ * Paper Bootstrap Wizard - v1.0.2
+ =========================================================
+ 
+ * Product Page: https://www.creative-tim.com/product/paper-bootstrap-wizard
+ * Copyright 2017 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/paper-bootstrap-wizard/blob/master/LICENSE.md)
+ 
+ =========================================================
+ 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
+ 
+ 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Muli', 'Helvetica', Arial, sans-serif;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  font-weight: 400;
+  margin: 30px 0 15px;
+}
+
+h1, .h1 {
+  font-size: 3.2em;
+}
+
+h2, .h2 {
+  font-size: 2.6em;
+}
+
+h3, .h3 {
+  font-size: 1.825em;
+  line-height: 1.4;
+  margin: 20px 0 10px;
+}
+
+h4, .h4 {
+  font-size: 1.5em;
+  font-weight: 600;
+  line-height: 1.2em;
+}
+
+h5, .h5 {
+  font-size: 1.25em;
+  font-weight: 400;
+  line-height: 1.4em;
+  margin-bottom: 15px;
+}
+
+h6, .h6 {
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.4em;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+  color: #9A9A9A;
+  font-weight: 300;
+  line-height: 1.4em;
+}
+
+h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
+  font-size: 60%;
+}
+
+.form-control::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.form-control:-moz-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.form-control::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.form-control:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+  background-color: #F3F2EE;
+  border: 1px solid #e8e7e3;
+  border-radius: 4px;
+  color: #66615b;
+  font-size: 14px;
+  padding: 6px 12px;
+  height: 31px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.form-control:focus {
+  border: 1px solid #e8e7e3;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0 !important;
+}
+.has-success .form-control, .has-error .form-control, .has-success .form-control:focus, .has-error .form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.has-error .form-control, .form-control.error {
+  background-color: #FFC0A4;
+  color: #EB5E28;
+  border-color: #EB5E28;
+}
+.has-success .form-control, .form-control.valid {
+  color: #66615b;
+  border-color: #e8e7e3;
+}
+.has-error .form-control:focus, .form-control.error:focus {
+  background-color: #FFFFFF;
+  border-color: #EB5E28;
+}
+.has-success .form-control:focus, .form-control.valid:focus {
+  background-color: #FFFFFF;
+  border-color: #7AC29A;
+}
+.form-control + .form-control-feedback {
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: -7px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  vertical-align: middle;
+}
+.open .form-control {
+  border-bottom-color: transparent;
+}
+.form-control.input-no-border {
+  border: 0 none;
+}
+.input-group .form-control:not(:first-child):not(:last-child) {
+  border-left: 0;
+  border-right: 0;
+}
+
+label.error:not(.form-control) {
+  color: #EB5E28;
+  font-weight: 300;
+  font-size: 0.8em;
+}
+
+.input-lg {
+  height: 55px;
+  padding: 11px 30px;
+}
+
+.has-error .form-control-feedback, .has-error .control-label {
+  color: #EB5E28;
+}
+
+.has-success .form-control-feedback, .has-success .control-label {
+  color: #7AC29A;
+}
+
+.input-group-addon {
+  background-color: #F3F2EE;
+  border: 1px solid #e8e7e3;
+  border-radius: 4px;
+}
+.has-success .input-group-addon, .has-error .input-group-addon {
+  background-color: #FFFFFF;
+}
+.has-error .form-control:focus + .input-group-addon {
+  color: #EB5E28;
+}
+.has-success .form-control:focus + .input-group-addon {
+  color: #7AC29A;
+}
+.form-control:focus + .input-group-addon, .form-control:focus ~ .input-group-addon {
+  background-color: #FFFFFF;
+}
+.has-error .input-group-addon {
+  color: #EB5E28;
+  border-color: #EB5E28;
+}
+.has-error .input-group-addon {
+  color: #7AC29A;
+  border-color: #7AC29A;
+}
+.input-group-addon + .form-control {
+  padding-left: 0;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group[disabled] .input-group-addon {
+  background-color: #E3E3E3;
+}
+
+.input-group .form-control:first-child,
+.input-group-addon:first-child,
+.input-group-btnconfigureconfigure:first-child > .dropdown-toggle,
+.input-group-btnconfigureconfigure:last-child > .btnconfigureconfigure:not(:last-child):not(.dropdown-toggle) {
+  border-right: 0 none;
+}
+
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btnconfigureconfigure:last-child > .dropdown-toggle,
+.input-group-btnconfigureconfigure:first-child > .btnconfigureconfigure:not(:first-child) {
+  border-left: 0 none;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  background-color: #E3E3E3;
+  cursor: not-allowed;
+  color: #9A9A9A;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.form-control[disabled]::-moz-placeholder {
+  color: #9A9A9A;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.form-control[disabled]:-moz-placeholder {
+  color: #cfcfca;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.form-control[disabled]::-webkit-input-placeholder {
+  color: #cfcfca;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.form-control[disabled]:-ms-input-placeholder {
+  color: #cfcfca;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.input-group-btnconfigureconfigure .btnconfigureconfigure {
+  border-width: 1px;
+  padding: 9px 18px;
+}
+
+.input-group-btnconfigureconfigure .btnconfigureconfigure-default:not(.btnconfigureconfigure-fill) {
+  border-color: #cfcfca;
+}
+
+.input-group-btnconfigureconfigure:last-child > .btnconfigureconfigure {
+  margin-left: 0;
+}
+
+textarea.form-control {
+  max-width: 100%;
+  padding: 10px 18px;
+  resize: none;
+}
+
+.input-group-focus .input-group-addon {
+  background-color: #FFFFFF;
+}
+
+/*     General overwrite     */
+body {
+  color: #66615b;
+  font-size: 14px;
+  font-family: 'Muli', Arial, sans-serif;
+}
+
+a {
+  color: #2CA8FF;
+}
+
+a:hover, a:focus {
+  color: #109CFF;
+}
+
+a:focus, a:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner,
+input[type="button"]:focus {
+  outline: 0 !important;
+}
+
+.btnconfigureconfigure:focus,
+.btnconfigureconfigure:hover,
+.btnconfigureconfigure:active {
+  outline: 0;
+}
+
+/*           Animations              */
+.form-control, .input-group-addon {
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+.image-container {
+  min-height: 100vh;
+  background-position: center center;
+  background-size: cover;
+}
+
+.wizard-container {
+  padding-top: 100px;
+  z-index: 3;
+}
+
+.made-with-pk {
+  width: 50px;
+  height: 50px;
+  display: block;
+  position: fixed;
+  z-index: 555;
+  bottom: 40px;
+  right: 40px;
+  border-radius: 30px;
+  background-color: rgba(16, 16, 16, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 10px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+  -moz-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+  -o-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+  transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+}
+.made-with-pk:hover, .made-with-pk:active, .made-with-pk:focus {
+  width: 218px;
+  color: #FFFFFF;
+  transition-duration: .55s;
+  padding: 10px 19px;
+}
+.made-with-pk:hover .made-with, .made-with-pk:active .made-with, .made-with-pk:focus .made-with {
+  opacity: 1;
+}
+.made-with-pk .brand,
+.made-with-pk .made-with {
+  float: left;
+}
+.made-with-pk .brand {
+  position: relative;
+  top: 4px;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 600;
+}
+.made-with-pk .made-with {
+  color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  left: 58px;
+  top: 14px;
+  opacity: 0;
+  margin: 0;
+  -webkit-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+  -moz-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+  -o-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+  transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
+}
+.made-with-pk .made-with strong {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.col-sm-8 .col-sm-4 {
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+.btnconfigureconfigure,
+.navbar .navbar-nav > li > a.btnconfigureconfigure {
+  border-radius: 20px;
+  box-sizing: border-box;
+  border-width: 2px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-color: #66615B;
+  color: #66615B;
+  -webkit-transition: all 150ms linear;
+  -moz-transition: all 150ms linear;
+  -o-transition: all 150ms linear;
+  -ms-transition: all 150ms linear;
+  transition: all 150ms linear;
+}
+.btnconfigureconfigure:hover, .btnconfigureconfigure:focus, .btnconfigureconfigure:active, .btnconfigureconfigure.active, .btnconfigureconfigure:active:focus, .btnconfigureconfigure:active:hover, .open > .btnconfigureconfigure.dropdown-toggle, .open > .btnconfigureconfigure.dropdown-toggle:focus, .open > .btnconfigureconfigure.dropdown-toggle:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active:hover, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle:focus, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle:hover {
+  background-color: #66615B;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #66615B;
+}
+.btnconfigureconfigure:hover .caret, .btnconfigureconfigure:focus .caret, .btnconfigureconfigure:active .caret, .btnconfigureconfigure.active .caret, .btnconfigureconfigure:active:focus .caret, .btnconfigureconfigure:active:hover .caret, .open > .btnconfigureconfigure.dropdown-toggle .caret, .open > .btnconfigureconfigure.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure.dropdown-toggle:hover .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:hover .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:focus .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.active .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active:focus .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active:hover .caret, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle .caret, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle:focus .caret, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.btnconfigureconfigure.disabled, .btnconfigureconfigure.disabled:hover, .btnconfigureconfigure.disabled:focus, .btnconfigureconfigure.disabled.focus, .btnconfigureconfigure.disabled:active, .btnconfigureconfigure.disabled.active, .btnconfigureconfigure:disabled, .btnconfigureconfigure:disabled:hover, .btnconfigureconfigure:disabled:focus, .btnconfigureconfigure:disabled.focus, .btnconfigureconfigure:disabled:active, .btnconfigureconfigure:disabled.active, .btnconfigureconfigure[disabled], .btnconfigureconfigure[disabled]:hover, .btnconfigureconfigure[disabled]:focus, .btnconfigureconfigure[disabled].focus, .btnconfigureconfigure[disabled]:active, .btnconfigureconfigure[disabled].active, fieldset[disabled] .btnconfigureconfigure, fieldset[disabled] .btnconfigureconfigure:hover, fieldset[disabled] .btnconfigureconfigure:focus, fieldset[disabled] .btnconfigureconfigure.focus, fieldset[disabled] .btnconfigureconfigure:active, fieldset[disabled] .btnconfigureconfigure.active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.disabled,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.disabled:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.disabled:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.disabled.focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.disabled:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.disabled.active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:disabled,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:disabled:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:disabled:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:disabled.focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:disabled:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:disabled.active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure[disabled],
+.navbar .navbar-nav > li > a.btnconfigureconfigure[disabled]:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure[disabled]:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure[disabled].focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure[disabled]:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure[disabled].active, fieldset[disabled]
+.navbar .navbar-nav > li > a.btnconfigureconfigure, fieldset[disabled]
+.navbar .navbar-nav > li > a.btnconfigureconfigure:hover, fieldset[disabled]
+.navbar .navbar-nav > li > a.btnconfigureconfigure:focus, fieldset[disabled]
+.navbar .navbar-nav > li > a.btnconfigureconfigure.focus, fieldset[disabled]
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active, fieldset[disabled]
+.navbar .navbar-nav > li > a.btnconfigureconfigure.active {
+  background-color: transparent;
+  border-color: #66615B;
+  color: rgba(80, 80, 80, 1);
+}
+.btnconfigureconfigure.btnconfigureconfigure-fill,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #66615B;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.btnconfigureconfigure.btnconfigureconfigure-fill:hover, .btnconfigureconfigure.btnconfigureconfigure-fill:focus, .btnconfigureconfigure.btnconfigureconfigure-fill:active, .btnconfigureconfigure.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure.btnconfigureconfigure-fill.dropdown-toggle,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill.active, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #484541;
+  color: #FFFFFF;
+  border-color: #484541;
+}
+.btnconfigureconfigure.btnconfigureconfigure-fill .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.btnconfigureconfigure.btnconfigureconfigure-simple:hover, .btnconfigureconfigure.btnconfigureconfigure-simple:focus, .btnconfigureconfigure.btnconfigureconfigure-simple:active, .btnconfigureconfigure.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure.btnconfigureconfigure-simple.dropdown-toggle,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-simple:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-simple:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-simple:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-simple.active, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #484541;
+}
+.btnconfigureconfigure.btnconfigureconfigure-simple .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.btnconfigureconfigure .caret,
+.navbar .navbar-nav > li > a.btnconfigureconfigure .caret {
+  border-top-color: #66615B;
+}
+.btnconfigureconfigure:hover, .btnconfigureconfigure:focus,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:hover,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:focus {
+  outline: 0 !important;
+}
+.btnconfigureconfigure:active, .btnconfigureconfigure.active, .open > .btnconfigureconfigure.dropdown-toggle,
+.navbar .navbar-nav > li > a.btnconfigureconfigure:active,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.active, .open >
+.navbar .navbar-nav > li > a.btnconfigureconfigure.dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0 !important;
+}
+.btnconfigureconfigure.btnconfigureconfigure-icon,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-icon {
+  border-radius: 25px;
+  padding: 7px 10px;
+}
+.btnconfigureconfigure.btnconfigureconfigure-icon i,
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-icon i {
+  margin-right: 0px;
+}
+.btnconfigureconfigure [class*="ti-"],
+.navbar .navbar-nav > li > a.btnconfigureconfigure [class*="ti-"] {
+  vertical-align: middle;
+}
+
+.btnconfigureconfigure-group .btnconfigureconfigure + .btnconfigureconfigure,
+.btnconfigureconfigure-group .btnconfigureconfigure + .btnconfigureconfigure-group,
+.btnconfigureconfigure-group .btnconfigureconfigure-group + .btnconfigureconfigure,
+.btnconfigureconfigure-group .btnconfigureconfigure-group + .btnconfigureconfigure-group {
+  margin-left: -2px;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary, .btnconfigureconfigure-primary {
+  border-color: #7A9E9F;
+  color: #7A9E9F;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active:hover, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.dropdown-toggle, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.dropdown-toggle:focus, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.dropdown-toggle:hover, .btnconfigureconfigure-primary:hover, .btnconfigureconfigure-primary:focus, .btnconfigureconfigure-primary:active, .btnconfigureconfigure-primary.active, .btnconfigureconfigure-primary:active:focus, .btnconfigureconfigure-primary:active:hover, .open > .btnconfigureconfigure-primary.dropdown-toggle, .open > .btnconfigureconfigure-primary.dropdown-toggle:focus, .open > .btnconfigureconfigure-primary.dropdown-toggle:hover {
+  background-color: #7A9E9F;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #7A9E9F;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:hover .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active:hover .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.dropdown-toggle .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.dropdown-toggle:focus .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.dropdown-toggle:hover .caret, .btnconfigureconfigure-primary:hover .caret, .btnconfigureconfigure-primary:focus .caret, .btnconfigureconfigure-primary:active .caret, .btnconfigureconfigure-primary.active .caret, .btnconfigureconfigure-primary:active:focus .caret, .btnconfigureconfigure-primary:active:hover .caret, .open > .btnconfigureconfigure-primary.dropdown-toggle .caret, .open > .btnconfigureconfigure-primary.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure-primary.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary[disabled], .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary[disabled]:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary[disabled]:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary[disabled].focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary[disabled]:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary[disabled].active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:hover, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary:active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.active, .btnconfigureconfigure-primary.disabled, .btnconfigureconfigure-primary.disabled:hover, .btnconfigureconfigure-primary.disabled:focus, .btnconfigureconfigure-primary.disabled.focus, .btnconfigureconfigure-primary.disabled:active, .btnconfigureconfigure-primary.disabled.active, .btnconfigureconfigure-primary:disabled, .btnconfigureconfigure-primary:disabled:hover, .btnconfigureconfigure-primary:disabled:focus, .btnconfigureconfigure-primary:disabled.focus, .btnconfigureconfigure-primary:disabled:active, .btnconfigureconfigure-primary:disabled.active, .btnconfigureconfigure-primary[disabled], .btnconfigureconfigure-primary[disabled]:hover, .btnconfigureconfigure-primary[disabled]:focus, .btnconfigureconfigure-primary[disabled].focus, .btnconfigureconfigure-primary[disabled]:active, .btnconfigureconfigure-primary[disabled].active, fieldset[disabled] .btnconfigureconfigure-primary, fieldset[disabled] .btnconfigureconfigure-primary:hover, fieldset[disabled] .btnconfigureconfigure-primary:focus, fieldset[disabled] .btnconfigureconfigure-primary.focus, fieldset[disabled] .btnconfigureconfigure-primary:active, fieldset[disabled] .btnconfigureconfigure-primary.active {
+  background-color: transparent;
+  border-color: #7A9E9F;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill, .btnconfigureconfigure-primary.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #7A9E9F;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill.dropdown-toggle, .btnconfigureconfigure-primary.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-primary.btnconfigureconfigure-fill:focus, .btnconfigureconfigure-primary.btnconfigureconfigure-fill:active, .btnconfigureconfigure-primary.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure-primary.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #5e8283;
+  color: #FFFFFF;
+  border-color: #5e8283;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-fill .caret, .btnconfigureconfigure-primary.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-simple:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-simple:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-simple:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-simple.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-simple.dropdown-toggle, .btnconfigureconfigure-primary.btnconfigureconfigure-simple:hover, .btnconfigureconfigure-primary.btnconfigureconfigure-simple:focus, .btnconfigureconfigure-primary.btnconfigureconfigure-simple:active, .btnconfigureconfigure-primary.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure-primary.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #5e8283;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary.btnconfigureconfigure-simple .caret, .btnconfigureconfigure-primary.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-primary .caret, .btnconfigureconfigure-primary .caret {
+  border-top-color: #7A9E9F;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success, .btnconfigureconfigure-success {
+  border-color: #7AC29A;
+  color: #7AC29A;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active:hover, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.dropdown-toggle, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.dropdown-toggle:focus, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.dropdown-toggle:hover, .btnconfigureconfigure-success:hover, .btnconfigureconfigure-success:focus, .btnconfigureconfigure-success:active, .btnconfigureconfigure-success.active, .btnconfigureconfigure-success:active:focus, .btnconfigureconfigure-success:active:hover, .open > .btnconfigureconfigure-success.dropdown-toggle, .open > .btnconfigureconfigure-success.dropdown-toggle:focus, .open > .btnconfigureconfigure-success.dropdown-toggle:hover {
+  background-color: #7AC29A;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #7AC29A;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:hover .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active:hover .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.dropdown-toggle .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.dropdown-toggle:focus .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.dropdown-toggle:hover .caret, .btnconfigureconfigure-success:hover .caret, .btnconfigureconfigure-success:focus .caret, .btnconfigureconfigure-success:active .caret, .btnconfigureconfigure-success.active .caret, .btnconfigureconfigure-success:active:focus .caret, .btnconfigureconfigure-success:active:hover .caret, .open > .btnconfigureconfigure-success.dropdown-toggle .caret, .open > .btnconfigureconfigure-success.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure-success.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success[disabled], .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success[disabled]:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success[disabled]:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success[disabled].focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success[disabled]:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success[disabled].active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:hover, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success:active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.active, .btnconfigureconfigure-success.disabled, .btnconfigureconfigure-success.disabled:hover, .btnconfigureconfigure-success.disabled:focus, .btnconfigureconfigure-success.disabled.focus, .btnconfigureconfigure-success.disabled:active, .btnconfigureconfigure-success.disabled.active, .btnconfigureconfigure-success:disabled, .btnconfigureconfigure-success:disabled:hover, .btnconfigureconfigure-success:disabled:focus, .btnconfigureconfigure-success:disabled.focus, .btnconfigureconfigure-success:disabled:active, .btnconfigureconfigure-success:disabled.active, .btnconfigureconfigure-success[disabled], .btnconfigureconfigure-success[disabled]:hover, .btnconfigureconfigure-success[disabled]:focus, .btnconfigureconfigure-success[disabled].focus, .btnconfigureconfigure-success[disabled]:active, .btnconfigureconfigure-success[disabled].active, fieldset[disabled] .btnconfigureconfigure-success, fieldset[disabled] .btnconfigureconfigure-success:hover, fieldset[disabled] .btnconfigureconfigure-success:focus, fieldset[disabled] .btnconfigureconfigure-success.focus, fieldset[disabled] .btnconfigureconfigure-success:active, fieldset[disabled] .btnconfigureconfigure-success.active {
+  background-color: transparent;
+  border-color: #7AC29A;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill, .btnconfigureconfigure-success.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #7AC29A;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill.dropdown-toggle, .btnconfigureconfigure-success.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-success.btnconfigureconfigure-fill:focus, .btnconfigureconfigure-success.btnconfigureconfigure-fill:active, .btnconfigureconfigure-success.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure-success.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #54b07d;
+  color: #FFFFFF;
+  border-color: #54b07d;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-fill .caret, .btnconfigureconfigure-success.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-simple:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-simple:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-simple:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-simple.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-simple.dropdown-toggle, .btnconfigureconfigure-success.btnconfigureconfigure-simple:hover, .btnconfigureconfigure-success.btnconfigureconfigure-simple:focus, .btnconfigureconfigure-success.btnconfigureconfigure-simple:active, .btnconfigureconfigure-success.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure-success.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #54b07d;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success.btnconfigureconfigure-simple .caret, .btnconfigureconfigure-success.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-success .caret, .btnconfigureconfigure-success .caret {
+  border-top-color: #7AC29A;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info, .btnconfigureconfigure-info {
+  border-color: #68B3C8;
+  color: #68B3C8;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active:hover, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.dropdown-toggle, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.dropdown-toggle:focus, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.dropdown-toggle:hover, .btnconfigureconfigure-info:hover, .btnconfigureconfigure-info:focus, .btnconfigureconfigure-info:active, .btnconfigureconfigure-info.active, .btnconfigureconfigure-info:active:focus, .btnconfigureconfigure-info:active:hover, .open > .btnconfigureconfigure-info.dropdown-toggle, .open > .btnconfigureconfigure-info.dropdown-toggle:focus, .open > .btnconfigureconfigure-info.dropdown-toggle:hover {
+  background-color: #68B3C8;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #68B3C8;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:hover .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active:hover .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.dropdown-toggle .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.dropdown-toggle:focus .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.dropdown-toggle:hover .caret, .btnconfigureconfigure-info:hover .caret, .btnconfigureconfigure-info:focus .caret, .btnconfigureconfigure-info:active .caret, .btnconfigureconfigure-info.active .caret, .btnconfigureconfigure-info:active:focus .caret, .btnconfigureconfigure-info:active:hover .caret, .open > .btnconfigureconfigure-info.dropdown-toggle .caret, .open > .btnconfigureconfigure-info.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure-info.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info[disabled], .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info[disabled]:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info[disabled]:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info[disabled].focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info[disabled]:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info[disabled].active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:hover, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info:active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.active, .btnconfigureconfigure-info.disabled, .btnconfigureconfigure-info.disabled:hover, .btnconfigureconfigure-info.disabled:focus, .btnconfigureconfigure-info.disabled.focus, .btnconfigureconfigure-info.disabled:active, .btnconfigureconfigure-info.disabled.active, .btnconfigureconfigure-info:disabled, .btnconfigureconfigure-info:disabled:hover, .btnconfigureconfigure-info:disabled:focus, .btnconfigureconfigure-info:disabled.focus, .btnconfigureconfigure-info:disabled:active, .btnconfigureconfigure-info:disabled.active, .btnconfigureconfigure-info[disabled], .btnconfigureconfigure-info[disabled]:hover, .btnconfigureconfigure-info[disabled]:focus, .btnconfigureconfigure-info[disabled].focus, .btnconfigureconfigure-info[disabled]:active, .btnconfigureconfigure-info[disabled].active, fieldset[disabled] .btnconfigureconfigure-info, fieldset[disabled] .btnconfigureconfigure-info:hover, fieldset[disabled] .btnconfigureconfigure-info:focus, fieldset[disabled] .btnconfigureconfigure-info.focus, fieldset[disabled] .btnconfigureconfigure-info:active, fieldset[disabled] .btnconfigureconfigure-info.active {
+  background-color: transparent;
+  border-color: #68B3C8;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill, .btnconfigureconfigure-info.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #68B3C8;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill.dropdown-toggle, .btnconfigureconfigure-info.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-info.btnconfigureconfigure-fill:focus, .btnconfigureconfigure-info.btnconfigureconfigure-fill:active, .btnconfigureconfigure-info.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure-info.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #429cb6;
+  color: #FFFFFF;
+  border-color: #429cb6;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-fill .caret, .btnconfigureconfigure-info.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-simple:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-simple:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-simple:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-simple.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-simple.dropdown-toggle, .btnconfigureconfigure-info.btnconfigureconfigure-simple:hover, .btnconfigureconfigure-info.btnconfigureconfigure-simple:focus, .btnconfigureconfigure-info.btnconfigureconfigure-simple:active, .btnconfigureconfigure-info.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure-info.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #429cb6;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info.btnconfigureconfigure-simple .caret, .btnconfigureconfigure-info.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-info .caret, .btnconfigureconfigure-info .caret {
+  border-top-color: #68B3C8;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning, .btnconfigureconfigure-warning {
+  border-color: #F3BB45;
+  color: #F3BB45;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active:hover, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.dropdown-toggle, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.dropdown-toggle:focus, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.dropdown-toggle:hover, .btnconfigureconfigure-warning:hover, .btnconfigureconfigure-warning:focus, .btnconfigureconfigure-warning:active, .btnconfigureconfigure-warning.active, .btnconfigureconfigure-warning:active:focus, .btnconfigureconfigure-warning:active:hover, .open > .btnconfigureconfigure-warning.dropdown-toggle, .open > .btnconfigureconfigure-warning.dropdown-toggle:focus, .open > .btnconfigureconfigure-warning.dropdown-toggle:hover {
+  background-color: #F3BB45;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #F3BB45;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:hover .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active:hover .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.dropdown-toggle .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.dropdown-toggle:focus .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.dropdown-toggle:hover .caret, .btnconfigureconfigure-warning:hover .caret, .btnconfigureconfigure-warning:focus .caret, .btnconfigureconfigure-warning:active .caret, .btnconfigureconfigure-warning.active .caret, .btnconfigureconfigure-warning:active:focus .caret, .btnconfigureconfigure-warning:active:hover .caret, .open > .btnconfigureconfigure-warning.dropdown-toggle .caret, .open > .btnconfigureconfigure-warning.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure-warning.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning[disabled], .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning[disabled]:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning[disabled]:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning[disabled].focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning[disabled]:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning[disabled].active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:hover, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning:active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.active, .btnconfigureconfigure-warning.disabled, .btnconfigureconfigure-warning.disabled:hover, .btnconfigureconfigure-warning.disabled:focus, .btnconfigureconfigure-warning.disabled.focus, .btnconfigureconfigure-warning.disabled:active, .btnconfigureconfigure-warning.disabled.active, .btnconfigureconfigure-warning:disabled, .btnconfigureconfigure-warning:disabled:hover, .btnconfigureconfigure-warning:disabled:focus, .btnconfigureconfigure-warning:disabled.focus, .btnconfigureconfigure-warning:disabled:active, .btnconfigureconfigure-warning:disabled.active, .btnconfigureconfigure-warning[disabled], .btnconfigureconfigure-warning[disabled]:hover, .btnconfigureconfigure-warning[disabled]:focus, .btnconfigureconfigure-warning[disabled].focus, .btnconfigureconfigure-warning[disabled]:active, .btnconfigureconfigure-warning[disabled].active, fieldset[disabled] .btnconfigureconfigure-warning, fieldset[disabled] .btnconfigureconfigure-warning:hover, fieldset[disabled] .btnconfigureconfigure-warning:focus, fieldset[disabled] .btnconfigureconfigure-warning.focus, fieldset[disabled] .btnconfigureconfigure-warning:active, fieldset[disabled] .btnconfigureconfigure-warning.active {
+  background-color: transparent;
+  border-color: #F3BB45;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill, .btnconfigureconfigure-warning.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #F3BB45;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill.dropdown-toggle, .btnconfigureconfigure-warning.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-warning.btnconfigureconfigure-fill:focus, .btnconfigureconfigure-warning.btnconfigureconfigure-fill:active, .btnconfigureconfigure-warning.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure-warning.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #f0a810;
+  color: #FFFFFF;
+  border-color: #f0a810;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-fill .caret, .btnconfigureconfigure-warning.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-simple:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-simple:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-simple:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-simple.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-simple.dropdown-toggle, .btnconfigureconfigure-warning.btnconfigureconfigure-simple:hover, .btnconfigureconfigure-warning.btnconfigureconfigure-simple:focus, .btnconfigureconfigure-warning.btnconfigureconfigure-simple:active, .btnconfigureconfigure-warning.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure-warning.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #f0a810;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning.btnconfigureconfigure-simple .caret, .btnconfigureconfigure-warning.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-warning .caret, .btnconfigureconfigure-warning .caret {
+  border-top-color: #F3BB45;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger, .btnconfigureconfigure-danger {
+  border-color: #EB5E28;
+  color: #EB5E28;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active:hover, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.dropdown-toggle, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.dropdown-toggle:focus, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.dropdown-toggle:hover, .btnconfigureconfigure-danger:hover, .btnconfigureconfigure-danger:focus, .btnconfigureconfigure-danger:active, .btnconfigureconfigure-danger.active, .btnconfigureconfigure-danger:active:focus, .btnconfigureconfigure-danger:active:hover, .open > .btnconfigureconfigure-danger.dropdown-toggle, .open > .btnconfigureconfigure-danger.dropdown-toggle:focus, .open > .btnconfigureconfigure-danger.dropdown-toggle:hover {
+  background-color: #EB5E28;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #EB5E28;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:hover .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.active .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active:focus .caret, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active:hover .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.dropdown-toggle .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.dropdown-toggle:focus .caret, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.dropdown-toggle:hover .caret, .btnconfigureconfigure-danger:hover .caret, .btnconfigureconfigure-danger:focus .caret, .btnconfigureconfigure-danger:active .caret, .btnconfigureconfigure-danger.active .caret, .btnconfigureconfigure-danger:active:focus .caret, .btnconfigureconfigure-danger:active:hover .caret, .open > .btnconfigureconfigure-danger.dropdown-toggle .caret, .open > .btnconfigureconfigure-danger.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure-danger.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:disabled, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:disabled:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:disabled:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:disabled.focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:disabled:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:disabled.active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger[disabled], .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger[disabled]:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger[disabled]:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger[disabled].focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger[disabled]:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger[disabled].active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:hover, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.focus, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger:active, fieldset[disabled] .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.active, .btnconfigureconfigure-danger.disabled, .btnconfigureconfigure-danger.disabled:hover, .btnconfigureconfigure-danger.disabled:focus, .btnconfigureconfigure-danger.disabled.focus, .btnconfigureconfigure-danger.disabled:active, .btnconfigureconfigure-danger.disabled.active, .btnconfigureconfigure-danger:disabled, .btnconfigureconfigure-danger:disabled:hover, .btnconfigureconfigure-danger:disabled:focus, .btnconfigureconfigure-danger:disabled.focus, .btnconfigureconfigure-danger:disabled:active, .btnconfigureconfigure-danger:disabled.active, .btnconfigureconfigure-danger[disabled], .btnconfigureconfigure-danger[disabled]:hover, .btnconfigureconfigure-danger[disabled]:focus, .btnconfigureconfigure-danger[disabled].focus, .btnconfigureconfigure-danger[disabled]:active, .btnconfigureconfigure-danger[disabled].active, fieldset[disabled] .btnconfigureconfigure-danger, fieldset[disabled] .btnconfigureconfigure-danger:hover, fieldset[disabled] .btnconfigureconfigure-danger:focus, fieldset[disabled] .btnconfigureconfigure-danger.focus, fieldset[disabled] .btnconfigureconfigure-danger:active, fieldset[disabled] .btnconfigureconfigure-danger.active {
+  background-color: transparent;
+  border-color: #EB5E28;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill, .btnconfigureconfigure-danger.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #EB5E28;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill.dropdown-toggle, .btnconfigureconfigure-danger.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-danger.btnconfigureconfigure-fill:focus, .btnconfigureconfigure-danger.btnconfigureconfigure-fill:active, .btnconfigureconfigure-danger.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure-danger.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #c84513;
+  color: #FFFFFF;
+  border-color: #c84513;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-fill .caret, .btnconfigureconfigure-danger.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-simple:hover, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-simple:focus, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-simple:active, .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-simple.active, .open > .navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-simple.dropdown-toggle, .btnconfigureconfigure-danger.btnconfigureconfigure-simple:hover, .btnconfigureconfigure-danger.btnconfigureconfigure-simple:focus, .btnconfigureconfigure-danger.btnconfigureconfigure-simple:active, .btnconfigureconfigure-danger.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure-danger.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #c84513;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger.btnconfigureconfigure-simple .caret, .btnconfigureconfigure-danger.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-danger .caret, .btnconfigureconfigure-danger .caret {
+  border-top-color: #EB5E28;
+}
+
+.btnconfigureconfigure-neutral {
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral:hover, .btnconfigureconfigure-neutral:focus, .btnconfigureconfigure-neutral:active, .btnconfigureconfigure-neutral.active, .btnconfigureconfigure-neutral:active:focus, .btnconfigureconfigure-neutral:active:hover, .open > .btnconfigureconfigure-neutral.dropdown-toggle, .open > .btnconfigureconfigure-neutral.dropdown-toggle:focus, .open > .btnconfigureconfigure-neutral.dropdown-toggle:hover {
+  background-color: #FFFFFF;
+  color: rgba(255, 255, 255, 0.85);
+  border-color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral:hover .caret, .btnconfigureconfigure-neutral:focus .caret, .btnconfigureconfigure-neutral:active .caret, .btnconfigureconfigure-neutral.active .caret, .btnconfigureconfigure-neutral:active:focus .caret, .btnconfigureconfigure-neutral:active:hover .caret, .open > .btnconfigureconfigure-neutral.dropdown-toggle .caret, .open > .btnconfigureconfigure-neutral.dropdown-toggle:focus .caret, .open > .btnconfigureconfigure-neutral.dropdown-toggle:hover .caret {
+  border-top-color: rgba(255, 255, 255, 0.85);
+}
+.btnconfigureconfigure-neutral.disabled, .btnconfigureconfigure-neutral.disabled:hover, .btnconfigureconfigure-neutral.disabled:focus, .btnconfigureconfigure-neutral.disabled.focus, .btnconfigureconfigure-neutral.disabled:active, .btnconfigureconfigure-neutral.disabled.active, .btnconfigureconfigure-neutral:disabled, .btnconfigureconfigure-neutral:disabled:hover, .btnconfigureconfigure-neutral:disabled:focus, .btnconfigureconfigure-neutral:disabled.focus, .btnconfigureconfigure-neutral:disabled:active, .btnconfigureconfigure-neutral:disabled.active, .btnconfigureconfigure-neutral[disabled], .btnconfigureconfigure-neutral[disabled]:hover, .btnconfigureconfigure-neutral[disabled]:focus, .btnconfigureconfigure-neutral[disabled].focus, .btnconfigureconfigure-neutral[disabled]:active, .btnconfigureconfigure-neutral[disabled].active, fieldset[disabled] .btnconfigureconfigure-neutral, fieldset[disabled] .btnconfigureconfigure-neutral:hover, fieldset[disabled] .btnconfigureconfigure-neutral:focus, fieldset[disabled] .btnconfigureconfigure-neutral.focus, fieldset[disabled] .btnconfigureconfigure-neutral:active, fieldset[disabled] .btnconfigureconfigure-neutral.active {
+  background-color: transparent;
+  border-color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill {
+  color: #FFFFFF;
+  background-color: #FFFFFF;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-neutral.btnconfigureconfigure-fill:focus, .btnconfigureconfigure-neutral.btnconfigureconfigure-fill:active, .btnconfigureconfigure-neutral.btnconfigureconfigure-fill.active, .open > .btnconfigureconfigure-neutral.btnconfigureconfigure-fill.dropdown-toggle {
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill .caret {
+  border-top-color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-simple:hover, .btnconfigureconfigure-neutral.btnconfigureconfigure-simple:focus, .btnconfigureconfigure-neutral.btnconfigureconfigure-simple:active, .btnconfigureconfigure-neutral.btnconfigureconfigure-simple.active, .open > .btnconfigureconfigure-neutral.btnconfigureconfigure-simple.dropdown-toggle {
+  background-color: transparent;
+  color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-simple .caret {
+  border-top-color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral .caret {
+  border-top-color: #FFFFFF;
+}
+.btnconfigureconfigure-neutral:hover, .btnconfigureconfigure-neutral:focus {
+  color: #66615B;
+}
+.btnconfigureconfigure-neutral:hover i, .btnconfigureconfigure-neutral:focus i {
+  color: #66615B;
+  opacity: 1;
+}
+.btnconfigureconfigure-neutral:active, .btnconfigureconfigure-neutral.active, .open > .btnconfigureconfigure-neutral.dropdown-toggle {
+  background-color: #FFFFFF;
+  color: #66615B;
+}
+.btnconfigureconfigure-neutral:active i, .btnconfigureconfigure-neutral.active i, .open > .btnconfigureconfigure-neutral.dropdown-toggle i {
+  color: #66615B;
+  opacity: 1;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill {
+  color: #66615B;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill i {
+  color: #66615B;
+  opacity: 1;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill:hover, .btnconfigureconfigure-neutral.btnconfigureconfigure-fill:focus {
+  color: #484541;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-fill:hover i, .btnconfigureconfigure-neutral.btnconfigureconfigure-fill:focus i {
+  color: #484541;
+  opacity: 1;
+}
+.btnconfigureconfigure-neutral.btnconfigureconfigure-simple:active, .btnconfigureconfigure-neutral.btnconfigureconfigure-simple.active {
+  background-color: transparent;
+}
+
+.btnconfigureconfigure:disabled, .btnconfigureconfigure[disabled], .btnconfigureconfigure.disabled, .btnconfigureconfigure.btnconfigureconfigure-disabled {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.btnconfigureconfigure-disabled {
+  cursor: default;
+}
+
+.btnconfigureconfigure-simple {
+  border: 0;
+  padding: 7px 18px;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-lg,
+.btnconfigureconfigure-lg {
+  font-size: 18px;
+  border-radius: 50px;
+  padding: 11px 30px;
+  font-weight: 400;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-lg.btnconfigureconfigure-simple,
+.btnconfigureconfigure-lg.btnconfigureconfigure-simple {
+  padding: 13px 30px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-lg.btnconfigureconfigure-icon,
+.btnconfigureconfigure-lg.btnconfigureconfigure-icon {
+  border-radius: 30px;
+  padding: 9px 16px;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-sm,
+.btnconfigureconfigure-sm {
+  font-size: 12px;
+  border-radius: 26px;
+  padding: 4px 10px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-sm.btnconfigureconfigure-simple,
+.btnconfigureconfigure-sm.btnconfigureconfigure-simple {
+  padding: 6px 10px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-sm.btnconfigureconfigure-icon,
+.btnconfigureconfigure-sm.btnconfigureconfigure-icon {
+  padding: 3px 6px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-sm.btnconfigureconfigure-icon .fa,
+.btnconfigureconfigure-sm.btnconfigureconfigure-icon .fa {
+  line-height: 1.6;
+  width: 15px;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-xs,
+.btnconfigureconfigure-xs {
+  font-size: 12px;
+  border-radius: 26px;
+  padding: 2px 5px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-xs.btnconfigureconfigure-simple,
+.btnconfigureconfigure-xs.btnconfigureconfigure-simple {
+  padding: 4px 5px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-xs.btnconfigureconfigure-icon,
+.btnconfigureconfigure-xs.btnconfigureconfigure-icon {
+  padding: 1px 5px;
+}
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-xs.btnconfigureconfigure-icon .fa,
+.btnconfigureconfigure-xs.btnconfigureconfigure-icon .fa {
+  width: 10px;
+}
+
+.navbar .navbar-nav > li > a.btnconfigureconfigure.btnconfigureconfigure-wd,
+.btnconfigureconfigure-wd {
+  min-width: 140px;
+}
+
+.btnconfigureconfigure-group.select {
+  width: 100%;
+}
+
+.btnconfigureconfigure-group.select .btnconfigureconfigure {
+  text-align: left;
+}
+
+.btnconfigureconfigure-group.select .caret {
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+  right: 8px;
+}
+
+.btnconfigureconfigure-tooltip {
+  white-space: nowrap;
+}
+
+.buttons-with-margin .btnconfigureconfigure {
+  margin-bottom: 5px;
+}
+
+.label {
+  padding: 3px 8px;
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  display: inline-block;
+  line-height: 1.5em;
+}
+
+.label-icon {
+  padding: 0.4em 0.55em;
+}
+.label-icon i {
+  font-size: 0.8em;
+  line-height: 1;
+}
+
+.label-default {
+  background-color: #66615b;
+}
+
+.label-primary {
+  background-color: #7A9E9F;
+}
+
+.label-info {
+  background-color: #68B3C8;
+}
+
+.label-success {
+  background-color: #7AC29A;
+}
+
+.label-warning {
+  background-color: #F3BB45;
+}
+
+.label-danger {
+  background-color: #EB5E28;
+}
+
+/*            Navigation menu                */
+.nav-pills {
+  background-color: #F3F2EE;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: 40px;
+  text-align: center;
+}
+.nav-pills > li + li {
+  margin-left: 0;
+}
+.nav-pills > li > a {
+  padding: 0;
+  max-width: 78px;
+  margin: 0 auto;
+  color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  position: relative;
+  top: -32px;
+  z-index: 100;
+}
+.nav-pills > li > a:after {
+  content: '';
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  transform: scale(0);
+  transition: .2s all linear;
+}
+.nav-pills > li > a:hover, .nav-pills > li > a:focus {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.2);
+  outline: 0 !important;
+  cursor: pointer;
+}
+.nav-pills > li.active > a:after {
+  content: '';
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: -2px;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transition: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background-color: transparent;
+  font-size: 15px;
+  -webkit-transition: font-size 0.2s linear;
+  -moz-transition: font-size 0.2s linear;
+  -o-transition: font-size 0.2s linear;
+  -ms-transition: font-size 0.2s linear;
+  transition: font-size 0.2s linear;
+}
+.nav-pills > li.active > a [class*="ti-"],
+.nav-pills > li.active > a:hover [class*="ti-"],
+.nav-pills > li.active > a:focus [class*="ti-"] {
+  color: #FFFFFF;
+  font-size: 24px;
+  top: 21px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.tooltip {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tooltip-arrow {
+  display: none;
+  opacity: 0;
+}
+
+.tooltip-inner {
+  background-color: #FAE6A4;
+  border-radius: 4px;
+  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(115, 71, 38, 0.23);
+  color: #734726;
+  max-width: 200px;
+  padding: 6px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+.tooltip-inner:after {
+  content: "";
+  display: inline-block;
+  left: 100%;
+  margin-left: -56%;
+  position: absolute;
+}
+.tooltip-inner:before {
+  content: "";
+  display: inline-block;
+  left: 100%;
+  margin-left: -56%;
+  position: absolute;
+}
+
+.tooltip.top {
+  margin-top: -11px;
+  padding: 0;
+}
+.tooltip.top .tooltip-inner:after {
+  border-top: 11px solid #FAE6A4;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  bottom: -10px;
+}
+.tooltip.top .tooltip-inner:before {
+  border-top: 11px solid rgba(0, 0, 0, 0.2);
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  bottom: -11px;
+}
+
+.tooltip.bottom {
+  margin-top: 11px;
+  padding: 0;
+}
+.tooltip.bottom .tooltip-inner:after {
+  border-bottom: 11px solid #FAE6A4;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  top: -10px;
+}
+.tooltip.bottom .tooltip-inner:before {
+  border-bottom: 11px solid rgba(0, 0, 0, 0.2);
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  top: -11px;
+}
+
+.tooltip.left {
+  margin-left: -11px;
+  padding: 0;
+}
+.tooltip.left .tooltip-inner:after {
+  border-left: 11px solid #FAE6A4;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  right: -10px;
+  left: auto;
+  margin-left: 0;
+}
+.tooltip.left .tooltip-inner:before {
+  border-left: 11px solid rgba(0, 0, 0, 0.2);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  right: -11px;
+  left: auto;
+  margin-left: 0;
+}
+
+.tooltip.right {
+  margin-left: 11px;
+  padding: 0;
+}
+.tooltip.right .tooltip-inner:after {
+  border-right: 11px solid #FAE6A4;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  left: -10px;
+  top: 0;
+  margin-left: 0;
+}
+.tooltip.right .tooltip-inner:before {
+  border-right: 11px solid rgba(0, 0, 0, 0.2);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  left: -11px;
+  top: 0;
+  margin-left: 0;
+}
+
+.card {
+  border-radius: 6px;
+  box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+  background-color: #FFFFFF;
+  color: #252422;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.card .card-checkboxes {
+  background-color: #F3F2EE;
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.3);
+}
+.card .card-hover-effect {
+  -webkit-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  -moz-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  -o-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  -ms-transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+}
+.card .card-hover-effect:hover {
+  box-shadow: 0px 12px 17px -7px rgba(0, 0, 0, 0.3);
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -o-transition: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+
+.wizard-card {
+  min-height: 410px;
+  box-shadow: 0 20px 16px -15px rgba(0, 0, 0, 0.57);
+}
+.wizard-card .picture-container {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+.wizard-card .icon-circle {
+  font-size: 20px;
+  border: 3px solid #F3F2EE;
+  text-align: center;
+  border-radius: 50%;
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  width: 70px;
+  height: 70px;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  position: relative;
+  top: -2px;
+}
+.wizard-card .icon-circle [class*="ti-"] {
+  position: absolute;
+  z-index: 1;
+  left: 1px;
+  right: 0px;
+  top: 23px;
+}
+.wizard-card .picture {
+  width: 106px;
+  height: 106px;
+  background-color: #d8d1c9;
+  border: 4px solid transparent;
+  color: #FFFFFF;
+  border-radius: 50%;
+  margin: 5px auto;
+  overflow: hidden;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+.wizard-card .picture:hover {
+  border-color: #2ca8ff;
+}
+.wizard-card .picture-src {
+  width: 100%;
+}
+.wizard-card[data-color="azure"] .picture:hover {
+  border-color: #7A9E9F;
+}
+.wizard-card[data-color="azure"] .nav-pills > li.active > a:after {
+  background-color: #7A9E9F;
+}
+.wizard-card[data-color="azure"] .nav-pills > li.active > a {
+  color: #7A9E9F;
+}
+.wizard-card[data-color="azure"] .nav-pills .icon-circle.checked {
+  border-color: #7A9E9F;
+}
+.wizard-card[data-color="azure"] .choice.active .card-checkboxes {
+  color: #7A9E9F;
+}
+.wizard-card[data-color="azure"] .wizard-navigation .progress-bar {
+  background-color: #7A9E9F;
+}
+.wizard-card[data-color="green"] .picture:hover {
+  border-color: #7AC29A;
+}
+.wizard-card[data-color="green"] .nav-pills > li.active > a:after {
+  background-color: #7AC29A;
+}
+.wizard-card[data-color="green"] .nav-pills > li.active > a {
+  color: #7AC29A;
+}
+.wizard-card[data-color="green"] .nav-pills .icon-circle.checked {
+  border-color: #7AC29A;
+}
+.wizard-card[data-color="green"] .choice.active .card-checkboxes {
+  color: #7AC29A;
+}
+.wizard-card[data-color="green"] .wizard-navigation .progress-bar {
+  background-color: #7AC29A;
+}
+.wizard-card[data-color="blue"] .picture:hover {
+  border-color: #68B3C8;
+}
+.wizard-card[data-color="blue"] .nav-pills > li.active > a:after {
+  background-color: #68B3C8;
+}
+.wizard-card[data-color="blue"] .nav-pills > li.active > a {
+  color: #68B3C8;
+}
+.wizard-card[data-color="blue"] .nav-pills .icon-circle.checked {
+  border-color: #68B3C8;
+}
+.wizard-card[data-color="blue"] .choice.active .card-checkboxes {
+  color: #68B3C8;
+}
+.wizard-card[data-color="blue"] .wizard-navigation .progress-bar {
+  background-color: #68B3C8;
+}
+.wizard-card[data-color="orange"] .picture:hover {
+  border-color: #F3BB45;
+}
+.wizard-card[data-color="orange"] .nav-pills > li.active > a:after {
+  background-color: #F3BB45;
+}
+.wizard-card[data-color="orange"] .nav-pills > li.active > a {
+  color: #F3BB45;
+}
+.wizard-card[data-color="orange"] .nav-pills .icon-circle.checked {
+  border-color: #F3BB45;
+}
+.wizard-card[data-color="orange"] .choice.active .card-checkboxes {
+  color: #F3BB45;
+}
+.wizard-card[data-color="orange"] .wizard-navigation .progress-bar {
+  background-color: #F3BB45;
+}
+.wizard-card[data-color="red"] .picture:hover {
+  border-color: #EB5E28;
+}
+.wizard-card[data-color="red"] .nav-pills > li.active > a:after {
+  background-color: #EB5E28;
+}
+.wizard-card[data-color="red"] .nav-pills > li.active > a {
+  color: #EB5E28;
+}
+.wizard-card[data-color="red"] .nav-pills .icon-circle.checked {
+  border-color: #EB5E28;
+}
+.wizard-card[data-color="red"] .choice.active .card-checkboxes {
+  color: #EB5E28;
+}
+.wizard-card[data-color="red"] .wizard-navigation .progress-bar {
+  background-color: #EB5E28;
+}
+.wizard-card .picture input[type="file"] {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.wizard-card .tab-content {
+  min-height: 435px;
+  padding: 105px 20px 10px;
+}
+.wizard-card .wizard-footer {
+  padding: 0 15px 5px;
+}
+.wizard-card .disabled {
+  display: none;
+}
+.wizard-card .wizard-header {
+  padding: 15px 15px 15px 15px;
+  position: relative;
+  border-radius: 3px 3px 0 0;
+  z-index: 3;
+}
+.wizard-card .wizard-header h3 {
+  text-align: center;
+}
+.wizard-card .wizard-title {
+  color: #252422;
+  font-weight: 300;
+  margin: 0;
+}
+.wizard-card .category {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9A9A9A;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.wizard-card .wizard-navigation {
+  position: relative;
+}
+.wizard-card .wizard-navigation .progress-with-circle {
+  position: relative;
+  top: 40px;
+  z-index: 50;
+  height: 4px;
+}
+.wizard-card .wizard-navigation .progress-with-circle .progress-bar {
+  box-shadow: none;
+  -webkit-transition: width .3s ease;
+  -o-transition: width .3s ease;
+  transition: width .3s ease;
+}
+.wizard-card .info-text {
+  text-align: center;
+  padding-bottom: 18px;
+  padding-top: 12px;
+}
+.wizard-card .choice {
+  text-align: center;
+  cursor: pointer;
+  margin-top: 38px;
+}
+.wizard-card .choice .icon {
+  text-align: center;
+  vertical-align: middle;
+  height: 116px;
+  width: 116px;
+  border-radius: 50%;
+  background-color: #999999;
+  color: #FFFFFF;
+  margin: 0 auto 20px;
+  border: 4px solid #CCCCCC;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+.wizard-card .choice i {
+  font-size: 32px;
+  line-height: 55px;
+}
+.wizard-card .choice:hover .icon, .wizard-card .choice.active .icon {
+  border-color: #2ca8ff;
+}
+.wizard-card .choice input[type="radio"],
+.wizard-card .choice input[type="checkbox"] {
+  position: absolute;
+  left: -10000px;
+  z-index: -1;
+}
+.wizard-card .description {
+  color: #999999;
+  font-size: 14px;
+}
+
+.footer {
+  position: relative;
+  bottom: 20px;
+  right: 0px;
+  width: 100%;
+  color: #FFFFFF;
+  z-index: 4;
+  text-align: right;
+  margin-top: 60px;
+  text-shadow: 0 1px 3px black;
+}
+.footer a {
+  color: #FFFFFF;
+}
+.footer .heart {
+  color: #FF3B30;
+}
+
+@media (max-width: 768px) {
+  .main .container {
+    margin-bottom: 50px;
+  }
+}
+@media (min-width: 768px) {
+  .navbar-form {
+    margin-top: 21px;
+    margin-bottom: 21px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .btnconfigureconfigure-wd {
+    min-width: 140px;
+  }
+}

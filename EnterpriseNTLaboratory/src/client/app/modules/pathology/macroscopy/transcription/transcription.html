@@ -1,0 +1,394 @@
+<style>
+
+  .line-head{
+    width: 100%;
+    font-weight: bold;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #d6d6d6;
+    padding: 0px;
+    margin: 0px
+  }
+
+  td.md-list-content{
+    width: 25%;
+    font-size: 12px;
+  }
+
+  thead.bold-text > tr > th{
+    font-weight: bold;
+    font-size: 13PX;
+  }
+
+  .input-template {
+    height: 20px !important;
+    font-size: 11px !important;
+    min-height: 20px !important;
+    border: none !important;
+    border-bottom: 1px solid rgb(224, 224, 224) !important;
+  }
+
+  .measureButtons>div {
+    margin-top: 5px;
+    margin-left: 4px;
+    align-items: center;
+  }
+
+  .measureButtons>div>span {
+    font-size: 9px;
+    text-align: center;
+    width: 60px;
+    max-height: 40px;
+    line-height: 10px;
+    margin-top: 6px;
+  }
+
+  .filters {
+    height: 100%;
+    border-style: solid;
+    border-top: 0;
+    border-bottom: 0px;
+    border-left: 0px;
+    padding-right: 15px;
+    padding-left: 35px;
+    margin-right: 0px;
+    border-color: #d6d3d6;
+  }
+
+  .targetactive {
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 5px #3131315c, 0 3px 0 #eee, 0px 3px 10px rgb(0 0 0 / 40%), inset 0px 0px 3px rgb(255 255 255 / 20%), inset 0 -2px 10px rgb(0 0 0 / 20%);
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0px -1px 0px rgb(0 0 0 / 20%);
+  }
+
+  .targetactive .md-card-toolbar-heading-text {
+    font-weight: bold;
+  }
+
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error" id="modalerrorresultentry"></modalexceptions>
+<loadpage view="vm.loading" class="p-absolute"></loadpage>
+
+<div id="page_content" style="overflow: hidden;">
+  <div id="page_content_inner" style="padding: 1px 13px 0px;">
+    <div class="uk-grid">
+
+      <div style="height: 100%" class="uk-width-3-10 filters">
+
+        <div class="uk-grid">
+          <div class="uk-width-1-2">
+            <div class="md-card" ng-class="{'targetactive': vm.transcriptionMode === 1}" ng-click="vm.selectTranscription()">
+              <a href="#" style="color: black;">
+                <div class="md-card-content" style="padding-right: 5px; padding-left: 7px;">
+                  <div class="uk-float-right progress-wrapper">
+                    <img style="width: 50px; margin-top: 10px; margin-left: -4px;" ng-src="images/pathology/macroscopy/transcription.png">
+                  </div>
+                  <span> {{ '3208' | translate }} </span>
+                  <h2 class="uk-margin-remove">
+                    <span class="countUpMe">{{ vm.listCases.length }}</span>
+                  </h2>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="uk-width-1-2">
+            <div class="md-card" ng-class="{'targetactive': vm.authorizationMode === 1}"  ng-click="vm.selectAuthorization()">
+              <a href="#" style="color: black;">
+                <div class="md-card-content" style="padding-right: 5px; padding-left: 7px;">
+                  <div class="uk-float-right progress-wrapper">
+                    <img style="width: 50px; margin-top: 10px; margin-left: -4px;" ng-src="images/pathology/macroscopy/authorization.png">
+                  </div>
+                  <span> {{ '3209' | translate }} </span>
+                  <h2 class="uk-margin-remove">
+                    <span class="countUpMe">{{ vm.listAuthorizations.length }}</span>
+                  </h2>
+                  </h2>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="height: calc(100vh - 173px);margin: 10px 0px;" class="md-card uk-animation-scale-up uk-animation-40 md-card-primary" >
+          <div style="height: 100%; padding-left: 14px; padding-right: 14px" ng-if="vm.transcriptionMode === 1">
+            <div class="uk-width-1-1" style="margin-top: 3px; height: 30px; ">
+              <table class="line-head">
+                <tr>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3038' | translate}}</span>
+                  </td>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3154' | translate}}</span>
+                  </td>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3184' | translate}}</span>
+                  </td>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3207' | translate}}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="uk-width-1-1 contentscroll" style="margin-top: 10px; height: calc(100% - 45px);overflow: auto; ">
+              <ul class="md-list" ng-repeat="case in vm.listCases | filter: vm.filter" ng-class="{selected: case.casePat == vm.selected}" data-ng-click="vm.getDetail(case)" on-last-repeat >
+                <li style="border-bottom: 1px solid #ddd;">
+                    <table style="width: 100%">
+                        <tr>
+                          <td class="md-list-content">
+                            <span>{{case.studyTypeCode}}{{case.numberCase}}</span>
+                          </td>
+                          <td class="md-list-content" style="padding-left: 10px;">
+                            <span>{{ case.pathologist.name }} {{ case.pathologist.lastName }}</span>
+                          </td>
+                          <td class="md-list-content">
+                            <span>{{ case.createdAt | date:vm.formatDate }}</span>
+                          </td>
+                          <td class="md-list-content" style="text-align: center;">
+                            <span class="uk-badge uk-badge-warning" ng-if="case.authorization === 1">{{ '0219'| translate }} </span>
+                            <span class="uk-badge" ng-if="case.authorization === 0" style="background: #1976d2;">{{ '0220'| translate }} </span>
+                          </td>
+                        </tr>
+                    </table>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div ng-if="vm.authorizationMode === 1" style="height: 100%; padding-left: 14px; padding-right: 14px">
+            <div class="uk-width-1-1" style="margin-top: 3px; height: 30px; ">
+              <table class="line-head">
+                <tr>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3038' | translate}}</span>
+                  </td>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3204' | translate}}</span>
+                  </td>
+                  <td class="md-list-content" style="text-align: center;">
+                    <span>{{'3205' | translate}}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="uk-width-1-1 contentscroll" style="margin-top: 10px; height: calc(100% - 45px);overflow: auto; ">
+              <ul class="md-list" ng-repeat="case in vm.listAuthorizations | filter: vm.filter" ng-class="{selected: case.casePat == vm.selected}" data-ng-click="vm.getDetail(case)" on-last-repeat >
+                <li style="border-bottom: 1px solid #ddd;">
+                  <table style="width: 100%">
+                      <tr style="text-align: center;">
+                        <td class="md-list-content">
+                          <span>{{case.studyTypeCode}}{{case.numberCase}}</span>
+                        </td>
+                        <td class="md-list-content">
+                          <span>{{ case.transcriber.name }} {{ case.transcriber.lastName }}</span>
+                        </td>
+                        <td class="md-list-content">
+                          <span>{{ case.transcribedAt | date:vm.formatDate }}</span>
+                        </td>
+                      </tr>
+                  </table>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="uk-width-2-10" ng-if="vm.casePat" style="padding-left: 15px;">
+        <div>
+          <caseinfo idcase="vm.casePat"></caseinfo>
+        </div>
+
+        <div ng-if="vm.transcriptionMode === 1" class="md-card" style="margin-top: 5px;">
+          <div class="md-card-content" style="padding: 5px;">
+            <div class="uk-flex" style="justify-content: center;height: 40px;align-items: center;">
+              <span class="uk-badge uk-badge-success" style="font-size: 12px;border-radius: 5px;" ng-if="vm.casePat.authorization === 0">{{'3199' | translate }}</span>
+              <div ng-if="vm.casePat.authorization === 1" style="text-align: center;">
+                <span class="uk-badge uk-badge-warning" style="font-size: 12px;border-radius: 5px;">{{'3200' | translate }}:</span>
+                <br>
+                <span style="font-weight: bold;font-size: 12px;text-transform: capitalize;">{{ vm.casePat.pathologist.name }} {{ vm.casePat.pathologist.lastName }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="vm.authorizationMode === 1" class="md-card" style="margin-top: 5px;">
+          <div class="md-card-content" style="padding: 5px;">
+            <div class="uk-flex" style="justify-content: center;height: 40px;align-items: center;">
+              <div style="text-align: center;display: grid;">
+                <span class="uk-badge" style="font-size: 12px;border-radius: 5px;background: #1976d2;">{{'3204' | translate }}:</span>
+                <span style="font-weight: bold;font-size: 12px;text-transform: capitalize;">{{ vm.casePat.transcriber.name }} {{ vm.casePat.transcriber.lastName }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: calc(100vh - 290px); width: 100%; margin-top: 5px;" ng-show="vm.casePat.numberOrder !== null">
+          <patient order="vm.casePat.numberOrder"></patient>
+        </div>
+
+      </div>
+
+      <form class="uk-form md-card-content uk-width-5-10" name="Form" id="Form" style="padding-left: 15px;">
+        <div class="uk-width-1-1" ng-if="vm.macroscopy.templates.length > 0">
+
+          <div class="uk-width-1-1" style="margin-top: 5px;">
+            <div class="md-card" style="height: calc(100vh - 153px);">
+              <div class="md-card-content" style="padding: 0 10px;">
+                <ul class="uk-tab" data-uk-tab="{connect:'#templates', animation:'slide-horizontal'}">
+                  <li ng-repeat="template in vm.macroscopy.templates" ng-class="{'uk-active': $index === 0 }" style="position: inherit;display: flex;">
+                    <a href="#" style="font-size: 12px;height: 40px;" class="uk-flex uk-flex-middle">
+                      {{ template.specimen.name }}
+                      <div ng-if="template.specimen.subSample > 0" style="font-size: 10px;">
+                        <span>{{ template.specimen.subSampleName }}</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <ul id="templates" class="uk-switcher uk-margin contentscroll" style="height: calc(100vh - 220px);overflow: auto;margin: 5px 0px;">
+
+                  <li ng-repeat="template in vm.macroscopy.templates" ng-class="{'uk-active': $index === 0 }" style="position: inherit;">
+                    <div class="uk-grid" ng-if="template.fields.length > 0">
+                      <div class="uk-width-1-{{field.grid}}" ng-repeat="field in template.fields" style="padding-bottom: 10px;">
+                        <div class="parsley-row" ng-if="field.type === 1">
+                          <span class="uk-text-small uk-text-muted" style="font-size: 11px !important;font-weight: 500;">{{ field.name }}</span>
+                          <input type="text" ng-model="field.value" id="{{field.template}}" name="{{field.template}}" class="md-input input-template" md-input ng-disabled="vm.disabled" ng-required="field.required">
+                        </div>
+                        <div class="parsley-row" ng-if="field.type === 2">
+                          <span class="uk-text-small uk-text-muted" style="font-size: 11px !important;font-weight: 500;">{{ field.name }}</span>
+                          <input type="number" ng-model="field.value" id="{{field.template}}" name="{{field.template}}" class="md-input input-template" md-input ng-disabled="vm.disabled" ng-required="field.required">
+                        </div>
+                        <div class="parsley-row" ng-if="field.type === 3">
+                          <span class="uk-text-small uk-text-muted" style="font-size: 11px !important;font-weight: 500;">{{ field.name }}</span>
+                          <textarea id="ui-annotation" ui-tinymce="vm.editor" id="{{field.template}}" name="{{field.template}}" ng-model="field.value" ng-required="field.required" ng-disabled="vm.disabled"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="uk-width-1-1" style="margin-top: 5px;">
+
+            <div class="uk-grid">
+              <div class="uk-width-6-10">
+                <div class="md-card">
+                  <div class="md-card-content" style="padding: 2px;">
+                      <div class="uk-flex uk-flex-center measureButtons">
+
+                        <!-- Guardar -->
+                        <div class="uk-flex uk-flex-column">
+                            <button type="button" ng-click="vm.confirmSaved(Form, 1)" class="md-fab md-fab-small md-bg-indigo-600 md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="!Form.$valid || vm.disabledSave"
+                            ng-class="{'md-bg-blue-grey-100': !Form.$valid || vm.disabledSave }">
+                                <i class="material-icons" style="color: white;">save</i>
+                            </button>
+                            <span>{{ '0007' | translate }}</span>
+                        </div>
+
+                        <!-- Guardar y enviar a autorización -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.confirmSaved(Form, 2)" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center"
+                          ng-disabled="!Form.$valid || vm.disabledSave || (vm.macroscopy.authorization === 0 && vm.macroscopy.transcription === 1) || (vm.macroscopy.authorization === 1 && vm.macroscopy.transcription === 0) "
+                          ng-class="{'md-bg-blue-grey-100': !Form.$valid || vm.disabledSave || (vm.macroscopy.authorization === 0 && vm.macroscopy.transcription === 1) || (vm.macroscopy.authorization === 1 && vm.macroscopy.transcription === 0) }">
+                              <i class="material-icons" style="color: white;">send</i>
+                          </button>
+                          <span>{{ '3202' | translate }}</span>
+                        </div>
+
+                        <!-- Guardar y Finalizar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.confirmSaved(Form, 0)" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center"
+                          ng-disabled="!Form.$valid || vm.disabledSave || vm.macroscopy.authorization === 1"
+                          ng-class="{'md-bg-blue-grey-100': !Form.$valid || vm.disabledSave || vm.macroscopy.authorization === 1 }">
+                              <i class="material-icons" style="color: white;">send_and_archive</i>
+                          </button>
+                          <span>{{ '3190' | translate }}</span>
+                        </div>
+
+                        <!-- Guardar y Autorizar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.confirmSaved(Form, 0)" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center"
+                          ng-disabled="!Form.$valid || vm.disabledSave || vm.macroscopy.transcription === 1"
+                          ng-class="{'md-bg-blue-grey-100': !Form.$valid || vm.disabledSave || vm.macroscopy.transcription === 1 }">
+                              <i class="material-icons" style="color: white;">add_task</i>
+                          </button>
+                          <span>{{ '3201' | translate }}</span>
+                        </div>
+
+                        <!-- Editar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.stateButton('update'); vm.edit = true;" class="md-fab md-fab-small md-fab-warning md-fab-wave-light
+                                  waves-effect waves-light aling-self-center" ng-disabled="vm.disabledEdit" ng-class="{'md-bg-blue-grey-100': vm.disabledEdit}">
+                              <i class="material-icons">create</i>
+                          </button>
+                          <span>{{ '0006' | translate }}</span>
+                        </div>
+
+                        <!-- Cancelar-->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.undo()" class="md-fab md-fab-small md-fab-danger md-fab-wave-light
+                          waves-effect waves-light aling-self-center" ng-disabled="vm.disabledCancel" ng-class="{'md-bg-blue-grey-100': vm.disabledCancel }">
+                              <i class="material-icons" style="color: white;">close</i>
+                          </button>
+                          <span>{{ '0008' | translate }}</span>
+                        </div>
+
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="uk-width-4-10" style="padding-left: 10px;">
+                <div class="md-card" style="height: 83px;">
+                  <div class="md-card-content" style="padding-top: 10px;">
+                    <div class="uk-grid" ng-if="vm.srcAudio" style="display: flex;align-items: center;">
+                      <div class="uk-width-1-1" style="align-self: center;">
+                        <span class="uk-badge uk-badge-info" style="margin-top: -10px;font-size: 11px;border-radius: 5px;padding: 2px 5px;color: white;background: #1976d2;margin-bottom: 5px;">{{'3191' | translate }}</span>
+                        <div class="uk-width-1-1" style="align-self: center;">
+                          <audio ng-if="vm.srcAudio" ng-src="{{vm.srcAudio}}" controls="" style="width: 100%;height: 40px;"></audio>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ventana modal para confirmacion de guardado y envio -->
+<div id="modalConfirmSave" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div style="float: left;">
+          <img class="img-responsive" src="images/Question.png">
+      </div>
+      <div class="uk-grid">
+          <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+              <h5 class="uk-text-bold" ng-if="vm.macroscopy.draft === 1">{{'3192' | translate }}</h5>
+              <h5 class="uk-text-bold" ng-if="vm.macroscopy.draft === 0">{{'3193' | translate }}</h5>
+              <h5 class="uk-text-bold" ng-if="vm.macroscopy.draft === 2">{{'3203' | translate }}</h5>
+          </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+        <button class="md-btn md-btn-primary uk-modal-close" type="button" ng-click="vm.save()" >{{'0219' | translate}}</button>
+        <button class="md-btn md-btn-default uk-modal-close" type="button">{{'0220' | translate}}</button>
+    </div>
+  </div>
+</div>
+

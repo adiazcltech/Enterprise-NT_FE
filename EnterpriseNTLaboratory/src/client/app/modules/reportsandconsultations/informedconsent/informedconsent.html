@@ -1,0 +1,240 @@
+<style>
+  .k-multiselect-wrap {
+    border-width: 1px;
+    height: 251px;
+    overflow: auto;
+  }
+
+  .viewresul {
+    height: calc(100% - 2px);
+  }
+
+  .inviewresul {
+    height: calc(100% - -78px);
+  }
+
+  .vs-repeat-custom-scroll {
+    margin-top: 0px;
+    height: calc(100% - 45px);
+    width: 100% !important;
+    overflow-y: auto;
+  }
+
+  .tabletestview {
+    height: 79%;
+  }
+
+  .tabletestview2 {
+    height: 82%;
+  }
+
+  .bottonview {
+    bottom: 38px;
+  }
+
+  .inbottonview {
+    bottom: 43px;
+  }
+
+  .dimensionMin {
+    height: 200px;
+    width: 450px;
+  }
+
+  .dimensionMax {
+    height: 275px;
+    width: 550px;
+  }
+
+  .md-tree-image {
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 50%;
+  }
+</style>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport"
+  variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content" style="overflow: hidden;">
+  <div id="page_content_inner" style="padding: 1px 13px 0px;">
+    <div class="uk-grid fullheight">
+      <div class="uk-width-1-1 fullheight">
+        <div class="md-card" style="height: 75px;">
+          <div class="md-card-content">
+            <div class="uk-width-1-1 fullheight">
+              <div style="height:100%;">
+                <div class="fullheight">
+                  <div class="uk-form-row" style="height: 100%; width: 100%">
+                    <div class="uk-grid">
+                      <div class="uk-width-1-3" style="padding-top:
+                        4px;">
+                        <label style="top: -6px; font-size: 12px;">{{'0387' |
+                          translate}}:</label>
+                        <select class="md-input" ng-options="obj.id as obj.name
+                          for obj in vm.typeresport"
+                          data-ng-model="vm.typeresport.id"
+                          ng-change="vm.changefilter()"></select>
+                      </div>
+                      <div class="uk-width-1-3" style="padding-top: 4px;"
+                        ng-show="vm.typeresport.id==1 && vm.typedocument">
+                        <label style="top: -6px; font-size: 12px;"> {{'0233' |
+                          translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name
+                          for obj in vm.documentTypelist"
+                          data-ng-model="vm.documentType.id"
+                          ng-change="vm.searchtype()"></select>
+                      </div>
+                      <div class="uk-width-1-3"
+                        ng-show="vm.typeresport.id==1">
+                        <label>{{'0117' | translate}}</label>
+                        <input type="text" class="md-input label-fixed"
+                          data-ng-model="vm.record"
+                          ng-keypress="vm.keyselectpatientid($event)" md-input
+                          />
+                      </div>
+                      <div class="uk-width-1-3"
+                        ng-show="vm.typeresport.id==2">
+                        <label style="top: -6px; font-size: 12px;"> {{'0072' |
+                          translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name
+                          for obj in vm.listYear" data-ng-model="vm.listYear.id"
+                          md-input></select>
+                      </div>
+                      <div class="uk-width-1-3"
+                        ng-show="vm.typeresport.id==2">
+                        <label>{{'0110' | translate}}</label>
+                        <input id="numberordersearch" class="md-input
+                          label-fixed" type="text"
+                          ng-model="vm.codeordernumberorden"
+                          ng-keypress="vm.keyselect($event)"
+                          maxlength="{{vm.cantdigit}}" md-input />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid" style="margin-top: 5px; height: calc(100% - 69px);"
+          ng-if="vm.basicTree.length!==0">
+          <div class="uk-width-2-10" style="width: 23%;height: 100%;">
+            <div class="md-card md-card-hover uk-animation-fade fullheight">
+              <div style="height: 97%;padding: 9px" class="md-card-content">
+                <div class="uk-input-group" style="padding-left: 0px;">
+                  <label>{{'0154' | translate}}</label>
+                  <input type="text" class="md-input"
+                    ng-model="vm.options5.filter.name" md-input>
+                  <span class="uk-input-group-addon" style="padding: 0 0px;">
+                    <i class="material-icons md-24">&#xE8B6;</i>
+                  </span>
+                </div>
+                <div class="tree-container contentscroll" style="height:
+                  calc(100% - 48px);overflow: auto;">
+                  <tree nodes="vm.basicTree" options="vm.options5"></tree>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1 fullheight"
+            ng-if="vm.listtest.length!=0"
+            style="width: 77%;padding-left: 7px;">
+            <div class="md-card md-card-hover uk-animation-fade"
+              ng-show="vm.viewresult=((vm.listtest | filter:{ currentState:
+              5}).length !== 0)" style="margin-bottom: 6px; height: 17%;">
+              <div class="md-card-content fullheight" style="padding:
+                8px;height: 79%;">
+                <label>{{'0389' | translate}}</label>
+                <input type="text" class="md-input"
+                  data-ng-model="vm.receiveresultspopup" md-input />
+              </div>
+            </div>
+            <div class="uk-grid" style="margin-top: 0px;margin-left:
+              -5px;height: 100%;">
+              <div class="uk-width-7-10" ng-if="vm.listtest.length!=0"
+                style="padding-left:8px;height:100%">
+                <div class="md-card md-card-hover uk-animation-fade"
+                  ng-class="{'tabletestview' : vm.viewresult,'fullheight' :
+                  !vm.viewresult}">
+                  <div class="uk-input-group" style="padding: 9px 9px 5px 9px;">
+                    <label>{{'0154' | translate}}</label>
+                    <input type="text" class="md-input" ng-model="vm.search"
+                      md-input>
+                    <span class="uk-input-group-addon" style="padding: 0 0px;">
+                      <i class="material-icons md-24">&#xE8B6;</i>
+                    </span>
+                  </div>
+                  <div class="md-card-content" style="height: 100%;padding:
+                    0px;">
+                    <table class="uk-table uk-table-small uk-table-middle
+                      tablescrollable" style="height: calc(100% - 59px);
+                      margin-bottom: 0px; font-size:
+                      12px;">
+                      <thead style="display: inline-block;width: 100%;height:
+                        36px;">
+                        <tr class="uk-grid" style="margin-left:
+                          0px;background-color: #eee;">
+                          <th class="uk-width-2-10">
+                            {{'0098' | translate}}
+                          </th>
+                          <th class="uk-width-4-10">
+                            {{'0118' | translate}}
+                          </th>
+                          <th class="uk-width-2-10">
+                            {{'0325' | translate}}
+                          </th>
+                          <th class="uk-width-2-10">
+                            {{'0001' | translate}}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbodyscrollable vs-repeat-custom-scroll"
+                        vs-repeat>
+                        <tr ng-repeat="test in vm.listtest | filter: vm.search |
+                          orderBy:vm.sortType:sortReverse" class="uk-grid"
+                          style="margin-left: 0px;margin-top: 0px;">
+                          <td class="uk-width-2-10">{{test.code}}</td>
+                          <td class="uk-width-4-10">{{test.name}}</td>
+                          <td class="uk-width-2-10">{{test.registrationDate|
+                            date: 'dd/MM/yyyy'}}</td>
+                          <td class="uk-width-2-10">
+                            {{test.userName}}
+                            <img style="width: 21px; height: 21px;float: right;"
+                              src="images/file.png"
+                              data-toggle="tooltip"
+                              ng-click="vm.sendFormData(test)"
+                              title="ver consentimiento informado">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-width-3-10" style="padding-left: 5px;height:
+                100%;position: relative;">
+                <div class="md-card md-card-hover uk-animation-fade"
+                  ng-class="{'tabletestview2' : vm.viewresult,'fullheight' :
+                  !vm.viewresult}">
+                  <div ng-class="{'viewresul ' : vm.viewresult,'inviewresul ' :
+                    !vm.viewresult}" style="height: 100%;">
+                    <patient order="vm.numberOrder"></patient>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

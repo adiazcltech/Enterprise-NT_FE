@@ -1,0 +1,72 @@
+<style type="text/css">
+    .report {
+        height: auto;
+        width: 61%;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        overflow-x: hidden;
+    }
+
+    .message {
+        height: auto;
+        top: 10px !important;
+        width: 35%;
+    }
+
+    .messageText {
+        width: 280px;
+        float: left;
+        padding-top: 5%;
+        white-space: nowrap;
+    }
+
+    .md-bg-blue-grey-100 {
+        cursor: default;
+    }
+
+    .vertical-report {
+        width: 65%;
+        border-radius: 4px;
+        height: 95%
+    }
+
+    .horizontal-report {
+        width: 91%;
+        border-radius: 4px;
+        height: 95%
+    }
+</style>
+<div style="display: inline-block;">
+    <button type="button" class="md-fab md-fab-small md-fab-success md-bg-blue-grey-100" ng-click="report.viewReport()"
+        ng-disabled="report.disabled"
+        ng-class="{'md-bg-blue-grey-100': report.disabled, 'md-bg-purple-A700 md-fab-wave-light waves-effect waves-light': !report.disabled}"
+        style="margin-left: 8px">
+        <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0009' | translate}}">&#xE8AD;</i>
+    </button>
+</div>
+<div class="uk-modal" id="modalReport" tabindex="1" aria-hidden="false">
+    <div class="uk-modal-dialog report " ng-show="report.listreport.length > 0"
+        ng-class="{'vertical-report': report.orientation === 'vertical', 'horizontal-report': report.orientation === 'horizontal' } ">
+        <div class="uk-modal-body" style="height: 100%">
+            <div id="viewerContent" style="height: 100%"></div>
+            <div id="designerContent"> </div>
+        </div>
+    </div>
+    <div class="uk-modal-dialog message" ng-show="report.listreport.length == 0">
+        <button type="button" class="uk-modal-close uk-close" ng-class="{'disabled':  vm.ButonReject}"></button>
+        <div class="uk-modal-body" style="height: 100px; top: 0px">
+            <div style="width: 20%; float: left">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageText">
+                <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+            </div>
+        </div>
+        <div class="uk-modal-footer">
+        </div>
+    </div>
+</div>

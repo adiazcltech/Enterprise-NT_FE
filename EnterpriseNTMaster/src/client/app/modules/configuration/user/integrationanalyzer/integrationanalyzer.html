@@ -1,0 +1,367 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<section class="row general-container">
+  <div class="panel panel-primary panel-principal">
+    <div class="panel-heading row">
+      <div class="col-md-4 text-left">
+        <strong id="titleUser" class="panel-title text-left title-bar">{{'1072' | translate | uppercase}}</strong>
+      </div>
+      <div class="col-md-8 text-right" style="padding-top: 5px;">
+        <strong ng-bind="vm.usuario" class="text-right"></strong>
+        <span class="panel-title glyphicon glyphicon-question-sign question-style" data-toggle="tooltip"
+          data-placement="bottom" title="Ctrl + B"
+          onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/userintegrationanalizer/userintegrationanalizer.htm','','width=1200,height=600,left=50,top=50,toolbar=yes');"></span>
+      </div>
+    </div>
+    <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+      <div class="col-md-5 panel-padding" style="height: 100%;">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container">
+              <div>
+                <div class="input-group right-bar">
+                  <input data-ng-model="vm.search" class="form-control" type="text"
+                    placeholder="{{'0015' | translate}}" />
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </div>
+                </div>
+                <div class="number-bage">
+                  <span style="margin-top: 10px;" class="badge" data-ng-bind="vm.filtered.length"></span>
+                </div>
+              </div>
+              <table class="table table-list table-hover">
+                <thead>
+                  <tr>
+                    <th class="col-md-3">
+                      <a ng-click="$event.stopPropagation(); vm.sortType=
+                        'userName'; vm.sortReverse= !vm.sortReverse;
+                        $event.stopPropagation()">
+                        <i ng-if="!vm.sortReverse && vm.sortType != 'userName'"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != 'userName'"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == 'userName' && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == 'userName' && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == 'userName' && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == 'userName' && vm.sortReverse"></span> </a>{{'0001' | translate }}
+                    </th>
+                    <th class="col-md-4">
+                      <a ng-click="$event.stopPropagation(); vm.sortType=
+                        'type.id'; vm.sortReverse= !vm.sortReverse;
+                        $event.stopPropagation()">
+                        <i ng-if="!vm.sortReverse && vm.sortType != 'type.id'"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != 'type.id'"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == 'type.id' && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == 'type.id' && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == 'type.id' && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == 'type.id' && vm.sortReverse"></span> </a>{{'0131' | translate}}
+                    </th>
+                    <th class="col-md-1" style="white-space: nowrap;">
+                      <a ng-click="$event.stopPropagation(); vm.sortType= 'state';
+                      vm.sortReverse= !vm.sortReverse; $event.stopPropagation()">
+                        <i ng-if="!vm.sortReverse && vm.sortType != 'state'"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != 'state'"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == 'state' && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <i ng-if="vm.sortType == 'state' && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <span ng-show="vm.sortType == 'state' && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == 'state' && vm.sortReverse"></span>
+                      </a>
+                      {{'0014' | translate}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tbody-list contentscroll">
+                  <tr class="row-list" data-ng-repeat="Users in
+                    vm.filtered=(vm.dataUsers
+                    | filter:{'search':vm.search} ) | orderBy:vm.sortType:vm.sortReverse"
+                    data-ng-click="vm.getUsersId(Users.id, $index, UsersForm)" ng-class="{info: Users.id == vm.selected, danger:
+                    Users.state == 0}">
+                    <td class="col-md-1 panel-padding" style="width: 20px;">
+                      <i ng-if="Users.userName == 'lismanager'|| Users.userName
+                        == 'integration' || Users.userName == 'system'"
+                        class="glyphicon glyphicon-lock panel-padding"></i>
+                    </td>
+                    <td class="col-md-3 text-left" data-ng-bind="Users.userName"></td>
+                    <td class="col-md-4" data-ng-bind="Users.typename"></td>
+                    <td class="col-md-1">
+                      <i ng-if="Users.state == true" class="glyphicon glyphicon-ok green"></i>
+                      <i ng-if="Users.state == false" class="glyphicon glyphicon-ban-circle red"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 panel-padding" style="height: 100%;">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container panel-padding panel-scroll" style="height: calc(100% - 55px);">
+              <form name="UsersForm" id="UsersForm" class="form-horizontal panel-body panel-padding"
+                style="margin-top: 20px;">
+                <div class="form-group-min form-group-sm">
+                  <div class="col-md-3 text-center has-error">
+                    <div fileimg disable="vm.isDisabled" ng-model="vm.usersDetail.photo" height="102" width="100"></div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group-min col-sm-12 text-left has-feedback" ng-class="{'has-error': UsersForm.UserTypes.$invalid &&
+                      UsersForm.UserTypes.$touched}">
+                      <label class="col-sm-4 text-left">{{'0131' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <select id="UserTypes" name="UserTypes" ng-options="obj
+                          as obj.name for obj in vm.ListUserTypes track by
+                          obj.id" data-ng-model="vm.usersDetail.type" ng-change="vm.modalrequired()"
+                          class="form-control" ng-required="true" ng-disabled="vm.isDisabled || vm.edituser"></select>
+                        <span ng-if="UsersForm.UserTypes.$invalid &&
+                          UsersForm.UserTypes.$touched" class="glyphicon glyphicon-remove form-control-feedback"
+                          aria-hidden="true"></span>
+                        <span ng-if="UsersForm.UserTypes.$invalid &&
+                          UsersForm.UserTypes.$touched" class="help-block">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-sm-12 text-left has-feedback" ng-class="{'has-error': UsersForm.identity.$invalid &&
+                      UsersForm.identity.$touched ||vm.identificationRepeat }">
+                      <label class="col-sm-4 text-left">{{'0124' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="identity" name="identity" data-ng-model="vm.usersDetail.identification"
+                          ng-disabled="vm.isDisabled" ng-required="true" class="form-control" type="text" />
+                        <span ng-if="UsersForm.identity.$invalid &&
+                          UsersForm.identity.$touched||vm.identificationRepeat"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="UsersForm.identity.$invalid &&
+                          UsersForm.identity.$touched" class="help-block">{{'0016' | translate}}</span>
+                        <span ng-if="vm.identificationRepeat" class="help-block">{{vm.messageidentification}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-sm-12 text-left has-feedback" ng-class="{'has-error': UsersForm.name.$invalid &&
+                      UsersForm.name.$touched }">
+                      <label class="col-sm-4 text-left">{{'0011' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="name" name="name" data-ng-model="vm.usersDetail.name" ng-disabled="vm.isDisabled"
+                          ng-required="true" class="form-control" type="text" />
+                        <span ng-if="UsersForm.name.$invalid &&
+                          UsersForm.name.$touched" class="glyphicon glyphicon-remove form-control-feedback"
+                          aria-hidden="true"></span>
+                        <span ng-if="UsersForm.name.$invalid &&
+                          UsersForm.name.$touched" class="help-block">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-12 text-left has-feedback" ng-class="{'has-error':
+                      (UsersForm.userName.$invalid &&
+                      UsersForm.userName.$touched) || vm.usersNameRepeat }">
+                      <label class="col-sm-4 text-left">{{'0001' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="userName" name="userName" data-ng-model="vm.usersDetail.userName"
+                          ng-disabled="vm.isDisabled" ng-required="true" class="form-control" type="text"
+                          ng-focus="vm.usersNameRepeat= false" />
+                        <span ng-if="UsersForm.userName.$invalid &&
+                          UsersForm.userName.$touched || vm.usersNameRepeat"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="UsersForm.userName.$invalid &&
+                          UsersForm.userName.$touched" class="help-block">{{'0016' | translate}}</span>
+                        <span ng-if="vm.usersNameRepeat" class="help-block">{{vm.messageusername}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-12 text-left has-feedback"
+                      ng-class="{'has-error': vm.validActivateUser === false}">
+                      <label class="col-md-4 text-left">{{'0126' | translate}}:</label>
+                      <div class="col-md-8">
+                        <div class="input-group help-block">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDateControl}}"
+                            ng-model="vm.dateActivateUser" is-open="vm.openActivateUser"
+                            datepicker-options="vm.optionsDateActivateUser" ng-disabled="vm.isDisabled"
+                            ng-focus="vm.openActivateUser= true" ng-change="vm.changeDateActivateUser()"
+                            ng-blur="vm.validDateActivateUser()" on-open-focus="false" clear-text="{{'1013' |
+                            translate}}" close-text="{{'0022' | translate}}" current-text="{{'1014' | translate}}"
+                            ng-required="true" />
+                          <div class="input-group-addon" ng-click="vm.openActivateUser=
+                            true">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </div>
+                        </div>
+                        <span ng-if="vm.validActivateUser === false"
+                          class="help-block text-left has-feedback">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="form-group-min col-md-12 text-left has-feedback"
+                      ng-class="{'has-error': vm.validExpirateUser === false}">
+                      <label class="col-md-4 text-left">{{'0127' | translate}}:</label>
+                      <div class="col-md-8">
+                        <div class="input-group help-block">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDateControl}}"
+                            ng-model="vm.dateExpirateUser" is-open="vm.opendate"
+                            datepicker-options="vm.optionsDateExpirateUser" ng-disabled="vm.isDisabled" ng-focus="vm.opendate=
+                            true" on-open-focus="false" ng-blur="vm.validDateExpirateUse()"
+                            clear-text="{{'1013' | translate}}" close-text="{{'0022' | translate}}"
+                            current-text="{{'1014' | translate}}" />
+                          <div class="input-group-addon" ng-click="vm.opendate=
+                            true" ng-required="true">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </div>
+                        </div>
+                        <span ng-if="vm.validExpirateUser === false" class="help-block">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div ng-if="vm.usersDetail.type.id === 13" class="form-group-min col-md-12 text-left has-feedback"
+                      ng-class="{'has-error':
+                      UsersForm.password.$invalid &&
+                      UsersForm.password.$touched}">
+                      <label class="col-sm-4 text-left">{{'0002' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="password" name="password" data-ng-model="vm.usersDetail.password"
+                          ng-disabled="vm.isDisabled" ng-required="vm.isRequiredPassword" class="form-control"
+                          type="password" ng-change="vm.changePassword()" />
+                        <span ng-if="UsersForm.password.$invalid &&
+                          UsersForm.password.$touched" class="glyphicon glyphicon-remove form-control-feedback"
+                          aria-hidden="true"></span>
+                        <span ng-if="UsersForm.password.$invalid &&
+                          UsersForm.password.$touched" class="help-block">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div ng-if="vm.usersDetail.type.id === 13" class="form-group-min col-md-12 text-left has-feedback"
+                      ng-class="{'has-error':
+                      (UsersForm.confirmPassword.$invalid &&
+                      UsersForm.confirmPassword.$touched ) ||
+                      (vm.confirmPassword != vm.usersDetail.password &&
+                      UsersForm.confirmPassword.$touched)}" ng-if="vm.isRequiredPassword">
+                      <label class="col-sm-4 text-left">{{'0182' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <input id="confirmPassword" name="confirmPassword" data-ng-model="vm.confirmPassword"
+                          ng-disabled="vm.isDisabled" ng-required="vm.usersDetail.password !== '' &&
+                          vm.usersDetail.password !== undefined" class="form-control" type="password"
+                          placeholder="{{'0125' | translate}}" ng-change="vm.changePassword()" />
+                        <span ng-if="UsersForm.confirmPassword.$invalid &&
+                          UsersForm.confirmPassword.$touched" class="glyphicon glyphicon-remove form-control-feedback"
+                          aria-hidden="true"></span>
+                        <span ng-if="UsersForm.confirmPassword.$invalid &&
+                          UsersForm.confirmPassword.$touched" class="help-block">{{'0016' | translate}}</span>
+                        <span ng-if="vm.confirmPassword !=
+                          vm.usersDetail.password &&
+                          UsersForm.confirmPassword.$touched" class="help-block">{{'1094' | translate}}</span>
+                        <span ng-if="UsersForm.password.$invalid &&
+                          UsersForm.password.$touched" class="help-block">.</span>
+                      </div>
+                    </div>
+                    <div ng-if="vm.usersDetail.type.id === 13" class="col-md-12 form-group-min">
+                      <label class="col-md-4 text-left">{{'0128' | translate}}:</label>
+                      <div class="col-md-8" style="margin-bottom: 10px;">
+                        <div class="input-group help-block">
+                          <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDateControl}}"
+                            ng-model="vm.dateExpiratePassword" ng-disabled="true" ng-required="false" />
+                          <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div ng-if="vm.usersDetail.type.id === 12" class="form-group-min col-sm-12 text-left has-feedback">
+                      <label class="col-sm-4 text-left">{{'1140' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <select id="destination" name="destination" ng-options="obj
+                          as obj.name for obj in vm.listDestinos track by
+                          obj.id" data-ng-model="vm.usersDetail.destination" class="form-control"
+                          ng-disabled="vm.isDisabled"></select>
+                      </div>
+                    </div>
+                    <div ng-show="vm.usersDetail.type.id === 12" class="form-group-min col-sm-12 text-left has-feedback"
+                      ng-class="{'has-error': UsersForm.laboratory.$invalid &&
+                      UsersForm.laboratory.$touched}">
+                      <label class="col-sm-4 text-left">{{'0204' | translate}}:</label>
+                      <div class="col-sm-8 text-left">
+                        <select id="laboratory" name="laboratory" ng-options="obj.id as obj.name for obj in vm.listlab"
+                          data-ng-model="vm.usersDetail.laboratory" class="form-control"
+                          ng-required="vm.usersDetail.type.id === 12" ng-disabled="vm.isDisabled"></select>
+                        <span ng-if="UsersForm.laboratory.$invalid && UsersForm.laboratory.$touched"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="UsersForm.laboratory.$invalid && UsersForm.laboratory.$touched"
+                          class="help-block">{{'0016' | translate}}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-12 form-group-min">
+                      <label class="col-md-4 text-left">{{'0014' | translate}}:</label>
+                      <div class="col-md-8">
+                        <toggle ng-model="vm.usersDetail.state" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                          ng-change="vm.changeState()" ng-disabled="vm.isDisabledState || vm.usersDetail.id
+                          == 1 || vm.usersDetail.userName == 'integration'" size="btn-sm">
+                        </toggle>
+                        <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.usersDetail.state"></modalstate>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="panel-footer general-container" style="height: 55px;">
+              <button type="button" class="btn btn-success button-list" ng-click="vm.NewUsers(UsersForm)"
+                ng-disabled="vm.isDisabledAdd">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                {{'0005' | translate}}
+              </button>
+              <button type="button" class="btn btn-warning button-list" ng-click="vm.EditUsers()" ng-disabled="vm.isDisabledEdit ||
+                vm.usersDetail.id == 1 || vm.usersDetail.userName ==
+                'integration'">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+              </button>
+              <button type="button" class="btn btn-primary button-list" ng-click="vm.saveUsers(UsersForm)"
+                ng-disabled="vm.isDisabledSave">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+              </button>
+              <button type="button" class="btn btn-info button-list" ng-click="vm.cancelUsers(UsersForm)"
+                ng-disabled="vm.isDisabledCancel">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+              </button>
+              <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                ng-disabled="vm.isDisabledPrint">
+                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="col-md-6">
+                                <a ng-click="close('laboratory')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/laboratory.png">
+                                    <h6 class="text-center"> {{'0204' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                              <a ng-click="close('integrationanalyzer')" class="thumbnail" data-dismiss="modal">
+                                  <img src="images/questionpage.png">
+                                  <h6 class="text-center">{{'1139' | translate}}</h6>
+                              </a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

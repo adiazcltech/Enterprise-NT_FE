@@ -1,0 +1,206 @@
+<style type="text/css">
+    .md-btn {
+        text-transform: initial;
+    }
+
+    @media screen and (max-width: 667px) {
+        .hide-div {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 667px) {
+        .view-div {
+            display: none;
+        }
+    }
+</style>
+<div id="page_content" style="margin-left: 0px;height: calc(100% - 76px);overflow: auto;">
+    <div id="page_content_inner" style="height: calc(100% - 33px);padding: 16px;">
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-3-5 uk-medium-3-5 uk-width-small-1-1">
+                <div class="md-card" style="min-height: 400px;">
+                    <div class="md-card-toolbar" style="background: #e6e6e6;">
+                        <h3 class="md-card-toolbar-heading-text">
+                            Cuerpo del correo
+                        </h3>
+                    </div>
+                    <div class="md-card-content" style="min-height: 400px;">
+                        <summernote ng-model="vm.dataconfig[0].value" config="vm.options"></summernote>
+                        <span class="uk-form-help-block" ng-show="!vm.disableduser">{{'0084' | translate}}</span>
+                        <span class="uk-form-help-block uk-text-danger" ng-show="vm.disableduser">{{vm.erroradd}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-large-2-5 uk-medium-3-5 uk-width-small-1-1 fullheight">
+                <div class="md-card fullheight">
+                    <div class="md-card-toolbar" style="background: #e6e6e6;">
+                        <h3 class="md-card-toolbar-heading-text">
+                            {{'0133' | translate}}
+                        </h3>
+                    </div>
+                    <div class="md-card-content">
+                        <form name="formemail">
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1 ">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                src="images/config/protocol.png" />
+                                        </span>
+                                        <span style="top: -6px;font-size: 12px;color: #727272;">Servidor de
+                                            correo</span> <br />
+                                        <span class="icheck-inline">
+                                            <input type="radio" name="radio_demo_inline3" id="radio_demo_inline_33"
+                                                ng-model="vm.dataconfig[7].value" value="OUTLOOK" />
+                                            <label class="inline-label">OUTLOOK</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input type="radio" name="radio_demo_inline3" id="radio_demo_inline_34"
+                                                ng-model="vm.dataconfig[7].value" value="OTRO" />
+                                            <label class="inline-label">OTRO</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1 uk-margin-top">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                src="images/config/protocol.png" />
+                                        </span>
+                                        <label>{{'0134' | translate}}</label>
+                                        <input name="input" class="md-input" ng-model="vm.dataconfig[3].value"
+                                            md-input />
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1 uk-margin-top" ng-if="vm.dataconfig[7].value == 'OTRO'">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                src="images/config/port.png" />
+                                        </span>
+                                        <label>{{'0135' | translate}}</label>
+                                        <input name="input" class="md-input" ng-model="vm.dataconfig[5].value"
+                                            md-input />
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1 uk-margin-top" ng-if="vm.dataconfig[7].value == 'OTRO'">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                src="images/config/protocol.png" />
+                                        </span>
+                                        <span style="top: -6px;font-size: 12px;color: #727272;">Tipo de manejo de
+                                            seguridad</span> <br />
+                                        <span class="icheck-inline">
+                                            <input type="radio" name="radio_demo_inline" id="radio_demo_inline_1"
+                                                ng-model="vm.dataconfig[6].value" value="TLS" />
+                                            <label class="inline-label">TLS</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2"
+                                                ng-model="vm.dataconfig[6].value" value="SSL" />
+                                            <label class="inline-label">SSL</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1 uk-margin-top">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                src="images/config/email.png" />
+                                        </span>
+                                        <label>{{'0136' | translate}}</label>
+                                        <form name="formemail">
+                                            <input id="email" name="email" type="email" class="md-input"
+                                                ng-model="vm.dataconfig[2].value"
+                                                ng-class="{'md-input-danger':formemail.email.$invalid && formemail.email.$touched}"
+                                                md-input />
+                                        </form>
+                                        <span class="uk-form-help-block uk-text-danger"
+                                            ng-show="formemail.email.$invalid && formemail.email.$touched"
+                                            style="padding: 0px;margin-top: 3px;font-size: 11px;">{{'0137' |
+                                            translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1 uk-margin-top">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                src="images/config/lock.png" />
+                                        </span>
+                                        <label>{{'0002' | translate}}</label>
+                                        <input type="password" name="input" class="md-input"
+                                            ng-model="vm.dataconfig[4].value" md-input />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer" style="margin-left: 0px;padding: 0 0px;">
+    <div class="uk-grid" data-uk-grid-margin style="padding-bottom: 10px; padding-top: 10px">
+        <div class="uk-width-medium-1-1" style="width: 93%;">
+            <div class="uk-grid uk-grid-width-1-5" data-uk-grid-margin>
+                <div>
+                    <button type="button" class="md-btn md-btn-flat md-btn-wave md-btn-large md-btn-block md-btn-icon"
+                        ng-click="vm.adduser()">
+                        <i><img class="md-list-addon-icon material-icons md-36" ng-src="images/adduser.png" />
+                        </i>
+                        <h6 class="hide-div" style="margin-top: 0px;">{{'0085' | translate}}</h6>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="md-btn md-btn-flat md-btn-wave md-btn-large md-btn-block md-btn-icon"
+                        ng-click="vm.addpassword()">
+                        <i><img class="md-list-addon-icon material-icons md-48" ng-src="images/password.png" />
+                        </i>
+                        <h6 class="hide-div" style="margin-top: 0px;">{{'0086' | translate}}</h6>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="md-btn md-btn-flat md-btn-wave md-btn-large md-btn-block md-btn-icon"
+                        ng-click="vm.adddate()">
+                        <i><img class="md-list-addon-icon material-icons md-36" ng-src="images/adddate.png" />
+                        </i>
+                        <h6 class="hide-div" style="margin-top: 0px;">{{'0087' | translate}}</h6>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="md-btn md-btn-flat md-btn-wave md-btn-large md-btn-block md-btn-icon"
+                        ng-click="vm.addlab()">
+                        <i>
+                            <img class="md-list-addon-icon material-icons md-36" ng-src="images/addlab.png" />
+                        </i>
+                        <h6 class="hide-div" style="margin-top: 0px;">{{'0088' | translate}}</h6>
+                    </button>
+                </div>
+                <div class="hide-div uk-flex uk-flex-right uk-flex-middle">
+                    <button type="button" class="md-fab md-fab-small md-fab md-fab-success" ng-click="vm.save()"
+                        style="background: {{vm.dataconfig[1].value}}">
+                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0007' | translate}}">&#xE161;</i>
+                    </button>
+                </div>
+                <div class="view-div">
+                    <button type="button" class="md-fab md-fab-small md-fab md-fab-success" ng-click="vm.save()"
+                        style="background: {{vm.dataconfig[1].value}}">
+                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0007' | translate}}">&#xE161;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

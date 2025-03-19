@@ -1,0 +1,415 @@
+<style>
+    .quote_tests_input {
+        padding: 15px;
+        margin-right: 20px;
+        transition: all 0.30s ease-in-out;
+        outline: none;
+        border: 1px solid #DDDDDD;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .quote_tests_input:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    #quote_tests_dropdown {
+        width: 800px;
+    }
+
+    .quote-table-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: 270px !important;
+        max-height: 323px !important;
+    }
+
+    .w-8 {
+        width: 8% !important;
+    }
+</style>
+<div id="quote" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-blue-A200">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">&#xE227;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'1761'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content fullheight">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-form-row">
+                            <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                                <div class="uk-width-1-4" style="padding-left:5px">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon" style="min-width: 28px; padding: 5px;">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/patient/history.png">
+                                        </span>
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <label>{{'0398' | translate}}</label>
+                                            <input type="text" class="md-input" md-input label-fixed
+                                                ng-model="quote.patient" style="text-transform:uppercase">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-1-4">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon" style="min-width: 28px; padding: 5px;">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/order/rate.png">
+                                        </span>
+                                        <div class="md-input-wrapper md-input-filled"
+                                            ng-class="{'md-bg-grey-100': patientManagement.statecontrol[1]}">
+                                            <label>{{'0087' | translate}}</label>
+                                            <div label-fixed angucomplete-alt id="quote_rates"
+                                                input-class="quote_tests_input uk-width-1-1 md-input" pause="20"
+                                                selected-object="quote.selectRate" local-data="quote.rates"
+                                                search-fields="code,name" title-field="showValue" minlength="0"
+                                                match-class="highlight" focus-first="true"
+                                                input-changed="quote.rateChanged"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="uk-width-1-4"
+                                    ng-if="quote.max > 0 && quote.generaldiscountmanagement">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon" style="min-width: 28px; padding: 10px;">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/order/discount.png">
+                                        </span>
+                                        <div>
+                                            <label class="uk-text-truncate" style="font-size: 12px;margin-top: -8px;
+                                                margin-bottom: 14px;">{{'1292' | translate}}: </label>
+                                            <input k-format="'n0'" kendo-numeric-text-box k-max="100" k-decimals="'0'"
+                                                k-restrictDecimals="true" class="k-textbox orderentrytab"
+                                                k-ng-model="quote.discount" k-min="0"
+                                                k-on-change="quote.changeDiscount()" style="width: 100%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-4" ng-if="quote.taxgeneral!== 0">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon" style="min-width: 28px; padding: 10px;">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/order/tax.png">
+                                        </span>
+                                        <div>
+                                            <label class="uk-text-truncate" style="font-size: 12px;margin-top: -8px;
+                                            margin-bottom: 14px;">{{'1341' | translate}}: </label>
+                                            <input k-format="'n0'" kendo-numeric-text-box k-rebind="quote.taxgeneral"
+                                                k-max="quote.taxgeneral" k-decimals="'0'" k-restrictDecimals="true"
+                                                class="k-textbox orderentrytab" k-ng-model="quote.taxquotegeneral"
+                                                k-min="0" k-on-change="quote.changeDiscount()" style="width: 100%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="md-card" style="height: calc(100% - 270px)">
+                    <div class="md-card-content fullheight">
+                        <div class="uk-grid fullheight">
+                            <div class="uk-width-1-1" style="height: 24px">
+                                <div angucomplete-alt id="quote_tests" placeholder="Busca pruebas por codigo o nombre"
+                                    input-class="md-input uk-width-1-1" pause="20" selected-object="quote.selectTest"
+                                    local-data="quote.tests" search-fields="code,name" title-field="showValue"
+                                    description-field="area.name" image-field="colorType" minlength="1"
+                                    match-class="highlight" focus-first="true" clear-selected="true"
+                                    override-suggestions="true"
+                                    disable-input="quote.rate === null || quote.rate === undefined"
+                                    local-search="quote.filterListTest" input-changed="quote.inputChangedTest">
+                                </div>
+                            </div>
+                            <div class="uk-width-1-1" style="height: calc(100% - 100px)">
+                                <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                    style="height: 83%;">
+                                    <thead style=" display: inline-block;width: 100%;height: 39px;">
+                                        <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                            <th class="uk-width-1-6">
+                                                {{'3059' | translate}}
+                                            </th>
+                                            <th class="uk-width-1-6">
+                                                {{'0013' | translate}}
+                                            </th>
+
+                                            <th class="uk-width-1-6">
+                                                {{'0087' | translate}}
+                                            </th>
+                                            <th class="uk-text-right uk-width-1-6">
+                                                precio cliente
+                                            </th>
+                                            <th class="uk-text-right uk-width-1-6">
+                                                {{'1762' | translate}}
+                                            </th>
+                                            <th class="uk-text-right uk-width-1-6">
+                                                {{'0443' | translate}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyscrollable orderdailysearch-table-container"
+                                        style="margin-top: 0px;height: 93%;width: 100% !important; line-height: 29px">
+                                        <tr ng-repeat="test in quote.selectedTests" class="uk-grid"
+                                            style="margin-top: 0px;margin-left: 0px;">
+                                            <td class="uk-text-left uk-width-1-6">
+                                                <input kendo-numeric-text-box k-min="1" k-format="'n0'" k-decimals="0"
+                                                    id="{{'rate_'+test.test.id}}" name="{{'rate_'+test.test.id}}"
+                                                    class="k-textbox smalll orderentrytab" k-ng-model="test.count"
+                                                    ng-model="test.count" ng-blur="quote.calculated()"
+                                                    ng-focus="quote.focustax(test)" style="width: 100%;" />
+                                            </td>
+                                            <td class="uk-text-left uk-width-1-6">
+                                                <div style="margin-bottom: 0; display: block; position: relative; width: 40px"
+                                                    ng-if="test.requerimenthml != ''" class="uk-button-dropdown"
+                                                    data-uk-dropdown="{mode:'click'}">
+                                                    <i class="md-icon material-icons md-color-blue-500"
+                                                        data-uk-tooltip="{pos:'top'}" title="{{'0858'| translate}}"
+                                                        style="float: left;">&#xE0B9;</i>
+                                                    <div class="uk-dropdown"
+                                                        style="min-width: 280px;font-size: 12px; color: #727272; top:23px; left: 112px;"
+                                                        ng-bind-html="test.requerimenthml | trust"></div>
+                                                </div>
+                                                {{test.test.code}} -
+                                                {{test.test.name}}
+                                            </td>
+                                            <td class="uk-text-center uk-width-1-6" style="padding: 0px">
+                                                <select class="md-input" ng-model="test.testRate"
+                                                    ng-change="quote.changeRate(test)"
+                                                    ng-options="rateS as rateS.showValue for rateS in quote.rates track by rateS.id"
+                                                    style="font-size: 12px;height: 37px; min-height: 10px;"></select>
+                                            </td>
+                                            <td class="uk-text-right uk-width-1-6">{{test.insurancePrice | currency :
+                                                quote.symbolCurrency : quote.penny}}
+                                            </td>
+                                            <td class="uk-text-right uk-width-1-6">{{test.price | currency :
+                                                quote.symbolCurrency : quote.penny}}
+                                            </td>
+                                            <td class="uk-text-right uk-width-1-6">{{test.pricecant | currency :
+                                                quote.symbolCurrency : quote.penny}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot class="tfoot-grid">
+                                        <tr>
+                                            <th colspan="4" class="cltech-label uk-text-right" style="font-weight: bold !important;
+                                            padding-left: 5px;"></th>
+                                            <th class="uk-widtd-1-9 uk-text-right small_col cltech-label"
+                                                style="width: 5%;"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5" class="cltech-label uk-text-right">
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-1-10 uk-text-truncate" style="font-weight: bold !important;
+                                                      padding-left: 5px;" ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{'0443' | translate}}:</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate"
+                                                        style="padding-left: 5px;"
+                                                        ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{quote.priceexam | currency :
+                                                        quote.symbolCurrency :quote.penny}}</div>
+
+                                                     <div class="uk-width-1-10 uk-text-truncate" style="font-weight: bold !important;padding-left: 5px;" ng-class="{'w-8': quote.isAddressCharge}">
+                                                        Total cliente:</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate"
+                                                        style="padding-left: 5px;"
+                                                        ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{quote.insurancePriceexam | currency :
+                                                        quote.symbolCurrency :quote.penny}}</div>
+ 
+
+                                                  <!--   <div class="uk-width-1-10 uk-text-truncate" style="font-weight: bold !important;
+                                                        padding-left: 5px;" ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{'0931' | translate}}:</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate"
+                                                        style="padding-left: 5px;"
+                                                        ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{quote.valuediscount | currency :
+                                                        quote.symbolCurrency :quote.penny}}</div> -->
+                                                    <div class="uk-width-1-10 uk-text-truncate" style="font-weight: bold !important;
+                                                        padding-left: 5px;" ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{'1760' | translate}}:</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate"
+                                                        style="padding-left: 5px;"
+                                                        ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{quote.totaldiscount | currency :
+                                                        quote.symbolCurrency :quote.penny}}</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate" style="font-weight: bold !important;
+                                                        padding-left: 5px;" ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{'0470' | translate}}:</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate"
+                                                        style="padding-left: 5px;"
+                                                        ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{quote.totaltax | currency :
+                                                        quote.symbolCurrency :quote.penny}}</div>
+
+                                                    <div ng-if="quote.isAddressCharge" class="w-8 uk-text-truncate"
+                                                        style="font-weight: bold !important;
+                                                        padding-left: 5px;">{{'1899' | translate}}:</div>
+
+                                                    <div ng-if="quote.isAddressCharge" class="w-8">
+                                                        <input id="addressCharge" ng-model="quote.addressCharge"
+                                                            ng-keypress="quote.keyOnlyNumber($event)"
+                                                            class="md-input uk-text-right" md-input
+                                                            ng-blur="quote.calculated()"
+                                                            ng-focus="quote.eventFocusValue(quote.addressCharge, 'addressCharge')"
+                                                            style="padding: 20px 0px 0px 0px;margin-top: -30px;font-size: 9pt;">
+                                                    </div>
+
+                                                    <div class="uk-width-1-10 uk-text-truncate" style="font-weight: bold !important;
+                                                        padding-left: 5px;" ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{'1723' | translate}}:</div>
+                                                    <div class="uk-width-1-10 uk-text-truncate"
+                                                        style="padding-left: 5px;"
+                                                        ng-class="{'w-8': quote.isAddressCharge}">
+                                                        {{quote.totaltaxvalue | currency :
+                                                        quote.symbolCurrency :quote.penny}}</div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-fab-wrapper md-fab-in-card uk-flex">
+                <button style="margin-top: 16px" type="button" class="md-fab  md-fab-small  md-bg-light-green-300"
+                    ng-click="quote.cleanQuote()">
+                    <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Nuevo">settings_backup_restore</i>
+                </button>
+                <button style="margin-top: 16px" type="button"
+                    ng-disabled="quote.patient === '' || !quote.rate.hasOwnProperty('id') || quote.discount === '' || quote.selectedTests.length === 0"
+                    class="md-fab  md-fab-small md-bg-blue-A200" ng-click="quote.saveQuote()"
+                    ng-class="{'md-bg-blue-grey-100' : quote.patient === '' || !quote.rate.hasOwnProperty('id') || quote.discount === '' || quote.selectedTests.length === 0}">
+                    <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Guardar cotizacion">save</i>
+                </button>
+                <button type="button" class="md-fab  md-fab-small md-bg-teal-300" ng-click="quote.searchQuote()">
+                    <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Buscar cotizacion">search</i>
+                </button>
+                <button type="button"
+                    ng-disabled="quote.patient === '' || !quote.rate.hasOwnProperty('id') || quote.discount === '' || quote.selectedTests.length === 0"
+                    class="md-fab  md-fab-small md-bg-purple-400" ng-click="quote.generate()"
+                    ng-class="{'md-bg-blue-grey-100' : quote.patient === '' || !quote.rate.hasOwnProperty('id') || quote.discount === '' || quote.selectedTests.length === 0}">
+                    <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Generar informe">&#xE8AD;</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalsearchquote" class="uk-modal" aria-hidden="true" bg-close="false"
+    style="display: none; overflow-y: scroll; min-height: 300px;">
+    <div class="uk-modal-dialog uk-modal-dialog-large" style="height: 70%">
+        <div class="uk-grid uk-container-center ordersearch-filter-padding" style="height: 100%;">
+            <div class="uk-width-2-10 uk-margin-top">              
+                <md-radio-group ng-model="quote.typefilter" aria-labelledby="favoriteFruit"
+                    ng-change="quote.Quoteradio(quote.typefilter)" class="md-primary">
+                    <md-radio-button value="1" class="md-primary">{{'3109' | translate}}</md-radio-button>
+                    <md-radio-button value="0">{{'3063' | translate}}</md-radio-button>
+                </md-radio-group>
+            </div>
+            <div ng-if="quote.typefilter === '1'" class="uk-width-8-10" style="padding-bottom:15px">
+                <div class="uk-input-group">
+                    <span class="uk-input-group-addon" style="min-width: 28px; padding: 5px;">
+                        <img class="md-list-addon-icon material-icons md-24" ng-src="images/patient/history.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled"
+                        ng-class="{'md-bg-grey-100': patientManagement.statecontrol[1]}">
+                        <label>{{'0398' | translate}}</label>
+                        <input type="text" class="md-input" ng-model="quote.patientsearch"
+                            style="text-transform:uppercase"
+                            ng-keypress="$event.keyCode === 13 && quote.searchQuoteByPatient()">
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-4-10" ng-if="quote.typefilter === '0'"
+                style="margin-top: -10px; margin-bottom: 10px;padding-bottom: 15px;">
+                <label style="font-size: 12px;color: #727272;left: 4px;">{{'0075' | translate}}</label>
+                <input kendo-date-picker k-ng-model="quote.startDate" style="width: 100%;"
+                    k-format="'{{quote.formatDate}}'" k-max="quote.maxDate" k-rebind="quote.maxDate"
+                    k-min="quote.tomorrow" k-on-change="quote.startChange()" />
+            </div>
+            <div class="uk-width-4-10" ng-if="quote.typefilter === '0'" style="margin-top: -10px;padding-bottom: 15px;">
+                <label style="font-size: 12px;color: #727272;left: 4px;">{{'0076' | translate}}</label>
+                <input kendo-date-picker k-ng-model="quote.endDate" style="width: 100%;"
+                    k-format="'{{quote.formatDate}}'" k-max="quote.maxend" k-min="quote.min" k-rebind="quote.min"
+                    k-on-change="quote.endChange()" />
+            </div>
+            <div class="uk-width-1-1" style="padding-left:5px; height: calc(100% - 100px)">
+                <table class="uk-table  uk-table-small uk-table-middle tablescrollable" style="height: 100%;">
+                    <thead style=" display: inline-block;width: 100%;height: 39px;">
+                        <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                            <th class="uk-width-3-6">
+                                <input type="text" class="md-input" md-input label-fixed
+                                    ng-model="quote.patientsearchlocal"
+                                    style="text-transform:uppercase; min-height: 25px;height: 25px;font-size: 12px;"
+                                    placeholder="paciente">
+                            </th>
+                            <th class="uk-text-center uk-width-1-6">
+                                {{'0087' | translate}}
+                            </th>
+
+                            <th class="uk-text-center uk-width-1-6">
+                                {{'0931' | translate}} (%)
+                            </th>
+
+                            <th class="uk-text-center uk-width-1-6">
+                                {{'0101' | translate}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyscrollable orderdailysearch-table-container contentscroll" vs-repeat="20"
+                        style="margin-top: 6px;height: calc(100% - 30px);width: 100% !important">
+                        <tr ng-repeat="quoteelement in quote.listQuote | filter: quote.patientsearchlocal"
+                            class="uk-grid" style="margin-top: 7px; margin-left: 0px">
+                            <td class="uk-width-3-6"><a style="text-transform: uppercase;"
+                                    ng-click="quote.loadQuote(quoteelement)">{{quoteelement.name}}</a></td>
+                            <td class="uk-text-left uk-width-1-6">{{quoteelement.rate.name}}</td>
+                            <td class="uk-text-center uk-width-1-6"> {{quoteelement.discount}}</td>
+                            <td class="uk-text-center uk-width-1-6">
+                                <span class="uk-badge uk-badge-primary">{{quoteelement.quotationDetail.length}}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ventana modal que muestra un mensaje que indica que el valor digitado supera al saldo.-->
+<div id="modalBalance" class="uk-modal" tabindex="1" aria-hidden="false" bg-close="false" modal="false">
+    <div class="uk-modal-dialog messageValidBalance">
+        <button type="button" class="uk-close" ng-click="quote.modalBalance.hide()"></button>
+        <div class="uk-modal-body" style="height: 100px; top: 0px">
+            <div style="width: 18%; float: left; margin-right: 20px; margin-left: 20px">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageTextBalance">
+                <label class="labelmessageText">{{'0870' | translate}}</label>
+            </div>
+        </div>
+        <div class="uk-modal-footer">
+        </div>
+    </div>
+</div>

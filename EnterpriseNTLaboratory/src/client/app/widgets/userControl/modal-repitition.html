@@ -1,0 +1,180 @@
+<loadpage view="modalrepitition.loading"></loadpage>
+<modalexceptions idcontrol="'modalrepitition'" openmodal="modalrepitition.ShowPopupError"
+    detailerror="modalrepitition.Error"></modalexceptions>
+<div id="rp-modal-advertencia" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-grid uk-container-center">
+            <div class="uk-width-3-10">
+                <img src="images/iconinfo.png" height="90" width="90">
+            </div>
+            <div class="uk-width-7-10" style="margin-top: 3%;">
+                <span>{{'1146' | translate}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="repititionmodal" class="uk-modal uk-modal-card-fullscreen">
+    <loadpage view="modalrepitition.loadingdata"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-blue-A700">
+                <div class="md-card-toolbar-actions" style="padding-top: 0px">
+                    <div>
+                        <i class="md-icon material-icons md-color-grey-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            ng-click="modalrepitition.loading = false; modalrepitition.loadingdata = false;"
+                            title="{{'0329'| translate}}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="line-height: 32px; font-size: 30px">&#xE889;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0355' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: 87%;">
+                <div class="uk-grid uk-grid-small" style="height: 100%;">
+                    <div class="uk-width-3-10" style="padding-left: 0px">
+                        <div class="md-card md-card-hover uk-flex uk-flex-center uk-flex-middle uk-animation-scale-up"
+                            style="height: 100%">
+                            <div class="md-card-content">
+                                <div class="uk-grid" style="width: 100%; margin-left: 0px;height: 100%">
+                                    <div class="uk-width-1-1" style="padding-left: 0px">
+                                        <ul class="md-list md-list-addon  uk-text-center">
+                                            <div class="uk-badge"
+                                                style="background-color: {{modalrepitition.patient.typeordercolor}}; font-size: 33px;margin-right: 10px;font-weight: 500;padding: 11px 8px 13px; border-radius: 10px;display: inline-block; margin-top: -21px;">
+                                                {{modalrepitition.patient.typeordercode}}
+                                            </div>
+                                            <div style="display: inline-block;">
+                                                <h1 class="uk-text-center" style="margin-bottom: 5px">
+                                                    {{modalrepitition.order}}
+                                                </h1>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-3-10" style="z-index: 100">
+                        <cardpatient patientname="modalrepitition.patient.name"
+                            patientdocument="modalrepitition.patient.document" patientage="modalrepitition.patient.age"
+                            patientgender="modalrepitition.patient.gender" photopatient="modalrepitition.photopatient"
+                            patientid="modalrepitition.patient.id" orderpatient="modalrepitition.order">
+                        </cardpatient>
+                    </div>
+                    <div class="uk-width-4-10">
+                        <div class="md-card md-card-hover">
+                            <div class="md-card-content" style="padding: 0px;">
+                                <div class="uk-grid uk-grid-small">
+                                    <div class="uk-width-1-2"
+                                        style="border-right: 1px solid rgba(0, 0, 0, 0.12);padding: 16px">
+                                        <div class="uk-form-row">
+                                            <label class="uk-modal-content">{{'0113' | translate}}:</label>
+                                            <select class="md-input form-control"
+                                                ng-options="obj as obj.name for obj in modalrepitition.Listmotive track by obj.id"
+                                                data-ng-model="modalrepitition.motive"
+                                                style="font-size: 14px !important"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2" style="padding: 16px;">
+                                        <div class="uk-form-row">
+                                            <label>{{'0114' | translate}}:</label>
+                                            <div class="md-input-wrapper">
+                                                <textarea cols="30" rows="2" data-ng-model="modalrepitition.Comment"
+                                                    class="md-input no_autosize"
+                                                    style="margin: 0px -10.5px 0px 0px; width: 100%; height: 80px; font-size: 14px !important"></textarea><span
+                                                    class="md-input-bar "></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="form" name="myForm"
+                        style="height: calc(100% - 157px); padding: 15px 0px 10px 0px;width: 100%">
+                        <div class="md-card" style="height: calc(100% - 55px)">
+                            <table class="uk-table uk-table-small uk-table-middle tablescrollable" style="height: 100%">
+                                <thead class="uk-table uk-table-small uk-table-middle  uk-table-divider">
+                                    <tr>
+                                        <th class="uk-width-1-10 uk-text-center small_col">
+
+                                        </th>
+                                        <th class="uk-width-2-10 uk-text-bold" style="padding-left: 25px">
+                                            {{'0098' | translate}}</th>
+                                        <th class="uk-width-2-10 uk-text-bold">{{'0198' | translate}}</th>
+                                        <th class="uk-width-6-10 uk-text-bold">{{'0013' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat-start="(areaGroup, tests) in modalrepitition.listTest">
+                                        <td style="background-color: rgb(198, 217, 253);width: 100%;"
+                                            class="uk-padding-remove" colspan="20"
+                                            ng-class="{'md-bg-grey-300 md-color-grey-400': !tests[0].grantAccess, 'uk-text-primary': tests[0].grantAccess}">
+                                            <a ng-if="tests[0].grantAccess === true && tests[0].grantValidate === false"
+                                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                                title="Sin permisos para validar"
+                                                class="uk-icon-justify uk-icon-user-times uk-margin-small-left uk-margin-small-right uk-text-primary"></a>                                         
+                                            {{areaGroup}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="obj in tests | orderBy:'profileId'" ng-repeat-end>
+                                        <td colspan="20" style="background-color: rgb(228 236 251);font-size: 11px;"
+                                            ng-if="obj.viewprofil"
+                                            class="uk-table-shrink uk-text-nowrap uk-padding-remove"
+                                            ng-class="{'md-bg-grey-300 md-color-grey-400': !tests[0].grantAccess, 'uk-text-primary': tests[0].grantAccess}">
+                                            <a ng-if="tests[0].grantAccess === true && tests[0].grantValidate === false"
+                                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                                title="Sin permisos para validar"
+                                                class="uk-icon-justify uk-icon-user-times uk-margin-small-left uk-margin-small-right uk-text-primary"></a>                                         
+                                            {{obj.profileName}}
+                                        </td>
+                                        <td ng-if="!obj.viewprofil"
+                                            class="uk-table-shrink uk-text-nowrap uk-padding-remove">
+                                            <a ng-if="obj.grantAccess === true && obj.grantValidate === false"
+                                                data-uk-tooltip="{pos:'bottom', cls:'my-tooltip'}"
+                                                title="Sin permisos para validar"
+                                                class="uk-icon-justify uk-icon-user-times uk-margin-small-left uk-margin-small-right uk-text-primary"></a>
+                                            <md-checkbox ng-model="obj.isSelected" aria-label="Finished?"
+                                                class="md-primary" ng-if="obj.state === 2"
+                                                ng-disabled="obj.block.blocked || !obj.grantAccess || obj.sampleState === 1 || obj.blockdays === true"
+                                                style="margin-bottom: 0px;">
+                                            </md-checkbox>
+                                            <i ng-if="obj.state !== 2" title="No se puede repetir"
+                                                data-uk-tooltip="{cls:'uk-tooltip-small long-text', pos:'top'}"
+                                                class="material-icons md-color-red-600"
+                                                style="font-weight: bold">&#xE14B;</i>
+                                        </td>
+                                        <td ng-if="!obj.viewprofil"
+                                            class="uk-table-shrink uk-text-nowrap uk-padding-remove">
+                                            {{obj.testCode}}
+                                        </td>
+                                        <td ng-if="!obj.viewprofil"
+                                            class="uk-table-shrink uk-text-nowrap uk-padding-remove">
+                                            {{obj.abbreviation}}
+                                        </td>
+                                        <td ng-if="!obj.viewprofil"
+                                            class="uk-table-shrink uk-text-nowrap uk-padding-remove">
+                                            {{obj.testName}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    <div class="md-fab-wrapper md-fab-in-card" style="top: calc(100% - 69px);">
+                        <button type="button" class="md-fab md-fab-small md-fab"
+                            ng-click="modalrepitition.Savepostponement()"
+                            ng-disabled="(modalrepitition.motive.id === -1 || (modalrepitition.Detail.tests | filter:{ select: true}).length === 0 )"
+                            ng-class="{'md-color-grey-50 md-bg-blue-grey-100': (modalrepitition.motive.id === -1 || (modalrepitition.Detail.tests | filter:{ select: true}).length === 0 ),
+                                       'md-color-grey-50 md-bg-purple-300': (modalrepitition.motive.id !== -1  && (modalrepitition.Detail.tests | filter:{ select: true}).length !== 0 )}">
+                            <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                title=" {{'0007' | translate}} ">&#xE161;</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

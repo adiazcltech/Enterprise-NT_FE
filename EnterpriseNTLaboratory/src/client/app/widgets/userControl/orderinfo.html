@@ -1,0 +1,141 @@
+<style>
+    .orderinfo-header-avatar {
+        margin-top: 10px !important;
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .orderinfo-header-text {
+        padding-bottom: 0px !important;
+    }
+
+    .orderinfo-md-card {
+        height: 120px !important;
+    }
+
+    .orderinfo-card-content {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        overflow-y: auto !important;
+    }
+
+    .orderinfo-addon-element {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        min-height: 40px;
+        height: 40px !important;
+    }
+
+    .orderinfo-list-content {
+        font-size: 12px !important;
+    }
+
+    .orderinfo-demo-item {
+        padding-top: {{orderinfo.height_line}};
+        padding-bottom: {{orderinfo.height_line}};
+    }
+
+    .md-list>li {
+        min-height: 0px !important;
+    }
+
+    .orderinfo-demographic-text {
+        text-transform: capitalize !important;
+    }
+
+    .orderinfo-order {
+        font-size: 38px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+</style>
+<modalexceptions openmodal="order.ShowPopupError" detailerror="order.Error"></modalexceptions>
+<div class="md-card md-card-hover uk-animation-fade" style="height: 100%">
+    <div class="md-card-head md-bg-light-blue-600 orderinfo-md-card">
+        <div class="uk-text-center orderinfo-order">
+            {{orderinfo.order.order}}
+        </div>
+        <h3 class="md-card-head-text uk-text-center md-color-white orderinfo-header-text">
+            {{orderinfo.order.type}}
+            <span>
+                {{orderinfo.order.registerDate}}
+            </span>
+        </h3>
+    </div>
+    <div class="md-card-content orderinfo-card-content contentscroll" style="height: calc(100% - 130px)">
+        <ul class="md-list md-list-addon">
+            <li class="orderinfo-demo-item">
+                <div class="md-list-addon-element orderinfo-addon-element">
+                     <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/branch.png" />
+                </div>
+                <div class="md-list-content orderinfo-list-content">
+                      <span class="uk-text-small uk-text-muted orderinfo-list-content">{{'0003' | translate}}</span>
+                    <span class="md-list-heading">
+                        {{orderinfo.order.branch}}
+                    </span>
+                  
+                </div>
+            </li>
+            <li class="orderinfo-demo-item" ng-if="orderinfo.manageService">
+                <div class="md-list-addon-element orderinfo-addon-element">
+                    <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/service.png" />
+                </div>
+                <div class="md-list-content orderinfo-list-content">
+                     <span class="uk-text-small uk-text-muted orderinfo-list-content">{{'0090' | translate}}</span>
+                    <span class="md-list-heading">
+                        {{orderinfo.order.service}}
+                    </span>
+                   
+                </div>
+            </li>
+            <li class="orderinfo-demo-item" ng-if="orderinfo.manageAccount">
+                <div class="md-list-addon-element orderinfo-addon-element">
+                     <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/customer.png" />
+                </div>
+                <div class="md-list-content orderinfo-list-content">
+                     <span class="uk-text-small uk-text-muted orderinfo-list-content">{{'0085' | translate}}</span>
+                    <span class="md-list-heading">
+                        {{orderinfo.order.account}}
+                    </span>
+                   
+                </div>
+            </li>
+            <li class="orderinfo-demo-item" ng-if="orderinfo.manageRate">
+                <div class="md-list-addon-element orderinfo-addon-element">
+                   <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/rate.png" />
+                </div>
+                <div class="md-list-content orderinfo-list-content">
+                     <span class="uk-text-small uk-text-muted orderinfo-list-content">{{'0087' | translate}}</span>
+                    <span class="md-list-heading">
+                       {{orderinfo.order.rate}}
+                    </span>
+                   
+                </div>
+            </li>
+            <li class="orderinfo-demo-item"  ng-if="orderinfo.managePhysician">
+                <div class="md-list-addon-element orderinfo-addon-element">
+                    <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/physician.png" />
+                </div>
+                <div class="md-list-content orderinfo-list-content">
+                      <span class="uk-text-small uk-text-muted orderinfo-list-content">{{'0086' | translate}}</span>
+                    <span class="md-list-heading">
+                        {{orderinfo.order.physician}}
+                    </span>
+                  
+                </div>
+            </li>
+            
+            <li class="orderinfo-demo-item" ng-repeat="demo in orderinfo.order.demographics">
+                <div class="md-list-addon-element orderinfo-addon-element">
+                    <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/demo.png" />
+                </div>
+                <div class="md-list-content orderinfo-list-content">
+                    <span class="uk-text-small uk-text-muted orderinfo-list-content">{{demo.demographic}}</span>
+                    <span class="md-list-heading">
+                        {{demo.value === undefined || demo.value === null || demo.value === '' ? 'No registrado' : demo.value}}
+                    </span>                    
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

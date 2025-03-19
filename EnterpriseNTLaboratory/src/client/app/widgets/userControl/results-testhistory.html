@@ -1,0 +1,368 @@
+<style>
+    .th-header {
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+        background-color: #ccc;
+        font-size: 12px !important;
+    }
+
+    .th-subheader {
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+        font-size: 12px !important;
+    }
+
+    .theader {
+        display: inline-block;
+        width: 100%;
+        height: 29px;
+        overflow-y: scroll;
+
+    }
+</style>
+
+<div class="uk-modal uk-modal-card-fullscreen" id="rs-modal-testhistory">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <loadpage view="vmd.loading"></loadpage>
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-blue-700">
+                <div class="md-card-toolbar-actions">
+                    <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top', delay: 3000}"
+                        title="{{'0329'| translate}}" ng-click="vmd.close()">&#xE5CD;</i>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="md-icon uk-icon-history md-color-blue-50"></i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0400' | translate}}
+                </h3>
+            </div>
+
+            <div class="md-card-content">
+                <div id="top_bar" style="margin-left: 0px; z-index: 0">
+                    <div class="md-top-bar">
+                        <div class="uk-grid">
+                            <div class="uk-width-4-6">
+                                <div class="uk-tab">
+                                    <ul class="uk-tab" data-uk-tab="{connect:'#tabs_filter'}">
+                                        <li ng-class="{'uk-active':vmd.tabactive === 1}">
+                                            <a ng-click="vmd.filterlist()">{{'0353' | translate}}</a>
+                                        </li>
+                                        <li ng-class="{'uk-active':vmd.tabactive === 2}" ng-if="vmd.viewtext">
+                                            <a href="#" ng-click="vmd.filterlist(1)">{{'0648' | translate}}</a>
+                                        </li>
+                                        <li ng-class="{'uk-active':vmd.tabactive === 3}" ng-if="vmd.viewgraph">
+                                            <a href="#" ng-click="vmd.filterlist(2)">{{'0649' | translate}}</a>
+                                        </li>
+                                        <li ng-class="{'uk-active':vmd.tabactive === 4}" ng-if="vmd.viewgraph">
+                                            <a href="#" ng-click="vmd.filterlist(3)">{{'0650' | translate}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-grid uk-grid-small" style="margin-top: 35px;height: calc(100% - 35px);">
+
+                    <div class="uk-grid uk-grid-small" style="width: 100%; margin-left:
+                    0px;height: 121px">
+                        <div class="uk-width-1-3" style="padding-left: 0px;height:100%;">
+                            <cardorder order="vmd.order" typeordercode="vmd.patient.typeordercode"
+                                typeordercolor="vmd.patient.typeordercolor" testcode="vmd.TestSelect.code"
+                                testname="vmd.TestSelect.name">
+                            </cardorder>
+                        </div>
+                        <div class="uk-width-1-3" style="z-index: 200;height: 100%;">
+                            <cardpatient patientname="vmd.patient.name" patientdocument="vmd.patient.document"
+                                patientage="vmd.patient.age" patientgender="vmd.patient.gender"
+                                patientagedate="vmd.patient.birthday" photopatient="vmd.photopatient"
+                                patientid="vmd.patient.id" orderpatient="vmd.order" orderdemo="vmd.orderdemo">
+                            </cardpatient>
+                        </div>
+                        <div class="uk-width-1-3" style="height: 100%;">
+                            <loadpage view="vmd.loading"></loadpage>
+                            <commentordermodal type="1" orderhistory="vmd.order" viewdirectic="vmd.viewcomment">
+                            </commentordermodal>
+                        </div>
+                    </div>
+
+
+                    <div class="uk-width-1-2" ng-repeat="graph in vmd.listgraphics" ng-if="vmd.graphgroup === false"
+                        style="height: calc(100% - 139px);">
+                        <div class="md-card md-card-hover uk-animation-scale-down" style="margin-bottom: 10px">
+                            <div class="md-card-toolbar" style="height: 35px">
+                                <div class="md-card-toolbar-actions" style="padding-top: 2px">
+                                    <i class="md-icon material-icons md-color-blue-500"
+                                        ng-click="vmd.loaddetailtest(graph)">&#xE3C2;</i>
+                                </div>
+
+                                <h3 class="md-card-toolbar-heading-text" style="height: 35px; line-height: 35px">
+                                    <b>{{graph.name}}</b>
+                                </h3>
+                            </div>
+                            <!--  Seccion pruebas de tipo numericas -->
+                            <div class="md-card-content" style="padding: 0px; width: 100%; height: 230px"
+                                ng-if="graph.type === 1">
+                                <div style="width: 100%; height: 230px">
+                                    <echart style="height: 100%; width: 100%" data="graph.datagraphics"
+                                        options="graph.options"></echart>
+                                </div>
+                            </div>
+                            <!--  Seccion pruebas de tipo texto -->
+                            <div class="md-card-content" style="min-height: 200px; height: 200px"
+                                ng-if="graph.type === 2">
+                                <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                    style="margin-bottom: 0px; height: 100%; margin-top: 0px;">
+                                    <thead class="theader">
+                                        <tr class="uk-grid" style="margin-left: 0px;">
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header"
+                                                style="width: 4%"></th>
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header"
+                                                style="width: 15%">{{'0418' | translate}}</th>
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header"
+                                                style="width: 16%">{{'0110' | translate}}</th>
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header">{{'0289'
+                                                | translate}}</th>
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header">{{'0394'
+                                                | translate}}</th>
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header"
+                                                style="width: 10%">{{'0323' | translate}}</th>
+                                            <th class="uk-width-1-5 uk-text-center uk-text-truncate th-header"
+                                                style="width: 15%">Comentario</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="tbodyscrollable"
+                                        style="margin-top: 0px; height: calc(100% - 30px); overflow-y: scroll;">
+                                        <tr data-ng-repeat="test in graph.testdetail" class="uk-grid"
+                                            style="margin-left: 0px;margin-top: 0px;">
+                                            <td class=" uk-width-1-5 th-subheader uk-text-center" style="width: 4%">
+                                                {{$index + 1}}
+                                            </td>
+                                            <td class=" uk-width-1-5 th-subheader" style="width: 15%">
+                                                {{test.datevalid}}
+                                            </td>
+                                            <td class="uk-width-1-5 uk-table-middle  th-subheader uk-text-center"
+                                                style="width: 16%">
+                                                {{test.order.toString().substring(3)}}
+                                            </td>
+                                            <td class="uk-width-1-5  th-subheader">
+                                                {{test.result}}
+                                            </td>
+                                            <td class="uk-width-1-5  th-subheader">
+                                                {{test.referencevalues}}
+                                            </td>
+                                            <td class="uk-width-1-5  th-subheader" style="width: 10%">
+                                                {{test.patology}}
+                                            </td>
+                                            <td class="uk-width-1-5  th-subheader" style="width: 15%"
+                                                ng-bind-html="test.comment">
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  Seccion grafica agrupada  -->
+                    <div class="uk-width-1-2" style="height: calc(100% - 139px);" ng-if="vmd.graphgroup === true">
+                        <div class="md-card md-card-hover uk-animation-scale-down" style="height: calc(100% - 110px)">
+                            <div class="md-card-content" style="height: 95%">
+                                <echart style="height: 100%; width: 100%" data="vmd.graphnumbergroup"
+                                    options="vmd.optionsgraphgroup"></echart>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2" style="height: calc(100% - 139px);" ng-if="vmd.graphgroup === true">
+                        <div class="md-card md-card-hover uk-animation-scale-down" style="height: calc(100% - 110px)">
+                            <div class="md-card-content" style="height: 95%">
+                                <div class="uk-accordion" data-uk-accordion>
+                                    <h3 class="uk-accordion-title" ng-repeat-start="test in vmd.listgraphics">
+                                        {{test.name}}</h3>
+                                    <div class="uk-accordion-content" style="padding: 10px" ng-repeat-end>
+                                        <table style="height: 200px"
+                                            class="uk-table uk-table-small uk-table-middle tablescrollable"
+                                            style="margin-bottom: 0px; margin-top: 0px;">
+                                            <thead class="theader" style="height: 40px">
+                                                <tr class="uk-grid" style="margin-left: 0px;">
+                                                    <th class="uk-width-1-5 uk-text-center th-header" style="width: 4%">
+                                                    </th>
+                                                    <th class="uk-width-1-5 uk-text-center th-header"
+                                                        style="width: 16%">{{'0418' | translate}}</th>
+                                                    <th class="uk-width-1-5 uk-text-center th-header">{{'0110' |
+                                                        translate}}</th>
+                                                    <th class="uk-width-1-5 uk-text-center th-header">{{'0289' |
+                                                        translate}}</th>
+                                                    <th class="uk-width-1-5 uk-text-center th-header">{{'0394' |
+                                                        translate}}</th>
+                                                    <th class="uk-width-1-5 uk-text-center th-header">{{'0323' |
+                                                        translate}}</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="tbodyscrollable"
+                                                style="margin-top: 0px; height: calc(100% - 55px); overflow-y: scroll;">
+                                                <tr data-ng-repeat="detail in test.testdetail" class="uk-grid"
+                                                    style="margin-left: 0px;margin-top: 0px;">
+                                                    <td class=" uk-width-1-5 th-subheader" style="width: 4%">
+                                                        {{$index + 1}}
+                                                    </td>
+                                                    <td class=" uk-width-1-5 th-subheader" style="width: 16%">
+                                                        {{detail.datevalid}}
+                                                    </td>
+                                                    <td
+                                                        class="uk-width-1-5 uk-table-middle  th-subheader uk-text-center">
+                                                        {{detail.order.toString().substring(3)}}
+                                                    </td>
+                                                    <td class="uk-width-1-5  th-subheader">
+                                                        {{detail.result}}
+                                                    </td>
+                                                    <td class="uk-width-1-5  th-subheader">
+                                                        {{detail.referencevalues}}
+                                                    </td>
+                                                    <td class="uk-width-1-5  th-subheader">
+                                                        {{detail.patology}}
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-modal uk-modal-card-fullscreen" id="rs-modal-testhistorydetail">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar" style="height: 35px">
+                <div class="md-card-toolbar-actions" style="padding-top: 2px">
+                    <i class="md-icon material-icons md-color-grey-900" ng-click="vmd.closedetailtest()">&#xE5CD;</i>
+                </div>
+
+                <h3 class="md-card-toolbar-heading-text" style="height: 35px; line-height: 35px">
+                    <b>{{vmd.detailtest.name}}</b>
+                </h3>
+            </div>
+            <div class="md-card-content" style="overflow: hidden">
+                <div style="height: 66px;width: 100%;border-bottom-style: solid;border-bottom-width: 4px;border-bottom-color: #ddd;margin-bottom: 11px;"
+                    class="uk-grid uk-grid-small">
+                    <div class="uk-width-1-4 uk-text-bold">
+                        {{'0398' | translate}}:
+                    </div>
+                    <div class="uk-width-1-4 uk-text-bold">
+                        {{vmd.patient.name}}
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{'0124' | translate}}:
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{vmd.patient.gender}}
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{vmd.label}}:
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{vmd.patient.document}}
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{'0976' | translate}}:
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{vmd.patient.birthday | date:'dd/MM/yyyy'}}
+                    </div>
+                    <div class="uk-width-2-4">
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{'0102' | translate}}:
+                    </div>
+                    <div class="uk-width-1-4">
+                        {{vmd.patient.age}}
+                    </div>
+                </div>
+                <div style="width: 100%; height: 300px" ng-if="vmd.detailtest.type === 1">
+                    <echart style="height: 100%; width: 100%" data="vmd.detailtest.datagraphics"
+                        options="vmd.detailtest.options"></echart>
+                </div>
+                <div ng-style="{'height' : vmd.detailtest.type === 1 ? 'calc(100% - 240px)':'100%'}">
+                    <table ng-style="{'height' : vmd.detailtest.type === 1 ? '85%':'100%'}"
+                        class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                        style="margin-bottom: 0px; margin-top: 0px;">
+                        <thead class="theader">
+                            <tr class="uk-grid" style="margin-left: 0px;">
+                                <th class="uk-width-1-5 uk-text-center th-header" style="width: 4%"></th>
+                                <th class="uk-width-1-5 uk-text-center th-header" style="width: 10%">{{'0418' |
+                                    translate}}</th>
+                                <th class="uk-width-1-5 uk-text-center th-header" style="width: 10%">{{'0110' |
+                                    translate}}</th>
+                                <th class="uk-width-1-5 uk-text-center th-header">{{'0289' | translate}}</th>
+                                <th class="uk-width-1-5 uk-text-center th-header">{{'0394' | translate}}</th>
+                                <th class="uk-width-1-5 uk-text-center th-header">{{'0323' | translate}}</th>
+                                <th class="uk-width-1-5 uk-text-center th-header" style="width: 10%">Comentario</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="tbodyscrollable"
+                            style="margin-top: 0px; height: calc(100% - 109px); overflow-y: scroll;">
+                            <tr data-ng-repeat="test in vmd.detailtest.testdetail" class="uk-grid"
+                                style="margin-left: 0px;margin-top: 0px;">
+                                <td class=" uk-width-1-5 th-subheader" style="width: 4%">
+                                    {{$index + 1}}
+                                </td>
+                                <td class=" uk-width-1-5 th-subheader" style="width: 10%">
+                                    {{test.datevalid}}
+                                </td>
+                                <td class="uk-width-1-5 uk-table-middle  th-subheader uk-text-center"
+                                    style="width: 10%">
+                                    {{test.order.toString().substring(3)}}
+                                </td>
+                                <td class="uk-width-1-5  th-subheader">
+                                    {{test.result}}
+                                </td>
+                                <td class="uk-width-1-5  th-subheader">
+                                    {{test.referencevalues}}
+                                </td>
+                                <td class="uk-width-1-5  th-subheader">
+                                    {{test.patology}}
+                                </td>
+                                <td class="uk-width-1-5  th-subheader" style="width: 10%" ng-bind-html="test.comment">
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rs-modal-testhistoryerror" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-3-10">
+                        <img src="images/iconinfo.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-7-10" style="margin-top: 3%;">
+                        <span>{{'0651' | translate}}</span>
+                    </div>
+                </div>
+                <div class="uk-overflow-container"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<modalexceptions openmodal="vmd.ShowPopupError" detailerror="vmd.Error" idcontrol="'rs-modal-testhistory'">
+</modalexceptions>

@@ -1,0 +1,387 @@
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError"></modalerror>
+<style type="text/css">
+  label {
+    font-size: 14px !important;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
+  .fieldsetConfig {
+    padding: 3px 20px 0px 0px;
+    margin: 2px 0px;
+  }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0665' | translate | uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario">
+          </strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-placement="bottom" data-toggle="tooltip"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/generalconfig/generalconfig.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"
+            title="Ctrl + B">
+          </span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll">
+        <div class="col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form panel-padding panel-scroll" style="height: calc(100% - 60px);">
+                <form class="form-horizontal panel-body panel-padding" id="Form" name="Form" style="height: 99%">
+                  <div id="login-container" ng-if="vm.sectionId == 0">
+                    <div class="row center-login" style="width: 100%">
+                      <div class=" col-3 col-md-3 col-sm-3">
+                        <div class=" sesion-container">
+                          <div class="text-center">
+                            <label translate="0108">
+                            </label>
+                          </div>
+                        </div>
+                        <div class="text-center barracolor-container">
+                          <img class="img-responsive" src="images/barra_color.png">
+                          </img>
+                        </div>
+                        <div class="panel panel-default panel-body" style="padding-bottom: 0px;">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <div ng-class="{'has-error':Form.user.$invalid && Form.user.$touched}">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user">
+                                    </i>
+                                  </div>
+                                  <input class="form-control" data-ng-model="vm.user.user" name="user"
+                                    placeholder="{{'0001' | translate}}" required="true" type="text">
+                                  </input>
+                                </div>
+                                <span class="help-block" ng-if="Form.user.$error.required && Form.user.$touched">
+                                  {{'0016' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div ng-class="{'has-error':Form.password.$invalid && Form.password.$touched}">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock">
+                                    </i>
+                                  </div>
+                                  <input class="form-control" data-ng-model="vm.user.password" name="password"
+                                    placeholder="{{'0002' | translate}}" required="true" type="Password">
+                                  </input>
+                                </div>
+                                <span class="help-block"
+                                  ng-if="Form.password.$error.required && Form.password.$touched">
+                                  {{'0016' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div ng-if="false">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-home">
+                                    </i>
+                                  </div>
+                                  <select charset="utf-8" class="form-control" data-ng-model="vm.user.location"
+                                    name="location" ng-options="obj.id as obj.name for obj in vm.ListBranch"
+                                    placeholder="{{'0003' | translate}}" required="false"></select>
+                                </div>
+                                <span class="help-block"
+                                  ng-if="Form.location.$error.required && Form.location.$touched">
+                                  {{'0016' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="text-center">
+                              <button class="btn btn-info" data-ng-click="vm.login('generalconfig')"
+                                data-ng-disabled="Form.$invalid" translate="0004"></button>
+                            </div>
+                            <div class="text-center" ng-class="{'has-error': vm.menssageInvalid}"
+                              ng-show="vm.menssageInvalid">
+                              <span class="help-block">
+                                {{vm.menssageInvalid}}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="panel-footer text-center version-container"
+                            style="margin-left: -15px; margin-right: -15px; height: 48px;">
+                            <label translate="0109">
+                            </label>
+                            <label>
+                              {{vm.version}}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="generalconfig" ng-if="vm.sectionId == 1">
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">
+                        {{'0995' | translate}}
+                      </legend>
+                      <label class="col-lg-3 text-right">
+                        {{'0676' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min">
+                        <input class="form-control" id="generalconfig1" name="Entidad" ng-model="vm.dataconfig[0].value"
+                          type="text">
+                        </input>
+                      </div>
+                      <label class="col-lg-3 text-right">
+                        {{'0677' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min">
+                        <input class="form-control" id="generalconfig2" name="Abreviatura"
+                          ng-model="vm.dataconfig[1].value" type="text">
+                        </input>
+                      </div>
+                      <label class="col-lg-3 text-right">
+                        {{'0703' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.dataconfig[2].value"
+                          id="generalconfig4" name="FormatoFecha"
+                          ng-options="obj.id as obj.name for obj in  vm.listFormatDate"></select>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'0771' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min">
+                        <input class="form-control" id="generalconfig3" name="FormatoTelefono" maxlength="20"
+                          ng-model="vm.dataconfig[3].value" type="text">
+                        </input>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">{{'0773' | translate}}:</label>
+                      <div class="col-lg-1 form-group-min">
+                        <input type="text" name="SeparadorLista" id="generalconfig10" maxlength="1" class="form-control"
+                          ng-model="vm.dataconfig[4].value">
+                      </div>
+                      <label class="col-lg-5 text-right" style="white-space: nowrap; padding-left: 4px;">{{'0134' |
+                        translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select ng-options="obj.id as obj.name for obj in vm.listOrderType" class="form-control"
+                          data-ng-model="vm.dataconfig[16].value" ng-disabled="vm.listOrderType.length === 0"></select>
+                      </div>
+
+                      <label class="col-lg-3 text-right">
+                        {{'1161' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min"
+                        ng-class="{'has-error': Form.Urllist.$invalid && Form.Urllist.$touched}">
+                        <input class="form-control" id="Urllist" name="Urllist" ng-model="vm.dataconfig[18].value"
+                          type="url" required>
+                        </input>
+                        <span ng-if="Form.Urllist.$invalid && Form.Urllist.$touched"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="Form.Urllist.$error.required && Form.Urllist.$touched" class="help-block ">{{'0016'
+                          | translate}}</span>
+                        <span ng-if="Form.Urllist.$error.url && Form.Urllist.$touched" class="help-block ">{{'0951' |
+                          translate}}</span>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'1170' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min">
+                        <toggle ng-model="vm.dataconfig[19].value" on="{{'0068' | translate}}"
+                          off="{{'0492' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">
+                        {{'1026' | translate}}
+                      </legend>
+
+                      <label class="col-lg-3 text-right">
+                        {{'1060' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min"
+                        ng-class="{'has-error': Form.UrlDischarge.$invalid && Form.UrlDischarge.$touched}">
+                        <input class="form-control" id="generalconfig14" name="UrlDischarge"
+                          ng-model="vm.dataconfig[5].value" type="url" required>
+                        </input>
+                        <span ng-if="Form.UrlDischarge.$invalid && Form.UrlDischarge.$touched"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="Form.UrlDischarge.$error.required && Form.UrlDischarge.$touched"
+                          class="help-block ">{{'0016' | translate}}</span>
+                        <span ng-if="Form.UrlDischarge.$error.url && Form.UrlDischarge.$touched"
+                          class="help-block ">{{'0951' | translate}}</span>
+                      </div>
+                      <label class="col-lg-3 text-right">
+                        {{'1061' | translate}}:
+                      </label>
+                      <div class="col-lg-3 form-group-min"
+                        ng-class="{'has-error': Form.UrlSecurity.$invalid && Form.UrlSecurity.$touched}">
+                        <input class="form-control" id="generalconfig15" name="UrlSecurity"
+                          ng-model="vm.dataconfig[6].value" type="url" required>
+                        </input>
+                        <span ng-if="Form.UrlSecurity.$invalid && Form.UrlSecurity.$touched"
+                          class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        <span ng-if="Form.UrlSecurity.$error.required && Form.UrlSecurity.$touched"
+                          class="help-block ">{{'0016' | translate}}</span>
+                        <span ng-if="Form.UrlSecurity.$error.url && Form.UrlSecurity.$touched"
+                          class="help-block ">{{'0951' | translate}}</span>
+                      </div>
+                      <label class="col-lg-3 text-right"> {{'1062' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min" style="font-size: 10px">
+                        <div class="input-group">
+                          <input type="hidden" name="DiasClave" id="generalconfig11">
+                          <number-input ng-model="vm.dataconfig[7].value" max="1000" min="0" step="1" start="0"
+                            disabledecimal="true" decimalplaces="1" aligntext="'center'">
+                          </number-input>
+                          <span class="input-group-addon">{{'0857' | translate}}</span>
+                        </div>
+                      </div>
+                      <label class="col-lg-3 text-right">{{'1063' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min" style="font-size: 10px">
+                        <div class="input-group">
+                          <input type="hidden" name="SessionExpirationTime" id="generalconfig12">
+                          <number-input ng-model="vm.dataconfig[8].value" max="60" min="1" step="1" start="0"
+                            disabledecimal="true" decimalplaces="1" aligntext="'center'">
+                          </number-input>
+                          <span class="input-group-addon">{{'0855' | translate}}</span>
+                        </div>
+                      </div>
+                      <label class="col-lg-3 text-right">{{'1064' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min" style="font-size: 10px">
+                        <div class="input-group">
+                          <input type="hidden" name="TokenExpirationTime" id="generalconfig13">
+                          <number-input ng-model="vm.dataconfig[9].value" max="1000" min="1" step="1" start="0"
+                            disabledecimal="true" decimalplaces="1" aligntext="'center'">
+                          </number-input>
+                          <span class="input-group-addon">{{'0855' | translate}}</span>
+                        </div>
+                      </div>
+                      <label class="col-lg-3 text-right"> {{'1160' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min" style="font-size: 10px">
+                        <div class="input-group">
+                          <toggle ng-model="vm.dataconfig[10].value" on="{{'0032' | translate}}"
+                            off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">
+                        {{'1024' | translate}}
+                      </legend>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'0694' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <input id="generalconfig5" name="ManejoServicio" type="hidden">
+                        <toggle ng-model="vm.dataconfig[11].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'0695' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <input id="generalconfig6" name="ManejoMedico" type="hidden">
+                        <toggle ng-model="vm.dataconfig[12].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'0696' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <input id="generalconfig7" name="ManejoRaza" type="hidden">
+                        <toggle ng-model="vm.dataconfig[13].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'0914' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <input id="generalconfig8" name="ManejoTipoDocumento" type="hidden">
+                        <toggle ng-model="vm.dataconfig[14].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" ng-disabled="vm.dataconfig[15].value" size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'0897' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <input id="generalconfig9" name="HistoriaAutomatica" type="hidden">
+                        <toggle ng-model="vm.dataconfig[15].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" ng-change="vm.getdocumentType(!vm.dataconfig[15].value)"
+                          size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'1153' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <input id="generalconfig6" name="ManejoMedico" type="hidden">
+                        <toggle ng-model="vm.dataconfig[17].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'3128' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <toggle ng-model="vm.dataconfig[20].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space: nowrap;">
+                        {{'3129' | translate}}:
+                      </label>
+                      <div class="col-lg-1 form-group-min">
+                        <toggle ng-model="vm.dataconfig[21].value" on="{{'0032' | translate}}"
+                          off="{{'0033' | translate}}" size="btn-sm"></toggle>
+                      </div>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+              <div class="panel-footer" ng-if="vm.sectionId !== 0">
+                <div class="container" style="width: 100%">
+                  <button class="btn btn-primary button-list" style="width: calc(100% / 2 - 4px)"
+                    ng-click="vm.saveCancel()" ng-disabled="!Form.$valid " type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-floppy-disk">
+                    </span>
+                    {{'0007' | translate}}
+                  </button>
+                  <button class="btn btn-info button-list" style="width: calc(100% / 2 - 4px)" ng-click="vm.cancel()"
+                    type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-remove">
+                    </span>
+                    {{'0008' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script id="Confirmation.html" type="text/ng-template">
+  <div class="modal fade" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/Question.png">
+                        </div>
+                        <div style="width: 80%; float: left; padding-top: 20px">
+                            <span style="margin-top: 10px; margin-left: 10px">{{'0040' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="close('yes')" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" class="btn btn-default" ng-click="close('no')" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

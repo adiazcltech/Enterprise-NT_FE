@@ -1,0 +1,496 @@
+<style>
+  [ng\:cloak],
+  [ng-cloak],
+  [data-ng-cloak],
+  [x-ng-cloak],
+  .ng-cloak,
+  .x-ng-cloak {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  #container {
+    overflow: auto;
+    height: 90%;
+  }
+
+  .main-container {
+    display: table;
+    width: 400px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .form-container {
+    position: relative;
+    bottom: 0;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .form-container form>div {
+    padding: 0 15px;
+  }
+
+  .form-container form>button {
+    margin-left: 15px;
+  }
+
+  legend.form-label {
+    font-size: 24pt;
+    padding: 0 15px;
+  }
+
+  .form-control.error {
+    border-color: red;
+  }
+
+  .form-hint {
+    font-size: 7pt;
+    line-height: 9pt;
+    margin: -5px auto 5px;
+    color: #999;
+    margin-top: 5px;
+  }
+
+  .form-hint.error {
+    color: #C00;
+    font-weight: bold;
+    font-size: 8pt;
+  }
+
+  .password-count {
+    float: right;
+    position: relative;
+    bottom: 24px;
+    right: 10px;
+  }
+
+  .strength-meter {
+    position: relative;
+    height: 3px;
+    background: #DDD;
+    margin: 5px auto 5px;
+    border-radius: 3px;
+  }
+
+  .strength-meter:before,
+  .strength-meter:after {
+    content: '';
+    height: inherit;
+    background: transparent;
+    display: block;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 0 5px 0 5px;
+    position: absolute;
+    width: 112px;
+    z-index: 10;
+  }
+
+  .strength-meter:before {
+    left: 45px;
+  }
+
+  .strength-meter:after {
+    right: 45px;
+  }
+
+  .strength-meter-fill {
+    background: transparent;
+    height: inherit;
+    position: absolute;
+    width: 0;
+    border-radius: inherit;
+    transition: width 0.5s ease-in-out, background 0.25s;
+  }
+
+  .strength-meter-fill[data-strength='0'] {
+    background: darkred;
+    width: 20%;
+  }
+
+  .strength-meter-fill[data-strength='1'] {
+    background: orangered;
+    width: 40%;
+  }
+
+  .strength-meter-fill[data-strength='2'] {
+    background: orange;
+    width: 60%;
+  }
+
+  .strength-meter-fill[data-strength='3'] {
+    background: yellowgreen;
+    width: 80%;
+  }
+
+  .strength-meter-fill[data-strength='4'] {
+    background: green;
+    width: 100%;
+  }
+
+  .toplabel {
+    margin-top: 17px;
+  }
+
+  .popover {
+    max-width: 326px !important;
+  }
+
+  .requeridbottom {
+    margin-bottom: 15px;
+  }
+
+  .btn-sm,
+  .btn-group-sm>.btn {
+    padding: 0px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+  }
+
+  .btn-sm-togle,
+  .btn-group-sm>.btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+  }
+
+  .margipassword {
+    margin-bottom: 32px;
+  }
+
+  .white-block {
+    font-size: 11px;
+    color: #ffffff;
+    margin: 0px;
+    padding: 0px;
+  }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div id="titleTestDemographicPyP" class="panel-heading row">
+        <div class=" col-md-8 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'1104' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-4 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/demographicwebconsultation/demographicwebconsultation.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-md-5 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div>
+                    <div class="panel-padding form-group-min right-bar">
+                      <input class="form-control" maxlength="60" data-ng-model=" vm.namedemographic.name"
+                        ng-required="true" ng-disabled="true" name="name" id="name" class="form-control" type="text">
+                    </div>
+                    <div class="number-bage" style="white-space: nowrap;">
+                      <span style="margin-top: 8px" class="badge" data-ng-bind="vm.dataDemographics.length"></span>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}" ng-change="vm.changeSearch()">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-5">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'userNameWeQuery'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'userNameWeQuery'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'userNameWeQuery'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'userNameWeQuery' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'userNameWeQuery' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'userNameWeQuery' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'userNameWeQuery' && vm.sortReverse"></span>
+                        </a>{{'0001' | translate}}
+                      </th>
+                      <th class="col-md-7">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'name' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'name' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'name' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'name' && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="width: 94%; height: calc(100% - 19rem);">
+                    <tr class="row-list" data-ng-click="vm.getUsersId(itemDemographics.id,UsersForm)" data-ng-repeat="itemDemographics in vm.filtered=(vm.dataItemDemographics |
+                                            filter: vm.search) | orderBy:vm.sortType:vm.sortReverse"
+                      ng-class="{info: itemDemographics.id == vm.selected}">
+                      <td class="col-md-5">{{itemDemographics.userNameWeQuery}}
+                      </td>
+                      <td class="col-md-7">{{itemDemographics.name}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form">
+                <form name="UsersForm" id="UsersForm" class="form-horizontal panel-body panel-padding">
+                  <div class="form-group col-md-12 text-left has-feedback" style="white-space: nowrap; "
+                    ng-class="{'col-md-6 ': vm.usersDetail.id!==null}">
+                    <label class="col-sm-offset-2 col-sm-10 text-left"
+                      ng-class="{'col-sm-offset-1 col-sm-11 text-left': vm.usersDetail.id===null}">Usuario:</label>
+                    <div class="col-sm-offset-2 col-sm-10 text-left"
+                      ng-class="{'col-sm-offset-1 col-sm-11 text-left': vm.usersDetail.id===null,'has-error': UsersForm.name.$invalid && UsersForm.name.$touched||vm.Repeat}">
+                      <input name="name" id="name" class="form-control" maxlength="60"
+                        data-ng-model="vm.usersDetail.user" ng-required="true" ng-focus="vm.Repeat = false"
+                        ng-disabled="vm.disablecontrol" class="form-control" type="text">
+                      <span ng-if="UsersForm.name.$invalid && UsersForm.name.$touched ||vm.Repeat"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UsersForm.name.$invalid && UsersForm.name.$touched" class="help-block ">{{'0016' |
+                        translate}}</span>
+                      <span ng-if="vm.Repeat" class="help-block ">{{'0038' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 text-left has-feedback" style="white-space: nowrap; "
+                    ng-if="vm.usersDetail.id!==null">
+                    <label class="col-sm-offset-2 col-sm-10 text-left">{{'0128' | translate}}:</label>
+                    <div class="col-sm-offset-2 col-sm-10 text-left" style="margin-bottom: 10px;">
+                      <div class="input-group help-block">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                          ng-model="vm.passwordExpirationDate" ng-disabled="true" ng-required="false" />
+                        <div class="input-group-addon">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </div>
+                      </div>
+                      <span ng-if="UsersForm.name.$invalid && UsersForm.name.$touched ||vm.Repeat"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UsersForm.name.$invalid && UsersForm.name.$touched" class="white-block">{{'0016' |
+                        translate}}</span>
+                      <span ng-if="vm.Repeat" class="white-block">{{'0038' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 text-left has-feedback" style="white-space: nowrap; "
+                    ng-if="vm.usersDetail.id!==null"
+                    ng-class="{'has-error': UsersForm.password.$invalid && UsersForm.password.$touched}">
+                    <label class="col-sm-offset-2 col-sm-10 text-left">{{'0002' | translate}}:</label>
+                    <div class="col-sm-offset-2 col-sm-10 text-left" ng-if="vm.SecurityPolitics">
+                      <div class="form-hint" style="color:{{color}} !important"
+                        ng-if="vm.usersDetail.password!==''&& vm.usersDetail.password!==undefined">
+                        {{vm.strengthlabel}}
+                      </div>
+                      <div class="strength-meter"
+                        ng-if="vm.usersDetail.password!==''&& vm.usersDetail.password!==undefined">
+                        <div class="strength-meter-fill" data-strength="{{vm.data}}"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10 text-left">
+                      <input id="password" name="password" data-ng-model="vm.usersDetail.password" autocomplete="nope"
+                        popover-placement="right-top" uib-popover-template="'myPopoverTemplate.html'"
+                        popover-trigger="'focus'" ng-disabled="vm.disablecontrol" class="form-control" type="password"
+                        ng-change="vm.CheckStrngth()" ng-if="vm.SecurityPolitics">
+                      <input id="password" name="password" data-ng-model="vm.usersDetail.password"
+                        autocomplete="new-password" ng-disabled="vm.disablecontrol" class="form-control" type="password"
+                        ng-if="!vm.SecurityPolitics">
+                      <div
+                        ng-if="vm.SecurityPolitics && vm.usersDetail.password !==undefined && vm.usersDetail.password.length!==0"
+                        class="label password-count"
+                        ng-class="vm.usersDetail.password.length >= vm.lettersize ? 'label-success' : 'label-danger'"
+                        ng-cloak>
+                        {{ vm.usersDetail.password | passwordCount:vm.lettersize }}
+                      </div>
+                      <span ng-if=" vm.strength !== '' && vm.viewvalidatedpassword"
+                        class="help-block text-left has-feedback">{{'1106' | translate}}</span>
+                      <span ng-if="UsersForm.password.$invalid && UsersForm.password.$touched"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UsersForm.password.$invalid && UsersForm.password.$touched"
+                        class="help-block">{{'0016' | translate}}</span>
+                      <span ng-if="vm.viewvalited" class="help-block">{{'1087' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 text-left has-feedback" ng-if="vm.usersDetail.id!==null"
+                    ng-class="{'has-error': (UsersForm.confirmPassword.$invalid && UsersForm.confirmPassword.$touched ) || vm.confirmPassword!==vm.usersDetail.password}">
+                    <div class="col-sm-offset-2 col-sm-10 text-left"
+                      ng-if="vm.viewvalidatedpassword && vm.SecurityPolitics"></div>
+                    <div class="col-sm-offset-2 col-sm-10 text-left"
+                      ng-if="vm.viewvalidatedpassword && vm.SecurityPolitics">
+                    </div>
+                    <label class="col-sm-offset-2 col-sm-10 text-left"
+                      ng-class="{'margipassword': vm.usersDetail.password!==''&& vm.usersDetail.password!==undefined && vm.SecurityPolitics}">{{'0182'
+                      | translate}}:</label>
+                    <div class="col-sm-offset-2 col-sm-10 text-left">
+                      <input id="confirmPassword" autocomplete="new-password" name="confirmPassword"
+                        data-ng-model="vm.confirmPassword" ng-disabled="vm.disablecontrol" class="form-control"
+                        type="password" placeholder="{{'0125' | translate}}" ng-change="vm.changePassword()">
+                      <span ng-if="UsersForm.confirmPassword.$invalid && UsersForm.confirmPassword.$touched"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UsersForm.confirmPassword.$invalid && UsersForm.confirmPassword.$touched"
+                        class="help-block">{{'0016' | translate}}</span>
+                      <span ng-if="vm.confirmPassword!==vm.usersDetail.password" class="help-block">{{'1094' |
+                        translate}}</span>
+                      <span ng-if="vm.viewvalited" class="help-block">{{'1087' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12 text-left has-feedback" ng-if="vm.usersDetail.id!==null"
+                    ng-class="{'has-error': UsersForm.email.$invalid && UsersForm.email.$touched }">
+                    <div class="text-right">
+                      <label class="col-sm-offset-1 col-sm-10 text-left">{{'0086' | translate}}:</label>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-5 text-left" style="width: 39.666667%;">
+                      <input id="email" name="email" data-ng-model="vm.usersDetail.email" ng-required="true"
+                        ng-disabled="vm.disablecontrol" class="form-control" type="email" ng-pattern="vm.validMail"
+                        placeholder="{{'0275' | translate}}" style="padding-right: 2px"
+                        ng-focus="vm.emailInvalid = false">
+                      <span ng-if="UsersForm.email.$error.required && UsersForm.email.$touched"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UsersForm.email.$error.required && UsersForm.email.$touched" class="help-block ">{{'0016' |
+                        translate}}</span>
+                      <span ng-if="UsersForm.email.$error.pattern && UsersForm.email.$touched"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UsersForm.email.$error.pattern && UsersForm.email.$touched"
+                        class="help-block">{{'0088' | translate}}</span>
+                      <span class="help-block " ng-if="vm.emailInvalid">
+                        {{'1230' | translate}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12 text-left has-feedback">
+                    <div class="text-right">
+                      <label class="col-sm-offset-1 col-sm-10 text-left">{{'0014' | translate}}:</label>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-10 text-left">
+                      <toggle ng-model="vm.usersDetail.state" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                        ng-disabled="vm.isDisabledState" ng-change="vm.changeState()" size="btn-md"></toggle>
+                    </div>
+                  </div>
+                  <modalstate detailstate="vm.usersDetail.state" openstatemodal="vm.ShowPopupState">
+                  </modalstate>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class="btn btn-warning button-list" style="width: calc(100% / 3 - 4px)"
+                    ng-click="vm.Edit()" ng-disabled="vm.isDisabledEdit">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary button-list" ng-click="vm.save(UsersForm)"
+                    ng-disabled="vm.isDisabledSave" style="width: calc(100% / 3 - 4px)">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" style="width: calc(100% / 3 - 4px)"
+                    ng-click="vm.cancel(UsersForm)" ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="myPopoverTemplate.html">
+  <div class="form-hint" style="width: 319px;">{{'1085' | translate}}.</div>
+    <div class="form-hint">
+        <i class="glyphicon glyphicon-ok-sign green"
+           ng-if="!vm.strength0"></i>
+        <i class="glyphicon glyphicon-remove-sign red"
+           ng-if="vm.strength0"></i>
+        {{'1088' | translate}} {{vm.lettersize}}
+        {{'1089' | translate}}.
+    </div>
+    <div class="form-hint">
+        <i class="glyphicon glyphicon-ok-sign green"
+           ng-if="!vm.strength1"></i>
+        <i class="glyphicon glyphicon-remove-sign red"
+           ng-if="vm.strength1"></i>
+        {{'1090' | translate}}.
+    </div>
+    <div class="form-hint">
+        <i class="glyphicon glyphicon-ok-sign green"
+           ng-if="!vm.strength2"></i>
+        <i class="glyphicon glyphicon-remove-sign red"
+           ng-if="vm.strength2"></i>
+        {{'1091' | translate}}.
+    </div>
+    <div class="form-hint">
+        <i class=" glyphicon glyphicon-ok-sign green"
+           ng-if="!vm.strength3"></i>
+        <i class="glyphicon glyphicon-remove-sign red"
+           ng-if="vm.strength3"></i>
+        {{'1092' | translate}}.
+    </div>
+    <div class="form-hint" ng-if="vm.administrator">
+        <i class=" glyphicon glyphicon-ok-sign green"
+           ng-if="!vm.strength4"></i>
+        <i class="glyphicon glyphicon-remove-sign red"
+           ng-if="vm.strength4"></i>
+        {{'1093' | translate}}.
+    </div>
+</script>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="row modal-body">
+                    <div class="row row-center col-md-12">
+                        <div class="col-md-5" >
+                            <a ng-click="close('demographicsItem')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/generalconfiguration.png">
+                                <h6 class="text-center">{{'0082' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

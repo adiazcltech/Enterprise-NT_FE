@@ -1,0 +1,27 @@
+<div id="page_content" style="height: calc(100% - 64px);margin-left: 0px;overflow: auto;">
+    <div id="page_content_inner" style="height: calc(100% - 19px);padding: 0px;margin: 0px 12px">
+        <div class="md-card uk-margin-top" style="min-height: 452px;">
+            <div class="md-card-content" style="min-height: 452px;">
+                <summernote ng-model="vm.dataconfig[0].value" config="vm.options"></summernote>
+                <span class="uk-form-help-block">{{'0083' | translate}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer" style="margin-left: 0px">
+    <div class="uk-clearfix" style="padding-bottom: 10px; padding-top: 10px">
+        <div class="uk-float-right">
+            <button type="button" class="md-fab md-fab-small md-fab md-fab-success" ng-click="vm.save()"
+                style="background: {{vm.dataconfig[1].value}}">
+                <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}">&#xE161;</i>
+            </button>
+        </div>
+    </div>
+</footer>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

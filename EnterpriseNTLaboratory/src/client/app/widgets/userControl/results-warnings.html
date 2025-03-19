@@ -1,0 +1,440 @@
+<style>
+    .timeline_icon_success {
+        background: #f44336;
+        color: white;
+        font-size: 20px;
+        line-height: 37px;
+    }
+</style>
+<div id="rs-modal-warnings" class="uk-modal uk-modal-card-fullscreen">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-red-500">
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">warning</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0725' | translate}} {{resultswarnings.order===''?'':'- Nº orden '+resultswarnings.order}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="padding: 16px 0px 0px 0px;background: #d5e1f2;">
+                <div class="uk-width-1-1" style="height: 86%;overflow: auto;padding: 0px 50px 25px 21px">
+                    <div class="uk-grid uk-grid-divider uk-grid-medium" style="height: 100%;">
+                        <div class="uk-width-1-2" style="height: 61px;">
+                            <div class="md-card" style="height: 100%">
+                                <div class="md-card-content  uk-flex uk-flex-middle large-padding"
+                                    style="padding: 10px 10px">
+                                    <div class="uk-grid uk-grid-divider uk-grid-medium"
+                                        style="width: 100%; margin-left: 0px;">
+                                        <div class="uk-width-1-2"
+                                            ng-if="resultswarnings.warningsbytest.length!==0 || resultswarnings.warningsbysurvey.length!==0">
+                                            <ul class=" md-list md-list-addon">
+                                                <li class="patient-demo-item"
+                                                    ng-if="resultswarnings.warningsbytest.length!==0"
+                                                    ng-repeat="alarm in resultswarnings.warningsbytest">
+                                                    <div class="md-list-addon-element patient-addon-element">
+                                                        <img class="md-list-addon-icon material-icons md-22"
+                                                            ng-src="images/QuestionRed.png" />
+                                                    </div>
+                                                    <div class="md-list-content patient-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted patient-list-content">{{'0726'|
+                                                            translate}}</span>
+                                                        <span class="md-list-heading uk-text-large">
+                                                            {{alarm.alarm}}
+                                                            <div class="uk-button-dropdown"
+                                                                ng-if="resultswarnings.panictest.length > 0"
+                                                                data-uk-dropdown="{justify:'#justify1'}"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                                <button class="uk-button" style="padding: 5px;"> <span
+                                                                        class="uk-badge"
+                                                                        style="background: rgb(244 67 54);">{{resultswarnings.panictest.length}}</span>
+                                                                </button>
+                                                                <div class="uk-dropdown uk-dropdown-bottom"
+                                                                    aria-hidden="true" tabindex=""
+                                                                    style="top: 30px; left: 0px; min-width: 823px; margin-left: 0px;">
+                                                                    <ul class="md-list md-list-addon">
+                                                                        <li class="patient-demo-item"
+                                                                            ng-repeat="test in resultswarnings.panictest">
+                                                                            <div
+                                                                                class="md-list-addon-element patient-addon-element">
+                                                                                <span
+                                                                                    class="{{resultswarnings.getpathologyicon(test.pathology)}}"
+                                                                                    ng-show="test.pathology > 3"></span>
+                                                                                <span class="uk-icon-flash uk-text-primary"
+                                                                                    ng-show="test.delta"></span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="md-list-content patient-list-content">
+                                                                                <span
+                                                                                    class="uk-text-small uk-text-muted patient-list-content">{{test.pathology
+                                                                                    > 3? '0356' : ''| translate}}
+                                                                                    {{test.pathology > 3 && test.delta? '/'
+                                                                                    : ''}}
+                                                                                    {{test.delta? '0357' : ''| translate}}
+                                                                                </span>
+                                                                                <span class="md-list-heading uk-text-large">
+                                                                                    {{test.testName}}
+                                                                                </span>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="patient-demo-item"
+                                                    ng-if="resultswarnings.warningsbysurvey.length!==0"
+                                                    ng-repeat="alarm in resultswarnings.warningsbysurvey">
+                                                    <div class="md-list-addon-element patient-addon-element">
+                                                        <img class="md-list-addon-icon material-icons md-22"
+                                                            ng-src="images/menu/CONTROLCALIDAD/Mod28.png" />
+                                                    </div>
+                                                    <div class="md-list-content patient-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted patient-list-content">{{'0727'|
+                                                            translate}}</span>
+                                                        <span class="md-list-heading uk-text-large">
+                                                            {{alarm.alarm}} <div class="uk-button-dropdown"
+                                                                ng-if="resultswarnings.panictest.length > 0"
+                                                                data-uk-dropdown="{justify:'#justify1'}"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                                <button class="uk-button" style="padding: 5px;"> <span
+                                                                        class="uk-badge"
+                                                                        style="background: rgb(244 67 54);">{{resultswarnings.panictest.length}}</span>
+                                                                </button>
+                                                                <div class="uk-dropdown uk-dropdown-bottom"
+                                                                    aria-hidden="true" tabindex=""
+                                                                    style="top: 30px; left: 0px; min-width: 823px; margin-left: 0px;">
+                                                                    <ul class="md-list md-list-addon">
+                                                                        <li class="patient-demo-item"
+                                                                            ng-repeat="test in resultswarnings.panictest">
+                                                                            <div
+                                                                                class="md-list-addon-element patient-addon-element">
+                                                                                <span
+                                                                                    class="{{resultswarnings.getpathologyicon(test.pathology)}}"
+                                                                                    ng-show="test.pathology > 3"></span>
+                                                                                <span class="uk-icon-flash uk-text-primary"
+                                                                                    ng-show="test.delta"></span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="md-list-content patient-list-content">
+                                                                                <span
+                                                                                    class="uk-text-small uk-text-muted patient-list-content">{{test.pathology
+                                                                                    > 3? '0356' : ''| translate}}
+                                                                                    {{test.pathology > 3 && test.delta? '/'
+                                                                                    : ''}}
+                                                                                    {{test.delta? '0357' : ''| translate}}
+                                                                                </span>
+                                                                                <span class="md-list-heading uk-text-large">
+                                                                                    {{test.testName}}
+                                                                                </span>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-1-2"
+                                            ng-if="resultswarnings.warningsbytest.length===0 && resultswarnings.warningsbysurvey.length===0">
+                                            <div class="md-list-content patient-list-content">
+                                                <span
+                                                    class="uk-text-small uk-text-muted patient-list-content">{{'0726'|
+                                                    translate}}</span>
+                                                <span class="md-list-heading uk-text-large">
+                                                    {{alarm.alarm}}
+                                                    <div class="uk-button-dropdown"
+                                                        ng-if="resultswarnings.panictest.length > 0"
+                                                        data-uk-dropdown="{justify:'#justify1'}"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <button class="uk-button" style="padding: 5px;"> <span
+                                                                class="uk-badge"
+                                                                style="background: rgb(244 67 54);">{{resultswarnings.panictest.length}}</span>
+                                                        </button>
+                                                        <div class="uk-dropdown uk-dropdown-bottom"
+                                                            aria-hidden="true" tabindex=""
+                                                            style="top: 30px; left: 0px; min-width: 823px; margin-left: 0px;">
+                                                            <ul class="md-list md-list-addon">
+                                                                <li class="patient-demo-item"
+                                                                    ng-repeat="test in resultswarnings.panictest">
+                                                                    <div
+                                                                        class="md-list-addon-element patient-addon-element">
+                                                                        <span
+                                                                            class="{{resultswarnings.getpathologyicon(test.pathology)}}"
+                                                                            ng-show="test.pathology > 3"></span>
+                                                                        <span class="uk-icon-flash uk-text-primary"
+                                                                            ng-show="test.delta"></span>
+                                                                    </div>
+                                                                    <div
+                                                                        class="md-list-content patient-list-content">
+                                                                        <span
+                                                                            class="uk-text-small uk-text-muted patient-list-content">{{test.pathology
+                                                                            > 3? '0356' : ''| translate}}
+                                                                            {{test.pathology > 3 && test.delta? '/'
+                                                                            : ''}}
+                                                                            {{test.delta? '0357' : ''| translate}}
+                                                                        </span>
+                                                                        <span class="md-list-heading uk-text-large">
+                                                                            {{test.testName}}
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                            <ul class="md-list md-list-addon" >
+                                                <li class="patient-demo-item">
+                                                    <div class="md-list-addon-element patient-addon-element">
+                                                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/patient/calendar.png" />
+                                                    </div>
+                                                    <div class="md-list-content patient-list-content">
+                                                        <span class="uk-text-small uk-text-muted patient-list-content">{{'1844' | translate}}</span>
+                                                        <span class="md-list-heading" >
+                                                            {{resultswarnings.reportedDoctor | date:'dd/MM/yyyy , HH:mm:ss'}}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                           <!--  <h6 style="margin: 0px 0px 0px 5px;">{{'1844' | translate}}</h6> -->
+                                          <!--   <input kendo-date-time-picker k-ng-model="resultswarnings.reportedDoctor"
+                                                style="width: 100%; margin-top: -47px; padding-bottom: 0px; font-size: 13px;"
+                                                k-interval="5" k-format="'{{ resultswarnings.formatDate }}'"
+                                                k-max="resultswarnings.max" k-rebind="resultswarnings.max"
+                                                k-on-change="resultswarnings.startChange()" class="md-input"
+                                                autocomplete="off" /> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Encuesta de pánico -->
+                        <div class="uk-width-1-2 md-card toolbar-fixed" style="height: 100%;">
+                            <div class="md-card-toolbar" style="padding: 0 10px;height: 47px;">
+                                <h3 class="md-card-toolbar-heading-text uk-flex uk-flex-middle">
+                                    <strong>Entrevista</strong>
+                                </h3>
+                            </div>
+                            <div class="md-card-content contentscroll" style="height: calc(100% - 81px);overflow: auto;">
+                                <form name="Formwarnings" id="Formwarnings">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1">
+                                            <div class="timeline">
+                                                <div class="timeline_item" style="padding-top: 0px"
+                                                    ng-repeat="question in resultswarnings.questions">
+                                                    <div class="timeline_icon timeline_icon_success">{{$index + 1}}</div>
+                                                    <div class="timeline_content">
+                                                        <h5 class="uk-text-bold" style="margin: 22px 0 0px 0;">
+                                                            {{question.question}}</h5>
+                                                        <div class="uk-width-1-1">
+                                                            <span class="uk-text-small uk-text-muted">
+                                                                <input ng-if="question.control === 1" md-input
+                                                                    class="md-input" type="text"
+                                                                    id="{{'question' + question.id }}"
+                                                                    name="{{'question' + question.id }}"
+                                                                    ng-class="{'md-input-danger':Formwarnings.{{'question' + question.id }}.$invalid && Formwarnings.{{'question' + question.id }}.$touched}"
+                                                                    ng-required="question.required"
+                                                                    ng-model="question.interviewAnswer" />
+
+                                                                <input ng-if="question.control === 2" kendo-numeric-text-box
+                                                                    k-ng-model="question.interviewAnswer" k-format="'n0'"
+                                                                    style="width: 20%"
+                                                                    k-on-change="resultswarnings.change(question)" />
+
+                                                                <textarea ng-if="question.control === 3" cols="30" rows="4"
+                                                                    id="{{'question' + question.id }}"
+                                                                    name="{{'question' + question.id }}"
+                                                                    ng-class="{'md-input-danger':Formwarnings.{{'question' + question.id }}.$invalid && Formwarnings.{{'question' + question.id }}.$touched}"
+                                                                    ng-required="question.required"
+                                                                    data-ng-model="question.interviewAnswer"
+                                                                    class="md-input no_autosize"
+                                                                    style="margin: 0px -10.5px 0px 0px; width: 100%; height:100px;"></textarea>
+
+                                                                <input ng-if="question.control === 4" kendo-date-picker
+                                                                    k-ng-model="question.interviewAnswer"
+                                                                    style="width: 20%;" id="kUI_datepicker_a"
+                                                                    k-format="'{{question.formatDate}}'"
+                                                                    k-on-change="resultswarnings.datequestion(question)" />
+
+                                                                <select ng-if="question.control === 5" class="md-input"
+                                                                    id="{{'question' + question.id }}"
+                                                                    name="{{'question' + question.id }}"
+                                                                    ng-class="{'md-input-danger':Formwarnings.{{'question' + question.id }}.$invalid && Formwarnings.{{'question' + question.id }}.$touched}"
+                                                                    ng-required="question.required"
+                                                                    ng-options="obj as obj.name for obj in question.answers track by obj.id"
+                                                                    data-ng-model="question.answers.selected"
+                                                                    class="form-control"
+                                                                    ng-change="resultswarnings.changelist(question.answers.selected,question.answers)"></select>
+
+                                                                <md-select ng-if="question.control === 6"
+                                                                    style="margin: 20px 0 0px 0;"
+                                                                    name="{{'question' + question.id }}"
+                                                                    ng-model="question.answers.selected"
+                                                                    ng-required="question.required"
+                                                                    ng-model-options="{trackBy: '$value.id'}"
+                                                                    ng-change="resultswarnings.changelist(question.answers.selected,question.answers)"
+                                                                    md-on-close="orderinterview.clearSearchTerm()"
+                                                                    data-md-container-class="selectdemoSelectHeader"
+                                                                    multiple>
+                                                                    <md-select-header class="demo-select-header">
+                                                                        <input ng-model="resultswarnings.searchTerm"
+                                                                            type="search"
+                                                                            ng-keydown="resultswarnings.keydownsearch($event)"
+                                                                            placeholder="{{ '0154' | translate }}"
+                                                                            class="demo-header-searchbox md-text">
+                                                                    </md-select-header>
+                                                                    <md-optgroup label="{{question.name}}">
+                                                                        <md-option ng-value="role"
+                                                                            ng-repeat="role in question.answers | filter:resultswarnings.searchTerm">
+                                                                            {{role.name}}</md-option>
+                                                                    </md-optgroup>
+                                                                </md-select>
+                                                                <span class="uk-form-help-block uk-text-danger label-error"
+                                                                    ng-show="Formwarnings.{{'question' + question.id }}.$invalid && Formwarnings.{{'question' + question.id }}.$touched"
+                                                                    style="padding: 0px; margin-top: 0px;">{{ '0060' |
+                                                                    translate }}</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1" style="height: 11%;background: #fff;">
+                    <button style="float: right; background-color: #f44336 !important"
+                        class="md-fab md-fab-small md-fab-wave-light waves-effect rs-button-margin waves-light uk-close"
+                        ng-click="resultswarnings.closed()">
+                        <i style="color: white" class="material-icons">close</i>
+                    </button>
+                    <button style="float: right; background-color: #f44336 !important"
+                        class="md-fab md-fab-small md-fab-wave-light waves-effect rs-button-margin waves-light {{true ? 'md-bg-green-100' : 'md-bg-blue-grey-50'}}"
+                        ng-click="resultswarnings.savevalidate(Formwarnings)">
+                        <i style="color: white" class="material-icons" title="{{'0312' | translate}}"
+                            data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE877;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="advertencia-modalwarnings" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container uk-flex uk-flex-middle" style="margin-top: 0px">
+            <div class="uk-grid uk-container-center uk-grid-divider uk-grid-medium"
+                style="width: 100%; margin-left: 0px;">
+                <div class="uk-width-1-2"
+                    ng-if="resultswarnings.warningsbytest.length!==0 || resultswarnings.warningsbysurvey.length!==0">
+                    <ul class=" md-list md-list-addon">
+                        <li class="patient-demo-item" ng-if="resultswarnings.warningsbytest.length!==0"
+                            ng-repeat="alarm in resultswarnings.warningsbytest">
+                            <div class="md-list-addon-element patient-addon-element">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/QuestionRed.png" />
+                            </div>
+                            <div class="md-list-content patient-list-content">
+                                <span class="uk-text-small uk-text-muted patient-list-content">{{'0726'|
+                                    translate}}</span>
+                                <span class="md-list-heading uk-text-large">
+                                    {{alarm.alarm}}
+                                    <div class="uk-button-dropdown" ng-if="resultswarnings.panictest.length > 0"
+                                        data-uk-dropdown="{justify:'#justify1'}" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <button class="uk-button" style="padding: 5px;"> <span class="uk-badge"
+                                                style="background: rgb(244 67 54);">{{resultswarnings.panictest.length}}</span>
+                                        </button>
+                                        <div class="uk-dropdown uk-dropdown-bottom" aria-hidden="true" tabindex=""
+                                            style="top: 30px; left: 0px; min-width: 823px; margin-left: 0px;">
+                                            <ul class="md-list md-list-addon">
+                                                <li class="patient-demo-item"
+                                                    ng-repeat="test in resultswarnings.panictest">
+                                                    <div class="md-list-addon-element patient-addon-element">
+                                                        <span
+                                                            class="{{resultswarnings.getpathologyicon(test.pathology)}}"
+                                                            ng-show="test.pathology > 3"></span>
+                                                        <span class="uk-icon-flash uk-text-primary"
+                                                            ng-show="test.delta"></span>
+                                                    </div>
+                                                    <div class="md-list-content patient-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted patient-list-content">{{test.pathology
+                                                            > 3?
+                                                            '0356' : ''| translate}}
+                                                            {{test.pathology > 3 && test.delta? '/' : ''}}
+                                                            {{test.delta? '0357' : ''| translate}}
+                                                        </span>
+                                                        <span class="md-list-heading uk-text-large">
+                                                            {{test.testName}}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </li>
+                        <li class="patient-demo-item" ng-if="resultswarnings.warningsbysurvey.length!==0"
+                            ng-repeat="alarm in resultswarnings.warningsbysurvey">
+                            <div class="md-list-addon-element patient-addon-element">
+                                <img class="md-list-addon-icon material-icons md-22"
+                                    ng-src="images/menu/CONTROLCALIDAD/Mod28.png" />
+                            </div>
+                            <div class="md-list-content patient-list-content">
+                                <span class="uk-text-small uk-text-muted patient-list-content">{{'0727'|
+                                    translate}}</span>
+                                <span class="md-list-heading uk-text-large">
+                                    {{alarm.alarm}}
+                                    <div class="uk-button-dropdown" ng-if="resultswarnings.panictest.length > 0"
+                                        data-uk-dropdown="{justify:'#justify1'}" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <button class="uk-button" style="padding: 5px;"> <span class="uk-badge"
+                                                style="background: rgb(244 67 54);">{{resultswarnings.panictest.length}}</span>
+                                        </button>
+                                        <div class="uk-dropdown uk-dropdown-bottom" aria-hidden="true" tabindex=""
+                                            style="top: 30px; left: 0px; min-width: 823px; margin-left: 0px;">
+                                            <ul class="md-list md-list-addon">
+                                                <li class="patient-demo-item"
+                                                    ng-repeat="test in resultswarnings.panictest">
+                                                    <div class="md-list-addon-element patient-addon-element">
+                                                        <span
+                                                            class="{{resultswarnings.getpathologyicon(test.pathology)}}"
+                                                            ng-show="test.pathology > 3"></span>
+                                                        <span class="uk-icon-flash uk-text-primary"
+                                                            ng-show="test.delta"></span>
+                                                    </div>
+                                                    <div class="md-list-content patient-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted patient-list-content">{{test.pathology
+                                                            > 3?
+                                                            '0356' : ''| translate}}
+                                                            {{test.pathology > 3 && test.delta? '/' : ''}}
+                                                            {{test.delta? '0357' : ''| translate}}
+                                                        </span>
+                                                        <span class="md-list-heading uk-text-large">
+                                                            {{test.testName}}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

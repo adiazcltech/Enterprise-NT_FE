@@ -1,0 +1,630 @@
+<style type="text/css">
+  .toolptipStyle {
+    background: #337ab7;
+    /*  float: right;
+      transition: all 0.2s ease;
+      color: black;
+      cursor: move;
+      border: 1px solid #337ab7;
+      font-size: 12px;*/
+    white-space: nowrap;
+    opacity: 1;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    height: 30px !important;
+    padding: 6px 12px;
+    font-size: 11px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<section class="row general-container">
+  <div class="panel panel-primary panel-principal">
+    <div class="panel-heading row">
+      <div class="col-md-8 text-left">
+        <strong id="titlePriceAssigment" class="panel-title text-left title-bar">{{'0610' | translate |
+          uppercase}}</strong>
+      </div>
+      <div class="col-md-4 text-right" style="padding-top: 5px;">
+        <strong ng-bind="vm.usuario" class="text-right"></strong>
+        <span class="panel-title glyphicon glyphicon-question-sign question-style" data-toggle="tooltip"
+          data-placement="bottom" title="Ctrl + B"
+          onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/priceassigment/priceassigment.htm','','width=1200,height=600,left=50,top=50,toolbar=yes');"></span>
+      </div>
+    </div>
+    <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+      <div class="col-md-4 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container">
+              <div style="white-space: nowrap;">
+                <div>
+                  <div class="panel-padding form-group-min right-bar">
+                    <label class="col-sm-3 text-right" style="white-space: nowrap;">{{'0310' | translate}}:</label>
+                    <div class="col-sm-9 text-left panel-padding" style="white-space: nowrap;">
+                      <select id="validity" name="validity" charset="utf-8"
+                        ng-options="obj as obj.name for obj in vm.listValidity track by obj.name"
+                        data-ng-model="vm.validity" class="form-control" ng-required="true"
+                        ng-change="vm.changeValidity(vm.validity.id, vm.validity.name)"></select>
+                    </div>
+                  </div>
+                  <div class="number-bage" style="white-space: nowrap;">
+                    <span style="margin-top: 8px" class="badge" data-ng-bind="vm.numValidity"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="panel-padding form-group-min right-bar">
+                    <label class="col-sm-3 text-right" style="white-space: nowrap;">{{'0307' | translate}}:</label>
+                    <div class="col-sm-9 text-left panel-padding" style="white-space: nowrap;">
+                      <select id="rate" name="rate" charset="utf-8"
+                        ng-options="obj as obj.name for obj in vm.listRate track by obj.name" data-ng-model="vm.rate"
+                        class="form-control" ng-required="true"
+                        ng-change="vm.changeRate(vm.rate.id, vm.rate.name)"></select>
+                    </div>
+                  </div>
+                  <div class="number-bage" style="white-space: nowrap;">
+                    <span style="margin-top: 8px" class="badge" data-ng-bind="vm.numRate"></span>
+                  </div>
+                </div>
+                <hr>
+                <div class="input-group right-bar">
+                  <input data-ng-model="vm.search" class="form-control" type="text" placeholder="{{'0015' | translate}}"
+                    ng-disabled="vm.idValidity == 0 || vm.idRate == 0" ng-change="vm.changeSearch()">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </div>
+                </div>
+                <div class="number-bage">
+                  <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                </div>
+              </div>
+              <table id="tableArea" class="table table-list">
+                <thead>
+                  <tr>
+                    <th class="col-md-3">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.ordering; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.ordering"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.ordering"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.ordering && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.ordering && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.ordering && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.ordering && vm.sortReverse"></span>
+                      </a>{{'0018' | translate}}
+                    </th>
+                    <th class="col-md-9">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                      </a>{{'0011' | translate}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tbody-list contentscroll" style="width: 94%; height: calc(100% - 23rem);">
+                  <tr class="row-list"
+                    data-ng-repeat="Area in vm.filtered = ((vm.dataAreas | filter: vm.search) |  orderBy:vm.sortType:vm.sortReverse)"
+                    data-ng-click="vm.getPriceAssigmentTest(Area.id, $index, this)"
+                    ng-class="{info: $index == vm.selected }">
+                    <td class="col-md-3  text-center" data-ng-bind="Area.ordering"></td>
+                    <td class="col-md-9" data-ng-bind="Area.name"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body panel-form" style="height: calc(100% - 76px);">
+              <div style="white-space: nowrap;">
+                <table class="col-md-12" style=" margin-bottom: 6px">
+                  <tr>
+                    <td class="col-md-9 panel-padding">
+                      <div class="input-group right-bar" style="margin-right: 2px;">
+                        <input data-ng-model="vm.searchtest" ng-disabled="vm.selected === -1" class="form-control"
+                          type="text" placeholder="{{'0015' | translate}}">
+                        <div class="input-group-addon">
+                          <i class="glyphicon glyphicon-search"></i>
+                        </div>
+                      </div>
+                      <div class="number-bage" style="margin-top: 8px; margin-right: 8px">
+                        <span class="badge" data-ng-bind="vm.filteredtest.length"></span>
+                      </div>
+                    </td>
+                    <td class="col-md-1 panel-padding" style="width: 5%; padding-right: 0px" tooltips
+                      tooltip-template="{{'0392' | translate}}" tooltip-class="toolptipStyle" tooltip-side="bottom"
+                      tooltip-hidden="vm.selected == -1" ng-disabled="vm.selected == -1 && vm.idRate !== 0 || vm.idValidity === 0">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPopup"
+                        ng-click="vm.getRateImport();vm.clickPopup('I')" ng-disabled="vm.selected == -1 && vm.idRate !== 0 || vm.idValidity === 0">
+                        <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                    <td></td>
+                    <td class="col-md-1 panel-padding" style="width: 5%; padding-right: 0px" tooltips
+                      tooltip-template="{{'0423' | translate}}" tooltip-class="toolptipStyle" tooltip-side="bottom"
+                      tooltip-hidden="vm.selected == -1">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPopup"
+                        ng-click="vm.clickPopup('F')" ng-disabled="vm.selected == -1">
+                        <span class="fa fa-calculator" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                    <td></td>
+                    <td class="col-md-1 panel-padding" style="width: 5%; padding-right: 0px" tooltips
+                      tooltip-template="{{'0611' | translate}}" tooltip-class="toolptipStyle" tooltip-side="bottom"
+                      tooltip-hidden="vm.selected == -1">
+                      <button type="button" class="btn btn-primary" ng-click="vm.modalApplyValid()"
+                        ng-disabled="vm.selected == -1">
+                        <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
+                      </button>
+                      <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.ok"></modalstate>
+                    </td>
+                    <td></td>
+                    <td class="col-md-1 panel-padding" style="width: 5%" tooltips
+                      tooltip-template="{{'0581' | translate}}" tooltip-class="toolptipStyle" tooltip-side="bottom"
+                      tooltip-hidden="vm.idValidity === 0">
+                      <button type="button" class="btn btn-primary" ng-disabled="vm.idValidity === 0" charset="utf-8"
+                        ng-csv="vm.exportTestPrice" filename="PriceTest.csv" csv-header="vm.headercsv"
+                        field-separator="vm.SeparatorList">
+                        <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <hr style="margin-bottom: 0px">
+              <form name="TestPriceForm" id="TestPriceForm" class="panel-padding">
+                <table class="table table-list" style="height: calc(100% - 90px); font-size: 12px">
+                  <thead>
+                    <tr>
+                      <th class="col-md-2 text-left" style="white-space: nowrap;">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortTypeTest =  vm.code; vm.sortReversetest = !vm.sortReversetest; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReversetest && vm.sortTypeTest != vm.code"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReversetest && vm.sortTypeTest != vm.code"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortTypeTest == vm.code && !vm.sortReversetest "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortTypeTest == vm.code && vm.sortReversetest"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortTypeTest == vm.code && !vm.sortReversetest"></span>
+                          <span ng-show="vm.sortTypeTest == vm.code && vm.sortReversetest"></span>
+                        </a>{{'0018' | translate}}
+                      </th>
+                      <th class="col-md-8">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortTypeTest =  vm.nametest; vm.sortReversetest = !vm.sortReversetest; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReversetest && vm.sortTypeTest != vm.nametest"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReversetest && vm.sortTypeTest != vm.nametest"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortTypeTest == vm.nametest && !vm.sortReversetest "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortTypeTest == vm.nametest && vm.sortReversetest"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortTypeTest == vm.nametest && !vm.sortReversetest"></span>
+                          <span ng-show="vm.sortTypeTest == vm.nametest && vm.sortReversetest"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                      <th class="col-md-2" style="white-space: nowrap">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortTypeTest =  vm.patientPercentage; vm.sortReversetest = !vm.sortReversetest; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReversetest && vm.sortTypeTest != vm.patientPercentage"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReversetest && vm.sortTypeTest != vm.patientPercentage"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortTypeTest == vm.patientPercentage && !vm.sortReversetest "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortTypeTest == vm.patientPercentage && vm.sortReversetest"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortTypeTest == vm.patientPercentage && !vm.sortReversetest"></span>
+                          <span ng-show="vm.sortTypeTest == vm.patientPercentage && vm.sortReversetest"></span>
+                        </a>{{'3138' | translate}}
+                      </th>
+                      <th class="col-md-2" style="white-space: nowrap">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortTypeTest =  vm.currency; vm.sortReversetest = !vm.sortReversetest; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReversetest && vm.sortTypeTest != vm.currency"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReversetest && vm.sortTypeTest != vm.currency"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortTypeTest == vm.currency && !vm.sortReversetest "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortTypeTest == vm.currency && vm.sortReversetest"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortTypeTest == vm.currency && !vm.sortReversetest"></span>
+                          <span ng-show="vm.sortTypeTest == vm.currency && vm.sortReversetest"></span>
+                        </a>{{'0612' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody vs-repeat="30" class="tbody-list contentscroll"
+                    style="width: calc(100% - 38px); height: calc(100% - 212px);">
+                    <tr class="row-list"
+                      data-ng-repeat="Test in vm.filteredtest = (vm.dataTestPrice | filter: vm.searchtest) | orderBy:vm.sortTypeTest:vm.sortReversetest"
+                      data-ng-click="vm.getTestId(Test.id, $index)" ng-class="{info: $index == vm.selectedTest }">
+                      <td class="col-md-2 text-center panel-padding-important" data-ng-bind="Test.code"
+                        style="vertical-align: middle; "></td>
+                      <td class="col-md-8 panel-padding-important" style="vertical-align: middle ">
+                        {{Test.name}}
+                        <span ng-if="Test.validatedprice" class="help-block">El precio es requerido</span>
+                      </td>
+                      <td class="col-md-2 text-left panel-padding-important">
+                        <label ng-if="$index != vm.selectedTest" data-ng-bind="Test.patientPercentage"
+                          style="padding-top: 8px; padding-bottom: 0px; padding-left: 6px; width: 95%;"
+                          class="text-currency text-left "></label>
+                        <number-input ng-if="$index == vm.selectedTest" class="text-right"
+                          ng-model="Test.patientPercentage" max="100" min="0" step="0.1" start="0" disabledecimal="true"
+                          decimalplaces="1" style="height: 30px !important;">
+                        </number-input>
+                      </td>
+                      <td class="col-md-2 text-left panel-padding-important">
+                        <label ng-if="$index != vm.selectedTest" data-ng-bind="Test.currency"
+                          style="padding-top: 8px; padding-bottom: 0px; padding-left: 6px; width: 95%;"
+                          class="text-currency text-left "></label>
+                        <div class="text-left panel-padding" ng-if="$index == vm.selectedTest">
+                          <input id="price" name="price" data-ng-model="Test.currency" maxlength="60" ng-required="true"
+                            class="form-control grid-Edit-control text-currency" type="text"
+                            ng-keyup="vm.currencyKeyUp($event, TestPriceForm.price, vm.symbol, vm.penny)"
+                            ng-change="Test.validatedprice=false;vm.changeData()" ng-blur="vm.onBlur(Test)"
+                            ng-focus="vm.focusSelect('price')" style="width: 95%">
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+            <div class="panel-footer">
+              <div class="container" style="width: 100%">
+                <button style="width: calc(100% / 3 - 4px)" type="button" class="btn btn-primary button-list"
+                  ng-click="vm.save()" ng-disabled="vm.dataTestPrice.length===0">
+                  <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                </button>
+                <button style="width: calc(100% / 3 - 4px)" type="button" class="btn btn-info button-list"
+                  ng-click="vm.cancel()" ng-disabled="vm.selected === -1">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                </button>
+                <button style="width: calc(100% / 3 - 4px)" type="button" class="btn btn-violet button-list"
+                  ng-click="vm.generateFile()" ng-disabled="vm.selected === -1">
+                  <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <!-- 					<div class="col-md-2" ng-hide="columnNum >= 3"></div> -->
+                        <div class="" ng-hide="hideValidity > 0" ng-class="{'col-md-12': columnNum == 1, 'col-md-6':columnNum == 2, 'col-md-4': columnNum == 3, 'col-md-3': columnNum == 4}">
+                            <a ng-click="close('feeschedules')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/validity.png">
+                                <h6 class="text-center">{{'0310' | translate}}</h6>
+                            </a>
+                        </div>
+                        <div class="" ng-hide="hideRate > 0" ng-class="{'col-md-12': columnNum == 1, 'col-md-6':columnNum == 2, 'col-md-4': columnNum == 3, 'col-md-3': columnNum == 4}">
+                            <a ng-click="close('rate')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/rate.png">
+                                <h6 class="text-center">{{'0307' | translate}}</h6>
+                            </a>
+                        </div>
+                        <div class="" ng-hide="hideArea > 0" ng-class="{'col-md-12': columnNum == 1, 'col-md-6':columnNum == 2, 'col-md-4': columnNum == 3, 'col-md-3': columnNum == 4}">
+                            <a ng-click="close('area')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/area.png">
+                                <h6 class="text-center">{{'0037' | translate}}</h6>
+                            </a>
+                        </div>
+                        <div class="" ng-hide="hideTest > 0" ng-class="{'col-md-12': columnNum == 1, 'col-md-6':columnNum == 2, 'col-md-4': columnNum == 3, 'col-md-3': columnNum == 4}">
+                            <a ng-click="close('test')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/Test.png">
+                                <h6 class="text-center">{{'0632' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- Actualizción de precios por fórmula -->
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="modalPopup" tabindex="1" role="dialog"
+  aria-labelledby="myModallabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 900px; height: 244px;" id="modalFormula">
+    <div class="modal-content" style="height: 100%">
+      <div class="modal-body panel-padding" style="padding-top: 10px; height: 95%">
+        <div class="row general-container">
+          <div class="panel panel-primary panel-principal">
+            <div class="panel-heading row">
+              <div class="panel-title">
+                <strong class="panel-title text-left title-bar">
+                  {{'0616' | translate |uppercase}}
+                </strong>
+              </div>
+            </div>
+            <div class="col-sm-12 form-group-min">
+              <form name="FormulaForm" id="FormulaForm" class="form-horizontal panel-body panel-padding">
+                <div class="form-group-min form-group-sm">
+                  <div class="form-group-min" style="margin-top: 7px">
+                    <div class="col-md-12 text-left form-group">
+                      <label class="col-sm-2 text-right">{{'0617' | translate}}:</label>
+                      <div class="col-sm-3 text-left form-group-min ">
+                        <select id="rate" name="rate" charset="utf-8"
+                          ng-options="obj as obj.name for obj in vm.listRateDestin  track by obj.name"
+                          data-ng-model="vm.rateDestin" class="form-control" ng-required="true"></select>
+                      </div>
+                      <label class="col-sm-1 text-right">{{'0516' | translate}}:</label>
+                      <div class="col-sm-2 text-left form-group-min ">
+                        <select charset="utf-8" ng-options="obj.id as obj.name for obj in vm.listSign"
+                          data-ng-model="vm.listSign.name" class="form-control" ng-required="true"
+                          ng-change="vm.changeSign()"></select>
+                      </div>
+                      <label class="col-sm-1 text-right">{{'0480' | translate}}:</label>
+                      <div class="col-sm-3 text-right form-group-min">
+                        <input id="value" name="value" data-ng-model="vm.value" maxlength="60" ng-required="true"
+                          class="form-control grid-Edit-control text-currency" type="text"
+                          ng-keyup="vm.currencyKeyUp($event, FormulaForm.value, vm.symbol, vm.penny2)"
+                          ng-blur="vm.blurValue()" ng-focus="vm.focusSelect('value')">
+                      </div>
+                    </div>
+                    <div class="col-md-12 text-left form-group">
+                      <div class="btn-group col-sm-5 text-left"
+                        style="font-size: 10px; background-color: transparent; padding-right: 0px; padding-left: 40px;">
+                        <label class="btn btn-primary radio-button"
+                          ng-class="{'active': FormulaForm.option1.value || !vm.math }"
+                          style="font-style: 12px; width: 50%">
+                          <span ng-if="!vm.math" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                          <input type="radio" name="options" id="option1" autocomplete="off" ng-model="vm.math"
+                            style="display: none;" ng-click="vm.clickResultType('T')"> {{'0618' | translate}}
+                        </label>
+                        <label class="btn btn-primary radio-button"
+                          ng-class="{'active': FormulaForm.option2.value || vm.math }"
+                          style="font-style: 12px; width: 50%">
+                          <span ng-if="vm.math" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                          <input type="radio" name="options" id="option2" autocomplete="off" value="true" checked
+                            ng-model="vm.math" style="display: none;" ng-click="vm.clickResultType('N')">
+                          {{'0619' | translate}}
+                        </label>
+                      </div>
+                      <div class="btn-group col-sm-1"></div>
+                      <label class="col-sm-2 text-right" style="white-space: nowrap;">{{'0620' | translate}}:</label>
+                      <div class="btn-group col-sm-4 text-left"
+                        style="font-size: 10px; background-color: transparent; padding-right: 0px; padding-left: 0px;">
+                        <label class="btn btn-primary radio-button"
+                          ng-class="{'active': FormulaForm.option1.value || !vm.writeType }"
+                          style="font-style: 12px;  width: 50%">
+                          <span ng-if=" !vm.writeType" class="glyphicon glyphicon-ok" aria-hidden="true">
+                          </span>
+                          <input type="radio" name="optionsW" id="option1" autocomplete="off" ng-model="vm.writeType"
+                            style="display: none;" ng-click="vm.clickResultType('T')"> {{'0621' | translate}}
+                        </label>
+                        <label class="btn btn-primary radio-button"
+                          ng-class="{'active': FormulaForm.option2.value || vm.writeType }"
+                          style="font-style: 12px; width: 50%">
+                          <span ng-if=" vm.writeType" class="glyphicon glyphicon-ok" aria-hidden="true">
+                          </span>
+                          <input type="radio" name="optionsW" id="option2" autocomplete="off" value="true" checked
+                            ng-model="vm.writeType" style="display: none;" ng-click="vm.clickResultType('N')">
+                          {{'0622' | translate}}
+                        </label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-12 panel-padding">
+                      <div class="panel-footer text-right" style="margin-top: 15px; height: 60px;;">
+                        <div>
+                          <div class="col-md-12">
+                            <button type="button" class="btn btn-primary button-list" ng-click="vm.updatePriceFormula()"
+                              data-dismiss="modal" ng-disabled="FormulaForm.$invalid || vm.saveCalculator">
+                              <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' |
+                              translate}}
+                            </button>
+                            <button type="button" class="btn btn-info button-list" ng-click="vm.close()"
+                              data-dismiss="modal">
+                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-dialog" style="width: 900px; height: 244px;" id="modalImport">
+    <div class="modal-content" style="height: 100%">
+      <div class="modal-body panel-padding" style="padding-top: 10px; height: 95%">
+        <div class="row general-container">
+          <div class="panel panel-primary panel-principal">
+            <div class="panel-heading row">
+              <div class="panel-title">
+                <strong class="panel-title text-left title-bar">
+                  {{'0613' | translate |uppercase}}
+                </strong>
+              </div>
+            </div>
+            <div class="col-sm-12 form-group-min">
+              <form name="ImportForm" id="ImportForm" class="form-horizontal panel-body panel-padding">
+                <div class="form-group-min form-group-sm">
+                  <div class="form-group-min" style="margin-top: 7px">
+                    <div class="col-md-12 text-left form-group">
+                      <label class="col-sm-3 text-right">{{'0614' | translate}}:</label>
+                      <div class="col-sm-9 text-left form-group-min" ng-if="vm.clean">
+                        <csvpricetest disabled="false" quantitydata="vm.quantitydata" json="vm.listimport"
+                          errorarray="vm.dataerror"></csvpricetest>
+                      </div>
+                    </div>
+                    <div class="col-md-12 text-left form-group">
+                      <div class="btn-group col-sm-5 text-left"
+                        style="font-size: 10px; background-color: transparent; padding-right: 0px; padding-left: 40px;">
+                        <label class="btn btn-primary radio-button"
+                          ng-class="{'active': ImportForm.option1.value || !vm.codeType, 'disabled': vm.listCentralSystem.length === 0 }"
+                          style="font-style: 12px; height: 35px; padding: 6px">
+                          <span ng-if="!vm.codeType" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                          <input type="radio" name="options" id="option1" autocomplete="off" ng-model="vm.codeType"
+                            data-ng-click="vm.listCentralSystem.id=undefined" style="display: none;"
+                            ng-disabled="vm.listCentralSystem.length === 0">
+                          {{'0615' | translate}}
+                        </label>
+                        <label class="btn btn-primary radio-button"
+                          ng-class="{'active': ImportForm.option2.value || vm.codeType, 'disabled': vm.listCentralSystem.length === 0 }"
+                          style="font-style: 12px; height: 35px; padding: 6px">
+                          <span ng-if="vm.codeType" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                          <input type="radio" name="options" id="option2" autocomplete="off" value="true" checked
+                            data-ng-click="vm.listCentralSystem.id=undefined" ng-model="vm.codeType"
+                            style="display: none;" ng-disabled="vm.listCentralSystem.length === 0"> {{'0525' |
+                          translate}}
+                        </label>
+                      </div>
+                      <div class="btn-group col-sm-1"></div>
+                      <label class="col-sm-2 text-right" style="white-space: nowrap;">{{'0280' |
+                        translate}}:{{vm.listCentralSystem.id}}</label>
+                      <div class="btn-group col-sm-4 text-left"
+                        style="font-size: 10px; background-color: transparent; padding-right: 0px; padding-left: 0px;">
+                        <select id="centralSytem" name="centralSytem" charset="utf-8"
+                          ng-options="obj.id as obj.name for obj in vm.listCentralSystem"
+                          data-ng-model="vm.listCentralSystem.id" class="form-control" ng-required="true"
+                          ng-disabled="vm.listCentralSystem.length === 0 || !vm.codeType"></select>
+                      </div>
+                    </div>
+                    <div class="col-md-12 panel-padding">
+                      <div class="panel-footer text-right" style="margin-top: 15px; height: 60px;;">
+                        <div>
+                          <div class="col-md-12">
+                            <button type="button" class="btn btn-primary button-list"
+                              ng-click="vm.clean=false;vm.updateImportPriceTest()" data-dismiss="modal"
+                              ng-disabled="(ImportForm.$invalid && vm.codeType) || vm.listimport == undefined">
+                              <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>&nbsp;{{'0392'
+                              | translate}}
+                            </button>
+                            <button type="button" class="btn btn-info button-list" ng-click="vm.clean=false;vm.close()"
+                              data-dismiss="modal">
+                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/ng-template" id="AdvertenceApply.html">
+  <div class="modal fade" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/Question.png">
+                        </div>
+                        <div style="width: 80%; float: left">
+                            <label style="margin-top: 10px;margin-left: 10px">{{'0628' | translate}} {{vm.validityName}}</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="close('yes')" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" class="btn btn-default" ng-click="close('no')" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="assignmennoadd.html" type="text/ng-template">
+<div class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal-header-prymary" style="padding: 5px">
+        <h4 class="modal-tittle text-center">{{'3139' | translate}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12" style="height: 400px">
+            <table class="table table-list">
+              <thead>
+                <tr>
+                  <th class="col-md-4">
+                    {{'0018' | translate}}
+                  </th>
+                  <th class="col-md-4">
+                    {{'3138' | translate}}
+                  </th>
+                  <th class="col-md-4">
+                    {{'0612' | translate}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="tbody-list" style="width: 96.5%;height: 320px">
+                <tr class="row-list" data-ng-repeat="Test in listTest">
+                  <td class="col-md-4" data-ng-bind="Test.code"></td>
+                  <td class="col-md-4" data-ng-bind="Test.patientPercentage"></td>
+                  <td class="col-md-4" data-ng-bind="Test.price"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0008' |
+          translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</script>

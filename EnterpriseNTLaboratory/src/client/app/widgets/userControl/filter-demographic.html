@@ -1,0 +1,239 @@
+<style type="text/css">
+  .btn-min {
+    width: 22px;
+    height: 22px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .btn-min>i.material-icons {
+    margin-top: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    font-size: 16px
+  }
+
+  .div-table {
+    max-height: 125px;
+    overflow-y: auto;
+    display: block;
+  }
+
+  .tag-item-add {
+    border: 2px solid #2196f3 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+  }
+
+  .tag-item-subtranct {
+    background: #f5dad0 !important;
+    border: 2px solid #ff5c5c !important;
+  }
+
+  .tag-item-add.selected {
+    background: #f5dad0 !important;
+    border: 2px solid #ff5c5c !important;
+  }
+
+  .tag-item-subtranct.selected {
+    border: 2px solid #2196f3 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+  }
+
+
+  .autocomplete-add:hover {
+    color: #1976d2 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-subtranct:hover {
+    color: #d80000 !important;
+    background: #ffece5 !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-add.selected {
+    color: #1976d2 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-subtranct.selected {
+    color: #d80000 !important;
+    background: #ffece5 !important;
+    font-size: 13px;
+  }
+
+  fieldset,
+  input,
+  select {
+    font-size: 13px !important;
+    padding-left: 10px !important;
+  }
+
+  .labelmessageText {
+    margin-top: 20px;
+    margin-left: 5px;
+    font-size: 14px;
+    line-height: 40px;
+  }
+
+  .messageRepeatDemo {
+    height: auto;
+    top: 10px !important;
+    width: 475px !important;
+  }
+
+  .messageRepeatText {
+    width: 280px;
+    float: left;
+    padding-top: 5%;
+    white-space: nowrap;
+  }
+</style>
+
+<fieldset class="fieldset">
+  <legend>{{'0082' | translate}}: {{filterdemographic.labelMaxDemo}}
+    <button id="btnAdd{{filterdemographic.id}}" type="button" ng-if="!filterdemographic.demostatic"
+      class="btn-min md-btn-success md-btn-wave-light waves-effect waves-button waves-light"
+      ng-click="filterdemographic.addFilterDemographic()" ng-disabled="vm.isAdd">
+      <i class="material-icons">&#xE145;</i>
+    </button>
+    <button id="btnRemove{{filterdemographic.id}}" type="button" ng-if="!filterdemographic.demostatic"
+      class="btn-min md-btn-danger md-btn-wave-light waves-effect waves-button waves-light"
+      ng-click="filterdemographic.removeFilterDemographic()"
+      ng-disabled="filterdemographic.numFilterDemographics.length == 0"
+      ng-class="{'md-bg-blue-grey-100': filterdemographic.numFilterDemographics.length == 0}">
+      <i class="material-icons">&#xE14C;</i>
+    </button>
+  </legend>
+  <div class="uk-grid uk-width-1-1" data-ng-repeat="filterDemo in filterdemographic.numFilterDemographics"
+    style="white-space: nowrap; margin-bottom: -1px; margin-top: 0px">
+    <div class="uk-width-1-6 radio-check" ng-if="!filterdemographic.demostatic"
+      style="white-space: nowrap; margin-bottom: -1px; margin-top: 0px; width: 14%">
+      <input type="checkbox" name="fD{{filterDemo.id}}{{filterdemographic.id}}"
+        id="fD_d{{filterDemo.id}}{{filterdemographic.id}}" checked
+        ng-model="filterdemographic.activeDemographic[this.filterDemo.id]"
+        ng-disabled="filterDemo.demographics.disabled">
+      <label for="fD_d{{filterDemo.id}}{{filterdemographic.id}}"
+        ng-click="filterdemographic.clickfilterDemographic(filterDemo.id)">{{'0083' | translate}}</label>
+    </div>
+    <div class="uk-width-1-6" style="margin-top: -15px; padding-left: 0px; width: 15%"
+      ng-show="filterdemographic.activeDemographic[filterDemo.id]" ng-if="!filterdemographic.demostatic">
+      <select id="lD{{filterDemo.id}}{{filterdemographic.id}}" charset="utf-8"
+        ng-disabled="filterDemo.demographics.disabled"
+        ng-options="obj as obj.name for obj in filterdemographic.listdemographicAll[this.filterDemo.id] track by obj.id"
+        data-ng-model="filterdemographic.numFilterDemographics[this.filterDemo.id].demographics" md-input
+        class="md-input"
+        ng-change="filterdemographic.changeDemographicsItems(filterdemographic.numFilterDemographics[this.filterDemo.id].demographics, this.filterDemo.id)"
+        style="padding-bottom: 0px"></select>
+    </div>
+    <div class="uk-width-3-10" style="margin-top: -15px; padding-left: 50px;"
+      ng-show="filterdemographic.activeDemographic[filterDemo.id]" ng-if="filterdemographic.demostatic">
+      <select id="lD{{filterDemo.id}}{{filterdemographic.id}}" charset="utf-8"
+        ng-disabled="filterDemo.demographics.disabled"
+        ng-options="obj as obj.name for obj in filterdemographic.listdemographicAll[this.filterDemo.id] track by obj.id"
+        data-ng-model="filterdemographic.numFilterDemographics[this.filterDemo.id].demographics" md-input
+        class="md-input"
+        ng-change="filterdemographic.changeDemographicsItems(filterdemographic.numFilterDemographics[this.filterDemo.id].demographics, this.filterDemo.id)"
+        style="padding-bottom: 0px"></select>
+    </div>
+    <div class="uk-width-7-10" ng-if="filterdemographic.demostatic">
+      {{filterdemographic.demoItem.demographicItem.name}}
+    </div>
+    <div class="uk-width-2-3" ng-if="!filterdemographic.demostatic"
+      ng-show="filterdemographic.activeDemographic[filterDemo.id] && (filterdemographic.listdemographicItems[filterDemo.id].length > 0 || filterdemographic.listdemographicItemsApply[filterDemo.id].length > 0) && filterdemographic.encoded[filterDemo.id] && filterDemo.demographics.id!== -100"
+      style="margin-top: -8px; padding-left: 18px; width: 71%">
+      <tags-input id="tagFD{{filterDemo.id}}{{filterdemographic.id}}" ng-disabled="filterDemo.demographics.disabled"
+        ng-model="filterdemographic.filterDemographic[filterDemo.id]" min-length="1" add-on-paste="true"
+        display-property="v" key-property="id" class="md-input" placeholder="{{'0385' | translate}}"
+        add-from-autocomplete-only="false" add-on-space="false" add-on-blur="false" text="$tag1"
+        template="tag-Template1"
+        on-tag-added="filterdemographic.validAddTag($tag, filterdemographic.filterDemographic[this.filterDemo.id], this.filterDemo.id)"
+        on-tag-removed="filterdemographic.validAddTag($tag, filterdemographic.filterDemographic[this.filterDemo.id], this.filterDemo.id)"
+        tag-class="{'tag-item-add': $tag.v == filterdemographic.all[this.filterDemo.id] || !filterdemographic.firstValue[this.filterDemo.id], 'tag-item-subtranct': $tag.v != filterdemographic.all[this.filterDemo.id] && filterdemographic.firstValue[this.filterDemo.id]}">
+
+        <auto-complete source="filterdemographic.loadDemographicItems($tag1, filterDemo.id)" min-length="1"
+          load-on-focus="true" load-on-empty="true" max-results-to-show="32"
+          match-class="{'autocomplete-add': $tag.v == filterdemographic.all[this.filterDemo.id] || !filterdemographic.firstValue[this.filterDemo.id], 'autocomplete-subtranct': $tag.v != filterdemographic.all[this.filterDemo.id] && filterdemographic.firstValue[this.filterDemo.id]}"
+          template="autocomplit-Template1">
+        </auto-complete>
+      </tags-input>
+
+      <script type="text/ng-template" id="tag-Template1">
+                <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+                  <div class="left-panel">
+                    <span class="material-icons md-color-blue-500" >{{data.icon}}</span>
+                  </div>  
+                  <div class="right-panel" style="padding-left: 4px">
+                      <span>{{$getDisplayText()}}</span>
+                      <span>{{data.name}}</span> 
+                      <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+                  </div>                                
+                </div> 
+                
+              </script>
+
+      <script type="text/ng-template" id="autocomplit-Template1">
+                <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+                  <div class="left-panel">
+                    <span class="material-icons md-color-blue-500" >{{data.icon}}</span>
+                  </div>
+                  <div class="right-panel" style="padding-left: 4px">
+                    <span ng-bind-html="$highlight($getDisplayText())"></span>
+                    <span>{{data.name}}</span>
+                  </div>
+                </div>
+              </script>
+    </div>
+    <div class="uk-width-2-3" ng-if="!filterdemographic.demostatic"
+      ng-show="filterdemographic.activeDemographic[filterDemo.id] && !filterdemographic.encoded[filterDemo.id] && filterDemo.demographics.id !== -110"
+      style="margin-top: -8px; padding-left: 18px; width: 71%">
+      <input id="txtFD{{filterDemo.id}}{{filterdemographic.id}}" md-input label-fixed class="md-input label-fixed"
+        ng-disabled="filterDemo.demographics.disabled" type="text" ng-model="filterdemographic.demotext[filterDemo.id]"
+        ng-blur="filterdemographic.addRemoveTag()" style="padding-bottom: 0px; margin-top: -6px" />
+    </div>
+    <div class="uk-width-2-3" ng-if="!filterdemographic.demostatic"
+      ng-show="filterdemographic.activeDemographic[filterDemo.id] && !filterdemographic.encoded[filterDemo.id] && filterDemo.demographics.id === -110"
+      style="margin-top: -16px; padding-left: 18px; width: 71%">
+      <div class="uk-grid uk-grid-small">
+        <div class="uk-width-3-10">
+          <select charset="utf-8" ng-options="obj.id as obj.name for obj in filterdemographic.listoperator"
+            ng-disabled="filterDemo.demographics.disabled" data-ng-model="filterDemo.demographics.operator"
+            ng-change="filterdemographic.addRemoveTag()" class="md-input" style="padding-bottom: 0px;"
+            md-input></select>
+        </div>
+        <div class="uk-width-3-10" style="margin-top: 4px;">
+          <input kendo-numeric-text-box id="{{filterDemo.demographics.id}}"
+            ng-disabled="filterDemo.demographics.disabled" k-ng-model="filterdemographic.demotext[filterDemo.id]"
+            maxlength="3" k-rebind="filterdemographic.max" k-max="filterdemographic.max" k-format="'n0'"
+            ng-blur="filterdemographic.addRemoveTag()" k-min="1" style="width: 100%;margin-top: 0px;">
+        </div>
+        <div class="uk-width-3-10">
+          <select charset="utf-8" ng-options="obj.id as obj.name for obj in filterdemographic.listunit"
+            ng-disabled="filterDemo.demographics.disabled" data-ng-model="filterDemo.demographics.unidAge"
+            ng-change="filterdemographic.demotext[filterDemo.id]=null;filterdemographic.changueunit(filterDemo.demographics.unidAge)"
+            class="md-input" style="padding-bottom: 0px;" md-input></select>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<div class="uk-modal" id="modalRepeat" tabindex="1" aria-hidden="false" bg-close="false" modal="false">
+  <div class="uk-modal-dialog messageRepeatDemo">
+    <button type="button" class="uk-close" ng-class="{'disabled':  vm.ButonReject}"
+      ng-click="filterdemographic.modalRepeat.hide()"></button>
+    <div class="uk-modal-body" style="height: 100px; top: 0px">
+      <div style="width: 18%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageRepeatText">
+        <label class="labelmessageText">{{'0781' | translate}}</label>
+      </div>
+    </div>
+    <div class="uk-modal-footer">
+    </div>
+  </div>
+</div>

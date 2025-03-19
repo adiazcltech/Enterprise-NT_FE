@@ -1,0 +1,219 @@
+<div class="content div-main" role="main">
+  <div>
+    <span class="title">Cubo Estadístico</span>
+  </div>
+  <div class="col-12">
+    <div class="row justify-content-start">
+      <div class="col-3">
+        <div class="card" style="height: calc(100vh - 140px);">
+          <div class="card-body">
+            <h5 class="card-title">Lista de Plantillas</h5>
+            <ul class="list-group list-group-flush" *ngIf="templates.length > 0">
+              <li class="list-group-item" *ngFor="let template of templates" (click)="selectTemplate(template)"
+                [ngClass]="{'item-select': template.select}">{{ template.name }}</li>
+            </ul>
+            <div *ngIf="templates.length === 0" class="lb-template">
+              No existen plantillas
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <button type="button" class="btn btn-primary mr-2 btn-sm" [disabled]="disabledNew"
+                (click)="newTemplate()">Nuevo</button>
+              <button type="button" class="btn btn-success mr-2 btn-sm" [disabled]="disabledSave || !form.valid"
+                (click)="save()">Guardar</button>
+              <button type="button" class="btn btn-danger mr-2 btn-sm" [disabled]="disabledDelete"
+                (click)="deleteTemplate()">Borrar</button>
+              <button type="button" class="btn btn-secondary mr-2 btn-sm" [disabled]="disabledCancel"
+                (click)="cancel()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="col-form">
+          <div class="card" style="height: calc(100vh - 140px);">
+            <div class="card-body">
+
+              <div class="row align-items-start">
+                <div class="col-3">
+                  <div class="form-group">
+                    <label for="name" class="mb-0">Nombre</label>
+                    <input type="text" class="form-control input-small" id="name" formControlName="name">
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group" style="margin: 20px 32px;">
+                    <input class="form-check-input profile" type="checkbox" value="" formControlName="profiles"
+                      id="profiles">
+                    <label class="form-check-label l-profile" for="profiles">
+                      Agrupar por perfiles
+                    </label>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <label *ngIf="form.value.init" class="label-date">Fecha inicial: {{ form.value.init.year }}/{{
+                    form.value.init.month }}/{{ form.value.init.day }}</label>
+                  <div class="input-group mb-1">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dpinit" formControlName="init"
+                      ngbDatepicker #dpinit="ngbDatepicker" [maxDate]="maxDate">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="dpinit.toggle()" type="button"
+                        style="border: 1px solid #b3b3b3;">
+                        <img src="assets/schedule.png" style="width: 20px;" />
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <br>
+                  <div class="mt-0" *ngIf="form.hasError('errorStartDate') && !form.get('init').pristine">
+                    <span class="badge m-r-5 badge-danger">La fecha de consulta no puede ser mayor a la fecha
+                      actual</span>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <label *ngIf="form.value.end" class="label-date">Fecha Final: {{ form.value.end.year }}/{{
+                    form.value.end.month }}/{{ form.value.end.day }}</label>
+                  <div class="input-group mb-1">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dpend" formControlName="end"
+                      ngbDatepicker #dpend="ngbDatepicker" [maxDate]="maxDate">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="dpend.toggle()" type="button"
+                        style="border: 1px solid #b3b3b3;">
+                        <img src="assets/schedule.png" style="width: 20px;" />
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <br>
+                  <div class="mt-0" *ngIf="form.hasError('dates') && !form.get('end').pristine">
+                    <span class="badge m-r-5 badge-danger">La fecha final debe ser mayor a la fecha de inicio</span>
+                  </div>
+                  <div class="mt-0" *ngIf="form.hasError('errorEndDate') && !form.get('end').pristine">
+                    <span class="badge m-r-5 badge-danger">La fecha de consulta no puede ser mayor a la fecha
+                      actual</span>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="row align-items-start">
+                <div style="width: 33% !important;" class="cards-col ">
+                  <div class="card card-column">
+                    <div class="card-body" style="padding: 5px 15px;overflow: auto;">
+                      <div>
+                        <!-- <input class="form-check-input check-item" type="checkbox" [checked]="selectAllH" (change)="selectAll(1, $event.target.checked)" style="margin-left: 7px;"> -->
+                        <h6 class="card-title" style="margin-left: 32px;">Historia</h6>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item p-item" formArrayName="demosH"
+                          *ngFor="let demoH of getDemosH.controls; let i = index">
+                          <div [formGroupName]="i">
+                            <input class="form-check-input check-item" type="checkbox" formControlName="isChecked">
+                            {{ demoH.value.name }}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div style="width: 33% !important;" class="cards-col ">
+                  <div class="card card-column">
+                    <div class="card-body" style="padding: 5px 15px;overflow: auto;">
+                      <div>
+                        <!-- <input class="form-check-input check-item" type="checkbox" [checked]="selectAllO" (change)="selectAll(2, $event.target.checked)" style="margin-left: 7px;"> -->
+                        <h6 class="card-title" style="margin-left: 32px;">Orden</h6>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item p-item" formArrayName="demosO"
+                          *ngFor="let demoO of getDemosO.controls; let i = index">
+                          <div [formGroupName]="i">
+                            <input class="form-check-input check-item" type="checkbox" formControlName="isChecked">
+                            {{ demoO.value.name }}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width: 33% !important;" class="cards-col">
+                  <div class="card card-column2" >
+                    <div class="card-body" style="padding: 5px 15px;overflow: auto;">
+                      <div>
+                        <!-- <input class="form-check-input check-item" type="checkbox" [checked]="selectAllR" (change)="selectAll(3, $event.target.checked)" style="margin-left: 7px;"> -->
+                        <h6 class="card-title" style="margin-left: 32px;">Resultados</h6>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item p-item" formArrayName="demosR"
+                          *ngFor="let demoR of getDemosR.controls; let i = index">
+                          <div [formGroupName]="i">
+                            <input class="form-check-input check-item" type="checkbox" formControlName="isChecked">
+                            {{ demoR.value.name }}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div> 
+                  <div class="card card-column2" style="margin-top:0.4rem">
+                    <div class="card-body" style="padding: 5px 15px;overflow: auto;">
+                      <div>
+                        <!-- <input class="form-check-input check-item" type="checkbox" [checked]="selectAllR" (change)="selectAll(3, $event.target.checked)" style="margin-left: 7px;"> -->
+                        <h6 class="card-title" style="margin-left: 32px;">Microbiologia</h6>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item p-item" formArrayName="demosM"
+                          *ngFor="let demoM of getDemosM.controls; let i = index">
+                          <div [formGroupName]="i">
+                            <input class="form-check-input check-item" type="checkbox" formControlName="isChecked">
+                            {{ demoM.value.name }}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div> 
+                </div>
+            
+              </div>
+          
+              <div class="row">
+                <app-filter-areatest class="col-md-12" *ngIf="info" [info]="info" [inviewarea]="false"
+                  [filter]="filterAreaTest" [jsonAreaTest]="filterAreaTestJSON"
+                  (finalJson)="getAreaTestFilter($event)"></app-filter-areatest>
+              </div>
+              <div class="row">
+                <app-filter-demographic class="col-md-12" *ngIf="info" [info]="info" [demosmask]="demosmask"
+                  [jsonDemographics]="filterDemographicsJSON"
+                  (finalJson)="getDemographicsFilter($event)"></app-filter-demographic>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <button type="submit" class="btn btn-success mr-2"
+                  [disabled]="!form.valid || disabledExecute">Ejecutar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      
+
+      <div class="col-2" style="padding: 0;padding-left: 5px;">
+        <div class="card" style="height: 100%;">
+          <div class="card-body" style="padding: 5px;">
+            <h5 class="card-title" style="font-size: 12px;margin: 0 0 5px;">Demográficos y Ordenamiento:</h5>
+            <ul class="list-group list-group-numbered" dragula="VAMPIRES" [(dragulaModel)]="listDemos" style="margin: 0;height: calc(100vh - 135px);overflow: auto;">
+              <li class="list-group-item item-demo" *ngFor="let demo of listDemos; index as i">
+                <i class="material-icons md-color-blue-500" style="font-size: 16px;">swap_vert</i>{{ demo.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

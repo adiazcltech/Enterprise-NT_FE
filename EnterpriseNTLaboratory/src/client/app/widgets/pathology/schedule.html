@@ -1,0 +1,372 @@
+<style>
+  .th-thead-schedule {
+    font-size: 11px !important;
+    padding: 0px !important;
+    border-bottom: 0px !important;
+    border-right: 1px solid #ddd !important;
+    font-weight: 700 !important;
+  }
+
+  .th-body-schedule {
+    font-size: 11px !important;
+    padding: 0px !important;
+    border-bottom: 0px !important;
+    font-weight: 700 !important;
+  }
+
+  .card-organs {
+    height: 25px;
+    overflow: auto;
+    border-radius: 5px;
+    margin-top: 7px;
+  }
+
+  .schedule-microscopy {
+    border-left: 4px solid #8bc34a !important;
+    cursor: pointer;
+  }
+
+  .schedule-macroscopy {
+    border-left: 4px solid #03a9f4 !important;
+  }
+
+  .activity {
+    padding: 5px;
+    font-size: 11px;
+    color: #000000;
+    font-weight: bold;
+    background-color: #ffffff;
+    margin: 4px 10px;
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+}
+
+  .disabled-card  {
+    background: #dedede !important;
+    cursor: no-drop !important;
+  }
+
+  .quantity-mic {
+    background: #8bc34a;
+    padding: 4px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .quantity-no {
+    background: #F44336;
+    padding: 4px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .organ {
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+</style>
+
+<div class="uk-modal uk-modal-card-fullscreen" id="modal_pathologist_assignment">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+
+      <loadpage view="schedule.loading"></loadpage>
+
+      <div class="md-card uk-height-viewport">
+
+          <div class="md-card-toolbar" style="background: #43a047;">
+              <div class="md-card-toolbar-actions" style="padding: 0;">
+                  <div>
+                      <i class="md-icon material-icons md-color-blue-50 uk-modal-close"  data-uk-tooltip title="{{'0329'| translate}}" ng-click="schedule.close()" >&#xE5CD;</i>
+                  </div>
+              </div>
+              <span class="md-icon material-icons uk-modal-close uk-modal-close"  style="color: white;" data-uk-tooltip title="{{'0329'| translate}}" ng-click="schedule.close()">&#xE5C4;</span>
+              <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                {{'3157' | translate}}
+            </h3>
+          </div>
+
+          <div class="md-card-content">
+
+            <div class="uk-width-1-1">
+
+              <div class="uk-grid">
+
+                <div class="uk-width-1-3">
+
+                  <div class="md-card md-card-hover heightstatic" style="height: 61px;">
+                    <div class="md-card-content" style="padding: 0px;">
+
+                      <div class="uk-grid">
+
+                        <div class="uk-width-1-2">
+                          <div class="uk-input-group" style="height: 35px;">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/inconsistency/order.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -6px; font-size: 13px;">{{ '0061' | translate }}: </label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ schedule.case.order.numberOrder }}</label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="uk-width-1-2" style="padding-left: 0px;">
+                          <div class="uk-input-group" style="height: 35px;">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/study.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -6px; font-size: 13px;">{{ '3138' | translate }}: </label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ schedule.case.studyType.name }}</label>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="uk-grid" style="margin-top: -7px;">
+
+                        <div class="uk-width-1-2">
+                          <div class="uk-input-group" style="height: 35px;">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/case.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -6px; font-size: 13px;">{{ '3038' | translate }}: </label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ schedule.case.numberCase }}</label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="uk-width-1-2" style="padding-left: 0px;">
+                          <div class="uk-input-group" style="height: 35px;">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/pathologist.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -6px; font-size: 13px;">{{ '3154' | translate }}: </label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;text-transform: capitalize;" ng-if="schedule.case.pathologist">{{ schedule.case.pathologist.name }} {{ schedule.case.pathologist.lastName }}</label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;" ng-if="!schedule.case.pathologist">{{ '0664' | translate }}</label>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="uk-width-1-3" style="padding-left: 10px;">
+
+                   <div class="md-card md-card-hover heightstatic">
+                     <div class="md-card-content">
+                       <div class="uk-input-group">
+                         <span class="uk-input-group-addon" style="width: 10%;">
+                           <img ng-src="images/pathology/samplereception/organ.png" />
+                         </span>
+                         <div class="md-input-wrapper md-input-filled">
+                           <label class="uk-text-bold uk-text-truncate" style="left: 0px;">{{ '3120' | translate }}</label>
+                           <ui-select ng-model="schedule.organ" theme="select2" style="width: 100%;" ng-change="schedule.filterScheduleByOrgan()">
+                             <ui-select-match placeholder="{{ '3058' | translate }}">
+                                 {{ $select.selected.name }}
+                             </ui-select-match>
+                             <ui-select-choices class="contentscroll" repeat="organ in schedule.organs | filter: {name:$select.search}">
+                                 <span ng-bind-html="organ.name | highlight: $select.search"></span>
+                             </ui-select-choices>
+                           </ui-select>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+
+                </div>
+
+                <div class="uk-width-1-3" style="padding-left: 10px;">
+
+                   <div class="md-card md-card-hover heightstatic">
+                     <div class="md-card-content">
+                       <div class="uk-input-group">
+                         <span class="uk-input-group-addon" style="width: 10%;">
+                           <img ng-src="images/pathology/samplereception/doctor.png" />
+                         </span>
+                         <div class="md-input-wrapper md-input-filled">
+                           <label class="uk-text-bold uk-text-truncate" style="left: 0px;">{{ '3154' | translate }}</label>
+                           <ui-select ng-model="schedule.pathologist" theme="select2" style="width: 100%;" ng-change="schedule.filterScheduleByPathologist()">
+                             <ui-select-match placeholder="{{ '3058' | translate }}">
+                                 {{ $select.selected.fullname }}
+                             </ui-select-match>
+                             <ui-select-choices class="contentscroll" repeat="pathologist in schedule.pathologists | filter: {fullname:$select.search}">
+                                 <span ng-bind-html="pathologist.fullname | highlight: $select.search"></span>
+                             </ui-select-choices>
+                           </ui-select>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Tabla -->
+
+            <div class="uk-width-1-1" style="min-width: 1300px; overflow-x: auto; overflow-y: hidden;margin-top: 10px;">
+
+              <div class="uk-grid">
+
+                <div class="uk-width-1-1">
+
+                  <div class="md-card md-card-hover" style="height: calc(100vh - 164px);">
+
+                    <div class="md-card-content fullheight" style="padding: 0px;">
+
+                      <table class="uk-table uk-table-small uk-table-middle" style="margin-bottom: 0px;height: 74%; margin-top: 0px; ">
+
+                        <thead class="theader">
+                          <tr class="uk-grid" style="margin-left: 0px;background-color: #eee; border-bottom: 1px solid #ddd; height: 30px; line-height: 30px">
+                            <th class="uk-text-center" style="width: 225px; padding: 0px; font-size: 12px; border-right: 1px solid; border-color: #ddd; border-bottom: 0px !important; font-weight: 700;">
+                              {{'3155' | translate}}
+                            </th>
+                            <th ng-repeat="day in schedule.days" class="uk-text-center uk-text-bold th-thead-schedule" ng-style="{'width': 'calc((100% - 245px)/{{schedule.days.length}})'}">
+                              {{day.day}} {{day.date}}
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody class="contentscroll" style="height: calc(100vh - 189px); overflow-y:auto;display: block; overflow-x: hidden">
+                          <tr class="uk-grid" style="margin-left: 0px; margin-top: 0px; border-bottom: 13px solid #ddd;position: relative;" ng-repeat="pathologist in schedule.listPathologistsFiltered">
+                            <th style="width: 225px; padding: 0px; height: 98px; border-right: 1px solid; margin-right: 0px; border-color: #ddd; border-bottom: 0px !important">
+                              <div class="md-card" style="border-radius: 0px;">
+                                <div class="md-card-content" style="padding: 10px 5px;">
+
+                                  <div class="uk-grid" style="margin-top: 5px;">
+                                    <div class="uk-width-1-3">
+                                      <img style="width: 40px;border-radius: 50%;height: 40px;" ng-if="pathologist.pathologist.photo !='' && pathologist.pathologist.photo != undefined" ng-src="data:image/jpeg;base64,{{pathologist.pathologist.photo}}" alt="" />
+                                      <img style="width: 40px;border-radius: 50%;height: 40px;" ng-if="pathologist.pathologist.photo==''|| pathologist.pathologist.photo==undefined" ng-src="images/user1.png" alt="" />
+                                    </div>
+                                    <div class="uk-width-2-3" style="padding: 0;">
+                                      <label style="text-transform: capitalize;font-size: 12px;">{{ pathologist.fullname }}</label>
+                                      <br>
+                                      <span style="font-size: 10px;">{{ pathologist.pathologist.identification }}</span>
+                                    </div>
+                                  </div>
+                                  <div class="card-organs contentscroll">
+                                    <span ng-repeat="organ in pathologist.organs" class="organ">• {{ organ.name }}</span>
+                                  </div>
+
+                                  <!-- <div>
+
+                                    <img style="width: 40px;border-radius: 50%;height: 40px;" ng-if="pathologist.pathologist.photo !='' && pathologist.pathologist.photo != undefined" ng-src="data:image/jpeg;base64,{{pathologist.pathologist.photo}}" alt="" />
+                                    <img style="width: 40px;border-radius: 50%;height: 40px;" ng-if="pathologist.pathologist.photo==''|| pathologist.pathologist.photo==undefined" ng-src="images/user1.png" alt="" />
+
+                                    <label style="text-transform: capitalize;font-weight: 500;font-size: 12px;">{{ pathologist.fullname }} </label>
+
+                                    <label class="uk-badge uk-badge-primary" style="border-radius: 10px;font-size: 11px;float: right;">{{ pathologist.quantity }}</label>
+
+                                    <div class="card-organs contentscroll">
+                                      <span ng-repeat="organ in pathologist.organs" style="margin-right: 5px;border-radius: 5px;font-size: 11px;font-weight: 500;color: #000000">• {{ organ.name }}</span>
+                                    </div>
+
+                                  </div> -->
+                                </div>
+                              </div>
+
+                              <!-- <div class="md-card uk-animation-scale-up" style="border-radius: 0px">
+                                <div class="md-card-toolbar" style="height: 30px;">
+                                  <div class="md-card-toolbar-actions" style="padding: 0;float: left;">
+                                    <ul class="uk-tab" data-uk-tab="{connect:'#pathologist_{{pathologist.pathologist.id}}',animation:'slide-horizontal'}">
+                                      <li class="uk-active">
+                                        <i class="md-icon uk-icon-user md-color-blue-grey-500" data-uk-tooltip="{pos:'top'}" title="{{'3154' | translate}}"></i>
+                                      </li>
+                                      <li>
+                                        <i class="md-icon material-icons md-color-blue-A200" data-uk-tooltip="{pos:'top'}" title="{{'3275' | translate}}">medical_services</i>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="md-card-content" style="padding: 0px 13px;">
+                                  <ul style="height: 100%;margin-bottom: 0px;" id="pathologist_{{pathologist.pathologist.id}}" class="uk-switcher uk-margin">
+                                    <li style="height: 51px;margin-top: 15px;">
+                                      <div class="uk-grid">
+                                        <div class="uk-width-1-3">
+                                          <img style="width: 40px;border-radius: 50%;height: 40px;" ng-if="pathologist.pathologist.photo !='' && pathologist.pathologist.photo != undefined" ng-src="data:image/jpeg;base64,{{pathologist.pathologist.photo}}" alt="" />
+                                          <img style="width: 40px;border-radius: 50%;height: 40px;" ng-if="pathologist.pathologist.photo==''|| pathologist.pathologist.photo==undefined" ng-src="images/user1.png" alt="" />
+                                        </div>
+                                        <div class="uk-width-2-3" style="padding: 0;">
+                                          <label style="text-transform: capitalize;font-size: 12px;">{{ pathologist.fullname }}</label>
+                                          <br>
+                                          <span style="font-size: 10px;">{{ pathologist.pathologist.identification }}</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="card-organs contentscroll">
+                                        <ul>
+                                          <li ng-repeat="organ in pathologist.organs">
+                                            <span style="font-size: 10px;">{{ organ.name }}</span>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div> -->
+                            </th>
+
+                            <th ng-repeat="sch in pathologist.schedule" class="th-body-schedule contentscroll" style="height: 98px;overflow: auto;" ng-style="{'width': 'calc((100% - 239px)/{{pathologist.schedule.length}})'}">
+                              <div ng-repeat="day in sch.schedules" class="activity" ng-click="schedule.selectPathologist(pathologist, day, sch.date)"
+                              ng-class="{'schedule-macroscopy': day.status === 1, 'schedule-microscopy': day.status === 2 }"
+                               ng-style="{'border-left': day.event.colour ? '4px solid' : '1px solid', 'border-left-color': day.event.colour ? day.event.colour : '#b1b1b1'  }">
+                                <div class="uk-grid">
+                                  <div class="uk-width-5-10">
+                                    <label ng-if="day.status === 1">
+                                      {{ '3001' | translate }}:
+                                    </label>
+                                    <label ng-if="day.status === 2">
+                                      {{ '3013' | translate }}:
+                                    </label>
+                                    <label ng-if="day.status === 0 && day.event.id !== 0">
+                                      {{ day.event.name }}:
+                                    </label>
+                                  </div>
+                                  <div class="uk-width-5-10" style="text-align-last: right;">
+                                    <label ng-if="day.status === 2" class="quantity-mic" ng-class="{'quantity-mic': day.quantityCases !== day.quantity, 'quantity-no': day.quantityCases === day.quantity }">
+                                      {{ day.quantity - day.quantityCases }}/{{ day.quantity }}
+                                    </label>
+                                  </div>
+                                </div>
+                                <label>
+                                  {{ day.init | date:'h:mma' }} - {{ day.end | date:'h:mma' }}
+                                </label>
+                              </div>
+                            </th>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+<modalexceptions openmodal="schedule.ShowPopupError" detailerror="schedule.Error" idcontrol="'rs-modal-casefiles'"></modalexceptions>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>

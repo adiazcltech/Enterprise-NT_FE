@@ -1,0 +1,70 @@
+<div class="fieldset">
+
+  <legend style="margin-bottom: 0px;">Filtrar por áreas o pruebas:</legend>
+
+  <div class="row">
+
+    <div class="col-md-6 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+      <div class="row row-checks">
+        <input type="radio" [(ngModel)]="typeFilter" name="fAT{{id}}" id="fAT_1{{id}}" value="0" checked (focus)="clickfilterByAreaTest(0)" />
+        <label for="fAT_1{{id}}" (click)="clickfilterByAreaTest(0)">General</label><br />
+
+        <input type="radio" [(ngModel)]="typeFilter" name="fAT{{id}}" id="fAT_2{{id}}" value="1" (focus)="clickfilterByAreaTest(1)"
+          *ngIf="inviewarea" />
+        <label for="fAT_2{{id}}" *ngIf="inviewarea" (click)="clickfilterByAreaTest(1)">Áreas</label>
+        <br *ngIf="inviewarea" />
+
+        <input type="radio" [(ngModel)]="typeFilter" name="fAT{{id}}" id="fAT_6{{id}}" value="5" (focus)="clickfilterByAreaTest(5)"
+          *ngIf="!onlyareas" />
+        <label for="fAT_6{{id}}" *ngIf="!onlyareas" (click)="clickfilterByAreaTest(5)">Grupos</label><br />
+
+        <input type="radio" [(ngModel)]="typeFilter" name="fAT{{id}}" id="fAT_3{{id}}" value="2" (focus)="clickfilterByAreaTest(2)"
+          *ngIf="!onlyareas" />
+        <label for="fAT_3{{id}}" *ngIf="!onlyareas" (click)="clickfilterByAreaTest(2)">Pruebas y perfiles</label><br />
+
+        <input type="radio" [(ngModel)]="typeFilter" name="fAT{{id}}" id="fAT_4{{id}}" value="3" (focus)="clickfilterByAreaTest(3)"
+          *ngIf="!onlyareas" [disabled]="confidential" />
+
+        <label for="fAT_4{{id}}" (click)="clickfilterByAreaTest(3)" *ngIf="!onlyareas" [disabled]="confidential">
+          Pruebas confidenciales
+        </label><br />
+
+        <input *ngIf="resultsentry === true && !onlyareas" type="radio" name="fAT{{id}}" id="fAT_5{{id}}" value="4"
+          (focus)="clickfilterByAreaTest(4)" />
+        <label *ngIf="resultsentry === true  && !onlyareas" for="fAT_5{{id}}" (click)="clickfilterByAreaTest(4)">Hojas
+          de
+          trabajo</label>
+      </div>
+    </div>
+
+    <div class="col-md-6 div-tags" [hidden]="numFilterAreaTest === 0 ">
+      <ng-select [items]="dataAreaTest" [addTag]="addTagFn" [hideSelected]="true" multiple="true" bindLabel="name" [clearable]="false"
+      [(ngModel)]="filterAreaTests" (change)="validTag()" appendTo="body" placeholder="{{placeholder}}" #selectItemsFilter>
+      <ng-template ng-multi-label-tmp let-items="items" >
+        <div class="ng-value" *ngFor="let item of items " [ngClass]="{'tag-item-add': item.id === 0 || !firstValue, 'tag-item-subtranct': item.id > 0 && firstValue}">
+          <div class="left-panel">
+            <span class="material-icons md-color-blue-500" style="margin-top: -1px;margin-left: 2px;">{{item.icon}}</span>
+          </div>
+          <div class="right-panel" style="padding-left: 0px;margin-top: -6px;">
+            <span class="ng-value-label"> {{item.name}}</span>
+            <span class="ng-value-icon right" (click)="removeTag(item)" aria-hidden="true"
+              style="font-size: 11px;font-weight: bold;color: #585858;">×</span>
+          </div>
+        </div>
+       </ng-template>
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div class="row" [ngClass]="{'autocomplete-add': !firstValue, 'autocomplete-subtranct': firstValue}">
+          <div class="left-panel" style="height: 18px;">
+            <span class="material-icons md-color-blue-500">{{item.icon}}</span>
+          </div>
+          <div class="right-panel" style="padding-left: 4px;margin-top: -4px;height: 18px;">
+            <span style="font-size: 11px;">{{item.name}}</span>
+          </div>
+        </div>
+      </ng-template>
+      </ng-select>
+    </div>
+
+  </div>
+
+</div>

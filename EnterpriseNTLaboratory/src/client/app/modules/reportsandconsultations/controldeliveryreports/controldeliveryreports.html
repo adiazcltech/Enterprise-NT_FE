@@ -1,0 +1,482 @@
+<style>
+  .card1 {
+    height: 100%;
+  }
+
+  .card2 {
+    height: 22%;
+  }
+
+  .k-multiselect-wrap {
+    border-width: 1px;
+    height: 251px;
+    overflow: auto;
+  }
+
+  .viewresul {
+    height: calc(100% - 2px);
+  }
+
+  .inviewresul {
+    height: calc(100% - -78px);
+  }
+
+  .vs-repeat-custom-scroll {
+    margin-top: 0px;
+    height: calc(100% - 45px);
+    width: 100% !important;
+    overflow-y: auto;
+  }
+
+  .tabletestview {
+    height: 79%;
+  }
+
+  .tabletestview2 {
+    height: 82%;
+  }
+
+  .bottonview {
+    bottom: 38px;
+  }
+
+  .inbottonview {
+    bottom: 43px;
+  }
+
+  .ordersearch-uppercase {
+    text-transform: uppercase;
+  }
+
+  .k-button {
+    margin: 2px;
+    padding: 0 5px;
+    display: inline-block;
+    float: left;
+    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 26px;
+    line-height: 25px;
+    border: 2px solid #2196f3;
+    border-radius: 6px;
+  }
+
+  .uk-close:after {
+    opacity: 1 !important;
+    color: #fff;
+    content: '\e5cd';
+    font-family: "Material Icons";
+  }
+
+  .dimensionMin {
+    height: 200px;
+    width: 450px;
+  }
+
+  .dimensionMax {
+    height: 275px;
+    width: 550px;
+  }
+
+  .md-tree-image {
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 50%;
+  }
+</style>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="demographicsmodal" class="uk-modal uk-modal-card-fullscreen">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-blue-700">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}" ng-click="vm.closemodaldemographics()">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="
+            float: left;
+            margin: 8px 8px 0 0;
+            display: block;
+            line-height: 32px;
+          "><i class="material-icons md-color-indigo-50 md-24">&#xE03F;</i></span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          {{'0083' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+        <div class="uk-grid" style="height: 100%;">
+          <div class="uk-width-1-3" style="height: 100%;">
+            <div class="uk-width-1-1" style="height: calc(100% - 90px);">
+              <patient order="vm.numberOrder"></patient>
+            </div>
+            <div class="md-card md-card-primary" style="width: 100%; height: 81px; margin-top: 5px">
+              <commentOrder idcontrol="'diagnostic'" idpatient="vm.patientview.Id" size="1" type="2" state="1">
+              </commentOrder>
+            </div>
+          </div>
+          <div class="uk-width-1-3" style="height: 100%;">
+            <div class="uk-width-1-1" style="height: calc(100% - 90px);">
+              <orderinfo ordernumber="vm.numberOrder"></orderinfo>
+            </div>
+            <div class="md-card md-card md-card-success" style="width: 100%; height: 81px; margin-top: 5px">
+              <commentOrder idcontrol="'order'" orderhistory="vm.numberOrder" size="1" type="1" state="1"
+                returncomment="vm.returncomment" commentsorder="vm.commentsorder">
+              </commentOrder>
+            </div>
+          </div>
+          <div class="uk-width-1-3" style="height: 100%;">
+            <interview order="vm.numberOrder" state="true"></interview>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="page_content" style="overflow: hidden;">
+  <div id="page_content_inner" style="padding: 1px 13px 0px;">
+    <div class="uk-grid fullheight">
+      <div class="uk-width-1-1 fullheight">
+        <div class="md-card" ng-class="{'card2' : vm.basicTree.length!=0,'card1' : vm.basicTree.length==0}">
+          <div style="height: 92%" class="md-card-content">
+            <div class="uk-width-1-1 fullheight">
+              <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1',swiping: false}" style="height:36px">
+                <li ng-click="vm.changetab(1)" class="uk-active"><a href="#">{{'0032' | translate}}</a></li>
+                <li ng-click="vm.changetab(2)"><a href="#">{{'0390' | translate}}</a></li>
+                <li ng-click="vm.changetab(3)"><a href="#">{{'0386' | translate}}</a></li>
+              </ul>
+              <ul id="tabs_1" class="uk-switcher uk-margin" style="height: calc(100% - 32px);">
+                <li class="fullheight">
+                  <div class="uk-form-row" style="height: 100%; width: 100%">
+                    <div class="uk-grid">
+                      <div class="uk-width-1-3"
+                        ng-class="{'uk-width-1-4' : vm.typeresport.id==1 || vm.typeresport.id==3 , 'uk-width-1-5': vm.typeresport.id==2}"
+                        style="padding-top: 4px;">
+                        <label style="top: -6px; font-size: 12px;">{{'0387' | translate}}:</label>
+                        <select class="md-input" ng-options="obj.id as obj.name for obj in vm.typeresport"
+                          data-ng-model="vm.typeresport.id" ng-change="vm.changefilter()"></select>
+                      </div>
+                      <div class="uk-width-1-4" style="padding-top: 4px;"
+                        ng-show="vm.typeresport.id==1 &&  vm.typedocument  &&  !vm.historyautomatic">
+                        <label style="top: -6px; font-size: 12px;"> {{'0233' | translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name for obj in vm.documentTypelist"
+                          data-ng-model="vm.documentType.id" ng-change="vm.searchtype()"></select>
+                      </div>
+                      <div class="uk-width-1-4" ng-show="vm.typeresport.id==1">
+                        <label>{{'0117' | translate}}</label>
+                        <input type="text" class="md-input label-fixed" data-ng-model="vm.record"
+                          ng-keypress="vm.keyselectpatientid($event)" md-input />
+                      </div>
+                      <div class="uk-width-1-5" ng-show="vm.typeresport.id==2 && vm.twosurnames">
+                        <label>{{'0234' | translate}}</label>
+                        <input type="text" class="md-input label-fixed ordersearch-uppercase"
+                          data-ng-model="vm.lastname" ng-keypress="vm.keyselectpatientid($event)" md-input />
+                      </div>
+                      <div class="uk-width-1-5" ng-show="vm.typeresport.id==2 && vm.twosurnames">
+                        <label>{{'0235' | translate}}</label>
+                        <input type="text" class="md-input label-fixed ordersearch-uppercase" data-ng-model="vm.surname"
+                          ng-keypress="vm.keyselectpatientid($event)" md-input />
+                      </div>
+                      <div class="uk-width-2-5" ng-show="vm.typeresport.id==2 && !vm.twosurnames">
+                        <label>{{'3657' | translate}}</label>
+                        <input type="text" class="md-input label-fixed ordersearch-uppercase"
+                          data-ng-model="vm.lastname" ng-keypress="vm.keyselectpatientid($event)" md-input />
+                      </div>
+                      <div class="uk-width-1-5" ng-show="vm.typeresport.id==2" style="padding-top: 4px;">
+                        <label style="top: -6px; font-size: 12px;">{{'0124' | translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name for obj in vm.sex"
+                          data-ng-model="vm.datasex.id" ng-change="vm.searchtype()"></select>
+                      </div>
+                      <div class="uk-width-1-4" ng-class="{'uk-width-1-5' : vm.typeresport.id==2}"
+                        ng-show="vm.typeresport.id==1||vm.typeresport.id==2">
+                        <label style="top: -6px; font-size: 12px;">{{'0388' | translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name for obj in vm.days"
+                          data-ng-model="vm.days.id" ng-change="vm.searchtype()" md-input></select>
+                      </div>
+                      <div class="uk-width-1-4" ng-show="vm.typeresport.id==3" style="padding-top: 4px;">
+                        <input kendo-date-picker k-ng-model="vm.dateseach" style="width: 100%;" id="kUI_datepicker_a"
+                          k-format="'{{vm.formatDate}}'" max="vm.max" k-on-change="vm.searchtype()" />
+                      </div>
+                      <div class="uk-width-1-3" ng-show="vm.typeresport.id==4  || vm.typeresport.id==5">
+                        <label style="top: -6px; font-size: 12px;"> {{'0072' | translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                          data-ng-model="vm.listYear.id" md-input></select>
+                      </div>
+                      <div class="uk-width-1-3" ng-show="vm.typeresport.id==4">
+                        <label>{{'0110' | translate}}</label>
+                        <input id="numberordersearch" class="md-input label-fixed " type="text"
+                          ng-model="vm.codeordernumberorden" ng-keypress="vm.keyselect($event)"
+                          maxlength="{{vm.cantdigit}}" md-input />
+                      </div>
+                      <div class="uk-width-1-3" ng-show="vm.typeresport.id==5">
+                        <label>{{'0110' | translate}}</label>
+                        <input maxlength="{{vm.codeorder.indexOf('-') >= 0 ? vm.cantdigit+1 : vm.cantdigit}}"
+                          class="md-input label-fixed " type="text" ng-model="vm.codeorder"
+                          ng-keypress="vm.keyselectrange($event)" md-input />
+                      </div>
+                      <div class="uk-width-1-1" style="padding-top: 19px;" ng-show="vm.typeresport.id==5">
+                        <label>{{'0389' | translate}}</label>
+                        <input type="text" class="md-input label-fixed" data-ng-model="vm.receiveresults" md-input />
+                      </div>
+                      <div class="uk-width-1-1" style="padding-top: 19px;" ng-show="vm.typeresport.id==5">
+                        <select kendo-multi-select k-options="vm.selectOptions" k-ng-model="vm.selectedIds"
+                          k-data-source="vm.listorderselect"></select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md-fab-wrapper md-fab-in-card">
+                    <button ng-hide="vm.typeresport.id!=5" type="button"
+                      ng-disabled="vm.receiveresults==''|| vm.selectedIds.length==0"
+                      class="md-fab md-fab-small md-fab md-fab-success"
+                      ng-class="{'md-bg-blue-grey-100' : vm.receiveresults==''|| vm.selectedIds.length==0}"
+                      ng-click="vm.getseach()">
+                      <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0393'| translate}}">&#xE169;</i>
+                    </button>
+                  </div>
+                </li>
+                <li class="fullheight">
+                  <div class="uk-grid fullheight">
+                    <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-top">
+                      <div class="uk-grid" style="width: 100%;">
+                        <div class="uk-width-1-1" ng-if="vm.tabselect === 2">
+                          <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd"
+                            typefilter="vm.filterRangePending" isopenreport="vm.button10"></orderfilter>
+                        </div>
+                        <div class="uk-width-1-1 uk-margin-top">
+                          <md-checkbox class="md-primary" ng-model="vm.groupProfilesPending" style="float: right;
+                          margin-right: 10px;" aria-label="Agrupar por perfiles">
+                            Agrupar por perfiles
+                          </md-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="md-fab-wrapper md-fab-in-card">
+                      <button ng-show="vm.report === true" type="button" class="md-fab md-fab-small md-bg-purple-A700">
+                        <i class="uk-icon-refresh uk-icon-spin md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                          title="{{'0154'| translate}}"></i>
+                      </button>
+                      <button ng-show="vm.report === false" type="button" ng-disabled="!vm.button10"
+                        class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : !vm.button10}"
+                        ng-click="vm.report = true;vm.Fileresultspending()">
+                        <i class="material-icons md-color-grey-50">&#xE8AD;</i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li class="fullheight">
+                  <div class="uk-grid fullheight">
+                    <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-top" style="height: 89%">
+                      <div class="uk-grid" style="width: 100%;">
+                        <div class="uk-width-8-10" ng-if="vm.tabselect === 3">
+                          <orderfilter rangeinit="vm.rangeInit2" rangeend="vm.rangeEnd2" typefilter="vm.filterRange"
+                            isopenreport="vm.button1"></orderfilter>
+                        </div>
+
+                        <div class="uk-width-2-10">
+                          <label class="uk-text-bold" style="top: -2px;font-size: 12px;">Tipo:</label>
+                          <select class="md-input"
+                            ng-options="obj.id as obj.{{'0000'| translate}} for obj in  vm.datalist"
+                            data-ng-model="vm.selectdatalis"></select>
+                        </div>
+                        <div class="uk-width-1-1 uk-margin-top">
+                          <md-checkbox class="md-primary" style="float: right;
+                          margin-right: 10px;" ng-model="vm.groupProfilesDelivery" aria-label="Agrupar por perfiles">
+                            Agrupar por perfiles
+                          </md-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="md-fab-wrapper md-fab-in-card">
+                      <button ng-show="vm.report === true" type="button" class="md-fab md-fab-small md-bg-purple-A700">
+                        <i class="uk-icon-refresh uk-icon-spin md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                          title="{{'0154'| translate}}"></i>
+                      </button>
+                      <button ng-show="vm.report === false" type="button" ng-disabled="!vm.button1"
+                        class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : !vm.button1}"
+                        ng-click="vm.report = true;vm.Filedeliveryresults()">
+                        <i class="material-icons md-color-grey-50">&#xE8AD;</i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid" style="margin-top: 5px; height: calc(100% - 135px);"
+          ng-if="vm.tab && vm.basicTree.length!==0">
+          <div class="uk-width-2-10 " style="width: 23%;height: 100%;">
+            <div class="md-card md-card-hover uk-animation-fade fullheight">
+              <div style="height: 97%;padding: 9px" class="md-card-content">
+                <div class="uk-input-group" style="padding-left: 24px;">
+                  <label>{{'0154' | translate}}</label>
+                  <input type="text" class="md-input" ng-model="vm.options5.filter.name" md-input>
+                  <span class="uk-input-group-addon" style="padding: 0 0px;">
+                    <i class="material-icons md-24">&#xE8B6;</i>
+                  </span>
+                </div>
+                <div class="tree-container" style="height: calc(100% - 48px);overflow: auto;">
+                  <tree nodes="vm.basicTree" options="vm.options5"></tree>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1 fullheight" ng-if="vm.listtest.length!=0" style="width: 77%;padding-left: 7px;">
+            <div class="uk-grid" style="margin-top: 0px;margin-left: -5px;height: 100%;">
+              <div class="uk-width-2-10" style="padding-left: 5px;width: 27%;height: 100%;position: relative;">
+                <div class="md-card  md-card-hover uk-animation-fade"
+                  ng-class="{'tabletestview2' : vm.viewresult,'fullheight' : !vm.viewresult}">
+                  <div ng-class="{'viewresul ' : vm.viewresult,'inviewresul ' : !vm.viewresult}" style="height: 100%;">
+                    <patient order="vm.numberOrder" datapatient="vm.patientview"></patient>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-width-6-10" ng-if="vm.listtest.length!=0"
+                style="padding-left:8px;height: calc(100% - 70px);width: 73%;">
+                <div class="md-card  md-card-hover uk-animation-fade"
+                  ng-class="{'tabletestview' : vm.viewresult,'fullheight' : !vm.viewresult}">
+                  <div class="md-card-content" style="height: 100%;padding: 0px;">
+                    <div class="uk-grid uk-flex uk-flex-middle div-head"
+                      style="background-color: #eee;font-size: 11px;width: 100%;height: 26px;border-bottom: 2px solid rgba(0, 0, 0, 0.12);">
+                      <div class="uk-width-2-10" style="font-style: normal;
+                      font-weight: 400;
+                      color: #727272;
+                      font-size: 14px;
+                      padding-left: 6px;">
+                        {{'0098' | translate}}
+                      </div>
+                      <div class="uk-width-2-10" style="font-style: normal;
+                      font-weight: 400;
+                      color: #727272;
+                      font-size: 14px;
+                      padding-left: 6px;">
+                        {{'0198' | translate}}
+                      </div>
+                      <div class="uk-width-5-10" style="font-style: normal;
+                      font-weight: 400;
+                      color: #727272;
+                      font-size: 14px;
+                      padding-left: 6px;">
+                        {{'0118' | translate}}
+                      </div>
+                      <div class="uk-width-1-10  uk-text-center" style="font-style: normal;
+                      font-weight: 400;
+                      color: #727272;
+                      font-size: 14px;
+                      padding-left: 6px;">
+                        {{'0364' | translate}}
+                      </div>
+                    </div>
+                    <div class="div-conttable contentscroll" style="height: calc(100% - 2rem);">
+                      <div ng-repeat="(key, value) in vm.listtest">
+                        <div class="uk-width-1-1 uk-grid" ng-repeat="test in value" style="margin-left: 0px;margin-top: 0px;
+                        border-color: #e0e0e0;
+                        border-bottom-style: solid;
+                        border-bottom-width: 1px;" ng-if="value[0].profileName===undefined">
+                          <div class="uk-width-2-10" style="padding: 8px;">{{test.testCode}}</div>
+                          <div class="uk-width-2-10" style="padding: 8px;">{{test.abbreviation}}</div>
+                          <div class="uk-width-5-10" style="padding: 8px;">{{test.testName}}</div>
+                          <div class="uk-width-1-10 uk-text-center" style="padding: 8px;">
+                            <i ng-if="test.state===0" class="uk-icon-circle-thin uk-text-primary"
+                              data-uk-tooltip="{pos:'top'}" title="{{'0767' | translate}}"></i>
+                            <i ng-if="test.state===1" class="uk-icon-repeat uk-text-primary"
+                              data-uk-tooltip="{pos:'top'}" title="{{'0355' | translate}}"></i>
+                            <i ng-if="test.state===2" class="uk-icon-file-text-o uk-text-primary"
+                              data-uk-tooltip="{pos:'top'}" title="{{'0635' | translate}}"></i>
+                            <i ng-if="test.state===3" class="uk-icon-search uk-text-success"
+                              data-uk-tooltip="{pos:'top'}" title="{{'0768' | translate}}"></i>
+                            <i ng-if="test.state===4" class="uk-icon-check uk-text-success"
+                              data-uk-tooltip="{pos:'top'}" title="{{'0416' | translate}}"></i>
+                            <i ng-if="test.state===5" class="uk-icon-print uk-text-success"
+                              data-uk-tooltip="{pos:'top'}" title="{{'0379' | translate}}"></i>
+                          </div>
+                        </div>
+                        <div class="uk-width-1-1 uk-grid" ng-if="value[0].profileName!==undefined" style="margin-left: 0px;margin-top: 0px;
+                        border-color: #e0e0e0;
+                        border-bottom-style: solid;
+                        border-bottom-width: 1px;">
+                          <div class="uk-width-2-10" style="padding: 8px;">{{value[0].profileCode}}</div>
+                          <div class="uk-width-2-10" style="padding: 8px;">{{value[0].profileAbreviature}}</div>
+                          <div class="uk-width-5-10" style="padding: 8px;">{{value[0].profileName}}</div>
+                          <div class="uk-width-1-10 uk-text-center" style="padding: 0px;">
+                            <md-menu>
+                              <md-button aria-label="Open menu with custom trigger" class="md-icon-button"
+                                ng-mouseenter="$mdMenu.open()">
+                                <img class="md-list-addon-icon material-icons md-22"
+                                  ng-src="images/interview/order.png">
+                                <!--   <i class="uk-icon-tasks uk-text-success" data-uk-tooltip="{pos:'top'}"
+                                  title="{{'0379' | translate}}"></i> -->
+                              </md-button>
+                              <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                                <md-menu-item ng-repeat="test in value">
+                                  <md-button>
+                                    <i ng-if="test.state===0" class="uk-icon-circle-thin uk-text-primary"
+                                      data-uk-tooltip="{pos:'top'}" title="{{'0767' | translate}}"></i>
+                                    <i ng-if="test.state===1" class="uk-icon-repeat uk-text-primary"
+                                      data-uk-tooltip="{pos:'top'}" title="{{'0355' | translate}}"></i>
+                                    <i ng-if="test.state===2" class="uk-icon-file-text-o uk-text-primary"
+                                      data-uk-tooltip="{pos:'top'}" title="{{'0635' | translate}}"></i>
+                                    <i ng-if="test.state===3" class="uk-icon-search uk-text-success"
+                                      data-uk-tooltip="{pos:'top'}" title="{{'0768' | translate}}"></i>
+                                    <i ng-if="test.state===4" class="uk-icon-check uk-text-success"
+                                      data-uk-tooltip="{pos:'top'}" title="{{'0416' | translate}}"></i>
+                                    <i ng-if="test.state===5" class="uk-icon-print uk-text-success"
+                                      data-uk-tooltip="{pos:'top'}" title="{{'0379' | translate}}"></i>
+                                    {{test.testCode}}-{{test.testName}}
+                                  </md-button>
+                                </md-menu-item>
+                              </md-menu-content>
+                            </md-menu>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="md-card md-card-hover uk-animation-fade" style="min-height: 62px;margin-top: 7px;">
+                  <div class="md-card-content fullheight" style="margin-top: 7px;padding: 5px;">
+                  </div>
+                  <div ng-if="vm.listtest.length!=0 " class="md-fab-wrapper md-fab-in-card"
+                    style="right: 33px; top: 7px;"
+                    ng-class="{'bottonview' : vm.viewresult,'inbottonview' : !vm.viewresult}">
+                    <div class="uk-grid uk-grid-small uk-container-center">
+                      <div class="uk-text-center buttonNormalLine">
+                        <button type="button"
+                          ng-disabled="(vm.listtest | filter:{ state: 5}).length === 0 && (vm.listtest | filter:{ state: 4}).length === 0"
+                          class="md-fab md-fab-small md-fab md-bg-purple-A700 md-fab-wave-light waves-effect waves-light"
+                          ng-class="{'md-bg-blue-grey-100' : (vm.listtest | filter:{ state: 5}).length === 0 && (vm.listtest | filter:{ state: 4}).length === 0 }"
+                          ng-click="vm.openreportfinal = true">
+                          <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0158' | translate}}">&#xE8AD;</i>
+                        </button>
+                      </div>
+                      <div class="uk-text-center buttonNormalLine">
+                        <button type="button" class="md-fab md-fab-small md-bg-deep-purple-200"
+                          data-uk-modal="{target:'#demographicsmodal'}">
+                          <i class="material-icons md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0083' | translate}}">&#xE03F;</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<reportend openreport="vm.openreportfinal" order="vm.numberOrder" receiveresult="1" functionexecute="vm.getDetail"
+  test="vm.listtest">
+</reportend>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

@@ -1,0 +1,659 @@
+<style type="text/css">
+  .popover {
+    color: #222424 !important;
+  }
+
+  .type-text {
+    border-radius: 4px;
+    background-color: #5ea22b;
+    padding: 3px 5px 3px;
+    color: white;
+    font-family: Time roman;
+    font-weight: bold;
+  }
+
+  .type-number {
+    border-radius: 4px;
+    background-color: #1589db;
+    padding: 3px 6px 3px;
+    color: white;
+    font-family: Century;
+    font-weight: bold;
+  }
+
+  .help-botton {
+    float: right !important;
+    color: #68B3C8;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: medium;
+    margin-left: 5px;
+  }
+
+  tooltip tip {
+    border-radius: 5px;
+    background: rgba(51, 122, 183, 0.9);
+    width: 300px !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+  }
+
+  .legendConfig {
+    width: auto;
+    padding-left: 2px;
+    padding-right: 5px;
+  }
+
+  .texareadanger {
+    border: 1px solid #da211e !important;
+  }
+
+  .fieldsetConfig {
+    padding: 10px 20px 0px 10px;
+    margin: 4px 0px;
+  }
+
+  .button-list {
+    width: calc(100% / 2 - 4px);
+  }
+
+  .modal-lg {
+    width: 1173px;
+  }
+
+  .modal-md {
+    width: 701px;
+  }
+</style>
+
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-5 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0295' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-7 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/referencevalues/referencevalues.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-md-4 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container" style="padding-right: 7px !important; ">
+                <div style="white-space: nowrap;">
+                  <div>
+                    <div class="panel-padding form-group-min right-bar">
+                      <select id="areas" name="areas" charset="utf-8"
+                        ng-options="obj.id as obj.name for obj in vm.ListAreas" data-ng-model="vm.ListAreas.id"
+                        class="form-control" ng-required="true" ng-change="vm.getTest()"></select>
+                    </div>
+                    <div class="number-bage" style="white-space: nowrap;">
+                      <span style="margin-top: 8px" class="badge" data-ng-bind="vm.ListAreas.length"></span>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search"
+                      ng-disabled="vm.ListAreas.id == null && vm.ListAreas.id == undefined" class="form-control"
+                      type="text" placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage" style="margin-top: 8px">
+                    <span class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-9">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.code; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.code"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.code"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.code && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.code && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.code && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.code && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                      <th class="col-md-3 text-right" style="white-space: nowrap;">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.resultType; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.resultType"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.resultType"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.resultType && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.resultType && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.resultType && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.resultType && vm.sortReverse"></span>
+                        </a>{{'0296' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody vs-repeat class="tbody-list contentscroll" data-scroll-to-top='vm.filtered.length'
+                    style="width: 94%; height: calc(100% - 19rem);">
+                    <tr class="row-list"
+                      data-ng-repeat="Test in vm.filtered = (vm.listTest | filter: {searh:vm.search}) | orderBy:vm.sortType:vm.sortReverse"
+                      data-ng-click="vm.getReferencevalues(Test.id,Test.resultType, Test.decimal,$index,Test)"
+                      ng-class="{info: Test.id == vm.selected.id }">
+                      <td class="col-md-9" style="font-size: 12px;">
+                        {{Test.code}} - {{Test.name}}
+                      </td>
+                      <td class="col-md-1 text-left">
+                        <span popover-placement="left" uib-popover="{{'0502' | translate}}"
+                          popover-trigger="'mouseenter'" ng-if="Test.resultType === 1" style="width: 20px; height: 20px"
+                          class="type-number">#</span>
+                        <span popover-placement="left" uib-popover="{{'0501' | translate}}"
+                          popover-trigger="'mouseenter'" ng-if="Test.resultType === 2" style="width: 20px; height: 20px"
+                          class="type-text">T</span>
+                      </td>
+                      <td class="col-md-1 text-center">
+                        <img popover-placement="left" uib-popover="{{'1021' | translate}}"
+                          popover-trigger="'mouseenter'" ng-if="Test.processingBy === 1"
+                          style="width: 16px; height: 20px" src="images/manual.png" />
+                        <img popover-placement="left" uib-popover="{{'1022' | translate}}"
+                          popover-trigger="'mouseenter'" ng-if="Test.processingBy === 2"
+                          style="width: 16px; height: 16px" src="images/middleware.png" />
+                        <img popover-placement="left" uib-popover="{{'1053' | translate}}"
+                          popover-trigger="'mouseenter'" ng-if="Test.processingBy === 3"
+                          style="width: 20px; height: 20px" src="images/external.png" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form" style="padding-top: 0px;">
+                <h5 style="line-height: 36px;font-weight: bold;" ng-if="vm.Idtest !== -1  && vm.processingBy !== 2"
+                  class="col-md-12 panel-padding">
+                  {{vm.selected.code + " " + vm.selected.name |uppercase}}</h5>
+                <div ng-if="vm.Idtest !== -1 && vm.processingBy !== 1">
+                  <div class="panel-padding right-bar" style="margin-top: 13px;margin-bottom: 9px;">
+                    <label class="text-center col-md-2" style="margin-top: 9px;">
+                      {{'0205' | translate}} :
+                    </label>
+                    <div class="panel-padding col-md-10">
+                      <select id="areas" name="areas" charset="utf-8"
+                        ng-options="obj.id as obj.name for obj in vm.listanalizeruser"
+                        data-ng-model="vm.analizeruser.id" class="form-control" ng-required="true"></select>
+                    </div>
+                  </div>
+                  <div class="number-bage" style="white-space: nowrap;">
+                    <span style="margin-top: 20px" class="badge" data-ng-bind="vm.ListAreas.length"></span>
+                  </div>
+                </div>
+                <hr ng-if="vm.Idtest !== -1">
+                <table class="table table-list" style="margin-bottom: 0px; font-size: 12px">
+                  <thead>
+                    <tr>
+                      <th ng-if="vm.racevalid && vm.Idtest !== -1" class="col-md-2 panel-padding"
+                        style="width: 14.666667%;">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType1 =  vm.racename; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.racename"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.racename"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType1 == vm.racename && !vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType1 == vm.racename && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType1 == vm.racename && !vm.sortReverse1"></span>
+                          <span ng-show="vm.sortType1 == vm.racename && vm.sortReverse1"></span>
+                        </a>
+                        {{'0174' | translate}}
+                      </th>
+                      <th ng-if="vm.Idtest !== -1" class="panel-padding" style="width: 14.666667%;">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType1 =  vm.genderesCo; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse1 && vm.sortType1 != vm.genderesCo"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse1 && vm.sortType1 != vm.genderesCo"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType1 == vm.genderesCo && !vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType1 == vm.genderesCo && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType1 == vm.genderesCo && !vm.sortReverse1"></span>
+                          <span ng-show="vm.sortType1 == vm.genderesCo && vm.sortReverse1"></span>
+                        </a>
+                        {{'0221' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 1" class="col-md-1 panel-padding" style="width: 13.666667%;">
+                        {{'0526' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 1" class="col-md-1 panel-padding" style="width: 12.666667%;">
+                        {{'0527' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 1" class="col-md-2 panel-padding" style="width: 14.666667%;">
+                        {{'0222' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 1" class="col-md-2 panel-padding" style="width: 14.666667%;">
+                        {{'0528' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 1" class="col-md-2 panel-padding">
+                        {{'0529' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 2" class="col-md-2 panel-padding">
+                        {{'0579' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 2" class="col-md-2 panel-padding">
+                        {{'0530' | translate}}
+                      </th>
+                      <th ng-if="vm.resultype === 2" class="col-md-4 panel-padding">
+                        {{'0178' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody vs-repeat class="tbody-list contentscroll" style="width: 97%; height: calc(100% - 20rem)"
+                    data-scroll-to-top='vm.filteredTest.length'>
+                    <tr class="row-list"
+                      data-ng-repeat="referenceDetail in vm.listReferencevalues | filter:{analizerUserId:vm.analizeruser.id} | orderBy:vm.sortType1:vm.sortReverse1"
+                      data-ng-dblclick="vm.New(referenceDetail,$index)">
+                      <td style="overflow: hidden;text-overflow: ellipsis" ng-if="vm.racevalid"
+                        class="col-md-2 panel-padding text-truncate text-nowrap"
+                        data-ng-bind="referenceDetail.race.name"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis" class="panel-padding text-truncate"
+                        data-ng-bind="referenceDetail.gender.esCo" ng-class="vm.racevalid ? 'col-md-2' : 'col-md-2'">
+                      </td>
+                      <td style="overflow: hidden;text-overflow: ellipsis;width: 14.333333%;" ng-if="vm.resultype === 1"
+                        class="col-md-1 panel-padding text-truncate" data-ng-bind="referenceDetail.ageMin"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis;width: 14.333333%;" ng-if="vm.resultype === 1"
+                        class="col-md-1 panel-padding text-truncate" data-ng-bind="referenceDetail.ageMax"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis" ng-if="vm.resultype === 1"
+                        class="col-md-2 panel-padding text-truncate" data-ng-bind="referenceDetail.unitAgeText"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis" ng-if="vm.resultype === 1"
+                        class="col-md-2 panel-padding text-truncate" data-ng-bind="referenceDetail.normalMin"></td>
+                      <td style="width: 13.666667%;" ng-if="vm.resultype === 1"
+                        class="col-md-2 panel-padding text-truncate" data-ng-bind="referenceDetail.normalMax"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis" ng-if="vm.resultype === 2"
+                        class="col-md-2 panel-padding text-truncate" data-ng-bind="referenceDetail.normal.name"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis" ng-if="vm.resultype === 2"
+                        class="col-md-2 panel-padding text-truncate" data-ng-bind="referenceDetail.panic.name"></td>
+                      <td style="overflow: hidden;text-overflow: ellipsis" ng-if="vm.resultype === 2"
+                        class="col-md-4 panel-padding text-truncate" ng-bind-html="referenceDetail.comment | trust">
+                      </td>
+                      <td style="width: 3.333333%;padding: 7px 0px;"
+                        class="col-md-1 text-center panel-padding text-truncate">
+                        <i class="fa fa-times-circle red" data-ng-click="vm.destroy(referenceDetail)"
+                          style="font-size: 19px;"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.Detail.state">
+                </modalstate>
+              </div>
+              <!--     <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class=" btn btn-success button-list" ng-click="vm.New(Form)"
+                    ng-disabled="vm.Idtest === -1">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    {{'0005' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-warning button-list" ng-disabled="true" ng-if="false">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true" ng-click="vm.getTest()"></span>{{'0006'
+                    | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary button-list" ng-click="vm.save(Form)" ng-disabled="true"
+                    ng-if="false">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" ng-click="vm.cancel(Form)" ng-disabled="true"
+                    ng-if="false">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                    ng-disabled="vm.isDisabledPrint">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                  </button>
+                </div>
+              </div> -->
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" style="width: calc(100% / 3 - 3px)" class="btn btn-success button-list"
+                    ng-click="vm.New(Form)" ng-disabled="vm.Idtest === -1">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    {{'0005' | translate}}
+                  </button>
+                  <button class="btn btn-violet button-list" style="width: calc(100% / 3 - 3px)"
+                    ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint" type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-print"></span>{{'0009' | translate}}
+                  </button>
+                  <button type="button" style="width: calc(100% / 3 - 3px)" class="btn btn-info button-list"
+                    ng-click="vm.exportReferenceValues()">
+                    <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> {{'0581' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="row modal-body" style="padding-bottom: 0px">
+                    <div class="row row-center col-md-12">
+                        <div class="col-md-4" ng-hide="hiderace > 0 || configurationrace === false">
+                            <a ng-click="close('race')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/race.png">
+                                <h6 class="text-center"> {{'0174' | translate}}</h6>
+                            </a>
+                        </div>
+                        <div class="col-md-4" ng-hide="hideliteralresult > 0">
+                            <a ng-click="close('literalresult')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/literalresult.png">
+                                <h6 class="text-center"> {{'0210' | translate}}</h6>
+                            </a>
+                        </div>
+                        <div class="col-md-4" ng-hide="hidetest > 0">
+                            <a ng-click="close('test')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/Test.png">
+                                <h6 class="text-center"> {{'0288' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="confirmDeleteReference.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body" style="height: 100px">
+                    <div style="width: 30%; float: left">
+                        <img class="img-responsive" src="images/Question.png">
+                    </div>
+                    <div style="width: 70%; float: left">
+                        <label style="margin-top: 20px;margin-left: 10px">{{'0531' | translate}}</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">{{'0032' | translate}}</button>
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0033' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="editdata.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" ng-class="{'modal-lg': typeresult === 1,'modal-md': typeresult === 2 }">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0295' | translate |uppercase}}
+                        {{testname}}
+                    </h4>
+                </div>
+                <div class="modal-body" style="padding:0px">
+                    <div class="col-md-12" ng-class="{'col-md-7': typeresult === 1}">
+                        <div class="panel-body panel-form" style="padding-bottom: 0px;">
+                            <div class="form-group form-group-sm has-feedback text-right col-md-6 panel-padding">
+                                <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0221' | translate}}:</label>
+                                <div class="col-md-6 panel-padding">
+                                    <select ng-options="obj as obj.name for obj in ListGender track by obj.id" data-ng-model="datareference.gender" class="form-control" ng-required="false" ng-disabled="vm.isDisabled"></select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm text-right col-md-6 panel-padding" style="height: 30px">
+                                <label ng-if="racevalid" class="col-md-5 panel-padding" style="padding-right: 3px">{{'0174' | translate}}:</label>
+
+                                <div ng-if="racevalid" class="col-md-7 panel-padding">
+                                    <select ng-options="obj as obj.name for obj in ListRace track by obj.id" data-ng-model="datareference.race" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div ng-if="typeresult === 1" class="form-group form-group-sm has-feedback text-right col-md-6 panel-padding">
+                                <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0222' | translate}}:</label>
+
+                                <div class="col-md-6 panel-padding">
+                                    <select ng-options="obj.id as obj.name for obj in ListUnitAge" data-ng-model="datareference.unitAge" ng-change="changeRange()" class="form-control" ng-required="false" ng-disabled="vm.isDisabled"></select>
+                                </div>
+                            </div>
+                            <div ng-if="typeresult === 1" class="form-group form-group-sm col-md-6 panel-padding" style="height: 30px">
+                                <label class="col-md-5 text-right panel-padding" style="padding-right: 3px">{{'0532' | translate}}:</label>
+                                <div class="col-md-7 panel-padding text-left">
+                                    <toggle ng-model="datareference.criticalCh"
+                                            on="{{'0068' | translate}}"
+                                            off="{{'0492' | translate}}"
+                                            ng-disabled="false"
+                                            size="btn-sm"></toggle>
+
+                                </div>
+                            </div>
+                            <div ng-class="{'has-error':vm.showInvalidRange}" ng-if="typeresult === 1" class="form-group form-group-sm has-feedback text-right col-md-12 panel-padding" ng-class="{'has-error': InvalidAge }">
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0533' | translate}}: </label>
+                                    <div class="col-md-6 panel-padding">
+                                        <div>
+                                            <number-input data-ng-model="datareference.ageMin"
+                                                          max="valueMaxAge"
+                                                          min="0"
+                                                          step="1"
+                                                          start="0"
+                                                          disabledecimal="true"
+                                                          decimalplaces="0"
+                                                          disable="false"
+                                                          blurexit="changeAge">
+                                            </number-input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0534' | translate}}: </label>
+                                    <div class="col-md-7 panel-padding">
+                                        <number-input data-ng-model="datareference.ageMax"
+                                                      max="valueMaxAge"
+                                                      min="0"
+                                                      step="1"
+                                                      start="0"
+                                                      disabledecimal="true"
+                                                      decimalplaces="0"
+                                                      disable="false"
+                                                      blurexit="changeAge">
+                                        </number-input>
+                                    </div>
+                                </div>
+                                <span style="padding-left: 140px" ng-if="InvalidAge" class=" text-left help-block">{{messageAge}}</span>
+                            </div>
+                            <div ng-if="typeresult === 1" class="form-group form-group-sm has-feedback text-right col-md-12 panel-padding" ng-class="{'has-error': InvalidNorma }">
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0535' | translate}}:</label>
+                                    <div class="col-md-6 panel-padding">
+                                        <number-input ng-model="datareference.normalMin"
+                                                      max="9999999999999999999999999999999999999999999"
+                                                      min="-999999999999999999999999999999999999999999"
+                                                      step="stepdecimal"
+                                                      disabledecimal="disabledecimal"
+                                                      decimalplaces="decimalCant"
+                                                      disable="false"
+                                                      acceptclean="true"
+                                                      blurexit="changeNorma">
+                                        </number-input>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0536' | translate}}: </label>
+                                    <div class="col-md-7 panel-padding">
+                                        <number-input ng-model="datareference.normalMax"
+                                                      max="9999999999999999999999999999999999999999999"
+                                                      min="-999999999999999999999999999999999999999999"
+                                                      step="stepdecimal"
+                                                      disabledecimal="disabledecimal"
+                                                      decimalplaces="decimalCant"
+                                                      disable="false"
+                                                      acceptclean="true"
+                                                      blurexit="changeNorma"></number-input>
+                                    </div>
+                                </div>
+                                <span style="padding-left: 140px" ng-if="InvalidNorma" class=" text-left help-block">{{messageNorma}}</span>
+                            </div>
+                            <div ng-if="typeresult === 1" class="form-group form-group-sm has-feedback text-right col-md-12 panel-padding" ng-class="{'has-error': InvalidPanic }">
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0537' | translate}}: </label>
+                                    <div class="col-md-6 panel-padding">
+                                        <number-input ng-model="datareference.panicMin"
+                                                      max="9999999999999999999999999999999999999999999"
+                                                      min="-999999999999999999999999999999999999999999"
+                                                      step="stepdecimal"
+                                                      disabledecimal="disabledecimal"
+                                                      decimalplaces="decimalCant"
+                                                      disable="false"
+                                                      acceptclean="true"
+                                                      blurexit="changePanic"></number-input>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0538' | translate}}: </label>
+                                    <div class="col-md-7 panel-padding">
+                                        <number-input ng-model="datareference.panicMax"
+                                                      max="9999999999999999999999999999999999999999999"
+                                                      min="-999999999999999999999999999999999999999999"
+                                                      step="stepdecimal"
+                                                      disabledecimal="disabledecimal"
+                                                      decimalplaces="decimalCant"
+                                                      disable="false"
+                                                      acceptclean="true"
+                                                      blurexit="changePanic"></number-input>
+                                    </div>
+                                </div>
+                                <span style="padding-left: 140px" ng-if="InvalidPanic" class=" text-left help-block">{{messagePanic}}</span>
+                            </div>
+                            <div ng-if="typeresult === 1" class="form-group form-group-sm has-feedback text-right col-md-12 panel-padding" ng-class="{'has-error': InvalidReportable }">
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0539' | translate}}: </label>
+                                    <div class="col-md-6 panel-padding">
+                                        <number-input ng-model="datareference.reportableMin"
+                                                      max="9999999999999999999999999999999999999999999"
+                                                      min="-999999999999999999999999999999999999999999"
+                                                      step="stepdecimal"
+                                                      disabledecimal="disabledecimal"
+                                                      decimalplaces="decimalCant"
+                                                      disable="datareference.normalMin === '' || datareference.normalMax === '' "
+                                                      acceptclean="true"
+                                                      blurexit="changeReportable"></number-input>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 panel-padding" style="padding-bottom: 0px">
+                                    <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0540' | translate}}: </label>
+
+                                    <div class="col-md-7 panel-padding">
+                                        <number-input ng-model="datareference.reportableMax"
+                                                      max="9999999999999999999999999999999999999999999"
+                                                      min="-999999999999999999999999999999999999999999"
+                                                      step="stepdecimal"
+                                                      disabledecimal="disabledecimal"
+                                                      decimalplaces="decimalCant"
+                                                      disable="datareference.normalMin === '' || datareference.normalMax === '' "
+                                                      acceptclean="true"
+                                                      blurexit="changeReportable"></number-input>
+                                    </div>
+                                </div>
+                                <span style="padding-left: 140px" ng-if="InvalidReportable" class=" text-left help-block">{{messageReportable}}</span>
+                            </div>
+                            <div ng-if="typeresult === 2" class="form-group form-group-sm has-feedback text-right col-md-6 panel-padding">
+                                <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0579' | translate}}:</label>
+                                <div class="col-md-6 panel-padding">
+                                    <select ng-options="obj.literalResult.id as obj.literalResult.name for obj in ListLiteralResult | filter:{assign:true}" data-ng-model="datareference.normal.id" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div ng-if="typeresult === 2" class="form-group form-group-sm text-right col-md-6 panel-padding" style="height: 30px">
+                                <label class="col-md-5 panel-padding" style="padding-right: 3px">{{'0530' | translate}}:</label>
+
+                                <div class="col-md-7 panel-padding">
+                                    <select ng-options="obj.literalResult.id as obj.literalResult.name for obj in ListLiteralResult | filter: { literalResult: { id: '!' + datareference.normal.id }, assign:true }" data-ng-model="datareference.panic.id" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-md-6 panel-padding" style="height: 30px">
+                                <label class="col-md-5 text-right panel-padding" style="padding-right: 3px">{{'1112' | translate}}:</label>
+                                <div class="col-md-6 panel-padding text-left">
+                                    <toggle ng-model="datareference.mandatoryNotation"
+                                            on="{{'1113' | translate}}"
+                                            off="{{'1114' | translate}}"
+                                            ng-disabled="false"
+                                            size="btn-sm"></toggle>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-sm text-right col-md-12 panel-padding" ng-if="typeresult === 2">
+                                <label class="text-right" style="padding-right: 3px; width: 21%; float: left">{{'0178' | translate}}:</label>
+                                <div class="panel-padding" style="width: 79%; float: left" ng-class="{'texareadanger': validcontrol}">
+                                    <textarea ng-change="validatedtextunit()" ng-required="true" name="name" id="name" ui-tinymce="tinymceOptions" ng-model="datareference.comment"></textarea>
+                                    <span ng-if="validcontrol" class="help-block ">{{'0989' | translate}}</span>
+                                </div>
+                            </div>
+                            <div ng-if="typeresult === 1" class="legendConfig"><span style="vertical-align: top">{{'1051' | translate}}: {{decimalCant}}</span><span class="help-botton glyphicon glyphicon-info-sign" tooltips tooltip-template="{{'1052' | translate}}"></span></div>
+                            <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.Detail.state"></modalstate>
+
+                        </div>
+                    </div>
+                    <div class="col-md-5" ng-if="typeresult === 1">
+                        <div class="panel-body panel-form" style="padding-bottom: 0px;padding-top: 0px;">
+                            <div class="form-group form-group-sm col-md-12 panel-padding">
+                                <label class="text-left" style="padding-right: 3px; width: 100%; float: left;margin-bottom: 15px;
+                                margin-top: 15px;">{{'0178' | translate}}:</label>
+                                <div class="panel-padding" style="width: 100%; float: left" ng-class="{'texareadanger': validcontrol}">
+                                    <textarea ng-change="validatedtextunit()" ng-required="true" name="name" id="name" ui-tinymce="tinymceOptions" ng-model="datareference.comment"></textarea>
+                                    <span ng-if="validcontrol" class="help-block ">{{'0989' | translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <div class="col-md-12 text-right" style="height: 100%">
+                                <button style="width:120px" ng-if="typeresult === 1" type="button" class="btn btn-primary" ng-click="close('insert')" data-dismiss="modal" ng-disabled="InvalidAge ||validcontrol|| InvalidNorma || InvalidPanic || InvalidReportable  || (datareference.normalMin === '' && datareference.normalMax === '')">
+                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                                </button>
+                                <button style="width:120px" ng-if="typeresult === 2 && (datareference.comment === '' || (datareference.panic.id !== null || datareference.normal.id !== null)) " type="button" ng-disabled="(datareference.panic.id === null || datareference.normal.id === null)" class="btn btn-primary" ng-click="close('insert')" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                                </button>
+                                <button style="width:120px" ng-if="typeresult === 2 && (datareference.comment !== '' && datareference.panic.id === null && datareference.normal.id === null)" type="button" ng-disabled="false" class="btn btn-primary" ng-click="close('insert')" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                                </button>
+                                <button style="width:120px" type="button" class="btn btn-info" ng-click="close('cancel')" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{'0022' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</script>

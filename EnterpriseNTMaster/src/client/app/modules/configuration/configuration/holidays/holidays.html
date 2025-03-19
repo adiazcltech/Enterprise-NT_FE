@@ -1,0 +1,116 @@
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+    <div class="panel panel-primary panel-principal" style="width: calc(100% - 30px);height: 100%;overflow: hidden;margin-right: 15px;margin-left: 15px;">
+        <div id="titleStandarization" class="panel-heading row">
+            <div class=" col-md-4 panel-title">
+                <strong class="panel-title text-left title-bar">
+                    {{'0660' | translate |uppercase}}
+                </strong>
+            </div>
+            <div class=" col-md-8 text-right" style="padding-top: 5px">
+                <strong ng-bind="vm.usuario"></strong>
+                <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Ctrl + B" onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/holiday/holiday.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+            </div>
+        </div>
+        <div class="panel-body general-container panel-padding panel-scroll">
+            <div class="general-container">
+                <div class="col-md-12" style="padding: 0px;">
+                    <div class="btn-group btn-group-sm btn-group-justified" style="margin-bottom: 14px;">
+                        <label class="btn btn-default year-title" style="font-size: 21px;" ng-model="vm.radioModel" uib-btn-radio="'Left'" ng-click="vm.setYear(vm.thisyear)">{{vm.thisyear}}</label>
+                        <label class="btn btn-default year-title" style="font-size: 21px;" ng-model="vm.radioModel" uib-btn-radio="'Middle'" ng-click="vm.setYear(vm.thisyear+1)">{{vm.thisyear+1}}</label>
+                    </div>
+                </div>
+                <div class="calendar" id="persCal">
+                    <div class="months-container" style="display: block;">
+                        <div class="month-container repeated-item" ng-class="monthContainerClass" ng-repeat="month in vm.calendar">
+                            <table class="month">
+                                <thead>
+                                    <tr><th class="month-title bg-skin" colspan="7">{{vm.dates.months[month.m]}}</th></tr>
+                                    <tr><th class="day-header text-muted" ng-repeat="days in vm.dates.daysShort track by $index">{{days}}</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="week in month.w">
+                                        <td ng-repeat="day in week track by $index" class="{{day.class}}" ng-class="day.oeclass"
+                                            ng-style="vm.styleFn(vm.mouseHoverList, vm.thisyear, month.m, day.dd)"
+                                            ng-mousedown="vm.initSelect($event,day,vm.thisyear, month.m, day.dd)"
+                                            ng-mousemove="vm.moveSelect($event, vm.thisyear, month.m, day.dd)"
+                                            ng-mouseup="vm.endSelect($event,day)">
+                                            <div uib-popover="{{day.event}}"
+                                                 popover-trigger="'mouseenter'"
+                                                 class="day-content"
+                                                 ng-class="day.oclass"
+                                                 ng-show="day.dd">{{day.dd}}</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/ng-template" id="modalinsertholiday.html">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" style="width: 730px;">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 ng-show="bottondelete===''">
+                        {{'1017' | translate}}
+                    </h4>
+                    <h4 ng-show="bottondelete!==''">
+                        {{'1018' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form name="Form" id="Form" class="form-horizontal panel-body">
+                        <div class="form-group form-group-sm has-feedback" ng-show="date1 === date2">
+                            <label class="col-md-3 text-right">
+                                {{'0072' | translate}} :
+                            </label>
+                            <div class="col-md-8">
+                                {{rangeDatesinicial | date: 'dd/MM/yyyy'}}
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-sm has-feedback" ng-show="date1!== date2">
+                            <label class="col-md-3 text-right">
+                                {{'0072' | translate}} :
+                            </label>
+                            <div class="col-md-8">
+                                {{rangeDatesinicial | date: 'dd/MM/yyyy'}} AL {{rangeDatesfinal | date: 'dd/MM/yyyy'}}
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': Form.name.$invalid && Form.name.$touched }">
+                            <label class="col-md-3 text-right">
+                                Evento:
+                            </label>
+                            <div class="col-md-8">
+                                <input class="form-control" data-ng-model="name" id="name" maxlength="60" name="name" ng-required="true" type="text">
+                                <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback" ng-if="Form.name.$invalid && Form.name.$touched ">
+                                </span>
+                                <span class="help-block " ng-if="Form.name.$invalid && Form.name.$touched">
+                                    {{'0016' | translate}}
+                                </span>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-disabled="Form.$invalid" class="btn btn-primary button-list" ng-click="save(Form)" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                    </button>
+                    <button ng-show="bottondelete!==''" ng-click="deleteholiday(Form)" type="button" class="btn btn-danger button-list" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Eliminar
+                    </button>
+                    <button type="button" class="btn btn-info button-list" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{'0022' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

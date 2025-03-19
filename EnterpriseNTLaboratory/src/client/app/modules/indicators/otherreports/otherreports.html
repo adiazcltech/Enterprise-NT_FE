@@ -1,0 +1,95 @@
+<style>
+
+  .sort-column {
+    margin: 0 0 5px !important;
+    border: 1px solid #c5c5c5;
+    background: #f6f6f6;
+    font-weight: normal;
+    color: #454545;
+    border-radius: 5px;
+    font-size: 10px;
+  }
+
+  .list-order li:hover {
+    background: #2196f3 !important;
+    color: white !important;
+    cursor: all-scroll;
+  }
+
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden" class="uk-grid uk-grid-small">
+    <div  style="height: 100%;padding-bottom: 7px; width: 16%;">
+      <div class="md-card md-card-hover uk-animation-fade fullheight">
+        <div style="height: 97%;padding: 9px" class="md-card-content">
+          <div class="uk-input-group" style="padding-left: 24px;">
+            <label>{{'0154' | translate}}</label>
+            <input type="text" class="md-input" ng-model="vm.options5.filter.name" md-input>
+            <span class="uk-input-group-addon" style="padding: 0 0px;">
+              <i class="material-icons md-24">&#xE8B6;</i>
+            </span>
+          </div>
+          <div class="tree-container" style="height: calc(100% - 48px);overflow: auto;">
+            <tree nodes="vm.basicTree" options="vm.options5"></tree>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div  style="height: 100%; width: 82%;" ng-show="vm.select === 1 && vm.Url4505 !== ''">
+      <iframe id="resolution4505"
+        height="700"
+        width="100%"
+        ng-src="{{ getIframeSrc4505() }}">
+      </iframe>    
+    </div>
+    <!-- Reporte de facturación -->
+    <div  style="height: 100%; width: 82%;" ng-show="vm.select === 2 && vm.urlExportView !== ''">
+      <iframe id="exportDataView"
+        height="700"
+        width="100%"
+        ng-src="{{ getIframeSrc() }}">
+      </iframe>
+    </div>
+
+    <!-- Cubo estadístico -->
+    <div  style="height: 100%; width: 82%;" ng-show="vm.select === 3 && vm.URLCube !== ''">
+      <iframe id="cubeStatistics"
+        height="700"
+        width="100%"
+        ng-src="{{ getIframeSrcCube() }}">
+      </iframe>
+    </div>
+
+    <!-- reporte tamizaje -->
+    <div  style="height: 100%; width: 82%;" ng-show="vm.select === 4 && vm.URLReporteTamizaje !== ''">
+      <iframe id="screeningReport"
+        height="700"
+        width="100%"
+        ng-src="{{ getIframeSrcTamizaje() }}">
+      </iframe>
+    </div>
+
+  </div>
+</div>
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false">
+  <div class="uk-modal-dialog message">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 100px; top: 0px">
+      <div style="width: 20%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

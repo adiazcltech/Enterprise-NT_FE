@@ -1,0 +1,119 @@
+<!-- tabla  -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                <input type="checkbox" value="" id="flexCheckDefault" [checked]="allSelected"
+                    (change)="processFacturaAll($event.target.checked)">
+            </th>
+            <th scope="col">Factura Externa</th>
+
+            <th scope="col">Orden</th>
+            <th scope="col">Nombre</th>
+
+            <!-- Columnas condicionales dependiendo del tipo -->
+            <ng-container *ngIf="facturas.length > 0" [ngSwitch]="data.Tipo">
+                <ng-container *ngSwitchCase="'P'">
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Codigo Paciente</th>
+                    <th scope="col">Sede</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Documento</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'C'">
+                    <th scope="col">Nit</th>
+                    <th scope="col">Plazo</th>
+                    <th scope="col">Copago</th>
+                </ng-container>
+            </ng-container>
+
+            <th scope="col">Tipo Documento</th>
+            <th scope="col">Fecha Ingreso</th>
+            <th scope="col">Fecha Vencimiento</th>
+            <th scope="col">Descuento Valor</th>
+            <th scope="col">Descuento Porcentaje</th>
+            <th scope="col">Saldo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngIf="facturas.length === 0">
+            <td colspan="100%" style="text-align: center;">No hay resultados disponibles</td>
+        </tr>
+
+        <ng-container *ngFor="let factura of facturas; let i = index">
+            <tr>
+                <td data-label="enviar a facturacion externa">
+                    <input type="checkbox" id="flexCheckDefault"  [checked]="listProcessFactura.includes(factura)" 
+                        (change)="processFactura($event.target.checked, factura)">
+                </td>
+
+                <td data-label="Factura Externa" (click)="toggleExamenes(i)">{{ factura.IdFacturaExterna }}</td>
+                <td data-label="Orden">{{ factura.CodOrden }}</td>
+                <td data-label="Nombre">{{ factura.Nombre }}</td>
+
+                <!-- Columnas condicionales dependiendo del tipo -->
+                <ng-container [ngSwitch]="data.Tipo">
+                    <ng-container *ngSwitchCase="'P'">
+                        <td data-label="Apellido">{{ factura.Apellido ? factura.Apellido : 'N/A' }}</td>
+                        <td data-label="Codigo Paciente">{{ factura.CodPaciente ? factura.CodPaciente : 'N/A' }}
+                        </td>
+                        <td data-label="Sede">{{ factura.Sede ? factura.Sede : 'N/A' }}</td>
+                        <td data-label="Ciudad">{{ factura.Ciudad ? factura.Ciudad : 'N/A' }}</td>
+                        <td data-label="Telefono">{{ factura.Telefono ? factura.Telefono : 'N/A' }}</td>
+                        <td data-label="Email">{{ factura.Email ? factura.Email : 'N/A' }}</td>
+                        <td data-label="Direccion">{{ factura.Direccion ? factura.Direccion : 'N/A' }}</td>
+                        <td data-label="Documento">{{ factura.Documento ? factura.Documento : 'N/A' }}</td>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'C'">
+                        <td data-label="Nit">{{ factura.Nit }}</td>
+                        <td data-label="Plazo">{{ factura.Plazo }}</td>
+                        <td data-label="Copago">{{ factura.Copago }}</td>
+                    </ng-container>
+                </ng-container>
+
+                <td data-label="Tipo Documento">{{ factura.TipoDoc }}</td>
+                <td data-label="Fecha Ingreso">{{ formatFecha(factura.FechaIngreso) }}</td>
+                <td data-label="Fecha Vencimiento">{{ formatFecha(factura.FechaVencimiento) }}</td>
+                <td data-label="Descuento Valor">{{ formatNumber(factura.DescuentoValor) }}</td>
+                <td data-label="Descuento Porcentaje">{{ factura.DescuentoPorcent }}</td>
+                <td data-label="Saldo">{{ formatNumber(factura.Saldo) }}</td>
+
+            </tr>
+
+            <!-- Fila expandida -->
+            <tr class="row-details" *ngIf="isExpanded(i)">
+                <td colspan="100%">
+                    <div class="more-details">
+                        <!-- Aquí puedes agregar el contenido adicional que necesites mostrar en la fila expandida -->
+                        <h4>Detalles adicionales {{factura.CodOrden}}</h4>
+                        <div class="detail-content">
+                            <h5>Examenes</h5>
+                            <table class="table-details">
+
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Examen</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Aquí puedes agregar los datos adicionales que necesites mostrar en la fila expandida -->
+                                    <tr *ngFor="let examen of factura.Examen; let i = index">
+                                        <td data-label="Codigo">{{examen.CodExamen}}</td>
+                                        <td data-label="Examen">{{examen.NomExamen}}</td>
+                                        <td data-label="Valor">{{examen.PrecioExamen}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

@@ -1,0 +1,6 @@
+Orden;Historia;Nombre;Género; Edad;Fecha nacimiento;codigo prueba; nombre prueba
+{{#each orders}}
+{{#each tests}}
+{{../orderNumber}};{{../patient.documentType.abbr}} {{../patient.patientId}};{{../patient.name1}} {{../patient.name2}} {{../patient.lastName}} {{../patient.surName}};{{../patient.sex.esCo}}; {{../patient.age}}; {{../patient.birthday}}; {{code}}; {{name}}
+{{/each}}
+{{/each}}

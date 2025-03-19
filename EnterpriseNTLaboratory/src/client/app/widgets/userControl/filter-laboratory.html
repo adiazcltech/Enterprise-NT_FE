@@ -1,0 +1,49 @@
+<fieldset class="fieldset">
+  <legend>{{'0163' | translate}}:</legend>
+  <div class="uk-grid" data-uk-grid-margin="">
+    <div class="uk-width-1-5 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+      <input type="checkbox" name="fLab{{filterlaboratory.id}}" id="fLab_1{{filterlaboratory.id}}" checked
+        ng-model="filterlaboratory.activeFilterLaboratory" />
+      <label for="fLab_1{{filterlaboratory.id}}" ng-click="filterlaboratory.clickfilterByLaboratory()">{{'0099' |
+        translate}}</label><br />
+    </div>
+
+    <div class="uk-width-4-5" ng-show="filterlaboratory.activeFilterLaboratory" style="width: 76%">
+      <tags-input id="tagFAT{{filterlaboratory.id}}" ng-model="filterlaboratory.filterLaboratories" min-length="1"
+        add-on-paste="true" key-property="id" display-property="v" class="md-input" placeholder="+"
+        add-from-autocomplete-only="false" add-on-space="false" add-on-blur="false" text="$tag" template="tag-Template"
+        on-tag-added="filterlaboratory.validAddTag($tag, filterlaboratory.filterLaboratories)"
+        on-tag-removed="filterlaboratory.validRemoveTag($tag, filterlaboratory.filterLaboratories)">
+        <auto-complete source="filterlaboratory.loadDataLaboratory($tag)" min-length="1" load-on-focus="true"
+          load-on-empty="true" max-results-to-show="32" template="autocomplit-Template">
+        </auto-complete>
+      </tags-input>
+
+      <script type="text/ng-template" id="tag-Template">
+          <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+            <div class="left-panel">
+              <span class="material-icons md-color-blue-500" >{{data.icon}}</span>
+            </div>  
+            <div class="right-panel" style="padding-left: 4px">
+              <span>{{$getDisplayText()}}</span>
+              <span>{{data.name}}</span> 
+              <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+            </div>
+          </div>  
+        </script>
+
+      <script type="text/ng-template" id="autocomplit-Template">
+          <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+            <div class="left-panel">
+              <span class="material-icons md-color-blue-500" >{{data.icon}}</span>
+             </div>
+            <div class="right-panel" style="padding-left: 4px">
+              <span ng-bind-html="$highlight($getDisplayText())"></span>
+              <span>{{data.name}}</span>
+            </div>
+        </div>
+        </script>
+
+    </div>
+  </div>
+</fieldset>

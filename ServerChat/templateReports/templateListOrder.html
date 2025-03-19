@@ -1,0 +1,116 @@
+
+<style type="text/css">
+  .headertable{
+	font-style: normal;
+    font-weight: bold;
+    font-size: 8pt;
+    color: #1e90ff;
+	border-top: 1px solid #1e90ff;
+	border-bottom: 1px solid #1e90ff;
+	font-family: Arial;
+  }
+  .headerorder {
+    line-height: 0.17in; 
+	font-style:normal;
+	font-weight:bold;
+	font-size:8pt;
+	color:#000000;
+	font-family: Arial;
+  }
+  .headertest {
+   	line-height: 0.17in; 
+	font-style:normal;
+	font-size:8pt;
+	color:#000000;
+	font-family: Arial;
+  }
+  
+
+  
+</style>
+
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+		{{#each variables}}
+		<table style="width: 100%">
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial;color:#000000;text-align:center">
+					Listado de órdenes
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial;color:#000000">
+					{{this.abbreviation}}
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:8pt;font-family:Arial;color:#664d26">
+					{{this.Username}}, {{this.date}} 
+				</td>
+		    </tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:8pt;font-family:Arial;color:#000000">
+					Listado normal: Registro general
+				</td>
+		    </tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:8pt;font-family:Arial;color:#000000">
+					Rango inicial: {{this.rangeInit}},  Rango final: {{this.rangeEnd}}
+				</td>
+		    </tr>
+		</table>
+		{{/each}}
+		<table>
+		   
+		   <tr>
+			<td class="headertable" style="width: 1in;">Orden</td>
+			<td class="headertable" style="width: 1in;">Historia</td>
+			<td class="headertable" style="width: 3.5in;">Nombre</td>
+			<td class="headertable" style="width: 1in;">Género</td>
+			<td class="headertable" style="width: 1in;">Edad</td>
+			<td class="headertable" style="width: 1in;">Fecha nacimiento</td>
+		  </tr>
+		</table>
+		
+      {{#each orders}}
+	  
+		<table>
+		  <tr>
+			<td class="headerorder" style="width: 1in;">{{this.orderNumber}}</td>
+			<td class="headerorder" style="width: 1in;">{{this.patient.documentType.abbr}} {{this.patient.patientId}}</td>
+			<td class="headerorder" style="width: 3.5in;">{{this.patient.name1}} {{this.patient.name2}} {{this.patient.lastName}} {{this.patient.surName}}</td>
+			<td class="headerorder" style="width: 1in;">{{this.patient.sex.esCo}}</td>
+			<td class="headerorder" style="width: 1in;">{{this.patient.age}}</td>
+			<td class="headerorder" style="width: 1in;">{{this.patient.birthday}}</td>
+		  </tr>
+		  {{#each this.tests}}
+		  <tr>
+			<td></td>
+			<td class="headertest">{{this.code}}</td>
+			<td class="headertest" colspan="4">{{this.name}}</td>
+		  </tr>
+		  {{/each}}
+		  {{#each this.comments}}
+		  <tr id="{{this.orderNumber}}">
+		 
+			<td class="headertest">Comentario</td>
+			<td colspan="5" class="headertest">
+				{{this.commentformat}}
+			</td>
+						
+		  </tr>
+		  {{/each}}
+		</table>
+		
+      
+      <br />
+      {{/each}}
+   
+  </body>
+</html>

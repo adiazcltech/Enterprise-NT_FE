@@ -1,0 +1,41 @@
+<button ng-if="report.classbutton"  type="button" class="btn btn-violet button-list-five" data-toggle="modal" data-target="#modal" ng-click="report.createViewer();   report.setReport();" ng-disabled="report.disabled">
+    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+</button>
+<button ng-if="report.classbutton === undefined"  type="button" class="btn btn-violet button-list" data-toggle="modal" data-target="#modalreport" ng-click="report.createViewer();   report.setReport();" ng-disabled="report.disabled">
+    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+</button>
+
+<div class="modal fade" id="modalreport" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true" >
+    <div class="modal-dialog  modal-lg" style="height: auto">
+        <div class="modal-content" ng-show="report.listreport.length > 0">
+           
+            <div class="modal-body" style="height: auto" >
+                <div id="viewerContent" style="height: 500px"></div>
+                <div id="designerContent">
+                   
+                </div>
+
+            </div>
+   			            
+        </div>
+      
+        <div class="modal-dialog modal-sm" ng-show="report.listreport.length == 0">
+              <div class="modal-content">
+               
+                <div class="modal-body" style="height: 100px">
+                   <div style="width: 30%; float: left">
+                        <img class="img-responsive" src="images/iconinfo.png">
+                    </div>
+                    <div style="width: 70%; float: left">
+                        <label style="margin-top: 20px;margin-left: 10px">{{'0242' | translate}}</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+                </div>
+              </div>
+            
+                  
+        </div>
+    </div>
+</div>

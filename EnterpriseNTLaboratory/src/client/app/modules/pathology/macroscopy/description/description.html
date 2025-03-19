@@ -1,0 +1,752 @@
+<style>
+  .filters {
+    height: 100%;
+    border-style: solid;
+    border-top: 0;
+    border-bottom: 0px;
+    border-left: 0px;
+    padding-right: 15px;
+    padding-left: 35px;
+    margin-right: 0px;
+    border-color: #d6d3d6;
+  }
+
+  .input-template {
+    height: 20px !important;
+    font-size: 11px !important;
+    min-height: 20px !important;
+    border: none !important;
+    border-bottom: 1px solid rgb(224, 224, 224) !important;
+  }
+
+  .measureButtons>div {
+    margin-left: 4px;
+    align-items: center;
+  }
+
+  .measureButtons>div>span {
+    font-size: 9px;
+    text-align: center;
+    width: 60px;
+    max-height: 40px;
+    line-height: 10px;
+    margin-top: 6px;
+  }
+
+  .span-record {
+    font-size: 9px;
+    text-align: center;
+    width: 60px;
+    max-height: 40px;
+    line-height: 10px;
+    margin-top: 6px;
+  }
+
+  .mce-i-custom-icon {
+    background-image: url('images/pathology/macroscopy/microphone.png');
+    background-size: 16px 16px;
+    /* Ajusta el tamaño según lo necesites */
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .cssload-container {
+    position: relative;
+    z-index: 4;
+    margin: 0 auto;
+    left: 10px;
+    right: 8px;
+    width: 47px;
+    height: 22px;
+    margin-top: 15px;
+    list-style: none;
+    border-radius: 11px;
+  }
+
+
+  .cssload-loader {
+    position: absolute;
+    z-index: 3;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -8px;
+    width: 27px;
+    height: 16px;
+    list-style: none;
+    padding-left: 0px !important;
+  }
+
+  ul.cssload-loader li {
+    background-color: rgb(250, 250, 250);
+    width: 3px;
+    height: 3px;
+    float: right;
+    margin-right: 1px !important;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .cssload-loader li:first-child {
+    animation: cssload-loadbars 1.15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite 0s;
+    -o-animation: cssload-loadbars 1.15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite 0s;
+    -ms-animation: cssload-loadbars 1.15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite 0s;
+    -webkit-animation: cssload-loadbars 1.15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite 0s;
+    -moz-animation: cssload-loadbars 1.15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite 0s;
+  }
+
+  .cssload-loader li:nth-child(2) {
+    animation: cssload-loadbars 1.15s ease-in-out infinite -0.23s;
+    -o-animation: cssload-loadbars 1.15s ease-in-out infinite -0.23s;
+    -ms-animation: cssload-loadbars 1.15s ease-in-out infinite -0.23s;
+    -webkit-animation: cssload-loadbars 1.15s ease-in-out infinite -0.23s;
+    -moz-animation: cssload-loadbars 1.15s ease-in-out infinite -0.23s;
+  }
+
+  .cssload-loader li:nth-child(3) {
+    animation: cssload-loadbars 1.15s ease-in-out infinite -0.46s;
+    -o-animation: cssload-loadbars 1.15s ease-in-out infinite -0.46s;
+    -ms-animation: cssload-loadbars 1.15s ease-in-out infinite -0.46s;
+    -webkit-animation: cssload-loadbars 1.15s ease-in-out infinite -0.46s;
+    -moz-animation: cssload-loadbars 1.15s ease-in-out infinite -0.46s;
+  }
+
+  .cssload-loader li:nth-child(4) {
+    animation: cssload-loadbars 1.15s ease-in-out infinite -0.69s;
+    -o-animation: cssload-loadbars 1.15s ease-in-out infinite -0.69s;
+    -ms-animation: cssload-loadbars 1.15s ease-in-out infinite -0.69s;
+    -webkit-animation: cssload-loadbars 1.15s ease-in-out infinite -0.69s;
+    -moz-animation: cssload-loadbars 1.15s ease-in-out infinite -0.69s;
+  }
+
+  .cssload-loader li:nth-child(5) {
+    animation: cssload-loadbars 1.15s ease-in-out infinite -0.92s;
+    -o-animation: cssload-loadbars 1.15s ease-in-out infinite -0.92s;
+    -ms-animation: cssload-loadbars 1.15s ease-in-out infinite -0.92s;
+    -webkit-animation: cssload-loadbars 1.15s ease-in-out infinite -0.92s;
+    -moz-animation: cssload-loadbars 1.15s ease-in-out infinite -0.92s;
+  }
+
+  .cssload-loader li:nth-child(6) {
+    animation: cssload-loadbars 1.15s ease-in-out infinite -1.15s;
+    -o-animation: cssload-loadbars 1.15s ease-in-out infinite -1.15s;
+    -ms-animation: cssload-loadbars 1.15s ease-in-out infinite -1.15s;
+    -webkit-animation: cssload-loadbars 1.15s ease-in-out infinite -1.15s;
+    -moz-animation: cssload-loadbars 1.15s ease-in-out infinite -1.15s;
+  }
+
+
+
+  @keyframes cssload-loadbars {
+    0% {
+      height: 3px;
+      margin-top: 7px;
+    }
+
+    50% {
+      height: 14px;
+      margin-top: 0px;
+    }
+
+    100% {
+      height: 3px;
+      margin-top: 7px;
+    }
+  }
+
+  @-o-keyframes cssload-loadbars {
+    0% {
+      height: 3px;
+      margin-top: 7px;
+    }
+
+    50% {
+      height: 14px;
+      margin-top: 0px;
+    }
+
+    100% {
+      height: 3px;
+      margin-top: 7px;
+    }
+  }
+
+  @-ms-keyframes cssload-loadbars {
+    0% {
+      height: 3px;
+      margin-top: 7px;
+    }
+
+    50% {
+      height: 14px;
+      margin-top: 0px;
+    }
+
+    100% {
+      height: 3px;
+      margin-top: 7px;
+    }
+  }
+
+  @-webkit-keyframes cssload-loadbars {
+    0% {
+      height: 3px;
+      margin-top: 7px;
+    }
+
+    50% {
+      height: 14px;
+      margin-top: 0px;
+    }
+
+    100% {
+      height: 3px;
+      margin-top: 7px;
+    }
+  }
+
+  @-moz-keyframes cssload-loadbars {
+    0% {
+      height: 3px;
+      margin-top: 7px;
+    }
+
+    50% {
+      height: 14px;
+      margin-top: 0px;
+    }
+
+    100% {
+      height: 3px;
+      margin-top: 7px;
+    }
+  }
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error" id="modalerrorresultentry"></modalexceptions>
+<loadpage view="vm.loading" class="p-absolute"></loadpage>
+
+<div id="page_content" style="overflow: hidden;">
+  <div id="page_content_inner" style="padding: 1px 13px 0px;">
+    <div class="uk-grid">
+      <div class="uk-width-1-5 filters">
+        <button ng-click="vm.modalfilter()" style="width: 100%; height: 110px; text-align: left;" class="md-btn" >
+          <ul class="md-list md-list-addon" style="margin-left: 16px; margin-top: 8px; height: 135px">
+            <li style="margin-left: 0px">
+              <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-3px">
+                <img src="images/pathology/macroscopy/date.png">
+              </div>
+              <div class="md-list-content" style="padding-left: 22px;">
+                <span style="float: left; margin-right: 3%" class="uk-text-small uk-text-muted">{{
+                  vm.filterinfo.textinit }}:</span>
+                <span class="uk-text-truncate uk-text-small">{{ vm.filterinfo.valueinit }} </span>
+                <span style="float: left; margin-right: 8%"
+                  class=" uk-text-small uk-text-muted">{{vm.filterinfo.textend}}:</span>
+                <span class="uk-text-truncate uk-text-small">{{vm.filterinfo.valueend}}</span>
+              </div>
+            </li>
+            <li style="margin-left: 0px">
+              <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-7px">
+                <img src="images/pathology/macroscopy/studies.png">
+              </div>
+              <div class="md-list-content" style="padding-left: 22px;">
+                <span class=" uk-text-small uk-text-muted">{{'3176' | translate}}</span>
+                <span class="md-list-heading uk-text-small uk-text-truncate">{{ vm.filterinfo.valuefilterstudies
+                  }}</span>
+              </div>
+            </li>
+          </ul>
+        </button>
+
+        <div class="md-card" style="height: calc(100vh - 185px);margin-top: 10px;">
+          <div class="md-card-toolbar" style="height: auto;padding: 0px;">
+            <div class="uk-text-bold uk-text-center" style="background-color: #1976d2; color: white">
+              {{ '3177' | translate}}
+              <span class="uk-badge uk-badge-primary">{{ vm.dataCases.length }}</span>
+            </div>
+          </div>
+          <div class="md-card-content" style="padding: 1px 1px 5px 1px; overflow-y: hidden">
+            <div class="uk-grid uk-grid-small" style="height: 100%">
+              <div class="uk-width-1-1 contentscroll" vs-repeat="{latch : vm.dataCases, size: 30}"
+                style="height: calc(100vh - 205px);overflow-y: auto;">
+                <div style="margin-top: 5px" class="md-card uk-width-1-1" ng-repeat="obj in vm.dataCases">
+                  <div class="md-card-content" style="padding: 0px 0 0 10px">
+                    <div class="uk-grid uk-grid-small" style="place-content: center;">
+                      <div class="uk-width-8-10 uk-text-bold uk-text-center" style="font-size: 15px">
+                        <div class="uk-grid uk-grid-small">
+                          <div class="uk-width-7-10">
+                            <a ng-click="vm.selectCase(obj);">{{ obj.studyType.code }}{{
+                              obj.numberCase.toString().substring(3) }}</a>
+                          </div>
+                          <div class="uk-width-1-10" style="margin-top: -1px">
+                            <i style="cursor: pointer;" class="material-icons" ng-click="collapsed = !collapsed">{{
+                              collapsed === false ? 'add_circle' : 'remove_circle' }}</i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-1" ng-if="collapsed">
+                        <div class="uk-grid uk-grid-small">
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '0110' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{ obj.orderNumber }}
+                          </div>
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '0833' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{obj.documentType}}
+                          </div>
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '3112' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{obj.patientId}}
+                          </div>
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '3109' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{obj.lastName}} {{obj.surName}} {{obj.name1}} {{obj.name2}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-1-5" ng-if="vm.case" style="padding-left: 15px;">
+        <div>
+          <div class="uk-button-dropdown" style="display: block;position: relative;z-index: 1;"
+            data-uk-dropdown="{mode:'click', pos:'right-top'}">
+            <div style="width: 86%;text-align: right;">
+              <button class="md-btndrobox">
+                <i class="md-icon material-icons" style="font-size: 20px;float: right;">&#xE5D4;</i>
+              </button>
+            </div>
+            <div class="uk-dropdown uk-dropdown-width-2 "
+              style="min-width: 420px;top: 0px;width: 420px;padding: 5px 10px;left: 240px;">
+              <div class="uk-grid uk-dropdown-grid">
+                <div class="uk-width-1-1" style="padding-left: 8px;padding-right: 8px;height: 272px;">
+                  <casedetail idcase="vm.case"></casedetail>
+                </div>
+              </div>
+            </div>
+          </div>
+          <caseinfo idcase="vm.case"></caseinfo>
+        </div>
+        <div style="height: calc(100vh - 245px); width: 100%; margin-top: 10px;" ng-show="vm.case.orderNumber !== null">
+          <patient order="vm.case.orderNumber"></patient>
+        </div>
+      </div>
+
+      <form class="uk-form md-card-content uk-width-3-5" name="Form" id="Form" style="padding-left: 15px;">
+        <div class="uk-width-1-1" ng-if="vm.macroscopy.templates.length > 0">
+
+          <div class="uk-width-1-1" style="margin-top: 5px;">
+            <div class="md-card" style="height: calc(100vh - 162px);">
+              <div class="md-card-content" style="padding: 0 10px;">
+                <ul class="uk-tab" data-uk-tab="{connect:'#templates', animation:'slide-horizontal'}">
+                  <li ng-repeat="template in vm.macroscopy.templates" ng-class="{'uk-active': $index === 0 }"
+                    style="position: inherit;display: flex;">
+                    <a href="#" style="font-size: 12px;height: 40px;" class="uk-flex uk-flex-middle">
+                      {{ template.specimen.name }}
+                      <div ng-if="template.specimen.subSample > 0" style="font-size: 10px;">
+                        <span>{{ template.specimen.subSampleName }}</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <ul id="templates" class="uk-switcher uk-margin contentscroll"
+                  style="height: calc(100vh - 220px);overflow: auto;margin: 5px 0px;">
+                  <li ng-repeat="template in vm.macroscopy.templates" ng-class="{'uk-active': $index === 0 }"
+                  style="position: inherit;">
+                    <div class="uk-grid" ng-if="template.fields.length > 0">
+                      <div class="uk-width-1-{{field.grid}}" ng-repeat="field in template.fields"
+                        style="padding-bottom: 10px;">
+                        <div class="parsley-row" ng-if="field.type === 1">
+                          <span class="uk-text-small uk-text-muted"
+                            style="font-size: 11px !important;font-weight: 500;">{{ field.name }}</span>
+                          <input type="text" ng-model="field.value" id="{{field.template}}" name="{{field.template}}"
+                            class="md-input input-template" md-input ng-disabled="vm.disabled"
+                            ng-required="field.required">
+                        </div>
+                        <div class="parsley-row" ng-if="field.type === 2">
+                          <span class="uk-text-small uk-text-muted"
+                            style="font-size: 11px !important;font-weight: 500;">{{ field.name }}</span>
+                          <input type="number" ng-model="field.value" id="{{field.template}}" name="{{field.template}}"
+                            class="md-input input-template" md-input ng-disabled="vm.disabled"
+                            ng-required="field.required">
+                        </div>
+                        <div class="parsley-row" ng-if="field.type === 3">
+                          <span class="uk-text-small uk-text-muted"
+                            style="font-size: 11px !important;font-weight: 500;">{{ field.name }}</span>
+                          <textarea id="ui-annotation" ui-tinymce="vm.editor" id="{{field.template}}"
+                            name="{{field.template}}" ng-model="field.value" ng-required="field.required"
+                            ng-disabled="vm.disabled"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="uk-grid">
+            <div class="uk-width-7-10" style="margin-top: 5px;">
+
+              <div class="uk-grid">
+
+                <div class="uk-width-4-10">
+                  <div class="md-card">
+                    <div class="md-card-content" style="padding: 2px;">
+                      <div class="uk-flex uk-flex-center measureButtons">
+
+                        <div style="text-align: center;" ng-if="vm.microphonePermission">
+                          <div class="uk-flex" style="justify-content: center;">
+                            <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                              <button type="button" ng-disabled="vm.recordingPathologist || vm.disabled"
+                                ng-click="vm.recording()"
+                                class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center"
+                                ng-class="{'md-bg-blue-grey-100': vm.recordingPathologist || vm.disabled}">
+                                <i class="material-icons" style="font-weight: bold;">mic</i>
+                              </button>
+                              <span class="span-record">{{'3040' | translate}}</span>
+                            </div>
+                            <div ng-if="!vm.pausedRecording" class="uk-flex uk-flex-column"
+                              style="font-size: 11px;align-items: center;margin-left: 10px;margin-right: 10px;">
+                              <button type="button" ng-disabled="!vm.recordingPathologist" ng-click="vm.pauseRecord()"
+                                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center"
+                                ng-class="{'md-bg-blue-grey-100': !vm.recordingPathologist}">
+                                <i class="material-icons" style="font-weight: bold;">pause_circle_filled</i>
+                              </button>
+                              <span class="span-record">{{'3041' | translate}}</span>
+                            </div>
+                            <div ng-if="vm.pausedRecording" class="uk-flex uk-flex-column"
+                              style="font-size: 11px;align-items: center;margin-left: 10px;margin-right: 10px;">
+                              <button type="button" ng-disabled="!vm.recordingPathologist" ng-click="vm.resumeRecord()"
+                                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center"
+                                ng-class="{'md-bg-blue-grey-100': !vm.recordingPathologist}">
+                                <i class="material-icons" style="font-weight: bold;">play_arrow</i>
+                              </button>
+                              <span class="span-record">{{'3043' | translate}}</span>
+                            </div>
+                            <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                              <button type="button" ng-disabled="!vm.recordingPathologist" ng-click="vm.stopRecord()"
+                                class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center"
+                                ng-class="{'md-bg-blue-grey-100': !vm.recordingPathologist}">
+                                <i class="material-icons" style="font-weight: bold;">stop</i>
+                              </button>
+                              <span class="span-record">{{'3042' | translate}}</span>
+                            </div>
+                          </div>
+
+                          <timer autostart="false"
+                            style="font-size: 10px;background: #1976d2;padding: 1px 5px;border-radius: 10px;color: white;">
+                            {{hours}} {{'0477' | translate}} : {{minutes}} {{'0478' | translate}} : {{seconds}} {{'0479'
+                            |
+                            translate}}.
+                          </timer>
+                        </div>
+
+                        <div style="    text-align: center;height: 85px;display: flex;place-content: center;"
+                          ng-if="!vm.microphonePermission">
+                          <span class="uk-badge uk-badge-info"
+                            style="font-size: 12px;border-radius: 5px;width: 80%;white-space: inherit;padding: 5px 10px;background: #1976d2;margin: 0;">
+                            {{'3044' | translate }}
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="uk-width-6-10" style="padding-left: 10px;">
+                  <div class="md-card" style="height: 89px;">
+                    <div class="md-card-content" style="padding: 2px 0px;">
+                      <div class="uk-flex uk-flex-center measureButtons">
+
+                        <!-- Guardar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.confirmSaved(Form, 1)" class="md-fab md-fab-small md-bg-indigo-600 md-fab-wave-light
+                            waves-effect waves-light aling-self-center"
+                            ng-disabled="(!Form.$valid && !vm.srcAudio) || vm.disabledSave"
+                            ng-class="{'md-bg-blue-grey-100': (!Form.$valid && !vm.srcAudio) || vm.disabledSave }">
+                            <i class="material-icons" style="color: white;">save</i>
+                          </button>
+                          <span>{{ '0007' | translate }}</span>
+                        </div>
+
+                        <!-- Guardar y Finalizar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.confirmSaved(Form, 0)" class="md-fab md-fab-small md-fab-success md-fab-wave-light
+                            waves-effect waves-light aling-self-center" ng-disabled="!Form.$valid || vm.disabledSave"
+                            ng-class="{'md-bg-blue-grey-100': !Form.$valid || vm.disabledSave }">
+                            <i class="material-icons" style="color: white;">send_and_archive</i>
+                          </button>
+                          <span>{{ '3190' | translate }}</span>
+                        </div>
+
+                        <!-- Editar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.stateButton('update'); vm.edit = true;" class="md-fab md-fab-small md-fab-warning md-fab-wave-light
+                                    waves-effect waves-light aling-self-center" ng-disabled="vm.disabledEdit"
+                            ng-class="{'md-bg-blue-grey-100': vm.disabledEdit}">
+                            <i class="material-icons" style="color: white;">create</i>
+                          </button>
+                          <span>{{ '0006' | translate }}</span>
+                        </div>
+
+                        <!-- Transcripción-->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.validateConfirmation(Form);" class="md-fab md-fab-small md-bg-cyan-600 md-fab-wave-light
+                            waves-effect waves-light aling-self-center"
+                            ng-disabled="(!Form.$valid && !vm.srcAudio) || vm.disabledSave"
+                            ng-class="{'md-bg-blue-grey-100': (!Form.$valid && !vm.srcAudio) || vm.disabledSave }">
+                            <i class="material-icons" style="color: white;">headphones</i>
+                          </button>
+                          <span>{{ '3183' | translate }}</span>
+                        </div>
+
+                        <!-- Cancelar-->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.undo()" class="md-fab md-fab-small md-fab-danger md-fab-wave-light
+                            waves-effect waves-light aling-self-center" ng-disabled="vm.disabledCancel"
+                            ng-class="{'md-bg-blue-grey-100': vm.disabledCancel }">
+                            <i class="material-icons" style="color: white;">close</i>
+                          </button>
+                          <span>{{ '0008' | translate }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="uk-width-3-10" style="padding-left: 10px;margin-top: 5px;">
+              <div class="md-card" style="height: 88px;">
+                <div class="md-card-content">
+                  <div class="uk-flex" ng-if="!vm.srcAudio" style="justify-content: center;margin-top: 15px;">
+                    <span class="uk-badge uk-badge-info"
+                      style="font-size: 13px;border-radius: 5px;padding: 5px;background: #1976d2;">{{'3179' | translate
+                      }}</span>
+                  </div>
+                  <div ng-if="vm.srcAudio">
+                    <span class="uk-badge uk-badge-info"
+                      style="margin-top: -10px;font-size: 11px;border-radius: 5px;padding: 2px 5px;color: white;background: #1976d2;margin-bottom: 5px;">{{'3191'
+                      | translate }}</span>
+                    <div class="uk-width-1-1" style="align-self: center;">
+                      <audio ng-if="vm.srcAudio" ng-disabled="vm.isEditAnnotation" ng-src="{{vm.srcAudio}}" controls=""
+                        style="width: 100%;height: 40px;"></audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ventana modal para el filtro de fechas -->
+<div id="modalfilter-date" class="uk-modal" bg-close="false" aria-hidden="true" style=" min-height: 300px" ng-if="vm.showModalFilter">
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">
+        <i style="padding-top: 5px; padding-right: 5px" class="material-icons md-color-light-blue-50">&#xE8B6;</i>
+        {{ '0642' | translate }}
+      </h3>
+    </div>
+    <div class="uk-grid">
+      <div class="uk-width-1-1">
+        <casefilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" rangeinittemp="vm.rangeinittemp"
+          rangeendtemp="vm.rangeendtemp" typefilter="vm.filterRange" isopenreport="vm.isOpenReport"></casefilter>
+      </div>
+      <div class="uk-width-1-1">
+        <div class="uk-input-group " style="width: 100%">
+          <filterstudytype numfilter="vm.numfilter" liststudies="vm.liststudies" numlist="vm.numlist"
+            state="vm.stateFilters"></filterstudytype>
+        </div>
+      </div>
+    </div>
+    <div class="uk-overflow-container"></div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+        ng-disabled="!vm.isOpenReport || vm.numlist === 0"
+        ng-class="{'md-bg-blue-grey-100':!vm.isOpenReport || vm.numlist === 0}" ng-focus="vm.stateFilters = 1;"
+        ng-click="vm.setFilter();">{{'0643' | translate}}
+      </button>
+      <button type="button" class="md-btn md-btn-default uk-modal-close" ng-click="vm.loadpreviousfilter();">{{'0008'
+        | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<!-- ventana modal para la captura de voz-->
+<div id="modalsintesis" class="uk-modal" bg-close="false" aria-hidden="true" style=" min-height: 300px">
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">
+        <i style="padding-top: 5px; padding-right: 5px" class="material-icons md-color-light-blue-50">&#xE8B6;</i>
+        Reconocomiento de voz
+      </h3>
+    </div>
+    <div class="uk-grid">
+      <div class="uk-width-1-1">
+        <textarea class="form-control" data-ng-model="vm.commentvoice" style="height: 100%; width: 100%;border-color: #ddd;">
+        </textarea>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-grid">
+      <!-- <div class="cssload-container">
+        <ul class="cssload-loader">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+     </div> -->
+
+
+      <div class="uk-width-1-3">
+        <div data-uk-button-radio="{target:'.md-btn'}">
+          <button class="md-btn md-btn-primary md-btn-wave waves-effect waves-button uk-active"
+            ng-class="{'md-bg-blue-grey-100': vm.showvoice}" aria-checked="true">
+            <i class="uk-icon-circle"></i>
+          </button>
+          <button class="md-btn  md-btn-primary md-btn-wave waves-effect waves-button" ng-click="vm.stopvoice()"  ng-class="{'md-bg-blue-grey-100': !vm.showvoice}"  aria-checked="false">
+            <i class="uk-icon-stop"></i>
+          </button>
+        </div>
+      </div>
+     {{vm.probando}}
+      <div class="cssload-container uk-width-1-3">
+        <ul class="cssload-loader">
+          <li style="background-color: #00b0ff;"></li>
+          <li style="background-color: #00b0ff;"></li>
+          <li style="background-color: #00b0ff;"></li>
+          <li style="background: #00b0ff;"></li>
+          <li style="background: #00b0ff;"></li>
+          <li style="background-color: #00b0ff;"></li>
+        </ul>
+      </div>
+
+      <div class="uk-width-1-3 uk-text-right">
+        <button type="button"  ng-click="vm.transcription(vm.commentvoice)"
+          class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-modal-close">{{'0643'
+          | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ '0962' | translate }}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ventana modal para confirmacion de guardado y envio -->
+<div id="modalConfirmSave" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div style="float: left;">
+        <img class="img-responsive" src="images/Question.png">
+      </div>
+      <div class="uk-grid">
+        <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+          <h5 class="uk-text-bold" ng-if="vm.macroscopy.draft === 1">{{'3192' | translate }}</h5>
+          <h5 class="uk-text-bold" ng-if="vm.macroscopy.draft === 0">{{'3193' | translate }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="md-btn md-btn-primary uk-modal-close" type="button" ng-click="vm.save()">{{'0219' |
+        translate}}</button>
+      <button class="md-btn md-btn-default uk-modal-close" type="button">{{'0220' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ventana modal para confirmacion de envio a transcripción -->
+<div id="modalConfirmTranscription" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div style="float: left;">
+        <img class="img-responsive" src="images/Question.png">
+      </div>
+      <div class="uk-grid">
+        <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+          <h5 class="uk-text-bold">{{'3194' | translate }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="md-btn md-btn-primary" type="button" ng-click="vm.confirmTranscription()">{{'0219' |
+        translate}}</button>
+      <button class="md-btn md-btn-default uk-modal-close" type="button" ng-click="vm.form = null">{{'0220' |
+        translate}}</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ventana modal para confirmacion si la descripcion requiere autorización -->
+<div id="modalConfirmAuthorization" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div style="float: left;">
+        <img class="img-responsive" src="images/Question.png">
+      </div>
+      <div class="uk-grid">
+        <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+          <h5 class="uk-text-bold">{{'3195' | translate }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="md-btn md-btn-primary" type="button" ng-click="vm.confirmAuthorization()">{{'0219' |
+        translate}}</button>
+      <button class="md-btn md-btn-default" type="button" ng-click="vm.authorizationNotRequired()">{{'0220' |
+        translate}}</button>
+    </div>
+  </div>
+</div>
+<script src="assets/js/artyom.window.js"></script>

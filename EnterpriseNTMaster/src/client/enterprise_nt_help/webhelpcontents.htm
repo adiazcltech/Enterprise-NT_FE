@@ -1,0 +1,394 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<title>Enterprise NT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css"> 
+<!-- 
+.selected {font-weight: normal;background-color: #E2E2E2;padding:0px,2px,0px,2px;}
+.unselected { font-weight: normal;padding:0px,2px,0px,2px;}
+.hand { cursor: hand; }
+.p {height: 16px;width: 16px;vertical-align: middle;border: 0;}
+div,body { font-family: Tahoma, Verdana; font-size: 11px; }
+A:link {text-decoration: none; color:#000000}
+A:visited {text-decoration: none; color: #000000}
+A:active {text-decoration: none; color: #000000 }
+A:hover {text-decoration: none; color: #FF0000 }
+
+-->
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var cl,pn,pm,bl;
+var path = 'icons/';
+var pos = 0;
+var icon;
+var tar = 'content';
+var display;
+var imgi;
+var AutoCollapse;
+var LastSelected = -1;
+var loaded = false;
+var max;
+var divlist;
+
+function SetEnv(v,a){
+
+if(v==0){ 
+	pn = [['daplus.gif','daminus.gif'],['tplus.gif','tminus.gif'],['uaplus.gif','uaminus.gif'],['splus.gif','sminus.gif']];
+	PreloadImg('downangle.gif','tshaped.gif','upangle.gif','sline.gif','daplus.gif','daminus.gif','tplus.gif','tminus.gif','uaplus.gif','uaminus.gif','splus.gif','sminus.gif','blank.gif','line.gif');
+}else{
+	pn = [['plus.gif','minus.gif']];
+	PreloadImg('plus.gif','minus.gif','blank.gif');
+
+}
+AutoCollapse = a;
+}
+
+ function PreloadImg(){
+if (document.images) { 
+	var imgs = PreloadImg.arguments; 
+	var pload = new Array();
+	for (var i=0; i<imgs.length; i++) { 
+		pload[i] = new Image; 
+		pload[i].src = path + imgs[i]; 
+	} 
+} 
+ } 
+
+function get(o){
+var x;
+if(document.all) x=document.all[o]; 
+if(document.getElementById) x=document.getElementById(o);
+
+return x;
+}
+
+
+function pnImg(img){
+var i,j;
+for(i=0;i<=3;i++){
+	for(j=0;j<=1;j++){
+	if(img.substr(img.lastIndexOf('/') + 1)== pn[i][j]){
+		return i;
+	}
+	}
+}
+}
+function icon(img){
+var f;
+f = img.substr(img.lastIndexOf('/') + 1);
+if( f=='1.gif' || f=='2.gif'){
+	return ['1.gif','2.gif'];
+}
+if( f=='3.gif' || f=='4.gif'){
+	return ['3.gif','4.gif'];
+}
+if( f=='5.gif' || f=='6.gif'){
+	return ['5.gif','6.gif'];
+}
+if( f=='7.gif' || f=='8.gif'){
+	return ['7.gif','8.gif'];
+}
+return [f,f];
+}
+
+function show(id){
+get('d' + id).style.display='block';
+if(get('imgn' + id )) get('imgn' + id ).src= path + pn[pnImg(get('imgn' + id ).src)][1];
+get('img' + id ).src= path + icon(get('img' + id ).src)[1];
+
+}
+
+function collapse(id){
+get('d' + id ).style.display='none';
+if(get('imgn' + id )) get('imgn' + id ).src= path + pn[pnImg(get('imgn' + id ).src)][0];
+get('img' + id ).src= path + icon(get('img' + id ).src)[0];
+
+}
+
+function collapseAll(){
+var i;
+var o;
+for(i=0;i<=divlist.length-1;i++){
+	if(o=get('d' + divlist[i])){
+		if(o.style.display!='none'){ 
+			collapse(divlist[i]);
+		}
+	}
+}
+}
+
+function showAll(){
+var i;
+var o;
+for(i=0;i<=divlist.length-1;i++){
+	if(o=get('d' + divlist[i])){
+		if(o.style.display!='block'){ 
+			show(divlist[i]);
+		}
+	}
+}
+}
+
+function unselectAll(){
+var i=0;
+while(get("l" + i)){
+	get("l" + i).className = "unselected";
+	i++;
+}
+}
+
+function clickNode(index){
+var e;
+
+e = get("l" + index);
+if(e==null) return;
+e = e.parentNode;
+if(e.nodeName == 'A'){
+	if(e.href!= window.location.href + '#'){
+		parent.parent.content.location.href = e.href;
+	}else{
+		selectNode(index);
+	}
+	e.onclick;
+}
+}
+
+function showParent(ele){
+var e;
+e = ele.parentNode;
+
+if(e==null) return;
+
+if(e.nodeName == 'DIV'){
+	if(e.id!='') show(e.id.substring(1,e.id.length ));
+}else if(e.nodeName == 'A'){
+
+}
+showParent(e);
+}
+
+function showNode(index){
+showParent(get("l" + index));
+LinkClick(index);
+}
+
+function selectNode(index){
+if(LastSelected!=index){
+//collapseAll();
+showParent(get("l" + index));
+LinkClick(index);
+get('l' + index).scrollIntoView(true);
+
+
+//alert(get('l' + index).offsetHeight + '|' + document.body.clientHeight + '|' + document.body.offsetHeight);
+window.scrollTo(0,document.body.scrollTop); // - document.body.clientHeight /3);
+}
+}
+
+
+function NodeClick(id){
+if(get('d' + id ).style.display=='none'){
+	show(id);
+}else{
+	collapse(id);
+}
+return false;
+}
+
+function LinkDblClick(id){
+if(!AutoCollapse){
+	if(get('d' + id ).style.display=='none'){
+		show(id);
+	}else{
+		collapse(id);
+	}
+}
+return false;
+}
+
+function LinkClick(index,hasChild,r){
+if(AutoCollapse && hasChild){
+	if(get('d' + index ).style.display=='none'){
+		collapseAll()
+		showParent(get('l' + index));
+		show(index);
+	}else{
+		collapseAll()
+		showParent(get('l' + index));	
+		collapse(index);
+	}
+}
+if(LastSelected!=-1){
+	get('l' + LastSelected).className = "unselected";
+}
+get('l' + index).className = "selected";
+LastSelected = index;
+return r;
+}
+
+function body_onmousemove(event){
+if(typeof(document.body.scrollTop)!='undefined'){
+if(parseInt(event.clientX)<5){
+window.scroll(0,document.body.scrollTop);}}
+if(typeof(window.scrollY)!='undefined'){
+if(parseInt(event.clientX)<5){
+window.scrollTo(0,window.scrollY);}}
+}
+
+window.defaultStatus = '';
+
+function body_onload(){
+get('loading').style.display='none';
+loaded = true;
+if(parent.parent.content.document.readyState){
+	if(parent.parent.content.document.readyState == 'complete'){
+		try{parent.parent.content.syn();}catch(e){};
+	}
+}else{
+	if(parent.parent.contentLoaded){
+		try{parent.parent.content.syn();}catch(e){};
+	}
+}
+}
+
+//-->
+</SCRIPT>
+<script language="JavaScript" src="languages.js"></script>
+
+</head>
+
+<body bgcolor="#ffffff" leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" onmousemove="body_onmousemove(event);" onload="body_onload();">
+<div id="loading"><font color="#FF0000" size="1"> Loading table of contents... 
+</font><br><br></div>
+<script>SetEnv(0,false)</script><div><nobr><a href="#" onClick="return NodeClick('0')"><img id="imgn0" src="icons/splus.gif" class="p"></a><a href="scr/" onclick="return LinkClick('0',true,true)" onDblClick="return LinkDblClick('0')" target="content" title="Configuracion" onmousemove="window.status='Configuracion'"><img id="img0" src="icons/1.gif" class="p"> <span id="l0" class="unselected">Configuracion</span></a></nobr></div>
+<div id="d0" style="display:none"><div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/index.htm" onclick="return LinkClick('1',false,true)" target="content" title="Bienvenido" onmousemove="window.status='Bienvenido'"><img src="icons/11.gif" class="p"> <span id="l1" class="unselected">Bienvenido</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/autentication/autentication.htm" onclick="return LinkClick('2',false,true)" target="content" title="Autenticacion" onmousemove="window.status='Autenticacion'"><img src="icons/11.gif" class="p"> <span id="l2" class="unselected">Autenticacion</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/shifts/shifts.htm" onclick="return LinkClick('3',false,true)" target="content" title="Jornada" onmousemove="window.status='Jornada'"><img src="icons/11.gif" class="p"> <span id="l3" class="unselected">Jornada</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/shiftsbybranch/shiftsbybranch.htm" onclick="return LinkClick('4',false,true)" target="content" title="Jornada por sede" onmousemove="window.status='Jornada por sede'"><img src="icons/11.gif" class="p"> <span id="l4" class="unselected">Jornada por sede</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/groupingorders/groupingorders.htm" onclick="return LinkClick('5',false,true)" target="content" title="Agrupación de órdenes" onmousemove="window.status='Agrupación de órdenes'"><img src="icons/11.gif" class="p"> <span id="l5" class="unselected">Agrupación de órdenes</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/antibiogram/antibiogram.htm" onclick="return LinkClick('6',false,true)" target="content" title="Antibiograma" onmousemove="window.status='Antibiograma'"><img src="icons/11.gif" class="p"> <span id="l6" class="unselected">Antibiograma</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/antibiotic/antibiotic.htm" onclick="return LinkClick('7',false,true)" target="content" title="Antibióticos" onmousemove="window.status='Antibióticos'"><img src="icons/11.gif" class="p"> <span id="l7" class="unselected">Antibióticos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/area/area.htm" onclick="return LinkClick('8',false,true)" target="content" title="Area" onmousemove="window.status='Area'"><img src="icons/11.gif" class="p"> <span id="l8" class="unselected">Area</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/destinationassignment/destinationassignment.htm" onclick="return LinkClick('9',false,true)" target="content" title="Asignación de destinos" onmousemove="window.status='Asignación de destinos'"><img src="icons/11.gif" class="p"> <span id="l9" class="unselected">Asignación de destinos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/priceassigment/priceassigment.htm" onclick="return LinkClick('10',false,true)" target="content" title="Asignación de precios por tarifa" onmousemove="window.status='Asignación de precios por tarifa'"><img src="icons/11.gif" class="p"> <span id="l10" class="unselected">Asignación de precios por tarifa</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/insurance/insurance.htm" onclick="return LinkClick('11',false,true)" target="content" title="Aseguradora" onmousemove="window.status='Aseguradora'"><img src="icons/11.gif" class="p"> <span id="l11" class="unselected">Aseguradora</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('12',false,true)" target="content" title="Banco" onmousemove="window.status='Banco'"><img src="icons/11.gif" class="p"> <span id="l12" class="unselected">Banco</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('13',false,true)" target="content" title="Clientes" onmousemove="window.status='Clientes'"><img src="icons/11.gif" class="p"> <span id="l13" class="unselected">Clientes</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/hematologicalcounter/hematologicalcounter.htm" onclick="return LinkClick('14',false,true)" target="content" title="Contador hematológico" onmousemove="window.status='Contador hematológico'"><img src="icons/11.gif" class="p"> <span id="l14" class="unselected">Contador hematológico</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/configdemographics/configdemographics.htm" onclick="return LinkClick('15',false,true)" target="content" title="Configuración dependencia de demográficos" onmousemove="window.status='Configuración dependencia de demográficos'"><img src="icons/11.gif" class="p"> <span id="l15" class="unselected">Configuración dependencia de demográficos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/generalconfig/generalconfig.htm" onclick="return LinkClick('16',false,true)" target="content" title="Configuración general" onmousemove="window.status='Configuración general'"><img src="icons/11.gif" class="p"> <span id="l16" class="unselected">Configuración general</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('17',false,true)" target="content" title="Comentarios" onmousemove="window.status='Comentarios'"><img src="icons/11.gif" class="p"> <span id="l17" class="unselected">Comentarios</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('18',false,true)" target="content" title="Delta check" onmousemove="window.status='Delta check'"><img src="icons/11.gif" class="p"> <span id="l18" class="unselected">Delta check</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('19',false,true)" target="content" title="Demográficos" onmousemove="window.status='Demográficos'"><img src="icons/11.gif" class="p"> <span id="l19" class="unselected">Demográficos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/demographicwebconsultation/demographicwebconsultation.htm" onclick="return LinkClick('20',false,true)" target="content" title="Demográfico adicional - consulta web" onmousemove="window.status='Demográfico adicional - consulta web'"><img src="icons/11.gif" class="p"> <span id="l20" class="unselected">Demográfico adicional - consulta web</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/demographicbranch/demographicbranch.htm" onclick="return LinkClick('21',false,true)" target="content" title="Demográficos por sede" onmousemove="window.status='Demográficos por sede'"><img src="icons/11.gif" class="p"> <span id="l21" class="unselected">Demográficos por sede</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/demographicdependency/demographicdependency.htm" onclick="return LinkClick('22',false,true)" target="content" title="Dependencia demográficos" onmousemove="window.status='Dependencia demográficos'"><img src="icons/11.gif" class="p"> <span id="l22" class="unselected">Dependencia demográficos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('23',false,true)" target="content" title="Destino" onmousemove="window.status='Destino'"><img src="icons/11.gif" class="p"> <span id="l23" class="unselected">Destino</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/destinationMicrobiology/destinationMicrobiology.htm" onclick="return LinkClick('24',false,true)" target="content" title="Destinos de microbiología" onmousemove="window.status='Destinos de microbiología'"><img src="icons/11.gif" class="p"> <span id="l24" class="unselected">Destinos de microbiología</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/diagnostic/diagnostic.htm" onclick="return LinkClick('25',false,true)" target="content" title="Diagnóstico" onmousemove="window.status='Diagnóstico'"><img src="icons/11.gif" class="p"> <span id="l25" class="unselected">Diagnóstico</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/diagnosticsfortest/diagnosticsfortest.htm" onclick="return LinkClick('26',false,true)" target="content" title="Diagnóstico por prueba" onmousemove="window.status='Diagnóstico por prueba'"><img src="icons/11.gif" class="p"> <span id="l26" class="unselected">Diagnóstico por prueba</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/alarmday/alarmday.htm" onclick="return LinkClick('27',false,true)" target="content" title="Días alarma pendiente de pago" onmousemove="window.status='Días alarma pendiente de pago'"><img src="icons/11.gif" class="p"> <span id="l27" class="unselected">Días alarma pendiente de pago</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/processingday/processingday.htm" onclick="return LinkClick('28',false,true)" target="content" title="Días de procesamiento" onmousemove="window.status='Días de procesamiento'"><img src="icons/11.gif" class="p"> <span id="l28" class="unselected">Días de procesamiento</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/testedition/testedition.htm" onclick="return LinkClick('29',false,true)" target="content" title="Edición de pruebas" onmousemove="window.status='Edición de pruebas'"><img src="icons/11.gif" class="p"> <span id="l29" class="unselected">Edición de pruebas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/provider/provider.htm" onclick="return LinkClick('30',false,true)" target="content" title="Entidad" onmousemove="window.status='Entidad'"><img src="icons/11.gif" class="p"> <span id="l30" class="unselected">Entidad</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/reportencryption/reportencryption.htm" onclick="return LinkClick('31',false,true)" target="content" title="Encriptación de reporte" onmousemove="window.status='Encriptación de reporte'"><img src="icons/11.gif" class="p"> <span id="l31" class="unselected">Encriptación de reporte</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/alarm/alarm.htm" onclick="return LinkClick('32',false,true)" target="content" title="Alarma para resultado" onmousemove="window.status='Alarma para resultado'"><img src="icons/11.gif" class="p"> <span id="l32" class="unselected">Alarma para resultado</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/interview/interview.htm" onclick="return LinkClick('33',false,true)" target="content" title="Entrevista" onmousemove="window.status='Entrevista'"><img src="icons/11.gif" class="p"> <span id="l33" class="unselected">Entrevista</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('34',false,true)" target="content" title="Especialidad" onmousemove="window.status='Especialidad'"><img src="icons/11.gif" class="p"> <span id="l34" class="unselected">Especialidad</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/excludetestsbydemographics/excludetestsbydemographics.htm" onclick="return LinkClick('35',false,true)" target="content" title="Excluir pruebas por demográfico" onmousemove="window.status='Excluir pruebas por demográfico'"><img src="icons/11.gif" class="p"> <span id="l35" class="unselected">Excluir pruebas por demográfico</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/excludetestbyuser/excludetestbyuser.htm" onclick="return LinkClick('36',false,true)" target="content" title="Excluir prueba por usuario" onmousemove="window.status='Excluir prueba por usuario'"><img src="icons/11.gif" class="p"> <span id="l36" class="unselected">Excluir prueba por usuario</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/populationgroup/populationgroup.htm" onclick="return LinkClick('37',false,true)" target="content" title="Grupos etarios" onmousemove="window.status='Grupos etarios'"><img src="icons/11.gif" class="p"> <span id="l37" class="unselected">Grupos etarios</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('38',false,true)" target="content" title="Festivos" onmousemove="window.status='Festivos'"><img src="icons/11.gif" class="p"> <span id="l38" class="unselected">Festivos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/groups/groups.htm" onclick="return LinkClick('39',false,true)" target="content" title="Grupos" onmousemove="window.status='Grupos'"><img src="icons/11.gif" class="p"> <span id="l39" class="unselected">Grupos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/histogram/Histogram.htm" onclick="return LinkClick('40',false,true)" target="content" title="Histograma" onmousemove="window.status='Histograma'"><img src="icons/11.gif" class="p"> <span id="l40" class="unselected">Histograma</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('41',false,true)" target="content" title="Hojas de trabajo" onmousemove="window.status='Hojas de trabajo'"><img src="icons/11.gif" class="p"> <span id="l41" class="unselected">Hojas de trabajo</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('42',false,true)" target="content" title="Homologación de demograficos" onmousemove="window.status='Homologación de demograficos'"><img src="icons/11.gif" class="p"> <span id="l42" class="unselected">Homologación de demograficos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/standarization/standarization.htm" onclick="return LinkClick('43',false,true)" target="content" title="Homologación de pruebas" onmousemove="window.status='Homologación de pruebas'"><img src="icons/11.gif" class="p"> <span id="l43" class="unselected">Homologación de pruebas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/userstandardization/userstandardization.htm" onclick="return LinkClick('44',false,true)" target="content" title="Homologación de usuarios" onmousemove="window.status='Homologación de usuarios'"><img src="icons/11.gif" class="p"> <span id="l44" class="unselected">Homologación de usuarios</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/institution/institution.htm" onclick="return LinkClick('45',false,true)" target="content" title="Institución" onmousemove="window.status='Institución'"><img src="icons/11.gif" class="p"> <span id="l45" class="unselected">Institución</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/installation/installation.htm" onclick="return LinkClick('46',false,true)" target="content" title="Instalación" onmousemove="window.status='Instalación'"><img src="icons/11.gif" class="p"> <span id="l46" class="unselected">Instalación</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/taxbytest/taxbytest.htm" onclick="return LinkClick('47',false,true)" target="content" title="Impuesto por prueba" onmousemove="window.status='Impuesto por prueba'"><img src="icons/11.gif" class="p"> <span id="l47" class="unselected">Impuesto por prueba</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/middleware/middleware.htm" onclick="return LinkClick('48',false,true)" target="content" title="Integración de middleware por laboratorio" onmousemove="window.status='Integración de middleware por laboratorio'"><img src="icons/11.gif" class="p"> <span id="l48" class="unselected">Integración de middleware por laboratorio</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/demographicitem/demographicItem.htm" onclick="return LinkClick('49',false,true)" target="content" title="Items demográficos" onmousemove="window.status='Items demográficos'"><img src="icons/11.gif" class="p"> <span id="l49" class="unselected">Items demográficos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/laboratory/laboratory.htm" onclick="return LinkClick('50',false,true)" target="content" title="Laboratorio" onmousemove="window.status='Laboratorio'"><img src="icons/11.gif" class="p"> <span id="l50" class="unselected">Laboratorio</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/laboratorybybranch/laboratorybybranch.htm" onclick="return LinkClick('51',false,true)" target="content" title="Laboratorio por sede" onmousemove="window.status='Laboratorio por sede'"><img src="icons/11.gif" class="p"> <span id="l51" class="unselected">Laboratorio por sede</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/userintegrationanalizer/userintegrationanalizer.htm" onclick="return LinkClick('52',false,true)" target="content" title="Integracion - Analizadores" onmousemove="window.status='Integracion - Analizadores'"><img src="icons/11.gif" class="p"> <span id="l52" class="unselected">Integracion - Analizadores</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('53',false,true)" target="content" title="Médicos" onmousemove="window.status='Médicos'"><img src="icons/11.gif" class="p"> <span id="l53" class="unselected">Médicos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/mediaculture/mediaculture.htm" onclick="return LinkClick('54',false,true)" target="content" title="Medio de cultivo" onmousemove="window.status='Medio de cultivo'"><img src="icons/11.gif" class="p"> <span id="l54" class="unselected">Medio de cultivo</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/meansofcultivationfortest/meansofcultivationfortest.htm" onclick="return LinkClick('55',false,true)" target="content" title="Medio de cultivo por prueba" onmousemove="window.status='Medio de cultivo por prueba'"><img src="icons/11.gif" class="p"> <span id="l55" class="unselected">Medio de cultivo por prueba</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/collectionmethod/collectionmethod.htm" onclick="return LinkClick('56',false,true)" target="content" title="Método de recolección" onmousemove="window.status='Método de recolección'"><img src="icons/11.gif" class="p"> <span id="l56" class="unselected">Método de recolección</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/microorganism/microorganism.htm" onclick="return LinkClick('57',false,true)" target="content" title="Microorganismo" onmousemove="window.status='Microorganismo'"><img src="icons/11.gif" class="p"> <span id="l57" class="unselected">Microorganismo</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/motive/motive.htm" onclick="return LinkClick('58',false,true)" target="content" title="Motivo" onmousemove="window.status='Motivo'"><img src="icons/11.gif" class="p"> <span id="l58" class="unselected">Motivo</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/sample/sample.htm" onclick="return LinkClick('59',false,true)" target="content" title="Muestras" onmousemove="window.status='Muestras'"><img src="icons/11.gif" class="p"> <span id="l59" class="unselected">Muestras</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/samplebyservice/samplebyservice.htm" onclick="return LinkClick('60',false,true)" target="content" title="Muestras por servicio" onmousemove="window.status='Muestras por servicio'"><img src="icons/11.gif" class="p"> <span id="l60" class="unselected">Muestras por servicio</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/refrigerator/refrigerator.htm" onclick="return LinkClick('61',false,true)" target="content" title="Nevera" onmousemove="window.status='Nevera'"><img src="icons/11.gif" class="p"> <span id="l61" class="unselected">Nevera</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/oportunityofsample/oportunityofsample.htm" onclick="return LinkClick('62',false,true)" target="content" title="Oportunidad de la muestra" onmousemove="window.status='Oportunidad de la muestra'"><img src="icons/11.gif" class="p"> <span id="l62" class="unselected">Oportunidad de la muestra</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('63',false,true)" target="content" title="Oportunidad de la prueba" onmousemove="window.status='Oportunidad de la prueba'"><img src="icons/11.gif" class="p"> <span id="l63" class="unselected">Oportunidad de la prueba</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/printorder/printorder.htm" onclick="return LinkClick('64',false,true)" target="content" title="Orden de impresión" onmousemove="window.status='Orden de impresión'"><img src="icons/11.gif" class="p"> <span id="l64" class="unselected">Orden de impresión</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/resultemplate/resultemplate.htm" onclick="return LinkClick('65',false,true)" target="content" title="Plantilla de resultado" onmousemove="window.status='Plantilla de resultado'"><img src="icons/11.gif" class="p"> <span id="l65" class="unselected">Plantilla de resultado</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/profil/profil.htm" onclick="return LinkClick('66',false,true)" target="content" title="Perfil" onmousemove="window.status='Perfil'"><img src="icons/11.gif" class="p"> <span id="l66" class="unselected">Perfil</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('67',false,true)" target="content" title="Pregunta" onmousemove="window.status='Pregunta'"><img src="icons/11.gif" class="p"> <span id="l67" class="unselected">Pregunta</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/process/process.htm" onclick="return LinkClick('68',false,true)" target="content" title="Procedimiento" onmousemove="window.status='Procedimiento'"><img src="icons/11.gif" class="p"> <span id="l68" class="unselected">Procedimiento</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/edi/edi.htm" onclick="return LinkClick('69',false,true)" target="content" title="Protocolo EDI" onmousemove="window.status='Protocolo EDI'"><img src="icons/11.gif" class="p"> <span id="l69" class="unselected">Protocolo EDI</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/test/test.htm" onclick="return LinkClick('70',false,true)" target="content" title="Pruebas" onmousemove="window.status='Pruebas'"><img src="icons/11.gif" class="p"> <span id="l70" class="unselected">Pruebas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/testdemographicpyp/testdemographicpyp.htm" onclick="return LinkClick('71',false,true)" target="content" title="Pruebas por demográfico PyP" onmousemove="window.status='Pruebas por demográfico PyP'"><img src="icons/11.gif" class="p"> <span id="l71" class="unselected">Pruebas por demográfico PyP</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/processfortest/processfortest.htm" onclick="return LinkClick('72',false,true)" target="content" title="Procedimiento por prueba" onmousemove="window.status='Procedimiento por prueba'"><img src="icons/11.gif" class="p"> <span id="l72" class="unselected">Procedimiento por prueba</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/automatictest/automatictest.htm" onclick="return LinkClick('73',false,true)" target="content" title="Prueba automática" onmousemove="window.status='Prueba automática'"><img src="icons/11.gif" class="p"> <span id="l73" class="unselected">Prueba automática</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/laboratorytest/laboratorytest.htm" onclick="return LinkClick('74',false,true)" target="content" title="Pruebas por laboratorio" onmousemove="window.status='Pruebas por laboratorio'"><img src="icons/11.gif" class="p"> <span id="l74" class="unselected">Pruebas por laboratorio</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('75',false,true)" target="content" title="Razas" onmousemove="window.status='Razas'"><img src="icons/11.gif" class="p"> <span id="l75" class="unselected">Razas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/reciver/reciver.htm" onclick="return LinkClick('76',false,true)" target="content" title="Receptor EDI" onmousemove="window.status='Receptor EDI'"><img src="icons/11.gif" class="p"> <span id="l76" class="unselected">Receptor EDI</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('77',false,true)" target="content" title="Recipientes" onmousemove="window.status='Recipientes'"><img src="icons/11.gif" class="p"> <span id="l77" class="unselected">Recipientes</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('78',false,true)" target="content" title="Resolución" onmousemove="window.status='Resolución'"><img src="icons/11.gif" class="p"> <span id="l78" class="unselected">Resolución</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/answer/answer.htm" onclick="return LinkClick('79',false,true)" target="content" title="Respuestas" onmousemove="window.status='Respuestas'"><img src="icons/11.gif" class="p"> <span id="l79" class="unselected">Respuestas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/requirement/requirement.htm" onclick="return LinkClick('80',false,true)" target="content" title="Requisitos" onmousemove="window.status='Requisitos'"><img src="icons/11.gif" class="p"> <span id="l80" class="unselected">Requisitos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/relationresult/relationresult.htm" onclick="return LinkClick('81',false,true)" target="content" title="Relación de resultados" onmousemove="window.status='Relación de resultados'"><img src="icons/11.gif" class="p"> <span id="l81" class="unselected">Relación de resultados</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/literalresult/literalresult.htm" onclick="return LinkClick('82',false,true)" target="content" title="Resultado literal" onmousemove="window.status='Resultado literal'"><img src="icons/11.gif" class="p"> <span id="l82" class="unselected">Resultado literal</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/literalresultfortest/literalresultfortest.htm" onclick="return LinkClick('83',false,true)" target="content" title="Resultado literal por prueba" onmousemove="window.status='Resultado literal por prueba'"><img src="icons/11.gif" class="p"> <span id="l83" class="unselected">Resultado literal por prueba</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('84',false,true)" target="content" title="Roles" onmousemove="window.status='Roles'"><img src="icons/11.gif" class="p"> <span id="l84" class="unselected">Roles</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/branch/branch.htm" onclick="return LinkClick('85',false,true)" target="content" title="Sedes" onmousemove="window.status='Sedes'"><img src="icons/11.gif" class="p"> <span id="l85" class="unselected">Sedes</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/service/service.htm" onclick="return LinkClick('86',false,true)" target="content" title="Servicios" onmousemove="window.status='Servicios'"><img src="icons/11.gif" class="p"> <span id="l86" class="unselected">Servicios</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('87',false,true)" target="content" title="Sistema central" onmousemove="window.status='Sistema central'"><img src="icons/11.gif" class="p"> <span id="l87" class="unselected">Sistema central</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/anatomicalsite/anatomicalsite.htm" onclick="return LinkClick('88',false,true)" target="content" title="Sitio anatómico" onmousemove="window.status='Sitio anatómico'"><img src="icons/11.gif" class="p"> <span id="l88" class="unselected">Sitio anatómico</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/subsample/subsample.htm" onclick="return LinkClick('89',false,true)" target="content" title="Submuestra" onmousemove="window.status='Submuestra'"><img src="icons/11.gif" class="p"> <span id="l89" class="unselected">Submuestra</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/card/card.htm" onclick="return LinkClick('90',false,true)" target="content" title="Tarjetas de Credito" onmousemove="window.status='Tarjetas de Credito'"><img src="icons/11.gif" class="p"> <span id="l90" class="unselected">Tarjetas de Credito</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/rate/rate.htm" onclick="return LinkClick('91',false,true)" target="content" title="Tarifa" onmousemove="window.status='Tarifa'"><img src="icons/11.gif" class="p"> <span id="l91" class="unselected">Tarifa</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/task/task.htm" onclick="return LinkClick('92',false,true)" target="content" title="Tareas de microbiología" onmousemove="window.status='Tareas de microbiología'"><img src="icons/11.gif" class="p"> <span id="l92" class="unselected">Tareas de microbiología</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/customerate/customerate.htm" onclick="return LinkClick('93',false,true)" target="content" title="Tarifa por cliente" onmousemove="window.status='Tarifa por cliente'"><img src="icons/11.gif" class="p"> <span id="l93" class="unselected">Tarifa por cliente</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/technique/Techniques.htm" onclick="return LinkClick('94',false,true)" target="content" title="Tecnicas" onmousemove="window.status='Tecnicas'"><img src="icons/11.gif" class="p"> <span id="l94" class="unselected">Tecnicas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/documenttype/documenttype.htm" onclick="return LinkClick('95',false,true)" target="content" title="Tipos de documento" onmousemove="window.status='Tipos de documento'"><img src="icons/11.gif" class="p"> <span id="l95" class="unselected">Tipos de documento</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/paymenttypes/paymenttypes.htm" onclick="return LinkClick('96',false,true)" target="content" title="Tipos de pago" onmousemove="window.status='Tipos de pago'"><img src="icons/11.gif" class="p"> <span id="l96" class="unselected">Tipos de pago</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/ordertype/ordertype.htm" onclick="return LinkClick('97',false,true)" target="content" title="Tipos de orden" onmousemove="window.status='Tipos de orden'"><img src="icons/11.gif" class="p"> <span id="l97" class="unselected">Tipos de orden</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/unit/Unit.htm" onclick="return LinkClick('98',false,true)" target="content" title="Unidad" onmousemove="window.status='Unidad'"><img src="icons/11.gif" class="p"> <span id="l98" class="unselected">Unidad</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('99',false,true)" target="content" title="Usuarios" onmousemove="window.status='Usuarios'"><img src="icons/11.gif" class="p"> <span id="l99" class="unselected">Usuarios</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/referencevalues/referencevalues.htm" onclick="return LinkClick('100',false,true)" target="content" title="Valores de referencia" onmousemove="window.status='Valores de referencia'"><img src="icons/11.gif" class="p"> <span id="l100" class="unselected">Valores de referencia</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/antibioticreferencevalues/antibioticreferencevalues.htm" onclick="return LinkClick('101',false,true)" target="content" title="Valores de referecia de antibiótico" onmousemove="window.status='Valores de referecia de antibiótico'"><img src="icons/11.gif" class="p"> <span id="l101" class="unselected">Valores de referecia de antibiótico</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/configuration/serviceprinting/serviceprinting.htm" onclick="return LinkClick('102',false,true)" target="content" title="Impresión por servicio" onmousemove="window.status='Impresión por servicio'"><img src="icons/11.gif" class="p"> <span id="l102" class="unselected">Impresión por servicio</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/Integrationanalyzer/Integrationanalyzer.htm" onclick="return LinkClick('103',false,true)" target="content" title="Integración - Analizador" onmousemove="window.status='Integración - Analizador'"><img src="icons/11.gif" class="p"> <span id="l103" class="unselected">Integración - Analizador</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/feeschedules/feeschedules.htm" onclick="return LinkClick('104',false,true)" target="content" title="Vigencia" onmousemove="window.status='Vigencia'"><img src="icons/11.gif" class="p"> <span id="l104" class="unselected">Vigencia</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/branchdemographic/branchdemographic.htm" onclick="return LinkClick('105',false,true)" target="content" title="Ítem demográfico por sede" onmousemove="window.status='Ítem demográfico por sede'"><img src="icons/11.gif" class="p"> <span id="l105" class="unselected">Ítem demográfico por sede</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/defaultvalue/defaultvalue.htm" onclick="return LinkClick('106',false,true)" target="content" title="Valores por demográfico" onmousemove="window.status='Valores por demográfico'"><img src="icons/11.gif" class="p"> <span id="l106" class="unselected">Valores por demográfico</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/areapathology/areapathology.htm" onclick="return LinkClick('107',false,true)" target="content" title="Areas de patología" onmousemove="window.status='Areas de patología'"><img src="icons/11.gif" class="p"> <span id="l107" class="unselected">Areas de patología</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/containerpathology/containerpathology.htm" onclick="return LinkClick('108',false,true)" target="content" title="Contenedores" onmousemove="window.status='Contenedores'"><img src="icons/11.gif" class="p"> <span id="l108" class="unselected">Contenedores</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('109',false,true)" target="content" title="Fijador" onmousemove="window.status='Fijador'"><img src="icons/11.gif" class="p"> <span id="l109" class="unselected">Fijador</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/coloration/coloration.htm" onclick="return LinkClick('110',false,true)" target="content" title="Coloración" onmousemove="window.status='Coloración'"><img src="icons/11.gif" class="p"> <span id="l110" class="unselected">Coloración</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/casete/casete.htm" onclick="return LinkClick('111',false,true)" target="content" title="Casete" onmousemove="window.status='Casete'"><img src="icons/11.gif" class="p"> <span id="l111" class="unselected">Casete</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/specimen/specimen.htm" onclick="return LinkClick('112',false,true)" target="content" title="Submuestras patología" onmousemove="window.status='Submuestras patología'"><img src="icons/11.gif" class="p"> <span id="l112" class="unselected">Submuestras patología</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/organ/organ.htm" onclick="return LinkClick('113',false,true)" target="content" title="Órgano" onmousemove="window.status='Órgano'"><img src="icons/11.gif" class="p"> <span id="l113" class="unselected">Órgano</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/studytype/studytype.htm" onclick="return LinkClick('114',false,true)" target="content" title="Tipo de Estudio" onmousemove="window.status='Tipo de Estudio'"><img src="icons/11.gif" class="p"> <span id="l114" class="unselected">Tipo de Estudio</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('115',false,true)" target="content" title="Patólogo" onmousemove="window.status='Patólogo'"><img src="icons/11.gif" class="p"> <span id="l115" class="unselected">Patólogo</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/protocol/protocol.htm" onclick="return LinkClick('116',false,true)" target="content" title="Protocolo de Espécimenes" onmousemove="window.status='Protocolo de Espécimenes'"><img src="icons/11.gif" class="p"> <span id="l116" class="unselected">Protocolo de Espécimenes</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/schedule/schedule.htm" onclick="return LinkClick('117',false,true)" target="content" title="Programación de agenda" onmousemove="window.status='Programación de agenda'"><img src="icons/11.gif" class="p"> <span id="l117" class="unselected">Programación de agenda</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('118',false,true)" target="content" title="Eventos de patología" onmousemove="window.status='Eventos de patología'"><img src="icons/11.gif" class="p"> <span id="l118" class="unselected">Eventos de patología</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/field/field.htm" onclick="return LinkClick('119',false,true)" target="content" title="Campos" onmousemove="window.status='Campos'"><img src="icons/11.gif" class="p"> <span id="l119" class="unselected">Campos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/template/template.htm" onclick="return LinkClick('120',false,true)" target="content" title="Plantillas" onmousemove="window.status='Plantillas'"><img src="icons/11.gif" class="p"> <span id="l120" class="unselected">Plantillas</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/processingtime/processingtime.htm" onclick="return LinkClick('121',false,true)" target="content" title="Horarios de procesamiento" onmousemove="window.status='Horarios de procesamiento'"><img src="icons/11.gif" class="p"> <span id="l121" class="unselected">Horarios de procesamiento</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/testalarm/testalarm.htm" onclick="return LinkClick('122',false,true)" target="content" title="Alarma de examenes desde ingreso" onmousemove="window.status='Alarma de examenes desde ingreso'"><img src="icons/11.gif" class="p"> <span id="l122" class="unselected">Alarma de examenes desde ingreso</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/tshaped.gif" class="p"><a href="scr/enterprise_nt/configuration/demographictest/demographictest.htm" onclick="return LinkClick('123',false,true)" target="content" title="Exámenes por demográficos" onmousemove="window.status='Exámenes por demográficos'"><img src="icons/11.gif" class="p"> <span id="l123" class="unselected">Exámenes por demográficos</span></a></nobr></div>
+<div><nobr><img src="icons/blank.gif" class="p"><img src="icons/upangle.gif" class="p"><a href="javascript:alert('This link is purposely disabled, because the document is created with WinCHM TRIAL version!\n(The registered version will not do so!)');" onclick="return LinkClick('124',false,true)" target="content" title="Agente Etiológico" onmousemove="window.status='Agente Etiológico'"><img src="icons/11.gif" class="p"> <span id="l124" class="unselected">Agente Etiológico</span></a></nobr></div>
+</div><script>divlist = [0]</script>
+</body>
+</html>

@@ -1,0 +1,1113 @@
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.min.js"></script>
+
+
+<style type="text/css">
+  .bodyPanel {
+    height: calc(100% - 75px) !important;
+    ;
+    /*overflow-y: scroll; */
+    margin-top: 0px;
+    padding-bottom: 0px !important;
+    padding-top: 5px !important;
+  }
+
+  .footPanel {
+    height: 70px;
+    overflow: hidden;
+    margin-top: -14px;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    vertical-align: bottom;
+  }
+
+  fieldset,
+  input,
+  select {
+    font-size: 13px !important;
+    padding-left: 10px !important;
+  }
+
+
+  table>thead>th {
+    padding-bottom: 0px !important;
+  }
+
+  .tbody-list {
+    overflow-y: scroll;
+    height: calc(100% - 84px);
+    position: absolute;
+  }
+
+  .md-bg-blue-grey-100 {
+    cursor: default;
+  }
+
+  .uk-tab>li>a:hover,
+  .uk-tab>li>a:focus {
+    color: #1976d2;
+  }
+
+  td.selected {
+    background: #d5e1f2;
+  }
+
+  .foot-panel {
+    margin-bottom: 0px !important;
+    border-top-color: #e0e0e0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    height: 72px;
+  }
+
+  .radio-check label {
+    padding: 5px 0px 5px 43px !important;
+  }
+  .select2-search-field {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #acacac;
+    margin-left: 5px !important;
+  }
+  
+</style>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.progressPrint"></loadpage>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport"
+  orientation="vm.orientation"></loadreport>
+<div id="page_content" style="overflow: hidden !important;">
+  <div id="page_content_inner" class="bodyPanel">
+    <form id="Form" class="md-card md-card-hover" charset="utf-8"
+      style="height: calc(100% - -4px);z-index: 10;overflow-y: auto;">
+      <div class="md-card-content" style="height: 94%; padding-bottom: 0px">
+        <div class="uk-grid" style="height: 100%">
+          <div class="uk-width-1-1">
+            <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1_content'}" id="tabs_1">
+              <li class="uk-active"><a href="#" ng-click="vm.clickFlange(1)">{{'0097'
+                  | translate | uppercase}}</a></li>
+              <li ng-class="{'uk-disabled' : vm.Ptcodigobarras}"><a href="#"
+                  ng-click="vm.Ptcodigobarras?'':vm.clickFlange(2)">{{'0151' | translate
+                  | uppercase}}</a></li>
+              <li ng-class="{'uk-disabled' : vm.Ptlaboratoriosexternos}"><a href="#"
+                  ng-click="vm.Ptlaboratoriosexternos?'':vm.clickFlange(3)">{{'0099' | translate
+                  | uppercase}}</a></li>
+              <li ng-class="{'uk-disabled' : vm.Ptmuestras}"><a href="#"
+                  ng-click="vm.Ptmuestras?'':vm.clickFlange(4)">{{'0111' | translate
+                  | uppercase}}</a></li>
+              <li ng-class="{'uk-disabled' : vm.Ptexamenespendientes}"><a href="#"
+                  ng-click="vm.Ptexamenespendientes?'':vm.clickFlange(5)">{{'1489' | translate
+                  | uppercase}}</a></li>
+              <li ng-class="{'uk-disabled' : vm.Ptpruebasporsede}"><a href="#"
+                  ng-click="vm.Ptpruebasporsede?'':vm.clickFlange(6)">{{'1501' | translate
+                  | uppercase}}</a></li>
+              <li ng-class="{'uk-disabled' : vm.Ptremisiones}"><a href="#"
+                  ng-click="vm.Ptremisiones?'':vm.clickFlange(7)">{{'1024' | translate
+                  | uppercase}}</a></li>
+            </ul>
+            <ul id="tabs_1_content" class="uk-switcher uk-margin"
+              style="height: calc(100% - 37px) !important; margin-top: 8px">
+              <li>
+                <div ng-if="vm.flange === 1" class="uk-grid">
+                  <div class="uk-width-1-1">
+                    <fieldset class="fieldset" style="height: 50px;">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport" rangedays="30"></orderfilter>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <filterareatest confidential="vm.confidential" numfilterareatest="vm.numFilterAreaTest"
+                      listareas="vm.listAreas" listtests="vm.listTests" numlist="vm.numlist">
+                    </filterareatest>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <filterdemographic id="'filterDemographics'" demographic="vm.demographics" state="vm.state"
+                      demosmask="vm.demosmask" includenotencoded="true">
+                    </filterdemographic>
+                  </div>
+                  <div class="uk-grid-match uk-width-1-1">
+                    <div class="uk-width-1-4@m" style="padding-left: 0px">
+                      <fieldset class="fieldset">
+                        <legend>{{'0161' | translate}}</legend>
+                        <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                          <input type="checkbox" name="filterPackagesListOrdes" id="filterPackages"
+                            ng-model="vm.isPackage" />
+                          <label for="filterPackages">{{'0092' | translate}}</label>
+                          <input type="radio" name="filterListedsListOrders" id="filterListeds_1" value="0" checked
+                            ng-focus="vm.clickFilterListed(0)" />
+                          <label for="filterListeds_1" ng-click="vm.clickFilterListed(0)">{{'0093' |
+                            translate}}</label>
+                          <input type="radio" name="filterListedsListOrders" id="filterListeds_2" value="1"
+                            ng-focus="vm.clickFilterListed(1)" />
+                          <label for="filterListeds_2" ng-click="vm.clickFilterListed(1)">{{'0094' |
+                            translate}}</label>
+                          <input type="radio" name="filterListedsListOrders" id="filterListeds_3" value="2"
+                            ng-focus="vm.clickFilterListed(2)" />
+                          <label for="filterListeds_3" ng-click="vm.clickFilterListed(2)">{{'0095' |
+                            translate}}</label>
+                          <input type="radio" name="filterListedsListOrders" id="filterListeds_4" value="3"
+                            ng-focus="vm.clickFilterListed(3)" />
+                          <!-- <label for="filterListeds_4" ng-click="vm.clickFilterListed(3)">{{'0096' |
+                            translate}}</label> -->
+                          <input type="radio" name="filterListedsListOrders" id="filterListeds_5" value="4"
+                            ng-focus="vm.clickFilterListed(4)" />
+                          <label for="filterListeds_5" ng-click="vm.clickFilterListed(4)"> {{'3271' |
+                            translate}}</label>
+                          <input type="radio" name="filterListedsListOrders" id="filterListeds_6" value="5"
+                            ng-focus="vm.clickFilterListed(5)" />
+                          <label for="filterListeds_6" ng-click="vm.clickFilterListed(5)">{{'2085' |
+                            translate}}</label>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <div class="uk-grid uk-grid-small">
+                      <div class="uk-width-3-10">
+                        <fieldset class="fieldset">
+                          <legend>{{'1055' | translate}}</legend>
+                          <div class="uk-width-1-1" style="margin-top: 10px;margin-left: 17px;">
+                            <md-checkbox class="md-primary" ng-model="vm.groupPackages"
+                              aria-label="Agrupar por perfiles">
+                              Agrupar por perfiles y paquetes
+                            </md-checkbox>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="uk-width-3-10">
+                        <fieldset class="fieldset">
+                          <legend>{{'0429' |
+                            translate}}</legend>
+                          <select id="service" charset="utf-8" ng-options="obj.id
+                              as obj.name for obj in vm.listlaboratory" data-ng-model="vm.laboratoryid.id"
+                            class="md-input" md-input></select>
+                        </fieldset>
+                      </div>
+                      <div class="uk-width-4-10">
+                        <fieldset class="fieldset" style="padding-top: 18px">
+                          <legend>{{'1481' | translate}}</legend>
+                          <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                            <input type="radio" name="filtersample1" id="filtersample1_0" value="0" checked
+                              ng-focus="vm.clickFiltersample1(0)" />
+                            <label for="filtersample1_0" ng-click="vm.clickFiltersample1(0)">{{'0215' | translate}}</label>
+                            <input type="radio" name="filtersample1" id="filtersample1_1" value="1"
+                              ng-focus="vm.clickFiltersample1(1)" />
+                            <label for="filtersample1_1" ng-click="vm.clickFiltersample1(1)">{{'1137' |
+                              translate}}</label>
+                            <input type="radio" name="filtersample1" id="filtersample1_2" value="2"
+                              ng-focus="vm.clickFiltersample1(2)" />
+                            <label for="filtersample1_2" ng-click="vm.clickFiltersample1(2)">{{'1482' |
+                              translate}}</label>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div ng-if="vm.flange === 2">
+                  <div class="uk-width-1-1">
+                    <fieldset class="fieldset" style="height: 50px;">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport" rangedays="30"></orderfilter>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-1-1 uk-grid uk-grid-small" style="padding-left: 0px;margin-left: 0px;">
+                    <div class="uk-width-2-6" style="padding-left: 0px;">
+                      <fieldset class="fieldset" style="padding-top: 3px;">
+                        <legend>{{'0088' | translate}}</legend>
+                        <select id="typeOrder" charset="utf-8" ng-options="obj.id
+                          as obj.name for obj in vm.listTypeOrder" data-ng-model="vm.listTypeOrder.id" class="md-input"
+                          md-input></select>
+                      </fieldset>
+                    </div>
+                    <div class="uk-width-2-6">
+                      <fieldset class="fieldset" style="padding-top: 15px">
+                        <legend>Estado de la muestra</legend>
+                        <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                          <input type="radio" name="filtersample2" id="filtersample2_0" value="0" checked
+                            ng-focus="vm.clickFiltersample2(0)" />
+                          <label for="filtersample2_0" ng-click="vm.clickFiltersample2(0)">{{'0215' |
+                            translate}}</label>
+                          <input type="radio" name="filtersample2" id="filtersample2_1" value="1"
+                            ng-focus="vm.clickFiltersample2(1)" />
+                          <label for="filtersample2_1" ng-click="vm.clickFiltersample2(1)">{{'1137' |
+                            translate}}</label>
+                          <input type="radio" name="filtersample2" id="filtersample2_2" value="2"
+                            ng-focus="vm.clickFiltersample2(2)" />
+                          <label for="filtersample2_2" ng-click="vm.clickFiltersample2(2)">{{'1482' |
+                            translate}}</label>
+                        </div>
+                      </fieldset>
+                    </div>
+
+                    <div class="uk-width-2-6">
+                      <fieldset class="fieldset">
+                        <legend>{{ '3123' | translate }}</legend>
+                        <ui-select ng-model="vm.selectedAreas" theme="select2" multiple tagging tagging-label="Añadir área" reset-search-input="false" style="width: 100%;">
+                          <ui-select-match placeholder="Seleccionar áreas" >{{$item.name}}</ui-select-match>
+                          <ui-select-choices repeat="area in vm.dataAreas | filter: $select.search">
+                            <div ng-bind-html="area.name | highlight: $select.search"></div>
+                          </ui-select-choices>
+                        </ui-select>
+                      </fieldset>
+                    </div>
+                    
+
+
+
+                  </div>
+                  <div class="uk-grid" style="margin-left: 0px; position:
+                    relative; height: 270px">
+
+                    <fieldset class="fieldset uk-width-1-1" style="height: 98%">
+                      <div class="uk-input-group">
+                        <label>{{'0154' | translate}}</label>
+                        <input type="text" class="md-input" ng-model="vm.filter1" md-input>
+                        <span class="uk-input-group-addon" style="height:
+                          10px;">
+                          <i class="material-icons md-24">&#xE8B6;</i>
+                        </span>
+                      </div>
+                      <table class="uk-table uk-table-small uk-table-middle
+                        tablescrollable" style="height: calc(100% - 64px);">
+                        <thead class="theadscrollable">
+                          <tr>
+                            <th class="uk-width-1-10 uk-text-center
+                              uk-table-middle small_col">
+                              <input type="checkbox" icheck ng-model="vm.samplesAll" class="check_all"
+                                ng-change="vm.changeCheckSamples()" table-check-all>
+                            </th>
+                            <th class="uk-width-1-10 uk-text-center">{{'0098' |
+                              translate }}</th>
+                            <th class="uk-width-1-2 uk-text-left">{{'0118' |
+                              translate}}</th>
+                          </tr>
+                        </thead>
+                        <tbody class="tbodyscrollable" style="overflow-y: auto;
+                          height: calc(100% - 44px);">
+                          <tr ng-repeat="Samples in vm.dataSamples | filter:
+                            vm.filter1">
+                            <td class="uk-width-1-10 uk-text-center
+                              uk-table-middle small_col">
+                              <input type="checkbox" icheck ng-model="Samples.select" class="check_row" table-check-row
+                                ng-change="vm.samplesSelected()">
+                            </td>
+                            <td class="uk-text-center uk-width-1-10" data-ng-bind="Samples.codesample"></td>
+                            <td class="uk-text-left uk-width-1-2" data-ng-bind="Samples.name"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </fieldset>
+
+                    <fieldset class="fieldset uk-width-1-2" ng-if="false">
+                      <legend>{{'0079' | translate}}</legend>
+                      <table class="uk-table uk-table-small uk-table-middle
+                        tablescrollable">
+                        <thead class="theadscrollable">
+                          <tr>
+                            <th class="uk-width-1-10 uk-text-center small_col"
+                              style="padding-bottom: 0px; padding-left: 3px">
+                              <input type="checkbox" icheck name="nameAreaAll" id="areaAll" ng-model="vm.areasAll"
+                                ng-change="vm.changeCheckAreas()" table-check-all>
+                            </th>
+                            <th class="uk-width-1-10 uk-text-center small_col">{{'0098'
+                              | translate }}</th>
+                            <th class="uk-width-1-4 uk-text-left">{{'0118' |
+                              translate}}</th>
+                          </tr>
+                        </thead>
+
+                        <tbody class="tbodyscrollable" style="width: 48.2%;">
+                          <tr class="" data-ng-repeat="Areas in vm.dataAreas" ng-show="Areas.id != 1">
+                            <td class="uk-width-1-10 uk-text-center
+                              uk-table-middle small_col">
+                              <input type="checkbox" icheck name="nameArea{{Areas.id}}" id="area{{Areas.id}}"
+                                ng-model="Areas.select" ng-change="vm.areaSelect(Areas.id)" class="check_row">
+                            </td>
+                            <td class="uk-text-center uk-width-1-10" data-ng-bind="Areas.ordering"></td>
+                            <td class="uk-text-left uk-width-1-2" data-ng-bind="Areas.name"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </fieldset>
+
+
+                  </div>
+                  <fieldset class="fieldset" ng-show="vm.stickerAditionals> 0">
+                    <!--  ng-show = "vm.printStickerAditional" -->
+                    <div class="radio-check">
+                      <input type="checkbox" id="printAddLabel" checked ng-model="vm.printAddLabel"
+                        ng-disabled="vm.stickerAditionals === 0">
+                      <label for="printAddLabel">{{'0159' | translate}}</label>
+                    </div>
+                  </fieldset>
+
+                </div>
+              </li>
+              <li>
+                <div ng-if="vm.flange === 3">
+                  <fieldset class="fieldset" style="height: 50px;">
+                    <div class="uk-grid uk-grid-medium" style="height: 100%;" data-uk-grid-margin>
+                      <div class="uk-width-7-10">
+                        <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                          isopenreport="vm.isOpenReport" rangedays="30"></orderfilter>
+                      </div>
+                      <div class="uk-width-3-10">
+                        <div class="uk-grid uk-grid-medium" style="display: flex;align-items: center;"
+                          data-uk-grid-margin>
+                          <div class="uk-width-3-10">
+                            <md-checkbox ng-model="vm.remission" class="md-primary" ng-change="vm.laboratory=''">
+                              {{'1810' | translate}}
+                            </md-checkbox>
+                          </div>
+                          <div class="uk-width-7-10">
+                            <label class="ng-binding">{{'1526' | translate}}</label>
+                            <select class="md-input" md-input style="margin-top: 3px;"
+                              ng-options="obj as obj.name for obj in vm.listlaboratory track by obj.id"
+                              data-ng-model="vm.laboratory" ng-disabled="!vm.remission">
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="uk-grid uk-grid-small uk-width-1-1">
+                    <div class="uk-width-6-10">
+                      <fieldset class="fieldset" style="height: 225px;">
+                        <legend>{{'0163' | translate}}:</legend>
+                        <div class="uk-grid uk-grid-small" style="height: 100%;" data-uk-grid-margin>
+                          <div class="uk-width-1-10">
+                            <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#tabs_6'}">
+                              <li class="uk-active" ng-click="vm.typelaboratory=''; vm.changeChecklaboratory()"><a
+                                  style="min-width: initial;" href="#">
+                                  <img ng-src="images/all.png" alt="img12" src="images/all.png" style="height: 35px;">
+                                  <span style="white-space: nowrap;    font-size: 9px;
+                                text-align: center;
+                                width: 60px;
+                                max-height: 40px;
+                                line-height: 10px;
+                                margin-top: 6px;">{{'0353' | translate | trim}} </span></a></li>
+                              <li ng-click="vm.typelaboratory=2; vm.changeChecklaboratory()"><a href="#"
+                                  style="min-width: initial;">
+                                  <img ng-src="images/external.png" alt="img12" src="images/external.png"
+                                    style="height: 35px;">
+                                  <span style="white-space: nowrap;    font-size: 9px;
+                                text-align: center;
+                                width: 60px;
+                                max-height: 40px;
+                                line-height: 10px;
+                                margin-top: 6px;">Externos<!-- {{'0118' | translate | trim}} --> </span>
+                                </a>
+                              </li>
+                              <li ng-click="vm.typelaboratory=1; vm.changeChecklaboratory()"><a href="#"
+                                  style="min-width: initial;">
+                                  <img ng-src="images/headquarter.png" alt="img12" src="images/headquarter.png"
+                                    style="height: 35px;">
+                                  <span style="white-space: nowrap;    font-size: 9px;
+                                text-align: center;
+                                width: 60px;
+                                max-height: 40px;
+                                line-height: 10px;
+                                margin-top: 6px;">Internos<!-- {{'0429' | translate | trim}}  --></span>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="uk-width-9-10" style="height: 100%;">
+                            <table class="uk-table uk-table-small uk-table-middle
+                              tablescrollable" style="margin-bottom: 0px;margin-top: 0px;height:
+                              93%;">
+                              <thead class="theadscrollable" style="height:
+                                38px;margin-left: 10px;margin-right: 10px;">
+                                <tr>
+                                  <th class="uk-width-1-10 uk-text-center
+                                    uk-text-middle small_col" style="padding: 0px 0px;">
+                                    <input type="checkbox" icheck name="nameAreaAll" id="areaAll"
+                                      ng-model="vm.laboratoryAll" ng-change="vm.changeChecklaboratory()"
+                                      ng-disabled="vm.listlaboratory.length===0" table-check-all>
+                                  </th>
+                                  <th class="uk-width-9-10">{{'0118' | translate}}</th>
+                                </tr>
+                              </thead>
+                              <tbody class="tbodyscrollable contentscroll" style="margin-top:
+                                2px;height: calc(100% - 44px);">
+                                <tr data-ng-repeat="laboratory in vm.listlaboratory
+                                  | filter: {type:vm.typelaboratory}">
+                                  <td class="uk-width-1-10 uk-text-center
+                                    uk-table-middle small_col">
+                                    <input type="checkbox" icheck ng-model="laboratory.select" class="check_row">
+                                  </td>
+                                  <td class="uk-width-1-1" data-ng-bind="laboratory.name">
+                                    {{laboratory.code}} - {{laboratory.name}}
+                                  </td>
+                                  <td class="uk-width-3-10 uk-table-middle small_col">
+                                    <span class="uk-badge uk-badge-primary ng-binding"
+                                      ng-if="laboratory.type===1">I</span>
+                                    <span class="uk-badge uk-badge-primary ng-binding"
+                                      ng-if="laboratory.type!==1">E</span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="uk-width-4-10">
+                      <fieldset class="fieldset">
+                        <legend>{{'1481' | translate}}</legend>
+                        <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                          <input type="radio" name="filtersample" id="filtersample_0" value="0" checked
+                            ng-focus="vm.clickFiltersample(0)" />
+                          <label for="filtersample_0">{{'0215' | translate}}</label>
+                          <input type="radio" name="filtersample" id="filtersample_1" value="1"
+                            ng-focus="vm.clickFiltersample(1)" />
+                          <label for="filtersample_1" ng-click="vm.clickFiltersample(1)">{{'1137' |
+                            translate}}</label>
+                          <input type="radio" name="filtersample" id="filtersample_2" value="2"
+                            ng-focus="vm.clickFiltersample(2)" />
+                          <label for="filtersample_2" ng-click="vm.clickFiltersample(2)">{{'1482' |
+                            translate}}</label>
+                        </div>
+                      </fieldset>
+                      <fieldset class="fieldset">
+                        <legend>Filtro de Listados</legend>
+                        <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                          <input type="radio" name="filterListedsLaboratory" id="filterLaboratory_1" checked=""
+                            value="2" ng-focus="vm.clickFilterListed(2)" />
+                          <label for="filterLaboratory_1" ng-click="vm.clickFilterListed(3)">Pruebas</label>
+
+                          <input type="radio" name="filterListedsLaboratory" id="filterLaboratory_2" value="4"
+                            ng-focus="vm.clickFilterListed(4)" />
+                          <label for="filterLaboratory_2" ng-click="vm.clickFilterListed(1)">Recipiente</label>
+
+                          <input type="radio" name="filterListedsLaboratory" id="filterLaboratory_3" value="5"
+                            ng-focus="vm.clickFilterListed(5)" />
+                          <label for="filterLaboratory_3" ng-click="vm.clickFilterListed(2)">Muestras</label>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <filterareatest confidential="vm.confidential" numfilterareatest="vm.numFilterAreaTest"
+                      listareas="vm.listAreas" listtests="vm.listTests" numlist="vm.numlist">
+                    </filterareatest>
+                  </div>
+                  <filterdemographic demographic="vm.demographics" demosmask="vm.demosmask">
+                  </filterdemographic>
+                </div>
+              </li>
+              <li>
+                <div ng-if="vm.flange === 4">
+                  <div class="uk-width-1-1">
+                    <fieldset class="fieldset">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport" typeview="2"></orderfilter>
+                    </fieldset>
+                  </div>
+                  <fieldset class="fieldset uk-width-1-1">
+                    <legend>{{'0161' | translate}}</legend>
+                    <div class="uk-width-1-1 radio-check">
+                      <input type="radio" name="typeSample" id="typeSample_1" value="true" checked
+                        ng-model="vm.typeSample">
+                      <label for="typeSample_1">{{'0070' | translate}}</label>
+                      <input type="radio" name="typeSample" id="typeSample_2" value="false" unchecked
+                        ng-model="vm.typeSample">
+                      <label for="typeSample_2">{{'0160' | translate}}</label>
+                      <input type="radio" name="typeSample" id="typeSample_3" value="0" unchecked
+                        ng-model="vm.typeSample" ng-if="vm.temperature">
+                      <label for="typeSample_3" ng-if="vm.temperature">{{'1515' | translate}}</label>
+                    </div>
+                  </fieldset>
+                  <fieldset class="fieldset  uk-width-1-1" style="padding-top: 15px;">
+                    <div class="uk-width-1-6" ng-if="vm.typeSample!=='0'">
+                      <label for="branch">{{'0089' | translate}}</label>
+                      <select id="branch" charset="utf-8" ng-options="obj.id
+                          as obj.name for obj in vm.listBranch" data-ng-model="vm.listBranch.id" class="md-input"
+                        md-input></select>
+                    </div>
+                    <div class="uk-grid">
+                      <div class="uk-width-5-10" ng-if="vm.typeSample==='0'">
+                        <label for="service"> {{'1516' | translate}}</label>
+                        <select id="service" charset="utf-8" ng-options="obj.id
+                            as obj.name for obj in vm.listservice" data-ng-model="vm.listservice.id" class="md-input"
+                          md-input></select>
+                      </div>
+                      <div class="uk-width-5-10" ng-if="vm.typeSample==='0'">
+                        <label for="sample"> {{'0111' |
+                          translate}}</label>
+                        <select id="sample" charset="utf-8" ng-options="obj.id
+                            as obj.name for obj in vm.sampletemperture" data-ng-model="vm.sampletemperture.id"
+                          class="md-input" md-input></select>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </li>
+              <li>
+                <div ng-if="vm.flange === 5">
+                  <div class="uk-width-1-1">
+                    <fieldset class="fieldset" style="height: 50px;">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport" rangedays="30"></orderfilter>
+                    </fieldset>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div ng-if="vm.flange === 6">
+                  <div class="uk-width-1-1">
+                    <fieldset class="fieldset" style="height: 50px;">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport" rangedays="30"></orderfilter>
+                    </fieldset>
+                    <fieldset class="fieldset" style="height: 250px;">
+                      <legend>{{'0163' | translate}}:</legend>
+                      <div class="uk-grid uk-grid-medium" style="height:
+                          100%;" data-uk-grid-margin>
+                        <div class="uk-width-1-10">
+                          <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#tabs_6'}">
+                            <li class="uk-active" ng-click="vm.typelaboratory=''; vm.changeChecklaboratory()"><a
+                                href="#">
+                                {{'0353' |
+                                translate}}</a></li>
+                            <li ng-click="vm.typelaboratory=2; vm.changeChecklaboratory()"><a href="#">Externos</a></li>
+                            <li ng-click="vm.typelaboratory=1; vm.changeChecklaboratory()"><a href="#">Internos</a></li>
+                          </ul>
+                        </div>
+                        <div class="uk-width-9-10" style="height: 100%;">
+                          <table class="uk-table uk-table-small
+                              uk-table-middle
+                              tablescrollable" style="margin-bottom: 0px;margin-top: 0px;height:
+                              93%;">
+                            <thead class="theadscrollable" style="height:
+                                38px;margin-left: 10px;margin-right: 10px;">
+                              <tr>
+                                <th class="uk-width-1-10 uk-text-center
+                                    uk-text-middle small_col" style="padding: 0px 0px;">
+                                  <input type="checkbox" icheck name="nameAreaAll" id="areaAll"
+                                    ng-model="vm.laboratoryAll" ng-change="vm.changeChecklaboratory()"
+                                    ng-disabled="vm.listlaboratory.length===0" table-check-all>
+                                </th>
+                                <th class="uk-width-2-10">{{'0098' | translate
+                                  }}</th>
+                                <th class="uk-width-5-10">{{'0118' |
+                                  translate}}</th>
+                                <th class="uk-width-3-10">{{'0429' |
+                                  translate}}
+
+                                </th>
+                              </tr>
+                            </thead>
+
+                            <tbody class="tbodyscrollable" style="margin-top:
+                                2px;height: calc(100% - 44px);">
+                              <tr data-ng-repeat="laboratory in
+                                  vm.listlaboratory
+                                  | filter: {type:vm.typelaboratory}">
+                                <td class="uk-width-1-10 uk-text-center
+                                    uk-table-middle small_col">
+                                  <input type="checkbox" icheck ng-model="laboratory.select" class="check_row">
+                                </td>
+                                <td class="uk-width-2-10" data-ng-bind="laboratory.code"></td>
+                                <td class="uk-width-5-10" data-ng-bind="laboratory.name"></td>
+                                <td class="uk-width-3-10">
+                                  {{laboratory.type===1?'Interno':'Externo'}}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                </div>
+              </li>
+              <li>
+                <div ng-if="vm.flange === 7" class="uk-grid">
+                  <div class="uk-width-7-10">
+                    <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+                      <div class="uk-width-1-10" style="width: 7%;">
+                        <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#tabs_6'}">
+                          <li class="uk-active" ng-click="vm.search=1"><a href="#" style="min-width: 46px;">
+                              <img ng-src="images/Menu/consultation/patientconsultation.png" style="height: 25px"
+                                alt="" />
+                            </a>
+                          </li>
+                          <li ng-click="vm.search=2;vm.order='';vm.sample=''"><a href="#" style="min-width: 46px;">
+                              <img ng-src="images/Menu/tools/barcode-512.png" style="height: 25px" alt="" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="uk-width-9-10" style="width: 93%;">
+                        <ul id="tabs_6" class="uk-switcher uk-margin-small-top">
+                          <li>
+                            <fieldset class="fieldset" style="margin-top: 0px;height: 46px;">
+                              <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                                isopenreport="vm.isOpenReport" rangedays="30"></orderfilter>
+                            </fieldset>
+                          </li>
+                          <li>
+                            <fieldset class="fieldset" style="margin-top: 0px;">
+                              <ordersample order="vm.order" sample="vm.sample" size='30'>
+                              </ordersample>
+                            </fieldset>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-width-3-10">
+                    <fieldset class="fieldset">
+                      <label>{{'0429' | translate}}</label>
+                      <select md-input class="md-input"
+                        ng-options="obj as obj.name for obj in vm.listlaboratory track by obj.id"
+                        data-ng-model="vm.laboratoryremisiones" class="form-control"></select>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <filterareatest confidential="vm.confidential" numfilterareatest="vm.numFilterAreaTest"
+                      listareas="vm.listAreas" listtests="vm.listTests" numlist="vm.numlist">
+                    </filterareatest>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <filterdemographic id="'filterDemographics'" demographic="vm.demographics" demosmask="vm.demosmask">
+                    </filterdemographic>
+                  </div>
+                  <div class="uk-width-4-10">
+                    <fieldset class="fieldset" style="padding-top: 18px">
+                      <legend>{{'1481' | translate}}</legend>
+                      <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                        <input type="radio" name="Filterstate" id="Filterstate_0" value="0" checked
+                          ng-focus="vm.clickFilterstate(0)" />
+                        <label for="Filterstate_0" ng-click="vm.clickFilterstate(0)">{{'0215' | translate}}</label>
+                        <input type="radio" name="Filterstate" id="Filterstate_1" value="1"
+                          ng-focus="vm.clickFilterstate(1)" />
+                        <label for="Filterstate_1" ng-click="vm.clickFilterstate(1)">{{'1137' |
+                          translate}}</label>
+                        <input type="radio" name="Filterstate" id="Filterstate_2" value="2"
+                          ng-focus="vm.clickFilterstate(2)" />
+                        <label for="Filterstate_2" ng-click="vm.clickFilterstate(2)">{{'1482' |
+                          translate}}</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-3-10">
+                    <fieldset class="fieldset" style="padding-top: 18px">
+                      <legend>{{'0161' | translate}}</legend>
+                      <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                        <input type="radio" name="Filtereport" id="Filtereport_0" value="0" checked
+                          ng-focus="vm.clickreport(0)" />
+                        <label for="Filtereport_0" ng-click="vm.clickreport(0)">{{'0015' | translate}}</label>
+                        <input type="radio" name="Filtereport" id="Filtereport_1" value="1"
+                          ng-focus="vm.clickreport(1)" />
+                        <label for="Filtereport_1" ng-click="vm.clickreport(1)">{{'1160' | translate}}</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-3-10" ng-if="vm.filtereport===1 && vm.viewremisiones">
+                    <fieldset class="fieldset">
+                      <legend>{{'1822' | translate}}</legend>
+                      <div class="uk-width-1-1" style="white-space: nowrap;">
+                        <div class="uk-grid uk-grid-small">
+                          <div class="uk-width-1-3">
+                            <label style="top: -6px; font-size: 12px;">{{'1823' | translate}}</label>
+                            <select id="service" charset="utf-8" ng-options="obj.id
+                            as obj.name for obj in vm.number" data-ng-model="vm.Environment" class="md-input"
+                              md-input></select>
+                          </div>
+                          <div class="uk-width-1-3">
+                            <label style="top: -6px; font-size: 12px;">{{'1824' | translate}}</label>
+                            <select id="service" charset="utf-8" ng-options="obj.id
+                            as obj.name for obj in vm.number" data-ng-model="vm.Frozen" class="md-input"
+                              md-input></select>
+                          </div>
+                          <div class="uk-width-1-3">
+                            <label style="top: -6px; font-size: 12px;">{{'1825' | translate}}</label>
+                            <select id="service" charset="utf-8" ng-options="obj.id
+                            as obj.name for obj in vm.number" data-ng-model="vm.Refrigerated" class="md-input"
+                              md-input></select>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-3-10">
+                    <fieldset class="fieldset" style="padding-top: 18px">
+                      <legend>{{'1849' | translate}}</legend>
+                      <div class="uk-width-1-1 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+                        <input type="radio" name="Filterstatetest" id="Filterstatetest_0" value="0" checked
+                          ng-focus="vm.clickFilterstatetest(0)" />
+                        <label for="Filterstatetest_0" ng-click="vm.clickFilterstatetest(0)">{{'0215' |
+                          translate}}</label>
+                        <input type="radio" name="Filterstatetest" id="Filterstatetest_1" value="1"
+                          ng-focus="vm.clickFilterstatetest(1)" />
+                        <label for="Filterstatetest_1" ng-click="vm.clickFilterstatetest(1)">{{'0027' |
+                          translate}}</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="md-card-content md-card uk-text-right" style="padding: 5px !important;height: 45px;margin-top: 5px;">
+      <div style="display: inline-block;width: 100%;" class="uk-text-right">
+        <div class="radio-check" style="float: left !important;" ng-if="vm.flange === 3">
+          <input type="checkbox" id="hl7" checked ng-model="vm.hl7">
+          <label for="hl7">{{'1502' | translate}}</label>
+        </div>
+        <div ng-if="vm.flange !== 2 && vm.flange !== 7 && vm.flange !== 5">
+          <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+            ng-click="vm.progressPrint = true;vm.validateConfirmation('pdf');"
+            ng-disabled="vm.isOpenReport === false || vm.numlist === 0" ng-class="{'md-bg-blue-grey-100' :vm.isOpenReport === false || vm.numlist === 0
+                         }">
+            <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar pdf"></i>
+          </button>
+          <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+            ng-click="vm.progressPrint = true;vm.validateConfirmation('csv');"
+            ng-disabled="vm.isOpenReport === false || vm.numlist === 0"
+            ng-class="{'md-bg-blue-grey-100' : vm.isOpenReport === false || vm.numlist === 0}">
+            <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar excel"></i>
+          </button>
+        </div>
+        <div ng-if="vm.flange === 5">
+          <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+            ng-click="vm.progressPrint = true;vm.validateConfirmation('pdf');" ng-disabled="vm.isOpenReport === false"
+            ng-class="{'md-bg-blue-grey-100' :vm.isOpenReport === false}">
+            <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar pdf"></i>
+          </button>
+          <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+            ng-click="vm.progressPrint = true;vm.validateConfirmation('xls');" ng-disabled="vm.isOpenReport === false"
+            ng-class="{'md-bg-blue-grey-100' : vm.isOpenReport === false}">
+            <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar excel"></i>
+          </button>
+        </div>
+        <button ng-if="vm.flange === 2" style="float: right;" type="button" class="md-fab
+            md-fab-small md-fab-success md-bg-blue-grey-100" ng-click="vm.progressPrint= true; vm.generateBarcodes();"
+          ng-disabled="!vm.isOpenReport || vm.samplesBarcode.length === 0" ng-class="{'md-bg-blue-grey-100': !vm.isOpenReport ||
+            vm.samplesBarcode.length === 0 , 'md-bg-purple-A700
+            md-fab-wave-light waves-effect waves-light': vm.isOpenReport &&
+            vm.samplesBarcode.length> 0}" style="margin-left: 8px">
+          <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0158' | translate}}">&#xE8AD;</i>
+        </button>
+        <div ng-if="vm.flange === 7">
+          <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+            ng-click="vm.progressPrint = true;vm.validateConfirmation('pdf');"
+            ng-disabled="vm.laboratoryremisiones===undefined || !vm.isOpenReport && vm.search===1 || vm.order==='' && vm.search===2 || vm.sample==='' && vm.search===2"
+            ng-class="{'md-bg-blue-grey-100': vm.laboratoryremisiones===undefined || !vm.isOpenReport && vm.search===1 || vm.order==='' && vm.search===2 || vm.sample==='' && vm.search===2}">
+            <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar pdf"></i>
+          </button>
+          <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+            ng-click="vm.progressPrint = true;vm.validateConfirmation('xls');"
+            ng-disabled="vm.laboratoryremisiones===undefined || !vm.isOpenReport && vm.search===1 || vm.order==='' && vm.search===2 || vm.sample==='' && vm.search===2"
+            ng-class="{'md-bg-blue-grey-100': vm.laboratoryremisiones===undefined || !vm.isOpenReport && vm.search===1 || vm.order==='' && vm.search===2 || vm.sample==='' && vm.search===2}">
+            <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar excel"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalprogressprint" class="uk-modal" aria-hidden="true">
+  <div class="uk-modal-dialog">
+    <div class="uk-progress uk-progress-striped uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;">{{vm.porcent}}%</div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">{{vm.ind}}
+      {{vm.prepotition}}
+      {{vm.totalCanStickers}}</div>
+  </div>
+</div>
+
+<div id="modallistorders" class="uk-modal" aria-hidden="true" style="display:
+    none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 90%; height: 500px;">
+    <div class="uk-modal-header md-bg-blue-600" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title">{{'0151' | translate}}</h3>
+    </div>
+    <div class="uk-form-row" style="height: 100%;height: calc(100% - 65px);position:
+        relative;">
+      <form class="form" name="myForm" style="height: 100%;">
+        <div class="uk-form-row" style="height: 100%;border-bottom-width:
+            1px;border-bottom-style: solid;border-bottom-color: #ddd;">
+          <div class="uk-form-row" style="height: 100%;">
+            <table class="uk-table uk-table-small uk-table-middle
+                tablescrollable" style="height: calc(100% - 66px);">
+              <div class="uk-grid" style="height: 51px;">
+                <div class="uk-input-group uk-width-1-1" style="float: left;">
+                  <label>{{'0154' | translate}}</label>
+                  <input type="text" class="md-input" ng-model="vm.filtersticker" md-input>
+                  <span class="uk-input-group-addon" style="height: 10px;">
+                    <i class="material-icons md-24">&#xE8B6;</i>
+                  </span>
+                </div>
+              </div>
+              <thead class="theadscrollable" style="width: calc(100% - 15px);height: 36px;">
+                <tr class="uk-width-1-1" style="display: inline-table;">
+                  <!-- checkbox -->
+                  <!-- checkbox -->
+                  <th style="width: 1%;">
+                    <input type="checkbox" icheck name="namestickerAll" id="stickerAll" ng-model="vm.stickerAll" 
+                      ng-change="vm.changeChecksticker()" ng-disabled="vm.previewStickersOrder.length===0"
+                      table-check-all />
+
+                  </th>
+                  <th style="width:10%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'0110'
+                    |translate}}{{vm.separatorSample}}{{'0111' | translate}}</th>
+                  <th style="width:2%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'3678' |
+                    translate}}</th>
+                  <th style="width:20%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'0118' |
+                    translate}}</th>
+                  <th style="width:6%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'3677' |
+                    translate}}</th>
+                  <th style="width:7%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'0117' |
+                    translate}}</th>
+                  <th style="width:9%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'3674' |
+                    translate}}</th>
+                  <th style="width: 34%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'3675' |
+                    translate}}</th>
+                  <!-- <th style="width: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'3676' |
+                    translate}}</th> -->
+                </tr>
+              </thead>
+              <tbody class="tbodyscrollable contentscroll"
+                style="max-height:250px;height: calc(100% - 53px);">
+                <tr class="uk-grid" data-ng-repeat="stickers in vm.previewStickersOrder |
+                  filter: vm.customFilter" style="margin-left: 0px; margin-top: 0px; height: 32px;">
+                  <td style="width:1%;" class="uk-text-center">
+                    <input type="checkbox" icheck ng-model="stickers.select" class="check_row"
+                      ng-change="vm.stickersSelected()"/>
+                  </td>
+                  <td style="width:11%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;;"
+                    data-ng-bind="stickers.ordersample"></td>
+                  <td style="width:1%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    data-ng-bind="stickers.cansticker"></td>
+                  <td style="width:21%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    data-ng-bind="stickers.namePatient"></td>
+                  <td style="width:5%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    data-ng-bind="stickers.document"></td>
+                  <td style="width:6%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    data-ng-bind="stickers.orderHis"></td>
+                  <td class="uk-width-1-10">
+                    <button  ng-click="vm.openExamModal(stickers.exmabbr)" 
+                    style ="
+                        background-color: #39f;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;">
+                      Ver Examen
+                    </button>
+                  </td>
+                    
+                  <td style="width: 34%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    data-ng-bind="stickers.puesto"></td>
+                  <!-- <td style="width: 15%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                    data-ng-bind="stickers.sala"></td> -->
+
+                </tr>
+              </tbody>
+            </table>
+
+
+
+
+           
+            
+
+          </div>
+        </div>
+        <label class="uk-width-1-1" ng-if="vm.printAddLabel">{{'0195' |
+          translate}} x
+          {{'0110' | translate | lowercase}}: {{vm.stickerAditionals}}</label>
+      </form>
+    </div>
+
+   
+
+    <div class="uk-modal-footer uk-text-right md-bg-grey-200">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat
+          md-bg-blue-600 md-color-grey-50" ng-click="vm.printStickrs= true; vm.getProcessPrint()">{{'0246' |
+        translate}}</button>
+      <button type="button" class="uk-modal-close md-btn md-btn-flat
+          buttonCancel" ng-click="vm.printStickrs= false;vm.stickerAll = false ">{{'0329' | translate}}</button>
+    </div>
+  </div>
+  
+  <div id="examModal" class="uk-modal" uk-modal>
+    <div class="uk-modal-dialog">
+      
+      <div class="uk-modal-header">
+        <h2 class="uk-modal-title">Detalles del Examen</h2>
+      </div>
+      <div class="uk-modal-body" style="overflow-y: auto; max-height: 50vh;">
+        <table class="uk-table uk-table-striped">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Abreviatura</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="exam in vm.examsList">
+              <td>{{ exam.codigo }}</td>
+              <td>{{ exam.nombre }}</td>
+              <td>{{ exam.abreviatura }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     
+    </div>
+  </div>
+
+</div>
+<div id="logNoData" class="uk-modal" aria-hidden="true">
+  <div class="uk-modal-dialog" style="width: 685px; height: 140px;">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 75px; top: 0px">
+      <div style="width: 13%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText uk-text-center" style="height: 100%;width:
+          80%;">
+        <label style="margin-top: 20px; margin-left: 5px; font-size: 13px">{{vm.message}}</label>
+      </div>
+    </div>
+    <div class="uk-modal-footer">
+    </div>
+  </div>
+</div>
+<div id="modalprogress" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress  uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;"></div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      Generando reporte ....
+    </div>
+  </div>
+
+</div>
+<div id="confirmation" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-3-10">
+            <img src="images/iconinfo.png" height="90" width="90">
+          </div>
+          <div class="uk-width-7-10" style="margin-top: 3%;">
+            <span>{{'1811' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+        ng-click="vm.generateFile()">
+        {{'0246' | translate}}
+      </button>
+      <button type="button" class="md-btn md-btn-flat" ng-click="vm.closemodalconfirmation()">{{'0008' |
+        translate}}</button>
+    </div>
+  </div>
+</div>
+<div id="referralsmodal" class="uk-modal uk-modal-card-fullscreen">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-blue-700">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              style="margin: 0px;" title="{{'0329'| translate}}">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="
+            float: left;
+            margin: 8px 8px 0 0;
+            display: block;
+            line-height: 32px;
+          "><i class="material-icons md-color-indigo-50 md-24">&#xE03F;</i></span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          {{'1865'| translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+        <div class="uk-grid">
+          <div class="uk-width-1-1">
+            <div class="md-card md-card-hover" style="min-height: 68px;">
+              <div class="md-card-content fullheight" style="padding: 5px 10px;">
+                <div class="uk-input-group">
+                  <span class="uk-input-group-addon">
+                    <img ng-src="images/search.png" />
+                  </span>
+                  <div class="md-input-wrapper md-input-filled">
+                    <label>{{'0154' | translate}}</label>
+                    <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed"
+                      ng-model="vm.searchorder">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1" style="margin-top: 15px;">
+            <div class="md-card">
+              <div class="uk-accordion"
+                ng-repeat="dataorder in vm.dataremisiones |filter: vm.searchorder| orderBy:'orderNumber'"
+                data-uk-accordion>
+                <div class="uk-accordion-title">
+                  <div class="uk-grid">
+                    <div class="uk-width-1-1">
+                      {{dataorder.patient.documentType.abbr}} {{dataorder.patient.patientId}}
+                      {{dataorder.patient.name1}} {{dataorder.patient.name2}}
+                      {{dataorder.patient.surName}} {{dataorder.patient.lastName}}
+                    </div>
+                    <div class="uk-width-1-1">
+                      {{dataorder.orderNumber}}
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-accordion-content" style="padding: 0px;">
+                  <table class="uk-table  uk-table-small uk-table-middle tablescrollable">
+                    <tbody class="tbodyscrollable" style="margin-top: 0px;">
+                      <tr ng-repeat="Test in dataorder.tests | orderBy:'code'">
+                        <td class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                          <input type="checkbox" icheck ng-model="Test.selected" class="check_row" table-check-row>
+                        </td>
+                        <td class="uk-width-9-10"> {{Test.code}} {{Test.abbr}} {{Test.name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="md-fab-wrapper">
+            <a class="md-fab md-fab-small md-fab-primary" ng-click="vm.save()" data-uk-tooltip="{pos:'right'}"
+              title="{{'0007' | translate}}"><i class="material-icons">&#xE161;</i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

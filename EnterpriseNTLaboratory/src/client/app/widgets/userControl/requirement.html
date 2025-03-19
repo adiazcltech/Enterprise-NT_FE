@@ -1,0 +1,106 @@
+<style>
+    .requirement_tests_input {
+        padding: 15px;
+        margin-right: 20px;
+        transition: all 0.30s ease-in-out;
+        outline: none;
+        border: 1px solid #DDDDDD;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .requirement_tests_input:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    #requirement_tests_dropdown {
+        width: 500px;
+    }
+
+    .requirement-table-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: 310px !important;
+        max-height: 400px !important;
+    }
+</style>
+<div id="requirement" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-blue-800">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">&#xE88F;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    Información
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-form-row">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-form-row">
+                                <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                                    <div class="uk-width-1-2 uk-row-first">
+                                        <div class="md-input-wrapper">
+                                            <label>{{'0398' | translate}}</label>
+                                            <input type="text" class="md-input" ng-model="requirement.patient"
+                                                style="text-transform:uppercase">
+                                            <span class="md-input-bar"></span>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2 uk-row-first">
+                                        <div angucomplete-alt id="requirement_tests"
+                                            placeholder="Busca pruebas por codigo o nombre" class="uk-width-1-1"
+                                            input-class="requirement_tests_input uk-width-1-1" pause="20"
+                                            selected-object="requirement.selectTest" local-data="requirement.tests"
+                                            search-fields="code,name" title-field="showValue"
+                                            description-field="area.name" image-field="colorType" minlength="1"
+                                            match-class="highlight" focus-first="true" clear-selected="true"
+                                            override-suggestions="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-row ordersearch-table-row">
+                        <div class="uk-overflow-container requirement-table-container">
+                            <table class="uk-table uk-table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th hidden>Test Id</th>
+                                        <th class="uk-text-center">{{'0098' | translate}}</th>
+                                        <th class="uk-text-center">{{'0118' | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="test in requirement.selectedTests">
+                                        <td hidden>{{test.id}}</td>
+                                        <td class="uk-text-center">{{test.code}}</td>
+                                        <td class="uk-text-left">{{test.name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-fab-wrapper md-fab-in-card">
+                    <button type="button"
+                        ng-disabled="requirement.patient === '' || requirement.selectedTests.length === 0"
+                        class="md-fab  md-fab-small md-bg-teal-400" ng-click="requirement.generate()"
+                        ng-class="{'md-bg-blue-grey-100' : requirement.patient === '' || requirement.selectedTests.length === 0}">
+                        <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="Generar informe">&#xE8AD;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

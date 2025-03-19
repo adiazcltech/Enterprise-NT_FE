@@ -1,0 +1,6 @@
+<div class="btn-group  btn-group-sm btn-group-justified">
+    <label ng-repeat="service in multiselect.availability.services" class="btn btn-primary" ng-disabled="multiselect.disabled" ng-click="multiselect.changemodel(service)"  ng-model="service.selected"  uib-uncheckable="false" uib-btn-checkbox ng-class="{'radio-button' : unique}">
+     	<span ng-if="service.selected" class="glyphicon glyphicon-ok" aria-hidden="true"></span> 
+    	{{service.name}}
+    </label>
+</div>

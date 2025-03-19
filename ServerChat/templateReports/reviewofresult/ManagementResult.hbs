@@ -1,0 +1,6 @@
+Orden;Historia;Primer Apellido;Segundo Apellido; Nombres;Sexo;Fecha de nacimiento; Edad;Email;Prueba;Resultado;Fecha de Ingreso; Fecha de resultado;Usuario Resultado; Fecha validación; Usuario validación; Fecha de Impresión; Usuario Impresión
+{{#each orders}}
+{{#each tests}}
+{{../orderNumber}};{{../patient.patientId}};{{../patient.lastName}};{{../patient.surName}};{{../patient.name1}};{{../patient.sexabbr}};{{../patient.birthdaydate}};{{../patient.birthday}};{{../patient.email}};{{name}};{{result.result}};{{entryDate}};{{resultDate}};{{result.userRes.name}} {{result.userRes.lastName}}; {{validationDate}};{{result.userVal.name}} {{result.userVal.lastName}};  {{datePrint}};{{result.userPri.name}} {{result.userPri.lastName}} 
+{{/each}}
+{{/each}}

@@ -1,0 +1,787 @@
+<style>
+  .traceability-uppercase {
+    text-transform: uppercase;
+  }
+
+  .automatic {
+    background: #2196f3;
+  }
+
+  .manually {
+    background: #673ab7;
+  }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalexceptions
+  openmodal="vm.ShowPopupError"
+  detailerror="vm.Error"
+></modalexceptions>
+<div id="page_content" style="overflow: hidden">
+  <div id="page_content_inner" style="padding: 1px 13px 0px">
+    <div class="uk-grid fullheight">
+      <div class="uk-width-1-1 fullheight">
+        <div class="md-card">
+          <div style="height: 92%" class="md-card-content">
+            <div class="uk-width-1-1 fullheight">
+              <div class="uk-form-row" style="height: 100%; width: 100%">
+                <div class="uk-grid">
+                  <div
+                    class="uk-width-1-3"
+                    ng-class="{'uk-width-1-5' : vm.typeresport.id==2}"
+                  >
+                    <label style="top: -6px; font-size: 12px"
+                      >{{'0387' | translate}}:</label
+                    >
+                    <select
+                      class="md-input"
+                      ng-options="obj.id as obj.name for obj in vm.typeresport"
+                      data-ng-model="vm.typeresport.id"
+                      ng-change="vm.changefilter()"
+                    ></select>
+                  </div>
+                  <div
+                    class="uk-width-1-3"
+                    ng-show="vm.typeresport.id==1 &&  vm.typedocument  &&  !vm.historyautomatic"
+                  >
+                    <label style="top: -6px; font-size: 12px">
+                      {{'0233' | translate}}</label
+                    >
+                    <select
+                      class="md-input"
+                      ng-options="obj.id as obj.name for obj in vm.documentTypelist"
+                      data-ng-model="vm.documentType.id"
+                      ng-change="vm.searchtype()"
+                    ></select>
+                  </div>
+                  <div class="uk-width-1-3" ng-show="vm.typeresport.id==1">
+                    <label>{{'0117' | translate}}</label>
+                    <input
+                      id="txt_patient_id"
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.record"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div
+                    class="uk-width-1-5"
+                    ng-show="vm.typeresport.id==2 && vm.twosurnames"
+                  >
+                    <label>{{'0234' | translate}}</label>
+                    <input
+                      id="txt_lastName"
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.lastNameToSearch"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div
+                    class="uk-width-1-5"
+                    ng-show="vm.typeresport.id==2 && vm.twosurnames"
+                  >
+                    <label>{{'0235' | translate}}</label>
+                    <input
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.surNameToSearch"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div
+                    class="uk-width-2-5"
+                    ng-show="vm.typeresport.id==2 && !vm.twosurnames"
+                  >
+                    <label>{{'3657' | translate}}</label>
+                    <input
+                      id="txt_lastName"
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.lastNameToSearch"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div
+                    class="uk-width-1-5"
+                    ng-show="vm.typeresport.id==2 && vm.twoNames"
+                  >
+                    <label>{{'0236' | translate}}</label>
+                    <input
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.name1ToSearch"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div
+                    class="uk-width-1-5"
+                    ng-show="vm.typeresport.id==2 && vm.twoNames"
+                  >
+                    <label>{{'0237' | translate}}</label>
+                    <input
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.name2ToSearch"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div
+                    class="uk-width-2-5"
+                    ng-show="vm.typeresport.id==2 && !vm.twoNames"
+                  >
+                    <label>{{'3656' | translate}}</label>
+                    <input
+                      type="text"
+                      class="md-input label-fixed traceability-uppercase"
+                      data-ng-model="vm.name1ToSearch"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                      md-input
+                    />
+                  </div>
+                  <div class="uk-width-1-3" ng-show="vm.typeresport.id==3">
+                    <input
+                      kendo-date-picker
+                      k-ng-model="vm.dateseach"
+                      style="width: 100%"
+                      id="kUI_datepicker_a"
+                      k-format="'{{vm.formatDate}}'"
+                      max="vm.max"
+                      k-on-change="vm.searchtype()"
+                    />
+                  </div>
+                  <div
+                    class="uk-width-1-3"
+                    ng-show="vm.typeresport.id==4  || vm.typeresport.id==5"
+                  >
+                    <label style="top: -6px; font-size: 12px">
+                      {{'0072' | translate}}</label
+                    >
+                    <select
+                      class="md-input"
+                      ng-options="obj.id as obj.name for obj in vm.listYear"
+                      data-ng-model="vm.listYear.id"
+                      md-input
+                    ></select>
+                  </div>
+                  <div class="uk-width-1-3" ng-show="vm.typeresport.id==4">
+                    <label>{{'0110' | translate}}</label>
+                    <input
+                      id="txt_vm_order"
+                      class="md-input label-fixed"
+                      type="text"
+                      ng-model="vm.codeordernumberorden"
+                      ng-keypress="vm.keyselect($event)"
+                      maxlength="{{vm.cantdigit}}"
+                      md-input
+                    />
+                  </div>
+                  <div class="uk-width-1-3" ng-show="vm.typeresport.id==5">
+                    <label>{{'0110' | translate}}</label>
+                    <input
+                      maxlength="{{vm.codeorder.indexOf('-') >= 0 ? vm.cantdigit+1 : vm.cantdigit}}"
+                      class="md-input label-fixed"
+                      type="text"
+                      ng-model="vm.codeorder"
+                      ng-keypress="vm.keyselectrange($event)"
+                      md-input
+                    />
+                  </div>
+                  <div class="uk-width-1-1" ng-show="vm.typeresport.id==5">
+                    <label>{{'0389' | translate}}</label>
+                    <input
+                      type="text"
+                      class="md-input label-fixed"
+                      data-ng-model="vm.receiveresults"
+                      md-input
+                    />
+                  </div>
+                  <div class="uk-width-1-1" ng-show="vm.typeresport.id==5">
+                    <select
+                      kendo-multi-select
+                      k-options="vm.selectOptions"
+                      k-ng-model="vm.selectedIds"
+                      k-data-source="vm.listorderselect"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="uk-grid uk-grid-small"
+          style="margin-top: 5px; height: calc(100% - 89px)"
+        >
+          <div
+            class="uk-grid uk-width-1-1 uk-grid-medium"
+            style="margin-top: 10px; height: 100%"
+            ng-if="vm.viewnofound"
+          >
+            <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+              <img
+                class="img-responsive"
+                style="height: 90px; width: 90px"
+                src="images/data.png"
+              />
+            </div>
+            <div class="uk-width-1-1 uk-text-center">
+              <h3 class="ng-binding">{{'3113' | translate}}</h3>
+            </div>
+          </div>
+          <div
+            class="uk-width-1-3 fullheight"
+            style="margin-top: 10px"
+            ng-if="vm.orders.length!==0"
+          >
+            <div class="md-card md-card-hover fullheight">
+              <div class="md-card-content fullheight" style="padding: 0px">
+                <div class="uk-input-group" style="margin: 5px">
+                  <span class="uk-input-group-addon">
+                    <img ng-src="images/search.png" />
+                  </span>
+                  <div class="md-input-wrapper md-input-filled">
+                    <label
+                      class="uk-text-bold uk-text-truncate"
+                      style="font-size: 10px"
+                    >
+                      {{'0154' | translate}}</label
+                    >
+                    <input
+                      type="text"
+                      name="search"
+                      id="search"
+                      md-input
+                      label-fixed
+                      class="md-input label-fixed"
+                      ng-model="vm.search"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head"
+                  style="height: 39px; font-size: 13px"
+                >
+                  <div
+                    class="uk-width-3-10 uk-text-bold"
+                    style="padding-left: 10px"
+                    ng-click="vm.sortType = 'order'; vm.sortReverse = !vm.sortReverse"
+                  >
+                    <resultssort
+                      sortvalue="'order'"
+                      sorttype="vm.sortType"
+                      sortreverse="vm.sortReverse"
+                    ></resultssort>
+                    {{'0110' | translate}}
+                  </div>
+                  <div
+                    class="uk-width-3-10 uk-text-bold"
+                    style="padding-left: 10px"
+                    ng-click="vm.sortType = 'patientId'; vm.sortReverse = !vm.sortReverse"
+                  >
+                    <resultssort
+                      sortvalue="'patientId'"
+                      sorttype="vm.sortType"
+                      sortreverse="vm.sortReverse"
+                    >
+                    </resultssort
+                    >{{'0132' | translate}}
+                  </div>
+                  <div
+                    class="uk-width-4-10 uk-text-bold"
+                    style="padding-left: 10px"
+                    ng-click="vm.sortType = 'lastName'; vm.sortReverse = !vm.sortReverse"
+                  >
+                    <resultssort
+                      sortvalue="'lastName'"
+                      sorttype="vm.sortType"
+                      sortreverse="vm.sortReverse"
+                    >
+                    </resultssort
+                    >{{'0398' | translate}}
+                  </div>
+                </div>
+                <div
+                  class="vs-repeat-custom-scroll contentscroll"
+                  style="height: calc(100% - 95px); font-size: 12px"
+                  vs-repeat="20"
+                  data-scroll-to-top="vm.orders"
+                >
+                  <div
+                    ng-repeat="order in vm.orders | orderBy:vm.sortType:vm.sortReverse | filter: vm.search"
+                    data-ng-click="vm.getId(order)"
+                    ng-class="{'md-bg-blue-100': order.order == vm.selected }"
+                    class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table"
+                    style="margin-top: 0px"
+                  >
+                    <div class="uk-width-3-10" style="padding-left: 10px">
+                      {{order.order}}
+                    </div>
+                    <div class="uk-width-3-10" style="padding-left: 15px">
+                      {{order.patientId}}
+                    </div>
+                    <div class="uk-width-4-10" style="padding-left: 20px">
+                      {{order.lastName + ' ' + order.surName + ' ' + order.name1
+                      + ' ' + order.name2 }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="uk-width-1-3 fullheight"
+            style="margin-top: 15px; height: 100%"
+            ng-if="vm.detailsample.length!==0"
+          >
+            <div class="md-card md-card-hover fullheight">
+              <div
+                class="md-card-content fullheight contentscroll"
+                style="overflow-y: auto; height: calc(100% - 32px)"
+              >
+                <div ng-repeat="item in vm.detailsample">
+                  <div class="md-card uk-margin-small-bottom">
+                    <div class="md-card-content" style="padding: 0px 16px">
+                      <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-1-1">
+                          <div
+                            class="uk-grid uk-grid-small"
+                            data-uk-grid-margin
+                          >
+                            <div
+                              class="uk-width-9-10"
+                              style="padding-left: 0px"
+                            >
+                              <ul
+                                id="{{item.id}}"
+                                class="uk-switcher uk-margin-small-top"
+                              >
+                                <li
+                                  data-ng-click="vm.traceabilitysample(item)"
+                                  ng-class="{'md-bg-blue-100': item.id == vm.selectedsample}"
+                                >
+                                  <md-list-item
+                                    class="noright"
+                                    style="
+                                      min-height: 48px;
+                                      padding: 8px 4px;
+                                      box-sizing: border-box;
+                                      position: relative;
+                                    "
+                                  >
+                                    <ul class="md-list md-list-addon">
+                                      <li>
+                                        <div
+                                          class="md-list-addon-element patient-addon-element"
+                                        >
+                                          <img
+                                            style="
+                                              border-radius: 50%;
+                                              font-size: 40px;
+                                              margin-top: 0px;
+                                            "
+                                            class="md-list-addon-icon material-icons md-22"
+                                            ng-if="item.container.image !== ''"
+                                            ng-src="data:image/jpeg;base64,{{item.container.image}}"
+                                          />
+
+                                          <img
+                                            style="
+                                              border-radius: 50%;
+                                              font-size: 40px;
+                                              margin-top: 0px;
+                                            "
+                                            class="md-list-addon-icon material-icons md-22"
+                                            ng-if="item.container.image === ''"
+                                            src="images/sintubo.png"
+                                          />
+                                        </div>
+                                        <div
+                                          class="md-list-content patient-list-content"
+                                        >
+                                          <span
+                                            class="uk-text-muted patient-list-content"
+                                            >{{item.codesample}}-{{item.name}}{{item.sampleState.state}}</span
+                                          >
+                                          <span class="md-list-heading">
+                                            {{item.sampleState.state===-1?vm.labelstate1:item.sampleState.state===0?vm.labelstate2:
+                                            item.sampleState.state===1?vm.labelstate3:item.sampleState.state===2?vm.labelstate4:
+                                            item.sampleState.state===3?vm.labelstate5:item.sampleState.state===4?vm.labelstate6:vm.labelstate7}}
+                                          </span>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </md-list-item>
+                                </li>
+                                <li>
+                                  <div class="uk-width-1-1">
+                                    <ul
+                                      class="md-list md-list-addon md-list-right contentscroll"
+                                      style="
+                                        height: 150px;
+                                        overflow-x: hidden;
+                                        overflow-y: auto;
+                                      "
+                                    >
+                                      <li
+                                        ng-repeat="test in item.tests"
+                                        data-ng-click="vm.traceabilitytest(test)"
+                                        ng-class="{'md-bg-blue-100': test.id == vm.selectedtest}"
+                                        style="
+                                          min-height: 20px;
+                                          margin-left: 0;
+                                          margin-right: 0;
+                                        "
+                                      >
+                                        <div class="md-list-content">
+                                          <span class="uk-text-muted"
+                                            >{{test.name}}</span
+                                          >
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="uk-width-1-10">
+                              <ul
+                                class="uk-tab uk-tab-right"
+                                data-uk-tab="{connect:'#'+{{item.id}}}"
+                              >
+                                <li class="uk-active">
+                                  <a style="min-width: 43px"
+                                    ><span class="menu_icon"
+                                      ><img
+                                        style="font-size: 20px !important"
+                                        class="menu_icon material-icons md-22"
+                                        ng-src="images/test.png"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        title="{{'3125' | translate}}"
+                                      /> </span
+                                  ></a>
+                                </li>
+                                <li>
+                                  <a style="min-width: 43px"
+                                    ><span class="menu_icon"
+                                      ><img
+                                        class="menu_icon material-icons md-22"
+                                        style="font-size: 20px !important"
+                                        ng-src="images/form.png"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        title="{{'0013' | translate}}" /></span
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="uk-width-1-3 fullheight"
+            style="margin-top: 15px; height: 100%"
+            ng-if="vm.selectedsample !== -1 || vm.selectedtest !== -1"
+          >
+            <div class="md-card md-card-hover fullheight">
+              <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">{{vm.namesample}}</h3>
+              </div>
+              <div
+                class="md-card-content contentscroll"
+                style="height: calc(100% - 83px); overflow-y: auto"
+              >
+                <div class="timeline">
+                  <div
+                    class="timeline_item"
+                    ng-repeat="destination in vm.listinformation"
+                    ng-if="vm.listinformation.lenght!==0"
+                  >
+                    <div class="timeline_icon" ng-if="destination.state==='-1'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/sampleReject.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon timeline_icon_danger"
+                      ng-if="destination.state==='D'"
+                    >
+                      <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='1'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/blood-testverification.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='2'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/edit.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='3'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/take.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='4'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/barcode-scanner.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="timeline_icon" ng-if="destination.state==='A'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/test-tubes.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon timeline_icon_danger"
+                      ng-if="destination.state==='0'"
+                    >
+                      <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <div
+                      class="timeline_date"
+                      style="width: 67px; font-size: 12px; line-height: 15px"
+                    >
+                      <span>{{destination.date}}</span>
+                    </div>
+                    <div class="timeline_content">
+                      <strong ng-if="destination.state==='A'">Gradilla:</strong
+                      >{{destination.state==='A'?destination.rack:''}}
+                      <strong ng-if="destination.state==='A'">Posicion:</strong
+                      >{{destination.state==='A'?destination.position:''}}
+                      <div
+                        class="timeline_content_addon"
+                        style="margin-top: 0px; min-height: 60px"
+                      >
+                        <ul class="md-list md-list-addon">
+                          <li>
+                            <div class="md-list-addon-element">
+                              <img
+                                class="md-user-image md-list-addon-avatar"
+                                ng-src="images/user1.png"
+                                alt=""
+                              />
+                            </div>
+                            <div class="md-list-content">
+                              <span class="uk-text-small uk-text-muted"
+                                >{{destination.name}}</span
+                              >
+                              <span class="md-list-heading"
+                                >{{destination.name1}} {{destination.lastName}}
+                              </span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="timeline_item"
+                    ng-repeat="destination in vm.listinformationtest"
+                    ng-if="vm.listinformationtest.lenght!==0"
+                  >
+                    <div class="timeline_icon" ng-if="destination.state==='0'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/result.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon timeline_icon_danger"
+                      ng-if="destination.state==='D'"
+                    >
+                      <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='1'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/order/demo.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='2'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/order/demo.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='3'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/validated.png"
+                        alt=""
+                      />
+                    </div>
+                    <div class="timeline_icon" ng-if="destination.state==='4'">
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/validated.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon"
+                      ng-if="destination.state==='5' && destination.fieldType !== 'ST'"
+                    >
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/printer.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon"
+                      ng-if="destination.state==='5' && destination.fieldType === 'ST'"
+                    >
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/test/fridge.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon"
+                      ng-if="destination.state==='6' && destination.fieldType === 'ST'"
+                    >
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/test/fridge.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon"
+                      ng-if="destination.state==='6' && destination.fieldType !== 'ST'"
+                    >
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/printer.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon"
+                      ng-if="destination.state==='DOI'"
+                    >
+                      <img
+                        class="md-image-timeline"
+                        ng-src="images/microbiology/edit.png"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="timeline_icon timeline_icon_danger"
+                      ng-if="destination.state==='DOD'"
+                    >
+                      <i class="material-icons">&#xE5CD;</i>
+                    </div>
+
+                    <div
+                      class="timeline_date"
+                      style="width: 67px; font-size: 12px; line-height: 15px"
+                    >
+                      <span>{{destination.date}}</span>
+                    </div>
+                    <div class="timeline_content">
+                      <div
+                        class="timeline_content_addon"
+                        style="margin-top: 0px; min-height: 60px"
+                      >
+                        <ul class="md-list md-list-addon">
+                          <li>
+                            <div class="md-list-addon-element">
+                              <img
+                                class="md-user-image md-list-addon-avatar"
+                                ng-src="images/user1.png"
+                                alt=""
+                              />
+                            </div>
+                            <div class="md-list-content">
+                              <span class="uk-text-small uk-text-muted"
+                                >{{destination.name}}</span
+                              >
+                              {{destination.information!==undefined?destination.information:''}}
+                              <span
+                                class="md-list-heading"
+                                ng-if="destination.delivery !== null"
+                                style="font-size: 14px; display: contents"
+                                >{{destination.delivery}}</span
+                              >
+                              <span
+                                class="uk-badge uk-badge-info"
+                                ng-if="destination.typeDelivery && destination.typeDelivery !== null"
+                                style="
+                                  padding: 1px 5px;
+                                  border-radius: 5px;
+                                  margin-right: 20px;
+                                "
+                                ng-class="{'manually': destination.idTypeDelivery === '0', 'automatic': destination.idTypeDelivery === '1'}"
+                                >{{ destination.typeDelivery }}
+                              </span>
+                              <span
+                                class="md-list-heading"
+                                ng-if="destination.name1 !== null"
+                              >
+                                <strong ng-if="destination.comment!==undefined"
+                                  >Motivo: </strong
+                                >{{destination.comment!==undefined?destination.comment:''}}
+                                {{destination.name1}} {{destination.lastName}}
+                              </span>
+                              <span
+                                class="md-list-heading"
+                                ng-if="destination.name1 === null"
+                                >{{destination.username}}</span
+                              >
+                              <span
+                                class="md-list-heading"
+                                ng-if="destination.receivesPerson !== null && destination.typeDelivery !== null"
+                                style="font-size: 12px; font-weight: 400"
+                                >{{destination.receivesPerson}}</span
+                              >
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

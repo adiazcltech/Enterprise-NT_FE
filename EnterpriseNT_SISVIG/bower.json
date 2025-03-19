@@ -1,0 +1,52 @@
+{
+  "name": "enterpriseNt",
+  "version": "0.0.2",
+  "description": "enterpriseNt",
+  "authors": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.5.9",
+    "sinon": "http://sinonjs.org/releases/sinon-1.17.7.js",
+    "bardjs": "~0.1.8"
+  },
+  "dependencies": {
+    "jquery": "~3.4.1",
+    "angular": "^1.6.6",
+    "angular-animate": "^1.6.6",
+    "angular-sanitize": "^1.6.6",
+    "angular-local-storage": "^0.2.7",
+    "moment": "~2.12.0",
+    "angular-ui-router": "~0.4.2",
+    "toastr": "~2.1.2",
+    "angular-translate": "^2.15.1",
+    "angular-translate-loader-static-files": "^2.15.1",
+    "angular-cookies": "1.5.11",
+    "angular-translate-storage-local": "^2.15.1",
+    "uikit": "^2.27.4",
+    "ng-idle": "^1.3.2",
+    "jquery-bez": "~1.0.11",
+    "angular-resource": "^1.6.6",
+    "material-design-icons": "^3.0.1",
+    "angular-websocket": "^2.0.0",
+    "angular-material": "^1.0.8",
+    "angular-velocity": "^0.3.2",
+    "angular-ui-select": "^0.19.8"
+  },
+  "resolutions": {
+    "angular": "^1.6.6"
+  },
+  "overrides": {
+    "material-design-icons": {
+      "iconfont": [
+        "material-icons.css"
+      ]
+    }
+  }
+}

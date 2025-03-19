@@ -1,0 +1,83 @@
+{
+    "name": "enterpriseNt",
+    "version": "0.0.1",
+    "description": "enterpriseNt",
+    "authors": [],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "devDependencies": {
+        "angular-mocks": "~1.5.9",
+        "sinon": "http://sinonjs.org/releases/sinon-1.17.7.js",
+        "bardjs": "~0.1.8"
+    },
+    "dependencies": {
+        "jquery": "~2.2.2",
+        "angular": "~1.5",
+        "angular-animate": "~1.5.9",
+        "angular-sanitize": "~1.5.9",
+        "angular-local-storage": "^0.2.7",
+        "bootstrap": "~3.3.6",
+        "extras.angular.plus": "~0.9.2",
+        "font-awesome": "~4.5.0",
+        "moment": "~2.12.0",
+        "angular-ui-router": "~0.4.2",
+        "toastr": "~2.1.2",
+        "angular-bootstrap": "^2.5.0",
+        "angular-spectrum-colorpicker": "^1.4.5",
+        "angular-bootstrap-toggle-switch": "^0.5.6",
+        "angular-dialog-service": "^5.3.0",
+        "angular-intro.js": "^3.2.4",
+        "angular-translate": "^2.15.1",
+        "angular-translate-loader-static-files": "^2.15.1",
+        "angular-cookies": "1.5.11",
+        "angular-translate-storage-local": "^2.15.1",
+        "file-saver": "^1.3.3",
+        "angular-hotkeys": "^0.2.2",
+        "ng-dialog": "^1.1.0",
+        "angular-daterangepicker": "^0.2.2",
+        "angular-base64-upload": "^0.1.22",
+        "angular-bootstrap-colorpicker": "^3.0.31",
+        "angular-spinner": "^1.0.1",
+        "angular-treasure-overlay-spinner": "^1.1.0",
+        "angular-vs-repeat-flww2": "^1.1.8",
+        "ng-caret-aware": "^0.3.2",
+        "angular-tooltips": "^1.2.2",
+        "ng-tags-input": "3.2.0",
+        "ng-csv": "^0.3.6",
+        "angular-ui-sortable": "^0.17.2",
+        "ng-ScrollSpy.js": "^3.2.2",
+        "angular-scroll": "^1.0.2",
+        "angular-ui-select": "^0.19.8",
+        "nz-tour": "^1.2.1",
+        "angular-filter": "^0.5.17",
+        "angular-i18n": "^1.7.0",
+        "angular-lodash": "^0.1.2",
+        "angular-lz-string": "^1.0.5",
+        "angular-dynamic-locale": "^0.1.37",
+        "ng-idle": "^1.3.2",
+        "angular-websocket": "^2.0.0",
+        "angular-modal-service": "^0.15.3"
+    },
+    "resolutions": {
+        "angular": "~1.5.9"
+    },
+    "overrides": {
+        "bootstrap": {
+            "main": [
+                "dist/css/bootstrap.css",
+                "dist/js/bootstrap.js"
+            ]
+        },
+        "font-awesome": {
+            "main": [
+                "css/font-awesome.css"
+            ]
+        }
+    }
+}

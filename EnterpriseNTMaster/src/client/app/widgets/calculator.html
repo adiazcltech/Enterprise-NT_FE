@@ -1,0 +1,163 @@
+<div class="input-group" style="width: 100%; background-color: transparent;">
+    <input data-ng-model="calculator.output" ng-disabled="true"  class="form-control" type="text"  >
+    <div class="input-group-addon panel-padding" style="border-style: none; background-color: transparent;">
+       <button type="button" class="btn btn-primary btn-short" data-toggle="modal" data-target="#modal" ng-disabled="calculator.disabled">
+        <span  class="fa fa-calculator" aria-hidden="true" ></span>
+      </button>
+    </div>
+</div>
+
+
+<div class="modal fade"  data-keyboard="false" data-backdrop="static" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 500px;">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class="row general-container">
+                    <div class="panel panel-primary panel-principal">
+                        <div class="panel-heading row">
+                            <div class="panel-title">
+                                <strong class="panel-title text-left title-bar">
+                                    {{'0423' | translate |uppercase}}
+                                </strong>
+                            </div>
+                            
+                        </div>
+                        <div class=" col-sm-12">
+                            <div class=" col-sm-12 height-control-calculator">
+                                <input type="text" class="form-control"  ng-model="calculator.output" ng-disabled="true">
+                            </div>
+                            <div class="text-center">
+                               <span ng-if="calculator.message" class="help-block">{{'0469' | translate}}</span>
+                            </div>
+                            <div class="height-control-calculator col-md-2">
+                                <span>{{'0402' | translate}}:</span>
+                            </div>
+                            <div class="col-sm-10 height-control-calculator">
+                                <div custom-select="obj.id as obj.name for obj in calculator.listTest | filter: $searchTerm" data-ng-model="calculator.test" ng-disabled="calculator.stateTest" custom-select-options="calculator.changeTest" height="100px" autofocus></div>
+                            </div>
+                            <div>
+                                <form name="Form" id="Form" class="form-horizontal">
+                                    <div class="col-sm-6">
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('7')">7</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('8')">8</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('9')">9</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('4')">4</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('5')">5</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('6')">6</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('1')">1</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('2')">2</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" ng-click="calculator.press('3')">3</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateNumber" style="width: 107px" ng-click="calculator.press('0')">0</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateDecimal" ng-click="calculator.press('.')">.</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateChater" ng-click="calculator.press('x')">Del</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateAll" style="width: 107px" ng-click="calculator.press('clean')">C</button>
+                                        </div>
+                                       
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateSign" ng-click='calculator.press("+")'>+</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateSignNegative" ng-click='calculator.press("-")'>-</button>
+                                        </div>
+                                         <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary  width-number-calculator special-chater-calculator" ng-disabled="calculator.stateSqrt" ng-click="calculator.press('Sqrt(')">Sqrt()</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateSign" ng-click='calculator.press("*")'>x</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateSign" ng-click='calculator.press("/")'>/</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary  width-number-calculator special-chater-calculator" ng-disabled="calculator.stateLog" ng-click="calculator.press('Log(')">Log()</button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator height-parent-calculator" ng-disabled="calculator.stateOpen" title="Operate (" ng-click='calculator.press("(")'><span class="superindice-calculator">(</span><span class="subindice-calculator">{{calculator.cantOpen}}</span>
+                                            </button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator height-parent-calculator" ng-disabled="calculator.stateClose ||  calculator.cantOpen <= calculator.cantClose" ng-click='calculator.press(")")'><span class="superindice-calculator">)</span><span class="subindice-calculator">{{calculator.cantClose}}</span> </button>
+                                        </div>
+                                        <div class="number-button-calculator">
+                                            <button type="button" class="btn btn-primary width-number-calculator" ng-disabled="calculator.stateSign" ng-click='calculator.press("^")'>^</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 divider-special-calculator">
+                                    </div>
+                                    <div class="col-sm-12">
+                                      <div class="number-button-calculator width-special-calculator">
+                                            <button type="button" class="btn btn-primary width-item-special-calculator" ng-disabled="calculator.stateTest" ng-click="calculator.press('||GENDER||')">{{'0221' | translate}}</button>
+                                      </div>
+                                      <div class="number-button-calculator width-special-calculator">
+                                            <button type="button" class="btn btn-primary width-item-special-calculator" ng-disabled="calculator.stateTest || calculator.manejoRaza" ng-click="calculator.press('||RACE||')">{{'0174' | translate}}</button>
+                                      </div>
+                                      <div class="number-button-calculator width-special-calculator">
+                                            <button type="button" class="btn btn-primary width-item-special-calculator" ng-disabled="calculator.stateTest || calculator.manejoPeso" ng-click="calculator.press('||WEIGHT||')">{{'0470' | translate}}</button>
+                                      </div>
+                                      <div class="number-button-calculator width-special-calculator">
+                                            <button type="button" class="btn btn-primary width-item-special-calculator" ng-disabled="calculator.stateTest || calculator.manejoTalla" ng-click="calculator.press('||SIZE||')">{{'0471' | translate}}</button>
+                                      </div>
+                                    </div>
+                                     <div class="col-sm-12 divider-special-calculator">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-12">
+                                <span>{{'0461' | translate}}:</span>
+                            </div>
+                            <div class="col-sm-12 height-control-calculator" style="margin-bottom: 15px">
+                                <input type="text" class="form-control" ng-model="calculator.textRequerid" ng-disabled="true">
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <div>
+                  <div class="col-md-12">
+                     <button type="button" class="btn btn-primary" ng-click="calculator.save(this)">
+                          <span class="fa fa-check" aria-hidden="true"></span>{{'0031' | translate}}
+                      </button>
+                      <button type="button" class="btn btn-info" ng-click="calculator.cancel()" data-dismiss="modal">
+                          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                      </button>
+                  </div>
+              </div>
+          </div>
+
+
+
+        </div>
+    </div>
+</div>

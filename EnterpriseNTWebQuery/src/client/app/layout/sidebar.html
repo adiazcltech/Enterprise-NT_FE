@@ -1,0 +1,83 @@
+<div ng-controller="SidebarController as vm">
+    <div class="header" ng-show="vm.menu &&  vm.administrator">
+        <!-- Barra lateral -->
+        <div id="style_switcher" ng-class="{'switcher_active':vm.styleSwitcherActive}">
+            <div id="style_switcher_toggle" ng-click="vm.toggleStyleSwitcher($event)">
+                <i class="material-icons">dns</i>
+            </div>
+            <div class="uk-width-large-1-1" style="padding-bottom: 5px" ng-if="vm.id!==-1">
+                <i>
+                    <h5 style="margin-bottom: 0px" class="uk-text-meta uk-text-bold uk-text-baseline"> <span>Modulos de
+                            Resultados</span></h5>
+                </i>
+                <ul class="md-list" style="height: auto !important">
+                    <li>
+                        <a class="md-color-grey-900" ng-href="/dashboard" ng-click="vm.styleSwitcherActive = false">
+                            <span class="menu_icon"><img class="md-list-addon-icon material-icons md-24"
+                                    ng-src="images/resultsentry.png" /></span>
+                            <span class="menu_title">Resultados</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-width-large-1-1">
+                <i>
+                    <h5 style="margin-bottom: 0px" class="uk-text-meta uk-text-bold uk-text-baseline"> <span>Modulos de
+                            Configuración</span></h5>
+                </i>
+                <ul class="md-list" style="height: auto !important">
+                    <li style="min-height: 40px">
+                        <a class="md-color-grey-900" ng-href="/datacustomers" ng-click="vm.styleSwitcherActive = false">
+                            <span class="menu_icon"><img class="md-list-addon-icon material-icons md-24"
+                                    ng-src="images/datacustomers.png" /></span>
+                            <span class="menu_title">{{'0010' | translate}}</span>
+                        </a>
+                    </li>
+                    <li style="min-height: 40px">
+                        <a class="md-color-grey-900" ng-href="/options" ng-click="vm.styleSwitcherActive = false">
+                            <span class="menu_icon"><img class="md-list-addon-icon material-icons md-24"
+                                    ng-src="images/options.png" /></span>
+                            <span class="menu_title">{{'0011' | translate}}</span>
+                        </a>
+                    </li>
+                    <li style="min-height: 40px">
+                        <a class="md-color-grey-900" ng-href="/typeuser" ng-click="vm.styleSwitcherActive = false">
+                            <span class="menu_icon"><img class="md-list-addon-icon material-icons md-24"
+                                    ng-src="images/typeuser.png" /></span>
+                            <span class="menu_title">{{'0012' | translate}}</span>
+                        </a>
+
+                    </li>
+                    <li style="min-height: 40px">
+                        <a class="md-color-grey-900" ng-href="/termsandConditions"
+                            ng-click="vm.styleSwitcherActive = false">
+                            <span class="menu_icon"><img class="md-list-addon-icon material-icons md-24"
+                                    ng-src="images/termsandConditions.png" /></span>
+                            <span class="menu_title">{{'0013' | translate}}</span>
+                        </a>
+
+                    </li>
+                    <li style="min-height: 40px" ng-if="vm.changepassword === 'true'">
+                        <a class="md-color-grey-900" ng-href="/mailconfigurate"
+                            ng-click="vm.styleSwitcherActive = false">
+                            <span class="menu_icon"><img class="md-list-addon-icon material-icons md-24"
+                                    ng-src="images/mailconfigurate.png" /></span>
+                            <span class="menu_title">{{'0014' | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+<!-- altair common functions/dropify -->
+<script src="assets/js/custom/dropify/dist/js/dropify.js"></script>

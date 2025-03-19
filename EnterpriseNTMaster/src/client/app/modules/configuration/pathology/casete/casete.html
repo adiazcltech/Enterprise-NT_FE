@@ -1,0 +1,184 @@
+<style type="text/css">
+  .line-separate {
+      background-color: #e5e5e5;
+      height: 2px;
+      width: 100%;
+      display: block;
+  }
+</style>
+
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+      <div class="panel panel-primary panel-principal">
+          <div class="panel-heading row">
+              <div class=" col-md-4 panel-title">
+                  <strong class="panel-title text-left title-bar">
+                    {{'3061' | translate |uppercase}}
+                  </strong>
+              </div>
+              <div class=" col-md-8 text-right" style="padding-top: 5px">
+                  <strong ng-bind="vm.usuario"></strong>
+                  <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Ctrl + B" onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/casete/casete.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+              </div>
+          </div>
+          <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+              <div class="col-md-5 panel-padding" style="height: 99%">
+                  <div class="panel-list">
+                      <div class="panel panel-primary general-container">
+                          <div class="panel-body general-container">
+                              <div>
+                                  <div class="input-group right-bar">
+                                      <input data-ng-model="vm.search" class="form-control" type="text" placeholder="{{'0015' | translate}}">
+                                      <div class="input-group-addon">
+                                          <i class="glyphicon glyphicon-search"></i>
+                                      </div>
+                                  </div>
+                                  <div class="number-bage">
+                                      <span style="margin-top: 10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                                  </div>
+                              </div>
+                              <table id="tableCasete" class="table table-list">
+                                  <thead>
+                                      <tr>
+                                          <th class="col-md-2">
+                                              <a ng-click="$event.stopPropagation(); vm.sortType =  vm.code; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!vm.sortReverse && vm.sortType != vm.code" class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="vm.sortReverse && vm.sortType != vm.code" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="vm.sortType == vm.code && !vm.sortReverse " class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="vm.sortType == vm.code && vm.sortReverse" class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="vm.sortType == vm.code && !vm.sortReverse"></span>
+                                                  <span ng-show="vm.sortType == vm.code && vm.sortReverse"></span>
+                                              </a>{{'0018' | translate}}
+                                          </th>
+                                          <th class="col-md-4">
+                                              <a ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!vm.sortReverse && vm.sortType != vm.name" class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="vm.sortReverse && vm.sortType != vm.name" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="vm.sortType == vm.name && !vm.sortReverse " class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="vm.sortType == vm.name && vm.sortReverse" class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                                                  <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                                              </a>{{'0011' | translate}}
+                                          </th>
+                                          <th class="col-md-2">
+                                              <a ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!vm.sortReverse && vm.sortType != vm.state" class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="vm.sortReverse && vm.sortType != vm.state" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="vm.sortType == vm.state && !vm.sortReverse " class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="vm.sortType == vm.state && vm.sortReverse" class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="vm.sortType == vm.state && !vm.sortReverse"></span>
+                                                  <span ng-show="vm.sortType == vm.state && vm.sortReverse"></span>
+                                              </a>{{'0014' | translate}}
+                                          </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody class="tbody-list contentscroll">
+                                      <tr class="row-list" data-ng-repeat="casete in vm.filtered =((vm.dataCasetes | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)" data-ng-click="vm.getCaseteById(casete.id,$index,CaseteForm)" ng-class="{info: casete.id == vm.selected, danger: casete.state == 0 }">
+                                          <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis" ng-bind-html="casete.code | trust"></td>
+                                          <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis" ng-bind-html="casete.name | trust"></td>
+                                          <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                                              <i ng-if="casete.status == 1" class="glyphicon glyphicon-ok green"></i>
+                                              <i ng-if="casete.status == 0" class="glyphicon glyphicon-ban-circle red"></i>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-7 panel-padding" style="height: 99%">
+                  <div class="panel-list">
+                      <div class="panel panel-primary general-container">
+                          <div class="panel-body panel-form contentscroll" style="overflow: auto">
+                              <form name="CaseteForm" id="CaseteForm" class="form-horizontal panel-body" style="width: 100%;">
+                                  <div style="display: none">
+                                      <div>
+                                          <input data-ng-model="vm.caseteDetail.id">
+                                      </div>
+                                  </div>
+
+                                  <!--Codigo-->
+                                  <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': CaseteForm.code.$invalid && CaseteForm.code.$touched || vm.codeRepeat }">
+                                      <div class="col-sm-4 text-center">
+                                          <label>{{'0018' | translate}}:</label>
+                                      </div>
+                                      <div class="col-sm-6">
+                                          <input data-ng-model="vm.caseteDetail.code" maxlength="10" ng-required="true" ng-disabled="vm.isDisabled" name="codeCasete" id="codeCasete" class="form-control" type="text">
+                                          <span ng-if="CaseteForm.code.$invalid && CaseteForm.code.$touched || vm.codeRepeat" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                          <span ng-if="CaseteForm.code.$invalid && CaseteForm.code.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                          <span ng-if="vm.codeRepeat" class="help-block ">{{'0038' | translate}}</span>
+                                      </div>
+                                  </div>
+
+                                  <!--Nombre-->
+                                  <div class="form-group form-group-sm has-feedback" ng-class="{'has-error':CaseteForm.name.$invalid && CaseteForm.name.$touched || vm.nameRepeat}">
+                                      <div class="col-sm-4 text-center">
+                                          <label>{{'0011' | translate}}:</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <input data-ng-model="vm.caseteDetail.name" maxlength="70" ng-disabled="vm.isDisabled" ng-required="true" name="name" id="name" class="form-control" type="text" ng-focus="vm.nameRepeat = false">
+                                          <span ng-if="CaseteForm.name.$invalid && CaseteForm.name.$touched || vm.nameRepeat" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                          <span ng-if="CaseteForm.name.$error.required && CaseteForm.name.$touched" class="help-block">{{'0016' | translate}}</span>
+                                          <span ng-if="vm.nameRepeat" class="help-block ">{{'0038' | translate}}</span>
+                                      </div>
+                                  </div>
+
+                                  <!--Color-->
+                                  <div class="form-group form-group-sm">
+                                    <div class="col-sm-4 text-center">
+                                      <label>{{'0036' | translate}}:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <spectrum-colorpicker ng-model="vm.caseteDetail.colour" disabled="vm.isDisabled" format="'hex'"></spectrum-colorpicker>
+                                    </div>
+                                  </div>
+
+                                  <!--Estado-->
+                                  <div class="form-group form-group-sm">
+                                      <div class="text-center">
+                                          <label class="col-md-4">{{'0014' | translate}}:</label>
+                                      </div>
+
+                                      <div class="col-md-3">
+                                          <toggle ng-model="vm.caseteDetail.status" on="{{'0068' | translate}}" off="{{'0492' | translate}}" ng-disabled="vm.isDisabledState" ng-change="vm.changeState()" size="btn-sm"></toggle>
+                                      </div>
+                                  </div>
+
+                              </form>
+                              <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.caseteDetail.state"></modalstate>
+                          </div>
+                          <div class="panel-footer">
+                              <div class="container" style="width: 100%">
+
+                                  <button type="button" class=" btn btn-success button-list" ng-click="vm.addCasete(CaseteForm)" ng-disabled="vm.isDisabledAdd">
+                                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{'0005' | translate}}
+                                  </button>
+
+                                  <button type="button" class="btn btn-warning  button-list" ng-click="vm.editCasete()" ng-disabled="vm.isDisabledEdit">
+                                      <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                                  </button>
+
+                                  <button type="submit" class="btn btn-primary  button-list" ng-click="vm.saveCasete(CaseteForm)" ng-disabled="!CaseteForm.$valid || vm.isDisabledSave">
+                                      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                                  </button>
+
+                                  <button type="button" class="btn btn-info button-list" ng-click="vm.cancelCasete(CaseteForm)" ng-disabled="vm.isDisabledCancel">
+                                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                                  </button>
+
+                                  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint">
+                                      <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

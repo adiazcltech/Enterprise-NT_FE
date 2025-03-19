@@ -1,0 +1,379 @@
+<style type="text/css">
+  .ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #1976d2;
+  }
+
+  .ngplus-overlay-content {
+    position: absolute;
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+  }
+
+  dissolve-animation.ng-hide-remove,
+  .dissolve-animation.ng-hide-add {
+    display: inline ! Important;
+    -webkit-transición: 0.5 s lineales todos;
+    -moz-transición: 0.5 s lineales todos;
+    -o-transición: 0.5 s lineales todos;
+    transición: 0.5 s lineales todos;
+  }
+
+  .dissolve-animation.ng-hide-remove.ng-hide-remove-active,
+  .dissolve-animation.ng-hide-add {
+    opacity: 1;
+  }
+
+  .dissolve-animation.ng-hide-add.ng-hide-add-active,
+  .dissolve-animation.ng-hide-remove {
+    opacity: 0;
+  }
+
+
+  .loader {
+    height: 20px;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .loader--dot {
+    animation-name: loader;
+    animation-timing-function: ease-in-out;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: black;
+    position: absolute;
+    border: 2px solid white;
+  }
+
+  .loader--dot:first-child {
+    background-color: #8cc759;
+    animation-delay: 0.5s;
+  }
+
+  .loader--dot:nth-child(2) {
+    background-color: #8c6daf;
+    animation-delay: 0.4s;
+  }
+
+  .loader--dot:nth-child(3) {
+    background-color: #ef5d74;
+    animation-delay: 0.3s;
+  }
+
+  .loader--dot:nth-child(4) {
+    background-color: #f9a74b;
+    animation-delay: 0.2s;
+  }
+
+  .loader--dot:nth-child(5) {
+    background-color: #60beeb;
+    animation-delay: 0.1s;
+  }
+
+  .loader--dot:nth-child(6) {
+    background-color: #fbef5a;
+    animation-delay: 0s;
+  }
+
+  .loader--text {
+    position: absolute;
+    top: 200%;
+    text-align: center;
+    font-size: 400%;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    -webkit-text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    padding: 0;
+  }
+
+  .loader--text:after {
+    content: "{{'1100' | translate}}";
+    font-weight: bold;
+    animation-name: loading-text;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+  }
+
+
+
+  @keyframes loading-text {
+    0% {
+      content: "{{'1100' | translate}}";
+    }
+
+    25% {
+      content: "{{'1100' | translate}}.";
+    }
+
+    50% {
+      content: "{{'1100' | translate}}..";
+    }
+
+    75% {
+      content: "{{'1100' | translate}}...";
+    }
+  }
+
+  @media only screen and (max-width: 470px) and (min-width: 5px) {
+    .zoomview {
+      zoom: 40%;
+      transform: translate(-604px, -853px) rotate(0rad) skewX(0rad) scale(0.40, 0.40);
+      transform-origin: 1010px 1429px 0px;
+      width: 248.7142%;
+    }
+
+    .material-icons {
+      font-size: 10px !important;
+    }
+
+    .md-fab>i {
+      line-height: 48px;
+    }
+
+    .measureButtons>div>span {
+      font-size: 5px !important;
+    }
+
+    label {
+      font-size: 10px !important;
+    }
+
+    .textbutton {
+      font-size: 5px !important;
+    }
+
+    .orderfield-label {
+      font-size: 9px;
+    }
+
+    .uk-h3,
+    h3 {
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    legend {
+      font-size: 10px !important;
+    }
+  }
+
+  @media only screen and (max-width: 600px) and (min-width: 471px) {
+    .zoomview {
+      zoom: 45%;
+      transform: translate(-555px, -785px) rotate(0rad) skewX(0rad) scale(0.45, 0.45);
+      transform-origin: 1010px 1429px 0px;
+      width: 222.2222%
+    }
+
+
+    .material-icons {
+      font-size: 10px !important;
+    }
+
+    .md-fab>i {
+      line-height: 48px;
+    }
+
+    .measureButtons>div>span {
+      font-size: 5px !important;
+    }
+
+    .textbutton {
+      font-size: 5px !important;
+    }
+
+    .orderfield-label {
+      font-size: 9px;
+    }
+
+    .uk-h3,
+    h3 {
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    label {
+      font-size: 10px !important;
+    }
+
+    legend {
+      font-size: 10px !important;
+    }
+  }
+
+  @media only screen and (max-width: 767px) and (min-width: 601px) {
+    .zoomview {
+      zoom: 53%;
+      transform: translate(-475px, -670px) rotate(0rad) skewX(0rad) scale(0.53, 0.53);
+      transform-origin: 1010px 1429px 0px;
+      width: 188.67924%;
+    }
+
+
+    .material-icons {
+      font-size: 10px !important;
+    }
+
+    .md-fab>i {
+      line-height: 48px;
+    }
+
+    .measureButtons>div>span {
+      font-size: 5px !important;
+    }
+
+    .textbutton {
+      font-size: 5px !important;
+    }
+
+    .orderfield-label {
+      font-size: 9px;
+    }
+
+    .uk-h3,
+    h3 {
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    label {
+      font-size: 10px !important;
+    }
+
+    legend {
+      font-size: 10px !important;
+    }
+  }
+
+  @media only screen and (max-width: 950px) and (min-width: 768px) {
+    .material-icons {
+      font-size: 10px !important;
+    }
+
+    .md-fab>i {
+      line-height: 48px;
+    }
+
+    .measureButtons>div>span {
+      font-size: 5px !important;
+    }
+
+    .textbutton {
+      font-size: 5px !important;
+    }
+
+    .orderfield-label {
+      font-size: 9px;
+    }
+
+    .uk-h3,
+    h3 {
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    label {
+      font-size: 10px !important;
+    }
+
+    legend {
+      font-size: 10px !important;
+    }
+  }
+
+
+  @media only screen and (max-width: 1000px) and (min-width: 768px) {
+    .zoomview {
+      zoom: 62%;
+      transform: translate(-390px, -540px) rotate(0rad) skewX(0rad) scale(0.62, 0.62);
+      transform-origin: 1010px 1429px 0px;
+      width: 161.29032%;
+    }
+
+  }
+
+  @media only screen and (max-width: 1068px) and (min-width: 1001px) {
+    .zoomview {
+      zoom: 73%;
+    }
+
+    .viewmenudash {
+      zoom: 73%;
+    }
+  }
+
+  @media only screen and (max-width: 1252px) and (min-width: 1069px) {
+    .zoomview {
+      zoom: 80%;
+    }
+
+    .viewmenudash {
+      zoom: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 1362px) and (min-width: 1253px) {
+    .zoomview {
+      zoom: 92%;
+    }
+
+    .viewmenudash {
+      zoom: 92%;
+    }
+  }
+</style>
+<div style="height: 100%;" class="general-container"
+  ng-class="{'zoomview': vm.login !== 1 && vm.login !== 2,'viewmenudash': vm.login === 2}"
+  ng-controller="ShellController as vm">
+  <header id="header-container" class="clearfix header-color">
+    <div class="header-image">
+      <img class="img-responsive" src="images/logo_.png">
+    </div>
+    <div class="header-text uk-text-right uk-hidden-small">
+      <strong>Laboratory Information Management System</strong>
+    </div>
+  </header>
+  <div id="body-content">
+    <div data-ng-include="'app/layout/sidebar.html'" ng-if="vm.viewcontent"></div>
+    <div ui-view class="general-container contentscroll" style="height: 100%;overflow: auto;" ng-if="vm.viewcontent">
+    </div>
+  </div>
+  <div ngplus-overlay ngplus-overlay-delay-in="10" ngplus-overlay-delay-out="300"
+    ngplus-overlay-animation="dissolve-animation">
+    <div class="loader">
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--text uk-hidden-small"></div>
+      <div class="loader--text uk-visible-small" style="font-size: 275%;"></div>
+    </div>
+  </div>
+</div>

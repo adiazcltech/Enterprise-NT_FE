@@ -1,0 +1,95 @@
+<style type="text/css">
+  .md-fab.md-fab-minismall {
+    width: 30px;
+    height: 30px;
+  }
+
+  .md-fab.md-fab-minismall>i {
+    line-height: 30px
+  }
+</style>
+<modalexceptions openmodal="groupingstatistics.ShowPopupError" detailerror="groupingstatistics.Error"></modalexceptions>
+<div style="height: 100%" class="md-card">
+  <div style="height: 100%" class="md-card-content">
+    <div style="height: 100%" class="uk-grid uk-grid-small" data-uk-grid-margin>
+      <div class="uk-width-1-1"
+        ng-class="{'uk-width-1-2':groupingstatistics.numbergroups === 2, 'uk-width-1-3':groupingstatistics.numbergroups === 3, 'uk-width-1-4':groupingstatistics.numbergroups === 4}"
+        style="height: 100%" ng-repeat="group in  groupingstatistics.listdata" ng-init="groupid = $index">
+        <fieldset class="fieldset" style="height: calc(100% - 50px)">
+          <legend>{{group.name}}</legend>
+          <div class="uk-text-center" style="height: 20px">                       
+            <md-radio-group ng-model="group.filter1" name="test_{{groupingstatistics.idcontrol}}"
+              id="test_{{groupingstatistics.idcontrol}}" aria-labelledby="favoriteFruit"
+              ng-change="groupingstatistics.changueradiobutton(groupid,group.filter1)" 
+              ng-disabled="group.state[1]">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-5-10">
+                  <md-radio-button value="1" class="md-primary">{{'0083' | translate}}</md-radio-button>
+                </div>
+                <div class="uk-width-5-10" ng-if="groupingstatistics.typegroup !== 1 && groupingstatistics.typegroup !== 2">
+                  <md-radio-button value="2" class="md-primary">{{'0013' | translate}}</md-radio-button>
+                </div>
+                <div class="uk-width-5-10"  ng-if="groupingstatistics.typegroup === 1 || groupingstatistics.typegroup === 2">
+                  <md-radio-button value="2" class="md-primary">{{'0451' | translate}}</md-radio-button>
+                </div>
+              </div>
+            </md-radio-group>
+          </div>
+          <select class="md-input" charset="utf-8" name="listfilter_{{groupingstatistics.idcontrol}}"
+            id="listfilter_{{groupingstatistics.idcontrol}}" ng-options="obj.id as obj.name for obj in group.listfilter"
+            ng-model="group.filter2" ng-disabled="group.state[2]" ng-change="groupingstatistics.loaditems(groupid)"
+            class="form-control"></select>
+
+          <div class="uk-grid uk-grid-small">
+            <div class="uk-width-1-4 uk-con">
+              <button style="margin-left: 18px; margin-top: 10px" type="button"
+                class="md-fab md-fab-minismall md-bg-light-blue-600"
+                ng-class="{'md-bg-blue-grey-100' : !group.allcheck}" ng-disabled="group.filter2 === null"
+                ng-click="groupingstatistics.selectallcheck(groupid)">
+                <i class="material-icons md-color-indigo-50 md-24" data-uk-tooltip="{pos:'top'}"
+                  title=" {{'0353' | translate}} ">&#xE065;</i>
+              </button>
+            </div>
+            <div class="uk-width-3-4">
+              <loadcombobox change="groupingstatistics.additemslist(item, groupid)" listorigin="group.listorigin"
+                cleanselect="true" placeholder="'0153'"></loadcombobox>
+            </div>
+          </div>
+
+          <div class="uk-overflow-container" style="height: calc(100% - 155px); margin-top: 20px">
+            <table class="uk-table">
+              <tbody>
+                <tr ng-repeat="item in group.listselect">
+                  <td style="width: calc(100% - 25px);">{{item.code}} {{item.name}}</td>
+                  <td style="width: 25px">
+                    <i ng-if="group.allcheck" class="material-icons md-24 md-color-red-600">&#xE15C;</i>
+                    <i ng-if="!group.allcheck" class="material-icons md-24 md-color-light-green-500">&#xE90A;</i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalinformative" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div ng- class="uk-overflow-container" style="margin-top: 0px">
+        <div style="width: 54px; float: left;">
+          <img class="img-responsive" src="images/iconinfo.png">
+        </div>
+        <div class="uk-text-center" style="margin-top: 10px">
+          {{'0547' | translate}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

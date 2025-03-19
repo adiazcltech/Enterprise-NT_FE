@@ -1,0 +1,152 @@
+<style>
+  .orderdailysearch-padding-search {
+      padding-top: 5px;
+  }
+
+  .orderdailysearch-uppercase {
+      text-transform: uppercase;
+  }
+
+  .orderdailysearch-table-row {
+      margin-top: 10px !important;
+  }
+
+  .orderdailysearch-table-container {
+     margin-top: 0px;
+     height: calc(100% - -43px);
+     width: 100% !important;
+  }
+
+  .orderdailysearch-filter-margin {
+      margin-top: 0px;
+      margin-bottom: 0px;
+  }
+
+  .orderdailysearch-filter-padding {
+      padding-top: 10px;
+      padding-bottom: 5px;
+  }
+</style>
+<loadpage view="casedailysearch.loadingsearch"></loadpage>
+<div id="casedailysearch" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+      <div class="md-card uk-height-viewport">
+          <div class="md-card-toolbar md-bg-cyan-400">
+              <div class="md-card-toolbar-actions">
+                  <div>
+                      <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                  </div>
+              </div>
+              <span class="margin-icon-modal">
+                  <i class="material-icons md-color-light-blue-50 md-33">&#xE916;</i>
+              </span>
+              <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                  {{'0773' | translate}}
+              </h3>
+          </div>
+          <div class="md-card-content">
+              <div class="uk-grid" style="height: 100%;">
+                  <div class="uk-width-8-10" style="height: 14%">
+                      <div class="md-card md-card-hover">
+                          <div class="md-card-content">
+                              <div class="uk-input-group">
+                                  <span class="uk-input-group-addon">
+                                      <img ng-src="images/search.png" />
+                                  </span>
+                                  <div class="md-input-wrapper md-input-filled">
+                                      <label>{{'3136' | translate}}</label>
+                                      <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed" ng-model="casedailysearch.search">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="uk-width-2-10" style="padding-left: 11px;height: 14%">
+                      <div class="md-card md-card-hover">
+                          <div class="md-card-content">
+                              <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                                  <li style="margin-left: 0px">
+                                      <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                                          <img class="md-list-addon-icon material-icons md-26" ng-src="images/order/totalorder1.png">
+                                      </div>
+                                      <div class="md-list-content" style="padding-left: 30px;">
+                                          <span class="uk-text-small uk-text-muted">{{'3137' | translate}}</span>
+                                          <span class="md-list-heading uk-text-small" style="font-size: 18px !important;"> {{casedailysearch.filtered.length}}</span>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="uk-width-1-1" style="margin-top: 10px;height: 83%" ng-show="casedailysearch.cases.length!==0">
+                      <div class="md-card md-card-hover" style="height: 100%;">
+                          <div class="md-card-content" style="height: 100%;padding: 0px;">
+                               <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head" style="height: 39px;">
+                                  <div class="uk-width-2-10" style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'studyType.code'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'studyType.code'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>
+                                      {{'3138' | translate}}
+                                  </div>
+                                  <div class="uk-width-1-10" style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'numberCase'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'numberCase'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>
+                                      {{'3038' | translate}}
+                                  </div>
+                                  <div class="uk-width-1-10" style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'oderNumber'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'oderNumber'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>
+                                      {{'0110' | translate}}
+                                  </div>
+                                  <div class="uk-width-1-10" style="padding-left: 10px;" ng-if="casedailysearch.showDocumentType" ng-click="casedailysearch.sortType = 'documentTypeId'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'documentTypeId'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>{{'0233' | translate}}
+                                  </div>
+                                  <div style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'patientId'; casedailysearch.sortReverse = !casedailysearch.sortReverse" ng-class="{'uk-width-1-10' : casedailysearch.showDocumentType,'uk-width-2-10' : !casedailysearch.showDocumentType}">
+                                      <resultssort sortvalue="'patientId'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>{{'0117' | translate}}
+                                  </div>
+                                  <div class="uk-width-2-10" style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'lastName'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'lastName'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>{{'0398' | translate}}
+                                  </div>
+                                  <div class="uk-width-1-10" style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'birthday'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'birthday'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>{{'0120' | translate}}
+                                  </div>
+                                  <div class="uk-width-1-10" style="padding-left: 10px;" ng-click="casedailysearch.sortType = 'sex'; casedailysearch.sortReverse = !casedailysearch.sortReverse">
+                                      <resultssort sortvalue="'sex'" sorttype="casedailysearch.sortType" sortreverse="casedailysearch.sortReverse"></resultssort>{{'0426' | translate}}
+                                  </div>
+                              </div>
+                              <div class="vs-repeat-custom-scroll" style="height: calc(100% - 40px);" vs-repeat="20" data-scroll-to-top='casedailysearch.cases'>
+                                  <div ng-repeat="case in casedailysearch.filtered = ( casedailysearch.cases | filter:casedailysearch.search | orderBy:casedailysearch.sortType:casedailysearch.sortReverse)" class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table" style="margin-top: 0px;">
+                                      <div style="padding-left: 15px;" class="uk-width-2-10">
+                                        <span class="uk-badge uk-badge-primary">{{case.studyType.code}}</span> | {{case.studyType.name}}
+                                      </div>
+                                      <div class="uk-width-1-10" style="padding-left: 15px;">
+                                          <a href="#" ng-click="casedailysearch.selectCase(case)">{{case.numberCase}}</a>
+                                      </div>
+                                      <div style="padding-left: 15px;" class="uk-width-1-10">{{case.orderNumber}}</div>
+                                      <div class="uk-width-1-10" style="padding-left: 15px;" ng-if="casedailysearch.showDocumentType">{{case.documentType.toUpperCase() === 'DEFECTO' ? 'SIN TIPO DE DOCUMENTO' : case.documentType.toUpperCase()}}</div>
+                                      <div style="padding-left: 15px;" ng-class="{'uk-width-1-10' : casedailysearch.showDocumentType,'uk-width-2-10' : !casedailysearch.showDocumentType}">{{case.patientId}}</div>
+                                      <div class="uk-width-2-10" style="padding-left: 15px;">
+                                          {{case.lastName.toUpperCase() + ' ' + (case.surName === null || case.surName === '' ? '' : case.surName.toUpperCase()
+                                               + ' ') + case.name1.toUpperCase() + ' ' + ((case.name1 === null || case.name2 === '' ? '' : case.name2.toUpperCase()))
+                                          }}
+                                      </div>
+                                      <div style="padding-left: 15px;" class="uk-width-1-10">{{case.birthday}}</div>
+                                      <div style="padding-left: 15px;" class="uk-width-1-10">{{case.sex}}</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="uk-grid uk-width-1-1 uk-grid-medium" style="margin-top: 10px;height: 70%" ng-show="casedailysearch.cases.length===0">
+                  <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                      <img class="img-responsive" style="height: 90px; width: 90px;" src="images/data.png">
+                  </div>
+                  <div class="uk-width-1-1 uk-text-center">
+                      <h3 class="ng-binding">{{'1078' | translate}}</h3>
+                  </div>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+

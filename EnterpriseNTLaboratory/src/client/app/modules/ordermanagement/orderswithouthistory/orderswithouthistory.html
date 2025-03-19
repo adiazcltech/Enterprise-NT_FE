@@ -1,0 +1,283 @@
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.min.js"></script>
+
+
+<style type="text/css">
+  .bodyPanel {
+    height: calc(100% - 7.4em) !important;
+    ;
+    overflow-y: scroll;
+    padding-bottom: 0px !important;
+  }
+
+  .footPanel {
+    height: 70px;
+    overflow: hidden;
+    margin-top: -14px;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    vertical-align: bottom;
+    overflow-y: scroll;
+
+  }
+
+
+
+  .tbody-list {
+    overflow-y: scroll;
+    height: calc(100% - 84px);
+    position: absolute;
+  }
+
+  .uk-tab>li>a:hover,
+  .uk-tab>li>a:focus {
+    color: #1976d2;
+  }
+
+  .messageWork {
+    height: auto;
+    top: 10px !important;
+    width: 35%;
+    border-radius: 4px;
+  }
+
+  .messageTextWork {
+    width: 300px;
+    float: left;
+    padding-top: 5%;
+    white-space: nowrap;
+  }
+
+  .cltech-btn-no,
+  .cltech-btn-no:hover,
+  .cltech-btn-no:active {
+    padding-left: 12.5px;
+    padding-right: 12.5px;
+    background: white;
+    border-color: #c6c6c6;
+    border-style: solid;
+    border-width: 0.5px;
+    color: #777;
+  }
+
+  .cltech-container {
+    height: 100%;
+    width: 103%;
+    position: relative;
+  }
+
+  .height-fieldset {
+    height: 80px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    padding-left: 10px;
+  }
+
+  .k-numerictextbox .k-input {
+    margin-top: -1px !important;
+  }
+  .k-state-disabled {
+    height: 20px !important;
+}
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content" style="overflow: hidden !important;">
+  <div id="page_content_inner" class="bodyPanel">
+
+    <form id="Form" class="md-card" charset="utf-8" style="height: 95%">
+      <div class="md-card-content" style="height: 95%">
+        <div class="uk-grid uk-width-1-1" style="margin-left: 0px; position: relative; height: calc(100% - 113px);">
+            <fieldset class="fieldset uk-width-1-1 height-fieldset" ng-class="{'uk-width-1-3': vm.byOrder === 'false'}" style="margin-right: 1%;">
+                <legend style="font-size: 13px">{{'0153' | translate}}</legend>
+                <div class="radio-check">
+                   <input type="radio" name="typeUnlock" id="order" checked value="true" ng-model="vm.byOrder" >
+                   <label for="order" >{{'0110' | translate}}</label>
+                   <input type="radio" name="typeUnlock" id="range" value="false" ng-model="vm.byOrder">
+                   <label for="range" style="margin-left: 15px;" >{{'0259' | translate}}</label>
+                </div>
+            </fieldset>
+            <fieldset class="fieldset uk-width-2-3 height-fieldset" ng-show="vm.byOrder === 'false' && vm.isOrderAutomatic" style="width: 65.65%; padding-top: 5px;" >
+                <legend style="font-size: 13px">{{'0287' | translate}}</legend>
+                <div style="margin-top: 14px;">
+                    <input id="kUI_Quantity"
+                           kendo-numeric-text-box
+                           class="k-textbox orderentrytab"
+                           k-min="1"
+                           k-max="vm.maxNumberOrder"
+                           k-ng-model="vm.quantity"
+                           k-decimals="0"
+                           k-restrictDecimals="true"
+                           k-round="true"
+                           k-format="'n0'"
+                           style="width: 25%;"
+                           maxlength="{{vm.digitsorder}}"
+                           ng-disabled="vm.disabledSave">
+                </div>
+            </fieldset>
+            <fieldset class="fieldset uk-width-2-3 height-fieldset" ng-show="vm.byOrder === 'false' && !vm.isOrderAutomatic" style="width: 65.65%; padding-top: 5px;" >
+                <legend style="font-size: 13px">{{'0288' | translate}}</legend>
+                <div class="uk-grid" style="margin-left: 0px" >
+                  <div class="uk-width-1-3" style="margin-top: 14px;">
+                     <input  id="kUI_Quantity2"
+                             kendo-numeric-text-box="numeric"
+                             class="k-textbox orderentrytab"
+                             k-min="1"
+                             k-max="vm.maxNumberOrder"
+                             k-ng-model="vm.quantity"
+                             k-decimals="1"
+                             k-restrictDecimals="true"
+                             k-round="true"
+                             style="width: 50%;"
+                             k-format="'n0'"
+                             maxlength="{{vm.digitsorder}}"
+                             ng-disabled="vm.disabledSave">
+                  </div>
+                  <div class="uk-width-1-3" style="margin-top: -1px; width: 30%; height: 38px" >
+                      <label for="orderInit" ng-disabled="vm.disabledSave">{{'0073' | translate}}</label>
+                      <input id="orderInit" md-input label-fixed class="md-input label-fixed" type="text" ng-model="vm.entryInit" ng-keypress="vm.keyselectOrder($event)" ng-blur="vm.keyselectOrder(undefined)" maxlength="{{vm.maxLenght}}" style="padding-bottom: 0px; margin-top: -10px" ng-disabled="vm.disabledSave"/>
+                  </div>
+                </div>
+            </fieldset>
+
+          <div id="cltech-form-card" class="uk-grid uk-margin-small-top uk-width-1-1 cltech-container"
+            pdk-next-input-on-enter>
+
+            <!--<div class="uk-width-1-3 order-entry-order-padding">
+                <demographics disabled="false" type="'O'" state="vm.stateControl" vieworder="vm.byOrder === 'true'" cleanform="vm.cleanform" datademographics="vm.dataOrder" order="vm.order" formvalid="vm.formvalid"></demographics>
+              </div> -->
+
+            <div class="uk-width-1-3" style="width: 32.8%; padding-left: 0px">
+              <orderfield statecontrol="vm.orderDemosDisabled" type="'O'" values="vm.orderDemosValues"
+                data="vm.dataOrder" listenerdate="vm.eventSelectDate" listener="vm.eventOrder" patientPhoto="vm.patientPhoto"></orderfield>
+            </div>
+
+            <div class="uk-width-2-3 order-entry-order-padding" style="padding-left: 17px;">
+              <listtest disabled="vm.disabledSave" id="'tests'" getdatatests="vm.listDataTest"
+                cleantests="vm.cleanTests" ratedefault="vm.orderDemosValues[vm.staticDemoIds['rate']].id"
+                clientdefault="vm.orderDemosValues[-1].id" save="vm.saveTest">
+              </listtest>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="page_content_inner" class="footPanel">
+    <form class="md-card" style="margin-bottom: 0px !important; ">
+
+      <div class="md-card-content uk-text-right" style="width: 97%">
+        <!--          <button type="button" class="md-btn md-btn-success md-btn-wave-light waves-effect waves-button waves-light" ng-disabled="false" >
+                  <i class="material-icons" >&#xE145;</i>{{'0005' | translate}}
+                </button>
+                <button type="button" class="md-btn md-btn-warning md-btn-wave-light waves-effect waves-button waves-light" ng-click="vm.edit()" ng-disabled="false">
+                  <i class="material-icons">&#xE254;</i>{{'0006' | translate}}
+                </button>
+                 -->
+        <!--                 <div style="display: inline-block;">
+
+                </div> -->
+        <div style="display: inline-block; margin-left: 8px">
+          <button type="submit" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light"
+            ng-disabled="false" ng-click="vm.newOrders()">
+            <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0005' | translate}}"
+              style="font-weight: bold; ">&#xE145;</i>
+          </button>
+        </div>
+        <div style="display: inline-block; margin-left: 8px">
+          <button type="submit" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+            ng-focus="vm.saveTest = true" ng-click="vm.saveOrders(); " ng-disabled="vm.disabledSave"
+            ng-class="{'md-bg-blue-grey-100' : vm.disabledSave}">
+            <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}"
+              style="font-weight: bold;">&#xE161;</i>
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- <script src="widgets/angular-icheck.js"></script> -->
+<div id="logSaveOrders" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 512px; height: 200px;">
+    <div class="uk-modal-header md-bg-blue-600" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title">{{'0330' | translate}}</h3>
+    </div>
+    <div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+      <form class="form" name="myForm">
+        <div class="uk-form-row" ng-if="vm.messageNotSave === ''" style="margin-top: 10px">
+
+        </div>
+        <div class="uk-form-row">
+          <label style="white-space: normal;">{{vm.messageSave}}</label>
+          <div class="uk-form-row" ng-if="false">
+            <table class="uk-table  uk-table-small uk-table-middle tablescrollable">
+              <tbody class="tbodyscrollable"
+                style="height: 235px; border-color: #ddd;border-style: solid;border-width: 1px;">
+                <tr class="uk-grid" data-ng-repeat="Order in vm.listSuccess" style="margin-left: 0px; margin-top: 5px">
+                  <td class="uk-width-1-1" data-ng-bind="Order.orderYes"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="uk-form-row" ng-if="vm.messageNotSave !== ''">
+          <label style="white-space: normal;">{{vm.messageNotSave}}</label>
+          <div class="uk-form-row" ng-if="false">
+            <table class="uk-table  uk-table-small uk-table-middle tablescrollable">
+              <tbody class="tbodyscrollable"
+                style="height: 235px; border-color: #ddd;border-style: solid;border-width: 1px;">
+                <tr class="uk-grid" data-ng-repeat="Order in vm.listError" style="margin-left: 0px; margin-top: 5px">
+                  <td class="uk-width-1-1" data-ng-bind="Order.orderYes"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<div id="logErrorTest2" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 512px; height: 185px;">
+    <div class="uk-modal-header md-bg-red-600" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title">{{'0330' | translate}}</h3>
+    </div>
+    <div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+      <form class="form" name="myForm">
+
+        <div class="uk-form-row">
+          <label style="white-space: normal;">{{vm.messageNotSave}}</label>
+          <div class="uk-form-row" ng-if="false">
+            <table class="uk-table  uk-table-small uk-table-middle tablescrollable">
+              <tbody class="tbodyscrollable"
+                style="height: 235px; border-color: #ddd;border-style: solid;border-width: 1px;">
+                <tr class="uk-grid" data-ng-repeat="Order in vm.listError" style="margin-left: 0px; margin-top: 5px">
+                  <td class="uk-width-1-1" data-ng-bind="Order.orderYes"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' | translate}}</button>
+    </div>
+  </div>
+</div>
+<dependencedemo listdemographics="vm.dataOrder"></dependencedemo>

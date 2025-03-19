@@ -1,0 +1,824 @@
+<style>
+  .uk-table td,
+  .uk-table th {
+    padding: 4px 8px;
+  }
+
+  .uk-table thead th,
+  .uk-table tfoot td,
+  .uk-table tfoot th {
+    font-style: normal;
+    font-weight: 400;
+    color: #727272;
+    font-size: 11px;
+  }
+
+  .uk-table td {
+    border-bottom-color: #e0e0e0;
+    font-size: 11px;
+  }
+
+  .theadscrollable {
+    display: inline-block;
+    width: 100%;
+    height: 26px;
+  }
+
+  .uk-table tr th.small_col,
+  .uk-table tr td.small_col {
+    width: 15%;
+  }
+
+  .uk-accordion-title {
+    background: rgba(153, 153, 153, 0.2);
+    border-radius: 0;
+    border: none;
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 1px 5px 5px 5px;
+    position: relative;
+  }
+
+  .uk-accordion-title:after {
+    content: "\e313";
+    font-family: "Material Icons";
+    font-size: 11px;
+    position: absolute;
+    top: 0px;
+    right: 8px;
+    display: block;
+    color: #727272;
+    transition: -webkit-transform 280ms;
+    transition: transform 280ms;
+  }
+
+  .tbodyscrollable {
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+    margin-top: 18px;
+    margin-top: 0px;
+  }
+
+  .uk-accordion-content {
+    padding: 0px;
+  }
+
+  .md-tree-image {
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 50%;
+  }
+
+  .vs-repeat-custom-queries {
+    margin-top: 0px;
+    height: 100%;
+    width: 100% !important;
+  }
+
+  .subtabla {
+    margin-left: 20px;
+    border-top: 1px solid #ddd;
+  }
+  .subtabla td {
+    padding-left: 10px;
+  }
+  .fila-principal {
+    cursor: pointer;
+  }
+
+  treecontrol {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 10px !important;
+    color: #555;
+    text-decoration: none;
+}
+</style>
+
+<modalexceptions
+  openmodal="vm.ShowPopupError"
+  detailerror="vm.Error"
+></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner">
+    <div style="height: 100%" class="uk-grid">
+      <div style="height: 100%" class="uk-width-1-1">
+        <div class="md-card" style="height: 100%">
+          <div
+            style="height: 99%; padding: 5px 10px 0px 12px"
+            class="md-card-content"
+          >
+            <div class="uk-width-1-1" style="height: 100%">
+              <ul
+                class="uk-tab"
+                data-uk-tab="{connect:'#tabs_1',swiping: false}"
+                style="height: 36px"
+              >
+                <li ng-click="vm.changetab(1)" class="uk-active">
+                  <a href="#">{{'0406' | translate}}</a>
+                </li>
+                <li ng-click="vm.changetab(2)">
+                  <a href="#">{{'0407' | translate}}</a>
+                </li>
+              </ul>
+              <ul
+                id="tabs_1"
+                class="uk-switcher uk-margin"
+                style="height: calc(100% - 32px)"
+              >
+                <li style="height: 100%">
+                  <div class="uk-width-1-1" style="height: 86px">
+                    <div class="uk-grid">
+                      <div
+                        class="uk-width-1-6"
+                        ng-class="{'uk-width-1-3' : vm.typeresport.id==3}"
+                        style="padding-top: 4px"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0387' | translate}}:</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in vm.typeresport"
+                          data-ng-model="vm.typeresport.id"
+                          ng-change="vm.changefilter()"
+                        ></select>
+                      </div>
+                      <!--   numero de la orden -->
+                      <div
+                        class="uk-width-1-6"
+                        style="padding-top: 4px"
+                        ng-show="vm.typeresport.id != 3"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0072' | translate}}</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in vm.listYear"
+                          data-ng-model="vm.listYear.id"
+                          ng-change="vm.disable()"
+                        ></select>
+                      </div>
+                      <div
+                        class="uk-width-1-6"
+                        style="padding-top: 4px"
+                        ng-show="vm.typeresport.id==1 &&  vm.typedocument  &&  !vm.historyautomatic"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0233' | translate}}</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in vm.documentType"
+                          data-ng-model="vm.documentType.id"
+                          ng-change="vm.disable()"
+                        ></select>
+                      </div>
+                      <div class="uk-width-1-6" ng-show="vm.typeresport.id==1">
+                        <label>{{'0117' | translate}}</label>
+                        <input
+                          type="text"
+                          class="md-input label-fixed"
+                          data-ng-model="vm.record"
+                          ng-keypress="vm.keyselectpatientid($event)"
+                          md-input
+                        />
+                      </div>
+                      <!-- apellido -->
+                      <div class="uk-width-1-6" ng-show="vm.typeresport.id==2">
+                        <label>{{'0134' | translate}}</label>
+                        <input
+                          type="text"
+                          class="md-input label-fixed"
+                          data-ng-model="vm.lastname"
+                          ng-keypress="vm.keyselectpatientid($event)"
+                          md-input
+                        />
+                      </div>
+                      <div
+                        class="uk-width-1-6"
+                        ng-show="vm.typeresport.id==2"
+                        style="padding-top: 4px"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0124' | translate}}</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in vm.sex"
+                          data-ng-model="vm.datasex.id"
+                          ng-change="vm.disable()"
+                        ></select>
+                      </div>
+
+                      <div
+                        class="uk-width-1-6"
+                        ng-show="vm.typeresport.id==4"
+                        style="padding-top: 4px"
+                      >
+                        <label>{{'0110' | translate}}</label>
+                        <input
+                          id="numberordersearch"
+                          class="md-input label-fixed"
+                          type="text"
+                          ng-model="vm.codeordernumberorden"
+                          ng-keypress="vm.keyselect($event)"
+                          maxlength="{{vm.cantdigit}}"
+                          md-input
+                        />
+                      </div>
+                      <!--demografico -->
+                      <div
+                        class="uk-width-1-6"
+                        ng-show="vm.typeresport.id==5"
+                        style="padding-top: 4px"
+                      >
+                        <label>{{'0083' | translate}}</label>
+                        <select
+                          class="md-input"
+                          ng-options="obj as obj.name for obj in vm.lisdemografic track by obj.id"
+                          data-ng-model="vm.demografic"
+                          ng-change="vm.getDemographicsItems()"
+                        ></select>
+                      </div>
+                      <div
+                        class="uk-width-1-6"
+                        ng-show="vm.typeresport.id==5 &&  vm.demografic.encoded"
+                        style="padding-top: 4px"
+                      >
+                        <label>{{'0412' | translate}}</label>
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in   vm.lisdemograficitems"
+                          data-ng-model="vm.lisdemograficitems.id"
+                          ng-change="vm.disable()"
+                        ></select>
+                      </div>
+                      <div
+                        class="uk-width-1-6"
+                        ng-show="vm.typeresport.id==5 &&  !vm.demografic.encoded "
+                        style="padding-top: 4px"
+                      >
+                        <input
+                          class="md-input label-fixed"
+                          type="text"
+                          ng-model="vm.demograficdesencored"
+                          ng-keypress="vm.keyselectpatientid($event)"
+                        />
+                      </div>
+                      <div
+                        class="uk-width-1-6"
+                        ng-class="{'uk-width-1-3' :  vm.typeresport.id==3}"
+                        style="padding-top: 4px"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0408' | translate}}:</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in   vm.lisArea"
+                          data-ng-model="vm.lisArea.id"
+                          ng-change="vm.disable()"
+                        ></select>
+                      </div>
+                      <div
+                        class="uk-width-1-6"
+                        ng-class="{'uk-width-1-3' : vm.typeresport.id==3}"
+                        style="padding-top: 4px"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0003' | translate}}:</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in vm.listranch"
+                          ng-change="vm.disable()"
+                          data-ng-model="vm.listranch.id"
+                        ></select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="uk-width-1-1"
+                    style="height: calc(100% - 109px)"
+                    ng-if="vm.basicTree.length!==0"
+                  >
+                    <div class="uk-grid" style="height: 100%; margin-left: 0px">
+                      <fieldset
+                        class="fieldset uk-width-2-10"
+                        style="height: 100%; padding-left: 0px"
+                      >
+                        <div class="uk-input-group" style="padding-left: 24px">
+                          <label>{{'0154' | translate}}</label>
+                          <input
+                            type="text"
+                            class="md-input"
+                            ng-model="vm.predicate"
+                            md-input
+                          />
+                          <span
+                            class="uk-input-group-addon"
+                            style="padding: 0 0px"
+                          >
+                            <i class="material-icons md-24">&#xE8B6;</i>
+                          </span>
+                        </div>
+                        <div
+                          class="tree-container contentscroll"
+                          class="vs-repeat-custom-queries contentscroll"
+                          style="height: calc(100% - 48px); overflow: auto"
+                          vs-repeat="20"
+                        >
+                          <treecontrol
+                            class="tree-classic"
+                            tree-model="vm.basicTree"
+                            options="vm.treeOptions"
+                            on-selection="vm.showSelected(node)"
+                            selected-node="node1"
+                            order-by="'name'"
+                            reverse-order="{{vm.reverse}}"
+                            filter-expression="vm.predicate"
+                          >
+                            {{node.name}}
+                          </treecontrol>
+                        </div>
+                      </fieldset>
+                      <div
+                        class="uk-width-2-10"
+                        ng-if="vm.numberOrder!==null"
+                        style="height: 99%; padding-left: 5px; margin-top: 6px"
+                      >
+                        <patient order="vm.numberOrder"></patient>
+                      </div>
+                      <div
+                        class="uk-width-6-10"
+                        style="
+                          width: 55%;
+                          height: 100%;
+                          overflow: auto;
+                          padding-left: 10px;
+                          margin-top: 5px;
+                        "
+                        ng-if="vm.numberOrder!==null"
+                      >
+                        <div
+                          class="uk-grid uk-flex uk-flex-middle div-head"
+                          style="
+                            font-size: 11px;
+                            width: 98%;
+                            height: 26px;
+                            background-color: #fff;
+                            border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+                          "
+                        >
+                          <div
+                            class="uk-width-2-10"
+                            style="width: 12%; padding: 4px 8px"
+                          >
+                            {{'0098' | translate}}
+                          </div>
+                          <div
+                            class="uk-width-3-10"
+                            style="width: 20%; padding: 4px 8px"
+                          >
+                            {{'0013' | translate}}
+                          </div>
+                          <div
+                            class="uk-width-3-10"
+                            style="width: 10%; padding: 4px 8px"
+                          >
+                            {{'0289' | translate}}
+                          </div>
+                          <div
+                            class="uk-width-1-10 small_col"
+                            style="width: 14%; padding: 4px 8px"
+                          >
+                            {{'0409' | translate}}
+                          </div>
+                          <div
+                            class="uk-width-1-10 small_col"
+                            style="width: 19%; padding: 4px 8px"
+                          >
+                            {{'0405' | translate}}
+                          </div>
+                          <div
+                            class="uk-width-1-10 small_col"
+                            style="width: 7%; padding: 4px 8px"
+                          >
+                            {{'0125' | translate}}
+                          </div>
+                          <div
+                            class="uk-width-1-10 small_col"
+                            style="width: 6%; padding: 4px 8px"
+                          ></div>
+                        </div>
+                        <div
+                          class="div-conttable contentscroll"
+                          style="height: calc(100% - 2rem)"
+                        >
+                          <div
+                            class="uk-accordion"
+                            ng-repeat="(key, value) in vm.listtestgroup"
+                            style="height: auto; overflow: auto"
+                            data-uk-accordion
+                          >
+                            <div class="uk-accordion-title">{{key}}</div>
+                            <div class="uk-accordion-content">
+                              <table
+                                class="uk-table uk-table-small uk-table-middle tablescrollable"
+                              >
+                                <tbody class="tbodyscrollable">
+                                  <tr ng-repeat="test in value">
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 12%"
+                                    >
+                                      {{test.testCode}}
+                                    </td>
+                                    <td
+                                      class="uk-width-2-10"
+                                      style="width: 20%"
+                                    >
+                                      {{test.testName}}
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 10%"
+                                    >
+                                      {{test.state < 4 ? 'Pendiente':
+                                      test.result}}
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 14%"
+                                    >
+                                      {{test.refMin==0?"":test.refMin}}{{test.refMin==0?"":"-"}}{{test.refMax==0?"":test.refMax}}
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 19%"
+                                    >
+                                      {{test.lastResult}}
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 10%"
+                                      ng-bind-html="test.unit | trust"
+                                    ></td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 1%"
+                                    >
+                                      <i
+                                        class="uk-icon-commenting md-color-grey-300"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        title="{{'0114' | translate}}"
+                                        ng-class="{' uk-text-primary' : test.hasComment}"
+                                      ></i>
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 1%"
+                                    >
+                                      <i
+                                        class="uk-icon-flask md-color-grey-300"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        title="{{'0414' | translate}}"
+                                        ng-class="{' uk-text-primary' : test.hasAntibiogram}"
+                                      ></i>
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 2%"
+                                    >
+                                      <i
+                                        style="font-size: 15px"
+                                        class="material-icons md-color-grey-300"
+                                        ng-class="{'uk-text-primary' : test.attachmentTest === 1}"
+                                        title="{{'0376' | translate}}"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        >&#xE226;</i
+                                      >
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 1%"
+                                    >
+                                      <i
+                                        class="uk-icon-check md-color-grey-300"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        title="{{'0416' | translate}}"
+                                        ng-class="{' uk-text-primary' : test.state === 4}"
+                                      ></i>
+                                    </td>
+                                    <td
+                                      class="uk-width-1-10 small_col"
+                                      style="width: 1%"
+                                    >
+                                      <i
+                                        class="uk-icon-print md-color-grey-300"
+                                        ng-class="{' uk-text-primary' : test.state === 5}"
+                                        data-uk-tooltip="{pos:'top'}"
+                                        title="{{'0379' | translate}}"
+                                      ></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md-fab-wrapper md-fab-in-card">
+                    <div class="uk-grid">
+                      <div class="uk-width-5-10" style="padding-left: 0px">
+                        <button
+                          type="button"
+                          ng-disabled="vm.listtest.length===0"
+                          ng-class="{'md-bg-blue-grey-100' : vm.listtest.length===0}"
+                          class="md-fab md-fab-small md-bg-indigo-200 md-fab-wave-light waves-effect waves-light"
+                          ng-click="vm.openreportfinalprint = true"
+                        >
+                          <i class="uk-icon-file-pdf-o md-color-brown-50"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li style="height: 100%">
+                  <div class="uk-width-1-1" style="height: 11%">
+                    <div class="uk-grid">
+                      <div
+                        class="uk-width-2-10"
+                        style="padding-top: 4px"
+                        ng-show="vm.typedocument &&  !vm.historyautomatic"
+                      >
+                        <label style="top: -6px; font-size: 12px"
+                          >{{'0233' | translate}}</label
+                        >
+                        <select
+                          class="md-input"
+                          ng-options="obj.id as obj.name for obj in vm.documentType"
+                          data-ng-model="vm.documentType1.id"
+                          ng-change="vm.idpatientfortest()"
+                        ></select>
+                      </div>
+                      <div class="uk-width-2-10">
+                        <label>{{'0117' | translate}}</label>
+                        <input
+                          type="text"
+                          class="md-input label-fixed"
+                          data-ng-model="vm.record1"
+                          ng-keypress="vm.keyspatientidenter($event)"
+                          md-input
+                        />
+                      </div>
+                      <div class="uk-width-6-10" style="margin-top: 8px">
+                        <loadcombobox
+                          listorigin="vm.listselecttest"
+                          ng-model="vm.selectedTest"
+                          placeholder="'0013'"
+                          change="vm.idpatientfortest(item)"
+                        >
+                        </loadcombobox>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="uk-width-1-1"
+                    style="height: 88%"
+                    ng-if="vm.numberOrder!=null"
+                  >
+                    <div class="uk-grid" style="height: 100%; margin-left: 0px">
+                      <div
+                        class="uk-width-3-10"
+                        style="
+                          height: 100%;
+                          padding-left: 5px;
+                          margin-top: 5px;
+                          width: 26%;
+                        "
+                      >
+                        <patient
+                          order="vm.numberOrder"
+                          datapatient="vm.datapatient"
+                        ></patient>
+                      </div>
+                      <div
+                        class="uk-width-3-10"
+                        style="
+                          height: 100%;
+                          padding-left: 10px;
+                          margin-top: 15px;
+                          width: 74%;
+                        "
+                      >
+                        <table
+                          class="uk-table uk-table-small uk-table-middle tablescrollable"
+                        >
+                          <thead class="theadscrollable">
+                            <tr>
+                              <th class="uk-width-1-10">
+                                {{'0110' | translate}}
+                              </th>
+                              <th class="uk-width-1-10">
+                                {{'0289' | translate}}
+                              </th>
+                              <th class="uk-width-1-10 uk-text-center">
+                                {{'0394' | translate}}
+                              </th>
+                              <th class="uk-width-1-10 uk-text-center">
+                                {{'0405' | translate}}
+                              </th>
+                              <th class="uk-width-1-10 uk-text-center">
+                                {{'0125' | translate}}
+                              </th>
+                              <th class="uk-width-1-10" style="width: 17%"></th>
+                              <th class="uk-width-2-10">
+                                {{'0417' | translate}}
+                              </th>
+                              <th class="uk-width-2-10">
+                                {{'0418' | translate}}
+                              </th>
+                            </tr>
+                          </thead>
+                        </table>
+                        <div
+                          class="uk-accordion"
+                          ng-repeat="(key, value) in vm.consultpatientgroup"
+                          data-uk-accordion
+                          style="height: calc(100% - 140px)"
+                        >
+                          <div class="uk-accordion-title">{{key}}</div>
+                          <div class="uk-accordion-content">
+                            <table
+                              class="uk-table uk-table-small uk-table-middle tablescrollable"
+                            >
+                              <tbody
+                                vs-repeat="30"
+                                style="
+                                  overflow-y: scroll;
+                                  height: calc(100vh - 374px);
+                                  width: 100%;
+                                  padding-left: 0px;
+                                "
+                                class="tbodyscrollable"
+                              >
+                                <tr
+                                  ng-repeat="test in value | orderBy: 'test.entryDate'"
+                                >
+                                  <td class="uk-width-1-10">{{test.order}}</td>
+                                  <td class="uk-width-1-10">{{test.result}}</td>
+                                  <td class="uk-width-1-10 uk-text-center">
+                                    {{test.refInterval}}
+                                  </td>
+                                  <td
+                                    class="uk-width-1-10 small_col uk-text-center"
+                                  >
+                                    {{test.lastResult}}
+                                  </td>
+                                  <td
+                                    class="uk-width-1-10"
+                                    ng-bind-html="test.unit | trust"
+                                  ></td>
+                                  <td
+                                    class="uk-width-1-10 small_col"
+                                    style="width: 2%"
+                                  >
+                                    <i
+                                      class="uk-icon-commenting md-color-grey-300"
+                                      data-uk-tooltip="{pos:'top'}"
+                                      title="{{'0114' | translate}}"
+                                      ng-class="{' uk-text-primary' : test.hasComment}"
+                                    ></i>
+                                  </td>
+                                  <td
+                                    class="uk-width-1-10 small_col"
+                                    style="width: 2%"
+                                  >
+                                    <i
+                                      class="uk-icon-flask md-color-grey-300"
+                                      data-uk-tooltip="{pos:'top'}"
+                                      title="{{'0414' | translate}}"
+                                      ng-class="{' uk-text-primary' : test.hasAntibiogram}"
+                                    ></i>
+                                  </td>
+                                  <td
+                                    class="uk-width-1-10 small_col"
+                                    style="width: 2%"
+                                  >
+                                    <i
+                                      style="font-size: 15px"
+                                      class="material-icons md-color-grey-300"
+                                      ng-class="{'uk-text-primary' : test.attachmentTest === 1}"
+                                      title="{{'0376' | translate}}"
+                                      data-uk-tooltip="{pos:'top'}"
+                                      >&#xE226;</i
+                                    >
+                                  </td>
+                                  <td
+                                    class="uk-width-1-10 small_col"
+                                    style="width: 2%"
+                                  >
+                                    <i
+                                      class="uk-icon-check md-color-grey-300"
+                                      data-uk-tooltip="{pos:'top'}"
+                                      title="{{'0416' | translate}}"
+                                      ng-class="{'uk-text-primary' : test.state===4}"
+                                    ></i>
+                                  </td>
+                                  <td
+                                    class="uk-width-1-10 small_col"
+                                    style="width: 2%"
+                                  >
+                                    <i
+                                      class="uk-icon-print md-color-grey-300"
+                                      ng-class="{' uk-text-primary' : test.currentState === 5}"
+                                      data-uk-tooltip="{pos:'top'}"
+                                      title="{{'0379' | translate}}"
+                                    ></i>
+                                  </td>
+                                  <td class="uk-width-2-10" style="width: 19%">
+                                    {{test.entryDate}}
+                                  </td>
+                                  <td class="uk-width-2-10" style="width: 21%">
+                                    {{test.validationDate}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md-fab-wrapper md-fab-in-card">
+                    <div class="uk-grid">
+                      <div class="uk-width-1-3" style="width: 43.333%">
+                        <button
+                          type="button"
+                          ng-disabled="((vm.consultpatient | filter:{ state: 4}).length === 0 ) || vm.selectedTest.resultType != 1"
+                          class="md-fab md-fab-small md-bg-cyan-600"
+                          ng-class="{'md-bg-blue-grey-100' : ((vm.consultpatient | filter:{ state: 4}).length === 0 ) || vm.selectedTest.resultType != 1}"
+                          ng-click="vm.Graph()"
+                        >
+                          <i
+                            class="uk-icon-area-chart md-color-grey-50"
+                            data-uk-tooltip="{pos:'top'}"
+                            title="{{'0423' | translate}}"
+                          ></i>
+                        </button>
+                      </div>
+                      <div class="uk-width-1-3">
+                        <button
+                          type="button"
+                          ng-disabled="((vm.consultpatient | filter:{ validationDate: ''}).length === 0 )"
+                          class="md-fab md-fab-small md-bg-brown-600"
+                          ng-class="{'md-bg-blue-grey-100' : ((vm.consultpatient | filter:{ validationDate:''}).length === 0 )}"
+                          ng-click="vm.printhistory()"
+                        >
+                          <i
+                            style="color: white"
+                            class="material-icons"
+                            data-uk-tooltip="{pos:'top'}"
+                            title="{{'0422' | translate}}"
+                            >&#xE889;</i
+                          >
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<reportend
+  openreport="vm.openreportfinalprint"
+  order="vm.numberOrder"
+  functionexecute="vm.getDetail"
+></reportend>
+<!-- <loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport> -->
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

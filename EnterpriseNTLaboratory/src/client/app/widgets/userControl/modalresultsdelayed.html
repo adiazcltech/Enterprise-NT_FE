@@ -1,0 +1,84 @@
+<div id="resultsdelayed" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true"
+  style="display: none; overflow-y: scroll; ">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-deep-purple-800">
+        <div class="md-card-toolbar-actions" style="padding-top: 0px">
+          <div>
+            <i class="md-icon material-icons md-color-grey-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="float: left; margin: 8px 8px 0 0; display: block;"><i class="material-icons md-color-brown-50"
+            style="line-height: 32px; font-size: 28px">history</i></span>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+          {{'2081' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="height: calc(100% - 76px);">
+        <form class="form md-card md-card-hover" name="myForm" style="height: calc(100% - 46px); padding: 20px">
+          <div class="uk-form-row uk-width-1-1" style="height: 100%">
+            <div class="uk-form-row"></div>
+            <div class="uk-form-row" style="margin-top: 15px; height: 100% ">
+              <table class="uk-table uk-table-small uk-table-middle tablescrollable" style="height: calc(100% - 60px)">
+                <div class="uk-grid">
+                  <div class="uk-input-group uk-width-1-1" style="float: left;">
+                    <label>{{'0154' | translate}}</label>
+                    <input type="text" class="md-input" ng-model="modalresultsdelayed.filter1" md-input>
+                    <span class="uk-input-group-addon" style="height: 10px;">
+                      <i class="material-icons md-24">&#xE8B6;</i>
+                    </span>
+                  </div>
+                </div>
+                <thead class="theadscrollable" style="width: calc(100% - 0px)">
+                  <tr class="uk-width-1-1" style="display: inline-table;">
+                    <th class="uk-width-1-5">{{'0061' | translate}}</th>
+                    <th class="uk-width-1-5">{{'0098' | translate}}</th>
+                    <th class="uk-width-1-5">{{'0013' | translate}}</th>
+                    <th class="uk-width-1-5">{{'0199' | translate}}</th>
+                    <th class="uk-width-1-5">{{'0200' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody class="tbodyscrollable" style="height: calc(100% - 60px); overflow-y: scroll;">
+                  <tr class="uk-grid"
+                    data-ng-repeat="resultsdelayed in modalresultsdelayed.TestSelect | filter: modalresultsdelayed.filter1"
+                    style="margin-left: 0px; margin-top: 0px; height: 32px">
+                    <td class="uk-width-1-5" style="border-top: 1px solid #ddd;">
+                      <a href="#"
+                        ng-click="modalresultsdelayed.selectOrder(resultsdelayed)">{{resultsdelayed.order}}</a>
+                    </td>
+                    <td style="border-top: 1px solid #ddd;" data-ng-bind="resultsdelayed.testCode" class="uk-width-1-5">
+                    </td>
+                    <td style="border-top: 1px solid #ddd;" data-ng-bind="resultsdelayed.testName" class="uk-width-1-5">
+                    </td>
+                    <td style="border-top: 1px solid #ddd;" data-ng-bind="resultsdelayed.time" class="uk-width-1-5">
+                    </td>
+                    <td style="border-top: 1px solid #ddd;" data-ng-bind="resultsdelayed.timetotal"
+                      class="uk-width-1-5"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="nofound" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{'1889' | translate}}
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

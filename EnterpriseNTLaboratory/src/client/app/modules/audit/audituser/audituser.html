@@ -1,0 +1,79 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="overflow: hidden;padding: 10px 19px 0px;">
+        <div class="md-card md-card-hover" style="height: 99%;">
+            <div style="height: 96%" class="md-card-content uk-margin">
+                <div class="uk-width-1-1 fullheight">
+                    <li class="fullheight uk-flex uk-flex-center uk-flex-middle">
+                        <div class="uk-width-8-10" style="height: 50%;">
+                            <div class="md-card  md-card-hover" style="min-height: 82px;min-width: 877px">
+                                <div class="uk-grid">
+                                    <div class="uk-width-3-10" style="margin-top: 10px;margin-left: 9px;">
+                                        <label
+                                            style="font-size: 12px;color: #727272;left: 4px; margin-bottom: 3px">{{'0075' | translate}}</label>
+                                        <br>
+                                        <input kendo-date-time-picker k-ng-model="vm.startDate"
+                                            style="width: 100%; margin-top: -47px; padding-bottom: 0px; font-size: 13px"
+                                            k-interval="5" k-format="'{{vm.formatDate}}'" k-max="vm.max"
+                                            k-rebind="vm.max" k-min="vm.tomorrow" k-on-change="vm.startChange()"
+                                            class="md-input" autocomplete="off" />
+
+                                    </div>
+                                    <div class="uk-width-3-10" style="margin-top: 10px;">
+                                        <label
+                                            style="font-size: 12px;color: #727272;left: 4px; margin-bottom: 3px">{{'0076' | translate}}</label>
+                                        <br>
+                                        <input kendo-date-time-picker k-ng-model="vm.endDate"
+                                            style="width: 100%; margin-top: -47px; padding-bottom: 0px; font-size: 13px"
+                                            k-interval="5" k-format="'{{vm.formatDate}}'" k-max="vm.maxend"
+                                            k-min="vm.min" k-rebind="vm.min" k-on-change="vm.endChange()"
+                                            class="md-input" autocomplete="off" />
+                                    </div>
+                                    <div class="uk-width-3-10" style="margin-top: 10px">
+                                        <div class="uk-form-row md-input-wrapper md-input-filled">
+                                            <label style="color: #444444; margin-left: -8px"
+                                                class="inline-label">{{'0001' | translate}}</label>
+                                            <select class="md-input" md-input style="margin-top: 13px; font-size: 13px"
+                                                ng-options="obj as obj.namecompleted for obj in vm.user track by obj.id"
+                                                data-ng-model="vm.list"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-10 uk-flex uk-flex-center uk-flex-middle"
+                                        style="width: 9%;padding-left: 0px; padding-top: 15px">
+                                        <button type="button" class="md-fab md-fab-smallY md-fab md-fab-primary"
+                                            ng-class="{'md-bg-blue-grey-100' : vm.list.id===undefined}"
+                                            ng-click="vm.search()" ng-disabled="vm.list.id===undefined">
+                                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                title="{{'0154' | translate}}">&#xE8B6;</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-2-10" style="padding-left: 17px;">
+                        <img src="images/Question.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-8-10" style="margin-top: 3%;">
+                        <span class="uk-text-justify">{{'0962' | translate}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

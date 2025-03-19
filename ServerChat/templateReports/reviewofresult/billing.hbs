@@ -1,0 +1,11 @@
+F.SOLICITUD;D F.CHECKIN;F.VALIDACIÓN;LETRA;ID. ATENCIÓN;ORDEN;INSTITUCIÓN;AREA;CUPS;PRUEBA;RESULTADO;EPS;HISTORIA;PACIENTE;DEPARTAMENTO;FECHA DE NACIMIENTO;EDAD;GÉNERO;TIPO DE ATENCIÓN;CARGO;CANAL;CLIENTE;TARIFA;PRECIO SERVICIO;PRECIO PACIENTE;PRECIO CLIENTE
+{{#each this}}
+{{#each this}}
+{{@key}}
+{{#each this}}
+{{#each tests}}
+{{entryDate}};{{verificationDate}};{{resultDate}};{{../demo_11_value}};{{../demo_12_value}};{{../orderNumber}};{{laboratory.name}};{{area.name}};{{code}};{{name}};{{result.result}};{{../demo_3_codifiedCode}} {{../demo_3_value}};{{../patient.documentType.abbr}} {{../patient.patientId}};{{../patient.name1}} {{../patient.name2}} {{../patient.lastName}} {{../patient.surName}};{{../demo_6_value}} ;{{../patient.birthdaydate}};{{../patient.birthday}};{{../patient.sexabbr}};{{../demo_8_value}};{{../demo_4_value}};{{../demo_1_value}};{{../account.name}};{{../rate.name}};${{testPrice.servicePrice}};${{testPrice.patientPrice}};${{testPrice.insurancePrice}}
+{{/each}}
+{{/each}}
+{{/each}}
+{{/each}}

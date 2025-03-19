@@ -1,0 +1,545 @@
+<style>
+    .cashbox-padding-search {
+        padding-top: 5px;
+    }
+
+    .cashbox-uppercase {
+        text-transform: uppercase;
+    }
+
+    .cashbox-table-row {
+        margin-top: 10px !important;
+        height: calc(100% - 402px);
+    }
+
+    .cashbox-table-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        height: 100%;
+        overflow: hidden;
+        border-left-style: solid;
+        border-left-color: #ddd;
+        border-left-width: 1px;
+    }
+
+    .cashbox-table-container-header {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: 110px !important;
+        max-height: 110px !important;
+    }
+
+    .cashbox-filter-margin {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .cashbox-filter-padding {
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    .k-picker-wrap {
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .k-picker-wrap.k-state-hover {
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .k-datepicker .k-input,
+    .k-timepicker .k-input {
+        background-color: white;
+    }
+
+    .cashbox-btn-min {
+        width: 22px;
+        height: 22px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .cashbox-btn-min>i.material-icons {
+        margin-top: 0px;
+        font-size: 18px;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .cashbox-tbody {
+        height: calc(100% - 479px) !important;
+        overflow-y: scroll;
+        position: absolute;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: #ddd;
+        width: 97.5% !important;
+    }
+
+    .cashbox-tbody-rate {
+        height: calc(100% - 62px) !important;
+        overflow-y: scroll;
+        position: absolute;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: #ddd;
+        width: 97.5% !important;
+    }
+
+
+
+    tr.chh>td {
+        line-height: 40px;
+        padding: 0px
+    }
+
+    .cashbox-noapply {
+        color: rgb(173, 173, 173);
+        font-style: italic;
+        margin-top: 14px;
+        text-align: center;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #dcdcdc;
+        height: 28px;
+    }
+
+    table.cashbox-table-tr>thead>tr>th {
+        font-size: 11pt !important;
+        font-weight: bold;
+        width: 12%;
+    }
+
+    table.cashbox-table-tr>tbody>tr>td {
+        width: 5%;
+        font-size: 10pt !important;
+    }
+
+    .labelmessageText {
+        margin-top: 20px;
+        margin-left: 5px;
+        font-size: 14px;
+        line-height: 40px;
+    }
+
+    .messageValidBalance {
+        height: auto;
+        top: 10px !important;
+        width: 500px !important;
+    }
+
+    .messageTextBalance {
+        width: 300px;
+        float: left;
+        padding-top: 5%;
+        white-space: nowrap;
+    }
+</style>
+
+<div id="cashbox" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-teal-300">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="cashbox.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="font-size: 33px;">&#xE227;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0779'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+
+                <!--------------TARIFAS-------------->
+                <div class="uk-form-row">
+                    <div class="md-card md-card-hover" style="height: 150px;">
+                        <div class="md-card-content" style="padding-top: 8px; padding-bottom: 8px">
+                            <form id="FormPayers" class="uk-overflow-container cashbox-table-container-header">
+                                <table class="uk-table uk-table-nowrap cashbox-table-tr">
+                                    <thead>
+                                        <tr>
+                                            <th hidden>Id</th>
+                                            <th hidden>Id Tarifa</th>
+
+                                            <th class="uk-text-left" style="padding-left: 50px;">{{'0087' | translate}}
+                                            </th>
+                                            <th class="uk-text-center">{{'0013' | translate}}</th>
+                                            <th class="uk-text-right">{{'0443' | translate}}</th>
+                                            <th class="uk-text-right">{{'0931' | translate}}</th>
+                                            <th class="uk-text-right" style="padding-right: 20px;">{{'0470' |
+                                                translate}} ({{cashbox.symbolCurrency}})</th>
+                                            <th class="uk-text-right" style="padding-right: 35px">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cashbox-tbody-rate" style="height: calc(100% - 62px) !important;">
+                                        <tr ng-repeat="payer in cashbox.payers track by $index" class="chh">
+                                            <td hidden>{{payer.id}}</td>
+                                            <td hidden>{{payer.rate.id}}</td>
+
+                                            <td class="uk-text-left" style="padding-left: 50px;">{{payer.rate.name}}
+                                            </td>
+                                            <td class="uk-text-center" style="padding-right: 40px;">
+                                                 <a href="#"
+                                                    ng-click="cashbox.openTests(payer.rate.id, payer.rate.name, false)">
+                                                    <i class="material-icons ng-binding md-color-light-blue-A700"
+                                                        style="font-size: 24px; padding-top: 11px"
+                                                        data-uk-tooltip="{pos:'top'}"
+                                                        title="{{payer.toolnumtest}}">{{payer.numtest}}</i>
+                                                </a>
+                                            </td>
+                                            <td class="uk-text-right">{{payer.subTotal | currency:
+                                                cashbox.symbolCurrency: cashbox.penny}}</td>
+                                            <td class="uk-text-right">{{payer.dicountvaluetest | currency:
+                                                cashbox.symbolCurrency: cashbox.penny}}</td>
+                                            <td class="uk-text-right">{{payer.taxValue | currency:
+                                                cashbox.symbolCurrency: cashbox.penny}}</td>
+                                            <td class="uk-text-right" style="padding-right: 15px">{{payer.totalWithTax |
+                                                currency: cashbox.symbolCurrency: cashbox.penny}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--------------PAGOS-------------->
+                <div class="uk-form-row cashbox-table-row">
+                    <div class="uk-overflow-container cashbox-table-container">
+                        <table class="uk-table uk-table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th hidden>Id</th>
+
+                                    <th class="uk-text-left uk-width-1-5">
+                                        <button id="btnAdd" type="button"
+                                            class="cashbox-btn-min md-btn-success md-btn-wave-light waves-effect waves-button waves-light"
+                                            ng-class="{'md-bg-blue-grey-100': cashbox.addPayDisabled}"
+                                            ng-click="cashbox.addPayment()" ng-disabled="cashbox.addPayDisabled"
+                                            style="margin-right: 20px">
+                                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                title="{{'0819' | translate}}">&#xE145;</i>
+                                        </button>{{'0820' | translate}}
+                                    </th>
+                                    <th class="uk-text-left uk-width-1-5">{{'0821' | translate}}</th>
+                                    <th class="uk-text-left uk-width-1-5">{{'0822' | translate}}</th>
+                                    <th class="uk-text-center uk-width-1-5">{{'0823' | translate}}</th>
+                                    <th class="uk-text-right uk-width-1-5" style="padding-right: 55px;">{{'0580' |
+                                        translate}}</th>
+                                    <th class="uk-text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="cashbox-tbody">
+                                <tr ng-repeat="payment in cashbox.payments track by $index" ng-show="payment.active">
+                                    <td hidden>{{payment.id}}</td>
+                                    <td class="uk-width-1-5">
+                                        <select charset="utf-8"
+                                            ng-options="obj as obj.name for obj in cashbox.paymentTypes track by obj.id"
+                                            data-ng-model="payment.paymentType" md-input class="md-input"
+                                            ng-change="cashbox.selectPaymentType(payment, $index)"
+                                            style="padding-bottom: 0px; margin-top: -4px"></select>
+                                    </td>
+                                    <td class="uk-width-1-5 uk-text-left">
+                                        <div ng-show="!payment.disabledBank">
+                                            <select charset="utf-8"
+                                                ng-options="obj as obj.name for obj in cashbox.banks track by obj.id"
+                                                data-ng-model="payment.bank" md-input class="md-input"
+                                                style="padding-bottom: 0px; margin-top: -4px"
+                                                ng-disabled="payment.disabledBank"></select>
+                                        </div>
+                                        <div ng-show="payment.disabledBank" class="cashbox-noapply uk-text-left"
+                                            id="{{'divNotBank' + $index}}">
+                                            -- {{'0162' | translate}} --
+                                        </div>
+                                    </td>
+                                    <td class="uk-width-1-5 uk-text-left">
+                                        <div ng-show="!payment.disabledCard">
+                                            <select charset="utf-8"
+                                                ng-options="obj as obj.name for obj in cashbox.cards track by obj.id"
+                                                data-ng-model="payment.card" md-input class="md-input"
+                                                style="padding-bottom: 0px; margin-top: -4px"
+                                                ng-disabled="payment.disabledCard"></select>
+                                            <!-- <loadcombobox listorigin="cashbox.cards" ng-model="payment.card.id" ng-disabled="payment.disabledCard"></loadcombobox> -->
+                                        </div>
+                                        <div ng-show="payment.disabledCard" class="cashbox-noapply uk-text-left"
+                                            id="{{'divNotCard' + $index}}">
+                                            -- {{'0162' | translate}} --
+                                        </div>
+                                    </td>
+                                    <td class="uk-width-1-5">
+                                        <input type="text" ng-model="payment.number"
+                                            ng-disabled="payment.disabledNumber" class="md-input uk-text-right"
+                                            ng-show="!payment.disabledNumber">
+                                        <div ng-show="payment.disabledNumber" class="cashbox-noapply uk-text-right"
+                                            id="{{'divNotNumber' + $index}}">
+                                            -- {{'0162' | translate}} --
+                                        </div>
+                                    </td>
+                                    <td class="uk-width-1-5">
+                                        <input type="text" id="{{'value' + $index}}" ng-model="payment.payment"
+                                            ng-keypress="cashbox.keyOnlyNumber($event)" md-input
+                                            class="md-input uk-text-right"
+                                            ng-blur="cashbox.eventChangePayment(payment, $index)"
+                                            ng-focus="cashbox.eventFocusValue(payment.payment, 'value' + $index)"
+                                            style="padding-bottom: 0px; margin-top: -4px">
+                                    </td>
+                                    <td>
+                                        <a class="" ng-click="cashbox.eventClickDeletePayment(payment, $index)">
+                                            <i class="material-icons no_margin md-color-red-500"
+                                                style="font-size: 24px;margin-top: 10px;">&#xE872;</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--------------TOTALES-------------->
+                <div class="uk-form-row" style="margin-top: 10px">
+                    <div class="md-card md-card-hover" style="height: 95px;">
+                        <div class="md-card-content" style="padding-top: 6px; padding-bottom: 8px">
+                            <form id="FormTotals" class="uk-overflow-container cashbox-table-container-header">
+                                <table class="uk-table uk-table-nowrap cashbox-table-tr">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-text-right" style="padding-right: 40px">{{'0868' | translate}}</th>
+                                            <th class="uk-text-left"  ng-if="cashbox.generaldiscountmanagement">{{'0825' | translate}}</th>
+                                            <th ng-if="cashbox.discountType === '1' && cashbox.generaldiscountmanagement" class="uk-text-right">{{'0931' |
+                                                translate}} (%)</th>
+                                            <th class="uk-text-right"  ng-if="cashbox.generaldiscountmanagement" style="padding-right:30px;">{{'0826' | translate}}</th>
+                                            <th class="uk-text-right" ng-if="cashbox.generaldiscountmanagement">{{'0869' | translate}}</th>
+                                            <th ng-if="cashbox.copaybypercentage" class="uk-text-right">{{'2080' | translate}}</th>
+                                            <th ng-if="cashbox.copayType === '1' && cashbox.copaybypercentage" class="uk-text-right">{{'1548' | translate}} (%)</th>
+                                            <th class="uk-text-right" style="padding-right: 30px">{{'1548' | translate}}</th>
+                                            <th class="uk-text-right" style="padding-right: 20px">{{'1578' | translate}}</th>
+                                            <th ng-if="cashbox.isAddressCharge" class="uk-text-right" style="padding-right: 30px">{{'1899' | translate}}</th>
+                                            <th class="uk-text-right" style="padding-right: 40px;">{{'0471' | translate }}</th>
+                                            <th class="uk-text-right">{{'0472' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cashbox-tbody-rate"
+                                        style="height: calc(100% - 50px) !important; overflow: hidden !important; position: relative;">
+                                        <tr class="chh">
+                                            <td class="uk-text-right" style="padding-right: 40px; padding-top: 5px;">
+                                                {{cashbox.totalToPaid | currency: cashbox.symbolCurrency:cashbox.penny}}
+                                            </td>
+                                            <td class="uk-text-center" ng-if="cashbox.generaldiscountmanagement">
+                                                <div style="padding-left: 10px; width: 90%;">
+                                                    <select data-ng-model="cashbox.discountType"
+                                                        ng-change="cashbox.changeDiscountType()" md-input
+                                                        class="md-input"
+                                                        style="padding: 0px; margin-top: -8px; margin-bottom: 4px; padding-top: 10px;  font-size: 10pt ">
+                                                        <option value="0">{{'0580' | translate}}</option>
+                                                        <option value="1">{{'0827' | translate}}</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="uk-text-center" ng-if="cashbox.generaldiscountmanagement">
+                                                <div style="padding-left: 10px; width: 95%;">
+                                                    <input id="discount" ng-model="cashbox.discount"
+                                                        class="md-input uk-text-right"
+                                                        ng-keypress="cashbox.maxDiscountValue(cashbox.discount, cashbox.discountType $event)"
+                                                        md-input ng-disabled="cashbox.vm.maxDiscountUser === 0"
+                                                        ng-blur="cashbox.maxDiscountValue(cashbox.discount, cashbox.discountType, $event); cashbox.recalculate()"
+                                                        style="padding: 0px; margin-top: -8px; margin-bottom: 4px; padding-top: 10px; padding-right:30px;  font-size: 10pt"
+                                                        ng-focus="cashbox.eventFocusValue(cashbox.discount, 'discount')">
+                                                </div>
+                                            </td>
+                                            <td ng-if="cashbox.discountType === '1' && cashbox.generaldiscountmanagement" class="uk-text-right"
+                                                style="padding-right: 35px; padding-top: 5px;">{{cashbox.valueDiscount |
+                                                currency: cashbox.symbolCurrency: cashbox.penny}}</td>
+                                            <td class="uk-text-right" style="padding-right: 10px; padding-top: 5px;"  ng-if="cashbox.generaldiscountmanagement">
+                                                {{cashbox.totalWithDiscount | currency: cashbox.symbolCurrency:
+                                                cashbox.penny}}</td>
+                                            <td class="uk-text-center" ng-if="cashbox.copaybypercentage">
+                                                  <div style="padding-left: 10px; width: 90%;">
+                                                      <select data-ng-model="cashbox.copayType"
+                                                          ng-change="cashbox.changeCopayType()" md-input ng-disabled="cashbox.disabledcopayType"
+                                                          class="md-input"
+                                                          style="padding: 0px; margin-top: -8px; margin-bottom: 4px; padding-top: 10px;  font-size: 10pt ">
+                                                          <option value="0">{{'0580' | translate}}</option>
+                                                          <option value="1">{{'0827' | translate}}</option>
+                                                      </select>
+                                                  </div>
+                                            </td>
+                                            <td class="uk-text-center">
+                                                <div style="padding-left: 10px; width: 95%;">
+                                                    <input id="copay" ng-model="cashbox.copay"
+                                                        ng-keypress="cashbox.keyOnlyNumber($event)"
+                                                        class="md-input uk-text-right" md-input
+                                                        ng-blur="cashbox.recalculate('copay')"
+                                                        ng-focus="cashbox.eventFocusValue(cashbox.copay, 'copay')"
+                                                        style="padding: 0px; margin-top: -8px; margin-bottom: 4px; padding-top: 10px; padding-right:30px;  font-size: 10pt">
+                                                </div>
+                                            </td>
+                                            <td ng-if="cashbox.copayType=== '1' && cashbox.copaybypercentage" class="uk-text-right"
+                                                style="padding-right: 35px; padding-top: 5px;">{{cashbox.valueCopay |
+                                                currency: cashbox.symbolCurrency: cashbox.penny}}
+                                            </td>
+                                            <td class="uk-text-center">
+                                                <div style="padding-left: 10px; width: 95%;">
+                                                    <input id="fee" ng-model="cashbox.fee"
+                                                        class="md-input uk-text-right" md-input
+                                                        ng-keypress="cashbox.keyOnlyNumber($event)"
+                                                        ng-blur="cashbox.recalculate('copay')"
+                                                        ng-focus="cashbox.eventFocusValue(cashbox.fee, 'fee')"
+                                                        style="padding: 0px; margin-top: -8px; margin-bottom: 4px; padding-top: 10px; padding-right:30px;  font-size: 10pt">
+                                                </div>
+                                            </td>
+                                            <td class="uk-text-center" ng-if="cashbox.isAddressCharge">
+                                              <div style="padding-left: 10px; width: 85%;padding-right: 40px;">
+                                                  <input id="charge" ng-model="cashbox.charge"
+                                                      class="md-input uk-text-right" md-input
+                                                      ng-keypress="cashbox.keyOnlyNumber($event)"
+                                                      ng-blur="cashbox.recalculate('copay')"
+                                                      ng-focus="cashbox.eventFocusValue(cashbox.charge, 'charge')"
+                                                      style="padding: 0px; margin-top: -8px; margin-bottom: 4px; padding-top: 10px; padding-right:30px;  font-size: 10pt">
+                                              </div>
+                                            </td>
+                                            <td class="uk-text-right" style="padding-right: 40px; padding-top: 5px;">
+                                                {{cashbox.allpayments | currency: cashbox.symbolCurrency:
+                                                cashbox.penny}}</td>
+                                            <td class="uk-text-right" style="padding-right: 10px; padding-top: 5px;">
+                                                {{cashbox.balance | currency: cashbox.symbolCurrency: cashbox.penny}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 8%;background: #fff;">
+                    <div class="md-fab-wrapper md-fab-in-card uk-flex uk-flex-column"
+                        style="bottom: 10px" ng-style="{'width' : cashbox.permissionuser.removeCashBox ? '118px': '40px'}">
+                        <button type="button" class="md-fab md-fab-small md-bg-teal-300"
+                            ng-click="cashbox.eventClickSave('save')">
+                            <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                title="{{'0007' | translate}}">&#xE161;</i>
+                        </button>
+                    </div>
+                    <div class="md-fab-wrapper md-fab-in-card uk-flex uk-flex-column" style="bottom: 10px;" ng-if="cashbox.permissionuser.removeCashBox">
+                        <button type="button" class="md-fab md-fab-small md-bg-red-A700"
+                            ng-class="{'md-bg-blue-grey-100': !cashbox.haveCashBox}"
+                            ng-click="cashbox.eventClickDeleteAll('delete')" ng-disabled="!cashbox.haveCashBox">
+                            <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                title="{{'0588' | translate}} {{'0779' | translate | lowercase}}">&#xE872;</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Ventana modal para confirmar el guardado de los pagos.-->
+<div id="modalConfirm" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog" style="top: 100px !important">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">
+                {{'0007' | translate}}
+            </h3>
+        </div>
+        <div class="uk-modal-body" style="height: 65px; top: 0px; line-height: 70px">
+            <div style="width: 12%; float: left">
+                <img class="img-responsive" src="images/Question.png">
+            </div>
+            <div class="messageText">
+                <label class="labelmessageText" style="font-size: 14px; margin-left: 10px">{{cashbox.message}}</label>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+                ng-click="cashbox.save(cashbox.transaction); cashbox.deleteCashbox(cashbox.transaction); cashbox.modalConfirm.hide()">{{'0219'
+                | translate}}</button>
+            <button type="button" class="md-btn md-btn-default" ng-click="cashbox.modalConfirm.hide()">{{'0220' |
+                translate}}</button>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal que muestra un mensaje que indica que el valor digitado supera al saldo.-->
+<div id="modalBalance" class="uk-modal" tabindex="1" aria-hidden="false" bg-close="false" modal="false">
+    <div class="uk-modal-dialog messageValidBalance">
+        <button type="button" class="uk-close" ng-class="{'disabled': vm.ButonReject}"
+            ng-click="cashbox.modalBalance.hide()"></button>
+        <div class="uk-modal-body" style="height: 100px; top: 0px">
+            <div style="width: 18%; float: left; margin-right: 20px; margin-left: 20px">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageTextBalance">
+                <label class="labelmessageText">{{'0870' | translate}}</label>
+            </div>
+        </div>
+        <div class="uk-modal-footer">
+        </div>
+    </div>
+</div>
+<!-- Ventana modal que muestra el detalle de las pruebas o exámenes de cada tarifa.-->
+<div id="modalTest" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="width: 822px; height: 350px;">
+        <div class="uk-modal-header md-bg-light-blue-A700" style="border-bottom: 0px;">
+            <h3 class="uk-modal-title">{{'0087' | translate}}: {{cashbox.nameRate}}</h3>
+        </div>
+        <div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+            <form class="form" name="myForm">
+                <div class="uk-form-row">
+
+                    <div class="uk-form-row" style="margin-top: -4px">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="font-size: 11px; width: 780px">
+                            <thead>
+                                <tr>
+                                    <th class="uk-text-left" style="width: 333px; font-weight: bold;">{{'0013' |
+                                        translate}}</th>
+                                    <th class="uk-text-right" style="width: 90px; font-weight: bold;">{{'0257' |
+                                        translate}}</th>
+                                    <th class="uk-text-right" style="width: 90px; font-weight: bold;">Descuento</th>
+                                    <th class="uk-text-right" style="width: 90px; font-weight: bold;">{{'0470' |
+                                        translate}} ({{cashbox.symbolCurrency}})</th>
+                                    <th class="uk-text-right"
+                                        style="width: 80px; font-weight: bold; padding-right: 30px">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbodyscrollable"
+                                style="height: 200px; border-color: #ddd;border-style: solid;border-width: 1px; overflow-y: scroll; margin-top: 5px; width: 100% !important;">
+                                <tr class="uk-grid" data-ng-repeat="Test in cashbox.testsPerRate"
+                                    style="margin-left: 0px; margin-top: 3px">
+                                    <td class="uk-text-left" data-ng-bind="Test.codeName"
+                                        style="width: 333px; white-space: nowrap;"></td>
+                                    <td class="uk-text-right" style="width: 85px">{{Test.patientPrice | currency:
+                                        cashbox.symbolCurrency: cashbox.penny}}</td>
+
+                                    <td class="uk-text-right" style="width: 85px">{{Test.valuediscount | currency:
+                                        cashbox.symbolCurrency: cashbox.penny}}</td>
+
+                                    <td class="uk-text-right" style="width: 85px">{{Test.taxValueCalculate | currency:
+                                        cashbox.symbolCurrency: cashbox.penny}}</td>
+                                    <td class="uk-text-right" style="width: 90px">{{Test.total | currency:
+                                        cashbox.symbolCurrency: cashbox.penny}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-flat" ng-click="cashbox.modalTest.hide()">{{'0329' |
+                translate}}</button>
+        </div>
+    </div>
+</div>

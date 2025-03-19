@@ -1,0 +1,20 @@
+<ui-select  multiple tagging tagging-label="true"  ng-model="multicombobox.item.selected" ng-disabled="multicombobox.disabled" theme="select2" on-select="multicombobox.changelist($item)" on-remove="multicombobox.removed($item, $model)"  style="width: 100%; max-width: 100%">
+    
+    <ui-select-match style="width: 100%; max-width: 100%" placeholder="{{multicombobox.placeholder}}" >
+        <span data-uk-tooltip="{pos:'top'}" title=" {{$item.name}}">{{$item.code}}</span>
+    </ui-select-match>
+    
+    <ui-select-choices repeat="item in multicombobox.list" refresh="multicombobox.fetch($select,$event)" refresh-delay="100" position="auto" >
+        <span ng-bind-html="item[multicombobox.fieldCode] | highlight: $select.search"></span>
+        <span ng-bind-html="item[multicombobox.fieldName] | highlight: $select.search"></span>
+            <div ng-if="$index === $select.items.length - 1  && multicombobox.list.length > 49" >
+                <button ng-if="$index < multicombobox.listorigin.length - 1 " 
+                        class="md-btn md-btn-primary md-btn-mini"
+                        style="width: 100%; margin-top: 5px; font-size: 12px !important"
+                        ng-click="multicombobox.fetch($select,$event);">
+                        {{'0606' | translate}} ({{$index + 1}} / {{multicombobox.listorigin.length}})
+                </button>
+            </div>
+    </ui-select-choices>
+
+ </ui-select>

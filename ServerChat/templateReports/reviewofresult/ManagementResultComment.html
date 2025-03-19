@@ -1,0 +1,130 @@
+
+<style type="text/css">
+  .headertable{
+	font-style: normal;
+    font-weight: bold;
+    font-size: 6pt;
+    color: #1e90ff;
+	border-top: 1px solid #1e90ff;
+	border-bottom: 1px solid #1e90ff;
+	font-family: Arial;
+  }
+  .headerorder {
+    line-height: 0.17in; 
+	font-style:normal;
+	font-weight:bold;
+	font-size:8pt;
+	color:#000000;
+	font-family: Arial;
+  }
+  .headertest {
+   	line-height: 0.10in; 
+	font-style:normal;
+	font-size:6pt;
+	color:#000000;
+	font-family: Arial;
+  }
+  
+	.wrap2{ 
+	  width:100px;
+	  white-space: pre-wrap;      /* CSS3 */   
+	  white-space: -moz-pre-wrap; /* Firefox */    
+	  white-space: -pre-wrap;     /* Opera <7 */   
+	  white-space: -o-pre-wrap;   /* Opera 7 */    
+	  word-wrap: break-word;      /* IE */
+	}
+  
+</style>
+
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+		{{#each variables}}
+		<table style="width: 100%">
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial;color:#000000;text-align:center">
+					Revision de resultados
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial;color:#000000">
+					{{this.abbreviation}}
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-weight:normal;font-size:8pt;font-family:Arial;color:#664d26">
+					{{this.date}} 
+				</td>
+		    </tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:8pt;font-family:Arial;color:#000000">
+					{{this.typeFilter}}
+				</td>
+		    </tr>
+			<tr>
+				<td style="font-style:normal;font-weight:bold;font-size:8pt;font-family:Arial;color:#000000">
+					Rango inicial: {{this.rangeInit}},  Rango final: {{this.rangeEnd}}
+				</td>
+		    </tr>
+		</table>
+		{{/each}}
+		<table>
+		   <tr>
+			<td class="headertable" style="width: 1in;">Orden</td>
+			<td class="headertable" style="width: 1in;">Fecha de ingreso</td>
+			<td class="headertable" style="width: 1in;">Tipo documento</td>
+			<td class="headertable" style="width: 1in;">Historia</td>
+			<td class="headertable" style="width: 1in;">Nombre</td>
+			<td class="headertable" style="width: 1in;">Código</td>
+			<td class="headertable" style="width: 1in;">Prueba</td>
+			<td class="headertable" style="width: 1in;">Resultado</td>
+			<td class="headertable" style="width: 1in;">Fecha de validación</td>
+			<td class="headertable" style="width: 1in;">Unidad</td>
+			<td class="headertable" style="width: 1in;">Comentario</td>
+			<td class="headertable" style="width: 1in;">Género</td>
+			<td class="headertable" style="width: 1in;">Estado</td>
+			<td class="headertable" style="width: 1in;">Fecha de nacimiento</td>
+			<td class="headertable" style="width: 1in;">Años</td>
+			<td class="headertable" style="width: 1in;">Teléfono</td>
+			<td class="headertable" style="width: 1in;">Dirección</td>
+			<td class="headertable" style="width: 1in;"><div class="wrap2" style="20px">Correo</div></td>			
+			<td class="headertable" style="width: 1in;">Diagnostico</td>
+			<td class="headertable" style="width: 1in;">Precio Servicio</td>
+			
+		  </tr>		
+		
+        {{#each orders}}
+	    {{#each this.tests}}
+	    <tr>
+			<td class="headertest" style="width: 1in;">{{../suborderNumber}}</td>
+			<td class="headertest" style="width: 1in;">{{../createdDate}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.documentType.name}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.patientId}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.name1}} {{../patient.name2}} {{../patient.lastName}} {{../patient.surName}}</td>
+			<td class="headertest" style="width: 1in;">{{code}}</td>
+			<td class="headertest" style="width: 1in;">{{name}}</td>
+			<td class="headertest" style="width: 1in;">{{result.result}}</td>
+			<td class="headertest" style="width: 1in;">{{validationDate}}</td>
+			<td class="headertest" style="width: 1in;">{{unit.name}}</td>
+			<td class="headertest" style="width: 1in;">{{resultComment.commentformat}} </td>
+			<td class="headertest" style="width: 1in;">{{../patient.sexabbr}}</td>
+			<td class="headertest" style="width: 1in;">{{result.state}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.birthdaydate}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.birthday}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.phone}}</td>
+			<td class="headertest" style="width: 1in;">{{../patient.address}}</td>
+			<td class="headertest" style="width: 1in;"><div class="wrap2" style="20px">{{../patient.email}}</div></td>
+			<td class="headertest" style="width: 1in;">{{../demo_18_value}}</td>
+			<td class="headertest" style="width: 1in;">{{testPrice.servicePrice}}</td>
+		   </tr>		  
+		  {{/each}}
+		  {{/each}}
+		  
+		</table>  
+  </body>
+</html>

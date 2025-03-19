@@ -1,0 +1,30 @@
+<style>
+    .select-requerid {
+        border-bottom: 1px solid #f30043;
+    }
+</style>
+<ui-select id="{{loadcomboboxrecepcion.identification}}" ng-model="loadcomboboxrecepcion.item.selected" ng-class="{'select-requerid' : loadcomboboxrecepcion.requerid}"
+    ng-disabled="loadcomboboxrecepcion.disabled" theme="select2" on-select="loadcomboboxrecepcion.changelist($item)"
+    style="width: 100%; max-width: 100%">
+
+    <ui-select-match style="width: 100%; max-width: 100%"
+        placeholder="{{loadcomboboxrecepcion.placeholder}}">{{$select.selected['patientId']}} -
+        {{$select.selected['name']}}
+    </ui-select-match>
+
+    <ui-select-choices repeat="item in loadcomboboxrecepcion.list" refresh="loadcomboboxrecepcion.fetch($select,$event)"
+        refresh-delay="100" position="auto">
+        <div class="uk-text-bold" ng-bind-html="item['patientId'] | highlight: $select.search"></div>
+        <div class="uk-text-muted" ng-bind-html="item['name'] | highlight: $select.search"></div>
+
+
+        <div ng-if="$index === $select.items.length - 1  && loadcomboboxrecepcion.list.length > 49">
+            <button ng-if="$index < loadcomboboxrecepcion.listorigin.length - 1 "
+                class="md-btn md-btn-primary md-btn-mini"
+                style="width: 100%; margin-top: 5px; font-size: 12px !important"
+                ng-click="loadcomboboxrecepcion.fetch($select,$event);">
+                {{'0606' | translate}} ({{$index + 1}} / {{loadcomboboxrecepcion.listorigin.length}})
+            </button>
+        </div>
+    </ui-select-choices>
+</ui-select>

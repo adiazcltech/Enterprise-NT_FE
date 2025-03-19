@@ -1,0 +1,300 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden">
+    <div style="height: 99%;margin-left: 0px;" class="md-card md-card-hover uk-grid" data-uk-grid-margin>
+      <div class="md-card-content uk-width-1-1"" style=" height: 100%; padding-bottom: 0px">
+        <div class="uk-grid" style="height: 100%">
+          <div class="uk-width-1-1 fullheight">
+            <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1_content'}" id="tabs_1">
+              <li class="uk-active"><a href="#">
+                  {{'1711'| translate | uppercase}}</a></li>
+              <li><a href="#">
+                  {{'1712' | translate| uppercase}}</a></li>
+            </ul>
+            <ul id="tabs_1_content" class="uk-switcher uk-margin"
+              style="height: calc(100% - 37px) !important; margin-top: 8px">
+              <li style="height:100%">
+                <div style="height: calc(100% - 87px);" class="uk-width-1-1">
+                  <div class="md-card" style="margin-bottom: 5px; height: 105px; width: 99%; margin-left: 8px;">
+                    <div class="md-card-content uk-grid uk-grid-small">
+                      <div class="uk-width-4-10">
+                        <fieldset class="fieldset uk-grid"
+                          style="height: 58px;padding: 12px 15px 1px 0px;margin-left: 0px;">
+                          <div class="uk-width-1-2">
+                            <label style="top: -6px; font-size: 12px;">{{'1609' | translate}}</label>
+                            <input type="text" class="md-input label-fixed" data-ng-model="vm.initialInvoice"
+                              ng-keypress="vm.keyselect($event)" md-input />
+                          </div>
+                          <div class="uk-width-1-2">
+                            <label style="top: -6px; font-size: 12px;">{{'1610' | translate}}</label>
+                            <input type="text" class="md-input label-fixed" data-ng-model="vm.finalInvoice"
+                              ng-keypress="vm.keyselect($event)" md-input />
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="uk-width-6-10">
+                        <fieldset class="fieldset uk-grid"
+                          style="height: 58px;padding: 12px 15px 1px 0px;margin-left: 0px;">
+                          <div flex-gt-xs>
+                            <h6 style="margin: -1px 0px -2px 15px;">{{'0325' | translate}}</h6>
+                            <md-datepicker ng-model="vm.dateToSearch" name="dateField1" md-open-on-focus
+                              md-is-open="vm.isOpen" md-max-date="vm.maxDate" ng-blur="vm.searchByDate()"
+                              md-open-on-focus>
+                            </md-datepicker>
+                          </div>
+                          <div class="uk-width-1-3">
+                            <label style="top: -6px; font-size: 12px;">{{'0085' | translate}}</label>
+                            <select class="md-input" ng-options="obj.id as obj.name for obj in vm.customer"
+                              data-ng-model="vm.datacustomer" ng-change="vm.filterinvoice()"></select>
+                          </div>
+                          <div class="uk-width-1-3">
+                            <label style="top: -6px; font-size: 12px;">{{'1576' | translate}}</label>
+                            <input type="text" class="md-input label-fixed" data-ng-model="vm.creditNoteId"
+                              ng-keypress="vm.keyselect($event)" md-input />
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-1" style="margin-top: 10px;height: calc(100% - 116px)"
+                    ng-if="vm.datasearch.length!==0">
+                    <div class="md-card md-card-hover" style="height: 100%;margin-left: 8px;margin-right: 5px;">
+                      <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <div class="md-card-content fullheight" style="padding: 0px;">
+                          <div class="uk-grid uk-flex uk-flex-middle div-head" style="height: 39px;">
+                            <div class="uk-width-1-10" style="padding-left: 10px;"
+                              ng-click="vm.sortType = 'invoiceNumber'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'invoiceNumber'" sorttype="vm.sortType"
+                                sortreverse="vm.sortReverse">
+                              </resultssort>{{'1533' | translate}}
+                            </div>
+                            <div style="padding-left: 10px;" class="uk-width-1-10"
+                              ng-click="vm.sortType = 'customer'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'customer'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                              </resultssort>{{'0085' | translate}}
+                            </div>
+                            <div style="padding-left: 10px;" class="uk-width-1-10"
+                              ng-click="vm.sortType = 'userName'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'userName'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                              </resultssort>{{'0001' | translate}}
+                            </div>
+                            <div class="uk-width-2-10" style="padding-left: 10px;"
+                              ng-click="vm.sortType = 'date'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'date'" sorttype="vm.sortType"
+                                sortreverse="vm.sortReverse">
+                              </resultssort>{{'3032' | translate}}
+                            </div>
+                            <div class="uk-width-1-10" style="padding-left: 10px;"
+                              ng-click="vm.sortType = 'total'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'total'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                              </resultssort>{{'1549' | translate}}
+                            </div>
+                            <div class="uk-width-2-10" style="padding-left: 10px;"
+                              ng-click="vm.sortType = 'paymentForm'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'paymentForm'" sorttype="vm.sortType"
+                                sortreverse="vm.sortReverse">
+                              </resultssort>{{'0820' | translate}}
+                            </div>
+                            <div class="uk-width-1-10" style="padding-left: 10px;"
+                              ng-click="vm.sortType = 'status'; vm.sortReverse = !vm.sortReverse">
+                              <resultssort sortvalue="'status'" sorttype="vm.sortType"
+                                sortreverse="vm.sortReverse">
+                              </resultssort>{{'0364' | translate}}
+                            </div>
+                          </div>
+                          <div vs-repeat class="vs-repeat-custom-scroll contentscroll"
+                            style="height: calc(100% - 40px);">
+                            <div ng-repeat="invoice in vm.datasearch | orderBy:vm.sortType:vm.sortReverse"
+                              class="uk-grid uk-flex uk-flex-middle div-table" ng-click="vm.select=invoice;vm.buttonpaymentDate=invoice.status === 1"
+                              ng-class="{'md-bg-blue-50': invoice.invoiceNumber == vm.select.invoiceNumber}"
+                              style="margin-top: 0px;">
+                              <div class="uk-width-1-10">{{invoice.invoiceNumber}}</div>
+                              <div class="uk-width-1-10">{{invoice.accountName}}</div>
+                              <div class="uk-width-1-10">{{invoice.userName}}</div>
+                              <div class="uk-width-2-10">{{invoice.date}}</div>
+                              <div class="uk-width-1-10">{{invoice.total | currency : vm.simbolmoney :vm.decimal}}</div>
+                              <div class="uk-width-2-10" ng-if="invoice.paymentForm === 0">{{ '2006' | translate }}</div>
+                              <div class="uk-width-2-10" ng-if="invoice.paymentForm === 1">{{ '2007' | translate }}</div>
+                              <div class="uk-width-1-10" ng-if="invoice.status === 1"><span class="uk-badge uk-badge-success">{{ '2016' | translate }}</span></div>
+                              <div class="uk-width-1-10" ng-if="invoice.status === 0"><span class="uk-badge uk-badge-warning">{{ '0413' | translate }}</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-width-1-1 " style="height: 58px;
+                margin-top: 10px;
+                margin-left: 10px;
+                width: 99%;">
+                  <div style="height: 100%;"
+                    class="md-card uk-animation-scale-up uk-animation-40 uk-flex uk-flex-right">
+                    <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                      <div class="uk-grid" style="height: 100%">
+                        <div class="uk-width-1-1" style="float: right">
+                          <button style="float: right; margin-left: 10px" type="button"
+                            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-purple-700"
+                            ng-disabled="vm.buttonpaymentDate"
+                            data-uk-tooltip="{pos:'top'}" title="{{'1722' | translate}}"
+                            ng-class="{'md-bg-blue-grey-100' : vm.buttonpaymentDate}"
+                            ng-click="vm.openmodaldate()">
+                            <i class="material-icons md-24 no_margin">monetization_on</i>
+                          </button>
+                          <button style="float: right; margin-left: 10px" type="button"
+                            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-teal-900"
+                            ng-disabled="vm.select.invoiceNumber===undefined " data-uk-tooltip="{pos:'top'}"
+                            title="{{'1576' | translate}}"
+                            ng-class="{'md-bg-blue-grey-100' : vm.select.invoiceNumber===undefined }"
+                            ng-click="vm.printnote()">
+                            <i class="material-icons md-24 no_margin">subtitles_off</i>
+                          </button>
+
+                          <button style="float: right; margin-left: 10px" type="button"
+                            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-cyan-700"
+                            ng-disabled="vm.select.invoiceNumber===undefined || vm.select.particular === 1 || vm.select.typeOfInvoice === 4 " data-uk-tooltip="{pos:'top'}"
+                            title="{{'1708' | translate}}"
+                            ng-class="{'md-bg-blue-grey-100' : vm.select.invoiceNumber===undefined || vm.select.particular === 1 || vm.select.typeOfInvoice === 4 }"
+                            ng-click="vm.print(1)">
+                            <i class="uk-icon-file-excel-o md-color-light-blue-50"></i>
+                          </button>
+                          <button style="float: right; margin-left: 10px" type="button"
+                            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-teal-500"
+                            ng-disabled="vm.select.invoiceNumber===undefined" data-uk-tooltip="{pos:'top'}"
+                            title="{{'1600' | translate}}"
+                            ng-class="{'md-bg-blue-grey-100' : vm.select.invoiceNumber===undefined}"
+                            ng-click="vm.print(2)">
+                            <i class="uk-icon-hover uk-icon-credit-card"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li style="height:100%">
+                <div class="uk-grid" style="height: calc(100% - 90px);">
+                  <div class="uk-width-5-10">
+                    <fieldset class="fieldset" style="height: 58px;padding: 12px 15px 1px 23px;">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport" typeview="2">
+                      </orderfilter>
+                    </fieldset>
+                  </div>
+                  <div class="uk-width-5-10">
+                    <fieldset class="fieldset uk-grid"
+                      style="height: 58px;padding: 12px 15px 1px 0px;margin-left: 0px;">
+                      <div class="uk-width-1-2">
+                        <label style="top: -6px; font-size: 12px;">{{'0085' | translate}}</label>
+                        <select class="md-input"
+                          ng-options="obj as obj.name for obj in vm.customereport track by obj.id"
+                          data-ng-model="vm.datacustomerreport"></select>
+                      </div>
+                      <div class="uk-width-1-2">
+                        <label style="top: -6px; font-size: 12px;">{{'0161' | translate}}</label>
+                        <select class="md-input" ng-options="obj.id as obj.name
+                          for obj in vm.typeresport" data-ng-model="vm.typeresport.id"></select>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="uk-width-1-1 " style="height: 58px;
+                margin-top: 10px;
+                margin-left: 10px;
+                width: 99%;">
+                  <div style="height: 100%;"
+                    class="md-card uk-animation-scale-up uk-animation-40 uk-flex uk-flex-right">
+                    <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                      <div class="uk-grid" style="height: 100%">
+                        <div class="uk-width-1-1" style="float: right">
+                          <button style="float: right; margin-left: 10px" type="button"
+                            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-light-blue-600"
+                            ng-class="{'md-bg-blue-grey-100' : vm.datacustomerreport===undefined}"
+                            data-uk-tooltip="{pos:'top'}" title="{{'0643' | translate}}" ng-click="vm.printrepot()">
+                            <i class="material-icons md-24 no_margin">picture_as_pdf</i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="dateinvoice" class="uk-modal" aria-hidden="true" bg-close="false"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-blue-700" style="border-bottom: 0px">
+      <h2 class="uk-modal-title">
+        Seleccione la fecha de pago de la factura
+      </h2>
+    </div>
+    <div class="uk-container" style="height: 60px;padding: 16px 35px;">
+      <div class="uk-grid uk-flex uk-flex-center">
+        <div class="uk-width-8-10">
+          <div flex-gt-xs>
+            <md-datepicker ng-model="vm.dateinvoice" name="dateinvoice" md-open-on-focus md-is-open="vm.isOpen2"
+              md-open-on-focus>
+            </md-datepicker>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="md-btn md-btn-primary uk-modal-close" type="button" ng-click="vm.savedate()"
+        ng-class="{'md-bg-blue-grey-100':vm.dateinvoice===null || vm.dateinvoice===undefined || vm.dateinvoice==='' }"
+        ng-disabled="vm.dateinvoice===null">
+        {{'0246' | translate }}
+      </button>
+      <button class="md-btn md-btn-default uk-modal-close" type="button">
+        {{'0008' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div id="modal-error" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Warning.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ vm.dataerror}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{'0962' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

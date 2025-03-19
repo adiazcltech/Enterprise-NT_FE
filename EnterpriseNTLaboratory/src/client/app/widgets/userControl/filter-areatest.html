@@ -1,0 +1,123 @@
+<style type="text/css">
+  .tag-item-add {
+    border: 2px solid #2196f3 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+  }
+
+  .tag-item-subtranct {
+    background: #f5dad0 !important;
+    border: 2px solid #ff5c5c !important;
+  }
+
+  .autocomplete-add:hover {
+    color: #1976d2 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-subtranct:hover {
+    color: #d80000 !important;
+    background: #ffece5 !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-add.selected {
+    color: #1976d2 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+    font-size: 13px;
+  }
+
+  .fieldset {
+    padding: 0.35em 0.625em 0em !important;
+  }
+
+  .autocomplete-subtranct.selected {
+    color: #d80000 !important;
+    background: #ffece5 !important;
+    font-size: 13px;
+  }
+</style>
+<fieldset class="fieldset">
+  <legend>{{'0077' | translate}}:</legend>
+  <div class="uk-grid" data-uk-grid-margin="">
+    <div class="uk-width-1-5 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+      <input type="radio" name="fAT{{filterareatest.id}}" id="fAT_1{{filterareatest.id}}" value="0" checked
+        ng-focus="filterareatest.clickfilterByAreaTest(0)" />
+      <label for="fAT_1{{filterareatest.id}}" ng-click="filterareatest.clickfilterByAreaTest(0)">{{'0078' |
+        translate}}</label><br />
+
+      <input type="radio" name="fAT{{filterareatest.id}}" id="fAT_2{{filterareatest.id}}" value="1"
+        ng-focus="filterareatest.clickfilterByAreaTest(1)" ng-if="filterareatest.inviewarea" />
+      <label for="fAT_2{{filterareatest.id}}" ng-if="filterareatest.inviewarea"
+        ng-click="filterareatest.clickfilterByAreaTest(1)">{{'0079' |
+        translate}}</label><br ng-if="filterareatest.inviewarea" />
+
+      <input type="radio" name="fAT{{filterareatest.id}}" id="fAT_6{{filterareatest.id}}" value="5"
+        ng-focus="filterareatest.clickfilterByAreaTest(5)" ng-if="!filterareatest.onlyareas" />
+      <label for="fAT_6{{filterareatest.id}}" ng-if="!filterareatest.onlyareas"
+        ng-click="filterareatest.clickfilterByAreaTest(5)">{{'1883' | translate}}</label><br />
+
+      <input type="radio" name="fAT{{filterareatest.id}}" id="fAT_3{{filterareatest.id}}" value="2"
+        ng-focus="filterareatest.clickfilterByAreaTest(2)" ng-if="!filterareatest.onlyareas" />
+      <label for="fAT_3{{filterareatest.id}}" ng-if="!filterareatest.onlyareas"
+        ng-click="filterareatest.clickfilterByAreaTest(2)">{{'3658' | translate}}</label><br />
+
+      <input type="radio" name="fAT{{filterareatest.id}}" id="fAT_4{{filterareatest.id}}" value="3"
+        ng-focus="filterareatest.clickfilterByAreaTest(3)" ng-if="!filterareatest.onlyareas"
+        ng-disabled="filterareatest.confidential" />
+
+      <label for="fAT_4{{filterareatest.id}}" ng-click="filterareatest.clickfilterByAreaTest(3)"
+        ng-if="!filterareatest.onlyareas" ng-disabled="filterareatest.confidential">{{'0081' | translate}}</label><br />
+
+
+
+      <input ng-if="filterareatest.resultsentry === true && !filterareatest.onlyareas" type="radio"
+        name="fAT{{filterareatest.id}}" id="fAT_5{{filterareatest.id}}" value="4"
+        ng-focus="filterareatest.clickfilterByAreaTest(4)" />
+      <label ng-if="filterareatest.resultsentry === true  && !filterareatest.onlyareas" for="fAT_5{{filterareatest.id}}"
+        ng-click="filterareatest.clickfilterByAreaTest(4)">{{'0018' | translate}}</label>
+    </div>
+
+    <div class="uk-width-4-5" ng-show="filterareatest.numFilterAreaTest > 0"
+      style="width: 80%; padding-top: 0px; padding-left: 25px; padding-bottom: 0px; margin-top: -8px;">
+      <tags-input id="tagFAT{{filterareatest.id}}" ng-model="filterareatest.filterAreaTests" min-length="1"
+        add-on-paste="true" key-property="id" display-property="v" class="md-input" placeholder="{{'0385' | translate}}"
+        add-from-autocomplete-only="false" add-on-space="false" add-on-blur="false" text="$tag" template="tag-Template"
+        on-tag-added="filterareatest.validAddTag($tag, filterareatest.filterAreaTests)"
+        on-tag-removed="filterareatest.validRemoveTag($tag)"
+        tag-class="{'tag-item-add': $tag.v == filterareatest.all || !filterareatest.firstValue, 'tag-item-subtranct': $tag.v != filterareatest.all && filterareatest.firstValue}">
+        <auto-complete source="filterareatest.loadDataAreaTest($tag)" min-length="1" load-on-focus="true"
+          load-on-empty="true" max-results-to-show="32"
+          match-class="{'autocomplete-add': $tag.v == filterareatest.all || !filterareatest.firstValue, 'autocomplete-subtranct': $tag.v != filterareatest.all && filterareatest.firstValue}"
+          template="autocomplit-Template">
+        </auto-complete>
+      </tags-input>
+
+      <script type="text/ng-template" id="tag-Template">
+          <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+            <div class="left-panel">
+              <span class="material-icons" ng-class="{'md-color-blue-500': $tag.v == filterareatest.all, 'md-color-red-500': $tag.v != filterareatest.all }" >{{data.icon}}</span>
+            </div>  
+            <div class="right-panel" style="padding-left: 4px">
+              <span>{{$getDisplayText()}}</span>
+              <span>{{data.name}}</span> 
+              <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+            </div>
+          </div>  
+        </script>
+
+      <script type="text/ng-template" id="autocomplit-Template">
+          <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+            <div class="left-panel">
+              <span class="material-icons" ng-class="{'md-color-red-500': $tag.v != filterareatest.all, 'md-color-blue-500': $tag.v == filterareatest.all  }"  >{{data.icon}}</span>
+             </div>
+            <div class="right-panel" style="padding-left: 4px">
+              <span ng-bind-html="$highlight($getDisplayText())"></span>
+              <span>{{data.name}}</span>
+            </div>
+        </div>
+      </script>
+
+    </div>
+  </div>
+</fieldset>

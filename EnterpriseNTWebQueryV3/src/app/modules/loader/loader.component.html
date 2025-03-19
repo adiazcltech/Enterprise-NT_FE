@@ -1,0 +1,17 @@
+<div style="height: 100%;" *ngIf="loader">
+  <section id="content" class="content back">
+    <div ui-view class="shuffle-animation" style="height: 100%;"></div>
+    <div ngplus-overlay ngplus-overlay-delay-in="10" ngplus-overlay-delay-out="300"
+      ngplus-overlay-animation="dissolve-animation">
+      <div class="loader">
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--text"></div>
+      </div>
+    </div>
+  </section>
+</div>

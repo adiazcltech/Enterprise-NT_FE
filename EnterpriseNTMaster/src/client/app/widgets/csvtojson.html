@@ -1,0 +1,86 @@
+
+<style type="text/css">
+    .button3 {
+        width: calc(100% / 3 - 3px)  !important;
+    }
+</style>
+<div ng-if="!csvtojson.disabled && csvtojson.classbutton" ng-class="{'button3': csvtojson.numberbutton}" class="fileImport btn btn-primary button-list">
+  <span aria-hidden="true" class="fa fa-cloud-upload"></span> {{'0392' | translate}}
+  <input type="file" ng-model="image" class="import" onchange="angular.element(this).scope().filecsv(); " />
+</div>
+<div ng-if="csvtojson.disabled && csvtojson.classbutton" ng-class="{'button3': csvtojson.numberbutton}" ng-disabled="true" class="fileImport btn btn-primary button-list">
+	<span class="fa fa-cloud-upload" aria-hidden="true"></span> {{'0392' | translate}}
+</div>
+<div ng-if="!csvtojson.disabled && csvtojson.classbutton === undefined" ng-class="{'button3': csvtojson.numberbutton}" class="fileImport btn btn-primary button-list-five">
+  <span aria-hidden="true" class="fa fa-cloud-upload"></span> {{'0392' | translate}}
+  <input type="file" ng-model="image" class="import" onchange="angular.element(this).scope().filecsv(); " />
+</div>
+<div ng-if="csvtojson.disabled && csvtojson.classbutton === undefined" ng-class="{'button3': csvtojson.numberbutton}" ng-disabled="true" class="fileImport btn btn-primary button-list-five">
+  <span class="fa fa-cloud-upload" aria-hidden="true"></span> {{'0392' | translate}}
+</div>
+
+
+<script type="text/ng-template" id="validationFormatcsv.html">
+  <div class="modal fade">
+    <div ng-if="!showdatainvalid" class="modal-dialog modal-sm">
+        <div class="modal-content">
+      <div class="modal-body" style="height: 100px">
+         <div style="width: 30%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+         </div>
+         <div style="width: 70%; float: left">
+        <label ng-show="!correctImport && !errorFile" style="margin-top: 30px;margin-left: 10px">{{'0177' | translate}}</label>
+        <label ng-show="correctImport && !errorFile" style="margin-top: 20px;margin-left: 10px">se han insertado {{quantitydata}} {{'0344' | translate}} {{quantityOrigin}} registros</label>
+        <label ng-show="errorFile" style="margin-top: 20px;margin-left: 10px">{{'0478' | translate}}</label>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+      </div>
+      </div>  
+  </div>
+    <div ng-if="showdatainvalid" class="modal-dialog modal-lg" style="width: 700px">
+        <div class="modal-content">
+          <div class="modal-header modal-header-danger" ng-hide="vm.print">                
+            <h4 class="modal-tittle text-center" id="myModallabel">{{'0100' | translate}}</h4>
+          </div>
+          <div class="modal-body" style="height: 400px">
+            <div>
+              <label  style="margin-left: 10px">{{'0479' | translate}}</label>
+            </div>
+            <table class="table table-hover table-sm table-list" style="height: 300px">
+              <thead>
+                <tr>
+                    <th class="col-md-3">
+                        {{'0482' | translate}}
+                    </th>
+                    <th class="col-md-2">
+                        {{'0481' | translate}}
+                    </th>
+                    <th class="col-md-4">
+                        {{'0480' | translate}}
+                    </th>
+                    <th class="col-md-3">
+                        {{'0035' | translate}}
+                    </th>
+                </tr>
+              </thead>
+              <tbody class="tbody-list" style="width: 97%; height: calc(100% - 9rem)">
+                  <tr class="row-list" data-ng-repeat="list in listdata">
+                      <td class="col-md-3" data-ng-bind="list.value"></td>
+                      <td class="col-md-2" data-ng-bind="list.name"></td>
+                      <td class="col-md-4" data-ng-bind="list.data"></td>
+                      <td class="col-md-3" data-ng-bind="list.error"></td>
+                      <td>
+                      </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+          </div>
+        </div>  
+    </div>
+</div>
+</script>

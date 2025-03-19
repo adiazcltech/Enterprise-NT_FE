@@ -1,0 +1,541 @@
+<style>
+  .th-header {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    padding-left: 0px;
+  }
+
+  .div-table {
+    margin-left: 0px;
+    margin-top: 0px;
+    height: 18px !important;
+    border-bottom-color: #e0e0e0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    font-size: 11px;
+  }
+
+  fieldset,
+  input,
+  select {
+    font-size: 11px !important;
+    padding-left: 0px !important;
+  }
+
+  .th-subheader {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    padding-left: 0px;
+  }
+
+  .theader-sensitives {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 100%;
+  }
+
+  .md-fab-wrapper {
+    position: fixed;
+    bottom: 7px;
+    right: 7px;
+    z-index: 1004;
+    transition: margin 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .md-inputsmall {
+    font: 400 12px / 18px 'Roboto', sans-serif;
+  }
+
+  .div-conttable {
+    margin-top: 0px;
+    overflow-y: scroll;
+    height: calc(100% - 55px);
+    width: 100% !important;
+  }
+
+  .uk-width-12 {
+    width: 18.9%;
+  }
+
+  .uk-width-D27 {
+    width: 27%;
+  }
+
+  .uk-width-D6 {
+    width: 6%;
+  }
+
+  .uk-width-D9 {
+    width: 9%;
+  }
+
+  .contentscroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+  }
+
+  .contentscroll::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+  }
+
+  .contentscroll::-webkit-scrollbar-thumb {
+    background-color: #999;
+  }
+
+  .select2-container .select2-choice {
+    font: 400 10px / 18px "Roboto", sans-serif;
+  }
+
+  .check-micro .md-container.md-ink-ripple {
+    margin-top: 5px !important;
+  }
+</style>
+<div id="ms-advertencia" class="uk-modal" bg-close="false" aria-hidden="true">
+  <div class="uk-modal-dialog">
+    <div class="uk-grid uk-container-center">
+      <div class="uk-width-2-10">
+        <img src="images/iconinfo.png" height="90" width="90">
+      </div>
+      <div class="uk-width-8-10" style="margin-top: 3%;">
+        <span>Debe agregar el examen a un antibiograma</span>
+      </div>
+    </div>
+  </div>
+</div>
+<loadpage view="modalsensitivities.loadingdata"></loadpage>
+<div class="uk-modal uk-modal-card-fullscreen" id="sensitivitiesmodal">
+  <loadpage view="modalsensitivities.loadingdata"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-purple-A200">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}" ng-click="modalsensitivities.closemodal()">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="float: left; margin: 8px 8px 0 0; display: block; line-height: 32px">
+          <img style="height: 25px;width: 25px;" ng-src="images/microbiology/antibiograma.png" />
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          {{'0414' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-3-10">
+            <cardorder order="modalsensitivities.order" typeordercode="modalsensitivities.patient.typeordercode"
+              typeordercolor="modalsensitivities.patient.typeordercolor" testcode="modalsensitivities.testCode"
+              testname="modalsensitivities.testName"></cardorder>
+          </div>
+          <div class="uk-width-3-10">
+            <cardpatient patientname="modalsensitivities.patient.name" orderdemo="modalsensitivities.orderdemo"
+              patientdocument="modalsensitivities.patient.document" patientage="modalsensitivities.patient.age"
+              patientgender="modalsensitivities.patient.gender" photopatient="modalsensitivities.photopatient"
+              patientid="modalsensitivities.patient.id" orderpatient="modalsensitivities.order"> 
+            </cardpatient>
+          </div>
+          <div class="uk-width-4-10">
+            <div class="md-card md-card-hover">
+              <div class="md-card-content">
+                <div class="uk-grid uk-grid-small">
+                  <div class="uk-width-1-2">
+                    <div class="uk-form-row">
+                      <div class="uk-input-group">
+                        <span class="uk-input-group-addon" style="min-width: 28px;">
+                          <img ng-src="images/microbiology/dropper.png" style="height: 28px;" />
+                        </span>
+                        <label class="labels-selectize">{{'0460' | translate}}</label>
+                        <ui-select ng-model="modalsensitivities.subSampleid.selected" theme="select2"
+                          ng-disabled="false" style="width: 100%;" title="">
+                          <ui-select-match placeholder="">
+                            {{$select.selected.name}}
+                          </ui-select-match>
+                          <ui-select-choices
+                            repeat="subSample in modalsensitivities.subSample | filter: $select.search">
+                            <span ng-bind-html="subSample.name | highlight: $select.search"></span>-
+                            <small ng-bind-html="subSample.codesample | highlight: $select.search"></small>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-2">
+                    <div class="uk-form-row">
+                      <div class="uk-input-group">
+                        <span class="uk-input-group-addon" style="min-width: 28px;">
+                          <img ng-src="images/microbiology/lab.png" style="height: 28px;" />
+                        </span>
+                        <label class="labels-selectize">{{'0461' | translate}}</label>
+                        <ui-select ng-model="modalsensitivities.getcollectionmethodid.selected" theme="select2"
+                          ng-disabled="false" style="width: 100%;" title="">
+                          <ui-select-match placeholder="">
+                            {{$select.selected.name}}
+                          </ui-select-match>
+                          <ui-select-choices
+                            repeat="collectionmethod in modalsensitivities.getcollectionmethod | filter: $select.search">
+                            <small ng-bind-html="collectionmethod.name | highlight: $select.search"></small>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-grid uk-grid-small">
+                  <div class="uk-width-1-2">
+                    <div class="uk-form-row">
+                      <div class="uk-input-group">
+                        <span class="uk-input-group-addon" style="font-size: 21px;min-width: 28px;">
+                          <img ng-src="images/microbiology/anatomy.png" style="height: 28px;" />
+                        </span>
+                        <label class="labels-selectize">{{'0462' | translate}}</label>
+                        <ui-select ng-model="modalsensitivities.anatomicalsitesid.selected" theme="select2"
+                          ng-disabled="false" style="width: 100%;" title="">
+                          <ui-select-match placeholder="">
+                            {{$select.selected.name}}
+                          </ui-select-match>
+                          <ui-select-choices
+                            repeat="anatomicalsites in modalsensitivities.anatomicalsites | filter: $select.search">
+                            <span ng-bind-html="anatomicalsites.abbr | highlight: $select.search"></span>-
+                            <small ng-bind-html="anatomicalsites.name | highlight: $select.search"></small>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid uk-grid-small" style="height: calc(100% - 139px)" ng-if="modalsensitivities.view2">
+          <div class="uk-width-2-10" style="height: 100%">
+            <div class="md-card md-card-hover" style="height: 100%">
+              <div class="md-card-content" style="height: 95%;">
+                <div class="uk-input-group" style="height: 10px;">
+                  <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed"
+                    ng-model="modalsensitivities.search" placeholder="{{'0154' | translate}}"
+                    style="font: 400 12px / 18px 'Roboto', sans-serif;">
+                  <span class="uk-input-group-addon" style="padding: 0px;min-width: 28px;">
+                    <img ng-src="images/microbiology/search.png" />
+                  </span>
+                </div>
+                <table class="uk-table  uk-table-small uk-table-middle tablescrollable "
+                  style="margin-top: 0px;height: calc(100% - 71px);">
+                  <tbody class="tbodyscrollable contentscroll"
+                    style="height: calc(100% - 20px);margin-top: 0px;overflow-y: scroll;">
+                    <tr
+                      data-ng-repeat="microorganisms in modalsensitivities.microorganismo| filter: {name:modalsensitivities.search}"
+                      data-ng-click="modalsensitivities.getantibiotic(microorganisms.id,microorganisms.idMicrobialDetection,microorganisms.comment,microorganisms)"
+                      class="uk-grid" style="margin-top: 2px;">
+                      <td class="uk-width-1-1"
+                        ng-class="{'md-bg-blue-100': microorganisms.id == modalsensitivities.selected}"
+                        style="padding-left: 35px;font-size: 12px;" data-ng-bind="microorganisms.name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="md-fab-wrapper md-fab-in-card">
+                  <button type="button" ng-disabled="false" class="md-fab md-fab-xsmall md-fab-success"
+                    ng-class="{'md-bg-blue-grey-100' : false}">
+                    <i class="material-icons" ng-click="modalsensitivities.view2 = false" data-uk-tooltip="{pos:'top'}"
+                      title="Agregar microorganismo">&#xE145;</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-8-10" style="height: 100%;"
+            ng-show="modalsensitivities.detailantibiotic.length!==0">
+            <div class="uk-grid uk-grid-small" style="height: 100%;">
+              <div class="uk-width-1-1" style="height:71%">
+                <div class="md-card md-card-hover" style="height: 100%;">
+                  <div class="md-card-content" style="padding: 5px;height: 100%;">
+                    <div class="uk-input-group" style="height: 10px;font: 400 12px / 18px 'Roboto', sans-serif;">
+                      <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed"
+                        ng-model="modalsensitivities.searchAntibiotic" placeholder="{{'0154' | translate}}"
+                        style="font: 400 12px / 18px 'Roboto', sans-serif;">
+                      <span class="uk-input-group-addon" style="padding: 0px;min-width: 28px;">
+                        <img ng-src="images/microbiology/search.png" />
+                      </span>
+                    </div>
+                    <div class="uk-grid uk-flex uk-flex-center uk-flex-middle"
+                      style="height: 19px;margin-left: 0px;font-size: 12px;background-color: #cccccc;border: 1px solid rgba(0, 0, 0, 0.12);padding-right: 6px;">
+                      <div class="uk-width-2-10" ng-if="modalsensitivities.viewCMI" style="width: 31.8%"></div>
+                      <div class="uk-text-center th-header"
+                        ng-class="{'uk-width-12': modalsensitivities.viewCMI,'uk-width-1-1': !modalsensitivities.viewCMI}"
+                        style="padding-left: 0px;">{{'0765'| translate}}</div>
+                      <div class="uk-width-3-10 uk-text-center th-header" ng-if="modalsensitivities.viewCMI"
+                        style="width: 24%;padding-left: 0px;">Manual</div>
+                      <div class="uk-width-3-10 uk-text-center th-header" ng-if="modalsensitivities.viewCMI"
+                        style="width: 23%;padding-left: 0px;">{{'0561'| translate}}</div>
+                    </div>
+                    <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head"
+                      style="height: 19px;    margin-top: 0px;padding-left: 0px;padding-right: 6px;font-size: 12px;    background-color: #ccc;">
+                      <div class="th-subheader uk-text-center"
+                        ng-class="{'uk-width-D27': modalsensitivities.viewCMI,'uk-width-5-10': !modalsensitivities.viewCMI}">
+                        {{'0557'| translate}}</div>
+                      <div class="uk-width-1-10 th-subheader uk-text-center"
+                        ng-class="{'uk-width-D6': modalsensitivities.viewCMI,'uk-width-1-10': !modalsensitivities.viewCMI}">
+                        {{'0558'| translate}}</div>
+
+                      <div class="th-subheader uk-text-center"
+                        ng-class="{'uk-width-D9': modalsensitivities.viewCMI,'uk-width-2-10': !modalsensitivities.viewCMI}">
+                        {{'0559'| translate}}</div>
+                      <div class="th-subheader uk-text-center"
+                        ng-class="{'uk-width-1-10': modalsensitivities.viewCMI,'uk-width-2-10': !modalsensitivities.viewCMI}">
+                        {{'0560'| translate}}</div>
+
+                      <div class="uk-width-1-10 th-subheader uk-text-center" ng-if="modalsensitivities.viewCMI"
+                        style="width: 9%;">{{'0559'| translate}}</div>
+                      <div class="uk-width-1-10 th-subheader uk-text-center" ng-if="modalsensitivities.viewCMI"
+                        style="width: 11%;">{{'0560'| translate}}</div>
+
+                      <div class="uk-width-1-10 th-subheader uk-text-center" ng-if="modalsensitivities.viewCMI"
+                        style="width: 4%;">
+                        <a href="" ng-if="modalsensitivities.cmiMPrint==false" class="uk-icon-square-o"
+                          ng-click="modalsensitivities.selectall()"></a>
+                        <a href="" ng-if="modalsensitivities.cmiMPrint==true" class="uk-icon-check-square-o"
+                          ng-click="modalsensitivities.selectall()"></a>
+                      </div>
+                      <div class="uk-width-1-10 th-subheader uk-text-center" ng-if="modalsensitivities.viewCMI"
+                        style="width: 9%;">{{'0561'| translate}}</div>
+
+                      <div class="uk-width-1-10 th-subheader uk-text-center" ng-if="modalsensitivities.viewCMI"
+                        style="width: 11%;">{{'0560'| translate}}</div>
+                      <div class="uk-width-1-10 th-subheader uk-text-center" ng-if="modalsensitivities.viewCMI"
+                        style="width: 4%;">
+                        <a href="" ng-if="modalsensitivities.diskPrint==false" class="uk-icon-square-o"
+                          ng-click="modalsensitivities.selectalldiskPrint()"></a>
+                        <a href="" ng-if="modalsensitivities.diskPrint==true" class="uk-icon-check-square-o"
+                          ng-click="modalsensitivities.selectalldiskPrint()"></a>
+                      </div>
+
+                    </div>
+                    <datalist id="line">
+                      <option value="{{'0562' | translate}}">1|{{'0562' | translate}}</option>
+                      <option value="{{'0563' | translate}}">2|{{'0563' | translate}}</option>
+                      <option value="{{'0564' | translate}}">3|{{'0563' | translate}}</option>
+                    </datalist>
+                    <div id="sensitive" vs-repeat data-scroll-to-top='modalsensitivities.filtered.length'
+                      class="div-conttable contentscroll" style="height: calc(100% - 102px);font-size: 12px;">
+                      <div id="{{antibiotic.idAntibiotic}}"
+                        ng-repeat="antibiotic in modalsensitivities.filtered= ( modalsensitivities.detailantibiotic | filter: {nameAntibiotic:modalsensitivities.searchAntibiotic})"
+                        class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table"
+                        style="overflow: hidden;margin-top: 0px">
+                        <div style="border-left: 1px solid rgba(0, 0, 0, 0.12);padding-left: 5px;"
+                          ng-class="{'uk-width-D27': modalsensitivities.viewCMI,'uk-width-5-10': !modalsensitivities.viewCMI}">
+                          {{antibiotic.nameAntibiotic}}
+                        </div>
+                        <div class="uk-text-center"
+                          ng-class="{'uk-width-D6': modalsensitivities.viewCMI,'uk-width-1-10': !modalsensitivities.viewCMI}"
+                          style="padding-left: 0px;border-left: 1px solid rgba(0, 0, 0, 0.12)">
+                          <span class="uk-badge uk-badge-primary "> {{'0527' | translate}} {{antibiotic.line}}</span>
+                        </div>
+                        <div class="theader-sensitives uk-flex uk-flex-middle"
+                          ng-class="{'uk-width-D9': modalsensitivities.viewCMI,'uk-width-2-10': !modalsensitivities.viewCMI}">
+                          <md-input-container>
+                            <input style="padding: 10px 0px 2px 2px;min-height: 32px;" type="text"
+                              ng-model="antibiotic.cmi" maxlength="15" list="line">
+                          </md-input-container>
+                        </div>
+                        <div class="theader-sensitives uk-flex uk-flex-middle"
+                          ng-class="{'uk-width-1-10': modalsensitivities.viewCMI,'uk-width-2-10': !modalsensitivities.viewCMI}">
+                          <md-input-container>
+                            <input type="text" style="padding: 10px 0px 2px 2px;min-height: 32px;"
+                              ng-model="antibiotic.interpretationCMI" maxlength="15" list="line">
+                          </md-input-container>
+                        </div>
+                        <div class="uk-width-1-10 theader-sensitives uk-flex uk-flex-middle"
+                          style="width: 9%;background-color: rgba(0, 0, 0, 0.08)" ng-if="modalsensitivities.viewCMI">
+                          <md-input-container>
+                            <input type="text" style="padding: 10px 0px 2px 2px;min-height: 32px;"
+                              ng-blur="modalsensitivities.cal(antibiotic,1)" ng-model="antibiotic.cmiM" maxlength="15"
+                              list="line">
+                          </md-input-container>
+                        </div>
+                        <div class="uk-width-1-10 theader-sensitives uk-flex uk-flex-middle"
+                          style="width: 11%;background-color: rgba(0, 0, 0, 0.08)" ng-if="modalsensitivities.viewCMI">
+                          <md-input-container>
+                            <input type="text" style="padding: 10px 0px 2px 2px;min-height: 32px;"
+                              ng-model="antibiotic.interpretationCMIM" maxlength="15" list="line">
+                          </md-input-container>
+                        </div>
+                        <div class="uk-width-1-10 theader-sensitives  uk-flex uk-flex-center uk-flex-middle"
+                          style="width: 4%;background-color: rgba(0, 0, 0, 0.08)" ng-if=" modalsensitivities.viewCMI">
+                          <a href="" ng-if="antibiotic.cmiMPrint==false" class="uk-icon-square-o"
+                            ng-click="antibiotic.cmiMPrint=true"></a>
+                          <a href="" ng-if="antibiotic.cmiMPrint==true" class="uk-icon-check-square-o"
+                            ng-click="antibiotic.cmiMPrint=false"></a>
+                        </div>
+                        <div class="uk-width-1-10 theader-sensitives uk-flex uk-flex-middle" style="width: 9%;"
+                          ng-if="modalsensitivities.viewCMI">
+
+                          <md-input-container>
+                            <input type="text" style="padding: 10px 0px 2px 2px;min-height: 32px;"
+                              ng-model="antibiotic.disk" maxlength="15" list="line"
+                              ng-blur="modalsensitivities.cal(antibiotic,2)">
+                          </md-input-container>
+                        </div>
+                        <div class="uk-width-1-10 theader-sensitives uk-flex uk-flex-middle" style="width: 11%;"
+                          ng-if="modalsensitivities.viewCMI">
+                          <md-input-container>
+                            <input type="text" style="padding: 10px 0px 2px 2px;min-height: 32px;"
+                              ng-model="antibiotic.interpretationDisk" maxlength="15" list="line">
+                          </md-input-container>
+                        </div>
+                        <div class="uk-width-1-10 theader-sensitives uk-flex uk-flex-center uk-flex-middle"
+                          style="width: 4%;" ng-if="modalsensitivities.viewCMI">
+                          <a href="" ng-if="antibiotic.diskPrint==false" class="uk-icon-square-o"
+                            ng-click="antibiotic.diskPrint=true"></a>
+                          <a href="" ng-if="antibiotic.diskPrint==true" class="uk-icon-check-square-o"
+                            ng-click="antibiotic.diskPrint=false"></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-width-1-1 uk-margin-small-top" style="height: 29%;">
+                <div class="uk-grid uk-grid-small" style="height: 100%;">
+                  <div class="uk-width-1-1" style="height: 97%;">
+                    <div class="md-card md-card-hover" style="height: 100%;">
+                      <div class="md-card-content contentscroll"
+                        style="height: calc(100% - 67px);overflow: auto;width: 98.5%;padding: 8px;">
+                        <md-tabs md-selected="data.selectedIndex" md-align-tabs="top" style="min-height: 100%;">
+                          <md-tab id="tab1" md-tab-class="example-selector-tab1">
+                            <md-tab-label>
+                              {{'0114' | translate}}
+                              <i class="md-icon material-icons md-color-orange-800"
+                                data-uk-modal="{target:'#modalcommentantibiotic'}"
+                                ng-click="modalsensitivities.typecomment=1;modalsensitivities.comment1=modalsensitivities.comment"
+                                data-uk-tooltip="{pos:'top'}" title="{{'0556'| translate}}">create</i>
+                            </md-tab-label>
+                            <md-tab-body>
+                              <p ng-bind-html="modalsensitivities.comment | trust"></p>
+                            </md-tab-body>
+                          </md-tab>
+                          <md-tab id="tab2">
+                            <md-tab-label>
+                              {{'1880' | translate}}
+                              <i class="md-icon material-icons md-color-orange-800"
+                                data-uk-modal="{target:'#modalcommentantibiotic'}"
+                                ng-click="modalsensitivities.typecomment=2;modalsensitivities.comment1=modalsensitivities.recount"
+                                data-uk-tooltip="{pos:'top'}" title="{{'0556'| translate}}">create</i>
+                            </md-tab-label>
+                            <md-tab-body>
+                              <p ng-bind-html="modalsensitivities.recount | trust"></p>
+                            </md-tab-body>
+                          </md-tab>
+                          <md-tab id="tab4">
+                            <md-tab-label>
+                              {{'1882' | translate}}
+                              <i class="md-icon material-icons md-color-orange-800"
+                                data-uk-modal="{target:'#modalcommentantibiotic'}"
+                                ng-click="modalsensitivities.typecomment=4;modalsensitivities.comment1=modalsensitivities.complementations"
+                                data-uk-tooltip="{pos:'top'}" title="{{'0556'| translate}}">create</i>
+                            </md-tab-label>
+                            <md-tab-body>
+                              <p ng-bind-html="modalsensitivities.complementations | trust"></p>
+                            </md-tab-body>
+                          </md-tab>
+                        </md-tabs>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="md-fab-wrapper md-fab-in-card">
+                <button type="button" ng-disabled="false" class="md-fab md-fab-small md-fab md-fab-primary"
+                  ng-click="modalsensitivities.Saveantiobiotics()">
+                  <i class="material-icons" data-uk-tooltip="{pos:'top'}" title=" {{'0007' | translate}} ">&#xE161;</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid uk-grid-small" style="height: calc(100% - 139px)" ng-if="!modalsensitivities.view2">
+          <div class="uk-width-1-1" style="height: 100%">
+            <div class="md-card md-card-hover" style="height: 100%">
+              <div class="md-card-content" style="height: 95%;">
+                <div class="uk-input-group" style="height: 10px;">
+                  <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed"
+                    ng-model="modalsensitivities.search" placeholder="{{'0554'| translate}}"
+                    ng-keypress="modalsensitivities.keyselect($event)"
+                    ng-disabled="modalsensitivities.datamicroorganismo.length===0">
+                  <span class="uk-input-group-addon" style="min-width: 28px;">
+                    <img ng-src="images/microbiology/search.png" />
+                  </span>
+                </div>
+                <table class="uk-table  uk-table-small uk-table-middle tablescrollable "
+                  style="margin-top: 0px;height: calc(100% - 51px);">
+                  <tbody class="tbodyscrollable " vs-repeat
+                    data-scroll-to-top='modalsensitivities.datamicroorganismo.length'
+                    style="height: calc(100% - 7px);margin-top: 8px;">
+                    <tr
+                      data-ng-repeat="microorganisms in modalsensitivities.datamicroorganismo| filter: {name:modalsensitivities.search}">
+                      <td class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                        <md-checkbox ng-model="microorganisms.selected" class="md-primary check-micro"
+                          style="margin-bottom: 0px;">
+                        </md-checkbox>
+                      </td>
+                      <td class="uk-width-9-10" data-ng-bind="microorganisms.name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="md-fab-wrapper md-fab-in-card">
+                  <button type="button" ng-disabled="false" class="md-fab md-fab-small md-fab md-fab-primary"
+                    ng-click="modalsensitivities.Savemicrobialdetection()">
+                    <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                      title=" {{'0007' | translate}} ">&#xE161;</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<modalexceptions idcontrol="'modalexceptionssensitive'" openmodal="modalsensitivities.ShowPopupError"
+  detailerror="modalsensitivities.Error"></modalexceptions>
+<div class="uk-modal uk-modal-card-fullscreen" id="modalcommentantibiotic">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-amber-800">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}" data-uk-modal="{target:'#sensitivitiesmodal'}">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="float: left; margin: 8px 8px 0 0; display: block">
+          <i class="uk-icon-pencil md-36 md-color-blue-50"></i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50" ng-if="modalsensitivities.typecomment===1">
+          {{'0114' | translate}}
+        </h3>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50" ng-if="modalsensitivities.typecomment===2">
+          {{'1880' | translate}}
+        </h3>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50" ng-if="modalsensitivities.typecomment===3">
+          {{'1881' | translate}}
+        </h3>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50" ng-if="modalsensitivities.typecomment===4">
+          {{'1882' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="height: 88%">
+        <div style="height: 90%">
+          <codedcomment comment="modalsensitivities.comment1"></codedcomment>
+        </div>
+        <div class="md-fab-wrapper md-fab-in-card">
+          <button type="button" class="md-fab md-fab-small md-fab md-fab-warning"
+            ng-click="modalsensitivities.Savecomment()" data-uk-modal="{target:'#sensitivitiesmodal'}">
+            <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}">&#xE161;</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

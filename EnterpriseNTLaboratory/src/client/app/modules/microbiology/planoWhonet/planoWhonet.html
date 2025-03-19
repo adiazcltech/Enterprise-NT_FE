@@ -1,0 +1,70 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content">
+    <div id="page_content_inner" style="overflow: hidden">
+        <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+            <div style="height:100%" class="uk-width-1-1">
+                <div class="md-card md-card-hover uk-animation-fade" style="margin-bottom: 5px ;height: 100%">
+                    <div class="md-card-content" style="height: 100%">
+                        <div style="margin-left: 0px;" class="uk-grid">
+                            <div class="uk-width-5-10" style="padding-left: 16px;">
+                                <fieldset class="fieldset" style="height: 58px;padding: 12px 16px;">
+                                    <orderfilter rangeinit="vm.rangeInit"
+                                                 rangeend="vm.rangeEnd"
+                                                 typefilter="vm.filterRange"
+                                                 isopenreport="vm.isOpenReport"
+                                                 typeview="2"></orderfilter>
+                                </fieldset>
+                            </div>
+                            <div class="uk-width-5-10" style="padding-left: 10px;padding-right: 16px;">
+                                <fieldset class="fieldset" style="height: 58px;padding: 12px 16px;">
+                                    <div class="uk-form-row md-input-wrapper md-input-filled">
+                                        <label style="font-size: 14px; color: #444444; margin-left: -8px" class="inline-label">{{'0003' | translate}}</label>
+                                        <select class="md-input" style="margin-top: 13px" ng-options="obj as obj.name for obj in vm.listbranch track by obj.id" data-ng-model="vm.branch"></select>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+            <div style="height: 100%;" class="md-card md-card-hover uk-animation-fade">
+                <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                    <div class="uk-grid" style="height: 100%">
+                        <div class="uk-width-1-1" style="float: right">
+                            <button style="float: right" type="button" class="md-fab md-fab-small md-fab-success" ng-class="{'md-bg-blue-grey-100' : vm.branch.id==undefined || !vm.isOpenReport}" ng-click="vm.get()">
+                                <i style="color: white" class="material-icons">&#xE149;</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false">
+    <div class="uk-modal-dialog message">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-body" style="height: 100px; top: 0px">
+            <div style="width: 20%; float: left">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageText">
+                <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+
+
+
+
+
+

@@ -1,0 +1,2438 @@
+<style>
+    .orderfield-uppercase {
+        text-transform: uppercase;
+    }
+
+    .clase {
+        padding: 0px !important;
+        width: 100% !important;
+        padding-left: 0px !important;
+        display: block !important;
+        height: auto !important;
+        padding-bottom: 0 !important;
+        overflow: visible !important;
+        border-top: 0 !important;
+        box-shadow: none !important
+    }
+
+    .help-block {
+        font-size: 11px;
+        color: #da211e;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .blocklabel {
+        font-size: 11px;
+        color: #a7a2a2;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+        display: none !important;
+    }
+
+    .green {
+        color: #5cb85c;
+    }
+
+    .red {
+        color: #DF013A;
+    }
+
+
+    .measureButtons>div>span {
+        font-size: 9px;
+        text-align: center;
+        width: 60px;
+        max-height: 40px;
+        line-height: 10px;
+        margin-top: 6px;
+    }
+
+    button {
+        margin-left: 5px
+    }
+
+
+    .form-hint {
+        font-size: 7pt;
+        line-height: 9pt;
+        margin: -5px auto 5px;
+        color: #999;
+        margin-top: 5px;
+    }
+
+    .form-hint.error {
+        color: #C00;
+        font-weight: bold;
+        font-size: 8pt;
+    }
+
+    .password-count {
+        float: right;
+        position: relative;
+        bottom: 24px;
+        right: 10px;
+    }
+
+    .strength-meter {
+        position: relative;
+        height: 4px;
+        background: #DDD;
+        margin: 5px auto 5px;
+        border-radius: 3px;
+    }
+
+    .strength-meter:before,
+    .strength-meter:after {
+        content: '';
+        height: inherit;
+        background: transparent;
+        display: block;
+        border-color: #FFF;
+        border-style: solid;
+        border-width: 0 5px 0 5px;
+        position: absolute;
+        width: 80px;
+        z-index: 10;
+    }
+
+    .strength-meter:before {
+        left: 50px;
+    }
+
+    .strength-meter:after {
+        right: 50px;
+    }
+
+    .strength-meter-fill {
+        background: transparent;
+        height: inherit;
+        position: absolute;
+        width: 0;
+        border-radius: inherit;
+        transition: width 0.5s ease-in-out, background 0.25s;
+    }
+
+    .strength-meter-fill[data-strength='0'] {
+        background: darkred;
+        width: 20%;
+    }
+
+    .strength-meter-fill[data-strength='1'] {
+        background: orangered;
+        width: 40%;
+    }
+
+    .strength-meter-fill[data-strength='2'] {
+        background: orange;
+        width: 60%;
+    }
+
+    .strength-meter-fill[data-strength='3'] {
+        background: yellowgreen;
+        width: 80%;
+    }
+
+    .strength-meter-fill[data-strength='4'] {
+        background: green;
+        width: 100%;
+    }
+
+    .patienview {
+        height: calc(100% - 178px);
+    }
+
+    .inpatientview {
+        height: calc(100% - 79px);
+    }
+</style>
+<div class="container-fluid main-container" style="height: 100%;">
+    <loadpage view="vm.loading"></loadpage>
+    <nav class="navbar navbar-default" ng-if="vm.Bannerview===''"
+        ng-style="{'background-color' : vm.color,'border-color': '#ffffff'}">
+        <img class="img-responsive" src="{{vm.logoview}}" ng-if="vm.logoview!==''" style="height: 48px !important;"">
+      <div class=" navbar-header" ng-if="vm.logoview===''"><a class="navbar-brand"
+            style="margin-bottom: 8px;">{{vm.Title}}</a>
+</div>
+<ul class="nav navbar-nav navbar-right" style="position: absolute;top: 0px;right: 24px;">
+    <li ng-if="vm.administrator" class="hidden-xs" style="margin-right: 5px;"><button
+            ng-style="{'background-color' : vm.color,'border-color': vm.color}" class="btn btn-success navbar-btn"
+            ng-click="vm.get()" type="button"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+    </li>
+    <li class="hidden-xs" style="margin-right: 5px;"><button class="btn btn-success navbar-btn"
+            ng-style="{'background-color' : vm.color,'border-color': vm.color}" ng-click="vm.getprofiluser()"
+            type="button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button></li>
+    <li class="hidden-xs"><button class="btn btn-danger navbar-btn" ng-click="vm.closed()" type="button"><span
+                class="glyphicon glyphicon-log-out" aria-hidden="true"></span></button>
+    </li>
+</ul>
+<span class="hidden-sm hidden-md hidden-lg" popup-placement="top" uib-dropdown on-toggle="toggled(open)"
+    style="position: absolute;top: 0px;right: 0px;">
+    <a href id="simple-dropdown" uib-dropdown-toggle>
+        <button class="btn btn-success navbar-btn" ng-style="{'background-color' : vm.color,'border-color': vm.color}"
+            type="button"> <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+        </button>
+    </a>
+    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="    top: 41px;
+                left: -128px;">
+        <li ng-if="vm.administrator" ng-click="vm.get()" role="menuitem"><a href="#">Configuración</a></li>
+        <li role="menuitem" ng-click="vm.getprofiluser()"><a href="#">Cambio de clave</a></li>
+        <li role="menuitem" ng-click="vm.closed()"><a href="#">salir</a></li>
+    </ul>
+</span>
+</nav>
+<nav class="navbar" ng-if="vm.Bannerview !==''">
+    <img class="img-responsive clase" src="{{vm.Bannerview}}">
+    <ul class="nav navbar-nav navbar-right" style="position: absolute;top: 5px;right: 5px;">
+        <li ng-if="vm.administrator" class="hidden-xs" style="margin-right: 5px;"><button
+                ng-style="{'background-color' : vm.color,'border-color': vm.color}" class="btn btn-success navbar-btn"
+                ng-click="vm.get()" type="button"><span class="glyphicon glyphicon-cog"
+                    aria-hidden="true"></span></button></li>
+        <li class="hidden-xs" style="margin-right: 5px;"><button class="btn btn-success navbar-btn"
+                ng-style="{'background-color' : vm.color,'border-color': vm.color}" ng-click="vm.getprofiluser()"
+                type="button"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button></li>
+        <li class="hidden-xs"><button class="btn btn-danger navbar-btn" ng-click="vm.closed()" type="button"><span
+                    class="glyphicon glyphicon-log-out" aria-hidden="true"></span></button>
+        </li>
+    </ul>
+    <span class="hidden-sm hidden-md hidden-lg" popup-placement="top" uib-dropdown on-toggle="toggled(open)"
+        style="position: absolute;top: 0px;right: 0px;">
+        <a href id="simple-dropdown" uib-dropdown-toggle>
+            <button class="btn btn-success navbar-btn"
+                ng-style="{'background-color' : vm.color,'border-color': vm.color}" type="button"> <span
+                    class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+            </button>
+        </a>
+        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="    top: 41px;
+            left: -128px;">
+            <li ng-if="vm.administrator" ng-click="vm.get()" role="menuitem"><a href="#">Configuración</a></li>
+            <li role="menuitem" ng-click="vm.getprofiluser()"><a href="#">Cambio de clave</a></li>
+            <li role="menuitem" ng-click="vm.closed()"><a href="#">Salir</a></li>
+        </ul>
+    </span>
+</nav>
+
+<!--tamaño celular -->
+<div class="row hidden-sm hidden-md hidden-lg"
+    ng-class="{'inpatientview': !vm.viewpatient,'patienview': vm.viewpatient}"
+    ng-if="vm.order.length!==0 && vm.dataorder.length===0">
+    <div class="col-xs-12" style="height: 100%;">
+        <div>
+            <div class="input-group right-bar">
+                <input data-ng-model="vm.searchorder" class="form-control" type="text"
+                    placeholder="{{'0205' | translate}}">
+                <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12"
+            style="margin-top: 10px;margin-bottom: 70px;height: calc(100% - 79px);padding-right: 0px;padding-left: 0px;">
+            <div class="md-card contentscroll" style="height: 100%;overflow-y: scroll;">
+                <div class="md-card-content" style="height: 100%;padding: 0px;font-size: 12px;">
+                    <ul class="md-list md-list-addon" ng-if="vm.order.length!==0" vs-repeat
+                        data-scroll-to-top='vm.filtered.length'>
+                        <li ng-repeat="order in vm.filtered= ( vm.order | filter: vm.searchorder)"
+                            ng-class="{'info': order.order == vm.selectedOrder}"
+                            ng-click="vm.getselectordermini(order)">
+                            <div class="md-list-addon-element" ng-click="vm.getselectorder(order,1)">
+                                <img style="width: 21px; height: 21px" src="images/evaluation.png">
+                                <h6 class="uk-text-bold" style="margin-top: 0px;font-size: 9px;">Ver detalle</h6>
+                            </div>
+                            <div class="md-list-content">
+                                <span class="md-list-heading">{{order.order}}</span>
+                                <span class="uk-text-small uk-text-muted">{{order.name1}} {{order.name2}}
+                                    {{order.lastName}} {{order.surName}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer" class="view-div" style="margin-left: 8px;height: 71px;" ng-if="vm.viewpatient">
+        <div class="col-xs-12">
+            <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+                <div class="md-card-content measureButtons" style="height: 100%;">
+                    <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;">
+                        <button type="button" style="border-radius: 38%;"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}"
+                            class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                            ng-click="vm.order=[];vm.viewpdf=false;vm.viewsmall=1;vm.clearcontrol();vm.dataorder = [];">
+                            <i class="glyphicon glyphicon-filter"></i>
+                        </button>
+                        <span class="text-center">{{'0206' | translate}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<div class="row hidden-sm hidden-md hidden-lg" style="height: calc(100% - 178px)" ng-if="vm.dataorder.length!==0">
+    <div class="col-xs-12 contentscroll" style="height: 100%;overflow: auto;">
+        <div class="row hidden-sm hidden-md hidden-lg separator">
+            <div class="col-xs-12">
+                <div class="panel-group" ng-repeat="(areaGroup, tests)  in vm.orderTests" id="tbl-results-xs"
+                    role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-info" ng-repeat="obj in tests">
+                        <div class="panel-heading" role="tab" id="heading-{{obj.testId}}" ng-if="!obj.viewprofil">
+                            <div class="panel-title"><a role="button" data-toggle="collapse"
+                                    data-parent="tbl-results-xs" href="#collapse-{{obj.testId}}" aria-expanded="false"
+                                    aria-controls="collapse-{{obj.testId}}"
+                                    class="collapsed">{{obj.testId}}{{obj.testName}}</a></div>
+                        </div>
+                        <div id="collapse-{{obj.testId}}" role="tabpanel" aria-labelledby="'heading-'+{{obj.testId}}"
+                            class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                            <div class="panel-body">
+                                <table class="table table-condensed table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-xs-5">{{'0115'|translate}}</td>
+                                            <td class="col-xs-7">{{obj.result}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-xs-5">{{'0117'|translate}}</td>
+                                            <td class="col-xs-7">{{obj.refInterval}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-xs-5"> {{'0116'|translate}}</td>
+                                            <td class="col-xs-7" ng-bind-html="obj.unit | trust"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-xs-5">{{'0225'|translate}}</td>
+                                            <td class="col-xs-7"> <button class="btn col-xs-12 btn-xs btn-success"
+                                                    ng-if="obj.pathology !== 5 && obj.pathology !== 6 && obj.pathology !== 2 && obj.pathology !== 3"><span
+                                                        class="glyphicon glyphicon-ok"
+                                                        aria-hidden="true"></span></button>
+
+                                                <button ng-if="obj.pathology === 2 || obj.pathology === 5"
+                                                    class="btn col-xs-12 btn-xs btn-warning"><span
+                                                        class="glyphicon glyphicon-arrow-down"
+                                                        aria-hidden="true"></span></button>
+
+                                                <button ng-if="obj.pathology === 3 || obj.pathology === 6"
+                                                    class="btn col-xs-12 btn-xs btn-warning"><span
+                                                        class="glyphicon glyphicon-arrow-up"
+                                                        aria-hidden="true"></span></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-xs-5">Comentario</td>
+                                            <td class="col-xs-7"><button ng-click="vm.viewcoment(obj)"
+                                                    ng-if="obj.hasComment" class="btn btn-info col-sm-12 btn-xs"><span
+                                                        class="glyphicon glyphicon-comment"
+                                                        aria-hidden="true"></span></button>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer" class="view-div" style="margin-left: 8px;height: 71px;">
+        <div class="col-xs-12">
+            <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+                <div class="md-card-content measureButtons" style="height: 100%;">
+                    <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;">
+                        <button type="button" style="border-radius: 38%;"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}"
+                            class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                            ng-click="vm.dataorder = [];vm.searchsmall()">
+                            <i class="glyphicon glyphicon-arrow-left"></i>
+                        </button>
+                        <span class="text-center">Regresar</span>
+                    </div>
+                    <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;"
+                        ng-if="vm.viewpatient">
+                        <button type="button" style="border-radius: 38%;"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}"
+                            class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                            ng-click="vm.order=[];vm.viewpdf=false;vm.viewsmall=1;vm.clearcontrol();vm.dataorder = [];">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        <span class="text-center">{{'0205' | translate}} </span>
+                    </div>
+                    <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;">
+                        <button type="button" style="border-radius: 38%;"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}"
+                            class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                            ng-click="vm.download = 1;vm.end()">
+                            <i class="glyphicon glyphicon glyphicon-book"></i>
+                        </button>
+                        <span class="text-center">Imprimir final</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<div class="row hidden-sm hidden-md hidden-lg" style="height: calc(100% - 75px)" ng-if="vm.order.length===0">
+    <div class="btn-group col-xs-12" style="padding: 5px;">
+        <div ng-class="{'col-xs-3': vm.BusquedaOrden,'col-xs-4': !vm.BusquedaOrden}" ng-if="vm.viewpatient">
+            <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===1}"
+                ng-click="vm.viewpdf=false;vm.viewsmall=1;vm.currentNavItem='page1';vm.lisArea.id=0"
+                style="padding: 2px 6px">
+                <img class="md-list-addon-icon material-icons md-24" ng-src="images/age.png" />
+                <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0106' | translate}}</h6>
+            </button>
+        </div>
+        <div ng-class="{'col-xs-3': vm.BusquedaOrden,'col-xs-4': !vm.BusquedaOrden}" ng-if="vm.viewpatient">
+            <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===2}"
+                style="padding: 2px 6px"
+                ng-click="vm.viewpdf=false;vm.viewsmall=2;vm.currentNavItem='page2';vm.lisArea.id=0">
+                <img class="md-list-addon-icon material-icons md-24" ng-src="images/interview.png" />
+                <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0107' | translate}}</h6>
+            </button>
+        </div>
+        <div ng-if="vm.viewpatient" ng-class="{'col-xs-3': vm.BusquedaOrden,'col-xs-4': !vm.BusquedaOrden}">
+            <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===3}"
+                style="padding: 2px 6px"
+                ng-click="vm.viewpdf=false;vm.viewsmall=3;vm.currentNavItem='page3';vm.lisArea.id=0">
+                <img class="md-list-addon-icon material-icons md-24" ng-src="images/history.png" />
+                <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0076' | translate}}</h6>
+            </button>
+        </div>
+        <div ng-class="{'col-xs-3': vm.BusquedaOrden,'col-xs-4': !vm.BusquedaOrden}"
+            ng-if="vm.BusquedaOrden && vm.viewpatient">
+            <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===4}"
+                style="padding: 2px 6px"
+                ng-click="vm.viewpdf=false;vm.viewsmall=4;vm.currentNavItem='page4';vm.lisArea.id=0">
+                <img class="md-list-addon-icon material-icons md-24" ng-src="images/demo.png" />
+                <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0108' | translate}}</h6>
+            </button>
+        </div>
+    </div>
+    <div class="col-xs-12" style="height: calc(100% - 239px);margin-top: 10px;padding-left: 22px;margin-bottom: 10px;"
+        ng-if="vm.order.length===0">
+        <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+            <div class="md-card-content" style="height: 100%;" ng-if="vm.viewpatient && vm.order.length===0">
+                <div class="row" style="margin-bottom: 10px;margin-top: 15px;">
+                    <form class="form-inline col-xs-12" ng-if="vm.viewsmall===1">
+                        <div class="form-group" ng-if="!vm.FiltroRangoFecha">
+                            <label id="lbl-date" for="txt-date" class="control-label">{{'0208' | translate}}</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseach" is-open="vm.openActivateUser"
+                                    ng-focus="vm.openActivateUser = true" ng-change="vm.getseachdate()"
+                                    popup-placement="bottom" on-open-focus="false" clear-text="{{'0214' | translate}}"
+                                    close-text="{{'0216' | translate}}" current-text="{{'0215' | translate}}"
+                                    ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="vm.FiltroRangoFecha">
+                            <label id="lbl-date" for="txt-date" class="control-label">Fecha inicial</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseachinit" is-open="vm.openActivateUser1"
+                                    ng-focus="vm.openActivateUser1 = true" popup-placement="bottom"
+                                    on-open-focus="false" clear-text="{{'0214' | translate}}"
+                                    close-text="{{'0216' | translate}}" current-text="{{'0215' | translate}}"
+                                    ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser1 = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="vm.FiltroRangoFecha">
+                            <label id="lbl-date" for="txt-date" class="control-label">Fecha final</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseachend" is-open="vm.openActivateUser"
+                                    ng-focus="vm.openActivateUser = true" popup-placement="bottom" on-open-focus="false"
+                                    clear-text="{{'0214' | translate}}" close-text="{{'0216' | translate}}"
+                                    current-text="{{'0215' | translate}}" ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-date" for="txt-date" class="control-label">Area</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                data-ng-model="vm.lisArea.id" ng-change="vm.getseachdate()"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="row" ng-if="vm.viewsmall===2 && vm.viewpatient">
+                    <form class="form-inline col-xs-12">
+                        <div class="form-group" ng-if="vm.typedocument">
+                            <label id="lbl-patient-section" class="control-label">{{'0110' | translate}}</label>
+                            <select id="patient-id-section" class="form-control"
+                                ng-options="obj.id as obj.name for obj in vm.documentType"
+                                data-ng-model="vm.documentType.id" ng-change="vm.getseachtype()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-patient-id" for="txt-patient-id" class="control-label">{{'0107' |
+                                translate}}</label>
+                            <input id="txt-patient-id" data-ng-model="vm.record"
+                                ng-keypress="vm.keyselectpatientid($event)" type="text"
+                                class="form-control orderfield-uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-order" for="txt-order" class="control-label">{{'0113' |
+                                translate}}</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearhistory.id" ng-change="vm.keyselectpatientid()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-date" for="txt-date" class="control-label">Area</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                data-ng-model="vm.lisArea.id" ng-change="vm.keyselectpatientid()"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="row" ng-if="vm.viewsmall===3 && vm.viewpatient">
+                    <form class="form-inline col-xs-12">
+                        <div class="form-group" ng-if="vm.twosurnames">
+                            <label for="txt-patient-last-name" class="control-label">{{'0111' | translate}}
+                                1</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.lastname"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group" ng-if="vm.twosurnames">
+                            <label id="lbl-patient-name" class="control-label">{{'0111'
+                                | translate}} 2</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.surName"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group" ng-if="!vm.twosurnames">
+                            <label for="txt-patient-last-name" class="control-label">{{'0111' | translate}}
+                            </label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.lastname"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+
+                        <div class="form-group" ng-if="vm.twoNames">
+                            <label id="lbl-patient-last-name" class="control-label">{{'0112'
+                                | translate}} 1</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name1"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group" ng-if="vm.twoNames">
+                            <label id="lbl-patient-name" class="control-label">{{'0112'
+                                | translate}} 2</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name2"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group" ng-if="!vm.twoNames">
+                            <label id="lbl-patient-last-name" class="control-label">{{'0112'
+                                | translate}} </label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name1"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-order" for="txt-order" class="control-label">{{'0113' |
+                                translate}}</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearname.id" ng-change="vm.keyselectname()"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="row" style="margin-bottom: 10px;margin-top: 15px;margin-right: 0px; margin-left: 0px;"
+                    ng-if="vm.viewsmall===4 && vm.BusquedaOrden">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label id="lbl-order" for="txt-order" class="control-label">{{'0113' |
+                                translate}}</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearorder.id" ng-change="vm.getOrderComplete()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-order" for="txt-order" class="control-label">{{'0108' |
+                                translate}}</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.numberorden"
+                                ng-keypress="vm.getOrderComplete($event)" maxlength="{{vm.cantdigit}}">
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-date" for="txt-date" class="control-label">Area</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                data-ng-model="vm.lisArea.id" ng-change="vm.getOrderComplete()"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="md-card-content" style="height: 100%;" ng-if="vm.viewpatient && vm.order.length!==0">
+            </div>
+        </div>
+    </div>
+    <footer id="footer" class="view-div" style="margin-left: 8px;height: 71px;">
+        <div class="col-xs-12">
+            <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+                <div class="md-card-content measureButtons" style="height: 100%;">
+                    <div class="col-xs-2 text-center" ng-if="vm.viewpatient && vm.order.length===0"
+                        style="padding-right: 12px;padding-left: 0px;float: right;">
+                        <button type="button" style="border-radius: 38%;"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}"
+                            class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                            ng-click="vm.dataorder = [];vm.searchsmall()">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        <span class="text-center">{{'0205' | translate}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Fila para el tab de busquedas -->
+<div class="row hidden-xs">
+    <div class="col-xs-12">
+        <!-- Nav Tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li id="tab-header-my-visits" ng-if="!vm.viewpatient" role="presentation"><a href="#tab-my-visits"
+                    aria-controls="my-visits" role="tab" data-toggle="tab">My Visits</a></li>
+            <li id="tab-header-date" ng-if="vm.viewpatient" role="presentation" class="active"
+                ng-click="vm.lisArea.id=0"><a href="#tab-date" aria-controls="date" role="tab" data-toggle="tab"
+                    aria-expanded="true"> {{'0106' |
+                    translate}}</a></li>
+            <li id="tab-header-patient-id" ng-if="vm.viewpatient" role="presentation" ng-click="vm.lisArea.id=0"><a
+                    href="#tab-patient-id" aria-controls="patient-id" role="tab" data-toggle="tab"> {{'0107' |
+                    translate}}</a></li>
+            <li id="tab-header-patient" ng-if="vm.viewpatient" role="presentation" ng-click="vm.lisArea.id=0"><a
+                    href="#tab-patient" aria-controls="patient" role="tab" data-toggle="tab">{{'0076' | translate}}</a>
+            </li>
+            <li id="tab-header-order" role="presentation" ng-click="vm.lisArea.id=0"
+                ng-if="vm.viewpatient && vm.BusquedaOrden">
+                <a href="#tab-order" aria-controls="order" role="tab" data-toggle="tab"> {{'0108' | translate}}</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="tab-my-visits" ng-if="!vm.viewpatient">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-xs-12">
+                        <button id="btn-search-my-visits" ng-click="vm.refreshpatient()"
+                            class="btn btn-default col-xs-12 col-sm-5 col-md-4 col-lg-3" type="button"
+                            style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+                            Actualizar mi Visitas</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient" class="tab-pane fade active in" id="tab-date">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-3" ng-if="!vm.FiltroRangoFecha">
+                        <div class="form-group">
+                            <label class="control-label">{{'0106' | translate}}</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseach" is-open="vm.openActivateUser"
+                                    ng-focus="vm.openActivateUser = true" ng-change="vm.getseachdate()"
+                                    on-open-focus="false" clear-text="{{'0214' | translate}}"
+                                    close-text="{{'0216' | translate}}" current-text="{{'0215' | translate}}"
+                                    ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" ng-if="vm.FiltroRangoFecha">
+                        <div class="form-group">
+                            <label class="control-label">Fecha inicial</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    datepicker-options="vm.dateOptionsinit" ng-change=" vm.validDateinit()"
+                                    ng-model="vm.dateseachinit" is-open="vm.openActivateInit"
+                                    ng-focus="vm.openActivateInit = true" on-open-focus="false"
+                                    clear-text="{{'0214' | translate}}" close-text="{{'0216' | translate}}"
+                                    current-text="{{'0215' | translate}}" ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateInit = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" ng-if="vm.FiltroRangoFecha">
+                        <div class="form-group">
+                            <label class="control-label">Fecha final</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseachend" is-open="vm.openActivateEnd"
+                                    ng-change=" vm.validDateend()" datepicker-options="vm.dateOptionsend"
+                                    ng-focus="vm.openActivateEnd = true" on-open-focus="false"
+                                    clear-text="{{'0214' | translate}}" close-text="{{'0216' | translate}}"
+                                    current-text="{{'0215' | translate}}" ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateEnd = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <div class="input-group help-block">
+                                <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                    data-ng-model="vm.lisArea.id" ng-change="vm.getseachdate()"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2" style="margin-top: 23px;padding-right: 5px;">
+                        <div class="form-group ">
+                            <div class="btn-group col-sm-13 col-md-13">
+                                <div>
+                                    <div class="btn-group">
+                                        <button id="btn-search-date" class="btn btn-primary hidden-xs" type="button"
+                                            ng-click="vm.getseachdate()"
+                                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="btn-search-date" ng-if="vm.EmpaquetarOrdenesCliente"
+                                            class="btn btn-primary hidden-xs" ng-disabled="vm.disabledopenreportzip"
+                                            type="button" ng-click="vm.openreportzip = true"
+                                            style="background-color: rgb(130 73 193);border-color:rgb(130 73 193);margin-left: 5px;">
+                                            <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                                        </button>
+                                        <label ng-if="vm.EmpaquetarOrdenesCliente" id="EmpaquetarOrdenesCliente"
+                                            for="EmpaquetarOrdenesCliente" style="font-size: 11px;
+                                            margin-left: 5px;
+                                            margin-top: 10px;
+                                            color: #aaa;" class="control-label">{{'0250' | translate}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient" class="tab-pane fade" id="tab-patient-id">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" ng-if="vm.typedocument">
+                        <div class="form-group">
+                            <label id="lbl-patient-section" class="control-label">{{'0110' | translate}}</label>
+                            <select id="patient-id-section" class="form-control"
+                                ng-options="obj.id as obj.name for obj in vm.documentType"
+                                data-ng-model="vm.documentType.id" ng-change="vm.getseachtype()"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label id="lbl-patient-id" class="control-label">{{'0107' |
+                                translate}}</label>
+                            <div class="input-group">
+                                <input id="txt-patient-id" data-ng-model="vm.record"
+                                    ng-keypress="vm.keyselectpatientid($event)" type="text"
+                                    class="form-control orderfield-uppercase">
+                                <span class="input-group-btn hidden-sm hidden-md hidden-lg">
+                                    <button id="btn-search-patient-id-xs" class="btn btn-primary" type="button">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="control-label">Año</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearhistory.id" ng-change="vm.keyselectpatientid()"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <div class="input-group">
+                                <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                    data-ng-model="vm.lisArea.id" ng-change="vm.keyselectpatientid()"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1" style="margin-top: 26px;">
+                        <div class="form-group ">
+                            <div class="btn-group col-sm-13 col-md-13">
+                                <div>
+                                    <div class="btn-group">
+                                        <button id="btn-search-patient-id" class="btn btn-primary hidden-xs"
+                                            type="button" ng-click="vm.keyselectpatientid()"
+                                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient" class="tab-pane fade" id="tab-patient">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" ng-if="vm.twosurnames">
+                        <div class="form-group">
+                            <label class="control-label">{{'0111' | translate}}
+                                1</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.lastname"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                    </div>
+                    <div class="col-sm-2" ng-if="vm.twosurnames">
+                        <div class="form-group">
+                            <label id="lbl-patient-name" class="control-label hidden-xs">{{'0111'
+                                | translate}} 2</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.surName"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-if="!vm.twosurnames">
+                        <div class="form-group">
+                            <label class="control-label">{{'0111' | translate}}
+                            </label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.lastname"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" ng-if="vm.twoNames">
+                        <div class="form-group">
+                            <label id="lbl-patient-last-name" class="control-label">{{'0112'
+                                | translate}} 1</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name1"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                    </div>
+                    <div class="col-sm-2" ng-if="vm.twoNames">
+                        <div class="form-group">
+                            <label id="lbl-patient-name" class="control-label hidden-xs">{{'0112'
+                                | translate}} 2</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name2"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                    </div>
+                    <div class="col-sm-4" ng-if="!vm.twoNames">
+                        <div class="form-group">
+                            <label id="lbl-patient-last-name" class="control-label">{{'0112'
+                                | translate}}</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name1"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label id="lbl-patient-name" class="control-label hidden-xs">Año</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearname.id" ng-change="vm.keyselectname()"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-1" style="margin-top: 26px;">
+                        <div class="form-group ">
+                            <div class="btn-group col-sm-13 col-md-13">
+                                <div>
+                                    <div class="btn-group">
+                                        <button id="btn-search-patient" class="btn btn-primary hidden-xs" type="button"
+                                            ng-click="vm.keyselectname()"
+                                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient && vm.BusquedaOrden" class="tab-pane fade" id="tab-order">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label id="lbl-order" class="control-label">{{'0113' |
+                                translate}}</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearorder.id" ng-change="vm.getOrderComplete()"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label id="lbl-order" class="control-label">{{'0108' |
+                                translate}}</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.numberorden"
+                                ng-keypress="vm.getOrderComplete($event)" maxlength="{{vm.cantdigit}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <div class="input-group">
+                                <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                    data-ng-model="vm.lisArea.id" ng-change="vm.getOrderComplete()"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1" style="margin-top: 26px;">
+                        <div class="form-group ">
+                            <div class="btn-group col-sm-13 col-md-13">
+                                <div>
+                                    <div class="btn-group">
+                                        <button id="btn-search-order" class="btn btn-primary hidden-xs" type="button"
+                                            ng-click="vm.getOrderComplete()"
+                                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--   <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="tab-my-visits" ng-if="!vm.viewpatient">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-xs-12">
+                        <button id="btn-search-my-visits" ng-click="vm.refreshpatient()"
+                            class="btn btn-default col-xs-12 col-sm-5 col-md-4 col-lg-3" type="button"
+                            style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+                            Actualizar mi Visitas</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient" class="tab-pane fade active in" id="tab-date">
+                <div class="row" style="margin-bottom: 10px;margin-top: 15px;">
+                    <form class="form-inline col-xs-12">
+                        <div class="form-group" ng-if="!vm.FiltroRangoFecha">
+                            <label id="lbl-date" for="txt-date" class="control-label">{{'0106' | translate}}</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseach" is-open="vm.openActivateUser"
+                                    ng-focus="vm.openActivateUser = true" ng-change="vm.getseachdate()"
+                                    popup-placement="right-top" on-open-focus="false"
+                                    clear-text="{{'0214' | translate}}" close-text="{{'0216' | translate}}"
+                                    current-text="{{'0215' | translate}}" ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="vm.FiltroRangoFecha">
+                            <label id="lbl-date" for="txt-date" class="control-label">Fecha inicial</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseachinit" is-open="vm.openActivateUser1"
+                                    ng-focus="vm.openActivateUser1 = true" popup-placement="bottom"
+                                    on-open-focus="false" clear-text="{{'0214' | translate}}"
+                                    close-text="{{'0216' | translate}}" current-text="{{'0215' | translate}}"
+                                    ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser1 = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="vm.FiltroRangoFecha">
+                            <label id="lbl-date" for="txt-date" class="control-label">Fecha final</label>
+                            <div class="input-group help-block">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{vm.formatDate}}"
+                                    ng-model="vm.dateseachend" is-open="vm.openActivateUser"
+                                    ng-focus="vm.openActivateUser = true" popup-placement="bottom" on-open-focus="false"
+                                    clear-text="{{'0214' | translate}}" close-text="{{'0216' | translate}}"
+                                    current-text="{{'0215' | translate}}" ng-required="true" />
+                                <div class="input-group-addon" ng-click="vm.openActivateUser = true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-date" for="txt-date" class="control-label">Area</label>
+                            <div class="input-group help-block">
+                                <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                    data-ng-model="vm.lisArea.id" ng-change="vm.getseachdate()"></select>
+                            </div>
+                        </div>
+                        <button id="btn-search-date" class="btn btn-primary hidden-xs" type="button"
+                            ng-click="vm.getseachdate()"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                        <button ng-if="vm.EmpaquetarOrdenesCliente" id="btn-search-date"
+                            class="btn btn-primary hidden-xs" ng-disabled="vm.disabledopenreportzip" type="button"
+                            ng-click="vm.openreportzip = true"
+                            style="background-color: rgb(130 73 193);border-color:rgb(130 73 193)">
+                            <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                        </button>
+                        <div ng-if="vm.EmpaquetarOrdenesCliente" class="form-group">
+                            <label id="EmpaquetarOrdenesCliente" for="EmpaquetarOrdenesCliente"
+                                class="control-label">{{'0250' | translate}}</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient" class="tab-pane fade" id="tab-patient-id">
+                <div class="row" style="margin-bottom: 10px;margin-top: 15px;">
+                    <form class="form-inline col-xs-12">
+                        <div class="form-group" ng-if="vm.typedocument">
+                            <label id="lbl-patient-section" class="control-label">{{'0110' | translate}}</label>
+                            <select id="patient-id-section" class="form-control"
+                                ng-options="obj.id as obj.name for obj in vm.documentType"
+                                data-ng-model="vm.documentType.id" ng-change="vm.getseachtype()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-patient-id" for="txt-patient-id" class="control-label">{{'0107' |
+                                translate}}</label>
+                            <div class="input-group">
+                                <input id="txt-patient-id" data-ng-model="vm.record"
+                                    ng-keypress="vm.keyselectpatientid($event)" type="text"
+                                    class="form-control orderfield-uppercase">
+                                <span class="input-group-btn hidden-sm hidden-md hidden-lg">
+                                    <button id="btn-search-patient-id-xs" class="btn btn-primary" type="button">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearhistory.id" ng-change="vm.keyselectpatientid()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <div class="input-group">
+                                <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                    data-ng-model="vm.lisArea.id" ng-change="vm.keyselectpatientid()"></select>
+                            </div>
+                        </div>
+                        <button id="btn-search-patient-id" class="btn btn-primary hidden-xs" type="button"
+                            ng-click="vm.keyselectpatientid()"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient" class="tab-pane fade" id="tab-patient">
+                <div class="row" style="margin-bottom: 10px;margin-top: 15px;">
+                    <form class="form-inline col-xs-12">
+                        <div class="form-group">
+                            <label for="txt-patient-last-name" class="control-label">{{'0111' | translate}}
+                                1</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.lastname"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+
+                        <div class="form-group">
+                            <label id="lbl-patient-name" for="txt-patient-name" class="control-label hidden-xs">{{'0111'
+                                | translate}} 2</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.surName"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+
+                        <div class="form-group">
+                            <label id="lbl-patient-last-name" for="txt-patient-last-name" class="control-label">{{'0112'
+                                | translate}} 1</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name1"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-patient-name" for="txt-patient-name" class="control-label hidden-xs">{{'0112'
+                                | translate}} 2</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.name2"
+                                ng-keypress="vm.keyselectname($event)">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearname.id" ng-change="vm.keyselectname()"></select>
+                        </div>
+                        <button id="btn-search-patient" class="btn btn-primary hidden-xs" type="button"
+                            ng-click="vm.keyselectname()"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" ng-if="vm.viewpatient && vm.BusquedaOrden" class="tab-pane fade" id="tab-order">
+                <div class="row" style="margin-bottom: 10px;margin-top: 15px;">
+                    <form class="form-inline col-xs-12">
+                        <div class="form-group">
+                            <label id="lbl-order" for="txt-order" class="control-label">{{'0113' |
+                                translate}}</label>
+                            <select class="form-control" ng-options="obj.id as obj.name for obj in vm.listYear"
+                                data-ng-model="vm.listYearorder.id" ng-change="vm.getOrderComplete()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-order" for="txt-order" class="control-label">{{'0108' |
+                                translate}}</label>
+                            <input type="text" class="form-control orderfield-uppercase" data-ng-model="vm.numberorden"
+                                ng-keypress="vm.getOrderComplete($event)" maxlength="{{vm.cantdigit}}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <div class="input-group">
+                                <select class="form-control" ng-options="obj.id as obj.name for obj in vm.lisArea"
+                                    data-ng-model="vm.lisArea.id" ng-change="vm.getOrderComplete()"></select>
+                            </div>
+                        </div>
+                        <button id="btn-search-order" class="btn btn-primary hidden-xs" type="button"
+                            ng-click="vm.getOrderComplete()"
+                            ng-style="{'background-color' : vm.color,'border-color': vm.color}">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                        <button id="btn-search-order-xs" class="btn btn-primary hidden-sm hidden-md hidden-lg"
+                            type="button">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="row hidden-xs">
+    <!-- Fila para las columnas de ordenes -->
+    <div id="div-orders" class="col-xs-12 col-sm-4 col-md-4 col-lg-3" style="padding-right: 0px">
+        <div class="tablescroll">
+            <table class="tablescroll_head" cellspacing="0" style="width: 450px;">
+                <thead id="tbl-orders-head">
+                    <tr style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+                        <th class="hidden header" style="width: 0px; padding-top: 5px; padding-bottom: 5px;"></th>
+                        <th class="hidden header" style="width: 0px; padding-top: 5px; padding-bottom: 5px;"></th>
+                        <th class="col-xs-2 header" ng-style="{'background-color' : vm.color}"
+                            style="width: 65px; padding-top: 5px; padding-bottom: 5px;">{{'0108' |
+                            translate}}</th>
+                        <th class="col-xs-10 header" ng-style="{'background-color' : vm.color}"
+                            style="width: 365px; padding-top: 5px; padding-bottom: 5px;">
+                            <div class="visible-md visible-lg">{{'0076' | translate}}</div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="tablescroll_wrapper contentscroll" style="height: 621px; overflow: hidden auto;">
+                <table id="tbl-orders" class="table table-condensed table-hover tablescroll_body"
+                    style="margin-bottom: 0px; width: 450px;">
+                    <tbody id="tbl-orders-body" vs-repeat>
+                        <tr ng-repeat="order in vm.order" ng-if="vm.order.length!==0"
+                            ng-class="{'info': vm.selectedOrder===order.order}">
+                            <td class="hidden">33062</td>
+                            <td class="hidden">123456</td>
+                            <td ng-click="vm.getselectorder(order)" class="col-xs-2"><a href="#">{{order.order}}</a>
+                            </td>
+                            <td class="col-xs-10" style="text-transform: capitalize;">{{order.name1}}
+                                {{order.name2}} {{order.lastName}} {{order.surName}}
+                            </td>
+                            <td class="hidden">-1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="div-results" class="col-xs-12 col-sm-8 col-md-8 col-lg-9"
+        style="height: 669px; overflow-y: auto;padding-left: 0px;" ng-if="!vm.VerReporteResultados">
+        <div class="row btn-bar">
+            <div class="col-sm-12">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group" ng-if="vm.viewpreliminar">
+                        <button id="btn-report" class="btn btn-info col-sm-12" type="button"
+                            ng-click="vm.preliminary()">
+                            <span class="glyphicon glyphicon-file visible-sm" aria-hidden="true"></span>
+                            <span id="inf-pre" class="visible-md visible-lg">{{'0190' |
+                                translate}}</span>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="btn-report-final" class="btn btn-primary col-sm-12" type="button"
+                            ng-click="vm.download = '';vm.end()">
+                            <span class="glyphicon glyphicon-folder-close visible-sm" aria-hidden="true"></span>
+                            <span id="inf-fin" class="visible-md visible-lg">{{'0221' |
+                                translate}}</span>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group" ng-if="vm.HistoricoGrafica">
+                        <button id="btn-historical-graph" ng-click="vm.GraphicHistory()"
+                            class="btn btn-success col-sm-12" type="button">
+                            <span class="glyphicon glyphicon-signal visible-sm" aria-hidden="true"></span>
+                            <span id="his-graf" class="visible-md visible-lg">{{'0222' |
+                                translate}}</span>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group" ng-if="vm.Historico">
+                        <button id="btn-historical-data" ng-click="vm.GraphicHistorydata()"
+                            class="btn btn-danger col-sm-12" type="button">
+                            <span class="glyphicon glyphicon-book visible-sm" aria-hidden="true"></span>
+                            <span id="his-dat" class="visible-md visible-lg">{{'0223' |
+                                translate}}</span>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group" ng-if="vm.HistoricoCombinado">
+                        <button id="btn-historical-condensed" ng-click="vm.GraphicHistorycodense()"
+                            class="btn btn-warning col-sm-12" type="button">
+                            <span class="glyphicon glyphicon-list-alt visible-sm" aria-hidden="true"></span>
+                            <span id="his-cond" class="visible-md visible-lg">{{'0224' |
+                                translate}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row hidden-xs">
+            <div class="col-sm-12">
+                <div id="div-header-results">
+                    <table id="tbl-results" class="table table-condensed table-hover table-bordered"
+                        style="margin-bottom: 0px;">
+                        <thead>
+                            <tr style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+                                <th class="hidden"></th>
+                                <th class="hidden"></th>
+                                <th class="hidden"></th>
+                                <th class="hidden"></th>
+                                <th class="text-center col-sm-1" ng-style="{'background-color' : vm.color}">
+                                    {{'0114'|translate}}
+                                </th>
+                                <th class="text-center col-sm-2" ng-style="{'background-color' : vm.color}">
+                                    {{'0115'|translate}}
+                                </th>
+                                <th class="text-center col-sm-2" ng-style="{'background-color' : vm.color}">
+                                    {{'0117'|translate}}</th>
+                                <th class="text-center col-md-1" ng-style="{'background-color' : vm.color}">
+                                    {{'0116'|translate}}
+                                </th>
+                                <th class="text-center col-md-1" ng-style="{'background-color' : vm.color}">
+                                    {{'0225' | translate}}</th>
+                                <th class="text-center hidden-xs hidden-sm col-md-2"
+                                    ng-style="{'background-color' : vm.color}">{{'0226'|translate}}</th>
+                                <th class="text-center hidden-xs hidden-sm col-md-1" ng-if="vm.HistoricoGrafica"
+                                    ng-style="{'background-color' : vm.color}">Hist G</th>
+                                <th class="text-center hidden-xs hidden-sm col-md-1" ng-if="vm.Historico"
+                                    ng-style="{'background-color' : vm.color}">Hist D</th>
+                                <th class="text-center hidden-xs hidden-sm col-md-1" ng-if="vm.HistoricoCombinado"
+                                    ng-style="{'background-color' : vm.color}">Rep</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div id="div-results-content">
+                    <table class="table table-condensed table-hover table-bordered">
+                        <tbody id="tbl-results-body" ng-repeat="(areaGroup, tests)  in vm.orderTests">
+                            <tr style="background-color: rgb(88, 124, 186); color: white;">
+                                <td colspan="14">
+                                    <div class="col-no-padding-right" style="text-align: center;"
+                                        ng-class="{'col-sm-9': vm.Historico,'col-sm-10': !vm.Historico}">
+                                        {{areaGroup}}
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right">
+                                        <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                            ng-if="vm.HistoricoGrafica"
+                                            ng-click="vm.selectallarea(areaGroup,obj.printgallarea,tests,1)"
+                                            ng-class="{'btn-success': obj.printgallarea}" ng-model="obj.printgallarea"
+                                            uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" ng-if="vm.Historico">
+                                        <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                            ng-click="vm.selectallarea(areaGroup,obj.printdallarea,tests,2)"
+                                            ng-class="{'btn-danger': obj.printdallarea}" ng-model="obj.printdallarea"
+                                            uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right">
+                                        <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                            ng-if="vm.HistoricoCombinado"
+                                            ng-click="vm.selectallarea(areaGroup,obj.printcallarea,tests,3)"
+                                            ng-class="{'btn-warning': obj.printcallarea}" ng-model="obj.printcallarea"
+                                            ng-change="" uib-btn-checkbox btn-checkbox-true="true"
+                                            btn-checkbox-false="false">
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="obj in tests" ng-class="{'success': obj.state >= 4}">
+                                <td colspan="14" ng-if="obj.viewprofil" style="background-color: rgb(224, 238, 33);">
+                                    <div class="col-no-padding-right"
+                                        ng-class="{'col-sm-9': vm.Historico,'col-sm-10': !vm.Historico}">
+                                        {{obj.profileName}}
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right">
+                                        <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                            ng-click="vm.selectall(obj,obj.printgall,tests,1)"
+                                            ng-if="vm.HistoricoGrafica" ng-class="{'btn-success': obj.printgall}"
+                                            ng-model="obj.printgall" uib-btn-checkbox btn-checkbox-true="true"
+                                            btn-checkbox-false="false">
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" ng-if="vm.Historico">
+                                        <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                            ng-click="vm.selectall(obj,obj.printdall,tests,2)"
+                                            ng-class="{'btn-danger': obj.printdall}" ng-model="obj.printdall"
+                                            uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right">
+                                        <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                            ng-click="vm.selectall(obj,obj.printcall,tests,3)"
+                                            ng-if="vm.HistoricoCombinado" ng-class="{'btn-warning': obj.printcall}"
+                                            ng-model="obj.printcall" ng-change="" uib-btn-checkbox
+                                            btn-checkbox-true="true" btn-checkbox-false="false">
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td ng-if="!obj.viewprofil" class="col-sm-1">
+                                    {{vm.Viewnames?obj.testName:obj.abbreviation}}</td>
+                                <td ng-if="!obj.viewprofil" class="tooltipstered col-sm-2">{{obj.result}}</td>
+                                <td ng-if="!obj.viewprofil" class="text-center col-sm-2">{{obj.refInterval}}</td>
+                                <td ng-if="!obj.viewprofil" class="text-center col-md-1"
+                                    ng-bind-html="obj.unit | trust"></td>
+                                <td ng-if="!obj.viewprofil" class="col-md-1">
+                                    <button class="btn col-xs-12 btn-xs btn-success"
+                                        ng-if="obj.pathology !== 5 && obj.pathology !== 6 && obj.pathology !== 2 && obj.pathology !== 3"><span
+                                            class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+
+                                    <button ng-if="obj.pathology === 2 || obj.pathology === 5"
+                                        class="btn col-xs-12 btn-xs btn-warning"><span
+                                            class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
+
+                                    <button ng-if="obj.pathology === 3 || obj.pathology === 6"
+                                        class="btn col-xs-12 btn-xs btn-warning"><span
+                                            class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
+                                </td>
+                                <td ng-if="!obj.viewprofil" class="hidden-xs hidden-sm col-md-2">
+                                    <div class="col-sm-6 col-no-padding-right" ng-if="obj.state >= 4">
+                                        <button ng-click="vm.viewcoment(obj)" ng-if="obj.hasComment"
+                                            class="btn btn-info col-sm-12 btn-xs"><span
+                                                class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+                                    </div>
+                                    <div class="col-sm-6 col-no-padding-left" ng-if="obj.hasAntibiogram">
+                                        <button ng-click="vm.viewantibiogramt(obj)"
+                                            class="btn btn-info col-sm-12 btn-xs"><span class="glyphicon glyphicon-font"
+                                                aria-hidden="true"></span></button>
+                                    </div>
+                                </td>
+                                <td ng-if="!obj.viewprofil && vm.HistoricoGrafica" class="hidden-xs hidden-sm col-md-1">
+                                    <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                        ng-if="obj.resultType===1" ng-class="{'btn-success': obj.printg}"
+                                        ng-model="obj.printg" uib-tooltip="Seleccionar para graficas de histórico"
+                                        uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+                                        <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                                <td ng-if="!obj.viewprofil  && vm.Historico" class="hidden-xs hidden-sm col-md-1">
+                                    <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                        ng-class="{'btn-danger': obj.printd}" ng-model="obj.printd"
+                                        uib-tooltip="Seleccionar para datos de histórico" uib-btn-checkbox
+                                        btn-checkbox-true="true" btn-checkbox-false="false">
+                                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                                <td ng-if="!obj.viewprofil  && vm.HistoricoCombinado"
+                                    class="hidden-xs hidden-sm col-md-1">
+                                    <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                                        ng-if="obj.resultType===1" ng-class="{'btn-warning': obj.printc}"
+                                        ng-model="obj.printc" uib-tooltip="Seleccionar para codensado de histórico"
+                                        uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+                                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="div-results" class="col-xs-12 col-sm-8 col-md-8 col-lg-9"
+        style="height: 669px;padding: 0px;background: #5f5f63;" ng-if="vm.VerReporteResultados">
+        <iframe id="previreport" scrolling="auto" width="100%" style="border-width: 0px;"
+            class="contentscroll"></iframe>
+    </div>
+</div>
+<footer class="hidden-xs">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h5></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h6 class=uk-text-small uk-text-bold" style="margin : 0px">
+                {{vm.Information}}
+            </h6>
+            <h6 ng-if="vm.Information2 !== ''" class="uk-text-small uk-text-bold" style="margin : 0px">
+                {{vm.Information2}}
+            </h6>
+            <a style="font-size: 12px;" ng-if="vm.URL !== ''" href="{{vm.URL}}">{{vm.URL}}</a>
+        </div>
+    </div>
+    <hr style="margin-top: 7px;margin-bottom: 0px;">
+    <div class="row">
+        <div class="col-xs-12 text-center"><a href="http://www.cltech.net"><img src="images/powered.png"
+                    alt="Powered by CLTech" width="200px"></a><br><a data-toggle="modal" href="#Conditions">
+                {{'0013'|translate}}</a><br></div>
+    </div>
+</footer>
+</div>
+<!-- modal del graficas historico -->
+<div class="modal fade bs-example-modal-lg in" id="test-modal-charts">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-header">
+                <h4>{{'0222'|translate}}</h4><button class="close" type="button" data-dismiss="modal" aria-label="close"
+                    style="margin-top: -30px;"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" id="modal-body" style="height: 500px; overflow: auto;">
+                <div ng-repeat="graph in vm.listgraphics" class="row">
+                    <label style="margin-left: 10px;">{{graph.name}}</label>
+                    <div id="chart-0" style="height: 200px; width: 850px;margin-left: 10px;">
+                        <echart style="height: 200px; width: 850px" data="graph.datagraphics" options="graph.options">
+                        </echart>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="height: 70px; width: 100%; overflow: auto;"><button class="btn btn-default"
+                    data-dismiss="modal" type="button">{{'0216'|translate}}</button></div>
+        </div>
+    </div>
+</div>
+<!-- modal de comentario -->
+<div class="modal fade in" id="modal-result-comment">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-background-header"><button class="close" type="button" data-dismiss="modal"
+                    aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">{{'0231'|translate}} {{vm.test}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p style="background-color: #eee;
+                        opacity: 1;
+                        height: auto;" class="form-control" rows="10" ng-bind-html="vm.comment | trust"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-default" type="button"
+                    data-dismiss="modal">{{'0216'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal del antibiograma -->
+<div class="modal fade in" id="myModal_antibiogram">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-label="close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{'0228'|translate}}</h4>
+            </div>
+            <div class="modal-body" style="height: 450px; overflow: auto; margin-left: 10px;">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"
+                    ng-repeat="sensitive in vm.sensitive">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne0">
+                            <h4 class="panel-title"></h4><a role="button" data-toggle="collapse"
+                                data-parent="#accordion" href="{{'#'+sensitive.id}}" aria-expanded="true"
+                                aria-controls="collapseOne0" class="">{{sensitive.name}}</a>
+                        </div>
+                    </div>
+                    <div class="panel-collapse out collapse in" id="{{sensitive.id}}" role="tabpanel"
+                        aria-labelledby="headingOne0" aria-expanded="true">
+                        <p style="background-color: #eee;
+                            opacity: 1;height: 63px; overflow-y: scroll;" class="form-control"
+                            ng-bind-html="sensitive.comment | trust"></p>
+                        <div style="height: auto; width: auto; overflow: auto;">
+                            <table class="table table-hover table-sm reflow" id="table-" colspan="1">
+                                <thead>
+                                    <tr bgcolor="#1995dc" class="text-white">
+                                        <th>{{'0229'|translate}}</th>
+                                        <th>{{'0230'|translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="result in sensitive.resultsMicrobiology">
+                                    <tr>
+                                        <td>{{result.nameAntibiotic}}</td>
+                                        <td>{{result.cmi}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-default" data-dismiss="modal"
+                    type="button">{{'0216'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal de historial data -->
+<div class="modal fade bs-example-modal-sm in" id="test-modal-chartsdata">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>{{'0223'|translate}}</h4><button class="close" type="button" data-dismiss="modal" aria-label="close"
+                    style="margin-top: -30px;"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" id="modal-body" style="height: 600px; overflow: auto; margin-left: 10px;">
+                <div class="row" ng-repeat="data in vm.listgraphics" style="margin-bottom: 10px;">
+                    <label>{{data.name}}</label>
+                    <div style="height: 250px; width: 830px; overflow: auto; margin-left: 10px;">
+                        <table class="table table-hover table-sm reflow" id="table-0" colspan="1">
+                            <thead>
+                                <tr bgcolor="#1995dc" class="text-white">
+                                    <th class="text-center">#</th>
+                                    <th>{{'0185'|translate}}</th>
+                                    <th>{{'0108'|translate}}</th>
+                                    <th>{{'0115'|translate}}</th>
+                                    <th>{{'0231'|translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="result in data.testdetail">
+                                    <th class="text-center">{{$index+1}}</th>
+                                    <td>{{result.datevalid}}</td>
+                                    <td>{{result.order}}</td>
+                                    <td>{{result.result}}</td>
+                                    <td ng-bind-html="result.comment"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="height: 70px; width: 100%; overflow: auto;"><button class="btn btn-default"
+                    data-dismiss="modal" type="button">{{'0216'|translate}}</button></div>
+        </div>
+    </div>
+</div>
+<!-- modal de configuracion -->
+<div class="modal fade in" id="controlConfigurationModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-label="close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{'0009'|translate}}</h4>
+                <h6 style="margin-top: 0px;margin-bottom: 0px;">Version {{vm.version}}</h6>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <ul class="nav nav-tabs" id="tab-settings" role="tablist">
+                        <li class="active" role="presentation"><a href="#tab-client-data"
+                                aria-controls="tab-client-data" role="tab" data-toggle="tab">{{'0010'|translate}}</a>
+                        </li>
+                        <li role="presentation"><a href="#tab-client-options" aria-controls="tab-client-options"
+                                role="tab" data-toggle="tab">{{'0011'|translate}}</a></li>
+                        <li role="presentation"><a href="#tab-client-user-types" aria-controls="tab-client-user-types"
+                                role="tab" data-toggle="tab">{{'0012'|translate}}</a></li>
+                        <li role="presentation"><a href="#tab-terms-adn-condition" aria-controls="tab-client-user-types"
+                                role="tab" data-toggle="tab">{{'0013'|translate}}</a></li>
+                        <li role="presentation"><a href="#tab-mail-configuration" aria-controls="tab-client-user-types"
+                                role="tab" data-toggle="tab">{{'0014'|translate}}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab-client-data" role="tabpanel">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label" for="txt-client-name">
+                                                {{'0047'|translate}}</label>
+                                            <div class="col-sm-10 col-md-10">
+                                                <input class="form-control" ng-model="vm.dataconfig[2].value"
+                                                    id="txt-client-name" type="text"
+                                                    aria-describedby="txt-client-name-help" maxlength="64">
+                                                <span class="blocklabel" style="margin-bottom: 3px;">
+                                                    {{'0048'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label"
+                                                for="txt-client-logo">Logo</label>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txt-client-logo" type="text"
+                                                        ng-model="vm.logo" aria-describedby="txt-client-logo-help"
+                                                        maxlength="64" disabled="disabled">
+                                                    <span class="input-group-btn">
+                                                        <span class="uk-form-file" style="position: relative;
+                                                        display: inline-block;
+                                                        overflow: hidden;
+                                                        vertical-align: middle;
+                                                        border-collapse: separate;
+                                                        list-style: none;">
+                                                            <input type="file" style="height: 34px;
+                                                            padding-left: 0px !important;
+                                                            position: absolute;
+                                                            top: 0;
+                                                            z-index: 1;
+                                                            width: 100%;
+                                                            opacity: 0;
+                                                            cursor: pointer;
+                                                            left: 0;" ng-model="vm.Temporal" name="file_upload-select1"
+                                                                base-sixty-four-input multiple
+                                                                accept="image/jpg, image/jpeg, image/png" maxsize="100"
+                                                                required minnum="2" on-change="onChangeimage"
+                                                                style="height: 50px;padding-left: 0px !important;">
+                                                            <button class="btn btn-primary" id="btn-client-file"
+                                                                type="button"
+                                                                ng-style="{'background-color' : vm.color,'border-color': vm.color}"><span
+                                                                    class="glyphicon glyphicon-search"
+                                                                    aria-hidden="true"></span>
+                                                            </button>
+                                                        </span>
+                                                        <button class="btn btn-danger" id="btn-client-delete-logo"
+                                                            ng-click="vm.logo='';vm.Temporal=undefined;vm.dataconfig[3].value =''"
+                                                            ng-disabled="vm.logo===''" type="button" delete="0"><span
+                                                                class="glyphicon glyphicon-minus-sign"
+                                                                aria-hidden="true"></span></button></span>
+                                                </div>
+                                                <span class="blocklabel" style="margin-bottom: 3px;">{{'0041'
+                                                    | translate}}</span>
+                                            </div>
+                                            <label class="col-sm-2 col-md-2 control-label"
+                                                for="txt-client-logo">Banner</label>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txt-client-logo" type="text"
+                                                        ng-model="vm.Banner" aria-describedby="txt-client-logo-help"
+                                                        maxlength="64" disabled="disabled">
+                                                    <span class="input-group-btn">
+                                                        <span class="uk-form-file" style="position: relative;
+                                                            display: inline-block;
+                                                            overflow: hidden;
+                                                            vertical-align: middle;
+                                                            border-collapse: separate;
+                                                            list-style: none;">
+                                                            <input type="file" style="height: 34px;
+                                                                padding-left: 0px !important;
+                                                                position: absolute;
+                                                                top: 0;
+                                                                z-index: 1;
+                                                                width: 100%;
+                                                                opacity: 0;
+                                                                cursor: pointer;
+                                                                left: 0;" ng-model="vm.Temporal1"
+                                                                name="file_upload-select1" base-sixty-four-input
+                                                                multiple accept="image/jpg, image/jpeg, image/png"
+                                                                maxsize="100" required minnum="2"
+                                                                on-change="onChangeimage1"
+                                                                style="height: 50px;padding-left: 0px !important;">
+                                                            <button class="btn btn-primary" id="btn-client-file"
+                                                                type="button"
+                                                                ng-style="{'background-color' : vm.color,'border-color': vm.color}"><span
+                                                                    class="glyphicon glyphicon-search"
+                                                                    aria-hidden="true"></span>
+                                                            </button>
+                                                        </span>
+                                                        <button class="btn btn-danger" id="btn-client-delete-logo"
+                                                            ng-click="vm.Banner='';vm.dataconfig[4].value='';vm.Temporal1=undefined"
+                                                            ng-disabled="vm.Banner===''" type="button" delete="0"><span
+                                                                class="glyphicon glyphicon-minus-sign"
+                                                                aria-hidden="true"></span></button></span>
+                                                </div>
+                                                <span class="blocklabel" style="margin-bottom: 3px;">
+                                                    {{'0041'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label"
+                                                for="txt-client-color">Color</label>
+                                            <div class="col-sm-10 col-md-10">
+                                                <div class="input-group colorpicker-element"><input
+                                                        ng-model="vm.dataconfig[1].value" class="form-control"
+                                                        id="txt-client-color" type="text"
+                                                        aria-describedby="txt-client-color-help"><span
+                                                        class="input-group-addon">
+                                                        <color-picker ng-model="vm.dataconfig[1].value"
+                                                            options="{'format':'hex', 'placeholder': 'Hello', 'round': false,'swatchOnly':true,'case':'lower'}"
+                                                            api="api" event-api="eventApi"></color-picker>
+                                                    </span>
+                                                </div>
+                                                <span class="blocklabel" style="margin-bottom: 3px;">
+                                                    {{'0046'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label" for="txt-client-info">
+                                                {{'0049'|translate}}</label>
+                                            <div class="col-sm-10 col-md-10"><input class="form-control"
+                                                    ng-model="vm.dataconfig[5].value" id="txt-client-info" type="text"
+                                                    aria-describedby="txt-client-info-help" maxlength="64">
+                                                <span class="blocklabel" style="margin-bottom: 3px;">
+                                                    {{'0045'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label"
+                                                for="txt-client-additionalInfo">{{'0042'|translate}}</label>
+                                            <div class="col-sm-10 col-md-10"><input class="form-control"
+                                                    ng-model="vm.dataconfig[6].value" id="txt-client-additionalInfo"
+                                                    type="text" aria-describedby="txt-client-additionalInfo-help"
+                                                    maxlength="64">
+                                                <span class="blocklabel"
+                                                    style="margin-bottom: 3px;">{{'0045'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label" for="txt-client-url">URL</label>
+                                            <div class="col-sm-10 col-md-10"><input class="form-control"
+                                                    id="txt-client-url" type="text" ng-model="vm.dataconfig[0].value"
+                                                    aria-describedby="txt-client-url-help" placeholder="http://"
+                                                    maxlength="64">
+                                                <span class="blocklabel"
+                                                    style="margin-bottom: 3px;">{{'0044'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label" for="txt-client-url">Url
+                                                Servicios LIS</label>
+                                            <div class="col-sm-10 col-md-10"><input class="form-control"
+                                                    id="txt-client-url" type="text" ng-model="vm.dataconfig[18].value"
+                                                    aria-describedby="txt-client-url-help" placeholder="C:"
+                                                    maxlength="64">
+                                                <span class="blocklabel" style="margin-bottom: 3px;">PATH para consultar
+                                                    los servicios del
+                                                    LIS</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label" for="txt-client-url">URL api de
+                                                seguridad</label>
+                                            <div class="col-sm-10 col-md-10"><input class="form-control"
+                                                    id="txt-client-url" type="text" ng-model="vm.dataconfig[30].value"
+                                                    aria-describedby="txt-client-url-help" placeholder="http://"
+                                                    maxlength="64">
+                                                <span class="blocklabel" style="margin-bottom: 3px;">PATH para consultar
+                                                    los URL api de
+                                                    seguridad</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-2 col-md-2 control-label" for="txt-client-url">{{'0193' |
+                                                translate}}</label>
+                                            <div class="col-sm-10 col-md-10"><input class="form-control"
+                                                    id="txt-client-url" type="text" ng-model="vm.dataconfig[19].value"
+                                                    aria-describedby="txt-client-url-help" placeholder="C:"
+                                                    maxlength="128">
+                                                <span class="blocklabel" style="margin-bottom: 3px;">{{'0194' |
+                                                    translate}}</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade in" id="tab-client-options" role="tabpanel">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-historical-data">
+                                                {{'0050'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[7].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel" style="margin-left: 15px;">
+                                                {{'0051'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-historical-graph">
+                                                {{'0052'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[8].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0053'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-historical-condensed">
+                                                {{'0054'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[9].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0055'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-login-captcha">
+                                                {{'0056'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[10].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0057'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label"
+                                                for="chk-change-password">{{'0058'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[11].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel" style="margin-left: 15px;">
+                                                {{'0059'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-outstanding-balance">
+                                                {{'0060'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[12].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0061'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label"
+                                                for="chk-order-search">{{'0062'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[13].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0063'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label"
+                                                for="chk-show-confidencials">{{'0064'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[14].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0065'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label"
+                                                for="chk-show-confidencials">{{'0234'|translate}}</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[29].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0235'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label">{{'0066'|translate}}</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <div>
+                                                    <div class="btn-group">
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[15].value" uib-btn-radio="'0'"
+                                                            uncheckable> {{'0067'|translate}}</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[15].value" uib-btn-radio="'1'"
+                                                            uncheckable> {{'0068'|translate}}</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[15].value" uib-btn-radio="'2'"
+                                                            uib-uncheckable="uncheckable">{{'0069'|translate}}</label>
+                                                    </div>
+                                                </div>
+                                                <span class="blocklabel"
+                                                    style="margin-bottom: 3px;">{{'0070'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="show-result-div" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label">{{'0071'|translate}}</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <div>
+                                                    <div class="btn-group">
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[16].value" uib-btn-radio="'5'"
+                                                            uncheckable> {{'0072'|translate}}</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[16].value" uib-btn-radio="'0'"
+                                                            uncheckable>{{'0073'|translate}}</label>
+                                                    </div>
+                                                </div>
+                                                <span class="blocklabel"
+                                                    style="margin-bottom: 3px;">{{'0074'|translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label"
+                                                for="chk-show-confidencials">Filtro por rango de fecha</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[31].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0235'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label"
+                                                for="chk-show-confidencials">Empaquetar ordenes por cliente</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[32].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel"
+                                                style="margin-left: 15px;">{{'0235'|translate}}</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-show-confidencials">
+                                                Inhabilitar La grilla</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[33].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel" style="margin-left: 15px;">Permite solo generar el
+                                                reporte y no mostrar la grilla</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-show-confidencials">
+                                                Ver nombre del examen</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[34].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel" style="margin-left: 15px;">Permite ver el nombre
+                                                del examen en la grilla</span>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label
+                                                class="col-sm-4 col-md-3 control-label" for="chk-show-confidencials">
+                                                Ver reporte preliminar</label>
+                                            <div class="col-sm-8 col-md-9">
+                                                <toggle-switch ng-model="vm.dataconfig[35].value" class="switch-small"
+                                                    on-label="Yes" off-label="No">
+                                                </toggle-switch>
+                                            </div>
+                                            <span class="blocklabel" style="margin-left: 15px;">Permite imprimir el
+                                                reporte preliminar</span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade in" id="tab-client-user-types" role="tabpanel">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden">id</th>
+                                                <th class="hidden">user-type</th>
+                                                <th class="hidden">image</th>
+                                                <th class="col-sm-3 text-center">Type</th>
+                                                <th class="col-sm-3 text-center">Message</th>
+                                                <th class="col-sm-1 text-center">{{'0080'|translate}}</th>
+                                                <th class="col-sm-2 text-center">Picture</th>
+                                                <th class="col-sm-1 text-center">Visible</th>
+                                                <th class="col-sm-1 text-center">{{ '0248' | translate }}</th>
+                                                <th class="col-sm-1 text-center">{{ '0249' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="user in vm.datauser"
+                                                ng-if="!(user.type===5 && !vm.viewdemogra)">
+                                                <td class="col-sm-3">
+                                                    {{user.type===1?vm.Doctor:''}}
+                                                    {{user.type===2?vm.Patient:''}}
+                                                    {{user.type===3?vm.Customer:''}}
+                                                    {{user.type===4?vm.Laboratory:''}}
+                                                    {{user.type===5?vm.demoname.name:''}}
+                                                    {{user.type===6?vm.Rate:''}}
+                                                </td>
+                                                <td class="col-sm-3">
+                                                    <input class="form-control" ng-model="user.message" type="text">
+                                                </td>
+                                                <td class="col-sm-1">
+                                                    <input class="form-control" ng-model="user.quantityOrder"
+                                                        type="text"
+                                                        ng-keypress="vm.keyselect($event,user.quantityOrder)">
+                                                </td>
+                                                <td class="col-sm-4">
+                                                    <span class="uk-form-file" style="position: relative;
+                                                    display: inline-block;
+                                                    vertical-align: middle;
+                                                    border-collapse: separate;
+                                                    list-style: none;">
+                                                        <input type="file" style="height: 34px;
+                                                        padding-left: 0px !important;
+                                                        position: absolute;
+                                                        top: 0;
+                                                        z-index: 1;
+                                                        width: 100%;
+                                                        opacity: 0;
+                                                        cursor: pointer;
+                                                        left: 0;" ng-model="user.image" name="file_upload-select1"
+                                                            base-sixty-four-input multiple
+                                                            accept="image/jpg, image/jpeg, image/png" maxsize="100"
+                                                            required minnum="2" on-change="onChangeimage1"
+                                                            style="height: 50px;padding-left: 0px !important;">
+                                                        <button class="btn btn-primary col-md-offset-1" type="button"
+                                                            id="btn-patient-file"><span
+                                                                class="glyphicon glyphicon-option-horizontal"></span>
+                                                        </button>
+                                                    </span>
+                                                    <button class="btn btn-primary col-md-offset-1" type="button"
+                                                        ng-click="vm.viewphoto(user)" ng-disabled="user.image===''">
+                                                        <span class="glyphicon glyphicon-zoom-in"></span>
+                                                    </button>
+
+                                                    <button class="btn btn-danger col-md-offset-1"
+                                                        ng-click="user.image=''" ng-disabled="user.image===''"
+                                                        id="btn-client-delete-user-image" type="button" delete="0"><span
+                                                            class="glyphicon glyphicon-minus-sign"
+                                                            aria-hidden="true"></span></button>
+                                                </td>
+                                                <td class="col-sm-1">
+                                                    <button type="button" class="btn col-sm-12 btn-default"
+                                                        ng-disabled="user.type===4"
+                                                        ng-click="user.visible==true?user.quantityOrder='*':user.quantityOrder"
+                                                        ng-class="{'btn-success': user.visible}" ng-model="user.visible"
+                                                        uib-btn-checkbox btn-checkbox-true="true"
+                                                        btn-checkbox-false="false">
+                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                    </button>
+                                                </td>
+                                                <td class="col-sm-1">
+                                                    <div class="col-sm-12" style="display: flex;place-content: center;">
+                                                        <button type="button" class="btn btn-default"
+                                                            ng-class="{'btn-success': user.confidential}"
+                                                            ng-model="user.confidential" uib-btn-checkbox
+                                                            btn-checkbox-true="true" btn-checkbox-false="false">
+                                                            <span class="glyphicon glyphicon-ok"
+                                                                aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-1">
+                                                    <div class="col-sm-12" style="display: flex;place-content: center;">
+                                                        <button type="button" class="btn btn-default"
+                                                            ng-class="{'btn-success': user.onlyValidated}"
+                                                            ng-model="user.onlyValidated" uib-btn-checkbox
+                                                            btn-checkbox-true="true" btn-checkbox-false="false">
+                                                            <span class="glyphicon glyphicon-ok"
+                                                                aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade in" id="tab-terms-adn-condition" role="tabpanel">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12">
+                                    <textarea ng-required="true" name="name" id="name" ui-tinymce="vm.customMenu"
+                                        ng-model="vm.dataconfig[21].value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade in" id="tab-mail-configuration" role="tabpanel">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group" id="show-result-div"><label
+                                                class="col-sm-4 col-md-3 control-label">Servidor de correo</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <div>
+                                                    <div class="btn-group">
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[20].value" uib-btn-radio="'OUTLOOK'"
+                                                            uncheckable>OUTLOOK</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[20].value" uib-btn-radio="'OTRO'"
+                                                            uncheckable>OTRO</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[20].value" uib-btn-radio="'OUTLOOKTOKEN'"
+                                                            uncheckable>Outlook GRAPH</label>    
+                                                    </div>
+                                                </div>
+                                                <span class="blocklabel" id="btns-panic-block-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                          
+                                        <div class="form-group" ng-if="vm.dataconfig[20].value == 'OUTLOOKTOKEN'">
+                                            <label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Cliente ID</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[36].value"
+                                                    id="txt-client-name" type="text"
+                                                    aria-describedby="txt-client-name-help" maxlength="64"><span
+                                                    class="blocklabel" id="txt-client-name-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"  ng-if="vm.dataconfig[20].value == 'OUTLOOKTOKEN'">
+                                            <label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Subdominio</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[37].value"
+                                                    id="txt-client-name" type="text"
+                                                    aria-describedby="txt-client-name-help" maxlength="64"><span
+                                                    class="blocklabel" id="txt-client-name-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"  ng-if="vm.dataconfig[20].value == 'OUTLOOKTOKEN'">
+                                            <label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Llave secreta</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[38].value"
+                                                    id="txt-client-name" type="text"
+                                                    aria-describedby="txt-client-name-help" maxlength="64"><span
+                                                    class="blocklabel" id="txt-client-name-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"  ng-if="vm.dataconfig[20].value == 'OTRO'|| vm.dataconfig[20].value == 'OUTLOOK'">
+                                            <label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Protocolo</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[24].value"
+                                                    id="txt-client-name" type="text"
+                                                    aria-describedby="txt-client-name-help" maxlength="64"><span
+                                                    class="blocklabel" id="txt-client-name-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="vm.dataconfig[20].value == 'OTRO'">
+                                            <label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Puerto</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[26].value"
+                                                    id="txt-client-name" type="text"
+                                                    aria-describedby="txt-client-name-help" maxlength="64"><span
+                                                    class="blocklabel" id="txt-client-name-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="vm.dataconfig[20].value == 'OTRO'"
+                                            id="show-result-div"><label class="col-sm-4 col-md-3 control-label">Tipo de
+                                                manejo de
+                                                seguridad</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <div>
+                                                    <div class="btn-group">
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[27].value" uib-btn-radio="'TLS'"
+                                                            uncheckable>TLS</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[27].value" uib-btn-radio="'SSL'"
+                                                            uncheckable>SSL</label>
+                                                    </div>
+                                                </div>
+                                                <span class="blocklabel" id="btns-panic-block-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="vm.dataconfig[20].value == 'OTRO'"
+                                            id="show-result-div"><label
+                                                class="col-sm-4 col-md-3 control-label">Protocolo de seguridad</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <div>
+                                                    <div class="btn-group">
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[28].value" uib-btn-radio="'smtp'"
+                                                            uncheckable>SMTP</label>
+                                                        <label class="btn btn-primary"
+                                                            ng-model="vm.dataconfig[28].value" uib-btn-radio="'smtps'"
+                                                            uncheckable>SMTPS</label>
+                                                    </div>
+                                                </div>
+                                                <span class="blocklabel" id="btns-panic-block-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ><label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Correo de
+                                                origen</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[23].value"
+                                                    type="text" aria-describedby="txt-client-name-help"
+                                                    maxlength="64"><span class="blocklabel"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="vm.dataconfig[20].value == 'OTRO'|| vm.dataconfig[20].value == 'OUTLOOK'"><label class="col-sm-4 col-md-3 control-label"
+                                                for="txt-client-name">Contraseña</label>
+                                            <div class="btn-group col-sm-8 col-md-9">
+                                                <input class="form-control" ng-model="vm.dataconfig[25].value"
+                                                    type="password" aria-describedby="txt-client-name-help"
+                                                    maxlength="64"><span class="blocklabel" id="txt-client-name-help"
+                                                    style="margin-bottom: 3px;"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-sm-12">
+                                    <textarea ng-required="true" name="name" id="name" ui-tinymce="vm.tinymceOptions"
+                                        ng-model="vm.dataconfig[22].value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" id="save-btn" ng-click="vm.saveconfigurate()"
+                    ng-style="{'background-color' : vm.color,'border-color': vm.color}">{{'0007' | translate}}</button>
+                <button class="btn btn-default" data-dismiss="modal" type="button">{{'0008' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal de terminos y condiciones-->
+<div class="modal fade in" id="Conditions">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-label="close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{'0013'|translate}}</h4>
+            </div>
+            <div class="modal-body" style="overflow: auto;height: 328px;">
+                <ng-bind-html ng-bind-html="vm.loadtermsandConditions(vm.TermsConditions)">
+                </ng-bind-html>
+            </div>
+            <div class="modal-footer"><button class="btn btn-default" data-dismiss="modal"
+                    type="button">{{'0216'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal ver la imagen de perfil-->
+<div class="modal fade bs-example-modal-sm in" id="profileimage">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-label="close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{'0227'|translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <img class="center-block img-circle" ng-src="data:image/jpeg;base64,{{vm.imageprofil}}" width="200px"
+                    height="200px" alt="">
+            </div>
+            <div class="modal-footer"><button class="btn btn-default" data-dismiss="modal"
+                    type="button">{{'0216'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para visualizar cambio de contraseña-->
+<script type="text/ng-template" id="modalchangepassword.html">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="text-center"><strong>{{'0058' | translate}} {{vm.user.userName|uppercase}}</strong></h4>
+      </div>
+      <div class="modal-body">
+
+          <div class="row" ng-if="!vm.keySecurityPolitics">
+              <form class="form-horizontal" id="myFormchangepassword" name="myFormchangepassword">
+                <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched || vm.errorpasword}">
+                    <label class="col-md-4 text-right">
+                        {{'0241' | translate}}:
+                    </label>
+                    <div class="col-md-7">
+                        <input class="form-control"
+                        id="afterpassword"
+                        name="afterpassword"
+                        data-ng-model="vm.userchangepassword.afterpassword"
+                        ng-required="true"
+                        type="password"
+                        ng-focus="vm.errorpasword=false">
+                        <span class="help-block "
+                        ng-if="Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched">
+                            {{'0020' | translate}}
+                        </span>
+                        <span class="help-block"
+                              ng-show="vm.errorpasword"
+                              style="padding: 0px; margin-top: 0px;">
+                              {{'0162' | translate}}
+                        </span>
+                    </div>
+                </div>
+                  <div class="form-group form-group-sm has-feedback"
+                  ng-class="{'has-error': Formchange.pswd.$invalid && Formchange.pswd.$touched || Formchange.pswd.$touched && vm.strength!=='' || vm.viewvalited }">
+                      <label class="col-md-4 text-right">
+                          {{'0103' | translate}}:
+                      </label>
+                      <div class="col-md-7">
+                          <input class="form-control"
+                                 id="pswd"
+                                 ng-change="vm.CheckStrngth()"
+                                 name="pswd"
+                                 ng-focus="vm.viewvalited=false"
+                                 data-ng-model="vm.userchangepassword.password1"
+                                 ng-required="true"
+                                 type="password">
+                          <span class="help-block "
+                                ng-if="Formchange.pswd.$invalid && Formchange.pswd.$touched">
+                              {{'0020' | translate}}
+                          </span>
+                          <span ng-if="vm.viewvalited" class="help-block">{{'0154' | translate}}</span>
+                          </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': Formchange.password.$invalid && Formchange.password.$touched || vm.userchangepassword.password1!==vm.userchangepassword.password2}">
+                      <label class="col-md-4 text-right">
+                          {{'0167' | translate}}:
+                      </label>
+                      <div class="col-md-7">
+                          <input class="form-control" id="password"
+                          name="password" data-ng-model="vm.userchangepassword.password2"
+                          ng-required="true" type="password">
+                          <span class="help-block " ng-if="vm.test=Formchange.password.$invalid && Formchange.password.$touched">
+                              {{'0020' | translate}}
+                          </span>
+                          <span class="help-block"
+                                ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && !vm.test && Formchange.password.$touched"
+                                style="padding: 0px; margin-top: 0px;">
+                                {{'0162' | translate}}
+                          </span>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="row" ng-if="vm.keySecurityPolitics">
+              <form class="form-horizontal" id="myFormchangepassword" name="Formchange">
+                <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched || vm.errorpasword}">
+                    <label class="col-md-4 text-right">
+                        {{'0241' | translate}}:
+                    </label>
+                    <div class="col-md-7">
+                        <input class="form-control"
+                        id="afterpassword"
+                        name="afterpassword"
+                        data-ng-model="vm.userchangepassword.afterpassword"
+                         ng-required="true"
+                         ng-focus="vm.errorpasword=false"
+                         type="password">
+                        <span class="help-block " ng-if="Formchange.afterpassword.$invalid && Formchange.afterpassword.$touched">
+                            {{'0020' | translate}}
+                        </span>
+                        <span class="help-block"
+                              ng-show="vm.errorpasword"
+                              style="padding: 0px; margin-top: 0px;">
+                              {{'0018' | translate}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm has-feedback"
+                  ng-class="{'has-error': Formchange.pswd.$invalid && Formchange.pswd.$touched || Formchange.pswd.$touched && vm.strength!=='' || vm.viewvalited }">
+                        <div class="col-sm-4 text-left"></div>
+                      <div class="col-sm-7 text-left">
+                          <div class="form-hint" style="color:{{vm.color}} !important">
+                              {{vm.strengthlabel}}
+                          </div>
+                          <div class="strength-meter">
+                              <div class="strength-meter-fill" data-strength="{{vm.data}}"></div>
+                          </div>
+                      </div>
+                      <label class="col-md-4 text-right">
+                          {{'0103' | translate}}:
+                      </label>
+                      <div class="col-md-7">
+                          <input class="form-control"
+                                 id="pswd"
+                                 name="pswd"
+                                 data-ng-model="vm.userchangepassword.password1"
+                                 ng-focus="vm.viewvalited=false"
+                                 ng-required="true"
+                                 type="password"
+                                 ng-change="vm.CheckStrngth()">
+                          <div class="label password-count" ng-class="vm.userchangepassword.password1.length >= vm.lettersize ? 'label-success' : 'label-danger'" ng-cloak>{{ vm.userchangepassword.password1 | passwordCount:vm.lettersize }}</div>
+                          <span ng-if="vm.viewvalited" class="help-block">{{'0154' | translate}}</span>
+                          <span class="help-block "
+                                ng-if="Formchange.pswd.$invalid && Formchange.pswd.$touched">
+                                {{'0153' | translate}}.
+                          </span>
+                      </div>
+                      <div class="col-sm-4 text-left"></div>
+                      <div class="col-sm-7 text-left">
+                           <div class="formlabel">
+                              <i class="glyphicon glyphicon-ok-sign green" ng-if="!vm.strength0"></i>
+                              <i class="glyphicon glyphicon-remove-sign red" ng-if="vm.strength0"></i>
+                              {{'0156' | translate}} {{vm.lettersize}} {{'0157' | translate}}
+                          </div>
+                          <div class="formlabel">
+                              <i class="glyphicon glyphicon-ok-sign green" ng-if="!vm.strength1"></i>
+                              <i class="glyphicon glyphicon-remove-sign red" ng-if="vm.strength1"></i>
+                              {{'0158' | translate}}
+                          </div>
+                          <div class="formlabel">
+                              <i class="glyphicon glyphicon-ok-sign green" ng-if="!vm.strength2"></i>
+                              <i class="glyphicon glyphicon-remove-sign red" ng-if="vm.strength2"></i>
+                              {{'0159' | translate}}
+                          </div>
+                          <div class="formlabel">
+                              <i class="glyphicon glyphicon-ok-sign green" ng-if="!vm.strength3"></i>
+                              <i class="glyphicon glyphicon-remove-sign red" ng-if="vm.strength3"></i>
+                              {{'0160' | translate}}
+                          </div>
+                          <div class="formlabel" ng-if="vm.administrator">
+                              <i class="glyphicon glyphicon-ok-sign green" ng-if="!vm.strength4"></i>
+                              <i class="glyphicon glyphicon-remove-sign red" ng-if="vm.strength4"></i>
+                              {{'0161' | translate}}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': Formchange.password.$invalid && Formchange.password.$touched || vm.userchangepassword.password1!==vm.userchangepassword.password2}">
+                      <label class="col-md-4 text-right">
+                          {{'0167' | translate}}:
+                      </label>
+                      <div class="col-md-7">
+                          <input class="form-control"
+                          id="password"
+                          name="password"
+                          data-ng-model="vm.userchangepassword.password2"
+                           ng-required="true"
+                           type="password">
+                          <span class="help-block " ng-if="vm.test=Formchange.password.$invalid && Formchange.password.$touched">
+                              {{'0020' | translate}}
+                          </span>
+                          <span class="help-block"
+                                ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && !vm.test && Formchange.password.$touched"
+                                style="padding: 0px; margin-top: 0px;">
+                                {{'0162' | translate}}
+                          </span>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" ng-click="vm.changepassword(myFormchangepassword)"
+          ng-disabled="vm.strength!=='' || vm.userchangepassword.password1!==vm.userchangepassword.password2 || vm.userchangepassword.password2===undefined || vm.userchangepassword.password2==='' || vm.userchangepassword.afterpassword===undefined || vm.userchangepassword.afterpassword===''"
+          class="btn btn-info">{{'0140' | translate}}</button>
+          <button type="button" ng-click="vm.cancel()" class="btn btn-default" data-dismiss="modal">{{'0008' | translate}}</button>
+      </div>
+  </div>
+  </script>
+<resultreportpreliminary openreport="vm.openreportpreliminary" order="vm.selectedOrder" tests="vm.dataorder"
+    listreports="vm.listreports" demographictemplate="vm.demographicTemplate" type="vm.type" download="vm.download"
+    referencedemographic="vm.referenceDemographic" namedemographic="vm.nameDemographic" idiome="vm.lisIdiome">
+</resultreportpreliminary>
+<reportzip demographictemplate="vm.demographicTemplate" openreport="vm.openreportzip" orders="vm.order"
+    tests="vm.dataorder" listreports="vm.listreports">
+</reportzip>

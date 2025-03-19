@@ -1,0 +1,120 @@
+ <style>
+   .md-button.md-icon-button {
+     display: none !important;
+   }
+
+ </style>
+ <loadpage view="vm.loadingdata"></loadpage>
+ <modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+ <div id="page_content">
+   <div id="page_content_inner">
+     <div style="height: calc(100% - 58px)" class="uk-grid" data-uk-grid-margin>
+       <div style="height:75%" class="uk-width-1-1">
+         <div class="md-card" style="margin-bottom: 5px">
+           <div class="md-card-content uk-grid">
+             <div class="uk-width-4-10" style="width: 33%">
+               <fieldset class="fieldset" style="height: 58px; padding-top: 14px">
+                 <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                   isopenreport="vm.isOpenReport" typeview='2'></orderfilter>
+               </fieldset>
+             </div>
+             <div class="uk-width-9-10" style="width: 68%; margin-left: -30px">
+               <fieldset class="fieldset" style="height: 63px; padding-top: 9px">
+                 <div class="uk-grid" style="margin-top: 3px">
+
+                   <div class="uk-width-1-4">
+                     <div class="uk-form-row md-input-wrapper md-input-filled">
+                       <label style="padding-left: 2px">{{'0161' | translate}}:</label>
+                       <select class="md-input" charset="utf-8"
+                         ng-options="obj.id as obj.name for obj in vm.listtypereport" ng-disabled="vm.statetypereport"
+                         data-ng-model="vm.typereport" ng-change="vm.validateddetail()" class="form-control">
+                       </select>
+                     </div>
+                   </div>
+                   <div class="uk-width-1-4">
+                     <div class="uk-form-row md-input-wrapper md-input-filled">
+                       <label style="padding-left: 2px">Generar con:</label>
+                       <select class="md-input" charset="utf-8"
+                         ng-options="obj.id as obj.name for obj in vm.listsearchby" data-ng-model="vm.searchby" ng-disabled="vm.statesearchby"
+                         class="form-control">
+                       </select>
+                     </div>
+                   </div>
+                   <div class="uk-width-1-4">
+                     <div class="uk-form-row md-input-wrapper md-input-filled">
+                       <label style="padding-left: 2px">{{'0431' | translate}}:</label>
+                       <select class="md-input" charset="utf-8"
+                         ng-options="obj.id as obj.name for obj in vm.liststatetest" data-ng-model="vm.statetest"
+                         class="form-control">
+
+                       </select>
+                     </div>
+                   </div>
+                   <div class="uk-width-1-4">
+                     <div class="uk-form-row md-input-wrapper md-input-filled">
+                       <label style="padding-left: 2px">{{'0088' | translate}}:</label>
+                       <select class="md-input" charset="utf-8"
+                         ng-options="obj as obj.name for obj in vm.listordertype track by obj.id"
+                         data-ng-model="vm.itemordertype" class="form-control">
+                       </select>
+                     </div>
+                   </div>
+                 </div>
+               </fieldset>
+             </div>
+             <div ng-if="false" class="uk-width-4-10" style="width: 17%; margin-left: -30px">
+               <div class="uk-input-group" style="margin-top: 14px">
+                 <span class="uk-input-group-addon"><input type="checkbox" ng-model="vm.checkstadistics"
+                     ng-change="vm.changecheckstadistics()" icheck /></span>
+                 <label style="padding-left: 2px">{{'0035' | translate}}</label>
+               </div>
+               <div class="uk-input-group" style="margin-top: 14px">
+                 <span class="uk-input-group-addon"><input type="checkbox" ng-disabled="vm.checkyears"
+                     ng-model="vm.graph" ng-change="vm.changegraph()" icheck /></span>
+                 <label style="padding-left: 2px">{{'0415' | translate}}</label>
+               </div>
+             </div>
+           </div>
+         </div>
+         <groupingstatistics numbergroups="vm.numbergroup" groupsvalue="vm.listgroup"
+           controlvalid="vm.controlvalidgroups" enabledagegroups="true" enabledtest="vm.enabledtest"
+           enabledgroupfirt="vm.enabledgroupfirt" removetest="vm.removetest"></groupingstatistics>
+       </div>
+     </div>
+     <div class="uk-width-1-1">
+      <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+        ng-click="vm.report = true; vm.loaddata('pdf')"
+        ng-disabled="(!vm.isOpenReport && !vm.checkyears && !vm.graph) || (vm.typereport === '' && !vm.checkyears && !vm.graph) || (!vm.isOpenReport && vm.graph) || !vm.controlvalidgroups"
+        ng-class="{'md-bg-blue-grey-100' : (!vm.isOpenReport && !vm.checkyears && !vm.graph) || (vm.typereport === '' && !vm.checkyears && !vm.graph) || (!vm.isOpenReport && vm.graph) || !vm.controlvalidgroups }">
+        <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+          title="Descargar pdf"></i>
+      </button>
+      <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+        ng-click="vm.report = true; vm.loaddata('xls')"
+        ng-disabled="(!vm.isOpenReport && !vm.checkyears && !vm.graph) || (vm.typereport === '' && !vm.checkyears && !vm.graph) || (!vm.isOpenReport && vm.graph) || !vm.controlvalidgroups"
+        ng-class="{'md-bg-blue-grey-100' : (!vm.isOpenReport && !vm.checkyears && !vm.graph) || (vm.typereport === '' && !vm.checkyears && !vm.graph) || (!vm.isOpenReport && vm.graph) || !vm.controlvalidgroups }">
+        <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+          title="Descargar excel"></i>
+      </button>
+    </div>
+   </div>
+ </div>
+ <div id="modalprogress" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress  uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;"></div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      Generando reporte ....
+    </div>
+  </div>
+
+</div>
+ <loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport"> </loadreport>
+
+ <!-- common functions -->
+ <script src="assets/js/common.min.js"></script>
+ <!-- uikit functions -->
+ <script src="assets/js/uikit_custom.min.js"></script>
+ <!-- altair common functions/helpers -->
+ <script src="assets/js/altair_admin_common.js"></script>

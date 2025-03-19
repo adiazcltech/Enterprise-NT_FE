@@ -1,0 +1,220 @@
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError"></modalerror>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class="col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            RIPS
+          </strong>
+        </div>
+        <div class="col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario">
+          </strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-placement="bottom" data-toggle="tooltip"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/rips/rips.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"
+            title="Ctrl + B">
+          </span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll">
+        <div class="col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form panel-padding panel-scroll contentscroll" style="height: calc(100% - 60px);">
+                <form class="form-horizontal panel-body" id="Form" name="Form" style="height: 99%">
+                     <div class="col-sm-6">
+                        <label class="col-sm-6 text-right">{{'0676' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+
+                          <!-- <ui-select ng-model="vm.configrips[7].select"  on-select="vm.onSelect('Entidad', $model)" theme="select2"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographic | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select> -->
+
+                          <select charset="utf-8" class="form-control" data-ng-model="vm.configrips[7].value " ng-change="vm.selectEntity()"
+                          ng-options="obj.id as obj.name for obj in vm.providers"></select>
+
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="col-sm-6 text-right">{{'3037' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <input class="form-control" maxlength="60" ng-model="vm.configrips[3].value"  class="form-control" type="text">
+                          <!-- <ui-select ng-model="vm.configrips[3].select" theme="select2" on-select="vm.onSelect('CodigoEntidad', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographic | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select> -->
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3038' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[12].select" theme="select2" on-select="vm.onSelect('TipoIdentificacionPrestador', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicTIP | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-sm-6 text-right">{{'0124' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <input class="form-control" data-ng-model="vm.configrips[12].fixedValue"  class="form-control" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3039' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[11].select" theme="select2" on-select="vm.onSelect('TipoIdentificacion', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicTI | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3040' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[1].select" theme="select2" on-select="vm.onSelect('Ambito', $model)"   style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicAmbito | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3041' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[9].select" theme="select2" on-select="vm.onSelect('Proposito', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicPurpose | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3042' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[10].select" theme="select2" on-select="vm.onSelect('Residencia', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.DemographicResidencia | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3043' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[8].select" theme="select2" on-select="vm.onSelect('Municipio', $model)" style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicTown | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6 form-group-min">
+                          <input class="form-control" data-ng-model="vm.configrips[8].fixedValue"
+                          class="form-control" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'0957' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[5].select" theme="select2" on-select="vm.onSelect('Departamento', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicDepartment | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6 form-group-min">
+                          <input class="form-control" maxlength="60" data-ng-model="vm.configrips[5].fixedValue"
+                            class="form-control" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3044' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[0].select" theme="select2" on-select="vm.onSelect('Afiliacion', $model)" style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicMembership | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'3045' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[2].select" theme="select2" on-select="vm.onSelect('Autorizacion', $model)"  style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicAuth | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="col-md-6 text-right">{{'0180' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <ui-select ng-model="vm.configrips[6].select" theme="select2" on-select="vm.onSelect('Diagnostico', $model)" style="width: 100%;" title="">
+                            <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="demo in vm.listdemographicDiagnosis | propsFilter: {name: $select.search}">
+                             <div ng-bind-html="demo.icon+' '+demo.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="col-sm-6 text-right">{{'0280' | translate}}:</label>
+                        <div class="col-sm-6 form-group-min">
+                          <select charset="utf-8" class="form-control" data-ng-model="vm.configrips[4].value"
+                           ng-options="obj.id as obj.name for obj in vm.centralsystem"></select>
+                        </div>
+                      </div>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button class="btn btn-primary button-list" style="width:
+                    calc(100% / 2 - 4px)" ng-click="vm.save()"  type="button">
+                    <span aria-hidden="true" class="glyphicon
+                      glyphicon-floppy-disk">
+                    </span>
+                    {{'0007' | translate}}
+                  </button>
+                  <button class="btn btn-info button-list" style="width:
+                    calc(100% / 2 - 4px)" ng-click="vm.cancel()"  type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-remove">
+                    </span>
+                    {{'0008' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

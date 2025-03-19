@@ -1,0 +1,152 @@
+<style type="text/css">
+	.k-dateinput.k-state-disabled {
+		border-color: white;
+	}
+
+	select {
+		border-color: rgba(235, 235, 235, 0.88)
+	}
+
+	.numberorderdate {
+		float: left;
+		width: 65px
+	}
+
+	.numberorderdigit {
+		float: left;
+		width: calc(100% - 80px) !important;
+	}
+
+	input[type="text"],
+	select {
+		font-size: 11px !important;
+	}
+
+	label {
+		white-space: nowrap;
+	}
+</style>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div class="md-card md-card-primary" style="width: 100%; height: 100%">
+	<div class="md-card-toolbar">
+		<div class="md-card-toolbar-actions">
+			<i  class="md-icon material-icons md-color-red-500" data-uk-modal="{target:'#modalimage' + {{demographics.patiendid}} }">&#xE410;</i>
+			<i  class="md-icon material-icons md-color-blue-grey-500"
+			 data-uk-modal="{target:'#modalphoto'}">&#xE412;</i>
+		</div>
+		<h3 class="md-card-toolbar-heading-text">
+			<strong>{{typeTitle}}</strong>
+		</h3>
+	</div>
+	<div class="md-card-content" style="height: calc(100% - 80px)">
+		<form name="Form" id="Form" style="height: 100%">
+			<div ng-class="{'fixeddemographicsorder' : type === 'O', 'fixeddemographicshistory': type === 'H' && !demographics.typedocument, 'fixeddemographicshistorydocument': type === 'H' && demographics.typedocument}">
+				<div class="uk-flex uk-flex-middle order-entry-field-margin-bottom" ng-repeat="demo in demos" ng-if="($index < demographics.cantitems) ">
+					<p ng-if="!demo.encoded && demo.id === -107 && !demographics.viewOrder" class="cltech-label uk-width-3-6" style="height: 9px"></p>
+					<label ng-if="!demo.encoded && demo.id === -107 && demographics.viewOrder" class="cltech-label uk-width-3-6" ng-class="{'cltech-label-left': demographics.labelAlign === 'left', 'cltech-label-right': demographics.labelAlign === 'right'}"
+					 style="width: 30%">{{demo.name}}
+						<label ng-if="demo.obligatory">*</label>
+					</label>
+					<div ng-if="!demo.encoded && demo.id === -107 && demographics.viewOrder" class="uk-width-3-5">
+						<b>
+							<label ng-if="false" class="numberorderdate">{{demo.dateorder}}</label>
+						</b>
+						<div ng-class="{'numberorderdigit': demo.id === -107}" style="width: 75% !important">
+							<input kendo-masked-text-box k-mask="demo.format" type="text" class="cltech-input" ng-disabled="demo.state || demographics.isOrderAutomatic"
+							 name="demo_{{demo.id}}" id="{{demo.id}}" ng-required="demo.obligatory === 1" ng-model="demo.value" ng-keypress="demographics.keyselectorder($event, demo)"
+							 ng-blur="demographics.keyselectorder(undefined, demo)" ng-class="{'cltech-input-requerid': Form['demo_' + demo.id].$invalid && Form['demo_' + demo.id].$touched && demo.obligatory === 1}"
+							 placeholder="{{demo.format}}" maxlength="{{demographics.maxLenght}}" />
+						</div>
+					</div>
+					<label ng-if="demo.id !== -107" class="cltech-label uk-width-2-5" ng-class="{'cltech-label-left': demographics.labelAlign === 'left', 'cltech-label-right': demographics.labelAlign === 'right'}">{{demo.name}}
+						<label style="color:red" ng-if="demo.obligatory">*</label>
+					</label>
+					<input ng-if="!demo.encoded && demo.id !== -107" kendo-masked-text-box k-mask="demo.format" type="text" class="cltech-input"
+					 ng-disabled="demo.state || demo.id === -108" name="demo_{{demo.id}}" id="{{demo.id}}" ng-required="demo.obligatory === 1"
+					 ng-model="demo.value" ng-keypress="demographics.keyselect($event, demo)" ng-blur="demographics.keyselect(undefined, demo)"
+					 ng-class="{'cltech-input-requerid': Form['demo_' + demo.id].$invalid && Form['demo_' + demo.id].$touched && demo.obligatory === 1}"
+					 placeholder="{{demo.format}}" />
+
+					<select type="text" class="cltech-input uk-width-3-5" id="{{demo.id}}" ng-required="demo.obligatory === 1" name="demo_{{demo.id}}"
+					 ng-if="demo.encoded" ng-disabled="demo.state" ng-model="demo.value" ng-options="option.code + '. ' + option.name for option in demo.items track by option.id"
+					 ng-class="{'cltech-input-requerid': Form['demo_' + demo.id].$invalid &&  Form['demo_' + demo.id].$touched && demo.obligatory === 1}"
+					 style="padding-left: 12px"></select>
+				</div>
+			</div>
+			<div ng-class="{'dinamicdemographicsorder' : type === 'O', 'dinamicdemographichistory': type === 'H' && !demographics.typedocument, 'dinamicdemographichistorydocument': type === 'H' && demographics.typedocument}">
+				<div class="uk-flex uk-flex-middle order-entry-field-margin-bottom" ng-repeat="demo in demos" ng-if="($index >= demographics.cantitems && demo.id !== -99 )">
+					<label class="cltech-label uk-width-2-5" ng-class="{'cltech-label-left': demographics.labelAlign === 'left', 'cltech-label-right': demographics.labelAlign === 'right'}">{{demo.name}}
+						<label style="color:red" ng-if="demo.obligatory">*</label>
+					</label>
+					<input kendo-masked-text-box k-mask="demo.format" data-role="maskedtextbox" type="text" class="cltech-input uk-width-3-5"
+					 ng-if="!demo.encoded" ng-disabled="demo.state" ng-required="demo.obligatory === 1" ng-model="demo.value" ng-keypress="demographics.keyselect($event, demo)"
+					 id="demo_{{demo.id}}" name="demo_{{demo.id}}" ng-class="{'cltech-input-requerid': Form['demo_' + demo.id].$invalid && Form['demo_' + demo.id].$touched && demo.obligatory === 1}"
+					 ng-blur="demographics.keyselect('', demo)" placeholder="{{demo.placeholder}}" />
+					<select type="text" class="cltech-input uk-width-3-5" ng-if="demo.encoded" ng-disabled="demo.state" id="{{demo.id}}" ng-required="demo.obligatory === 1"
+					 ng-model="demo.value" ng-options="option.code + '. ' + option.name for option in demo.items track by option.id" name="demo_{{demo.id}}"
+					 ng-class="{'cltech-input-requerid': Form['demo_' + demo.id].$invalid &&  Form['demo_' + demo.id].$touched && demo.obligatory === 1}"
+					 style="padding-left: 12px"></select>
+				</div>
+			</div>
+			<form>
+	</div>
+</div>
+
+<div id="modalphoto" class="uk-modal" aria-hidden="true" style="overflow-y: scroll; min-height: 300px">
+	<div class="uk-modal-dialog">
+		<div class="uk-modal-header">
+			<h3 class="uk-modal-title">Foto paciente</h3>
+		</div>
+		<div class="uk-grid">
+			<div class="uk-width-5-10">
+				<webcam channel="demographics.myChannel" on-stream="demographics.onStream(stream)" on-access-denied="demographics.onError(err)"
+				 on-streaming="demographics.onSuccess()">
+				</webcam>
+			</div>
+			<div class="uk-width-5-10">
+				<canvas id="snapshot" class="well pull-right" width="320" height="240"></canvas>
+			</div>
+			<div class="uk-width-1-1" style="padding-top: 8px; padding-bottom: 8px; display: flex;">
+				<div class="uk-grid uk-grid-small uk-container-center">
+					<div class="uk-text-center buttonNormalLine">
+						<button type="button" class="md-fab md-fab-small md-fab-primary" ng-click="demographics.makeSnapshot()">
+							<i class="uk-icon-camera"></i>
+						</button>
+					</div>
+					<div class="uk-text-center buttonNormalLine">
+						<button type="button" class="md-fab md-fab-small md-fab-success uk-modal-close uk-close" ng-click="demographics.savephoto()">
+							<i class="uk-icon-save"></i>
+						</button>
+					</div>
+					<div class="uk-text-center buttonNormalLine">
+						<button type="button" class="md-fab md-fab-small md-fab-danger uk-modal-close uk-close">
+							<i class="uk-icon-close"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="{{ 'modalimage' + demographics.patiendid }}" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+	<div class="uk-modal-dialog">
+		<div class="uk-modal-header">
+			<h3 class="uk-modal-title">Foto paciente</h3>
+		</div>
+		<div class="uk-grid">
+			<div class="uk-width-1-1">
+				<img ng-src="{{photopatient}}" alt="user avatar" />
+			</div>
+			<div class="uk-width-1-1" style="padding-top: 8px; padding-bottom: 8px; display: flex;">
+				<div class="uk-grid uk-grid-small uk-container-center">
+					<div class="uk-text-center buttonNormalLine">
+						<button type="button" class="md-fab md-fab-small md-fab-danger uk-modal-close uk-close">
+							<i class="uk-icon-close"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

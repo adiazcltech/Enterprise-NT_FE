@@ -1,0 +1,284 @@
+<style>
+    .rs-opacity-delete {
+        opacity: 0.25;
+    }
+
+    .rs-width-medium {
+        width: 49%;
+    }
+</style>
+<div class="uk-modal uk-modal-card-fullscreen" id="modal-casefiles">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <loadpage view="file.loading"></loadpage>
+        <div class="md-card uk-height-viewport">
+
+            <div class="md-card-toolbar md-bg-indigo-600">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top', delay: 3000}" title="{{'0329'| translate}}" ng-click="file.close()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-24 md-light">&#xE226;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0376' | translate}}
+                </h3>
+            </div>
+
+            <div class="md-card-content">
+
+                <div class="uk-grid uk-grid-small" style="width: 100%;margin-left: 0px;">
+
+                    <div class="uk-medium-3-10 uk-width-1-1  uk-padding-remove">
+
+                        <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+                            <div class="md-card-content" >
+                                <div class="uk-grid" style="width: 100%; margin-left: 0px;height: 100%">
+                                    <div class="uk-width-1-1" style="padding-left: 0px">
+                                        <ul class="md-list md-list-addon  uk-text-center">
+                                            <div class="uk-badge" style="font-size: 24px;margin-right: 5px;font-weight: 500;padding: 8px;border-radius: 10px;display: inline-block;margin-top: -9px;">{{ file.case.studyType.code }}</div>
+                                            <div style="display: inline-block;">
+                                                <h2 class="uk-text-center">
+                                                    | {{ file.case.studyType.name }}
+                                                </h2>
+                                            </div>
+                                            <p style="margin: 0px;font-size: 21px;font-weight: 500;">{{ file.case.numberCase }}</p>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-medium-3-10" style="z-index: 9999">
+                        <cardpatient patientname="file.patient.name" patientdocument="file.patient.document" patientage="file.patient.age" patientgender="file.patient.gender" photopatient="file.photopatient" patientid="file.patient.id"></cardpatient>
+                    </div>
+
+                    <div class="uk-medium-3-10">
+                        <div class="md-card md-card-hover md-card1-horizontal uk-animation-scale-up" style="height: 100%">
+                            <div class="md-card1-head" style="width: 46%;">
+                                <div class="uk-text-center" style="padding-top: 22px">
+                                    <img style="width: 60px; height: 60px; " ng-src="images/formatimage.png" alt="" />
+                                </div>
+                            </div>
+                            <div class="md-card-content" style="width: 49%; margin-left: 47%;padding: 10px;">
+                                <ul class="md-list">
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">{{'0589' | translate}}</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{ file.extsToPrint }}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-grid" style="margin-top: 5px;height: calc(100% - 140px); margin-left: 0px;">
+
+                    <div class=" uk-medium-1-1 uk-padding-remove" style="height: 100%;">
+
+                        <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%;">
+
+                            <div class="md-card-toolbar" style="height: 7%;">
+
+                                <div class="md-card-toolbar-heading-text" style="margin-top: -6px;">
+                                    <strong>{{ '3140' | translate }}</strong>
+                                </div>
+
+                            </div>
+
+                            <div class="md-card-content" style="height: 78%;padding: 5px;">
+
+                                <div class="gallery_grid uk-grid-width-large-1-3 uk-grid-width-large-1-6" id="galleryGrid" ng-if="file.repeatname==false && file.viewtakephotocase === false">
+                                    <div ng-repeat="attach in file.caseFiles" ng-if="!attach.hidden" on-last-repeat>
+                                        <div class="md-card md-card-hover">
+                                            <div class="gallery_grid_item md-card-content">
+                                                <div class="md-card-content uk-flex-center uk-flex-middle">
+                                                    <a data-lightbox-type="image" data-uk-lightbox href="{{ attach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + attach.fileType + ';base64,' + attach.file}}" data-uk-lightbox="{group:'gallery'}">
+                                                        <img ng-src="{{ attach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + attach.fileType + ';base64,' + attach.file}}" style="min-height: 140px; max-height: 140px;">
+                                                    </a>
+                                                </div>
+                                                <div class="gallery_grid_image_caption">
+                                                    <div class="gallery_grid_image_menu">
+                                                        <i class="md-icon material-icons" ng-click="file.caseDeleteDocument(attach)">&#xE872;</i>
+                                                    </div>
+                                                    <span style="display: none">{{attach.id=$index}}</span>
+                                                    <span class="gallery_image_title uk-text-truncate">{{attach.name}}</span>
+                                                    <span class="uk-text-muted uk-text-small">{{attach.createdAt | date: file.formatDate }}-{{attach.userCreated.userName}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid uk-width-1-1 uk-flex uk-flex-center uk-flex-middle" ng-if="file.repeatname==true">
+                                    <div class="uk-text-center" style="width: 100%;margin-bottom: 22px;">
+                                        <span><strong> {{'0621' | translate}} </strong></span><br>
+                                        <span><strong> {{'0622' | translate}} </strong></span>
+                                    </div>
+
+                                    <div class="uk-width-1-3">
+                                        <div class="md-card">
+                                            <div class="md-card md-card-hover">
+                                                <div class="md-card-content uk-flex uk-flex-center uk-flex-middle">
+                                                    <a data-lightbox-type="image" data-uk-lightbox href="{{ file.indexcaseTemporal[0] .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + file.indexcaseTemporal[0].fileType + ';base64,' + file.indexcaseTemporal[0].file}}"
+                                                        data-uk-lightbox="{group:'gallery'}">
+                                                        <img ng-src="{{ file.indexcaseTemporal[0].extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + file.indexcaseTemporal[0].fileType + ';base64,' + file.indexcaseTemporal[0].file}}" style="min-height: 97px; max-height: 97px;">
+                                                    </a>
+                                                </div>
+                                                <div class="md-card-content">
+                                                    <span class="gallery_image_title uk-text-truncate">{{file.indexcaseTemporal[0].name}}</span>
+                                                    <span class="uk-text-muted uk-text-small">{{file.indexcaseTemporal[0].date | date: file.formatDate}}-{{file.indexcaseTemporal[0].userCreated.userName}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-column-small">
+                                        <i class="md-icon material-icons md-48 uk-text-success">&#xE028;</i>
+                                    </div>
+
+                                    <div class="uk-width-1-3">
+                                        <div class="md-card">
+                                            <div class="md-card md-card-hover">
+                                                <div class="md-card-content uk-flex uk-flex-center uk-flex-middle">
+                                                    <a data-lightbox-type="image" data-uk-lightbox href="{{ file.changeattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + file.changeattach.fileType + ';base64,' + file.changeattach.file}}" data-uk-lightbox="{group:'gallery'}">
+                                                        <img ng-src="{{ file.changeattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + file.changeattach.fileType + ';base64,' + file.changeattach.file}}" style="min-height: 97px; max-height: 97px;">
+                                                    </a>
+                                                </div>
+                                                <div class="md-card-content">
+                                                    <span class="gallery_image_title uk-text-truncate">{{file.changeattach.name}}</span>
+                                                    <span class="uk-text-muted uk-text-small">{{file.changeattach.createdAt | date: file.formatDate}}-{{file.changeattach.userCreated.userName}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--contenedor toma de foto-->
+                                <div class="uk-grid uk-width-1-1 uk-flex uk-flex-center uk-flex-middle" ng-if="file.viewtakephotocase === true">
+
+                                    <div class="uk-text-center" style="width: 100%;margin-bottom: 10px;padding-left: 80px;">
+                                        <span><strong> {{'0613' | translate}} </strong></span><br>
+                                    </div>
+
+                                    <div class="uk-grid" style="padding-left: 79px">
+                                        <div class="uk-width-1-2">
+                                            <div class="uk-thumbnail uk-thumbnail-medium">
+                                                <figure class="uk-overlay">
+                                                    <video ng-show="file.validcamera" id="cameracase"></video>
+                                                    <img ng-show="!file.validcamera" ng-src="images/order/attacmentphoto.png" width="" height="" alt="">
+                                                    <figcaption ng-show="!file.validcamera" class="uk-overlay-panel">{{'0614' | translate}}</figcaption>
+                                                </figure>
+                                                <div class="uk-thumbnail-caption" style="line-height: 33px"> <span><strong> {{'0615' | translate}} </strong></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                            <div class="uk-thumbnail uk-thumbnail-medium uk-text-center">
+
+                                                <figure class="uk-overlay">
+                                                    <img id="photoorder" ng-src="images/order/attacmentphoto.png" width="" height="" alt="">
+                                                    <figcaption ng-if="file.photoattachmentcase === ''" class="uk-overlay-panel">{{'0616' | translate}}</figcaption>
+                                                </figure>
+
+                                                <canvas id="canvascase" style="display:none;"></canvas>
+
+                                                <div class="uk-thumbnail-caption" style="padding-top: 0px">
+                                                    <div style="width: 90%;float: left;">
+                                                        <input placeholder="{{'0617' | translate}}" type="text" class="md-input label-fixed uk-padding-remove" ng-model="file.namephotoattachmentcase" md-input="" style="height: 32px;min-height: 32px; font-size: 12px !important;" ng-blur="file.validnamephotocase()">
+                                                        <label ng-if="file.messageimagecase" class="md-color-red-500">{{'0618' | translate}}</label>
+                                                    </div>
+                                                    <div style="float: left;padding-top: 17px">
+                                                        <label>.png</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="uk-flex uk-flex-right uk-position-bottom-right uk-position-fixed" style="margin-bottom: 5px;">
+
+                                <!--agregar foto-->
+                                <div ng-show="(file.caseFiles|filter:{ delete : false }).length < 6 && file.repeatname != true && file.viewtakephotocase!=true "  class="uk-flex uk-flex-column" style="z-index: 100">
+                                    <button type="button" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-indigo-400" ng-click="file.loadtakephotocase()">
+                                        <i class="material-icons md-color-light-blue-50" title="{{'0619' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE439;</i>
+                                    </button>
+                                </div>
+
+                                <!--toma de foto-->
+                                <div ng-show="file.viewtakephotocase == true" class="uk-flex uk-flex-column">
+                                    <div class="uk-input-group">
+                                        <span class="uk-form-file">
+                                            <button type="button" ng-disabled="!file.validcamera"  class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-indigo-300" ng-class="{'md-bg-blue-grey-100' : !file.validcamera}" ng-click="file.takephotocase()">
+                                                <i class="material-icons md-color-light-blue-50" title="{{'0620' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE412;</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--adjuntar foto-->
+                                <div ng-show="file.viewtakephotocase == true" class="uk-flex uk-flex-column">
+                                    <div class="uk-input-group">
+                                        <span class="uk-form-file">
+                                            <button type="button" ng-disabled="file.photoattachmentcase === '' || file.namephotoattachmentcase === '' || file.messageimagecase === true" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-blue-500" ng-class="{'md-bg-blue-grey-100' : (file.photoattachmentcase === '' || file.namephotoattachmentcase === '' || file.messageimagecase === true)}" ng-click="file.addphotoattachmentcase()">
+                                                <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE2C3;</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--cancelar toma de foto-->
+                                <div ng-show="file.viewtakephotocase == true" class="uk-flex uk-flex-column">
+                                    <button type="button" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-red-A700" ng-click="file.viewtakephotocase = false; file.photoattachmentcase = ''">
+                                        <i class="material-icons md-color-light-blue-50" title="{{'0008' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE5CD;</i>
+                                    </button>
+                                </div>
+
+                                <div ng-show="(file.caseFiles|filter:{ delete : false }).length < 6 && file.repeatname!=true && file.viewtakephotocase === false" class="uk-flex uk-flex-column">
+                                  <!--adjuntar / orden-->
+                                  <div class="uk-input-group">
+                                      <span class="uk-form-file">
+                                          <input type="file" ng-model="file.caseTemporalInput" name="file_upload-select1" base-sixty-four-input multiple accept="image/jpg, image/jpeg, image/png, application/pdf" maxsize="100" required minnum="2" on-change="onChange(event)" class="file" style="height: 50px;padding-left: 0px !important;">
+                                          <button type="button" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-blue-500">
+                                              <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE2C3;</i>
+                                          </button>
+                                      </span>
+                                  </div>
+                                </div>
+                                <!--guardar / orden-->
+                                <div ng-show="file.repeatname != true && file.viewtakephotocase === false" class="uk-flex uk-flex-column">
+                                    <button type="button" ng-disabled="!file.caseChange" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500" ng-class="{'md-bg-blue-grey-100' :!file.caseChange}" ng-click="file.save()">
+                                        <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE161;</i>
+                                    </button>
+                                </div>
+
+                                <div ng-show="file.repeatname==true" class="uk-flex uk-flex-column">
+                                    <button type="button" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500" ng-click="file.change()">
+                                        <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE028;</i>
+                                    </button>
+                                </div>
+
+                                <div ng-show="file.repeatname==true" class="uk-flex uk-flex-column">
+                                    <button type="button" class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-red-A700" ng-click="file.repeatname=false;">
+                                        <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}" data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE5CD;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<modalexceptions openmodal="file.ShowPopupError" detailerror="file.Error" idcontrol="'rs-modal-casefiles'"></modalexceptions>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>

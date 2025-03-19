@@ -1,0 +1,446 @@
+<style>
+    .colordosabletraget {
+        background: #cfd8dc1a;
+    }
+</style>
+<loadpage view="commentmicrobiology.loading"></loadpage>
+<div class="md-card toolbar-fixed" style="height: 100%;"
+    ng-class="{'colordosabletraget': commentmicrobiology.idtest ===''}">
+    <div class="md-card-toolbar " style="height: 37px;"
+        ng-class="{'colordosabletraget': commentmicrobiology.idtest ===''}">
+        <div class="md-card-toolbar-actions uk-flex uk-flex-middle" style="padding-top: 3px;">
+            <i ng-if="commentmicrobiology.state && commentmicrobiology.idtest !== ''"
+                class="md-icon material-icons md-color-light-green-600" data-uk-tooltip="{pos:'top'}"
+                title="{{'0005'| translate}}" style="font-weight: bold;"
+                ng-click="commentmicrobiology.openModalAdd()">&#xE145;</i>
+            <i class="md-icon material-icons md-color-purple-A200 " ng-if="commentmicrobiology.idtest !== ''"
+                ng-click="commentmicrobiology.audit()" data-uk-tooltip="{pos:'top'}" title="{{'0046'| translate}}"
+                style="margin-left: -2px !important;">&#xE068;</i>
+            <i class="md-icon material-icons md-color-light-blue-500" ng-if="commentmicrobiology.idtest !== ''"
+                data-uk-tooltip="{pos:'top'}" title="{{'0604'| translate}}"
+                ng-if="!(commentmicrobiology.notes.length === 0 && !commentmicrobiology.state)"
+                ng-click="commentmicrobiology.allcomment()"
+                style="margin-left: -2px !important; margin-right: -4px ">&#xE3C2;</i>
+        </div>
+        <h3 ng-if="commentmicrobiology.idtest ===''" class="md-card-toolbar-heading-text uk-flex uk-flex-middle uk-text-truncate"
+            style="height: 37px;font-size: 11px">
+            <strong>{{'0466'| translate}}</strong>
+        </h3>
+        <h3 ng-if="commentmicrobiology.idtest !==''" class="md-card-toolbar-heading-text uk-flex uk-flex-middle uk-text-truncate"
+            style="height: 37px;font-size: 11px">
+            <strong>{{'0466'| translate}} ({{commentmicrobiology.notes.length}})</strong>
+        </h3>
+    </div>
+    <div class="md-card-content contentscroll" ng-class="{'colordosabletraget': commentmicrobiology.idtest ===''}"
+        style="height: calc(100% - 48px);padding: 0px;overflow: auto;">
+        <div ng-repeat="notes in commentmicrobiology.notes " class="md-card toolbar-fixed" style="margin-bottom: 5px;
+        margin-top: 0px;">
+            <div class="md-card-toolbar md-bg-grey-200" style="padding: 0 16px 0 15px;height: 31px;">
+                <div class="md-card-toolbar-actions" style="padding-top: 0px;">
+                    <i class="md-icon material-icons md-color-orange-500" style="font-size: 20px;
+                    line-height: 37px !important;" ng-if="notes.permissionEdit && commentmicrobiology.state"
+                        data-uk-tooltip="{pos:'top'}" title="{{'0006'| translate}}"
+                        ng-click="commentmicrobiology.editcomment(notes)">&#xE254;</i>
+                    <i class="material-icons md-color-grey-700" ng-if="!notes.permissionEdit" style="font-size: 20px;
+                    line-height: 37px !important;" data-uk-tooltip="{pos:'top'}" title="No tiene permisos">&#xE88D;</i>
+                    <i class="md-icon material-icons md-color-red-500 "
+                        ng-if="notes.permissionEdit && commentmicrobiology.state" data-uk-tooltip="{pos:'top'}"
+                        title="Eliminar" ng-click="commentmicrobiology.deletcomment(notes)" style="font-weight: normal;font-size: 20px;
+                        line-height: 37px !important;">&#xE872;</i>
+                </div>
+                <ul class="md-list" style="width: 80%;">
+                    <li>
+                        <div class=" md-list-content">
+                            <span
+                                class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small uk-text-truncate"
+                                style="font-size: 11px !important;margin-top: 5px!important;"><b>{{notes.user.userName}}</b>
+                                -
+                                {{ notes.lastTransaction | date: commentmicrobiology.formatDate | lowercase}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="md-card-content" style="padding: 8px;">
+                <p ng-bind-html="notes.commentArray.content | trust"></p>
+                <ul class="uk-list" ng-if="notes.commentArray.checklist">
+                    <li class="uk-margin-small-top" ng-repeat="checkbox in notes.commentArray.checklist">
+                        <input type="checkbox" icheck ng-model="checkbox.checked" ng-disabled="true" />
+                        <label class="inline-label" ng-disabled="true">{{ checkbox.title }}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para ver todas las notas -->
+<div id="full_microbiology" class="uk-modal uk-modal-card-fullscreen">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-blue-700">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span ng-if="commentmicrobiology.state" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentmicrobiology.openModalAdd()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0005'| translate}}">&#xE145;</span>
+                        <span ng-if="commentmicrobiology.state" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentmicrobiology.audit()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0046'| translate}}">&#xE068;</span>
+                        <span class="md-icon material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                            ng-click="commentmicrobiology.closedallcomment()"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="line-height: 32px; font-size: 28px">&#xE3C2;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0466'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: 89%;overflow: auto;padding-top: 0px;">
+                <div class="uk-grid uk-grid-width-large-1-3 uk-grid-width-medium-1-2 uk-grid-medium">
+                    <div ng-repeat="notes in commentmicrobiology.notes">
+                        <div class="md-card" style="margin-top: 12px;">
+                            <div class="md-card-toolbar md-bg-grey-200" style="padding: 0 16px 0 10px">
+                                <div class="md-card-toolbar-actions">
+                                    <i class="md-icon material-icons md-color-orange-500"
+                                        ng-if="notes.permissionEdit && commentmicrobiology.state "
+                                        data-uk-tooltip="{pos:'top'}" title="{{'0006'| translate}}"
+                                        ng-click="commentmicrobiology.editcomment(notes)">&#xE254;</i>
+                                    <i class="material-icons md-color-grey-700" ng-if="!notes.permissionEdit"
+                                        data-uk-tooltip="{pos:'top'}" title="No tiene permisos">&#xE88D;</i>
+                                    <i class="md-icon material-icons md-color-red-500 "
+                                        ng-if="notes.permissionEdit && commentmicrobiology.state"
+                                        data-uk-tooltip="{pos:'top'}" title="Eliminar"
+                                        ng-click="commentmicrobiology.deletcomment(notes)"
+                                        style="font-weight: normal;">&#xE872;</i>
+                                </div>
+                                <ul class="md-list" style="width: 80%;">
+                                    <li>
+                                        <div class=" md-list-content">
+                                            <span class="md-list-heading"
+                                                style="font-weight: 700;">{{notes.user.userName}}</span>
+                                            <span class="uk-text-small uk-text-muted">
+                                                {{ notes.lastTransaction | date: commentmicrobiology.formatDate | lowercase}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="md-card-content" style="height: 110px;overflow: auto;">
+                                <p ng-bind-html="notes.commentArray.content | trust"></p>
+                                <ul class="uk-list" ng-if="notes.commentArray.checklist">
+                                    <li class="uk-margin-small-top"
+                                        ng-repeat="checkbox in notes.commentArray.checklist">
+                                        <input type="checkbox" icheck ng-model="checkbox.checked" ng-disabled="true" />
+                                        <label class="inline-label" ng-disabled="true">{{ checkbox.title }}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para editar notas -->
+<div id="edit_microbiology" class="uk-modal uk-modal-card-fullscreen" bg-close="false">
+    <loadpage view="commentmicrobiology.loaddata"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-orange-500">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span id="cancel4" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentmicrobiology.closedmodal()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" ng-if="commentmicrobiology.action == 1"
+                        style="line-height: 32px; font-size: 28px">&#xE145;</i>
+                    <i class="material-icons md-color-grey-50" ng-if="commentmicrobiology.action == 2"
+                        style="line-height: 32px; font-size: 28px">&#xE254;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0466'| translate}} - {{'0006'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: calc(100% - 10px);">
+                <form action="" class="form md-card md-card-hover"
+                    style="height: calc(100% - 115px) ;overflow: hidden; ; padding: 20px">
+                    <div class="md-card-toolbar" style="height: 46px;">
+                        <div style="float: left; width: auto; text-align: left; margin-right: 5px">
+                            <span
+                                class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small"><b>{{commentmicrobiology.user.userName}}</b>
+                                - {{commentmicrobiology.time | date: commentmicrobiology.formatDate | lowercase}}</span>
+                        </div>
+                        <div class="md-card-toolbar-heading-text image-check" id="checkPrint1"
+                            ng-if="commentmicrobiology.viewPrint" style="float: left; width: auto;">
+                            <input type="checkbox" checked ng-model="commentmicrobiology.printReported">
+                            <label for="printComment3" class="md-icon material-icons"
+                                ng-class="{'md-color-yellow-A700': commentmicrobiology.printReported, 'border-image': !commentmicrobiology.printReported }"
+                                data-uk-tooltip="{pos:'top'}"
+                                title="{{ commentmicrobiology.printReported ? '0635' : '0593'| translate}}">&#xE8AD;</label>
+                        </div>
+                    </div>
+                    <div class="md-card-content"
+                        style="height: calc(100% - 120px); overflow-y: hidden; overflow-x: hidden; width: 98%; padding-top: 0px;">
+                        <div class="uk-width-1-1" style="margin-top: 15px;">
+                            <textarea ng-required="true" name="name" id="name"
+                                ui-tinymce="commentmicrobiology.customMenu"
+                                ng-model="commentmicrobiology.additem.commentArray.content"></textarea>
+                        </div>
+                        <span ng-if="cardcomment.commentrequired" class="help-block">{{'0060' | translate}}</span>
+                        <div class="uk-form-row " id="notes_checklist2"
+                            ng-class="{'uk-hidden': ccommentmicrobiology.additem.commentArray.checklist.length == 0}">
+                            <ul class="uk-list uk-list-hover uk-sortable-single" data-uk-sortable
+                                style="max-height: 156px; overflow-y: auto ">
+                                <li class="uk-margin-small-top uk-clearfix"
+                                    ng-repeat="checkbox in commentmicrobiology.additem.commentArray.checklist"
+                                    ng-if="checkbox.hidden">
+                                    <a href="#" class="uk-float-right remove_checklist_item"
+                                        ng-click="commentmicrobiology.closechecklist($index)"><i
+                                            class="material-icons">&#xE5CD;</i></a>
+                                    <div class="uk-nbfc">
+                                        <input type="checkbox" name="checkboxes" icheck ng-model="checkbox.checked" />
+                                        <label class="inline-label">{{ checkbox.title }}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="uk-input-group">
+                                <input id="textaddcheck2" type="text" class="md-input"
+                                    placeholder="Adicionar item a la lista" ng-model="commentmicrobiology.labelheck"
+                                    ng-keypress="commentmicrobiology.checkboxAddKey($event)"
+                                    ng-class="{'md-input-danger':commentmicrobiology.required && commentmicrobiology.labelheck ==''}"
+                                    style="font-size: 13px !important;" />
+                                <span id="requiredcheck2"
+                                    ng-if="commentmicrobiology.required && commentmicrobiology.labelheck ==''"
+                                    class="help-block">{{'0060' | translate}}</span>
+                                <span class="uk-input-group-addon">
+                                    <a id="checkbox_add2" href="#"
+                                        ng-click="commentmicrobiology.checkboxAddClick($event)"><i
+                                            class="material-icons md-24">&#xE145;</i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-modal-footer" style="margin-top: 5px; padding: 15px">
+                        <div class="uk-form-row uk-clearfix">
+                            <div class="uk-float-left">
+                                <a href="#" id="addchecklist2" class="uk-margin-left"
+                                    data-uk-toggle="{target:'#notes_checklist2'}"
+                                    ng-click="commentmicrobiology.additem.commentArray.checklist=[];commentmicrobiology.labelheck='';commentmicrobiology.required=false"
+                                    data-uk-tooltip="{pos:'top'}" title="Adicionar lista"><i
+                                        class="material-icons md-24">&#xE065;</i></a>
+                            </div>
+                            <div class="md-fab-wrapper md-fab-in-card" style="top: calc(100% - 58px)">
+                                <button type="button" class="md-fab md-fab-small md-fab md-bg-orange-500"
+                                    ng-click="commentmicrobiology.saveComment()"
+                                    ng-disabled="commentmicrobiology.additem.commentArray.checklist.length===0 && commentmicrobiology.additem.commentArray.content===''"
+                                    ng-class="{'md-bg-blue-grey-100': commentmicrobiology.additem.commentArray.checklist.length===0 && commentmicrobiology.additem.commentArray.content===''}">
+                                    <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                        title=" {{'0007' | translate}} ">&#xE161;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para adicionar notas -->
+<div id="add_microbilogy" class="uk-modal uk-modal-card-fullscreen" bg-close="false" aria-hidden="true"
+    style="display: none; overflow-y: scroll;">
+    <loadpage view="commentmicrobiology.loaddata"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-green-600">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span id="cancel4" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentmicrobiology.closedmodal()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" ng-if="commentmicrobiology.action == 1"
+                        style="line-height: 32px; font-size: 28px">&#xE145;</i>
+                    <i class="material-icons md-color-grey-50" ng-if="commentmicrobiology.action == 2"
+                        style="line-height: 32px; font-size: 28px">&#xE254;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0466'| translate}} - {{'0005'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: calc(100% - 10px);">
+                <form action="" class="form md-card md-card-hover"
+                    style="height: calc(100% - 115px) ;overflow: hidden; ; padding: 20px">
+                    <div class="md-card-toolbar" style="height: 46px;">
+                        <div style="float: left; width: auto; text-align: left; margin-right: 5px">
+                            <span
+                                class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small"><b>{{commentmicrobiology.user.userName}}</b>
+                                - {{commentmicrobiology.time | date: commentmicrobiology.formatDate | lowercase}}</span>
+                        </div>
+                        <div class="md-card-toolbar-heading-text image-check" id="checkPrint1"
+                            ng-if="commentmicrobiology.viewPrint" style="float: left; width: auto;">
+                            <input type="checkbox" checked ng-model="commentmicrobiology.printReported">
+                            <label for="printComment3" class="md-icon material-icons"
+                                ng-class="{'md-color-yellow-A700': commentmicrobiology.printReported, 'border-image': !commentmicrobiology.printReported }"
+                                data-uk-tooltip="{pos:'top'}"
+                                title="{{ commentmicrobiology.printReported ? '0635' : '0593'| translate}}">&#xE8AD;</label>
+                        </div>
+                    </div>
+                    <div class="md-card-content"
+                        style="height: calc(100% - 120px); overflow-y: hidden; overflow-x: hidden; width: 98%; padding-top: 0px;">
+                        <div class="uk-width-1-1" style="margin-top: 15px;">
+                            <textarea ng-required="true" name="name" id="name"
+                                ui-tinymce="commentmicrobiology.customMenu"
+                                ng-model="commentmicrobiology.additem.commentArray.content"></textarea>
+                        </div>
+                        <span ng-if="cardcomment.commentrequired" class="help-block">{{'0060' | translate}}</span>
+                        <div class="uk-form-row " id="notes_checklist2"
+                            ng-class="{'uk-hidden': ccommentmicrobiology.additem.commentArray.checklist.length == 0}">
+                            <ul class="uk-list uk-list-hover uk-sortable-single" data-uk-sortable
+                                style="max-height: 156px; overflow-y: auto ">
+                                <li class="uk-margin-small-top uk-clearfix"
+                                    ng-repeat="checkbox in commentmicrobiology.additem.commentArray.checklist"
+                                    ng-if="checkbox.hidden">
+                                    <a href="#" class="uk-float-right remove_checklist_item"
+                                        ng-click="commentmicrobiology.closechecklist($index)"><i
+                                            class="material-icons">&#xE5CD;</i></a>
+                                    <div class="uk-nbfc">
+                                        <input type="checkbox" name="checkboxes" icheck ng-model="checkbox.checked" />
+                                        <label class="inline-label">{{ checkbox.title }}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="uk-input-group">
+                                <input id="textaddcheck2" type="text" class="md-input"
+                                    placeholder="Adicionar item a la lista" ng-model="commentmicrobiology.labelheck"
+                                    ng-keypress="commentmicrobiology.checkboxAddKey($event)"
+                                    ng-class="{'md-input-danger':commentmicrobiology.required && commentmicrobiology.labelheck ==''}"
+                                    style="font-size: 13px !important;" />
+                                <span id="requiredcheck2"
+                                    ng-if="commentmicrobiology.required && commentmicrobiology.labelheck ==''"
+                                    class="help-block">{{'0060' | translate}}</span>
+                                <span class="uk-input-group-addon">
+                                    <a id="checkbox_add2" href="#"
+                                        ng-click="commentmicrobiology.checkboxAddClick($event)"><i
+                                            class="material-icons md-24">&#xE145;</i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-modal-footer" style="margin-top: 5px; padding: 15px">
+                        <div class="uk-form-row uk-clearfix">
+                            <div class="uk-float-left">
+                                <a href="#" id="addchecklist2" class="uk-margin-left"
+                                    data-uk-toggle="{target:'#notes_checklist2'}"
+                                    ng-click="commentmicrobiology.additem.commentArray.checklist=[];commentmicrobiology.labelheck='';commentmicrobiology.required=false"
+                                    data-uk-tooltip="{pos:'top'}" title="Adicionar lista"><i
+                                        class="material-icons md-24">&#xE065;</i></a>
+                            </div>
+                            <div class="md-fab-wrapper md-fab-in-card" style="top: calc(100% - 58px)">
+                                <button type="button" class="md-fab md-fab-small md-fab md-bg-light-green-600"
+                                    ng-click="commentmicrobiology.saveComment()"
+                                    ng-disabled="commentmicrobiology.additem.commentArray.checklist.length===0 && commentmicrobiology.additem.commentArray.content===''"
+                                    ng-class="{'md-bg-blue-grey-100': commentmicrobiology.additem.commentArray.checklist.length===0 && commentmicrobiology.additem.commentArray.content===''}">
+                                    <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                        title=" {{'0007' | translate}} ">&#xE161;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para ver la trazabilidad de todas las notas -->
+<div class="uk-modal uk-modal-card-fullscreen" id="audit" bg-close="false">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-purple-A200">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span id="closetrace" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentmicrobiology.closedaudit()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="line-height: 32px; font-size: 28px">&#xE068;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{'0466'| translate}} - {{'0046'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="padding: 16px 40px 16px 70px; background-color: #ececec;">
+                <div id="notesTrace" class="uk-grid uk-grid-width-large-1-1 uk-grid-medium uk-container-center"
+                    style="margin-top: 4px">
+                    <h3 class="heading_a uk-margin-bottom"
+                        style="padding: 0px !important; margin-bottom: 0px !important; margin-top: 5px; margin-left: -20px">
+                        {{'0609'| translate}}
+                    </h3>
+                    <hr style="border-width: 3px;  margin-left: -20px; width: calc(100% + 20px)">
+                    <div class="timeline">
+                        <div class="timeline_item"
+                            ng-repeat="noteTrace in commentmicrobiology.notesTracking track by $index">
+                            <div class="timeline_icon" ng-class="{ 'md-bg-light-green-A700': noteTrace.state == 1,
+                                                'md-bg-orange-A700': noteTrace.state == 2 ,
+                                                'md-bg-red-A700': noteTrace.state == 3 }">
+                                <i class="material-icons" style="font-weight: bold;"
+                                    ng-if="noteTrace.state == 1">&#xE145;</i>
+                                <i class="material-icons" style="font-weight: bold;"
+                                    ng-if="noteTrace.state == 2">&#xE254;</i>
+                                <i class="material-icons" style="font-weight: bold;"
+                                    ng-if="noteTrace.state == 3">&#xE14C;</i>
+                            </div>
+                            <div class="timeline_date">
+                                {{ noteTrace.date }}
+                                <span>{{ noteTrace.time }}</span>
+                            </div>
+                            <div class="timeline_content">
+                                {{noteTrace.title}}: {{noteTrace.id}}
+                                <div class="md-card toolbar-fixed">
+                                    <div class="md-card-toolbar"
+                                        ng-class="{ 'md-bg-green-100': noteTrace.state == 1,
+                                        'md-bg-orange-100': noteTrace.state == 2 ,'md-bg-red-100': noteTrace.state == 3 }"
+                                        style="padding: 0 16px 0 0px">
+                                        <ul class="md-list md-list-addon" style="height: 100%;">
+                                            <li style="height: 100%;">
+                                                <div class="md-list-addon-element">
+                                                    <img class="md-user-image md-list-addon-avatar"
+                                                        ng-src="{{noteTrace.user.photo}}" alt="" />
+                                                </div>
+                                                <div class=" md-list-content uk-flex uk-flex-middle"
+                                                    style="height: 100%;">
+                                                    {{noteTrace.user.userName}}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="md-card-content">
+                                        <p ng-bind-html="noteTrace.commentArray.content | trust"></p>
+                                        <ul class="uk-list" ng-if="noteTrace.commentArray.checklist">
+                                            <li class="uk-margin-small-top"
+                                                ng-repeat="checkbox in noteTrace.commentArray.checklist">
+                                                <input type="checkbox" icheck ng-model="checkbox.checked"
+                                                    ng-disabled="true" />
+                                                <label class="inline-label"
+                                                    ng-disabled="true">{{ checkbox.title }}</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

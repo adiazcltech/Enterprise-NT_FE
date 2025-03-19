@@ -1,0 +1,618 @@
+<app-loader [loader]="false"></app-loader>
+<div class="container-fluid main-container" style="height: 80%;overflow: auto;">
+  <nav class="navbar navbar-default" *ngIf="listconfiguration[8].value===''" style="margin-bottom: 5px;"
+    [ngStyle]="{'background-color': listconfiguration[5].value,'border-color': '#ffffff'}">
+    <div class=" navbar-header" *ngIf="listconfiguration[7].value===''">
+      <a class="navbar-brand" style="margin-bottom: 8px;">{{listconfiguration[11].value}}</a>
+    </div>
+  </nav>
+
+  <nav class="navbar" *ngIf="listconfiguration[8].value !==''" style="margin-bottom: 5px;">
+    <img class="img-responsive clase" src="{{listconfiguration[8].value}}">
+  </nav>
+
+  <div class="container text-center" style="display: block;">
+    <div class="row hidden-xs" *ngIf="!viewupdatepassword">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" role="tabpanel">
+        <div class="col-xs-4 col-sm-12">
+          <ul class="nav nav-justified" id="nav-tabs" role="tablist">
+            <li role="presentation" *ngIf="PHYSICIAN.visible" [ngClass]="{'active': usertype === 1}" (click)="usertype = 1;menssageInvalid = ''">
+              <a aria-controls="usersTab" role="tab" data-toogle="tab" data-id="-2">
+                <img class="img-circle" width="80px" height="80px"
+                  src="{{PHYSICIAN.image}}">
+              </a>
+            </li>
+            <li role="presentation" *ngIf="RATE.visible" [ngClass]="{'active': usertype === 6}" (click)="usertype = 6;menssageInvalid = ''">
+              <a aria-controls="usersTab" role="tab" data-toogle="tab" data-id="-2">
+                <img class="img-circle" width="80px" height="80px"
+                  src="{{RATE.image}}">
+              </a>
+            </li>
+            <li role="presentation" *ngIf="PATIENT.visible" [ngClass]="{'active': usertype === 2}" (click)="usertype = 2;menssageInvalid = ''">
+              <a aria-controls="patientsTab" role="tab" data-toogle="tab" data-id="-1">
+                <img class="img-circle" width="80px" height="80px"
+                  src="{{PATIENT.image}}">
+              </a>
+            </li>
+            <li role="presentation" *ngIf="ACCOUNT.visible" [ngClass]="{'active': usertype === 3}" (click)="usertype = 3;menssageInvalid = ''">
+              <a aria-controls="demo16" role="tab" data-toogle="tab" data-id="16">
+                <img class="img-circle" width="80px" height="80px" src="{{ACCOUNT.image}}">
+              </a>
+            </li>
+            <li role="presentation" [ngClass]="{'active': usertype === 4}" (click)="usertype = 4;menssageInvalid = ''">
+              <a aria-controls="adminTab" role="tab" data-toogle="tab" data-id="-3">
+                <img class="img-circle" width="80px" height="80px" src="{{USERLIS.image}}">
+              </a>
+            </li>
+            <li role="presentation" *ngIf="USERDEMO.visible && viewdemogra" [ngClass]="{'active': usertype === 5}" (click)="usertype = 5;menssageInvalid = ''">
+              <a aria-controls="adminTab" role="tab" data-toogle="tab" data-id="-3">
+                <img class="img-circle" width="80px" height="80px" src="{{USERDEMO.image}}">
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-8 col-sm-12">
+          <div class="tab-content" id="tabs-collapse">
+            <div role="tabpanel" id="usersTab" class="tab-pane fade" *ngIf="PHYSICIAN.visible"
+              [ngClass]="{'active in': usertype === 1}">
+              <div class="tab-inner" style="padding-bottom: 0px; padding-top: 10px;">
+                <p class="lead">{{PHYSICIAN.message}}</p>
+                <hr>
+              </div>
+            </div>
+            <div role="tabpanel" id="usersTab" class="tab-pane fade" *ngIf="RATE.visible"
+              [ngClass]="{'active in': usertype === 6}">
+              <div class="tab-inner" style="padding-bottom: 0px; padding-top: 10px;">
+                <p class="lead">{{RATE.message}}</p>
+                <hr>
+              </div>
+            </div>
+            <div role="tabpanel" id="patientsTab" class="tab-pane fade" *ngIf="PATIENT.visible"
+              [ngClass]="{'active in': usertype === 2}">
+              <div class="tab-inner" style="padding-bottom: 0px; padding-top: 10px;">
+                <p class="lead">{{PATIENT.message}}</p>
+                <hr style="margin-top: 5px;margin-bottom: 10px;">
+              </div>
+            </div>
+            <div role="tabpanel" id="demo16" class="tab-pane fade" *ngIf="ACCOUNT.visible"
+              [ngClass]="{'active in': usertype === 3}">
+              <div class="tab-inner" style="padding-bottom: 0px; padding-top: 10px;">
+                <p class="lead">{{ACCOUNT.message}}</p>
+                <hr>
+              </div>
+            </div>
+            <div role="tabpanel" id="adminTab" class="tab-pane fade" [ngClass]="{'active in': usertype === 4}">
+              <div class="tab-inner" style="padding-bottom: 0px; padding-top: 10px;">
+                <p class="lead">{{USERLIS.message}}</p>
+                <hr>
+              </div>
+            </div>
+            <div role="tabpanel" id="adminTab" class="tab-pane fade" *ngIf="USERDEMO.visible && viewdemogra"
+              [ngClass]="{'active in': usertype === 5}">
+              <div class="tab-inner" style="padding-bottom: 0px; padding-top: 10px;">
+                <p class="lead">{{USERDEMO.message}}</p>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row" *ngIf="!viewupdatepassword">
+      <div class="hidden-xs col-sm-3 col-md-4 col-lg-4"></div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <div class="panel panel-primary" id="login-panel" [ngStyle]="{'border-color': listconfiguration[5].value}" style="margin-bottom: 0px;">
+          <div class="panel-heading text-left"
+            [ngStyle]="{'background-color': listconfiguration[5].value, 'border-color': listconfiguration[5].value }">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            {{'0004' | translate}}
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12" style="margin-top: -15px;">
+
+                <form [formGroup]="formLoggin" class="mt-1" autocomplete="off" (ngSubmit)="login()">
+                  <div class="hidden-sm hidden-md hidden-lg form-group">
+                    <div class="btn-group bootstrap-select col-xs-12">
+
+                      <button type="button" class="btn dropdown-toggle btn-info" data-toggle="dropdown"
+                        *ngIf="usertype ===1" data-id="cmb-usertype" title=" {{'0075' | translate}}"
+                        [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+                        <span class="filter-option pull-left">
+                          <i class="glyphicon glyphicon glyphicon-tint"></i>
+                          {{'0075' | translate}}
+                        </span>&nbsp;
+                        <span class="bs-caret">
+                          <span class="caret"></span>
+                        </span>
+                      </button>
+
+                      <button type="button" class="btn dropdown-toggle btn-info" data-toggle="dropdown"
+                        *ngIf="usertype ===2" data-id="cmb-usertype" title="{{'0076' | translate}}"
+                        [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+                        <span class="filter-option pull-left">
+                          <i class="glyphicon glyphicon glyphicon-user"></i>
+                          {{'0076' | translate}}
+                        </span>&nbsp;
+                        <span class="bs-caret">
+                          <span class="caret"></span>
+                        </span>
+                      </button>
+
+                      <button type="button" class="btn dropdown-toggle btn-info" data-toggle="dropdown"
+                        *ngIf="usertype ===3" data-id="cmb-usertype" title="{{'0077' | translate}}"
+                        [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+                        <span class="filter-option pull-left">
+                          <i class="glyphicon glyphicon glyphicon-cog"></i>
+                          {{'0077' | translate}}
+                        </span>&nbsp;
+                        <span class="bs-caret">
+                          <span class="caret"></span>
+                        </span>
+                      </button>
+
+                      <button type="button" class="btn dropdown-toggle btn-info" data-toggle="dropdown"
+                        *ngIf="usertype ===4" data-id="cmb-usertype" title="{{'0078' | translate}}"
+                        [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+                        <span class="filter-option pull-left">
+                          <i class="glyphicon glyphicon glyphicon-cog"></i>
+                          {{'0078' | translate}}
+                        </span>&nbsp;
+                        <span class="bs-caret">
+                          <span class="caret"></span>
+                        </span>
+                      </button>
+
+                      <button type="button" class="btn dropdown-toggle btn-info" data-toggle="dropdown"
+                        *ngIf="viewdemogra && usertype ===5" data-id="cmb-usertype" title="{{demoname.name}}"
+                        [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+                        <span class="filter-option pull-left">
+                          <i class="glyphicon glyphicon glyphicon-cog"></i>
+                          {{demoname.name}}
+                        </span>&nbsp;
+                        <span class="bs-caret">
+                          <span class="caret"></span>
+                        </span>
+                      </button>
+
+                      <div class="dropdown-menu open">
+                        <ul class="dropdown-menu inner" role="menu">
+                          <li (click)="usertype = 1" class="selected" *ngIf="PHYSICIAN.visible">
+                            <a>
+                              <span class="glyphicon glyphicon glyphicon-tint"></span>
+                              <span class="text">{{'0075' | translate}}</span>
+                              <span *ngIf="usertype ===1" class="glyphicon glyphicon-ok check-mark"></span>
+                            </a>
+                          </li>
+                          <li (click)="usertype = 6" class="selected" *ngIf="RATE.visible">
+                            <a>
+                              <span class="glyphicon glyphicon glyphicon-tint"></span>
+                              <span class="text">{{'0075' | translate}}</span>
+                              <span *ngIf="usertype ===6" class="glyphicon glyphicon-ok check-mark"></span>
+                            </a>
+                          </li>
+                          <li (click)="usertype = 2" *ngIf="PATIENT.visible">
+                            <a>
+                              <span class="glyphicon glyphicon glyphicon-user"></span>
+                              <span class="text">{{'0076' | translate}}</span>
+                              <span class="glyphicon glyphicon-ok check-mark" *ngIf="usertype ===2"></span>
+                            </a>
+                          </li>
+                          <li (click)="usertype = 3" *ngIf="ACCOUNT.visible">
+                            <a>
+                              <span class="glyphicon glyphicon glyphicon-cog"></span>
+                              <span class="text">{{'0077' | translate}}</span>
+                              <span class="glyphicon glyphicon-ok check-mark" *ngIf="usertype ===3"></span>
+                            </a>
+                          </li>
+                          <li (click)="usertype = 4">
+                            <a>
+                              <span class="glyphicon glyphicon glyphicon-cog"></span>
+                              <span class="text">{{'0078' | translate}}</span>
+                              <span *ngIf="usertype === 4" class="glyphicon glyphicon-ok check-mark"></span>
+                            </a>
+                          </li>
+                          <li (click)="usertype = 5" *ngIf="USERDEMO.visible && viewdemogra">
+                            <a>
+                              <span class="glyphicon glyphicon glyphicon-cog"></span>
+                              <span class="text">{{demoname.name}}</span>
+                              <span *ngIf="usertype ===5" class="glyphicon glyphicon-ok check-mark"></span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group" *ngIf="viewtype && usertype === 2">
+                    <div class="col-sm-12" style="margin-bottom: 15px;margin-top: 15px;"
+                      [ngClass]="{'has-error': submittedLoggin && formLoggin.get('documentType').hasError('required') }">
+                      <div class="input-group">
+                        <span class="input-group-addon" hidden="">
+                          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </span>
+                        <select class="form-control" required formControlName="documentType">
+                          <option [value]="item.id" *ngFor="let item of listDocumentype">{{ item.name }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12" style="margin-bottom: 15px;"
+                      [ngClass]="{'has-error': submittedLoggin && formLoggin.get('user').hasError('required') }"
+                      [ngStyle]="{'margin-top': usertype !== 2 ? '15px': '0px'}">
+                      <div class="input-group">
+                        <span class="input-group-addon" hidden="">
+                          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </span>
+                        <input type="text" required formControlName="user" maxlength="10" class="form-control focus"
+                          placeholder="{{'0001' | translate}}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12" style="margin-bottom: 15px;"
+                      [ngClass]="{'has-error': submittedLoggin && formLoggin.get('password').hasError('required') }">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                        </span>
+                        <input type="password" formControlName="password" class="form-control" required
+                          placeholder="{{'0002' | translate}}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="menssageInvalid!==''">
+                    <strong>{{menssageInvalid}}</strong>
+                  </div>
+                  <app-captcha *ngIf="listconfiguration[1].value"  (viewvalidatedcapchat)="validatedcapchat($event)"></app-captcha>
+                  <div class="row">
+                    <a class="col-md-7 col-xs-12" (click)="forgetpassword()"
+                      *ngIf="listconfiguration[2].value && usertype !== 4">
+                      {{'0218' | translate}}
+                    </a>
+                    <button type="submit" id="btn-login" [disabled]="!formLoggin.valid  || !errorcaptchan"
+                      style="margin-left: -15px;float: initial;"
+                      class="col-md-offset-1 col-md-5 col-xs-8 col-xs-offset-2 btn btn-info"
+                      [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color':listconfiguration[5].value}">
+                      {{'0004' |translate}}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hidden-xs col-sm-3 col-md-4 col-lg-4">
+      </div>
+    </div>
+
+    <div class="row hidden-xs" *ngIf="viewupdatepassword">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" role="tabpanel">
+        <div class="col-xs-4 col-sm-12">
+          <ul class="nav nav-justified" id="nav-tabs" role="tablist">
+            <li role="presentation">
+              <a aria-controls="usersTab" role="tab" data-toogle="tab">
+                <img class="img-circle" width="80px" height="80px" src="assets/images/resetpassword.png">
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class=" col-xs-8 col-sm-12">
+          <p class="lead">{{'0094' | translate}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="viewupdatepassword">
+      <div class="hidden-xs col-sm-3 col-md-4 col-lg-4">
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <div class="panel panel-primary" id="login-panel" [ngStyle]="{'border-color': listconfiguration[5].value}" style="margin-bottom: 0px;">
+          <div class="panel-heading text-left"
+            [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+
+                <form [formGroup]="formRecovery" class="form-horizontal" autocomplete="off"
+                  (ngSubmit)="submitRecovery()">
+                  <div class="form-group">
+                    <div class="col-sm-12"
+                      [ngClass]="{'has-error': submitteRecovery && formRecovery.get('newPassword').hasError('required') }">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                        </span>
+                        <input type="password" formControlName="newPassword" class="form-control" required
+                          placeholder="{{'0103' | translate}}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12" style="margin-top: 5px;" *ngIf="keySecurityPolitics">
+                    <mat-password-strength #passwordComponent
+                      [password]="formRecovery.get('newPassword').value" [min]="10" [max]="20"
+                      [customValidator]="patternPassword">
+                    </mat-password-strength>
+                    <mat-password-strength-info lowerCaseCriteriaMsg="{{'0159' | translate}}"
+                      upperCaseCriteriaMsg="{{'0158' | translate}}"
+                      digitsCriteriaMsg="{{'0160' | translate}}"
+                      specialCharsCriteriaMsg="{{'0161' | translate}}"
+                      minCharsCriteriaMsg="{{'0156' | translate}} 10 {{'0157' | translate}}"
+                      customCharsCriteriaMsg="{{'0252' | translate}}"
+                      [passwordComponent]="passwordComponent">
+                    </mat-password-strength-info>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12"
+                      [ngClass]="{'has-error': submitteRecovery && formRecovery.get('reNewPassword').hasError('required') }">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                        </span>
+                        <input type="password" formControlName="reNewPassword" class="form-control" required
+                          placeholder="{{'0104' | translate}}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="formRecovery.hasError('notSame')">
+                    <strong>{{ '0100' | translate }}</strong>
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="messageupdatepassword!==''">
+                    <strong>{{messageupdatepassword}}</strong>
+                  </div>
+
+                  <div class="row">
+                    <button id="btn-login" type="submit" [disabled]="!formRecovery.valid"
+                      style="margin-left: -15px;float: initial"
+                      class="col-md-offset-1 col-md-5 col-xs-8 col-xs-offset-2 btn btn-info"
+                      [ngStyle]="{'background-color' : listconfiguration[5].value,'border-color': listconfiguration[5].value}">
+                      {{'0004' | translate}}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hidden-xs col-sm-3 col-md-4 col-lg-4">
+      </div>
+    </div>
+  </div>
+</div>
+<footer style="width: 98%;">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h5></h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h6 class="uk-text-small uk-text-bold" style="margin : 0px">
+        {{listconfiguration[9].value}}
+      </h6>
+      <h6 *ngIf="listconfiguration[10].value !== ''" class="uk-text-small uk-text-bold" style="margin : 0px">
+        {{listconfiguration[10].value}}
+      </h6>
+      <a style="font-size: 12px;" *ngIf="listconfiguration[14].value !== ''"
+        href="{{listconfiguration[14].value}}">{{listconfiguration[14].value}}</a>
+    </div>
+  </div>
+  <hr style="margin-top: 7px;margin-bottom: 0px;">
+  <div class="row">
+    <div class="col-xs-12 text-center"><a href="http://www.cltech.net"><img src="assets/images/powered.png"
+          alt="Powered by CLTech" width="200px"></a>
+      <br>
+      <a (click)="viewtermsandConditions()">{{'0013' | translate}}</a><br>
+    </div>
+  </div>
+</footer>
+
+<!--Email-->
+<div id="content-email" [hidden]="true" [innerHTML]="htmlContentEmail" #contentEmail></div>
+
+<!-- Modal para visualizar teminos y condiciones-->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayConditions}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'0013' | translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeConditions()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow: auto;height: 328px;">
+        <div [innerHtml]="listconfiguration[3].value"></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-default" (click)="closeConditions()" data-dismiss="modal"
+          type="button">{{'0008' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para visualizar la contraseña incorrecta -->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayPasswordWarning}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{'0018' | translate}}</h3>
+        <button type="button" class="close" aria-label="Close" (click)="closeWarningPassword()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{menssageInvalid}}
+      </div>
+      <div class="modal-footer"><button class="btn btn-default" (click)="closeWarningPassword()" data-dismiss="modal"
+          type="button">{{'0213' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para visualizar el olvido de contraseña -->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayForgetPassword}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">{{'0218' | translate}}</h1>
+        <button type="button" class="close" aria-label="Close" (click)="closeForgetPassword()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="text-center">
+                <p>
+                  {{'0219' | translate}}
+                </p>
+                <div class="panel-body">
+                  <fieldset>
+
+                    <form [formGroup]="formForget" class="mt-1" autocomplete="off" (ngSubmit)="submitFogetPassword()">
+
+                      <div class="form-group" *ngIf="usertype != 6">
+                        <div class="input-group"
+                          [ngClass]="{'has-error': submittedForget && formForget.get('history').hasError('required') }">
+                          <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                          </span>
+                          <input type="text" formControlName="history" class="form-control input-md" required
+                            placeholder="{{'0001' | translate}}">
+                        </div>
+                      </div>
+
+                      <div class="form-group"
+                        [ngClass]="{'has-error': submittedForget && formForget.get('emailrecovery').hasError('required') }">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                          </span>
+                          <input type="text" formControlName="emailrecovery" class="form-control input-md" required
+                            placeholder="{{'0001' | translate}}" placeholder="{{'0138' | translate}}">
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!formForget.valid">
+                        {{'0220' | translate}}
+                      </button>
+                      <div class="alert alert-danger" *ngIf="formForget.get('emailrecovery').hasError('email')"
+                        role="alert" style="margin-top: 10px">
+                        {{ '0249' | translate }}
+                      </div>
+                      <div class="alert alert-danger" *ngIf="messagerecoverpassword!==''" role="alert"
+                        style="margin-top: 10px">
+                        {{messagerecoverpassword}}
+                      </div>
+                      <div class="alert alert-success" *ngIf="messagerecoverpasswordok!==''" role="alert"
+                        style="margin-top: 10px">
+                        {{messagerecoverpasswordok}}
+                      </div>
+
+                    </form>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" (click)="closeForgetPassword()" data-dismiss="modal" type="button">{{'0213' |
+          translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para visualizar cambio de contraseña-->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayChangePassword}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form [formGroup]="formRecovery" class="form-horizontal" autocomplete="off" (ngSubmit)="submitChangePassword()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="text-center"><strong>{{'0166' | translate}}</strong></h4>
+          <p *ngIf="!keySecurityPolitics">{{'0168' | translate}}</p>
+          <p *ngIf="keySecurityPolitics">{{'0153' | translate}}</p>
+          <button type="button" class="close" aria-label="Close" (click)="closeChangePassword()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="col-sm-12"
+              [ngClass]="{'has-error': submitteRecovery && formRecovery.get('newPassword').hasError('required') }">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </span>
+                <input type="password" formControlName="newPassword" class="form-control" required
+                  placeholder="{{'0103' | translate}}">
+              </div>
+            </div>
+            <span *ngIf="viewvalited" class="help-block" style="margin-left: 16px;padding: 40px 0 0;">{{'0154' | translate}}</span>
+
+            <div class="col-sm-12" style="margin-top: 5px;" *ngIf="keySecurityPolitics">
+              <mat-password-strength #passwordComponent
+                [password]="formRecovery.get('newPassword').value" [min]="10" [max]="20"
+                [customValidator]="patternPassword">
+              </mat-password-strength>
+              <mat-password-strength-info lowerCaseCriteriaMsg="{{'0159' | translate}}"
+                upperCaseCriteriaMsg="{{'0158' | translate}}"
+                digitsCriteriaMsg="{{'0160' | translate}}"
+                specialCharsCriteriaMsg="{{'0161' | translate}}"
+                minCharsCriteriaMsg="{{'0156' | translate}} 10 {{'0157' | translate}}"
+                customCharsCriteriaMsg="{{'0252' | translate}}"
+                [passwordComponent]="passwordComponent">
+              </mat-password-strength-info>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12"
+              [ngClass]="{'has-error': submitteRecovery && formRecovery.get('reNewPassword').hasError('required') }">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </span>
+                <input type="password" formControlName="reNewPassword" class="form-control" required
+                  placeholder="{{'0104' | translate}}">
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-danger" *ngIf="formRecovery.hasError('notSame')">
+            <strong>{{ '0100' | translate }}</strong>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" type="submit" [disabled]="!formRecovery.valid">
+            {{'0140' | translate}}
+          </button>
+          <button class="btn btn-default" (click)="closeChangePassword()" data-dismiss="modal" type="button">
+            {{'0213' | translate}}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

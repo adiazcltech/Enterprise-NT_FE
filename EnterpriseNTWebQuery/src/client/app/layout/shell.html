@@ -1,0 +1,217 @@
+<style type="text/css">
+  .ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #1976d2;
+
+  }
+
+  .ngplus-overlay-content {
+    position: absolute;
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+  }
+
+  dissolve-animation.ng-hide-remove,
+  .dissolve-animation.ng-hide-add {
+    display: inline ! Important;
+    -webkit-transición: 0.5 s lineales todos;
+    -moz-transición: 0.5 s lineales todos;
+    -o-transición: 0.5 s lineales todos;
+    transición: 0.5 s lineales todos;
+  }
+
+  .dissolve-animation.ng-hide-remove.ng-hide-remove-active,
+  .dissolve-animation.ng-hide-add {
+    opacity: 1;
+  }
+
+  .dissolve-animation.ng-hide-add.ng-hide-add-active,
+  .dissolve-animation.ng-hide-remove {
+    opacity: 0;
+  }
+
+
+  .loader {
+    height: 20px;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .loader--dot {
+    animation-name: loader;
+    animation-timing-function: ease-in-out;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: black;
+    position: absolute;
+    border: 2px solid white;
+  }
+
+  .loader--dot:first-child {
+    background-color: #8cc759;
+    animation-delay: 0.5s;
+  }
+
+  .loader--dot:nth-child(2) {
+    background-color: #8c6daf;
+    animation-delay: 0.4s;
+  }
+
+  .loader--dot:nth-child(3) {
+    background-color: #ef5d74;
+    animation-delay: 0.3s;
+  }
+
+  .loader--dot:nth-child(4) {
+    background-color: #f9a74b;
+    animation-delay: 0.2s;
+  }
+
+  .loader--dot:nth-child(5) {
+    background-color: #60beeb;
+    animation-delay: 0.1s;
+  }
+
+  .loader--dot:nth-child(6) {
+    background-color: #fbef5a;
+    animation-delay: 0s;
+  }
+
+  .loader--text {
+    position: absolute;
+    top: 200%;
+    text-align: center;
+    font-size: 400%;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    -webkit-text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    padding: 0;
+  }
+
+  .loader--text:after {
+    content: "{{'0169' | translate}}";
+    font-weight: bold;
+    animation-name: loading-text;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes loader {
+    15% {
+      transform: translateX(0);
+    }
+
+    45% {
+      transform: translateX(230px);
+    }
+
+    65% {
+      transform: translateX(230px);
+    }
+
+    95% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes loading-text {
+    0% {
+      content:"{{'0169' | translate}}.";
+    }
+
+    25% {
+      content: "{{'0169' | translate}}..";
+    }
+
+    50% {
+      content: "{{'0169' | translate}}..";
+    }
+
+    75% {
+      content: "{{'0169' | translate}}...";
+    }
+  }
+</style>
+<div style="height: 100%" class="general-container" ng-controller="ShellController as vm">
+  <loadpage view="vm.loading"></loadpage>
+  <header style="height: 60px;width: 100%;position: relative;margin-bottom: -6px;"
+    ng-style="{'background-color' : vm.bannerentity === '' ? vm.colorentity: ''}"
+    class="clearfix header-color  uk-display-inline-block header-band">
+    <div class="header-image" ng-if="vm.bannerentity === '' && vm.logoentity !== ''">
+      <img style="height: 60px;padding: 5px;" src="{{vm.logoentity}}">
+    </div>
+    <img ng-if="vm.logoentity === '' && vm.bannerentity !== '' || vm.logoentity !== '' && vm.bannerentity !== ''"
+      style="height: 60px;width: 100%; position: absolute;" src="{{vm.bannerentity}}">
+    <div class="header-image" ng-if="vm.logoentity === '' && vm.bannerentity === '' && vm.titleentity !== ''">
+      <strong class="md-color-grey-50">
+        <span class="uk-text-left">{{vm.titleentity}}</span>
+      </strong>
+    </div>
+    <div class="uk-navbar-flip" style="position: relative;" ng-if="vm.menu">
+      <ul class="uk-navbar-nav user_actions" style="padding: 10px 0px;">
+        <li>
+          <a data-uk-tooltip="{pos:'bottom'}" title="{{'0170' | translate}}" class="user_action_icon"
+            ng-click="vm.openhelp()">
+            <i style="font-size: 24px; color: #ffffff !important; padding-top: 10px"
+              class="md-color-blue-grey-50 uk-icon-question"></i>
+          </a>
+        </li>
+        <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+          <a class="user_action_image">
+            <img class="md-user-image" ng-src="images/user1.png" alt="" data-uk-tooltip="{pos:'bottom'}"
+              title="{{vm.user.userName}}" />
+          </a>
+          <div class="uk-dropdown uk-dropdown-small" style="overflow: auto">
+            <ul class="uk-nav js-uk-prevent">
+              <li><a ng-href="/userprofile">{{'0058' | translate}}</a></li>
+            </ul>
+            <ul class="uk-nav js-uk-prevent">
+              <li><a ng-click="vm.closesesion()">{{'0021' | translate}}</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div id="body-content" style="height: calc(100% - 60px)">
+    <div ng-include="'app/layout/sidebar.html'"></div>
+    <div ui-view class="general-container" style="height: 100%"></div>
+  </div>
+  <div ngplus-overlay ngplus-overlay-delay-in="10" ngplus-overlay-delay-out="300"
+    ngplus-overlay-animation="dissolve-animation">
+    <div class="loader">
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--text uk-hidden-small"></div>
+      <div class="loader--text uk-visible-small" style="font-size: 275%;"></div>
+    </div>
+  </div>
+</div>

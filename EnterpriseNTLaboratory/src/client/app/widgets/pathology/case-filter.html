@@ -1,0 +1,99 @@
+<style>
+  .md-button.md-icon-button {
+    float: right !important;
+    padding: 0px 8px 13px 8px !important;
+  }
+
+  .md-datepicker-input-container {
+    min-width: calc(100% - 70px) !important;
+    margin-top: 5px !important;
+  }
+
+  .md-datepicker-calendar-pane {
+    width: 340px;
+    z-index: 10000;
+  }
+
+</style>
+
+<div  ng-if="casefilter.typeview === undefined" style="width: 310px; float: left; margin-right: 30px; margin-top: 3px">
+  <div class="uk-form-row md-input-wrapper md-input-filled">
+    <label style="padding-left: 2px">{{'0071' | translate}}:</label>
+    <p style="margin-left: 7px; font-size: 13px !important">
+      <input type="radio" name="typefilter" id="typefilternumber" icheck ng-model="casefilter.typefilter" value="1" ng-change="casefilter.changetypefilter(1)" />
+      <label style="margin-right: 20px" for="typefilternumber" class="inline-label">{{'3172' | translate}}</label>
+      <input type="radio" name="typefilter" id="typefilterdate" icheck ng-model="casefilter.typefilter" value="0" ng-change="casefilter.changetypefilter(0)"/>
+      <label for="typefilterdate" class="inline-label">{{'0189' | translate}}</label>
+    </p>
+  </div>
+</div>
+
+<div style="float: left; margin-top: 3px" ng-style="{'width' : casefilter.typeview === 1 ? '100%': 'calc(100% - 350px)'}" ng-if="casefilter.typefilter === '1' || casefilter.typeview === 1">
+  <div class="uk-grid">
+    <div class="uk-width-1-3">
+      <label>{{'0072' | translate}}</label>
+      <select md-input label-fixed class="md-input label-fixed" charset="utf-8" ng-options="obj.id as obj.name for obj in casefilter.listYear"
+      data-ng-model="casefilter.listYear.id" ng-change="casefilter.changeage()" style="font-size: 13px !important"></select>
+    </div>
+    <div class="uk-width-1-3">
+      <label>{{'3173' | translate}}</label>
+      <input md-input label-fixed class="md-input label-fixed" type="text" ng-model="casefilter.entryInit"
+        ng-keypress="casefilter.getCaseComplete($event, 1)" ng-blur="casefilter.getCaseComplete(undefined, 1)"
+        maxlength="{{casefilter.quantDigit}}" style="font-size: 13px !important" />
+    </div>
+    <div class="uk-width-1-3">
+      <label>{{'3174' | translate}}</label>
+      <input md-input label-fixed class="md-input label-fixed" id="caseend" type="text" ng-model="casefilter.entryEnd"
+        ng-keypress="casefilter.getCaseComplete($event, 2)" ng-required="true"
+        ng-blur="casefilter.getCaseComplete(undefined, 2)" maxlength="{{casefilter.quantDigit}}"
+        style="font-size: 13px !important" />
+    </div>
+  </div>
+</div>
+
+<div style="float: left; margin-top: 3px" ng-style="{'width' : casefilter.typeview === 2 ? '100%': 'calc(100% - 350px)'}" ng-if="casefilter.typefilter === '0' || casefilter.typeview === 2">
+  <form name="myForm" class="uk-grid uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-width-1-2 " style="padding-left: 35px;">
+      <div flex-gt-xs>
+        <h6 style="margin: -1px 0px -2px 15px;">{{'0075' | translate}}</h6>
+        <md-datepicker ng-model="casefilter.dateInit" name="dateField" md-min-date="casefilter.minDateinit"
+          ng-change="casefilter.changeDatePicker(1)" md-open-on-focus ng-blur="casefilter.focusdateInit()"
+          md-placeholder="Enter date" md-max-date="casefilter.maxDate" ng-required="true"
+          md-is-open="casefilter.isOpen1">
+        </md-datepicker>
+        <div ng-messages="myForm.dateField.$error">
+          <div ng-message="required" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'0060' | translate}}</div>
+          <div ng-message="valid" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1478' | translate}}</div>
+          <div ng-message="mindate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1479' | translate}}{{casefilter.minDateinit | date:'dd/MM/yyyy'}}</div>
+          <div ng-message="maxdate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1480' | translate}}{{casefilter.maxDate | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-width-1-2" style="padding-left: 10px;">
+      <div flex-gt-xs>
+        <h6 style="margin: -1px 0px -2px 15px;">{{'0076' | translate}}</h6>
+        <md-datepicker ng-model="casefilter.dateEnd" name="dateField1" ng-change="casefilter.changeDatePicker(2)"
+          md-placeholder="Enter date" ng-blur="casefilter.focusdateend()" md-open-on-focus
+          md-max-date="casefilter.maxDate" md-min-date="casefilter.minDateinit" md-is-open="casefilter.isOpen2"
+          ng-required="true">
+        </md-datepicker>
+        <div ng-messages="myForm.dateField1.$error">
+          <div ng-message="required" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'0060' | translate}}</div>
+          <div ng-message="valid" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1478' | translate}}</div>
+          <div ng-message="mindate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1479' | translate}}{{casefilter.minDateinit | date:'dd/MM/yyyy'}}</div>
+          <div ng-message="maxdate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1480' | translate}} {{casefilter.maxDate | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div ng-class="casefilter.validateddate(!myForm.$invalid)"></div>
+</div>
+

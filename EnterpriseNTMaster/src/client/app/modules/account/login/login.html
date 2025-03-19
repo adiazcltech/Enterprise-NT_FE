@@ -1,0 +1,397 @@
+<style>
+  [ng\:cloak],
+  [ng-cloak],
+  [data-ng-cloak],
+  [x-ng-cloak],
+  .ng-cloak,
+  .x-ng-cloak {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-container {
+    display: table;
+    width: 400px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .form-container {
+    position: relative;
+    bottom: 0;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .form-container form>div {
+    padding: 0 15px;
+  }
+
+  .form-container form>button {
+    margin-left: 15px;
+  }
+
+  legend.form-label {
+    font-size: 24pt;
+    padding: 0 15px;
+  }
+
+  .form-control.error {
+    border-color: red;
+  }
+
+  .form-hint {
+    font-size: 7pt;
+    line-height: 9pt;
+    margin: -5px auto 5px;
+    color: #999;
+    margin-top: 5px;
+  }
+
+  .form-hint.error {
+    color: #C00;
+    font-weight: bold;
+    font-size: 8pt;
+  }
+
+  .password-count {
+    float: right;
+    position: relative;
+    bottom: 24px;
+    right: 10px;
+  }
+
+  .strength-meter {
+    position: relative;
+    height: 4px;
+    background: #DDD;
+    margin: 5px auto 5px;
+    border-radius: 3px;
+  }
+
+  .strength-meter:before,
+  .strength-meter:after {
+    content: '';
+    height: inherit;
+    background: transparent;
+    display: block;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 0 5px 0 5px;
+    position: absolute;
+    width: 80px;
+    z-index: 10;
+  }
+
+  .strength-meter:before {
+    left: 50px;
+  }
+
+  .strength-meter:after {
+    right: 50px;
+  }
+
+  .strength-meter-fill {
+    background: transparent;
+    height: inherit;
+    position: absolute;
+    width: 0;
+    border-radius: inherit;
+    transition: width 0.5s ease-in-out, background 0.25s;
+  }
+
+  .strength-meter-fill[data-strength='0'] {
+    background: darkred;
+    width: 20%;
+  }
+
+  .strength-meter-fill[data-strength='1'] {
+    background: orangered;
+    width: 40%;
+  }
+
+  .strength-meter-fill[data-strength='2'] {
+    background: orange;
+    width: 60%;
+  }
+
+  .strength-meter-fill[data-strength='3'] {
+    background: yellowgreen;
+    width: 80%;
+  }
+
+  .strength-meter-fill[data-strength='4'] {
+    background: green;
+    width: 100%;
+  }
+
+  .formlabel {
+    line-height: 9pt;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<div class="text-center lenguaje-container" style="z-index: -1" ng-show="vm.visibleBranch">
+  <div>
+    <a href="#" ng-click="vm.changeLanguage('es')">
+      <img src="images/es_CO.png">
+      <h6 class="lenguaje-color-text" translate="0106"></h6>
+    </a>
+  </div>
+  <div>
+    <a href="#" ng-click="vm.changeLanguage('en')">
+      <img src="images/en_US.png">
+      <h6 class="lenguaje-color-text" translate="0107"></h6>
+    </a>
+  </div>
+</div>
+
+<div id="login-container" ng-show="vm.visibleBranch">
+  <div class="row center-login">
+    <div class=" col-6 col-md-3 col-sm-4">
+      <div class=" sesion-container">
+        <div class="text-center">
+          <label translate="0108"></label>
+        </div>
+
+      </div>
+      <div class="text-center barracolor-container">
+        <img class="img-responsive" src="images/barra_color.png">
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form class="form" name="myForm">
+            <div class="form-group">
+              <div ng-class="{'has-error':myForm.username.$invalid && myForm.username.$touched}">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-user"></i>
+                  </div>
+
+       <!--            <input name="username" ng-blur="vm.getBranchUsername(vm.user.username)" type="text"
+                    class="form-control" data-ng-model="vm.user.username" placeholder="{{'0001' | translate}}" required> -->
+                    <input name="username"  type="text"
+                    class="form-control" data-ng-model="vm.user.username" placeholder="{{'0001' | translate}}" required>
+                </div>
+                <span ng-if="myForm.username.$error.required && myForm.username.$touched"
+                  class="help-block">{{'0016' | translate}}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div ng-class="{'has-error':myForm.password.$invalid && myForm.password.$touched}">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-lock"></i>
+                  </div>
+
+                  <input name="password" type="Password" class="form-control" data-ng-model="vm.user.password"
+                    placeholder="{{'0002' | translate}}" required>
+                </div>
+                <span ng-if="myForm.password.$error.required && myForm.password.$touched"
+                  class="help-block">{{'0016' | translate}}</span>
+              </div>
+            </div>
+
+            <!-- <div class="form-group">
+              <div ng-show="vm.visibleBranch"
+                ng-class="{'has-error':myForm.location.$invalid && myForm.location.$touched}">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-home"></i>
+                  </div>
+                  <select name="location" charset="utf-8" ng-options="obj.id as obj.name for obj in vm.ListBranch"
+                    data-ng-model="vm.user.location" class="form-control" placeholder="{{'0003' | translate}}"
+                    required="true"></select>
+
+                </div>
+                <span ng-if="myForm.location.$error.required && myForm.location.$touched"
+                  class="help-block">{{'0016' | translate}}</span>
+              </div>
+            </div> -->
+            <div class="text-center">
+              <button class="btn btn-info" data-ng-click="vm.login('menuMaster', myFormchangepassword)"
+                data-ng-disabled="myForm.$invalid" translate="0004"></button>
+            </div>
+            <div ng-show="vm.menssageInvalid" ng-class="{'has-error': vm.menssageInvalid}" class="text-center">
+              <span class="help-block">{{vm.menssageInvalid}}</span>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="panel-footer text-center version-container">
+          <label translate="1280"></label>
+          <label>{{vm.version}}</label>
+
+        </div>
+      </div>
+      <div class="text-center power-container">
+        <label>Powered by:</label>
+      </div>
+      <div class="logo-container">
+        <img class="img-responsive" src="images/CLTechLogo.png"
+          onclick="javascript:window.open('http://www.cltech.net','','width=1100,height=600,left=50,top=50,toolbar=yes')">
+      </div>
+
+    </div>
+  </div>
+</div>
+<script id="changepassword.html" type="text/ng-template">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="text-center"><strong>{{'0120' | translate}}</strong></h4>
+					<p  ng-if="!keySecurityPolitics">{{'1035' | translate}}</p>
+					<p  ng-if="keySecurityPolitics">  {{'1085' | translate}}</p>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row" ng-if="!keySecurityPolitics">
+                        <form class="form-horizontal" id="myFormchangepassword" name="myFormchangepassword">
+                            <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': myFormchangepassword.password1changepassword.$invalid && myFormchangepassword.password1changepassword.$touched || viewvalited }">
+                                <label class="col-md-4 text-right">
+                                    {{'1030' | translate}}:
+                                </label>
+                                <div class="col-md-7">
+                                    <input class="form-control"
+                                           id="password1changepassword"
+                                           name="password1changepassword"
+                                           data-ng-model="userchangepassword.password1"
+                                           ng-required="true"
+                                           type="password">
+                                    <span class="help-block "
+                                          ng-if="myFormchangepassword.password1changepassword.$invalid && myFormchangepassword.password1changepassword.$touched">
+                                        {{'0016' | translate}}
+									</span>
+									<span ng-if="viewvalited" class="help-block">{{'1086' | translate}}</span>
+									</div>
+                            </div>
+                            <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': myFormchangepassword.password2changepassword.$invalid && myFormchangepassword.password2changepassword.$touched || userchangepassword.password1!==userchangepassword.password2||messageerrorpassword}">
+                                <label class="col-md-4 text-right">
+                                    {{'1031' | translate}}:
+                                </label>
+                                <div class="col-md-7">
+                                    <input class="form-control" id="password2changepassword" name="password2changepassword" data-ng-model="userchangepassword.password2" ng-required="true" type="password" ng-focus="messageerrorpassword = ''">
+                                    <span class="help-block " ng-if="test=myFormchangepassword.password2changepassword.$invalid && myFormchangepassword.password2changepassword.$touched">
+                                        {{'0016' | translate}}
+									</span>
+									<span class="help-block"
+                                          ng-show="userchangepassword.password1!==userchangepassword.password2 && !test && myFormchangepassword.password2changepassword.$touched"
+                                          style="padding: 0px; margin-top: 0px;">
+										  {{'1094' | translate}}
+                                    </span>
+                                    <div ng-show="messageerrorpassword" class="has-error text-center">
+                                        <span class="help-block">{{messageerrorpassword}}</span>
+									</div>
+									<span ng-if="messageerrorpassword!==''" class="help-block">{{'1039' | translate}}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row" ng-if="keySecurityPolitics">
+                        <form class="form-horizontal" id="myFormchangepassword" name="myFormchangepassword">
+                            <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': myFormchangepassword.password1changepassword.$invalid && myFormchangepassword.password1changepassword.$touched || viewvalited }">
+
+                                <div class="col-sm-4 text-left"></div>
+                                <div class="col-sm-7 text-left">
+                                    <div class="form-hint" style="color:{{color}} !important">
+                                        {{strengthlabel}}
+                                    </div>
+                                    <div class="strength-meter">
+                                        <div class="strength-meter-fill" data-strength="{{data}}"></div>
+                                    </div>
+                                </div>
+                                <label class="col-md-4 text-right">
+                                    {{'1030' | translate}}:
+                                </label>
+                                <div class="col-md-7">
+                                    <input class="form-control"
+                                           id="password1changepassword"
+                                           name="password1changepassword"
+                                           data-ng-model="userchangepassword.password1"
+                                           ng-required="true"
+                                           type="password"
+                                           ng-change="CheckStrngth()">
+                                    <div class="label password-count" ng-class="userchangepassword.password1.length >= lettersize ? 'label-success' : 'label-danger'" ng-cloak>{{ userchangepassword.password1 | passwordCount:lettersize }}</div>
+									<span ng-if="viewvalited" class="help-block">{{'1087' | translate}}</span>
+									<span class="help-block "
+                                          ng-if="myFormchangepassword.password1changepassword.$invalid && myFormchangepassword.password1changepassword.$touched">
+                                        {{'0016' | translate}}
+                                    </span>
+								</div>
+								<div class="col-sm-4 text-left"></div>
+                                <div class="col-sm-7 text-left">
+                                     <div class="formlabel">
+                                        <i class="glyphicon glyphicon-ok-sign green" ng-if="!strength0"></i>
+                                        <i class="glyphicon glyphicon-remove-sign red" ng-if="strength0"></i>
+										{{'1088' | translate}} {{lettersize}} {{'1089' | translate}}.
+                                    </div>
+                                    <div class="formlabel">
+                                        <i class="glyphicon glyphicon-ok-sign green" ng-if="!strength1"></i>
+                                        <i class="glyphicon glyphicon-remove-sign red" ng-if="strength1"></i>
+										{{'1090' | translate}}
+                                    </div>
+                                    <div class="formlabel">
+                                        <i class="glyphicon glyphicon-ok-sign green" ng-if="!strength2"></i>
+                                        <i class="glyphicon glyphicon-remove-sign red" ng-if="strength2"></i>
+                                        {{'1091' | translate}}
+                                    </div>
+                                    <div class="formlabel">
+                                        <i class="glyphicon glyphicon-ok-sign green" ng-if="!strength3"></i>
+                                        <i class="glyphicon glyphicon-remove-sign red" ng-if="strength3"></i>
+										{{'1092' | translate}}
+                                    </div>
+                                    <div class="formlabel" ng-if="administrator">
+                                        <i class="glyphicon glyphicon-ok-sign green" ng-if="!strength4"></i>
+                                        <i class="glyphicon glyphicon-remove-sign red" ng-if="strength4"></i>
+                                        {{'1093' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': myFormchangepassword.password2changepassword.$invalid && myFormchangepassword.password2changepassword.$touched}">
+                                <label class="col-md-4 text-right">
+                                    {{'1031' | translate}}:
+                                </label>
+                                <div class="col-md-7">
+									<input class="form-control"
+									id="password2changepassword"
+									name="password2changepassword"
+									data-ng-model="userchangepassword.password2"
+									 ng-required="true"
+									 type="password">
+                                    <span class="help-block " ng-if="test=myFormchangepassword.password2changepassword.$invalid && myFormchangepassword.password2changepassword.$touched">
+                                        {{'0016' | translate}}
+                                    </span>
+                                    <span class="help-block"
+                                          ng-show="userchangepassword.password1!==userchangepassword.password2 && !test && myFormchangepassword.password2changepassword.$touched"
+                                          style="padding: 0px; margin-top: 0px;">
+										  {{'1094' | translate}}
+									</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+					<button type="button" ng-click="changepassword(myFormchangepassword)"
+					data-ng-disabled="userchangepassword.password1!== userchangepassword.password2 || userchangepassword.password2===''|| userchangepassword.password2===undefined|| strength!==''" class="btn btn-info">{{'0031' | translate}}</button>
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0008' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<modalerror openerrormodal="vm.ShowPopupError" detailError="vm.Error"></modalerror>

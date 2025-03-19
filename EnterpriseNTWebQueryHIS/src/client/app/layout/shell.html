@@ -1,0 +1,49 @@
+<style>
+  .loader--text:after {
+  content: "{{'0001' | translate}}";
+  font-weight: bold;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+  @keyframes loading-text {
+  0% {
+    content: "{{'0001' | translate}}";
+  }
+  25% {
+    content: "{{'0001' | translate}}.";
+  }
+  50% {
+    content: "{{'0001' | translate}}..";
+  }
+  75% {
+    content: "{{'0001' | translate}}...";
+  }
+}
+
+
+</style>
+  <div ng-controller="ShellController as vm" style="height: 100%;">
+  <header class="clearfix">
+    <ht-top-nav navline="vm.navline">
+
+    </ht-top-nav>
+  </header>
+  <section id="content" class="content" style="height: 100%;">
+    <div ng-include="'app/layout/sidebar.html'"></div>
+
+  <div ui-view class="shuffle-animation" style="height: 100%;"></div>
+    <div  ngplus-overlay ngplus-overlay-delay-in="10" ngplus-overlay-delay-out="300" ngplus-overlay-animation="dissolve-animation">
+      <div  class="loader" >
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--text"></div>
+      </div>
+    </div>
+  </section>
+</div>

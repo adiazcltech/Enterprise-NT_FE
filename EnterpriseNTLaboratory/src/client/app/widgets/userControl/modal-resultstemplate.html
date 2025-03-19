@@ -1,0 +1,161 @@
+<style>
+   label {
+      font-size: 12px;
+      color: #727272;
+   }
+
+   .th-templete {
+      font-weight: bold !important;
+      color: #333 !important;
+      /* padding: 0px*/
+   }
+
+   .td-templete {
+      margin: 5px 5px 5px 5px !important;
+      width: calc(33.33% - 10px) !important;
+   }
+
+   .th-templete>div {
+      margin: 0px 5px 0px 5px !important;
+      width: calc(100% - 10px) !important;
+   }
+
+   .textarea-template {
+      height: 83% !important;
+      width: calc(100% - 40px) !important;
+      min-height: 40px !important;
+      padding: 0 !important;
+      overflow-y: auto !important;
+      margin-right: 30px !important;
+      position: absolute !important;
+      line-height: 18px !important;
+      margin-top: 5px !important;
+   }
+</style>
+
+<div id="resultstemplate" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true"
+   style="display: none; overflow-y: scroll; ">
+   <div class="uk-modal-dialog uk-modal-dialog-blank">
+      <loadpage view="modalresultstemplate.loadingdata"></loadpage>
+      <div class="md-card uk-height-viewport">
+         <div class="md-card-toolbar md-bg-light-blue-A200">
+            <div class="md-card-toolbar-actions" style="padding-top: 0px">
+               <div>
+                  <i class="md-icon material-icons md-color-grey-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                     title="{{'0329'| translate}}">&#xE5CD;</i>
+               </div>
+            </div>
+            <span style="float: left; margin: 8px 8px 0 0; display: block;"><i class="material-icons md-color-grey-50"
+                  style="line-height: 32px; font-size: 28px">&#xE86D;</i></span>
+            <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+               {{'0599' | translate}}
+            </h3>
+         </div>
+         <div class="md-card-content" style="height: calc(100% - 72px);">
+            <div class="md-card-content" style="height: calc(100% - 65px);">
+               <div class="uk-grid uk-grid-small" style="width: 100%; margin-left: 0px">
+                  <div class="uk-width-1-3" style="padding-left: 0px; height: 122px;">
+                     <cardorder order="modalresultstemplate.order"
+                        typeordercode="modalresultstemplate.patient.typeordercode"
+                        typeordercolor="modalresultstemplate.patient.typeordercolor"
+                        testcode="modalresultstemplate.TestSelect.code" testname="modalresultstemplate.TestSelect.name">
+                     </cardorder>
+                  </div>
+                  <div class="uk-width-1-3" style="z-index: 1000">
+                     <cardpatient patientname="modalresultstemplate.patient.name" orderdemo="modalresultstemplate.orderdemo"
+                        patientdocument="modalresultstemplate.patient.document"
+                        patientage="modalresultstemplate.patient.age"
+                        patientgender="modalresultstemplate.patient.gender"
+                        photopatient="modalresultstemplate.photopatient" patientid="modalresultstemplate.patient.id" orderpatient="modalresultstemplate.order">
+                     </cardpatient>
+                  </div>
+                  <div class="uk-width-1-3" style="padding-left: 10px;height: 122px;">
+                     <commentordermodal type="1" orderhistory="modalresultstemplate.order"
+                        viewdirectic="modalresultstemplate.viewcomment">
+                     </commentordermodal>
+                  </div>
+               </div>
+               <form class="form md-card md-card-hover uk-grid" name="myForm" id="myForm"
+                  style="height: calc(100% - 125px); padding: 20px; padding-top: 5px; margin-top: 15px">
+                  <div class="uk-form-row uk-width-1-1" style="height: 100%; margin-top: -10px;">
+                     <div class="uk-form-row md-card" style="margin-top: 15px; height: calc(100% - 65px); ">
+                        <table class="uk-table uk-table-small uk-table-middle tablescrollable"
+                           style="height: calc(100% - 0px); background-color: #ececec; margin-bottom: 0px">
+                           <thead class="theadscrollable"
+                              style="width: calc(100% - 0px); font-weight: bold; color: #333;height: 25px">
+                              <tr class="uk-width-1-1" style="display: inline-table; background-color: #fff">
+                                 <th class="uk-width-1-3 th-templete">{{'0601' | translate}}</th>
+                                 <th class="uk-width-1-3 th-templete">{{'0289' | translate}}</th>
+                                 <th class="uk-width-1-3 th-templete">{{'0623' | translate}}</th>
+                              </tr>
+                           </thead>
+                           <tbody class="tbodyscrollable contentscroll"
+                              style="height: calc(100% - 36px); overflow-y: scroll; margin-top: 12px">
+                              <tr class="uk-grid"
+                                 data-ng-repeat="ResultTemplate in modalresultstemplate.resultstemplate"
+                                 style="margin: 0px 0px 3px 0px; height: 95px; ">
+                                 <td class="uk-width-1-3 md-card md-card-hover td-templete">
+                                    <p style="margin-bottom: 0; ">
+                                    <div style="margin-bottom: 0; display: block; position: relative; width: 40px"
+                                       class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+                                       <i class="md-icon material-icons md-color-blue-500" data-uk-tooltip="{pos:'top'}"
+                                          title="{{'0114'| translate}}" style="float: left;">&#xE0B9;</i>
+                                       <div class="uk-dropdown"
+                                          style="min-width: 280px;font-size: 12px; color: #727272; top:23px; left: 112px;"
+                                          data-ng-bind="ResultTemplate.comment"></div>
+                                    </div>
+                                    <label class="uk-modal-content" data-ng-bind="ResultTemplate.option"
+                                       style="float: right; width: calc(100% - 40px); margin-top: 6px"></label>
+                                    </p>
+                                    <select class="md-input form-control"
+                                       ng-options="obj as obj.result for obj in ResultTemplate.results track by obj.result"
+                                       data-ng-model="modalresultstemplate.updateResult"
+                                       ng-change="modalresultstemplate.changeResult(ResultTemplate)"
+                                       style="font-size: 14px !important; padding-top: 0px; padding-bottom: 0px"></select>
+                                 </td>
+                                 <td class="uk-width-1-3 md-card md-card-hover td-templete"
+                                    style="padding-bottom: 1px;">
+                                    <textarea class="md-input form-control textarea-template contentscroll"
+                                       ng-model="ResultTemplate.result"></textarea>
+                                    <i class="md-icon material-icons md-color-red-500" data-uk-tooltip="{pos:'top'}"
+                                       title="{{'0624'| translate}}" style="float: right;"
+                                       ng-click="ResultTemplate.result =''">&#xE872;</i>
+                                 </td>
+                                 <td class="uk-width-1-3 md-card md-card-hover td-templete" style="padding-left: 10px">
+                                    <label class="uk-modal-content" style="margin-top: 6px">{{'0628'|
+                                       translate}}</label>
+                                    <span class="uk-text-truncate" data-ng-bind="ResultTemplate.normalResult"></span>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="md-fab-in-card uk-width-8-10 contentscroll uk-text-bold" style="margin-bottom: 6px;margin-top: -45px;overflow: auto;height: 40px;width: calc(100% - 133px);">
+                     {{modalresultstemplate.comment}}
+                  </div>
+                  <div class="md-fab-wrapper md-fab-in-card uk-width-2-10" style="margin-bottom: 10px;width: 177px;">
+                     <button type="button"
+                        class="md-fab md-fab-small md-fab uk-modal-close md-fab-wave-light waves-effect waves-light"
+                        ng-click="modalresultstemplate.saveResultsTemplate()"
+                        ng-disabled="modalresultstemplate.resultstemplate.length === 0"
+                        ng-class="{'md-color-grey-50 md-bg-blue-grey-100': modalresultstemplate.resultstemplate.length === 0,'md-color-grey-50 md-bg-indigo-700': modalresultstemplate.resultstemplate.length !== 0}">
+                        <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                           title=" {{'0007' | translate}} ">&#xE161;</i>
+                     </button>
+                  </div>
+                  <div class="md-fab-wrapper md-fab-in-card"
+                     style="left: calc(100% - 120px); width: 55px; margin-bottom: 10px">
+                     <button type="button"
+                        class="md-fab md-fab-small md-fab md-bg-yellow-A700 md-fab-wave-light waves-effect waves-light  "
+                        ng-click="modalresultstemplate.resetTemplate()">
+                        <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                           title=" {{'0625' | translate}} ">&#xE042;</i>
+                     </button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

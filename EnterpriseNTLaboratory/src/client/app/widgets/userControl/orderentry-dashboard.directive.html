@@ -1,0 +1,79 @@
+<style>
+    .disabledSiga {
+        background-color: #f5f5f5;
+    }
+</style>
+<div class="uk-grid" style="margin-left: -15px;">
+    <div class="uk-width-2-10" style="padding-left: 0px;width: 24%">
+        <div class="md-card" style="height: 65px;padding-left: 16px;">
+            <div class="uk-grid">
+                <div class="uk-width-6-10" style="margin-top: 10px;">
+                    <span class="uk-text-muted uk-text-small uk-text-truncate">{{'1113' | translate}}</span>
+                    <h3 class="uk-margin-remove uk-text-truncate">
+                        {{orderentrydashboard.totalorderuser}}/
+                        <small>{{orderentrydashboard.totalorderbranch}}</small>
+                    </h3>
+                </div>
+                <div class="uk-width-4-10">
+                    <echart
+                        style="height: 79px; width: 128px; float: right;margin-top: -5px;margin-bottom: -17px;margin-right: -24px;"
+                        data="orderentrydashboard.datageneral" options="orderentrydashboard.optionsgeneral"></echart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-2-10" style="padding-left: 12px;width: 25%;padding-right: 10px">
+        <div class="md-card" style="height: 65px;padding-left: 10px;"
+            ng-class="{'disabledSiga': !orderentrydashboard.integrationSiga }">
+            <div class="uk-grid">
+                <div class="uk-width-6-10" style="margin-top: 10px">
+                    <span class="uk-text-muted uk-text-small uk-text-truncate">{{'1114' | translate}}</span>
+                    <h3 class="uk-margin-remove uk-text-truncate" ng-if="orderentrydashboard.integrationSiga">
+                        {{orderentrydashboard.totalturnsuser}}/
+                        <small>{{orderentrydashboard.totalturns}}</small>
+                    </h3>
+                </div>
+                <div class="uk-width-4-10" ng-if="orderentrydashboard.integrationSiga">
+                    <echart
+                        style="height: 79px; width: 128px; float: right;margin-top: -5px;margin-bottom: -17px;margin-right: -24px;"
+                        data="orderentrydashboard.dataturngeneral" options="orderentrydashboard.optionsturn"></echart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-2-10" style=" padding-left: 3px;width: 25%;">
+        <div class="md-card" style="height: 65px;padding-left: 10px;"
+            ng-class="{'disabledSiga': !orderentrydashboard.integrationSiga }">
+            <div class="uk-grid">
+                <div class="uk-width-6-10" style="margin-top: 10px;">
+                    <span class="uk-text-muted uk-text-small uk-text-truncate">{{'1115' | translate}}</span>
+                    <h3 class="uk-margin-remove uk-text-truncate" ng-if="orderentrydashboard.integrationSiga">
+                        {{orderentrydashboard.totalturnswaiting}}/
+                        <small>{{orderentrydashboard.totalturns}}</small>
+                    </h3>
+                </div>
+                <div class="uk-width-4-10" ng-if="orderentrydashboard.integrationSiga">
+                    <echart
+                        style="height: 79px; width: 128px; float: right;margin-top: -5px;margin-bottom: -17px;margin-right: -24px;"
+                        data="orderentrydashboard.dataturnwaiting" options="orderentrydashboard.optionsturnwaiting">
+                    </echart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-2-10" style="padding-left: 8px;width: 25%;">
+        <div class="md-card" style="height: 65px;padding-left: 10px;margin-right: -2px;"
+            ng-class="{'disabledSiga': !orderentrydashboard.integrationSiga }">
+            <div class="uk-grid">
+                <div class="uk-width-5-10" style="margin-top: 10px;width: 56%;">
+                    <span class="uk-text-muted uk-text-small uk-text-truncate">{{'1116' | translate}}</span>
+                </div>
+                <div class="uk-width-5-10" style="width: 44%;" ng-if="orderentrydashboard.integrationSiga">
+                    <echart
+                        style="height: 45px; width: 247px; float: right;margin-top: 19px;margin-bottom: -17px;margin-right: 15px;"
+                        data="orderentrydashboard.dataquantity" options="orderentrydashboard.optionsquantity"></echart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

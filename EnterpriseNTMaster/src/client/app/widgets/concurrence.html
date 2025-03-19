@@ -1,0 +1,91 @@
+<div class="input-group" style="width: 100%; background-color: transparent;">
+	<input data-ng-model="concurrence.output" ng-disabled="true" class="form-control" type="text"  >
+	<div class="input-group-addon panel-padding" style="border-style: none; background-color: transparent; ">
+		<button type="button" class="btn btn-primary btn-short" data-toggle="modal" data-target="#modalConcurrence" ng-disabled="concurrence.disabled">
+			<span  class="glyphicon glyphicon-log-in" aria-hidden="true" ></span>
+		</button>
+	</div>
+</div>
+
+ <div class="modal fade" data-keyboard="false" data-backdrop="static" id="modalConcurrence" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+  	<div class="modal-dialog" style="width: 910px;">
+  		<div class="modal-content">
+
+  			<div class="modal-body panel-padding" style="padding-top: 10px">
+
+  				<div class="row general-container">
+  					<div class="panel panel-primary panel-principal">
+  						<div class="panel-heading row">
+  							<div class="panel-title">
+  								<strong class="panel-title text-left title-bar">
+  									{{'0424' | translate |uppercase}}
+  								</strong>
+  							</div>
+
+  						</div>
+  						<div class="col-sm-12 form-group-min">
+  							<form name="ConcurrenceForm" id="ConcurrenceForm" class="form-horizontal panel-body panel-padding" >
+  								<div class="form-group-min form-group-sm" >
+  									<div class="form-group-min" style="margin-top: 7px" >
+  										<div class="col-md-12 text-left " ng-class="{'has-error': ConcurrenceForm.name.$invalid && ConcurrenceForm.name.$touched || vm.nameRepeat }" >
+  											<label class="col-sm-1 text-right">{{'0402' | translate}}:</label>
+  											<div class="col-sm-7 text-left form-group-min ">
+  											   <select charset="utf-8" ng-options="obj.id as obj.name for obj in concurrence.ListTests" data-ng-model="concurrence.sample" class="form-control" ng-disabled="true"></select>
+  											</div>
+  										  <label class="col-sm-1 text-right">{{'0037' | translate}}:</label>
+  											<div class="col-sm-3 text-left form-group-min ">
+  												<select charset="utf-8" ng-options="obj.id as obj.name for obj in concurrence.ListAreas" data-ng-model="concurrence.ListAreas.id" class="form-control" ng-disabled="true" ></select>
+  											</div>
+  										</div>	
+
+  										<div class="col-md-12 text-left">
+  											<label class="col-sm-1 text-right">{{'0052' | translate}}:</label>
+  											<div class="col-sm-4 text-left form-group-min" >
+													 <select charset="utf-8" ng-options="obj.id as obj.name for obj in concurrence.ListSamples" data-ng-model="concurrence.sample" class="form-control" ng-disabled="true"></select>
+  											</div>
+  											<label class="col-sm-1 text-right">{{'0221' | translate}}:</label>
+  											<div class="col-sm-2 text-left form-group-min">
+  												<select charset="utf-8" ng-options="obj.value as obj.text for obj in concurrence.ListGender" data-ng-model="concurrence.gender" class="form-control" ng-required="false" ng-disabled="true"></select>
+  											</div>									
+  											<label class="col-md-1 text-right">{{'0418' | translate}}:</label>			   
+  											<div class="col-md-1 text-left form-group-min " style="width: 10%" >
+  												<select charset="utf-8" ng-options="obj.value as obj.text for obj in concurrence.ListUnitAge" data-ng-model="concurrence.testDetail.unitAge" class="form-control" ng-required="false" ng-disabled="true" ></select>
+  											</div>
+										  	<div name="minAge" class="col-md-1 text-center panel-padding" style="width: 7%; margin-left: 4px" >
+                            <input type="text" class="form-control" ng-model="concurrence.minAge" ng-disabled="true">
+										  	</div>
+										  	<div name="maxAge" class="col-md-1 text-center panel-padding" style="width: 7%; margin-left: 4px"  >
+										  			<input type="text" class="form-control" ng-model="concurrence.maxAge" ng-disabled="true">
+										  	</div>
+  										</div>	
+  										<div class="col-md-12 text-left">
+  											 <label class="col-sm-1 text-right" >{{'0423' | translate}}:</label>
+  											 <div class="col-sm-11 text-right form-group-min" >
+  											 	 <input type="text" class="form-control"  ng-model="concurrence.formula" ng-disabled="true">
+  											 </div>
+											</div>
+
+  								<div class="col-md-12 text-left" >
+
+  								</div>
+  							</form>
+  						</div>
+
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  		<div class="modal-footer">
+  				<div>
+  					<div class="col-md-12">
+  						<button type="button" class="btn btn-primary" ng-click="concurrence.save(this)">
+  							<span class="fa fa-check" aria-hidden="true"></span>{{'0031' | translate}}
+  						</button>
+  						<button type="button" class="btn btn-info" ng-click="concurrence.cancel()" data-dismiss="modal">
+  							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+  						</button>
+  					</div>
+  				</div>
+  		</div>
+	 </div>
+</div>	 

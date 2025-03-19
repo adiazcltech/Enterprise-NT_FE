@@ -1,0 +1,165 @@
+<style>
+  .orderinconsistencysearch-padding-search {
+    padding-top: 5px;
+  }
+
+  .orderinconsistencysearch-uppercase {
+    text-transform: uppercase;
+  }
+
+  .orderinconsistencysearch-table-row {
+    margin-top: 10px !important;
+  }
+
+  .orderinconsistencysearch-table-container {
+    margin-top: 0px;
+    height: calc(100% - -43px);
+    width: 100% !important;
+  }
+
+  .orderinconsistencysearch-filter-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .orderinconsistencysearch-filter-padding {
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
+</style>
+<loadpage view="orderinconsistencysearch.loading"></loadpage>
+<div id="orderinconsistencysearch" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-pink-200">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-light-blue-50 md-33">&#xE916;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          Inconsistencias
+        </h3>
+      </div>
+      <div class="md-card-content">
+        <div class="uk-grid" style="height: 100%;">
+          <div class="uk-width-8-10" style="height: 14%">
+            <div class="md-card md-card-hover">
+              <div class="md-card-content">
+                <div class="uk-input-group">
+                  <span class="uk-input-group-addon">
+                    <img ng-src="images/search.png" />
+                  </span>
+                  <div class="md-input-wrapper md-input-filled">
+                    <label>{{'0640' | translate}}</label>
+                    <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed"
+                      ng-model="orderinconsistencysearch.search">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-2-10" style="padding-left: 11px;height: 14%">
+            <div class="md-card md-card-hover">
+              <div class="md-card-content">
+                <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                  <li style="margin-left: 0px">
+                    <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                      <img class="md-list-addon-icon material-icons md-26" ng-src="images/order/totalorder1.png">
+                    </div>
+                    <div class="md-list-content" style="padding-left: 30px;">
+                      <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                      <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                        {{orderinconsistencysearch.filtered.length}}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="uk-width-1-1" style="margin-top: 10px;height: 83%"
+            ng-show="orderinconsistencysearch.orders.length!==0">
+            <div class="md-card md-card-hover" style="height: 100%;">
+              <div class="md-card-content" style="height: 100%;padding: 0px;">
+                <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head" style="height: 39px;">
+                  <div class="uk-width-1-10" style="padding-left: 10px;"
+                    ng-click="orderinconsistencysearch.sortType = 'order'; orderinconsistencysearch.sortReverse = !orderinconsistencysearch.sortReverse">
+                    <resultssort sortvalue="'order'" sorttype="orderinconsistencysearch.sortType"
+                      sortreverse="orderinconsistencysearch.sortReverse"></resultssort>
+                    {{'0110' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-if="orderinconsistencysearch.showDocumentType"
+                    ng-click="orderinconsistencysearch.sortType = 'documentTypeId'; orderinconsistencysearch.sortReverse = !orderinconsistencysearch.sortReverse">
+                    <resultssort sortvalue="'documentTypeId'" sorttype="orderinconsistencysearch.sortType"
+                      sortreverse="orderinconsistencysearch.sortReverse"></resultssort>{{'0233' | translate}}
+                  </div>
+                  <div style="padding-left: 10px;"
+                    ng-click="orderinconsistencysearch.sortType = 'patientId'; orderinconsistencysearch.sortReverse = !orderinconsistencysearch.sortReverse"
+                    ng-class="{'uk-width-2-10' : orderinconsistencysearch.showDocumentType,'uk-width-4-10' : !orderinconsistencysearch.showDocumentType}">
+                    <resultssort sortvalue="'patientId'" sorttype="orderinconsistencysearch.sortType"
+                      sortreverse="orderinconsistencysearch.sortReverse"></resultssort>{{'0117' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="orderinconsistencysearch.sortType = 'lastName'; orderinconsistencysearch.sortReverse = !orderinconsistencysearch.sortReverse">
+                    <resultssort sortvalue="'lastName'" sorttype="orderinconsistencysearch.sortType"
+                      sortreverse="orderinconsistencysearch.sortReverse"></resultssort>{{'0398' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="orderinconsistencysearch.sortType = 'birthday'; orderinconsistencysearch.sortReverse = !orderinconsistencysearch.sortReverse">
+                    <resultssort sortvalue="'birthday'" sorttype="orderinconsistencysearch.sortType"
+                      sortreverse="orderinconsistencysearch.sortReverse"></resultssort>{{'0120' | translate}}
+                  </div>
+                  <div class="uk-width-1-10" style="padding-left: 10px;"
+                    ng-click="orderinconsistencysearch.sortType = 'sex'; orderinconsistencysearch.sortReverse = !orderinconsistencysearch.sortReverse">
+                    <resultssort sortvalue="'sex'" sorttype="orderinconsistencysearch.sortType"
+                      sortreverse="orderinconsistencysearch.sortReverse"></resultssort>{{'0426' | translate}}
+                  </div>
+                </div>
+                <div class="vs-repeat-custom-scroll" style="height: calc(100% - 40px);" vs-repeat="20"
+                  data-scroll-to-top='orderinconsistencysearch.orders'>
+                  <div
+                    ng-repeat="order in orderinconsistencysearch.filtered = ( orderinconsistencysearch.orders | filter:orderinconsistencysearch.search | orderBy:orderinconsistencysearch.sortType:orderinconsistencysearch.sortReverse)"
+                    class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table" style="margin-top: 0px;">
+                    <div class="uk-width-1-10" style="padding-left: 10px;">
+                      <a href="#"
+                        ng-click="orderinconsistencysearch.selectOrder(order.orderNumber)">{{order.orderNumber}}</a>
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 15px;"
+                      ng-if="orderinconsistencysearch.showDocumentType">
+                      {{order.patient.documentType.abbr  === undefined ? 'SIN TIPO DE DOCUMENTO' :order.patient.documentType.abbr.toUpperCase()}}
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 15px;">{{order.patient.patientId}}</div>
+                    <div style="padding-left: 20px;"
+                      ng-class="{'uk-width-2-10' : orderinconsistencysearch.showDocumentType,'uk-width-4-10' : !orderinconsistencysearch.showDocumentType}">
+                      {{order.patient.lastName.toUpperCase() + ' ' + (order.patient.surName === null || order.patient.surName === '' ? '' : order.patient.surName.toUpperCase()
+                                                 + ' ') + order.patient.name1.toUpperCase() + ' ' + ((order.patient.name1 === null || order.patient.name2 === '' ? '' : order.patient.name2.toUpperCase()))
+                                            }}
+                    </div>
+                    <div style="padding-left: 23px;" class="uk-width-2-10">{{order.patient.birthday}}</div>
+                    <div style="padding-left: 27px;" class="uk-width-1-10">{{order.sex}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-grid uk-width-1-1 uk-grid-medium" style="margin-top: 10px;height: 70%"
+            ng-show="orderinconsistencysearch.orders.length===0">
+            <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+              <img class="img-responsive" style="height: 90px; width: 90px;" src="images/data.png">
+            </div>
+            <div class="uk-width-1-1 uk-text-center">
+              <h3 class="ng-binding">No existen inconsistencias registradas</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

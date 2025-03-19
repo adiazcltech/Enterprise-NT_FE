@@ -1,0 +1,133 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div id="titleTestDemographicPyP" class="panel-heading row">
+        <div class="col-md-8 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'1134' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class="col-md-4 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/reportencryption/reportencryption.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll">
+        <div class="col-md-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form">
+                <div>
+                  <div>
+                    <div class="panel-padding form-group-min right-bar">
+                      <input class="form-control" maxlength="60" data-ng-model="vm.namedemographic" ng-required="true"
+                        ng-disabled="true" name="name" id="name" class="form-control" type="text">
+                    </div>
+                    <div class="number-bage" style="white-space: nowrap;">
+                      <span style="margin-top: 8px" class="badge" data-ng-bind="vm.dataDemographics.length"></span>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}" ng-change="vm.changeSearch()">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-10">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                      <th class="col-md-2 text-center">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.selected; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.selected"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.selected"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.selected && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.selected && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.selected && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.selected && vm.sortReverse"></span>
+                        </a>{{'1135' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="width: 97%;height: calc(100%
+                    - 25rem);">
+                    <tr class="row-list" data-ng-repeat="itemDemographics in
+                      vm.filtered=(vm.dataItemDemographics | filter:
+                      {name:vm.search}) | orderBy:vm.sortType:vm.sortReverse">
+                      <td class="col-md-10" data-ng-bind="itemDemographics.name"></td>
+                      <td class="col-md-2 text-center">
+                        <toggle ng-model="itemDemographics.selected" on="SI" off="NO" size="btn-sm"></toggle>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class="btn btn-primary button-list" ng-click="vm.save(UsersForm)"
+                    ng-disabled="(vm.dataItemDemographics | filter:{ selected: true}).length === 0"
+                    style="float: right;">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="row modal-body">
+                    <div class="row row-center col-md-12">
+                        <div class="col-md-5" >
+                            <a ng-click="close('demographicsItem')" class="thumbnail" data-dismiss="modal">
+                                <img src="images/generalconfiguration.png">
+                                <h6 class="text-center">{{'0082' | translate}}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

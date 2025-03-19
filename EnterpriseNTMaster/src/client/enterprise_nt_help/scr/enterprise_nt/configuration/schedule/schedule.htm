@@ -1,0 +1,504 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Programación de agenda</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+
+
+
+<style>
+html,div { margin: 0; padding: 0;}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	overflow: auto;
+	height: 100%;
+}
+
+#winchm_template_button{
+	float: right;
+	width: 93px;
+	top: 7px;
+	position: relative;
+	text-align: right;
+	right: 5px;
+	height: auto;
+}
+
+#winchm_template_top{
+	padding: 0px;
+	margin: 0px;
+	border-bottom: 1px solid #9B9B9B;
+	background-color: #B1CEFE;
+}
+
+#winchm_template_navigation{
+	margin: 0px;
+	padding-top: 7px;
+	padding-left: 7px;
+	padding-bottom: 3px;
+	padding-right: 0px;
+	font-size: 8.5pt;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #585858;
+}
+
+#winchm_template_title{
+	margin: 0px;
+	padding-top: 4px;
+	padding-left: 7px;
+	padding-bottom: 7px;
+	padding-right: 0px;
+	font-size: 18px; 
+	font-family: Verdana, Geneva, sans-serif;
+	color: #363636;
+}
+
+#winchm_template_content{
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	width: auto  !important;
+	width: 100%;
+}
+
+#winchm_template_footer{
+	border-width: 1px;
+	border-color: #B1CEFE;
+	border-top-style: solid;
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	padding-top: 7px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 8.5pt;
+	color: #696969;
+	width: auto;
+	text-align: left;
+}
+
+
+#winchm_template_container{
+	margin: 0px;
+	padding: 0px;
+	position: static;
+	padding-bottom: 3px;
+	overflow: auto;
+	background-color: #FFFFFF;
+}
+
+
+@media print
+{
+#winchm_template_container{
+	position: static;	
+	margin: 0px;
+	padding: 5px;
+	
+	width: auto;
+	height: auto;
+	overflow: auto;
+}
+#winchm_template_button{
+visibility:hidden;
+}
+}
+
+#winchm_template_navigation A:link	{text-decoration: none; color:#004080}
+#winchm_template_navigation A:visited  {text-decoration: none; color: #004080}
+#winchm_template_navigation A:active {text-decoration: none; color: #004080 }
+#winchm_template_navigation A:hover {text-decoration: none;color: #0080FF}
+
+A:link	{text-decoration: underline; color:#0033CC}
+A:visited  {text-decoration: underline; color: #0033CC}
+A:active {text-decoration: underline; color: #0033CC }
+A:hover {text-decoration: underline;color: #FF0000;}
+</style>
+<script type="text/javascript">
+function isMobile(){
+Agent = window.navigator.userAgent;
+if (Agent.indexOf("iPhone")>=1 || Agent.indexOf("iPad")>=1 || Agent.indexOf("iPod")>=1 || Agent.indexOf("Android")>=1){
+return true;
+}else{
+return false;	
+}
+
+}
+function d_onresize(){
+if (window.navigator.userAgent.indexOf("MSIE")>=1){
+document.getElementById('winchm_template_container').style.pixelWidth = document.body.offsetWidth - 3;
+document.getElementById('winchm_template_container').style.pixelHeight = document.body.offsetHeight - document.getElementById('winchm_template_top').offsetHeight - 4;
+}
+document.getElementById('winchm_template_container').style.top = document.getElementById('winchm_template_top').offsetHeight + 'px';
+}
+
+function d_onbeforeprint(){
+document.getElementById('winchm_template_container').style.width = 'auto';
+document.getElementById('winchm_template_container').style.height = 'auto';
+}
+
+function d_onafterprint(){
+d_onresize();
+}
+
+if(!isMobile()){
+
+window.onload = d_onresize;
+window.onresize = d_onresize;
+window.onbeforeprint = d_onbeforeprint;
+window.onafterprint = d_onafterprint;
+
+document.write("<style>\n");
+document.write("body {overflow: hidden;}\n");
+document.write("#winchm_template_container {position: absolute;overflow: auto;top : 0px;right: 0px;bottom: 0px;left: 0px;}\n");
+document.write("</style>\n");
+}
+
+</script>
+</head>
+
+<body><script language="JavaScript" type="text/JavaScript">
+function syn(){
+if(parent.nav.tree){
+ if(parent.nav.tree.loaded){
+  parent.nav.tree.selectNode(117);
+ }else{
+  setTimeout("syn()",500);
+}
+  }else{
+  setTimeout("syn()",500);
+  }}
+if(parent!=self){
+  setTimeout("syn()",100);
+}else{
+  parent.location.href = "../../../../index.htm?page=enterprise_nt/configuration/schedule/schedule.htm";
+}
+originalOnload = window.onload;
+if(originalOnload==null){
+window.onload = function(){parent.contentLoaded = true;};
+}else{
+window.onload = function(){originalOnload();parent.contentLoaded = true;};
+}
+</script> 
+
+
+<div id="winchm_template_top">
+	<div id="winchm_template_button"><A href="../protocol/protocol.htm" title="Previous topic"><img id="winchm_template_prev" alt="Previous topic" src="../../../template2/btn_prev_n.png" border="0"></a><A href="../eventpathology/eventpathology.htm" title="Next topic"><img id="winchm_template_next" alt="Next topic" src="../../../template2/btn_next_n.png" border="0"></a></div>
+	<div id="winchm_template_navigation">Help &gt; 
+Configuracion &gt; </div>
+	<div id="winchm_template_title">Programación de agenda</div>
+</div>
+<div id="winchm_template_container">
+	<div id="winchm_template_content"><FONT size=2>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" align=left><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-size: 11.0pt; mso-bidi-font-weight: bold'>Este maestro&nbsp;permite realizar la programación de 
+la&nbsp;agenda de los patólogos indicando los horarios en las areas de microscopía, macroscopía y&nbsp;de diferentes 
+eventos configurados previamente en el maestro de eventos.</SPAN></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" align=left><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-size: 11.0pt; mso-bidi-font-weight: bold'></SPAN>
+<SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-bidi-font-size: 11.0pt'>
+A continuación, se muestra una ventana típica con sus 
+partes:</P></SPAN></FONT>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 8pt"><o:p></O:P></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 8pt" align=center><IMG style="HEIGHT: 485px; WIDTH: 907px" alt="" src="../../img/schedule_01.png" width=1650 height=859>&nbsp; </P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt" align=center><FONT size=2><STRONG><SPAN lang=ES-CO 
+style='FONT-SIZE: 7.5pt; FONT-FAMILY: "Arial","sans-serif"; LINE-HEIGHT: 115%'>[Imagen 01 - Formulario de Programación de agenda de 
+patólogos]</SPAN></STRONG></FONT></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt" align=center><FONT size=2><STRONG><SPAN lang=ES-CO 
+style='FONT-SIZE: 7.5pt; FONT-FAMILY: "Arial","sans-serif"; LINE-HEIGHT: 115%'></SPAN></STRONG></FONT>&nbsp;</P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt" align=left><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN 
+Arial?,?sans-serif???><STRONG>1. Buscador. </STRONG>  </SPAN><SPAN><BR></SPAN><SPAN><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: 
+"Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-no-proof: yes'>Se usa</SPAN><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'> el ordenamiento por columnas de menor a mayor o</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>viceversa,</SPAN><SPAN 
+lang=ES-CO style  ='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'></SPAN><SPAN 
+lang=ES-CO style  ='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>la lista se organiza ya sea alfabéticamente, 
+numéricamente</SPAN><SPAN lang=ES style  ='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>. El ícono que aparece en cada columna cambia según el 
+orden.</SPAN>           
+             
+             
+       </SPAN></SPAN></P>
+<P><SPAN><SPAN></SPAN></SPAN><STRONG><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>2. Ordenamiento. </SPAN></SPAN></STRONG><V:SHAPETYPE id="_x0000_t75" 
+stroked="f" filled="f" path="m@4@5l@4@11@9@11@9@5xe" 
+o:preferrelative="t" o:spt="75" coordsize="21600,21600"><v:stroke joinstyle="miter"></V:STROKE><v:formulas><v:f 
+eqn="if lineDrawn pixelLineWidth 0"></V:F><v:f 
+eqn="sum @0 1 0"></V:F><v:f eqn="sum 0 0 @1"></V:F><v:f eqn="prod @2 1 2"></V:F><v:f 
+eqn="prod @3 21600 pixelWidth"></V:F><v:f 
+eqn="prod @3 21600 pixelHeight"></V:F><v:f 
+eqn="sum @0 0 1"></V:F>
+<v:f eqn="prod @6 1 2"></V:F>
+<v:f eqn="prod @7 21600 pixelWidth"></V:F>
+<v:f eqn="sum @8 21600 0"></V:F>
+<v:f eqn="prod @7 21600 pixelHeight"></V:F>
+<v:f eqn="sum @10 21600 0"></V:F></V:FORMULAS>
+
+<v:path 
+o:connecttype="rect" gradientshapeok="t" o:extrusionok="f"></V:PATH>
+<o:lock aspectratio="t" v:ext="edit"></O:LOCK></V:SHAPETYPE> 
+ <SPAN 
+style="mso-no-proof: yes">             </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Usa el control de ordenamiento para 
+ordenar de menor a mayor o viceversa según el campo que desees ordenar solo al 
+hacer click <SPAN><SPAN style="mso-spacerun: yes">&nbsp;</SPAN></SPAN>sobre él.&nbsp;&nbsp;</SPAN></P>
+<P><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'></SPAN><STRONG><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>3. Cantidad. </SPAN></SPAN></STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Este control muestra la cantidad de 
+patólogos visualizados en la lista.</SPAN><o:p></O:P></SPAN></P>
+<p><STRONG><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>4. Fecha - Usuario de última actualización.</SPAN><FONT size=2> </FONT></SPAN></STRONG><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Aquí se despliega la fecha y el usuario que modificaron 
+la agenda del patólogo que ha sido seleccionado. <o:p></O:P></SPAN></p></SPAN>
+<p><STRONG><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>5. Botón ayuda. </SPAN></SPAN></STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Aquí despliega la explicación de 
+cada uno de los controles</SPAN><o:p></O:P></SPAN></p>
+<p><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>6. Controles de paginación.</SPAN><FONT size=2> 
+</FONT></SPAN></strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>     
+    Este control permite navegar por el calendario bien sea 
+el mes siguiente o anterior.</SPAN></SPAN></p>
+<p><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 7. Hoy.</SPAN><FONT size=2> 
+</FONT></SPAN></strong><B><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'></SPAN><SPAN><FONT size=2>Este control permite cargar el calendario en el mes actual. 
+</FONT></SPAN></SPAN></p><SPAN><SPAN><FONT size=2>
+<p><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>8. Convenciones.</SPAN><FONT size=2> 
+</FONT></SPAN></strong><B><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'></SPAN><SPAN><FONT size=2>Este control&nbsp;indica las conveciones&nbsp;para la agenda 
+del patólogo.&nbsp;</FONT></SPAN></SPAN></P></FONT></SPAN></SPAN>
+<p><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9. Calendario. </STRONG></SPAN><SPAN><BR><FONT size=2>Este control permite visualizar la agenda del mes para el 
+patólogo. Por defecto se manejan dos colores para identificar los horarios del 
+patólogo según 
+el area en el que se encuentre trabajando, bien sea macroscopia que se identifica de color 
+verde o microscopia que se identifica de color azul. Adicionalmente se visualizan 
+los eventos adicionales&nbsp;programados para el patólogo seleccionado. Por&nbsp;defecto, el color de cada evento 
+se identifica dependiendo de la configuracion realizada en el maestro de 
+eventos.&nbsp;</FONT></SPAN></SPAN></p>
+<p><SPAN><SPAN></SPAN></SPAN><SPAN><SPAN><FONT size=2>          
+                
+            
+           Al seleccionar 
+un dia o un rango de dias se desplegara la siguiente 
+pantalla:</FONT></SPAN></SPAN></p>
+<p align=center><SPAN><SPAN><IMG style="HEIGHT: 566px; WIDTH: 948px" alt="" src="../../img/schedule_02.png" width=1644 height=858></SPAN></SPAN></p>
+<P align=center><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG><FONT size=1>Imagen 02 - Formulario de creación y 
+modificación de agenda]</FONT></STRONG> 
+ </SPAN></SPAN></P>
+<P><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.1. Fecha de la 
+agenda</STRONG> 
+ </SPAN></SPAN><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+ .</SPAN><FONT size=2> 
+</FONT></SPAN></strong><B><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'></SPAN><SPAN><FONT size=2>Indica la fecha o rango seleccionado en el 
+calendario.</FONT></SPAN></SPAN></P>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.2. Sección de macroscopía</STRONG> 
+ </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>La sección permite cargar la hora 
+iniciar y hora final en el area de 
+macroscopía</SPAN></SPAN></FONT></SPAN></SPAN></p>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.3. Sección de microscopía</STRONG> 
+ </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>La sección permite cargar la hora 
+inicial y hora final en el 
+area de microscopía. Por defecto, esta sección es 
+obligatoria.</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></p>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.4. </STRONG><STRONG>Boton</STRONG><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+adicionar evento&nbsp;o 
+ actividad.</SPAN></SPAN></strong> 
+ </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR><SPAN><FONT size=2>  Este botón permite realizar la configuración de una 
+nueva sección en la agenda del patólogo. Por defecto el sistema cargara la lista 
+de eventos previamente configurados en el maestro de eventos y los campos para 
+la  hora inicial y la hora 
+final.</FONT></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></p>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.5.&nbsp;Lista de eventos o actividades 
+adicionales.</STRONG>  
+ </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Es una lista de eventos adicionales 
+para el dia seleccionado en la agenda del patólogo. Las secciones de eventos 
+adicionales no son 
+obligatorias.      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></p>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.6.&nbsp;Botón Limpiar</STRONG></SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>
+<BR>
+Es botón permite limpiar los campos 
+de la hora inicial y la hora final para la sección que aplique. Al limpiar la 
+sección se eliminara de la agenda en caso de que se de click en el botón 
+guardar.</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+             
+   
+      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></p>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.7. </STRONG><STRONG>Boton</STRONG><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+ guardar.</SPAN></SPAN></strong> 
+ </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR><SPAN><FONT size=2>  Este botón guarda&nbsp;los datos de 
+la&nbsp;agenda.</FONT></SPAN> Mínimo una sección es 
+obligatoria.      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></p>
+<p align=left><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><SPAN><SPAN><FONT size=2><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><STRONG>9.8. </STRONG><STRONG>Boton</STRONG><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+ cerrar.</SPAN></SPAN></strong> 
+ </SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR><SPAN><FONT size=2>Este botón cancela el proceso realizado y cierra automaticamente la 
+pantalla.</FONT></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN>      
+        
+</SPAN></SPAN></FONT></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN><o:p></O:P></p>
+<p><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+10. Boton</SPAN></SPAN></strong><strong><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+ cancelar.</SPAN><FONT size=2> 
+</FONT></SPAN></strong><B><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'></SPAN><SPAN><FONT size=2>Este botón cancela, limpia y deshabilita la 
+agenda.</FONT></SPAN><o:p></O:P></SPAN></p>
+<p><STRONG><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>11. Botón <SPAN><SPAN 
+style="mso-spacerun: yes">&nbsp;</SPAN></SPAN>Reporte.</SPAN></SPAN><FONT size=2> </FONT></STRONG><B><SPAN><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'></SPAN><SPAN><FONT size=2>           
+  Este botón imprime la agenda del patólogo que fue seleccionado de la 
+lista. </FONT></SPAN></SPAN></p>
+<p><a name=OLE_LINK5></a><a 
+name=OLE_LINK4></a><SPAN><STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>12. Listado de&nbsp;patólogos</SPAN><FONT size=2> </FONT></STRONG><SPAN><BR></SPAN><FONT size=2><SPAN><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Es una </SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>lista de datos que contiene dos campos: usuario y 
+nombre</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'> . Dicha lista puede ser ordenada y/o filtrada por cada 
+campo. La fila seleccionada siempre se mostrará resaltada en azul 
+claro.</SPAN>          
+              
+        
+</SPAN></FONT></SPAN><FONT size=2> 
+</FONT></FONT></SPAN></FONT></FONT></FONT></p><BR><font color="#FF0000" size="1" face="Arial">This document is created with WinCHM trial version. (The registered version will not show this message!)</font></div>	
+	<div id="winchm_template_footer">     
+   Copyright © 2017. CLTech Colombia All rights reserved.</div>
+</div>
+
+</body>
+</html>

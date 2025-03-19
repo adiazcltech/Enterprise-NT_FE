@@ -1,0 +1,44 @@
+<div class="md-card md-card-hover md-card1-horizontal uk-animation-scale-up" style="height: 100%; z-index: 100">
+    <div class="md-card1-head" style="width: 46%;">
+        <div class="uk-text-center" ng-if="cardpatient.photopatient === ''">
+            <img class="md-card-head-avatar" style="width: 60px; height: 60px; margin-top: -2px"
+                ng-src="images/user1.png" alt="" />
+        </div>
+        <div class="uk-text-center" ng-if="cardpatient.photopatient !== ''">
+            <img class="md-card-head-avatar" style="width: 60px; height: 60px; margin-top: -2px"
+                ng-src="{{cardpatient.photopatient}}" />
+        </div>
+        <h3 class="md-card-head-text uk-text-center" style="font: 500 12px / 22px 'Roboto', sans-serif;">
+            {{cardpatient.patientname}}
+            <span class="uk-text-truncate">{{cardpatient.patientdocument}}</span>
+        </h3>
+    </div>
+    <div class="uk-button-dropdown" style="display: block;position: relative;" data-uk-dropdown="{mode:'click'}">
+        <button class="md-btndrobox">
+            <i class="md-icon material-icons" style="font-size: 20px;float: right;">&#xE5D4;</i>
+        </button>
+        <div class="uk-dropdown" style="min-width: 295px;">
+            <patient order="cardpatient.orderpatient"  orderdemo="cardpatient.orderdemo"></patient>
+        </div>
+    </div>
+    <div class="md-card-content" style="width: 49%; margin-left: 47%;padding: 10px;">
+        <ul class="md-list">
+            <li>
+                <div class="md-list-content">
+                    <span class="uk-text-small uk-text-muted">{{'0102'| translate}}</span>
+                    <span class="md-list-heading uk-text-truncate">{{cardpatient.patientage}}
+                        {{cardpatient.patientagedate!== '' ? ' - ':''}}
+                        {{cardpatient.patientagedate}} 
+                    </span>
+                </div>
+            </li>
+            <li>
+                <div class="md-list-content">
+                    <span class="uk-text-small uk-text-muted">{{'0426'| translate}}</span>
+                    <span class="md-list-heading uk-text-truncate">{{cardpatient.patientgender}}</span>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>

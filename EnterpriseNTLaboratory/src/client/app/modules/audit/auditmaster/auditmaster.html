@@ -1,0 +1,130 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="overflow: hidden;padding: 10px 19px 0px;">
+        <div class="md-card md-card-hover" style="height: 99%;">
+            <div style="height: 96%" class="md-card-content uk-margin">
+                <div class="uk-width-1-1 fullheight">
+                    <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1',swiping: false}" style="height:36px">
+                        <li class="uk-active"><a href="#">{{'0325' | translate}}</a></li>
+                        <li><a href="#">{{'0001' | translate}}</a></li>
+                        <li><a href="#">{{'0874' | translate}}</a></li>
+                    </ul>
+                    <ul id="tabs_1" class="uk-switcher uk-margin" style="height: calc(100% - 53px);">
+                        <li class="fullheight uk-flex uk-flex-center uk-flex-middle">
+                            <div class="uk-width-5-10" style="width: 50%; height: 50%;">
+                                <div class="md-card  md-card-hover" style="min-height: 82px; min-width: 665px;">
+                                    <div class="uk-grid uk-flex uk-flex-center uk-flex-middle" style="padding: 10px;">
+                                        <div class="uk-width-8-10">
+                                            <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd"
+                                                typefilter="vm.filterRange" isopenreport="vm.button" typeview="2">
+                                            </orderfilter>
+                                        </div>
+                                        <div class="uk-width-1-10 uk-flex uk-flex-center uk-flex-middle"
+                                            style="width: 10%;">
+                                            <button type="button" class="md-fab md-fab-smallY md-fab md-fab-primary"
+                                                ng-class="{'md-bg-blue-grey-100' : !vm.button}" ng-click="vm.search(1)"
+                                                ng-disabled="!vm.button">
+                                                <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'0154' | translate}}">&#xE8B6;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fullheight uk-flex uk-flex-center uk-flex-middle">
+                            <div class="uk-width-8-10" style="height: 50%;">
+                                <div class="md-card  md-card-hover" style="min-height: 82px;min-width: 865px;">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-6-10" style="margin-top: 21px;margin-left: 9px;">
+                                            <orderfilter rangeinit="vm.rangeInit1" rangeend="vm.rangeEnd1"
+                                                typefilter="vm.filterRange1" isopenreport="vm.button1" typeview="2">
+                                            </orderfilter>
+                                        </div>
+                                        <div class="uk-width-3-10" style="margin-top: 15px">
+                                            <div class="uk-form-row md-input-wrapper md-input-filled">
+                                                <label style="color: #444444; margin-left: -8px"
+                                                    class="inline-label">{{'0001' | translate}}</label>
+                                                <select class="md-input" md-input
+                                                    ng-options="obj as obj.name +' '+ obj.lastName for obj in vm.user track by obj.id"
+                                                    data-ng-model="vm.list" style="font-size: 13px"></select>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-10 uk-flex uk-flex-center uk-flex-middle"
+                                            style="width: 7%;padding-left: 0px; padding-top: 20px">
+                                            <button type="button" class="md-fab md-fab-smallY md-fab md-fab-primary"
+                                                ng-class="{'md-bg-blue-grey-100' : !vm.button1 || vm.list.id===undefined}"
+                                                ng-click="vm.search(2)"
+                                                ng-disabled="!vm.button1 || vm.list.id===undefined">
+                                                <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'0154' | translate}}">&#xE8B6;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fullheight uk-flex uk-flex-center uk-flex-middle">
+                            <div class="uk-width-8-10" style="height: 50%;">
+                                <div class="md-card  md-card-hover" style="min-height: 82px; min-width: 865px;">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-6-10" style="margin-top: 21px;margin-left: 9px;">
+                                            <orderfilter rangeinit="vm.rangeInit2" rangeend="vm.rangeEnd2"
+                                                typefilter="vm.filterRange2" isopenreport="vm.button2" typeview="2">
+                                            </orderfilter>
+                                        </div>
+                                        <div class="uk-width-3-10" style="margin-top: 15px">
+                                            <div class="uk-form-row md-input-wrapper md-input-filled">
+                                                <label style="color: #444444; margin-left: -8px"
+                                                    class="inline-label">{{'0874' | translate}}</label>
+                                                <select class="md-input" md-input
+                                                    ng-options="obj as obj.name for obj in vm.module track by obj.id"
+                                                    data-ng-model="vm.modul" style="font-size: 13px"></select>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-10 uk-flex uk-flex-center uk-flex-middle"
+                                            style="width: 7%;padding-left: 0px; padding-top: 20px">
+                                            <button type="button" class="md-fab md-fab-smallY md-fab md-fab-primary"
+                                                ng-class="{'md-bg-blue-grey-100' : !vm.button|| vm.modul.id===undefined}"
+                                                ng-click="vm.search(3)"
+                                                ng-disabled="!vm.button2 || vm.modul.id===undefined">
+                                                <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'0154' | translate}}">&#xE8B6;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-2-10" style="padding-left: 17px;">
+                        <img src="images/Question.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-8-10" style="margin-top: 3%;">
+                        <span class="uk-text-justify">{{'0962' | translate}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

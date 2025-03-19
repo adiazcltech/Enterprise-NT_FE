@@ -1,0 +1,461 @@
+<loadpage view="vm.loadingdata">
+</loadpage>
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError">
+</modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0325' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario">
+          </strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-placement="bottom" data-toggle="tooltip"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/destinationassignment/destinationassignment.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"
+            title="Ctrl + B">
+          </span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <label class="text-right col-md-3 panel-padding" style="padding-right: 3px">
+                    {{'0075' | translate}}:
+                  </label>
+                  <div class="panel-padding col-md-9" style="margin-bottom: 5px">
+                    <select charset="utf-8" class="form-control" data-ng-model="vm.Branch"
+                      ng-change="vm.getDestinationAssignment()"
+                      ng-options="obj as obj.name for obj in vm.listBranch track by obj.id" ng-required="true"></select>
+                  </div>
+                  <label class="text-right col-md-3 panel-padding" style="padding-right: 3px">
+                    {{'0133' | translate}}:
+                  </label>
+                  <div class="panel-padding col-md-9" style="margin-bottom: 5px">
+                    <select charset="utf-8" class="form-control" data-ng-model="vm.ordertype"
+                      ng-change="vm.getDestinationAssignment()"
+                      ng-options="obj as obj.name for obj in vm.listordertype track by obj.id"
+                      ng-required="true"></select>
+                  </div>
+                  <label class="text-right col-md-3 panel-padding" style="padding-right: 3px">
+                    {{'0052' | translate}}:
+                  </label>
+                  <div class="panel-padding col-md-9" style="margin-bottom: 15px">
+                    <select charset="utf-8" class="form-control" data-ng-model="vm.sample"
+                      ng-change="vm.getDestinationAssignment()"
+                      ng-options="obj as obj.name for obj in vm.listsample track by obj.id" ng-required="true"></select>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <div class="input-group right-bar">
+                    <input class="form-control" data-ng-model="vm.search" placeholder="{{'0015' | translate}}"
+                      type="text">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search">
+                      </i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span class="badge" data-ng-bind="vm.filtered.length" style="margin-top:10px">
+                    </span>
+                  </div>
+                </div>
+                <div class="containerlistDestination">
+                  <div class="containerDestination list" ng-model="vm.data" ui-sortable="vm.sortableOptions1">
+                    <div ng- class="itemDestination panel-padding"
+                      ng-class="{'not-sortable': vm.sample === undefined || vm.Branch === undefined || vm.ordertype === undefined}"
+                      ng-repeat="Destination in vm.filtered = (vm.data | filter: vm.search) ">
+                      <span>
+                        {{Destination.destination.code}} - {{Destination.destination.name}}
+                      </span>
+                      <img class="img-responsive" popover-placement="left" uib-popover="Asignar a la ruta"
+                        popover-trigger="'mouseenter'" data-toggle="tooltip"
+                        ng-if="vm.sample !== undefined && vm.Branch !== undefined" height="15" src="images/arrow.png"
+                        ng-click="vm.asiggnedblclick(Destination)" width="20"
+                        style="float: right;margin-left: 5px;cursor: pointer;">
+
+                      <div popover-placement="left" uib-popover="Inicial" popover-trigger="'mouseenter'"
+                        data-toggle="tooltip" ng-if="Destination.destination.type.id === 44" style="float: right;">
+                        <img class="img-responsive" height="15" src="images/inicial_over.png" width="20">
+                      </div>
+                      <div popover-placement="left" uib-popover="Proceso interno" popover-trigger="'mouseenter'"
+                        data-toggle="tooltip" ng-if="Destination.destination.type.id === 45" style="float: right;">
+                        <img class="img-responsive" height="15" src="images/interno_over.png" width="20">
+                      </div>
+                      <div popover-placement="left" uib-popover="Proceso externo" popover-trigger="'mouseenter'"
+                        data-toggle="tooltip" ng-if="Destination.destination.type.id === 46" style="float: right;">
+                        <img class="img-responsive" height="15" src="images/externo_over.png" width="20">
+                      </div>
+                      <div popover-placement="left" uib-popover="Control" popover-trigger="'mouseenter'"
+                        ng-if="Destination.destination.type.id === 47" style="float: right;">
+                        <img class="img-responsive" height="15" src="images/control_over.png" width="20">
+                      </div>
+                      <div popover-placement="left" uib-popover="Final" popover-trigger="'mouseenter'"
+                        ng-if="Destination.destination.type.id === 48" style="float: right;">
+                        <img class="img-responsive" height="15" src="images/final_over.png" width="20">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </hr>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body "
+                style="overflow:auto; height: calc(100% - 50px); padding-top: 0px; padding-left: 10px">
+                <div class="containerGeneralDestinationassing listinitial" style="height: 70px">
+                  <fieldset style="height: 100%">
+                    <legend>
+                      {{'0639' | translate}}
+                    </legend>
+                    <form>
+                      <div class="containerDestinationassing listinitial" ng-model="vm.data2"
+                        ui-sortable="vm.sortableOptions2">
+                        <div class="itemDestinationassing" ng-repeat="app in vm.data2">
+                          <span>
+                            {{app.order = $index + 1}}. {{app.destination.code}} -
+                            {{app.destination.name}}
+                          </span>
+                          <div style="float: right;">
+                            <img class="img-responsive" height="15" src="images/inicial_over.png" width="20">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </fieldset>
+                </div>
+                <div class="containerGeneralDestinationassing listprocess" style="height: calc(100% - 175px)">
+                  <fieldset style="height: 100%">
+                    <legend>
+                      {{'0638' | translate}}
+                    </legend>
+                    <form>
+                      <div class="containerDestinationassing listprocess" ng-model="vm.data3"
+                        ui-sortable="vm.sortableOptions2">
+                        <div class="itemDestinationassing"
+                          ng-class="{'errorTestAssing':app.assignmentTest.length === 0}"
+                          ng-click="vm.assignmentTest(app.destination.id, app.destination.type.id,  app.tests)"
+                          ng-repeat="app in vm.data3">
+                          <span>
+                            {{app.order = $index + 2}}. {{app.destination.code}} -
+                            {{app.destination.name}}
+                          </span>
+                          <span ng-if="app.destination.type.id === 45 || app.destination.type.id === 46">
+                            ({{app.assignmentTest.length}})
+                          </span>
+                          <div ng-if="app.destination.type.id === 45" style="float: right;">
+                            <img class="img-responsive" height="15" src="images/interno_over.png" width="20">
+                          </div>
+                          <div ng-if="app.destination.type.id === 46" style="float: right;">
+                            <img class="img-responsive" height="15" src="images/externo_over.png" width="20">
+                          </div>
+                          <div ng-if="app.destination.type.id === 47" style="float: right;">
+                            <img class="img-responsive" height="15" src="images/control_over.png" width="20">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </fieldset>
+                </div>
+                <div class="containerGeneralDestinationassing listfinal" style="height: 105px">
+                  <fieldset style="height: 100%">
+                    <legend>
+                      {{'0271' | translate}}
+                    </legend>
+                    <form>
+                      <div class="containerDestinationassing listfinal" ng-model="vm.data4"
+                        ui-sortable="vm.sortableOptions2">
+                        <div class="itemDestinationassing" ng-repeat="app in vm.data4">
+                          <span>
+                            {{app.order = $index + 2 + vm.data3.length }}.
+                            {{app.destination.code}} - {{app.destination.name}}
+                          </span>
+                          <div style="float: right;">
+                            <img class="img-responsive" height="15" src="images/final_over.png" width="20">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </fieldset>
+
+                </div>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button style="width: calc(100% / 3 - 3px)" class="btn btn-primary button-list"
+                    ng-click="vm.save(Form)"
+                    ng-disabled="(vm.data2.length === 0 || vm.data3.length === 0 || vm.data4.length === 0) || vm.isDisabledSave"
+                    type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-floppy-disk">
+                    </span>
+                    {{'0007' | translate}}
+                  </button>
+                  <button style="width: calc(100% / 3 - 3px)" class="btn btn-info button-list"
+                    ng-click="vm.getDestinationAssignment()"
+                    ng-disabled="vm.data2.length === 0 || vm.data3.length === 0 || vm.data4.length === 0" type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-remove">
+                    </span>
+                    {{'0008' | translate}}
+                  </button>
+                  <button style="width: calc(100% / 3 - 3px)" class="btn btn-violet button-list"
+                    ng-click="vm.generateFile()"
+                    ng-disabled="vm.data2.length === 0 || vm.data3.length === 0 || vm.data4.length === 0" type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-print">
+                    </span>
+                    {{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script id="changedestinationInitial.html" type="text/ng-template">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img class="img-responsive" src="images/Question.png" width="115" height="115">
+                            </div>
+                            <div class="col-md-9">
+                                <label class="modal-label">{{'0640' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+<script id="changedestinationEnd.html" type="text/ng-template">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img class="img-responsive" src="images/Question.png" width="115" height="115">
+                            </div>
+                            <div class="col-md-9">
+                                <label class="modal-label">{{'0642' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+<script id="validSave.html" type="text/ng-template">
+  <div class="modal fade">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3" style=" padding-right: 0px;padding-left: 8px">
+                                <img class="img-responsive" src="images/iconinfo.png" width="80" height="80">
+                            </div>
+                            <div class="col-md-8 " style=" padding-right:1px; padding-left: 11px; margin-right: 7px;">
+                                <h5>{{'0644' | translate}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+<script id="modalErrorAssing.html" type="text/ng-template">
+  <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3" style="padding-right: 0px; padding-left: 48px;">
+                                <img class="img-responsive" src="images/iconinfo.png" width="80" height="80">
+                            </div>
+                            <div class="col-md-8 " style=" padding-right:1px; padding-left: 11px; margin-right: 7px;">
+                                <h5 style="line-height: 55px;">¡El destino seleccionado no pertenece a esa seccion!</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+<script id="Requerido.html" type="text/ng-template">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+          <div class="modal-content">
+                  <div class="modal-header modal-header-prymary">
+                        <h4 class="modal-title" align="justify">
+                            {{'0171' | translate}}
+                        </h4>
+                    </div>
+                    <div class="row modal-body">
+                        <div class="row row-center col-md-12">
+                            <div class="col-md-4" ng-show="hideBranch === 0">
+                                <a ng-click="close('branch')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/branch.png">
+                                    <h6 class="text-center"> {{'0003' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-4" ng-show="hideSample === 0">
+                                <a ng-click="close('sample')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/sample.png">
+                                    <h6 class="text-center"> {{'0052' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-4" ng-show="hideDestination === 0">
+                                <a ng-click="close('destination')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/destination.png">
+                                    <h6 class="text-center"> {{'0324' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                  </div>
+            </div>
+    </div>
+  </div>
+</script>
+<script id="assignmentTest.html" type="text/ng-template">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-prymary" style="padding: 5px">
+                        <h4 class="modal-tittle text-center">{{'0648' | translate}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="height: 400px">
+                                <div class="col-md-6">
+                                    <div class="panel-padding col-md-2" style="margin-top: 5px">
+                                        <label>{{'0037' | translate}}: </label>
+                                    </div>
+                                    <div class="panel-padding col-md-10" style="margin-bottom: 5px">
+                                        <select id="areas" name="areas" charset="utf-8" ng-options="obj.id as obj.name for obj in lisArea"
+                                        data-ng-model="lisArea.id" class="form-control" ng-change="id = lisArea.id === 0 ? '' : lisArea.id"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 input-group">
+                                    <input data-ng-model="searchTest" class="form-control" type="text" placeholder="{{'0015' | translate}}">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div>
+                                    <table class="table table-list"  >
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-2">
+                                                  <a
+                                                  ng-click="$event.stopPropagation(); sortType =  code; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!sortReverse && sortType != code"
+                                                    class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="sortReverse && sortType != code"
+                                                    class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="sortType == code && !sortReverse "
+                                                    class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="sortType == code && sortReverse"
+                                                    class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="sortType == code && !sortReverse"></span>
+                                                  <span ng-show="sortType == code && sortReverse"></span>
+                                                </a> {{'0018' | translate}}
+                                                </th>
+                                                <th class="col-md-2">
+                                                  <a
+                                                  ng-click="$event.stopPropagation(); sortType =  abbr; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!sortReverse && sortType != abbr"
+                                                    class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="sortReverse && sortType != abbr"
+                                                    class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="sortType == abbr && !sortReverse "
+                                                    class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="sortType == abbr && sortReverse"
+                                                    class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="sortType == abbr && !sortReverse"></span>
+                                                  <span ng-show="sortType == abbr && sortReverse"></span>
+                                                </a> {{'0019' | translate}}
+                                                </th>
+                                                <th class="col-md-6">
+                                                  <a
+                                                  ng-click="$event.stopPropagation(); sortType =  name; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!sortReverse && sortType != name"
+                                                    class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="sortReverse && sortType != name"
+                                                    class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="sortType == name && !sortReverse "
+                                                    class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="sortType == name && sortReverse"
+                                                    class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="sortType == name && !sortReverse"></span>
+                                                  <span ng-show="sortType == name && sortReverse"></span>
+                                                </a> {{'0402' | translate}}
+                                                </th>
+                                                <th class="col-md-2 text-center" style="padding-right: 0px; padding-left: 0px">
+                                                  <a
+                                                  ng-click="$event.stopPropagation(); sortType =  selected; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!sortReverse && sortType != selected"
+                                                    class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="sortReverse && sortType != selected"
+                                                    class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="sortType == selected && !sortReverse "
+                                                    class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="sortType == selected && sortReverse"
+                                                    class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="sortType == selected && !sortReverse"></span>
+                                                  <span ng-show="sortType == selected && sortReverse"></span>
+                                                </a> {{'0456' | translate}}
+                                                 <checkboxnt value="selecttest" disable="listTest.length===0" model="selecttest"
+                                                    disable="false" ng-click="valid()">
+                                                 </checkboxnt>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody-list" style="width: 96.5%;height: 320px">
+                                            <tr class="row-list" data-ng-repeat="Test in filteredtest = (listTest | filter: searchTest) | filter: { area : {id: id}} | orderBy:sortType:sortReverse">
+                                                <td class="col-md-2" data-ng-bind="Test.code"></td>
+                                                <td class="col-md-2" data-ng-bind="Test.abbr"></td>
+                                                <td class="col-md-7" data-ng-bind="Test.name"></td>
+                                                <td class="col-md-1" style="padding-right:13px">
+                                                    <span ng-if="Test.selected === ''" class="glyphicon glyphicon-lock panel-padding"></span>
+                                                    <checkboxnt ng-if="Test.selected !== ''" value="Test.selected" model="Test.selected"  disable="false"></checkboxnt>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.Detail.state"></modalstate>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">{{'0031' | translate}}</button>
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0008' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</script>

@@ -1,0 +1,260 @@
+<style>
+    .inputkendo {
+        height: 1.214em !important;
+        font-size: 11px !important;
+        border-width: 0 0 1px !important;
+        border-style: solid !important;
+        border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .tfoot-grid {
+        background-color: #efefef;
+        border-top-color: #bdbdbd;
+        border-top-style: solid;
+        border-top-width: 1px;
+    }
+</style>
+<loadpage view="resultscellularcounters.loadingdata"></loadpage>
+<div class="uk-modal uk-modal-card-fullscreen" id="rs-modal-cellularcounters">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-purple-800">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="resultscellularcounters.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin:13px 6px 0px 0px; display: block;">
+                  <!--   <i class="material-icons md-color-grey-50">calculate</i> -->
+                  <i class="uk-icon-list-ol md-color-grey-50"></i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0998' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid uk-grid-small" style="height: 120px">
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardorder order="resultscellularcounters.order"
+                            typeordercode="resultscellularcounters.patient.typeordercode"
+                            typeordercolor="resultscellularcounters.patient.typeordercolor"
+                            testcode="resultscellularcounters.testcode" testname="resultscellularcounters.testname">
+                        </cardorder>
+                    </div>
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardpatient patientname="resultscellularcounters.patient.name"
+                            patientdocument="resultscellularcounters.patient.document"
+                            patientage="resultscellularcounters.patient.age"
+                            patientgender="resultscellularcounters.patient.gender"
+                            photopatient="resultscellularcounters.photopatient"
+                            patientid="resultscellularcounters.patient.id" orderpatient="resultscellularcounters.order">
+                        </cardpatient>
+                    </div>
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+                            <div class="md-card-content uk-grid" style="padding: 2px 20px">
+                                <div class="uk-width-1-1" style="padding-top: 0px;">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/billing/total.png" />
+                                        </span>
+                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold"
+                                            style="color: #727272;font-size: 11px;">{{'1222' | translate}}</label>
+                                        <input id="labelmax" name="labelmax" type="number"
+                                            class="md-input md-inputsm label-fixed"
+                                            data-ng-model="resultscellularcounters.numbermax" md-input />
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-1" style="padding-top: 9px;">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/keyboard.png" />
+                                        </span>
+                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3663' | translate}}</label>
+                                        <input type="text" class="md-input md-inputsm label-fixed"
+                                            ng-keydown="resultscellularcounters.keyselect($event)"
+                                            data-ng-model="resultscellularcounters.keys" md-input />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1" style="height: calc(100% - 211px);
+                margin-top: 10px;
+                margin-bottom: 10px;">
+                    <div class="md-card  md-card-hover" style="height: 100%;">
+                        <div class="md-card-content" style="height: 100%;padding: 0px;">
+                            <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                style="height: calc(100% - 37px);margin-bottom: 0px;">
+                                <thead style="display: inline-block;width: 100%;height: 37px;">
+                                    <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                        <th class="uk-width-2-10 uk-text-bold">
+                                            {{'3663' | translate}}
+                                        </th> 
+                                        <th class="uk-width-6-10 uk-text-bold">
+                                            {{'0459' | translate}}
+                                        </th>
+                                        <th class="uk-width-2-10 uk-text-bold">
+                                            {{'0289' | translate}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyscrollable"
+                                    style="margin-top: 0px;height: calc(100% - 37px);width: 100% !important;">
+                                    <tr ng-repeat="(key, value) in resultscellularcounters.Listcelular" class="uk-grid"
+                                        style="margin-left: 0px;margin-top: 0px;">
+                                        <td class="uk-width-2-10">{{value.key}}</td>
+                                        <td class="uk-width-6-10">{{value.testName}}</td>
+                                        <td class="uk-width-2-10">{{value.result}}</td0>
+                                    </tr>
+                                </tbody>                        
+                            </table>
+                            <div class="tfoot-grid uk-grid" style="margin-left: 0px;">
+                                <div class="uk-width-8-10 uk-text-right uk-text-bold" style="padding: 8px 8px;">
+                                    {{'1549' | translate}}
+                                </div>
+                                <div class="uk-width-2-10" style="padding: 8px 8px;">
+                                    {{resultscellularcounters.total}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1 " style="height: 65px;">
+                    <div style="height: 100%;" class="md-card md-card-hover">
+                        <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                            <div class="uk-grid" style="height: 100%">
+                                <audio id="myAudio">
+                                    <source src="images/beep.mp3" type="audio/mp3">
+                                    Tu navegador no soporta audio HTML5.
+                                </audio>
+                                <div class="uk-width-1-1" style="float: right">
+                                    <button style="float: right" type="button"                                      
+                                        class="md-fab md-fab-middle md-fab-success md-bg-purple-800"                                       
+                                        ng-click="resultscellularcounters.save()">
+                                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                            title="{{'0683' | translate}}">&#xE065;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="advertencia" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container uk-flex uk-flex-middle" style="margin-top: 0px">
+            <div style="width: 12%;padding-left: 32px">
+                <img class="img-responsive" src="images/Warning.png">
+            </div>
+            <div style="margin-top: 10px;width: 82%" class="uk-text-center">
+                {{'3664' | translate}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal uk-modal-card-fullscreen" id="modal-comment">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-blue-A700">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}"
+                            ng-click="resultscellularcounters.closemodaltestEdit()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin:13px 6px 0px 0px; display: block;">
+                    <i class="material-icons md-24 md-color-light-blue-50">&#xE0B9;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'3665' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid uk-grid-small" style="height: 107px">
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardorder order="resultscellularcounters.order"
+                            typeordercode="resultscellularcounters.patient.typeordercode"
+                            typeordercolor="resultscellularcounters.patient.typeordercolor"
+                            testcode="resultscellularcounters.testcode" testname="resultscellularcounters.testname">
+                        </cardorder>
+                    </div>
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardpatient patientname="resultscellularcounters.patient.name"
+                            patientdocument="resultscellularcounters.patient.document"
+                            patientage="resultscellularcounters.patient.age"
+                            patientgender="resultscellularcounters.patient.gender"
+                            photopatient="resultscellularcounters.photopatient"
+                            patientid="resultscellularcounters.patient.id" orderpatient="resultscellularcounters.order">
+                        </cardpatient>
+
+                    </div>
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <commentordermodal type="1" orderhistory="resultscellularcounters.order"
+                            viewdirectic="resultstestnotes.viewcomment">
+                        </commentordermodal>
+                    </div>
+                </div>
+                <div class="uk-grid" style="height: calc(100vh - 211px)">
+                    <div class="uk-width-1-1">
+                        <div class="md-card" style="height: 100%">
+                            <div class="md-card-content">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-1">
+                                        <label>{{'0113' | translate}}: </label>
+                                        <loadcombobox ng-model="resultscellularcounters.selectedMotive"
+                                            listorigin="resultscellularcounters.editMotives" cleanselect="false">
+                                        </loadcombobox>
+                                    </div>
+                                    <div class="uk-width-1-1" style="margin-top: 15px;">
+                                        <label>{{'0114' | translate}}:</label>
+                                        <div class="md-input-wrapper">
+                                            <textarea ng-model="resultscellularcounters.reasonComment"
+                                                class="md-input no_autosize"
+                                                style="margin: 0px -10.5px 0px 0px; width: 100%; height: 80px; font-size: 14px !important">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="uk-flex uk-flex-right"
+                                        style="position: fixed; bottom: 0; right: 0; left: 0; background: transparent; padding: 25px 21px; line-height: 48px;">
+                                        <div class="uk-flex uk-flex-column">
+                                            <button type="button"
+                                                ng-disabled="resultscellularcounters.selectedMotive === undefined"
+                                                class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-light-blue-A700 uk-modal-close"
+                                                ng-class="{'md-bg-blue-grey-100' : resultscellularcounters.selectedMotive == undefined}"
+                                                ng-click="resultscellularcounters.savemotive()">
+                                                <i class="material-icons md-color-light-blue-50"
+                                                    title="{{'0007' | translate}}"
+                                                    data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE161;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="advertencia-resulteditcomment" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container uk-flex uk-flex-middle" style="margin-top: 0px">
+            <div style="width: 12%;padding-left: 32px">
+                <img class="img-responsive" src="images/Warning.png">
+            </div>
+            <div style="margin-top: 10px;width: 82%" class="uk-text-center">
+                {{'3666' | translate}}
+            </div>
+        </div>
+    </div>
+</div>

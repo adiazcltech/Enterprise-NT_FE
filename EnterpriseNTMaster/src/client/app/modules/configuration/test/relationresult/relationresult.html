@@ -1,0 +1,302 @@
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<modalreport openmodal="vm.open"></modalreport>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0514' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/relationresult/relationresult.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-12">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                        </a> {{'0278' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="width: 92.5%;">
+                    <tr class="row-list"
+                      data-ng-repeat="Resuliteral in vm.filtered = ((vm.data | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getId(Resuliteral.id,Resuliteral.name)"
+                      ng-class="{info: Resuliteral.id == vm.selected, danger: Resuliteral.state == 0 }">
+                      <td class="col-md-12" data-ng-bind="Resuliteral.name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form contentscroll" style="overflow:auto">
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-1">
+                        {{'0035' | translate}}
+                      </th>
+                      <th class="col-md-5">
+                        {{'1054' | translate}}
+                      </th>
+                      <th class="col-md-6">
+                        {{'0480' | translate}}
+                      </th>
+                  </thead>
+                  <tbody vs-repeat class="contentscroll tbody-list" data-scroll-to-top='vm.listTest.length'
+                    style="width: 97%; height: calc(100% - 16rem)">
+                    <tr class="row-list" data-ng-repeat="relationresult in vm.listTest">
+                      <td class="col-md-1">
+                        {{relationresult.typename}}
+                      </td>
+                      <td class="col-md-5">
+                        {{relationresult.name}}
+                      </td>
+                      <td class="col-md-5">
+                        {{relationresult.value}}
+                      </td>
+                      <td class="col-md-1 text-right">
+                        <i class="fa fa-times-circle red" style="font-size: 18px; cursor: pointer;"
+                          ng-click="vm.destroy($index)"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" style="width: calc(100% / 2 - 4px)" class=" btn btn-success button-list"
+                    ng-click="vm.New()" ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    {{'0005' | translate}}
+                  </button>
+                  <button style="width: calc(100% / 2 - 4px)" type="button" class="btn btn-violet button-list"
+                    ng-click="vm.generateFile()" ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/ng-template" id="Requerido.html">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-prymary">
+                        <h4 class="modal-title" align="justify">
+                            {{'0171' | translate}}
+                        </h4>
+                    </div>
+                    <div class="row modal-body">
+                        <div class="row row-center col-md-12">
+                            <div class="col-md-2" ng-hide="hidequestion > 0">
+                                <a ng-click="close('question')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/itemdemographics.png">
+                                    <h6 class="text-center">Pregunta se seleccion multiple</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-2" ng-hide="hideanswer > 0">
+                                <a ng-click="close('question')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/Mod2.png">
+                                    <h6 class="text-center">{{'0599' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-2" ng-hide="hidetest > 0">
+                                <a ng-click="close('test')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/Test.png">
+                                    <h6 class="text-center">{{'0402' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-2" ng-hide="hidealarm > 0">
+                                <a ng-click="close('alarm')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/alarm.png">
+                                    <h6 class="text-center"> {{'0278' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+  <script type="text/ng-template" id="delete.html">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img class="img-responsive" src="images/iconinfo.png" width="115" height="115">
+                            </div>
+                            <div class="col-md-9">
+                                <label class="modal-label">{{'0602' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+  <script type="text/ng-template" id="new.html">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-prymary">
+                        <h4 class="modal-title">
+                         {{'1055' | translate}}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="Form" id="Form" class="form-horizontal panel-body">
+                            <div class="form-group form-group-sm ">
+                                <label class="col-lg-1 col-md-1 text-right">{{'0035' | translate}}:</label>
+                                <div class="col-lg-3 col-md-3  text-left">
+                                    <div class="btn-group btn-group-sm">
+                                        <label class="btn btn-primary radio-button" ng-model="listresult.type" ng-change="cleancontrol()" uib-btn-radio="1" style="width: 100px;" uib-uncheckable="uncheckable"><span ng-if="listresult.type==1" class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'0402' | translate}}</label>
+                                        <label class="btn btn-primary radio-button" ng-model="listresult.type" ng-change="cleancontrol()" uib-btn-radio="2" style="width: 88px;" uib-uncheckable="uncheckable"><span ng-if="listresult.type==2" class="glyphicon glyphicon-ok" aria-hidden="true"></span>Pregunta</label>
+                                    </div>
+                                </div>
+                                <label class="col-md-1" ng-if="listresult.type==1">{{'0402' | translate}}:</label>
+                                <div class="col-md-7 text-left form-group form-group-sm has-feedback" ng-if="listresult.type==1">
+                                    <loadcombobox change="changelistoperator()" listorigin="listest2" cleanselect="false" placeholder="'items'" ng-model="listresult.test" viewfieldcode="false"></loadcombobox>
+                                </div>
+                                <label class="col-md-2 text-right" ng-if="listresult.type==2">{{'0595' | translate}}:</label>
+                                <div class="col-md-6  text-left form-group form-group-sm has-feedback" ng-class="{'has-error':Form.question.$invalid && Form.question.$touched}" ng-if="listresult.type==2">
+                                    <select ng-options="obj as obj.name for obj in lisquestion track by obj.id" data-ng-model="listresult.question" class="form-control" ng-required="true" name="question" id="question" ng-change="answerQuestion()"></select>
+                                    <span ng-if="Form.question.$invalid && Form.question.$touched " class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span ng-if="Form.question.$invalid && Form.question.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm ">
+                                <label class="col-md-1" ng-if="listresult.type==2">{{'0516' | translate}}:</label>
+                                <div class="col-md-3 has-feedback" ng-class="{'has-error':Form.operator.$invalid && Form.operator.$touched}" ng-if="listresult.type==2">
+                                    <select ng-options="obj as obj.name for obj in listoperatorquestion track by obj.id" data-ng-model="listresult.operator" class="form-control" ng-required="true" name="operator" id="operator"></select>
+                                    <span ng-if="Form.operator.$invalid && Form.operator.$touched " class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span ng-if="Form.operator.$invalid && Form.operator.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                                <label class="col-md-2 text-right" ng-if="listresult.type==2">{{'0599' | translate}}:</label>
+                                <div class="col-md-6  text-left form-group form-group-sm has-feedback" ng-class="{'has-error':Form.result.$invalid && Form.result.$touched}" ng-if="listresult.type==2">
+                                    <select ng-options="obj as obj.name for obj in listanswer track by obj.id" data-ng-model="listresult.result" class="form-control" ng-required="true" name="result" id="result"></select>
+                                    <span ng-if="Form.result.$invalid && Form.result.$touched " class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span ng-if="Form.result.$invalid && Form.result.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm has-feedback" ng-if="listresult.type==1">
+                                <label class="col-md-1" ng-if="listresult.test.resultType==2 || listresult.test.resultType==1">{{'0516' | translate}}:</label>
+                                <div class="col-md-3 has-feedback" ng-class="{'has-error':Form.operator.$invalid && Form.operator.$touched}" ng-if="listresult.test.resultType==2 || listresult.test.resultType==1">
+                                    <select ng-options="obj as obj.name for obj in listoperator track by obj.id" data-ng-model="listresult.operator" class="form-control" ng-required="true" name="operator" id="operator" ng-change="listresult.operator.id !==56 ? listresult.result2='':listresult.result2"></select>
+                                    <span ng-if="Form.operator.$invalid && Form.operator.$touched " class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span ng-if="Form.operator.$invalid && Form.operator.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                                <label class="col-md-1" ng-if="listestresul.length!==0 && listresult.test.resultType==2">{{'0480' | translate}}:</label>
+                                <div class="col-md-7  form-group form-group-sm has-feedback" ng-class="{'has-error':Form.result.$invalid && Form.result.$touched}" ng-if="listestresul.length!==0 && listresult.test.resultType==2">
+                                    <select ng-options="obj as obj.literalResult.name for obj in listestresul track by obj.literalResult.id" data-ng-model="listresult.result" class="form-control" ng-required="true" name="result" id="result"></select>
+                                    <span ng-if="Form.result.$invalid && Form.result.$touched " class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span ng-if="Form.result.$invalid && Form.result.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                                <label class="col-md-1 text-right" ng-if="listestresul.length===0 && listresult.test.resultType==2">{{'0480' | translate}}:</label>
+                                <div class="col-md-7  form-group form-group-sm has-feedback" ng-class="{'has-error':Form.result.$invalid && Form.result.$touched}" ng-if="listestresul.length===0 && listresult.test.resultType==2">
+                                    <input class="form-control" maxlength="60" data-ng-model="listresult.result" ng-required="true" name="result" id="result" class="form-control" type="text">
+                                    <span ng-if="Form.result.$invalid && Form.result.$touched " class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span ng-if="Form.result.$invalid && Form.result.$touched" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                                <label class="col-md-1 text-right" ng-if="listresult.test.resultType==1 && listresult.operator.id !=56">{{'0480' | translate}}:</label>
+                                <div class="col-md-7 form-group form-group-sm has-feedback" ng-class="{'has-error':listresult.result==''}" ng-if="listresult.test.resultType==1 && listresult.operator.id !=56">
+                                    <number-input ng-model="listresult.result"
+                                                  max="9999999999999999999999999999999999999999999"
+                                                  min="-999999999999999999999999999999999999999999"
+                                                  step="stepdecimal"
+                                                  isabledecimal="false"
+                                                  decimalplaces="decimal"
+                                                  acceptclean="true"></number-input>
+                                    <span ng-if="listresult.result==''" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                                <label class="col-md-1 text-right" ng-if="listresult.test.resultType==1 && listresult.operator.id ==56">{{'0480' | translate}}:</label>
+                                <div class="col-md-3 form-group form-group-sm has-feedback" ng-class="{'has-error':listresult.result==''}" ng-if="listresult.test.resultType==1 && listresult.operator.id ==56">
+                                    <number-input ng-model="listresult.result"
+                                                  max="9999999999999999999999999999999999999999999"
+                                                  min="-999999999999999999999999999999999999999999"
+                                                  step="stepdecimal"
+                                                  isabledecimal="false"
+                                                  decimalplaces="decimal"
+                                                  acceptclean="true"></number-input>
+                                    <span ng-if="listresult.result==''" class="help-block ">{{'0016' | translate}}</span>
+                                </div>
+                                <label class="col-md-1 text-center" style="padding-right: 52px;
+                                 padding-left: 52px;" ng-hide="listresult.operator.id !=56">Y</label>
+                                <div class="col-md-3 form-group form-group-sm has-feedback" ng-hide="listresult.operator.id != 56"
+                                     ng-class="{'has-error':listresult.operator.id===56 && listresult.result >= listresult.result2  && !(listresult.operator.id===56 && listresult.result2==null) || listresult.operator.id===56 && listresult.result2==''}">
+                                    <number-input ng-model="listresult.result2"
+                                                  max="9999999999999999999999999999999999999999999"
+                                                  min="-999999999999999999999999999999999999999999"
+                                                  step="stepdecimal"
+                                                  isabledecimal="false"
+                                                  decimalplaces="decimal"
+                                                  acceptclean="true"></number-input>
+                                    <span ng-if="listresult.operator.id===56 && listresult.result >= listresult.result2  && !(listresult.operator.id===56 && listresult.result2==null) || listresult.operator.id===56 && listresult.result2==''" class="help-block ">{{'0573' | translate}}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-disabled="disablecontrols(!Form.$valid)" class="btn btn-primary button-list" ng-click="close('insert')" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-info button-list" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{'0022' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</section>

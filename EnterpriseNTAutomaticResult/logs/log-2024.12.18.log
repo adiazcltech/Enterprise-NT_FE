@@ -1,0 +1,119 @@
+15:04:01.010 INFO  .................................. 
+15:04:01.010 INFO  Usuario cargado... 
+15:04:01.039 INFO  Cargando las llaves de configuracion... 
+15:04:01.040 INFO  Cargando plantilla de demograficos... 
+15:04:01.040 INFO  Consultando ordenes para envio... 
+15:04:01.042 INFO  Idiomas cargados correctamente 
+15:04:01.256 INFO  Total de ordenes encontradas 1 
+15:04:01.257 INFO  printOrder  
+15:04:01.257 INFO  printOrder  
+15:04:01.674 INFO  printOrder  
+15:04:01.684 INFO  printOrder  
+15:04:01.684 INFO  printOrder  
+15:04:01.687 INFO  La orden no se encuentra completamente validada...202412180006 
+15:04:01.687 INFO  Fin del envio de las ordenes encontradas... 
+15:04:01.687 INFO  .................................. 
+15:06:00.269 INFO  .................................. 
+15:06:00.269 INFO  Usuario cargado... 
+15:06:00.310 INFO  Cargando las llaves de configuracion... 
+15:06:00.310 INFO  Cargando plantilla de demograficos... 
+15:06:00.310 INFO  Consultando ordenes para envio... 
+15:06:00.312 INFO  Idiomas cargados correctamente 
+15:06:00.555 INFO  Total de ordenes encontradas 1 
+15:06:00.555 INFO  printOrder  
+15:06:00.555 INFO  printOrder  
+15:06:01.029 INFO  printOrder  
+15:06:01.034 INFO  printOrder  
+15:06:01.034 INFO  printOrder  
+15:06:01.036 INFO  La orden no se encuentra completamente validada...202412180006 
+15:06:01.036 INFO  Fin del envio de las ordenes encontradas... 
+15:06:01.036 INFO  .................................. 
+15:08:00.425 INFO  .................................. 
+15:08:00.425 INFO  Usuario cargado... 
+15:08:00.454 INFO  Cargando las llaves de configuracion... 
+15:08:00.454 INFO  Cargando plantilla de demograficos... 
+15:08:00.454 INFO  Consultando ordenes para envio... 
+15:08:00.456 INFO  Idiomas cargados correctamente 
+15:08:00.688 INFO  Total de ordenes encontradas 1 
+15:08:00.688 INFO  printOrder  
+15:08:00.688 INFO  printOrder  
+15:08:01.110 INFO  printOrder  
+15:08:01.118 INFO  printOrder  
+15:08:01.118 INFO  printOrder  
+15:08:04.446 INFO  Se envio reporte de resultados de la orden[object Object] 
+15:08:06.815 INFO  Fin del envio de las ordenes encontradas... 
+15:08:06.815 INFO  .......................... 
+15:10:01.078 INFO  .................................. 
+15:10:01.078 INFO  Usuario cargado... 
+15:10:01.107 INFO  Cargando las llaves de configuracion... 
+15:10:01.107 INFO  Cargando plantilla de demograficos... 
+15:10:01.107 INFO  Consultando ordenes para envio... 
+15:10:01.109 INFO  Idiomas cargados correctamente 
+15:10:01.331 INFO  No se encontraron ordenes para enviar... 
+15:12:00.997 INFO  .................................. 
+15:12:00.997 INFO  Usuario cargado... 
+15:12:01.025 INFO  Cargando las llaves de configuracion... 
+15:12:01.025 INFO  Cargando plantilla de demograficos... 
+15:12:01.025 INFO  Consultando ordenes para envio... 
+15:12:01.027 INFO  Idiomas cargados correctamente 
+15:12:01.341 INFO  No se encontraron ordenes para enviar... 
+15:14:00.944 INFO  .................................. 
+15:14:00.944 INFO  Usuario cargado... 
+15:14:00.948 ERROR Problemas con el servicio: /configurationError: Request failed with status code 401 
+15:16:00.972 ERROR Problemas con el servicio de autenticacion 
+15:18:00.086 ERROR Problemas con el servicio de autenticacion 
+15:20:00.204 ERROR Problemas con el servicio de autenticacion 
+15:22:00.149 ERROR Problemas con el servicio de autenticacion 
+15:24:00.266 ERROR Problemas con el servicio de autenticacion 
+15:26:00.252 ERROR Problemas con el servicio de autenticacion 
+15:28:00.267 ERROR Problemas con el servicio de autenticacion 
+15:30:00.330 ERROR Problemas con el servicio de autenticacion 
+15:32:00.322 ERROR Problemas con el servicio de autenticacion 
+15:34:00.239 ERROR Problemas con el servicio de autenticacion 
+15:36:00.117 ERROR Problemas con el servicio de autenticacion 
+15:38:00.080 ERROR Problemas con el servicio de autenticacion 
+15:40:00.040 ERROR Problemas con el servicio de autenticacion 
+15:42:00.018 ERROR Problemas con el servicio de autenticacion 
+15:44:00.967 ERROR Problemas con el servicio de autenticacion 
+15:46:00.852 ERROR Problemas con el servicio de autenticacion 
+15:48:00.786 ERROR Problemas con el servicio de autenticacion 
+15:50:00.835 ERROR Problemas con el servicio de autenticacion 
+15:52:00.855 ERROR Problemas con el servicio de autenticacion 
+15:54:00.957 ERROR Problemas con el servicio de autenticacion 
+15:56:00.037 ERROR Problemas con el servicio de autenticacion 
+15:58:00.947 ERROR Problemas con el servicio de autenticacion 
+16:00:00.885 ERROR Problemas con el servicio de autenticacion 
+16:02:00.867 ERROR Problemas con el servicio de autenticacion 
+16:04:00.902 ERROR Problemas con el servicio de autenticacion 
+16:06:00.879 ERROR Problemas con el servicio de autenticacion 
+16:10:01.002 ERROR Problemas con el servicio de autenticacion 
+16:12:00.945 ERROR Problemas con el servicio de autenticacion 
+16:14:00.958 ERROR Problemas con el servicio de autenticacion 
+16:16:00.011 ERROR Problemas con el servicio de autenticacion 
+16:18:00.086 ERROR Problemas con el servicio de autenticacion 
+16:20:00.871 ERROR Problemas con el servicio de autenticacion 
+16:24:00.332 ERROR Problemas con el servicio de autenticacion 
+16:26:00.596 ERROR Problemas con el servicio de autenticacion 
+16:28:00.829 ERROR Problemas con el servicio de autenticacion 
+16:30:00.917 ERROR Problemas con el servicio de autenticacion 
+16:32:00.022 ERROR Problemas con el servicio de autenticacion 
+16:34:00.969 ERROR Problemas con el servicio de autenticacion 
+16:36:00.905 ERROR Problemas con el servicio de autenticacion 
+16:38:00.888 ERROR Problemas con el servicio de autenticacion 
+16:40:01.004 ERROR Problemas con el servicio de autenticacion 
+16:42:00.180 ERROR Problemas con el servicio de autenticacion 
+16:44:00.297 ERROR Problemas con el servicio de autenticacion 
+16:46:00.381 ERROR Problemas con el servicio de autenticacion 
+16:48:00.613 ERROR Problemas con el servicio de autenticacion 
+16:50:00.652 ERROR Problemas con el servicio de autenticacion 
+16:52:00.709 ERROR Problemas con el servicio de autenticacion 
+16:54:00.638 ERROR Problemas con el servicio de autenticacion 
+16:56:00.858 ERROR Problemas con el servicio de autenticacion 
+16:58:00.103 ERROR Problemas con el servicio de autenticacion 
+17:00:00.363 ERROR Problemas con el servicio de autenticacion 
+17:02:00.583 ERROR Problemas con el servicio de autenticacion 
+17:04:00.739 ERROR Problemas con el servicio de autenticacion 
+17:06:00.820 ERROR Problemas con el servicio de autenticacion 
+17:08:00.013 ERROR Problemas con el servicio de autenticacion 
+17:10:00.188 ERROR Problemas con el servicio de autenticacion 
+17:12:00.265 ERROR Problemas con el servicio de autenticacion 

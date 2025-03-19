@@ -1,0 +1,103 @@
+<script src="../stimulsoft/scripts/stimulsoft.reports.js"></script>
+<script src="../stimulsoft/scripts/stimulsoft.viewer.js"></script>
+<script src="../stimulsoft/scripts/stimulsoft.designer.js"></script>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../assets/js/lz-string.min.js"></script>
+<link rel="stylesheet"
+  href="../stimulsoft/css/stimulsoft.designer.office2013.whiteblue.css">
+<link rel="stylesheet"
+  href="../stimulsoft/css/stimulsoft.viewer.office2013.whiteblue.css">
+
+<style type="text/css">
+	.content {display:none;}
+	.preload {  width:50px;
+			    height: 50px;
+			    position: fixed;
+			    top: 25%;
+			    left: 38%;}
+
+</style>
+<!-- <div class="preload"><img style="height: 60px; width: 60px" src="../images/loading2.gif"></div> -->
+<div>
+  <div id="viewerContent"></div>
+</div>
+
+
+
+<script>
+	window.onload = loadReport;
+
+    function loadReport(){
+    	Stimulsoft.Base.StiLicense.key = "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHkLGVcN+bpBmun+R2BRIKs8z3U9Q3qMl9QZwpdoqVEoeTR5v9" +
+"9NEVUdMFq0E8GmiSgDVUpjdje4mRPlh9ChdF5D/dsLbKw4o0RukpfbtVI2RxkdSpv9D35WHQUGab9FX4+LJdMJQvlh" +
+"5KvpRTwawH95BNVJAMNn6wPznC+40WjzxgXipSOKnjMGArxsoAynOnZlNFJ4GGdnaz7Hwxqz091IWnszsoCxqIG+5e" +
+"x5Ztsj4y6KQ5Dfu1E5g8atl99q7fBRZDXZNG3CNnb/jXuRHB6mwS88AmejPFdPkkaNiMeUDliFoiKivbylMnTh7Gnl" +
+"QyV+BtOH0xQ/BwnAOmtkMTI0QcAujH9IRJ50ClaaHhJxZFVLaYZLWV/oAWrk2TIQGhVCl48g58hZ72XmMNUgMtBEhz" +
+"5J6gyjEGKwZQfL8GDqMc1JqftgW6ONC4BFwM+evU7QUfnF6Qlr+dYdBMhBwfFOyM71leMi9q2fA3VQHbVwXkPTFahY" +
+"KgBSOEI2nk1Y99FUGk0zkDjx6duWpy98jAxd5Nzu4VCitvXK14mGo88O1A==";
+
+		var data = LZString.decompressFromUTF16(JSON.parse(localStorage.getItem("ls.dataReport")));
+
+	 	var parametersReport = localStorage.getItem('ls.parameterReport');
+	 	data = JSON.parse(data);
+		var parameters = JSON.parse(parametersReport)
+		var labels = JSON.parse(parameters.labelsreport);
+
+		var options = new Stimulsoft.Viewer.StiViewerOptions();
+		options.height = '100%';
+		options.appearance.scrollbarsMode = true;
+		options.toolbar.showDesignButton = false;
+		options.toolbar.printDestination = Stimulsoft.Viewer.StiPrintDestination.Direct;
+    options.appearance.htmlRenderMode = Stimulsoft.Report.Export.StiHtmlExportMode.Table;
+
+
+		// Create an instance of the viewer
+		  var viewer = new Stimulsoft.Viewer.StiViewer(options, 'StiViewer', false);
+	    parameters.variables.entity = JSON.parse(localStorage.getItem('ls.Entidad'));
+      parameters.variables.abbreviation = JSON.parse(localStorage.getItem('ls.Abreviatura'));
+
+
+
+
+
+
+
+
+	    setTimeout(function () {
+	      var report = new Stimulsoft.Report.StiReport();
+
+	      report.loadFile(parameters.pathreport);
+
+	      // Load reports from JSON object
+	      var jsonData = { 'data'  : [ data ],'Labels' : [ labels ], 'variables': [parameters.variables]};
+
+	      var dataSet = new Stimulsoft.System.Data.DataSet();
+	      dataSet.readJson(jsonData);
+
+	      // Remove all connections from the report template
+	      report.dictionary.databases.clear();
+	      // Register DataSet object
+	      report.regData('Demo', 'Demo', dataSet);
+	      // Render report with registered data
+        report.render();
+	      console.log("Rendered page count: " + report.renderedPages.count);
+
+	      viewer.report = report;
+	      localStorage.setItem('ls.parameterReport', {});
+
+	        $(window).load(function() {
+				// Animate loader off screen
+				$(".se-pre-con").fadeOut("slow");
+
+			});
+
+	       $(".preload").fadeOut(2000, function() {
+		     $(".content").fadeIn(1000);
+		   });
+
+
+	    }, 50);
+
+		viewer.renderHtml('viewerContent');
+	}
+</script>

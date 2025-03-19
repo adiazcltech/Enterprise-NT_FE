@@ -1,0 +1,8 @@
+<div class="md-input-wrapper">
+  <label>{{'0110' | translate}} {{ ordersample.sampletab}} {{'0111' | translate}}</label>
+  <input id="{{ordersample.id}}" type="text" autofocus md-input label-fixed class="md-input  label-fixed" autocomplete="off"
+    ng-class="{'md-input-danger':ordersample.classdanger}" ng-style="{'font-size' : ordersample.styleButton === '' ? '30px':  ordersample.styleButton }"
+    ng-style="ordersample.styleButton" ng-model="ordersample.entry" ng-keypress="ordersample.keyselect($event)"
+    ng-disabled="ordersample.disabled">
+  <span class="md-input-bar "></span>
+</div>

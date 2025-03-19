@@ -1,0 +1,354 @@
+<style type="text/css">
+    .vs-repeat-custom-scroll {
+        margin-top: 0px;
+        height: calc(100% - 37px);
+        width: 100% !important;
+        overflow-y: auto;
+    }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content" style="overflow-y: hidden;">
+    <div id="page_content_inner">
+        <div id="modalhis" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+            <div class="uk-modal-dialog">
+                <div class="uk-form-row">
+                    <form class="form" name="myForm">
+                        <div class="uk-grid uk-container-center">
+                            <div class="uk-width-3-10">
+                                <img src="images/Question.png" height="90" width="90">
+                            </div>
+                            <div class="uk-width-7-10" style="margin-top: 3%;">
+                                <span>{{'0299' | translate}} <strong>{{'0297' | translate}}</strong>
+                                    {{'0300' | translate}}</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button"
+                        class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+                        ng-click="vm.save(1)">
+                        {{'0246'| translate}}
+                    </button>
+                    <button type="button"
+                        class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0008' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div id="modalis" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+            <div class="uk-modal-dialog">
+                <div class="uk-form-row">
+                    <form class="form" name="myForm">
+                        <div class="uk-grid uk-container-center">
+                            <div class="uk-width-3-10">
+                                <img src="images/Question.png" height="90" width="90">
+                            </div>
+                            <div class="uk-width-7-10" style="margin-top: 3%;">
+                                <span>{{'0299' | translate}} <strong>{{'0298' | translate}}</strong>
+                                    {{'0300' | translate}}</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button"
+                        class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+                        ng-click="vm.save(2)">
+                        {{'0246'| translate}}
+                    </button>
+                    <button type="button"
+                        class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0008' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div style="height: 100%" class="uk-grid">
+            <div style="height: 100%" class="uk-width-1-1">
+                <div class="uk-grid" style="height: 100%">
+                    <div class="uk-width-4-10" style="height: 100%">
+                        <div class="md-card" style="height: 90px;">
+                            <div class="md-card-content" style="height: 100%;padding: 0px; width: 100%;">
+                                <div class="uk-grid  uk-grid-small" style="width: 100%;
+                                margin-left: -5px;
+                                height: 89%;
+                                padding: 13px 5px 0px;
+                            ">
+                                    <div lass="uk-width-5-6" style="width: 84%;">
+                                        <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd"
+                                            isopenreport="vm.isOpenReport" typeview="2"></orderfilter>
+
+                                    </div>
+                                    <div class="uk-width-1-6" style="margin-top: 10px;
+                                    padding-top: 10px;
+                                    padding-left: 5px;
+                                    width: 8%;">
+                                        <div class="uk-float-left">
+                                            <div style="display: inline-block;">
+                                                <button type="button" class="md-fab md-fab-xsmall md-fab md-fab-primary"
+                                                    ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport}"
+                                                    ng-click="vm.getorder()" ng-disabled="!vm.isOpenReport">
+                                                    <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                        title="{{'0154'| translate}}">&#xE8B6;</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-card  md-card-hover" style="height: calc(100% - 90px); margin-top: 11px;">
+                            <div class="md-card-content" style="height: 100%;padding: 0px;">
+                                <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                    style="height: 100%;    margin-bottom: 0px;">
+                                    <thead style=" display: inline-block;width: 100%;height: 8%;">
+                                        <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                            <th class="uk-width-1-1">
+                                                <a
+                                                    ng-click="$event.stopPropagation(); vm.sortType = 'orderNumber'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                                    <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                                    <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                                    <span ng-show="vm.sortType == 'orderNumber' && !sortReverse"></span>
+                                                    <span ng-show="vm.sortType == 'orderNumber' && sortReverse"></span>
+                                                </a>{{'0110' | translate}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyscrollable vs-repeat-custom-scroll">
+                                        <tr ng-repeat="Order in vm.filtered= ( vm.ListOrder | filter: vm.search | orderBy:vm.sortType:sortReverse)"
+                                            ng-class="{selected: Order.orderNumber ==  vm.selected}"
+                                            data-ng-click="vm.getDetail(Order.orderNumber)" class="uk-grid"
+                                            style="margin-left: 0px;margin-top: 0px;">
+                                            <td class="uk-width-1-1">{{Order.orderNumber}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-3-10" style="height: 103%;padding-left: 13px;"
+                        ng-if="vm.order.length!==0">
+                        <div class="md-card" style="height: 99%">
+                            <div class="md-card-toolbar">
+                                <h3 class="md-card-toolbar-heading-text">
+                                    <strong>{{'0297'| translate}}</strong>
+                                </h3>
+                            </div>
+                            <div class="md-card-content" style="padding: 12px;height: 88%">
+
+                                <ul class="md-list md-list-addon" style="height: 89%">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/order.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0110'| translate}}</span>
+                                            <span class="md-list-heading">{{ vm.order.orderNumber}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/patient.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorpatientId,'uk-text-muted': !vm.errorpatientId}">{{'0117'| translate}}</span>
+                                            <span class="md-list-heading">{{ vm.order.patientHIS.patientId}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/name.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorname,'uk-text-muted': !vm.errorname}">{{'0133'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorname,'uk-text-muted': !vm.errorname}">{{vm.hisname}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/lasname.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorlastName || vm.errorsurName,'uk-text-muted': !vm.errorlastName && !vm.errorsurName}">{{'0134'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorlastName || vm.errorsurName,'uk-text-muted': !vm.errorlastName && !vm.errorsurName}">{{ vm.order.patientHIS.lastName}}
+                                                {{ vm.order.patientHIS.surName}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-22"
+                                                ng-src="images/inconsistency/age.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorbirthday,'uk-text-muted': !vm.errorbirthday}">{{'0102'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorbirthday,'uk-text-muted': !vm.errorbirthday}">{{vm.HISbirthday}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-22"
+                                                ng-src="images/inconsistency/genders.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorsex,'uk-text-muted': !vm.errorsex}">{{'0124'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorsex,'uk-text-muted': !vm.errorsex}">{{vm.sexhis}}</span>
+                                        </div>
+                                    </li>
+                                    <li ng-if="vm.demograficolis != '' || vm.demograficohis!=''">
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/demographip.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errordemographip,'uk-text-muted': !vm.errordemographip}">{{'0295'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errordemographip,'uk-text-muted': !vm.errordemographip}">{{vm.demograficohis==''?vm.varnull:vm.demograficohis}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="md-fab-wrapper md-fab-in-card">
+                                    <button type="button" data-uk-modal="{target:'#modalhis'}"
+                                        class="md-fab md-fab-small md-fab-success"
+                                        ng-class="{'md-bg-blue-grey-100' :  vm.order.length==0}"
+                                        ng-disabled=" vm.order.length==0">
+                                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                            title="{{'0296' | translate}}">&#xE876;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-3-10" style="height: 103%;padding-left: 13px;"
+                        ng-if="vm.order.length!==0">
+                        <div class="md-card" style="height: 99%">
+                            <div class="md-card-toolbar">
+                                <h3 class="md-card-toolbar-heading-text">
+                                    <strong>{{'0298'| translate}}</strong>
+                                </h3>
+                            </div>
+                            <div class="md-card-content" style="padding: 12px;height: 88%">
+
+                                <ul class="md-list md-list-addon" style="height: 89%">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/order.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small">{{'0110'| translate}}</span>
+                                            <span class="md-list-heading">{{vm.order.orderNumber}}</span>
+                                        </div>
+                                    </li>
+                                    <li ng-class="{'md-bg-red-A100': vm.errorpatientId}">
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/patient.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorpatientId,'uk-text-muted': !vm.errorpatientId}">{{'0117'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorpatientId,'uk-text-muted': !vm.errorpatientId}">{{ vm.order.patientLIS.patientId}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/name.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorname,'uk-text-muted': !vm.errorname}">{{'0133'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorname,'uk-text-muted': !vm.errorname}">{{vm.lisname}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/lasname.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorlastName || vm.errorsurName,'uk-text-muted': !vm.errorlastName && !vm.errorsurName}">{{'0134'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorlastName || vm.errorsurName,'uk-text-muted': !vm.errorlastName && !vm.errorsurName}">{{ vm.order.patientLIS.lastName}}{{ vm.order.patientLIS.surName}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-22"
+                                                ng-src="images/inconsistency/age.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorbirthday,'uk-text-muted': !vm.errorbirthday}">{{'0102'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorbirthday,'uk-text-muted': !vm.errorbirthday}">{{ vm.LISbirthday}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-22"
+                                                ng-src="images/inconsistency/genders.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errorsex,'uk-text-muted': !vm.errorsex}">{{'0124'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errorsex,'uk-text-muted': !vm.errorsex}">{{vm.sexlis}}</span>
+                                        </div>
+                                    </li>
+                                    <li ng-if="vm.demograficolis != '' || vm.demograficohis!=''">
+                                        <div class="md-list-addon-element">
+                                            <img class="md-list-addon-icon material-icons md-30"
+                                                ng-src="images/inconsistency/demographip.png" />
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small"
+                                                ng-class="{'md-color-red-400': vm.errordemographip,'uk-text-muted': !vm.errordemographip}">{{'0295'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                ng-class="{'md-color-red-400': vm.errordemographip,'uk-text-muted': !vm.errordemographip}">
+                                                {{vm.demograficolis==''?vm.varnull:vm.demograficolis}}
+                                        </div>
+                                    </li>
+
+                                </ul>
+                                <div class="md-fab-wrapper md-fab-in-card">
+                                    <button type="button" data-uk-modal="{target:'#modalis'}"
+                                        class="md-fab md-fab-small md-fab-success"
+                                        ng-class="{'md-bg-blue-grey-100' : vm.order.length==0}"
+                                        ng-disabled="vm.order.length==0">
+                                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                            title="{{'0296' | translate}}">&#xE876;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.min.js"></script>

@@ -1,0 +1,26 @@
+<div class="uk-grid" data-uk-grid-margin="" style="height: 100%">
+    <div class="uk-width-3-5" style="height: 50px" ng-if="codedcomment.ListComment.length!==0">
+        <div angucomplete-alt id="ex1" 
+             placeholder="{{'0290' | translate}}" 
+             focus-first="true"
+             maxlength="50" 
+             pause="100"
+             selected-object="codedcomment.changeComment" 
+             local-data="codedcomment.ListComment" 
+             search-fields="code"
+             title-field="message" 
+             minlength="1" 
+             disable-input="codedcomment.ListComment.length===0"
+             input-class="md-input" 
+             match-class="highlight" 
+             auto-match="true"></div>
+    </div>
+    <div class="uk-width-2-5" style="margin-top: 15px; height: 35px" ng-if="codedcomment.ListComment.length!==0">
+        <input type="checkbox" icheck ng-model="codedcomment.insertcomment" />
+        <label for="checkbox_demo_2" class="inline-label">{{'0293' | translate}}</label>
+    </div>
+    <div class="uk-width-1-1" style="margin-top: 15px; height: calc(100% - 70px);">
+        <textarea ng-required="true" name="name" id="name" ui-tinymce="codedcomment.customMenu"
+            ng-model="comment"></textarea>
+    </div>
+</div>

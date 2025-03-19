@@ -1,0 +1,74 @@
+<style>
+  .capchatbackgtound {
+    border: 2px solid #ddd !important;
+    padding: 15px 0px !important;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+    background: rgb(250 250 250) !important;
+  }
+
+  .capchabuttonpopover {
+    height: 15px !important;
+    width: 15px !important;
+    padding: 11px 12px !important;
+    border: 2px solid #857676 !important;
+  }
+
+  .capchabuttonreffres {
+    font-size: 24px !important;
+    color: rgb(36 199 33 / 87%) !important;
+    float: left !important;
+    margin-left: 10px !important;
+  }
+
+  .capchaimagen {
+    height: 35px !important;
+    width: 35px !important;
+    float: right !important;
+    margin-top: 5px !important;
+  }
+
+  .popover.top {
+    top: -265px !important;
+    left: -3px !important;
+  }
+
+</style>
+<div class="col-xs-11 text-left capchatbackgtound">
+  <div class="col-xs-9 text-left" style="margin-top: 10px;">
+    <button uib-popover-template="captchadirective.dynamicPopover.templateUrl"
+      ng-if="!captchadirective.validatedcapchat" popover-title="{{captchadirective.dynamicPopover.title}}"
+      class="btn btn-default capchabuttonpopover" ng-click="captchadirective.Captcha()">
+    </button>
+    <span class=" glyphicon glyphicon-ok capchabuttonreffres" data-toggle="tooltip"
+      ng-if="captchadirective.validatedcapchat"></span>
+    <label style="margin-left: 10px;">{{'0237' | translate}}</label>
+  </div>
+  <div class="col-xs-3 text-right">
+    <img class="img-responsive capchaimagen" src="images/captcha.png" />
+  </div>
+</div>
+<script type="text/ng-template" id="myPopoverTemplate.html">
+  <form id="contactForm1" action="#" method="post">
+    <div class="col-sm-12" style="padding-right: 0px;padding-left: 0px;">
+        <input style="margin-top:10px;" type="text" class="form-control" placeholder="{{'0238' | translate}}" name="captcha"
+            id="bloquear" autocomplete="off" data-ng-model="captchadirective.captchadata" ng-focus="captchadirective.errorcaptchan=false">
+    </div>
+    <div class="col-sm-12" style="padding-right: 0px;padding-left: 0px;">
+        <input type="text" class="form-control" data-ng-model="captchadirective.code" oncopy="return false" onpaste="return false" ng-disabled="true" autocomplete="off"
+            style="margin-bottom: 0px; height: 61px; font-size: 24px; font-weight: bolder; text-decoration: line-through; display: inline-block; background-color: #f5f5f5;"
+            id="mainCaptcha" disabled="">
+    </div>
+    <div class="alert alert-danger" ng-if="captchadirective.errorcaptchan">
+        <strong>{{'0239' | translate}}</strong>
+    </div>
+    <div class="col-sm-12">
+        <div class="row" style="padding: 15px;margin-top: 12px;">
+            <span class="glyphicon glyphicon-repeat" data-toggle="tooltip" title="Refrescar" ng-click="captchadirective.Captcha()"
+                style="font-size: 24px;color: rgb(92 81 81 / 87%);float: left;margin-left: 10px;"></span>
+            <button class="btn btn-primary" ng-disabled="captchadirective.captchadata == '' || captchadirective.captchadata == undefined"
+                style="float: right;" ng-click="captchadirective.validCaptcha()" type="button">{{'0236' | translate}}</button>
+        </div>
+    </div>
+</form>
+</script>

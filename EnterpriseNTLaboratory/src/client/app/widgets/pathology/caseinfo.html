@@ -1,0 +1,43 @@
+<modalexceptions openmodal="caseinfo.ShowPopupError" detailerror="caseinfo.Error"></modalexceptions>
+
+<div class="md-card md-card-hover uk-animation-fade">
+  <div class="md-card-head contentscroll" style="min-height: 170px;height: auto;overflow: auto;border-bottom: none;">
+      <div class="uk-text-center" style="padding-top: 15px;display: flex;align-items: center;place-content: center;" ng-if="caseinfo.case">
+        <div class="uk-badge" style="font-size: 20px;font-weight: bold;padding: 5px 7px;border-radius: 5px;display: inline-block;background: #1976d2;margin-right: 2px;">
+          {{ caseinfo.case.studyType.code }}
+        </div>
+        <label style="font-size: 18px;font-weight: bold;">{{ caseinfo.case.numberCase }}</label>
+      </div>
+      <h5 class="md-card-head-text uk-text-center" style="font-size: 15px;padding: 5px;">
+          {{caseinfo.case.studyType.name}}
+          <span style="font-size: 13px;">
+              {{caseinfo.case.registerDate}}
+          </span>
+      </h5>
+
+      <ul class="md-list md-list-addon" style="margin-top: 5px;padding: 0px 5px;" ng-if="caseinfo.case">
+        <li style="padding: 0;">
+          <div class="md-list-addon-element">
+              <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/doctor.png" style="margin-top: 0;" />
+          </div>
+          <div class="md-list-content">
+              <span class="uk-text-small uk-text-muted" style="font-size: 11px !important;">{{'3154' | translate}}</span>
+              <span class="md-list-heading" style="font-size: 12px;text-transform: capitalize;">
+                {{caseinfo.case.pathologist.name}} {{caseinfo.case.pathologist.lastName}}
+              </span>
+          </div>
+        </li>
+        <li style="padding: 0;">
+          <div class="md-list-addon-element">
+              <img class="md-list-addon-icon material-icons md-22" ng-src="images/user1.png" style="margin-top: 0;" />
+          </div>
+          <div class="md-list-content">
+              <span class="uk-text-small uk-text-muted" style="font-size: 11px !important;">{{'3178' | translate}}</span>
+              <span class="md-list-heading" style="font-size: 12px;">
+                {{caseinfo.case.userCreated.name}} {{caseinfo.case.userCreated.lastName}}
+              </span>
+          </div>
+        </li>
+      </ul>
+  </div>
+</div>

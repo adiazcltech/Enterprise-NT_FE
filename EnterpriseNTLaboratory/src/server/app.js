@@ -1,0 +1,86 @@
+/*jshint node:true*/
+'use strict';
+
+var express = require('express');
+var app = express();
+//var loginContr = require('../client/app/modules/result/emailSendAutomaicResult/emailSendAutomaticResult.controller')();
+
+var bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+
+var port = process.env.PORT || 8001;
+var four0four = require('./utils/404')();
+
+var environment = process.env.NODE_ENV;
+var  cors = require("cors");
+
+var fs = require("fs");
+
+app.use(favicon(__dirname + '/favicon.ico'));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+app.use(bodyParser.json());
+app.use(logger('dev'));
+
+app.use(cors());
+
+console.log('About to crank up node');
+console.log('PORT=' + port);
+console.log('NODE_ENV=' + environment);
+
+app.use('/api', require('./routes'));
+
+
+switch (environment) {
+    case 'build':
+        console.log('** BUILD **');
+        app.use(express.static('./build/'));
+        // Any invalid calls for templateUrls are under app/* and should return 404
+        app.use('/app/*', function (req, res, next) {
+            four0four.send404(req, res);
+        });
+        // Invalid calls to assets should return the custom error object to mitigate
+        // against XSS reflected attacks
+        app.use('/js/*', function (req, res, next) {
+            four0four.send404(req, res);
+        });
+        app.use('/images/*', function (req, res, next) {
+            four0four.send404(req, res);
+        });
+        app.use('/styles/*', function (req, res, next) {
+            four0four.send404(req, res);
+        });
+        // Any deep link calls should return index.html
+        app.use('/*', express.static('./build/index.html'));
+        break;
+    default:
+        console.log('** DEV **');
+        app.use(express.static('./src/client/'));
+        app.use(express.static('./'));
+        app.use(express.static('./tmp'));
+        // Any invalid calls for templateUrls are under app/* and should return 404
+        app.use('/app/*', function (req, res, next) {
+            four0four.send404(req, res);
+        });
+        // Any deep link calls should return index.html
+        app.use('/*', express.static('./src/client/index.html'));
+        break;
+}
+
+app.listen(port, function () {
+    var express = require('express');
+    var app2 = express();
+    app2.get('/StartEmailAutomaticResult', function (req, res) {
+        res.send('Inicio Hilo para el envio de correos');
+        console.log("Inicio Hilo para el envio de correos");
+      //  loginContr.SendAutomaticResult();
+
+    })
+    app2.listen(8089);
+
+    console.log('Express server listening on port ' + port);
+    console.log('env = ' + app.get('env') +
+        '\n__dirname = ' + __dirname +
+        '\nprocess.cwd = ' + process.cwd());
+});

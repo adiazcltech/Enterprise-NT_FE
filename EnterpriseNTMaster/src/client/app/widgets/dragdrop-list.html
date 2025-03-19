@@ -1,0 +1,189 @@
+<style type="text/css">
+	%content {
+	  font-size: 32px;
+	  text-align: center;
+	  margin: 0 5px;
+	}
+
+	.bin {
+		@extend %content;
+	    min-height: 30px;
+	    min-width: 100%;
+	    width: 100%;
+	    float: left;
+	    border: 1px solid #fff;
+	    padding: 5px;
+	    border-radius: 5px;
+	    /*color: #337ab7;*/
+	    color: #fff;
+	    font-weight: bold;
+	    /*background-color: #d9edf7*/
+	   /* background-color: #fff*/
+	    background-color: #337ab7
+	}
+
+	.bin-disable {
+	    float: left;
+	    border: 1px solid #fff;
+	    padding: 5px;
+	    border-radius: 5px;
+	    /*color: #337ab7;*/
+	    color: #fff;
+	    /*background-color: #d9edf7*/
+	   /* background-color: #fff*/
+	    background-color: #bbb
+	}
+
+
+
+	.item {
+	  @extend %content;
+	  height: 30px;
+	  width: 95%;
+	  background: #ffffff;
+	  border-color: #ccc;
+	  border-style: solid;
+	  border-width: 1px; 
+	  font-size: 12px;	
+	  font-weight: normal; 
+	  float: right;
+	  color: #555;
+	  text-align: left;
+	  vertical-align: middle;
+	  cursor: move;
+	  border-radius: 5px;
+	  padding-left: 5px;
+	  padding-top: 5px;
+	}	
+
+	.itemPerfil {
+	  height: 30px;
+	  width: 95%;
+	  background-color: #eeddff;	  
+	  border-color: #ccc;
+	  border-style: solid;
+	  border-width: 1px; 
+	  font-size: 12px;	 
+	  font-weight: normal;
+	  float: right;
+	  color: #555;
+	  text-align: left;
+	  vertical-align: middle;
+	  cursor: move;
+	  border-radius: 5px;
+	  padding-left: 5px;
+	  padding-top: 5px;
+	  
+
+	}	
+
+	.item:active, .itemPerfil:active {
+	  background: #bcdff1;
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform-style: preserve-3d;
+	  transform: scale(1.007, 1.2);
+	  color: #777;
+	  cursor: move;
+      font-weight: normal;
+	}	
+
+
+    .itemSelected {
+      font-weight: bold !important;	
+	  background: #d9edf7 !important;     
+	  float: right;
+	  font-size: 12px;	
+	  color: #777;
+	  cursor: move;
+	}
+
+	.itemDelay {
+	  height: 30px;
+	  width: 95%;
+	  font-weight: normal; 
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform: scale(1, 1);
+	  font-size: 12px;	
+	  cursor: move;
+	  border-radius: 5px;
+	}
+
+
+
+	.animationItem{
+	  @extend %content;
+	  height: 30px;
+	  width: 95%;
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform-style: preserve-3d;
+	  transform: scale(1, 1);
+	  color: #555;
+	  cursor: move;
+	  border-radius: 5px;
+	  animation-name: AnimationLast;
+	  animation-iteration-count: 1;
+	  animation-duration: 0.8s;
+	  animation-delay: 0s;
+	  /*animation-fill-mode: both;*/
+
+	}
+
+	.animationItem:active{
+	  @extend %content;
+	  transition: all 0.8s ease;
+	  transform-style: preserve-3d;
+	  transform: scale(1.015, 1.4);
+	  background: #d9edf7 !important;
+	  color: #777 !important;
+	}
+
+	.action-mouse:hover, .action-mouse:active{
+		background: #d5dbee !important;
+    	color: #517496 !important;
+	}
+
+	.action-mouse{
+		/*background: #fff;*/
+    	color: #555 !important;
+	}
+
+
+	@keyframes AnimationLast
+	{
+		from
+		{
+			opacity: 0.7;
+			transform-style: preserve-3d;
+			transform: translateX(0px) translateY(0px) translateZ(0px) rotate(0deg) scale(1.015, 1.4);
+			background: #d9edf7;
+			color: #555;
+		}
+	    to
+	    {
+			opacity: 1;
+			color: #557897;
+			transition: all 0.8s ease;
+			transform-style: preserve-3d;
+	    }
+	}
+
+	.drag {
+	  opacity: 0.5;
+	  transition: all 0.2s ease;
+	  background: #31b0d5 !important;
+	  color: #555 !important;
+	}
+	.over {
+	  background: #31b0d5;
+	  transition: all 0.3s ease;
+	  transform: scale(1, 1);
+	}
+</style> 
+
+<div class="bin col-md-12" id="bin{{ bin.printOrder }}" >&nbsp;{{bin.printOrder}}
+<div class="panel-padding text-center btn action-mouse itemDelay" id="item{{ bin.id }}" draggable="true" draggablelist="true"  item="item" ng-class="{'itemPerfil': bin.testType !='', 'item': bin.testType ==''}" >
+{{bin.printOrder}} - {{bin.code}} {{bin.testType | uppercase}}:  {{bin.name}} </br></div></div>
+<div id="bin0" style="display: block; height: 0px"></div> 

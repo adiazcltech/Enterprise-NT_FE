@@ -1,0 +1,914 @@
+<html>
+<style type="text/css">
+	span.cltech-combobox {
+		width: 100%;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		padding-right: 0px;
+		padding-left: 0px;
+		border-top-width: 0px !important;
+		border-left-width: 0px !important;
+		font-size: 12px;
+		height: 28px
+	}
+
+	.tbody-style-test {
+		overflow-y: scroll;
+		position: absolute;
+		width: 96%
+	}
+
+	td.cltech-label,
+	select.cltech-label {
+		font-weight: normal !important;
+		font-size: 10px !important
+	}
+
+	/***************************/
+
+	.angucomplete-description {
+		font-size: 10px !important;
+	}
+
+	.angucomplete-dropdown {
+		font-size: 12px !important;
+	}
+
+
+	.orderentry_tests_input {
+		padding: 5px;
+		transition: all 0.30s ease-in-out;
+		outline: none;
+		border: 1px solid #DDDDDD;
+		border-radius: 3px;
+		font-size: 12px;
+	}
+
+	.orderentry_tests_input:focus {
+		box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+		border: 1px solid rgba(81, 203, 238, 1);
+	}
+
+	.orderentry-tests-table-header {
+		font-size: 12px !important;
+		font-weight: bold !important;
+	}
+
+	.orderentry-tests-table-body {
+		font-size: 11px;
+	}
+
+	.orderentry-input-codified-input {
+		width: 100%;
+		padding: 2px;
+		transition: all 0.30s ease-in-out;
+		outline: none;
+		border: 1px solid #DDDDDD;
+		border-radius: 3px;
+		font-size: 11px !important;
+	}
+
+	.orderentry-input-codified-input:focus {
+		box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+		border: 1px solid rgba(81, 203, 238, 1);
+	}
+
+	.orderentry-footer {
+		height: 75px;
+	}
+
+	.orderentry-sample-name {
+		color: #000000;
+	}
+
+	.orderentry-recipients {
+		display: flex;
+	}
+
+	.orderentry-recipient {
+		margin-top: 10px;
+		margin-left: 10px;
+		max-width: 51.2%;
+		overflow-x: auto;
+	}
+
+	.orderentry-recipient>img {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.orderentry-recipient>p {
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-size: 9px;
+		font-weight: bold;
+	}
+
+	.orderentry-validity-dropdown {
+		padding: 0px 0px 0px 0px !important;
+	}
+
+	.orderentry-tests-table-body>tr>td {
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+		line-height: 24px;
+	}
+
+	.tfoot-grid {
+		background-color: #efefef;
+		border-top-color: #bdbdbd;
+		border-top-style: solid;
+		border-top-width: 1px;
+	}
+
+	.tfoot-grid>tr>th {
+		padding-top: 3px !important;
+		padding-bottom: 3px !important;
+		border-top-style: none !important;
+	}
+
+	.k-multiselect-wrap {
+		border-width: 1px;
+		height: 251px;
+		overflow: auto;
+	}
+
+	.select2-container-multi .select2-choices {
+		overflow: auto;
+		height: 50px !important
+	}
+
+	.md-tree-image {
+		width: auto !important;
+		height: auto !important;
+		border-style: none;
+		border-radius: 0 !important;
+	}
+
+	.node-name {
+		margin-left: -4px !important;
+		display: inline-table;
+		margin-top: -7px;
+		white-space: normal;
+		width: 92%;
+	}
+
+
+	.k-numerictextbox .k-select {
+		display: none !important;
+	}
+
+	.k-numerictextbox .k-input {
+		margin-top: -52px;
+		height: 20px;
+		padding-bottom: 0px !important;
+		font-size: 12px !important;
+		min-height: 20px !important;
+	}
+
+	span.k-picker-wrap,
+	span.k-state-default,
+	span.k-state-default:hover,
+	span.k-state-default:focus {
+		height: 20px !important;
+	}
+
+	.k-numeric-wrap k-state-default {
+		height: 20px !important;
+	}
+
+	.k-state-disabled {
+		height: 20px !important;
+	}
+
+	.k-dropdown-wrap,
+	.k-numeric-wrap,
+	.k-picker-wrap {
+		padding: 0;
+	}
+</style>
+
+
+<modalexceptions openmodal="listtest.ShowPopupError" detailerror="listtest.Error"></modalexceptions>
+
+<loadpage view="listtest.loadingdiagnostics"></loadpage>
+<!-- ****************************************************************************************************************** -->
+<div class="md-card md-card-warning" style="width: 100%; height: 100%; z-index: 100;">
+	<div class="md-card-toolbar" ng-show="listtest.viewHead">
+		<h3 class="md-card-toolbar-heading-text" style="margin-right: 20px">
+			<strong>{{'0013' | translate}} ({{listtest.selectedTest.length}}){{Testlist}}</strong>
+		</h3>
+		<h3 class="md-card-toolbar-heading-text">
+			<a ng-click="listtest.basicTree = []; listtest.getRequirements();">{{'0858' | translate}}</a>
+		</h3>
+	</div>
+	<div class="md-card-content" style="height: {{listtest.height}}; padding: 0px">
+		<div class="uk-width-1-1 uk-margin-small-bottom" ng-if="listtest.manageDiagnostics">
+			<multicombobox listorigin="listtest.listdiagnostics" placeholder="'0258'"
+				ng-disabled="listtest.disabledTests" ng-model="listtest.diagnosticsselect"
+				removeitem="listtest.validremovediagnostics(item)" change="listtest.adddiagnostics(item)">
+			</multicombobox>
+		</div>
+		<div ng-show="!listtest.isCashbox && !listtest.blockbilling && !listtest.blockservice"
+			style="margin: 5px 5px 0px;">
+			<div angucomplete-alt id="orderentry_tests" placeholder="{{'0655' | translate}}" class="uk-width-1-1"
+				input-class="orderentry_tests_input uk-width-1-1 orderentrytab form-control-small" pause="20"
+				selected-object="listtest.getSelectTest" local-data="listtest.tests" search-fields="code,namesearch"
+				title-field="showValue" description-field="area.name" image-field="colorType" minlength="1"
+				match-class="highlight" focus-first="true" text-searching="Buscando pruebas"
+				disable-input="listtest.disabledTests || (listtest.manageDiagnostics && listtest.diagnosticsselect.length === 0)"
+				clear-selected="true" override-suggestions="true" search-fields local-search="listtest.filterListTest"
+				focus-out="listtest.focusOutListTest()" input-changed="listtest.inputChangedTest">
+			</div>
+		</div>
+		<div ng-show="listtest.isCashbox || listtest.blockbilling || listtest.blockservice "
+			style="font-size: 9pt; font-weight: bold; color: #f30000;">
+			<div style="float: left; width: 5%"><i class="material-icons md-color-red-500"
+					style="font-size: 24px; font-weight: bold;">block</i></div>
+			<div style="float: right; width: 95%; padding-top: 7px;
+			padding-bottom: 7px;">{{listtest.messageCashbox}}</div>
+
+		</div>
+		<div class="uk-width-1-1" style="height: 100%">
+			<table id="tableTest" ng-mouseover="listtest.eventResize($event)"
+				class="uk-table uk-table-nowrap uk-table-condensed" style="height: {{listtest.heighttable}}">
+				<thead>
+					<tr>
+						<th hidden>id</th>
+						<th style="padding: 0px 0px;" class="uk-text-center orderentry-tests-table-header"></th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="!listtest.viewcustomerPercentage">{{'0098' | translate}}
+						</th>
+						<th class="uk-width-3-5 uk-text-left orderentry-tests-table-header"
+							ng-show="!listtest.viewcustomerPercentage"
+							ng-class="{'uk-width-5-6': !listtest.viewRate || !listtest.manageRate}">{{'0118' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-left orderentry-tests-table-header"
+							ng-show="listtest.manageRate && listtest.viewRate && !listtest.viewcustomerPercentage"
+							style="min-width: 100px">{{'0087' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="listtest.manageRate && listtest.viewRate && !listtest.trialdiscount && !listtest.viewcustomerPercentage"
+							style="min-width: 100px">{{'1577' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="listtest.manageRate && listtest.viewRate && !listtest.viewcustomerPercentage"
+							style="min-width: 100px">{{'0455' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="listtest.manageRate && listtest.viewRate && listtest.trialdiscount && !listtest.viewcustomerPercentage"
+							style="min-width: 100px">{{'0931' | translate}}</th>
+
+						<!-- activo la llave de ver precio cliente  -->
+						<th class="uk-width-4-5 uk-text-left orderentry-tests-table-header" style="padding: 8px 22px;"
+							ng-show="listtest.viewcustomerPercentage">{{'0118' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-left orderentry-tests-table-header"
+							ng-show="listtest.viewcustomerPercentage" style="min-width: 100px;padding: 8px 0px;">
+							{{'0087' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="listtest.viewcustomerPercentage" style="min-width: 75px;padding: 8px 0px;">P.
+							{{'0085' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="listtest.viewcustomerPercentage" style="min-width: 75px;padding: 8px 0px;">P.
+							{{'0398' |
+							translate}}</th>
+						<th class="uk-width-1-5 uk-text-center orderentry-tests-table-header"
+							ng-show="listtest.viewcustomerPercentage" style="min-width: 120px;padding: 8px 0px;">
+							{{'0931' | translate}}</th>
+
+					</tr>
+				</thead>
+				<tbody class="orderentry-tests-table-body tbody-style-test contentscroll"
+					style="height: {{listtest.heighttbody}};width: calc(100% - 0px) !important;font-size: 11px !important">
+					<tr ng-repeat-start="(key, value) in listtest.selectedTest | groupBy: 'areaName'">
+						<td colspan="100%"><span style="font-weight: bold;
+              color: #000000;
+              text-transform: uppercase;
+              font-size: 12px;">{{ key }}</span></td>
+					</tr>
+					<tr ng-repeat-end ng-repeat="test in value">
+						<td hidden>{{test.id}}</td>
+						<td>
+							<div ng-if="test.resultValidity !== null" class="uk-button-dropdown"
+								data-uk-dropdown="{mode:'click'}" aria-haspopup="true" aria-expanded="false">
+								<a href="#" ng-click="listtest.eventValidityResult(test)">
+									<img src="images/warning.PNG" style="min-width: 18px; height:18px">
+								</a>
+								<div class="uk-dropdown uk-dropdown-width-3 uk-dropdown-bottom orderentry-validity-dropdown"
+									aria-hidden="true" tabindex="" style="min-width: 400px; top: 35px; left: 0px;">
+									<div class="md-card">
+										<div class="md-card-toolbar md-bg-amber-A400">
+											<h3 class="md-card-toolbar-heading-text">
+												<strong>Ultimo examen realizado</strong>
+											</h3>
+										</div>
+										<div class="md-card-content" style="padding-top: 10px; padding-bottom:10px">
+											<ul class="md-list md-list-addon gmap_list">
+												<li>
+													<div class="md-list-addon-element">
+														<img class="md-user-image md-list-addon-avatar"
+															src="{{listtest.resultValidity.photo}}" alt="">
+													</div>
+													<div class="md-list-content">
+														<span class="md-list-heading">
+															<b>{{listtest.resultValidity.lastName + ' ' +
+																listtest.resultValidity.name}}</b>
+														</span>
+														<span
+															class="uk-text-small uk-text-muted">{{listtest.resultValidity.dateLastResult
+															+ ' - ' +
+															listtest.resultValidity.daysFromLastResult}}</span>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td class="uk-width-1-5 uk-text-center" ng-show="!listtest.viewcustomerPercentage">
+							<a ng-if="listtest.blockservice && test.deletedtest" ng-click="listtest.removetest(test)"
+								class="uk-icon-hover uk-icon-close md-color-red-A700"></a>
+							{{test.code}}
+						</td>
+						<td class="uk-width-3-5" ng-class="{'uk-width-5-6': !listtest.viewRate || !listtest.manageRate}"
+							style="max-width: 190px" ng-show="!listtest.viewcustomerPercentage">
+							<label class="uk-text-truncate">{{test.name}}</label>
+						</td>
+						<td class="uk-width-1-5 uk-text-left"
+							ng-show="listtest.manageRate && listtest.viewRate && !listtest.viewcustomerPercentage"
+							style="padding: 0px; min-width: 100px">
+							<angucomplete-alt id="{{'orderentry_test_'+test.id}}"
+								input-class="orderentry-input-codified-input orderentrytab" pause="100"
+								override-suggestions="false" auto-match="false" local-search="listtest.filterListrates"
+								selected-object="listtest.changeRate" local-data="listtest.rates"
+								search-fields="code,name" title-field="showValue" minlength="1" match-class="highlight"
+								focus-first="true" initial-value="test.rate"
+								disable-input="listtest.disabledTests || listtest.isCashbox"
+								focus-in="listtest.focusInListRates(test, listtest.rates)"
+								focus-out="listtest.focusOutListRates(test, listtest.rates)">
+								<angucomplete-alt />
+						</td>
+						<td class="uk-width-1-5 uk-text-right"
+							ng-show="listtest.manageRate && listtest.viewRate && !listtest.trialdiscount && !listtest.viewcustomerPercentage"
+							style="min-width: 120px">{{test.insurancePrice | currency : listtest.symbolCurrency :
+							listtest.penny}}</td>
+						<td class="uk-width-1-5 uk-text-right"
+							ng-show="listtest.manageRate && listtest.viewRate && !listtest.viewcustomerPercentage"
+							style="min-width: 120px">{{test.patientPrice | currency : listtest.symbolCurrency :
+							listtest.penny}}</td>
+
+						<td class="uk-width-1-5 uk-text-right"
+							ng-show="listtest.manageRate && listtest.viewRate && listtest.trialdiscount && !listtest.viewcustomerPercentage"
+							style="min-width: 70px;padding: 4px 0px;">
+							{{test.Valuediscount | currency : listtest.symbolCurrency :
+							listtest.penny}}
+						</td>
+						<td class="uk-width-1-5 uk-text-right"
+							ng-if="listtest.manageRate && listtest.viewRate && listtest.trialdiscount && !listtest.viewcustomerPercentage"
+							style="min-width: 50px">
+							<input kendo-numeric-text-box k-min="0" k-format="'n0'" k-decimals="0"
+								id="{{'rate_'+test.id}}" name="{{'rate_'+test.id}}"
+								class="k-textbox smalll orderentrytab" k-ng-model="test.discount"
+								ng-model="test.discount" ng-blur="listtest.changeDiscount(test)"
+								ng-focus="listtest.focusdiscount(test)" k-max="listtest.maxDiscountUser"
+								style="width: 100%;"
+								ng-disabled="listtest.disabledTests || listtest.isCashbox || test.patientPrice===0" />%
+						</td>
+						<!-- activo la llave de ver precio cliente  -->
+						<td class="uk-width-3-5" style="max-width: 190px;font-size: 10px !important;"
+							ng-show="listtest.viewcustomerPercentage">
+							<a ng-if="listtest.blockservice && test.deletedtest" ng-click="listtest.removetest(test)"
+								class="uk-icon-hover uk-icon-close md-color-red-A700"></a>
+							<label class="uk-text-truncate">{{test.code}} - {{test.name}}</label>
+						</td>
+						<td class="uk-width-1-5 uk-text-left" ng-show="listtest.viewcustomerPercentage"
+							style="padding: 0px; min-width: 100px;font-size: 10px !important;">
+							<angucomplete-alt id="{{'orderentry_test_'+test.id}}"
+								input-class="orderentry-input-codified-input orderentrytab" pause="100"
+								override-suggestions="false" auto-match="false" local-search="listtest.filterListrates"
+								selected-object="listtest.changeRate" local-data="listtest.rates"
+								search-fields="code,name" title-field="showValue" minlength="1" match-class="highlight"
+								focus-first="true" initial-value="test.rate"
+								disable-input="listtest.disabledTests || listtest.isCashbox"
+								focus-in="listtest.focusInListRates(test, listtest.rates)"
+								focus-out="listtest.focusOutListRates(test, listtest.rates)">
+								<angucomplete-alt />
+						</td>
+						<td class="uk-width-1-5 uk-text-right" ng-show="listtest.viewcustomerPercentage"
+							style="min-width: 70px;font-size: 10px !important;">{{test.insurancePrice | currency :
+							listtest.symbolCurrency :
+							listtest.penny}}</td>
+						<td class="uk-width-1-5 uk-text-right" ng-show="listtest.viewcustomerPercentage"
+							style="min-width: 70px;font-size: 10px !important;">{{test.patientPrice | currency :
+							listtest.symbolCurrency :
+							listtest.penny}}</td>
+						<td class="uk-width-1-5 uk-text-right" ng-show="listtest.viewcustomerPercentage"
+							style="min-width: 70px;padding: 4px 0px;font-size: 10px !important;">
+							{{test.Valuediscount | currency : listtest.symbolCurrency :
+							listtest.penny}}
+						</td>
+						<td class="uk-width-1-5 uk-text-right" ng-if="listtest.viewcustomerPercentage"
+							style="min-width: 50px;font-size: 10px !important;">
+							<input kendo-numeric-text-box k-min="0" k-format="'n0'" k-decimals="0"
+								id="{{'rate_'+test.id}}" name="{{'rate_'+test.id}}"
+								class="k-textbox smalll orderentrytab" k-ng-model="test.discount"
+								ng-model="test.discount" ng-blur="listtest.changeDiscount(test)"
+								ng-focus="listtest.focusdiscount(test)" k-max="listtest.maxDiscountUser"
+								style="width: 100%;"
+								ng-disabled="listtest.disabledTests || listtest.isCashbox || test.patientPrice===0" />%
+						</td>
+
+						<td hidden>{{test.price}}</td>
+						<td hidden>{{test.state}}</td>
+						<td hidden>{{test.type}}</td>
+					</tr>
+				</tbody>
+				<tfoot class="tfoot-grid"
+					ng-show="listtest.manageRate && listtest.viewRate && !listtest.copayPercentage && !listtest.viewcustomerPercentage">
+					<tr>
+						<th colspan="3" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5x;">Subtotal paciente:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.subtotal | currency : listtest.symbolCurrency : listtest.penny}}
+								</div>
+								<div ng-if="!listtest.trialdiscount" class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'1759' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" ng-if="!listtest.trialdiscount"
+									style="padding-left: 5px;">
+									{{listtest.totalinsurancePrice | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+
+								<div ng-if="listtest.trialdiscount" class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'0931' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" ng-if="listtest.trialdiscount"
+									style="padding-left: 5px;">
+									{{listtest.invoice.discounttest | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+						<th colspan="4" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'0470' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.taxValue | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'1549' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.total | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+					</tr>
+					<tr>
+						<th colspan="3" class="cltech-label uk-text-right">
+							<div class="uk-grid" ng-if="!listtest.generaldiscountmanagement">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 29px;">{{'1548' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.copay | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'1623' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.fee | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+							<div class="uk-grid" ng-if="listtest.generaldiscountmanagement">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 29px;">{{'0931' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.discountValue | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">Otros pagos:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.otherpayments | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+						<th colspan="4" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 29px;">{{'0471' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.balance | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'0391' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.totalPaid | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+					</tr>
+				</tfoot>
+				<tfoot class="tfoot-grid" ng-show="listtest.viewcustomerPercentage">
+					<tr>
+						<th colspan="3" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5x;">Subtotal paciente:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.subtotal | currency : listtest.symbolCurrency : listtest.penny}}
+								</div>
+								<div  class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'1759' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" 
+									style="padding-left: 5px;">
+									{{listtest.totalinsurancePrice | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>								
+							</div>
+						</th>
+						<th colspan="4" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'0470' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.taxValue | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'1549' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.total | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+					</tr>
+					<tr>
+						<th colspan="3" class="cltech-label uk-text-right">
+							<div class="uk-grid" ng-if="!listtest.generaldiscountmanagement">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 29px;">{{'1548' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.copay | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'1623' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.fee | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+							<div class="uk-grid" ng-if="listtest.generaldiscountmanagement">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 29px;">{{'0931' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.discountValue | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">Otros pagos:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.otherpayments | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+						<th colspan="4" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 29px;">{{'0471' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.balance | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+								<div class="uk-width-3-10 uk-text-truncate" style="font-weight: bold !important;
+								padding-left: 5px;">{{'0391' | translate}}:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.totalPaid | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+					</tr>
+				</tfoot>
+				<tfoot class="tfoot-grid"
+					ng-show="listtest.manageRate && listtest.viewRate && listtest.copayPercentage && !listtest.viewcustomerPercentage">
+					<tr>
+						<th colspan="3" class="cltech-label uk-text-right">
+
+							<div class="uk-grid">
+
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 5x;">{{ '0443' | translate }}:
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.total | currency : listtest.symbolCurrency : listtest.penny}}
+								</div>
+
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 5px;">T. Descuento:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;"
+									ng-if="listtest.invoice.discountType === 1">
+									{{ '0827' | translate }}
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;"
+									ng-if="listtest.invoice.discountType === 0">
+									{{ '0580' | translate }}
+								</div>
+
+							</div>
+
+						</th>
+
+						<th colspan="4" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 5px;">{{'0931' | translate}}:
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{listtest.invoice.discountValue | currency : listtest.symbolCurrency :
+									listtest.penny}}
+								</div>
+
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 5px;">T. con descuento:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{ ( listtest.invoice.total - listtest.invoice.discountValue ) | currency :
+									listtest.symbolCurrency : listtest.penny}}</div>
+							</div>
+						</th>
+
+					</tr>
+					<tr>
+						<th colspan="3" class="cltech-label uk-text-right">
+
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 5px;">T. Copago:</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;"
+									ng-if="listtest.invoice.copayType === 1">
+									{{ '0827' | translate }}
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;"
+									ng-if="listtest.invoice.copayType === 0">
+									{{ '0580' | translate }}
+								</div>
+
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important; padding-left: 29px;">{{'1548' | translate}}:
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{ listtest.invoice.copay | currency :listtest.symbolCurrency : listtest.penny }}
+								</div>
+							</div>
+
+						</th>
+
+						<th colspan="4" class="cltech-label uk-text-right">
+							<div class="uk-grid">
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 29px;">{{'0471' | translate}}:
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{ listtest.invoice.balance | currency : listtest.symbolCurrency : listtest.penny }}
+								</div>
+								<div class="uk-width-3-10 uk-text-truncate"
+									style="font-weight: bold !important;padding-left: 5px;">{{'0391' | translate}}:
+								</div>
+								<div class="uk-width-2-10 uk-text-truncate" style="padding-left: 5px;">
+									{{ listtest.invoice.totalPaid | currency : listtest.symbolCurrency : listtest.penny
+									}}</div>
+							</div>
+						</th>
+
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="md-card md-card-warning" style="width: 100%; height: 81px; margin-top:5px" ng-show="listtest.viewSamples">
+	<div class="orderentry-recipients">
+		<div ng-repeat="sample in listtest.samples" class="orderentry-recipient">
+			<img class="md-user-image md-list-addon-avatar" src="{{sample.container.image}}" alt="" draggable="false">
+			<p class="orderentry-sample-name">{{sample.name}}</p>
+		</div>
+	</div>
+</div>
+
+<!-- Ventana modal para confirmar y/o prohibir el borrado de exámenes según su estado: Reportado(2) pregunta. Validad(4) no permite.-->
+<div id="modalConfirmTest" class="uk-modal" bg-close="false" aria-hidden="true">
+	<div class="uk-modal-dialog" style="top: 100px !important">
+		<div class="uk-modal-header">
+			<h3 class="uk-modal-title">
+				{{listtest.stateTest === 2 || listtest.stateTest === 3 ? '0658' : '0659' | translate}}
+			</h3>
+		</div>
+		<div class="uk-modal-body" style="height: 65px; top: 0px; line-height: 70px">
+			<div style="width: 12%; float: left">
+				<img class="img-responsive" src="images/Question.png"
+					ng-if="listtest.stateTest === 2 || listtest.stateTest === 3">
+				<img class="img-responsive" src="images/iconinfo.png"
+					ng-if="listtest.stateTest >= 4 || listtest.validChilds > 0">
+			</div>
+			<div class="messageText">
+				<label class="labelmessageText" style="font-size: 14px; margin-left: 10px"
+					ng-if="listtest.validChilds === 0">{{listtest.stateTest === 2 || listtest.stateTest === 3 ? '0660' :
+					'0661' | translate}}</label>
+				<label class="labelmessageText"
+					style="font-size: 14px;margin-left: 10px;height: 20px;position: absolute;line-height: 20px;margin-top: 15px;"
+					ng-if="listtest.validChilds > 0">{{listtest.messagevalidchilds}}</label>
+			</div>
+		</div>
+		<div class="uk-modal-footer uk-text-right" ng-if="listtest.stateTest === 2 || listtest.stateTest === 3">
+			<button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+				ng-click="listtest.accept = true; listtest.getSelectTest(listtest.selected); listtest.modalValid.hide()">{{'0219'
+				| translate}}</button>
+			<button type="button" class="md-btn md-btn-default"
+				ng-click="listtest.accept = false; listtest.modalValid.hide()">{{'0220' | translate}}</button>
+		</div>
+		<div class="uk-modal-footer uk-text-right" ng-if="listtest.stateTest >= 4 || listtest.validChilds > 0">
+			<button type="button" class="md-btn md-btn-default"
+				ng-click="listtest.accept = false; listtest.modalValid.hide()">{{'0329' | translate}}</button>
+		</div>
+	</div>
+</div>
+
+
+<!-- Ventana modal validacion de pruebas que tengan diagnosticos que vallan a ser eliminados.-->
+<div id="modalConfirmDiagnostics" class="uk-modal" bg-close="false" aria-hidden="true">
+	<div class="uk-modal-dialog" style="top: 100px !important">
+		<div class="uk-modal-header">
+			<h3 class="uk-modal-title">
+				{{'0258' | translate}}
+			</h3>
+		</div>
+		<div class="uk-modal-body" style="height: 65px">
+			<div style="width: 12%; float: left">
+				<img class="img-responsive" src="images/Question.png">
+
+			</div>
+			<div class="messageText" style="padding-top: 10px; margin-left: 90px">
+				<label class="labelmessageText" style="font-size: 14px; margin-left: 0px;line-height: 26px">{{'0835' |
+					translate}}</label>
+			</div>
+		</div>
+		<div class="uk-modal-footer uk-text-right">
+			<button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+				ng-click="listtest.removediagnostics()">{{'0219' | translate}}</button>
+			<button type="button" class="md-btn md-btn-default uk-modal-close">{{'0220' | translate}}</button>
+		</div>
+	</div>
+</div>
+
+<!-- Ventana modal que muestra la lista de pruebas con error. -->
+<div id="modalErrorTest" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+	<div class="uk-modal-dialog" style="{{listtest.dimensions}}">
+		<div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px;"
+			ng-class="{'md-bg-red-A700' : listtest.numError !== '0', 'md-bg-yellow-700': listtest.numError === '0'}">
+			<h3 class="uk-modal-title">{{'0013' | translate}}</h3>
+		</div>
+		<div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+			<form class="form" name="myForm">
+				<div class="uk-form-row">
+					<div class="uk-grid uk-container-center"
+						ng-if="listtest.numError !== '6' && listtest.numError !== '7' && listtest.numError !== '8'">
+						<div class="uk-width-3-10" style="width: 20%; padding-left: 10px">
+							<i class="material-icons md-color-red-A700"
+								ng-class="{'md-color-red-A700' : listtest.numError !== '0', 'md-color-yellow-700': listtest.numError === '0'}"
+								style="font-size: 64px">warning</i>
+						</div>
+						<div class="uk-width-7-10" style="margin-top: 3%; padding-left: 10px">
+							<label style="white-space: normal; font-size: 14px">{{listtest.messageNotSave}}</label>
+						</div>
+					</div>
+					<div class="uk-grid uk-container-center"
+						ng-if="listtest.numError === '6' || listtest.numError === '7' || listtest.numError === '8'">
+						<div class="uk-width-3-10" style="width: 10%;padding-left: 10px;">
+							<i class="material-icons md-color-red-A700" style="font-size: 32px;">warning</i>
+						</div>
+						<div ng-if="listtest.numError === '6'" class="uk-width-7-10"
+							style="margin-top: 2%;padding-left: 10px;">
+							<label style="white-space: normal;" class="ng-binding">{{'0331' | translate}}</label>
+						</div>
+						<div ng-if="listtest.numError === '7'" class="uk-width-7-10"
+							style="margin-top: 2%;padding-left: 10px;">
+							<label style="white-space: normal;" class="ng-binding">{{'0836' | translate}}</label>
+						</div>
+						<div ng-if="listtest.numError === '8'" class="uk-width-7-10"
+							style="margin-top: 2%;padding-left: 10px;">
+							<label style="white-space: normal;" class="ng-binding">{{'0837' | translate}}</label>
+						</div>
+					</div>
+					<div class="uk-form-row"
+						ng-if="listtest.numError === '6' || listtest.numError === '7' || listtest.numError === '8'"
+						style="margin-top: -4px">
+						<table class="uk-table  uk-table-small uk-table-middle tablescrollable" style="font-size: 11px">
+							<tbody class="tbodyscrollable"
+								style="height: 200px; border-color: #ddd;border-style: solid;border-width: 1px; overflow-y: scroll;">
+								<tr class="uk-grid" data-ng-repeat="Test in listtest.listError"
+									style="margin-left: 0px; margin-top: 3px">
+									<td class="uk-width-1-1" data-ng-bind="Test.test"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</form>
+
+		</div>
+		<div class="uk-modal-footer uk-text-right" ng-if="listtest.numError !== '8'">
+			<button type="button" class="md-btn md-btn-flat" ng-click="listtest.modalValidTest.hide()">{{'0329' |
+				translate}}</button>
+		</div>
+		<div class="uk-modal-footer uk-text-right" ng-if="listtest.numError === '8'">
+			<button type="button" class="md-btn md-btn-danger md-btn-wave-light waves-effect waves-button waves-light"
+				ng-click="listtest.removediagnostics(true); listtest.modalValidTest.hide()">{{'0219' |
+				translate}}</button>
+			<button type="button" class="md-btn md-btn-default" ng-click=" listtest.modalValidTest.hide()">{{'0220' |
+				translate}}</button>
+		</div>
+	</div>
+</div>
+
+<!-- Ventana modal que muestra los requisitos de las pruebas seleccionadas o cargadas.de una orden -->
+<div id="modalRequirement" class="uk-modal" bg-close="false" aria-hidden="true" style="width: 100%; top: -3px">
+	<div class="uk-modal-dialog" style="top: 100px !important; width: 75%">
+		<div class="uk-modal-header md-bg-orange-A400" style="border-bottom-color: #ff9100 !important;">
+			<h3 class="uk-modal-title">
+				{{'0858' | translate}}
+			</h3>
+		</div>
+
+		<div class="uk-modal-body uk-grid" style="height: 458px; top: 0px; ">
+			<div class="uk-width-1-2" style="height: 470px">
+				<div class="md-card-warning" style="height: 100%; padding-left: 4px; margin-left: -4px">
+					<div class="md-input-wrapper">
+						<label>{{'0398' | translate}}</label>
+						<input type="text" class="md-input ordersearch-uppercase" ng-model="listtest.namePatient"
+							md-input style="font-size: 12px">
+						<!--  -->
+						<!--  <span class="md-input-bar"></span> -->
+					</div>
+					<div angucomplete-alt id="requirements_tests" placeholder="{{'0655' | translate}}"
+						class="uk-width-1-1" input-class="orderentry_tests_input uk-width-1-1 orderentrytab" pause="20"
+						selected-object="listtest.getSelectTestRequirement" local-data="listtest.tests"
+						search-fields="code,name" title-field="showValue" description-field="area.name"
+						image-field="colorType" minlength="1" match-class="highlight" focus-first="true"
+						text-searching="Buscando pruebas" clear-selected="true" override-suggestions="true"
+						search-fields local-search="listtest.filterListTest" focus-out="listtest.focusOutListTest()"
+						input-changed="listtest.inputChangedTest">
+					</div>
+					<div class="uk-width-1-1" style="height: 375px">
+						<table id="tableTestReq" class="uk-table uk-table-nowrap uk-table-condensed"
+							style="height: 375px">
+							<thead>
+								<tr>
+									<th class="uk-width-1-6 uk-text-center orderentry-tests-table-header">{{'0098' |
+										translate}}</th>
+									<th class="uk-width-4-6 uk-text-left orderentry-tests-table-header">{{'0118' |
+										translate}}</th>
+									<th class="uk-width-1-6 uk-text-left orderentry-tests-table-header">{{'0858' |
+										translate}}</th>
+								</tr>
+							</thead>
+							<tbody class="orderentry-tests-table-body tbody-style-test"
+								style="height: 355px; width: calc(50% - 38px) !important; font-size: 11px !important">
+								<tr ng-repeat="test in listtest.selectedTestReq track by $index">
+									<td class="uk-width-1-6 uk-text-center" style="width: 90px">{{test.code}}</td>
+									<td class="uk-width-4-6 uk-text-left" style="width: 385px">
+										<label class="uk-text-truncate">{{test.name}}</label>
+									</td>
+									<td class="uk-width-1-6 uk-text-left panel-padding" style="width: 40px">
+										{{test.quantity}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="uk-width-1-2" style="height: 470px">
+				<div class="md-card-warning" style="height: 100%; padding-left: 4px; margin-left: -4px">
+					<div class="uk-input-group" style="padding-left: 24px;">
+						<label>{{'0154' | translate}}</label>
+						<input type="text" class="md-input" ng-model="listtest.options5.filter.name" md-input
+							style="font-size: 12px">
+						<span class="uk-input-group-addon" style="padding: 0 0px;">
+							<i class="material-icons md-24">&#xE8B6;</i>
+						</span>
+					</div>
+					<div class="tree-container" style="height: 90%;overflow: auto; overflow-x: hidden;">
+						<tree nodes="listtest.basicTree" options="listtest.options5"></tree>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="uk-modal-footer uk-text-right">
+			<button type="button" class="md-btn md-btn-warning" ng-click="listtest.getReport();"
+				ng-disabled="listtest.selectedTestReq.length === 0"
+				ng-class="{'disabled':listtest.selectedTestReq.length === 0 }">{{'0009' | translate}}</button>
+			<button type="button" class="md-btn md-btn-default" ng-click="listtest.modalRequirement.hide()">{{'0329' |
+				translate}}</button>
+		</div>
+	</div>
+</div>

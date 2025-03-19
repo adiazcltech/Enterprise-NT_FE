@@ -1,0 +1,24 @@
+<ui-select   ng-model="loadcombobox.item.selected" ng-disabled="loadcombobox.disabled" theme="select2" on-select="loadcombobox.changelist($item)"  style="width: 100%;">    
+    <ui-select-match placeholder="{{loadcombobox.placeholder}}">{{$select.selected[loadcombobox.fieldCode]}} {{$select.selected[loadcombobox.fieldName]}}
+    </ui-select-match>
+    
+    <ui-select-choices group-by="'areaname'"  group-filter="loadcombobox.OrderFilterFn"  repeat="item in loadcombobox.list" refresh="loadcombobox.fetch($select,$event)" refresh-delay="100" position="down">
+        <span ng-if="loadcombobox.viewfieldCode" ng-bind-html="item[loadcombobox.fieldCode] | highlight: $select.search"></span>
+        <span ng-bind-html="item[loadcombobox.fieldName] | highlight: $select.search"></span>
+             <div ng-if="loadcombobox.list.length > 49" >
+                 <button ng-if="item.showbutton === true" 
+                        class="md-btn md-btn-primary md-btn-mini"
+                        style="width: 100%; margin-top: 5px; font-size: 12px !important"
+                        ng-click="loadcombobox.fetch($select,$event);"
+                        >
+                        {{'0934' | translate}} ({{loadcombobox.list.length}} / {{loadcombobox.listorigin.length}})
+                 </button>
+               </div>
+    </ui-select-choices>
+
+ </ui-select>
+ 
+
+    
+    
+  

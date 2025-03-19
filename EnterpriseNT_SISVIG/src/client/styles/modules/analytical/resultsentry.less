@@ -1,0 +1,194 @@
+// Contenedor de la página
+// div#page_content_inner {
+//    padding-top: 12px;
+//    padding-right: 8px;
+//    padding-left: 8px;
+// }
+
+div#principal {
+    min-height: calc(~"100vh - 64px");
+    min-height: -moz-calc(~"100vh - 64px");
+    min-height: -webkit-calc(~"100vh - 64px");
+}
+
+// Tablas en gerenal para el módulo 
+.rs-grid {
+    display: table;
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.rs-grid-body {
+    display: table-row-group;
+}
+
+.rs-grid-head {
+    display: table-cell;
+    padding: 2px 4px;
+    color: #727272;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);  
+    width: auto;
+}
+
+.rs-grid-row-head {
+    display: table-row;
+}
+
+.rs-grid-row {
+    display: table-row;
+    cursor:pointer;
+}
+
+.rs-grid-cell {
+    display: table-cell;
+    padding: 2px 4px;
+    border-bottom: 1px solid #ddd;
+    width: auto;
+}
+
+.rs-grid-cell-noborder {
+    display: table-cell;
+    padding: 2px 4px;
+    width: auto;
+}
+
+.rs-grid-heading {
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
+}
+
+.rs-grid-foot {
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
+}
+
+.rs-grid-block-cursor {
+    cursor: not-allowed;
+}
+
+// Listado de órdenes
+form#order_list div.rs-grid-row:hover{
+   background-color: #f2fcff;
+}
+
+form#order_list_simple div.rs-grid-row:hover{
+   background-color: #f2fcff;
+}
+
+div#order_list_card {
+    min-height: calc(~"100vh - 350px");
+    min-height: -moz-calc(~"100vh - 350px");
+    min-height: -webkit-calc(~"100vh - 350px");
+    max-height: calc(~"100vh - 350px");
+    max-height: -moz-calc(~"100vh - 350px");
+    max-height: -webkit-calc(~"100vh - 350px");
+}
+
+div#order_list_simple_card {
+    min-height: calc(~"100vh - 60px");
+    min-height: -moz-calc(~"100vh - 60px");
+    min-height: -webkit-calc(~"100vh - 60px");
+    max-height: calc(~"100vh - 60px");
+    max-height: -moz-calc(~"100vh - 60px");
+    max-height: -webkit-calc(~"100vh - 60px");
+}
+
+//Listado de examenes
+div#result_grid_card {
+    height: calc(~"100vh - 283px");
+}
+
+form#test_list div.rs-grid-row:hover{
+   background-color: #f2fcff;
+}
+
+.rs-grid-selected {
+    background-color: #fff8da;
+}
+
+.rs-grid-md-icon {
+    font-size: 23px;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: background 280ms ease-out, color 280ms ease-out;
+    text-align: center;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.rs-grid-md-input {
+    border-width: 0 0 0px !important;
+    min-height: 25px !important;
+    padding: 0px !important;
+}
+
+.rs-grid-md-input-wrapper {
+    padding: 0px !important;
+}
+
+// Comportamiento de las tarjetas
+.rs-card-title {
+    background-color: #f6f6f6 !important;
+    border-top: 4px solid transparent;
+}
+
+.rs-card-content-nopadding {
+    padding: 8px !important;
+}
+
+// Comportamiento de los botones
+.rs-button-margin {
+    margin: 4px;
+}
+// Comportamiento de los botones
+.rs-button-margin-left {
+    margin-left: 16px !important;
+}
+
+// Barra lateral
+#style_switcher_toggle_results {
+    position: absolute;
+    top: -6px;
+    left: -44px;
+    width: 44px;
+    height: 36px;
+    background: #fff;
+    border-radius: 4px 0 0 4px;
+    cursor: pointer;
+    padding: 0 8px;
+    -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.26);
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.26);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 1096;
+}
+
+#style_switcher_results {
+    position: fixed;
+    right: 0px;
+    top: 60px;
+    background: #fff;
+    width: 100%;
+    z-index: 1094;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 16px;
+    margin-right: -100%;
+    -webkit-transition: margin 800ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: margin 800ms cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.26);
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+#style_switcher_toggle_results .material-icons {
+    font-size: 24px;
+    line-height: 36px;
+    color: #212121;
+}
+
+#style_switcher_results.switcher_active {
+  margin-right: 0px;
+}

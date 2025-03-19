@@ -1,0 +1,130 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content">
+  <loadpage view="vm.loadingdata"></loadpage>
+  <div id="page_content_inner">
+    <div class="uk-grid fullheight">
+      <div class="uk-width-1-1 fullheight">
+        <div class="md-card fullheight">
+          <div style="height: 92%" class="md-card-content">
+            <div class="uk-width-1-1 fullheight">
+              <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1',swiping: false}" style="height: 36px">
+                <li ng-click="vm.changetab(1)" class="uk-active"><a href="#">Orden</a></li>
+                <li ng-click="vm.changetab(2)"><a href="#">Demografico</a></li>
+              </ul>
+              <ul id="tabs_1" class="uk-switcher uk-margin" style="height: calc(100% - 32px);">
+                <li style="height: 100%;">
+                  <div class="uk-grid fullheight">
+                    <div class="uk-width-1-1 " style="height: 20%;">
+                      <div class="md-card fullheight">
+                        <div style="height: 62%;padding: 24px;" class="md-card-content">
+                          <div class="uk-grid">
+                            <div class="uk-width-1-1">
+                              <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                                isopenreport="vm.button"></orderfilter>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-1" style="height: 62%">
+                      <div class="md-card  md-card-hover fullheight">
+                        <div class="md-card-content fullheight">
+                          <filterareatest confidential="vm.confidential" numfilterareatest="vm.numFilterAreaTest"
+                            listareas="vm.listAreas" listtests="vm.listTests" numlist="vm.numlist">
+                          </filterareatest>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-1" style="height: 10%">
+                      <button style="float: right" ng-show="vm.pruebareport1 === true" type="button"
+                        class="md-fab md-fab-small md-bg-purple-A700">
+                        <i class="uk-icon-refresh uk-icon-spin md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                          title="{{'0158' | translate}}"></i>
+                      </button>
+                      <button style="float: right" ng-show="vm.pruebareport1 === false" type="button"
+                        ng-disabled="!vm.button || vm.numlist==0" class="md-fab md-fab-small md-bg-purple-A700"
+                        ng-class="{'md-bg-blue-grey-100' : !vm.button || vm.numlist==0}"
+                        ng-click="vm.pruebareport1 = true; vm.generateFile()">
+                        <i class="material-icons md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                          title="{{'0158' | translate}}">&#xE8AD;</i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li class="fullheight">
+                  <div class="uk-width-1-1" style="height: 90px; overflow:auto">
+                    <filterdemographic id="'filterDemographics'" type="'H'" excludetypeorder="true" demographic="vm.demographics">
+                    </filterdemographic>
+                  </div>
+                  <div class="uk-input-group">
+                    <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed"
+                      ng-model="vm.searchdemographics" placeholder="Buscar demograficos"
+                      ng-disabled="modalsensitivities.datamicroorganismo.length===0">
+                    <span class="uk-input-group-addon" style="min-width: 28px;">
+                      <img ng-src="images/microbiology/search.png" />
+                    </span>
+                  </div>
+                  <table class="uk-table uk-table-small uk-table-middle tablescrollable"
+                    style="margin-top: 0px; height: 65%">
+                    <tbody class="tbodyscrollable" style="height: calc(100% - 100px)">
+                      <tr
+                        data-ng-repeat="demographic in vm.ListDemographicsHistory | filter: {name:vm.searchdemographics}">
+                        <td class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                          <input type="checkbox" icheck ng-model="demographic.selected" class="check_row"
+                            table-check-row>
+                        </td>
+                        <td class="uk-width-9-10" data-ng-bind="demographic.name"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="uk-width-1-1">
+                    <button style="float: right; margin-left: 5px" type="button"
+                      class="md-fab md-fab-small md-bg-red-A700"
+                      ng-click="vm.pruebareport = true; vm.getPatientbydemographics('pdf')" ng-disabled="(vm.ListDemographicsHistory | filter:{
+                                                  selected: true}).length === 0" ng-class="{'md-bg-blue-grey-100':(vm.ListDemographicsHistory | filter:{
+                                                    selected: true}).length === 0 }">
+                      <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="{{'0158' | translate}}"></i>
+                    </button>
+                    <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+                      ng-click="vm.pruebareport = true; vm.getPatientbydemographics('xls')"
+                      ng-click="vm.pruebareport = true; vm.getPatientbydemographics('pdf')" ng-disabled="(vm.ListDemographicsHistory | filter:{
+                        selected: true}).length === 0" ng-class="{'md-bg-blue-grey-100':(vm.ListDemographicsHistory | filter:{
+                          selected: true}).length === 0 }">
+                      <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="{{'0158' | translate}}"></i>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="logNoData" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 75px; top: 0px">
+      <div style="width: 18%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+      </div>
+    </div>
+    <div class="uk-modal-footer">
+    </div>
+  </div>
+</div>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

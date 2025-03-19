@@ -1,0 +1,98 @@
+<loadpage view="resultstestedit.loadingdata"></loadpage>
+<div class="uk-modal uk-modal-card-fullscreen" id="rs-modal-testedit">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-blue-A700">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}"
+                            ng-click="resultstestedit.closemodaltestEdit()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin:13px 6px 0px 0px; display: block;">
+                    <i class="material-icons md-24 md-color-light-blue-50">&#xE0B9;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    Modificación del resultado
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid uk-grid-small" style="height: 107px">
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardorder order="resultstestedit.order"
+                            typeordercode="resultstestedit.patient.typeordercode"
+                            typeordercolor="resultstestedit.patient.typeordercolor"
+                            testcode="resultstestedit.testcode" testname="resultstestedit.testname">
+                        </cardorder>
+                    </div>
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardpatient patientname="resultstestedit.patient.name"
+                            patientdocument="resultstestedit.patient.document"
+                            patientage="resultstestedit.patient.age"
+                            patientgender="resultstestedit.patient.gender"
+                            photopatient="resultstestedit.photopatient"
+                            patientid="resultstestedit.patient.id" orderpatient="resultstestedit.order"></cardpatient>
+                    </div>
+                    <div class="uk-width-1-3" style="height: 100%">
+                        <cardcomment id="'ordercomment'" orderhistory="vm.orderselect" gettype="1"
+                            setnotes="vm.selectedOrder.comment" getnotes="[]" readonly="true" iconsize="16"
+                            fontsize="11" headsize="24">
+                        </cardcomment>
+                    </div>
+                </div>
+                <div class="uk-grid" style="height: calc(100vh - 211px)">
+                    <div class="uk-width-1-1">
+                        <div class="md-card" style="height: 100%">
+                            <div class="md-card-content">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-1">
+                                        <label>{{'0113' | translate}}: </label>
+                                        <loadcombobox ng-model="resultstestedit.selectedMotive"
+                                            listorigin="resultstestedit.editMotives" cleanselect="false">
+                                        </loadcombobox>
+                                    </div>
+                                    <div class="uk-width-1-1" style="margin-top: 15px;">
+                                        <label>{{'0114' | translate}}:</label>
+                                        <div class="md-input-wrapper">
+                                            <textarea ng-model="resultstestedit.reasonComment"
+                                                class="md-input no_autosize"
+                                                style="margin: 0px -10.5px 0px 0px; width: 100%; height: 80px; font-size: 14px !important">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="uk-flex uk-flex-right"
+                                        style="position: fixed; bottom: 0; right: 0; left: 0; background: transparent; padding: 25px 21px; line-height: 48px;">
+                                        <div class="uk-flex uk-flex-column">
+                                            <button type="button"
+                                                ng-disabled="resultstestedit.selectedMotive === undefined"
+                                                class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500 uk-modal-close"
+                                                ng-class="{'md-bg-blue-grey-100' : resultstestedit.selectedMotive == undefined}"
+                                                ng-click="resultstestedit.save()">
+                                                <i class="material-icons md-color-light-blue-50"
+                                                    title="{{'0007' | translate}}"
+                                                    data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE161;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="rs-modal-advertencia-resultedit" class="uk-modal" bg-close="false" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container uk-flex uk-flex-middle" style="margin-top: 0px">
+            <div style="width: 12%;padding-left: 32px">
+                <img class="img-responsive" src="images/Warning.png">
+            </div>
+            <div style="margin-top: 10px;width: 82%" class="uk-text-center">
+                No se han creado motivos de modificación de resultado, comuniquese con el administrador
+            </div>
+        </div>
+    </div>
+</div>

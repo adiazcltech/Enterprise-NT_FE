@@ -1,0 +1,194 @@
+<style type="text/css">
+  .sedewith {
+    width: 46%;
+  }
+
+</style>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner">
+    <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-1-1 fullheight">
+        <div class="md-card fullheight" style="margin-bottom: 5px">
+          <div class="md-card-content uk-grid fullheight">
+            <div class="uk-width-6-10">
+              <fieldset class="fieldset" style="height: 54px; padding-top: 8px">
+                <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                  isopenreport="vm.disabled"></orderfilter>
+              </fieldset>
+            </div>
+            <div class="uk-width-4-10" style="padding-left: 10px">
+              <fieldset class="fieldset" style="height: 62px; padding-top: 0px">
+                <legend style="padding-left: 2px; font-size: 13px;">{{'0161' |
+                  translate}}:</legend>
+                <div class="uk-form-row md-input-wrapper md-input-filled" style="padding-top: 15px;">
+                  <p style="margin-left: 7px">
+                    <input type="radio" name="typereport" id="typefiltercodensade" icheck ng-model="vm.typereport"
+                      value="1" />
+                    <label style="margin-right: 20px" for="typefiltercodensade" class="inline-label">{{ '0432' | translate }}</label>
+                    <input type="radio" name="typereport" id="typefilterdetallado" icheck ng-model="vm.typereport"
+                      value="2" />
+                    <label style="margin-right: 20px" for="typefilterdetallado" class="inline-label">{{ '0321' | translate }}</label>
+                  </p>
+                </div>
+              </fieldset>
+            </div>
+            <div style="height: calc(100% - 98px);"
+              ng-class="{'uk-width-1-1' : !vm.service,'sedewith' : vm.service}">
+              <fieldset class="fieldset" style="height: 89%">
+                <legend>{{'0003' | translate}}</legend>
+                <div class="uk-grid fullheight">
+                  <div class="uk-width-1-10" style="width: 10%">
+                    <button style="margin-left: 18px; margin-top: 10px" type="button"
+                      class="md-fab md-fab-minismall md-bg-light-blue-600"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.allcheckbranch}" ng-click="vm.selectallbranch(groupid)">
+                      <i class="material-icons md-color-indigo-50 md-24" data-uk-tooltip="{pos:'top'}"
+                        title=" {{'0353' | translate}} ">&#xE065;</i>
+                    </button>
+                  </div>
+                  <div class="uk-width-3-10">
+                    <ui-select ng-model="vm.itembranch.selected" theme="select2" ng-disabled="false"
+                      style="width: 100%;" title="Seleccione una sede" on-select="vm.additemslistbranch($item)">
+                      <ui-select-match placeholder="Items">
+                        {{$select.selected.code}}. {{$select.selected.name}}
+                      </ui-select-match>
+                      <ui-select-choices
+                        repeat="item in vm.listbranch | filter: {code:$select.search} || {name:$select.search}">
+                        <small ng-bind-html="item.code | highlight: $select.search"></small>.
+                        <span ng-bind-html="item.name | highlight: $select.search"></span>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                  <div class="uk-width-6-10 fullheight">
+                    <div class="uk-overflow-container fullheight">
+                      <table class="uk-table">
+                        <tbody>
+                          <tr ng-repeat="item in vm.listselectbranch">
+                            <td style="width: calc(100% - 25px);">{{item.code}} {{item.name}}</td>
+                            <td style="width: 25px">
+                              <i ng-if="vm.allcheckbranch" class="material-icons md-24 md-color-red-600">&#xE15C;</i>
+                              <i ng-if="!vm.allcheckbranch"
+                                class="material-icons md-24 md-color-light-green-500">&#xE90A;</i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="uk-width-1-2" style="height: calc(100% - 98px);margin-left: -14px;width: 52%;"
+              ng-if="vm.service">
+              <fieldset class="fieldset" style="height: 89%">
+                <legend>{{'0090' | translate}}</legend>
+                <div class="uk-grid fullheight">
+                  <div class="uk-width-1-10" style="width: 10%">
+                    <button style="margin-left: 18px; margin-top: 10px" type="button"
+                      class="md-fab md-fab-minismall md-bg-light-blue-600"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.allcheckservice}" ng-click="vm.selectallservice(groupid)">
+                      <i class="material-icons md-color-indigo-50 md-24" data-uk-tooltip="{pos:'top'}"
+                        title=" {{'0353' | translate}} ">&#xE065;</i>
+                    </button>
+                  </div>
+                  <div class="uk-width-3-10">
+                    <ui-select ng-model="vm.item.selected" theme="select2" ng-disabled="false" style="width: 100%;"
+                      on-select="vm.additemslist($item)">
+                      <ui-select-match placeholder="Items">
+                        {{$select.selected.code}}. {{$select.selected.name}}
+                      </ui-select-match>
+                      <ui-select-choices
+                        repeat="item in vm.listservice | filter: {code:$select.search} || {name:$select.search}">
+                        <small ng-bind-html="item.code | highlight: $select.search"></small>.
+                        <span ng-bind-html="item.name | highlight: $select.search"></span>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                  <div class="uk-width-6-10 fullheight">
+                    <div class="uk-overflow-container fullheight">
+                      <table class="uk-table">
+                        <tbody>
+                          <tr ng-repeat="item in vm.listselect">
+                            <td style="width: calc(100% - 25px);">{{item.code}} {{item.name}}</td>
+                            <td style="width: 25px">
+                              <i ng-if="vm.allcheckservice" class="material-icons md-24 md-color-red-600">&#xE15C;</i>
+                              <i ng-if="!vm.allcheckservice"
+                                class="material-icons md-24 md-color-light-green-500">&#xE90A;</i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+      <div class="md-card uk-animation-scale-up uk-animation-40 fullheight">
+        <div style="padding-top: 5px" class="md-card-content fullheight">
+          <div class="uk-grid fullheight">
+            <div class="uk-width-1-1" style="float: right">
+              <button style="float: right" ng-show="vm.report === true" type="button" ng-disabled="true"
+                class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : false}">
+                <i class="uk-icon-refresh uk-icon-spin md-color-grey-50"></i>
+              </button>
+              <button style="float: right" ng-show="vm.report === false" type="button" ng-disabled="!vm.disabled"
+                class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : !vm.disabled}"
+                ng-click="vm.report = true; vm.getearlywarning()">
+                <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                  title="{{'0158' | translate}}">&#xE8AD;</i>
+              </button>
+              <div class="uk-width-1-1" style="margin-top: 10px;margin-left: 31px;">
+                <md-checkbox class="md-primary" ng-model="vm.groupProfiles" aria-label="Agrupar por perfiles">
+                  Agrupar por perfiles
+                </md-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalinformative" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div ng- class="uk-overflow-container" style="margin-top: 0px">
+        <div style="width: 54px; float: left;">
+          <img class="img-responsive" src="images/iconinfo.png">
+        </div>
+        <div class="uk-text-center" style="margin-top: 10px">
+          {{'0547' | translate}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false">
+  <div class="uk-modal-dialog message">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 100px; top: 0px">
+      <div style="width: 20%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

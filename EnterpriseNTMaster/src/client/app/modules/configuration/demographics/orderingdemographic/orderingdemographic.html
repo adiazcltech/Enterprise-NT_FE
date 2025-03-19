@@ -1,0 +1,128 @@
+<style type="text/css">
+  .info-select {
+    background-color: #c4e3f3;
+  }
+
+  .deleted-select {
+    background-color: #ebcccc;
+  }
+
+  .not-sortable {
+    color: #ffffff !important;
+    cursor: default !important;
+  }
+
+  .md-list .reset_list .border-box .uk-nestable-list>li,
+  .md-list>li {
+    min-height: 30px !important;
+  }
+
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError">
+</modalerror>
+<section class="row general-container">
+  <div class="panel panel-primary panel-principal">
+    <div class="panel-heading row">
+      <div class="col-md-4 text-left">
+        <strong class="panel-title text-left title-bar">
+          {{'1358' | translate | uppercase}}
+        </strong>
+      </div>
+      <div class="col-md-8 text-right" style="padding-top: 5px;">
+        <strong class="text-right" ng-bind="vm.usuario">
+        </strong>
+        <span class="panel-title glyphicon glyphicon-question-sign question-style" data-placement="bottom"
+          data-toggle="tooltip"
+          onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/orderingdemographic/orderingdemographic.htm','','width=1200,height=600,left=50,top=50,toolbar=yes');"
+          title="Ctrl + B">
+        </span>
+      </div>
+    </div>
+    <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+      <div class="col-md-12 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container">
+              <div style="float: right; width: 100%;height: 36px">
+                <div class="btn-group col-lg-12 text-left" 
+                  style="font-size: 10px; background-color: transparent; padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 10px; margin-top: 0px; min-width: 90%;">
+                  <label class="btn btn-primary col-sm-5 radio-button"
+                    ng-class="{'active': vm.origin==='H'}" ng-click="vm.filterOrigin('H')"
+                     ng-model="vm.origin" style="font-style: 12px;width: 50%"
+                    uib-btn-radio="'H'" uib-uncheckable="uncheckable">
+                    <span aria-hidden="true" class="glyphicon glyphicon-ok" ng-if="vm.origin==='H'"
+                      style="margin-right: 5px;">
+                    </span>
+                    {{'0070' | translate}}
+                  </label>
+                  <label class="btn btn-primary col-sm-5 radio-button"
+                    ng-class="{'active': vm.origin==='O'}" ng-click="vm.filterOrigin('O')"
+                     ng-model="vm.origin" style="font-style: 12px; width: 48%"
+                    uib-btn-radio="'O'" uib-uncheckable="uncheckable">
+                    <span aria-hidden="true" class="glyphicon glyphicon-ok" ng-if="vm.origin==='O'"
+                      style="margin-right: 5px;">
+                    </span>
+                    {{'0061' | translate}}
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+              </div>
+              <div class="table table-list">
+                <ul class="md-list md-list-addon"
+                  style="padding-inline-start: 0px;border-bottom: 2px solid rgba(0, 0, 0, 0.12);margin-bottom: 0px;">
+                  <li style="color: #fff;padding: 0px 0px">
+                    <div class="md-list-addon-element Bold text" style="padding: 0px 11px 0px;color: #333;">
+                      <strong>N°</strong></div>
+                    <div class="md-list-content" style="color: #333;margin-bottom: 8px">
+                      <div class="col-md-12"><strong>{{'0011' | translate}}</strong></div>                      
+                    </div>
+                  </li>
+                </ul>
+                <ul class="md-list md-list-addon contentscroll" ui-sortable="vm.sortableOptions"
+                  ng-model="vm.dataDemographics" style="padding-inline-start: 0px;height: calc(100% - 33px);
+                                 overflow-y: scroll;">
+                  <li ng-repeat="Demographics in vm.dataDemographics"
+                    data-ng-click="vm.getDemographicsId(Demographics.id, DemographicsForm)"
+                    style="color: #fff;padding: 0px 0px">
+                    <div class="md-list-addon-element"
+                      style="padding: 5px">
+                      <span class="label label-primary">{{Demographics.order=$index + 1}}</span>                      
+                    </div>
+                    <div class="md-list-content" style="color: #333;margin-bottom: 5px">
+                      <div class="col-md-6" style="margin-top: 5px;" translate="{{Demographics.name}}"></div>                      
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="validateorder.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="img-responsive" src="images/Question.png" width="115" height="115">
+                        </div>
+                        <div class="col-md-9">
+                            <label class="modal-label">{{'0991' | translate}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">{{'0032' | translate}}</button>
+                    <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">{{'0033' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

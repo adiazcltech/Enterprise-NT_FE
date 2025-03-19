@@ -1,0 +1,243 @@
+<style>
+  .k-picker-wrap {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+  }
+
+  .k-picker-wrap.k-state-hover {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+  }
+
+  .k-datepicker .k-input,
+  .k-timepicker .k-input {
+    background-color: white;
+  }
+</style>
+<!-- modal error-->
+<modalexceptions
+  idcontrol="'modalinterview'"
+  openmodal="interview.ShowPopupErrorinterview"
+  detailerror="interview.Errorinterview"
+></modalexceptions>
+<!-- card para editar los datos de la entrevista-->
+<div
+  class="md-card md-card-hover"
+  style="height: 100%; width: 100%"
+  ng-show="!interview.state"
+>
+  <div class="md-card-toolbar" style="background-color: #e6e6e6">
+    <h3 class="md-card-toolbar-heading-text">
+      <img
+        class="md-card-head-avatar"
+        style="width: 38px; height: 38px; margin-top: 0px"
+        ng-src="images/microbiology/interview.png"
+      />
+      {{'0192' | translate}} {{interview.dateorder}}
+    </h3>
+  </div>
+  <div
+    class="md-card-content"
+    style="
+      height: calc(100% - 50px);
+      width: 89%;
+      overflow-y: auto !important;
+      padding: 0px 16px 0px 14px;
+    "
+  >
+    <ul class="md-list md-list-addon">
+      <li
+        data-ng-repeat="interview in interview.ListInterview"
+        style="border-bottom: 0px solid rgba(0, 0, 0, 0.12)"
+      >
+        <div class="md-list-addon-element">
+          <span class="uk-badge uk-badge-primary"> {{$index + 1}}</span>
+        </div>
+        <div class="md-list-content">
+          <span class="md-list-heading" style="font-weight: 700">
+            {{interview.question}}</span
+          >
+          <span class="uk-text-small uk-text-muted">
+            <input
+              ng-if="interview.control === 1"
+              md-input
+              class="md-input"
+              type="text"
+              id="username"
+              name="username"
+              ng-model="interview.interviewAnswer"
+            />
+
+            <input
+              ng-if="interview.control === 2"
+              kendo-numeric-text-box
+              class="k-textbox orderentrytab"
+              k-ng-model="interview.interviewAnswer"
+              k-format="'n0'"
+              style="width: 100%"
+            />
+
+            <select
+              ng-if="interview.control === 5"
+              class="md-input"
+              charset="utf-8"
+              ng-options="obj as obj.name for obj in interview.answers track by obj.id"
+              data-ng-model="interview.answers.selected"
+              class="form-control"
+              ng-change="interview.changeSelect(interview.answers.selected,interview.answers)"
+            ></select>
+
+            <textarea
+              ng-if="interview.control === 3"
+              cols="30"
+              rows="4"
+              data-ng-model="interview.interviewAnswer"
+              class="md-input no_autosize"
+              style="margin: 0px -10.5px 0px 0px; width: 100%; height: 100px"
+            ></textarea>
+
+            <input
+              ng-if="interview.control === 4"
+              kendo-date-picker
+              k-ng-model="interview.interviewAnswer"
+              style="width: 100%"
+              id="kUI_datepicker_a"
+              k-format="'{{interview.formatDate}}'"
+            />
+
+            <tags-input
+              ng-if="interview.control === 6"
+              id="tagFilterTests"
+              ng-model="interview.answers.selected"
+              min-length="1"
+              add-on-paste="true"
+              display-property="id"
+              class="md-input"
+              placeholder="+"
+              add-from-autocomplete-only="false"
+              add-on-space="false"
+              add-on-blur="false"
+              text="$tag"
+              template="tag-Template"
+              on-tag-removed="interview.validRemoveTag($tag, interview.answers)"
+              on-tag-added="interview.validAddTag($tag, interview.answers)"
+            >
+              <auto-complete
+                source="interview.loadItems($tag, interview.answers)"
+                min-length="1"
+                load-on-focus="true"
+                load-on-empty="true"
+                max-results-to-show="32"
+                template="my-custom-template"
+              >
+              </auto-complete>
+            </tags-input>
+          </span>
+        </div>
+      </li>
+    </ul>
+    <div class="md-fab-wrapper md-fab-in-card">
+      <button
+        type="button"
+        class="md-fab md-fab-small md-fab md-fab-primary"
+        ng-click="interview.Saveinterview()"
+      >
+        <i
+          class="material-icons"
+          data-uk-tooltip="{pos:'top'}"
+          title=" {{'0007' | translate}} "
+          >&#xE161;</i
+        >
+      </button>
+    </div>
+  </div>
+</div>
+<!-- template de los tag-->
+<script type="text/ng-template" id="tag-Template">
+  <div class="right-panel" style="padding-left: 4px">
+      <span>{{data.name}}</span>
+      <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+  </div>
+</script>
+<!-- template de los tag-->
+<script type="text/ng-template" id="my-custom-template">
+
+  <div class="right-panel">
+      <span>{{data.name}}</span>
+  </div>
+</script>
+<!-- card que muestra los datos de la entrevista-->
+<div
+  class="md-card md-card-hover"
+  style="height: 100%; width: 100%"
+  ng-show="interview.state"
+>
+  <div class="md-card-toolbar" style="background-color: #e6e6e6;">
+    <h3 class="md-card-toolbar-heading-text" style="width: 100%;">
+      <img
+        class="md-card-head-avatar"
+        style="width: 38px; height: 38px; margin-top: 0px"
+        ng-src="images/microbiology/checklist.png"
+      />
+       Entrevista      
+      <span class="uk-text-small uk-text-muted orderinfo-list-content ng-binding"
+      style="float: right;margin-top: 29px;"
+      >{{interview.dateorder}}</span>
+    </h3>   
+  </div>
+  <div
+    class="md-card-content"
+    style="
+      height: calc(100% - 50px);
+      width: 89%;
+      overflow-y: auto !important;
+      padding: 0px 16px 0px 14px;
+    "
+  >
+    <ul class="md-list md-list-addon">
+      <li
+        data-ng-repeat="interview in interview.ListInterview"
+        style="margin-left: 34px"
+      >
+        <div
+          class="md-list-addon-element"
+          style="width: 33px; margin-left: 26px"
+        >
+          <span class="uk-badge uk-badge-primary"> {{$index + 1}}</span>
+        </div>
+        <div class="md-list-content">
+          <span class="md-list-heading" style="font-weight: 700">
+            {{interview.question}}</span
+          >
+          <span
+            class="uk-text-small uk-text-muted"
+            ng-show="interview.answers.length===0"
+            ng-class="{'md-color-grey-50' : interview.interviewAnswer===undefined}"
+            style="margin-left: 15px"
+          >
+            {{interview.interviewAnswer===undefined?'.':interview.interviewAnswer}}</span
+          >
+          <span
+            class="uk-text-small uk-text-muted"
+            ng-show="interview.answers.length!==0"
+          >
+            <ul class="md-list">
+              <li data-ng-repeat="itemsinterview in interview.answertotal">
+                <div class="md-list-content">
+                  <span
+                    class="md-list-heading"
+                    ng-class="{'md-color-grey-50' : itemsinterview.name==='null'}"
+                    style="margin-left: 15px"
+                    >{{itemsinterview.name==='null'?'.':itemsinterview.name}}</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

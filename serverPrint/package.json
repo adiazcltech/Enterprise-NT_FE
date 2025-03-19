@@ -1,0 +1,26 @@
+{
+  "name": "03_export_rendered_report_to_pdf-file",
+  "version": "1.0.0",
+  "description": "Export Rendered Report to PDF-file",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "extend": "^3.0.2",
+    "loader": "^2.1.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "request": "^2.88.2",
+    "require-in-the-middle": "^5.1.0",
+    "stimulsoft-dashboards-js": "^2022.2.3",
+    "stimulsoft-reports-js": "^2022.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/03.%20Export%20Rendered%20Report%20to%20PDF-file"
+  }
+}

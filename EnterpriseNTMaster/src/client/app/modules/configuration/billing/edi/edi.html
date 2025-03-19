@@ -1,0 +1,269 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+    <div class="row general-container">
+        <div class="panel panel-primary panel-principal">
+            <div class="panel-heading row">
+                <div class=" col-md-4 panel-title">
+                    <strong class="panel-title text-left title-bar">
+                        {{'0393' | translate |uppercase}}
+                    </strong>
+                </div>
+                <div class=" col-md-8 text-right" style="padding-top: 5px">
+                    <strong ng-bind="vm.usuario"></strong>
+                    <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Ctrl + B" onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/edi/edi.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+                </div>
+            </div>
+            <div class="panel-body general-container panel-padding panel-scroll">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+                    <div class="panel-list">
+                        <div class="panel panel-primary general-container">
+                            <div class="panel-body general-container" style="overflow:auto">
+                                <uib-accordion close-others="true">
+                                    <div uib-accordion-group class="panel panel-default panel-padding" heading="Static Header, initially expanded" is-open="vm.state">
+                                        <uib-accordion-heading>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title panel-third">
+                                                    <span class="badge" data-ng-bind="vm.filtered.length"></span>
+                                                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.state, 'glyphicon-chevron-right': !vm.state}"></i>
+                                                    {{'0394' | translate}}
+
+                                                </h4>
+                                            </div>
+                                        </uib-accordion-heading>
+                                        <div class="form-group-sm">
+                                            <div class="input-group">
+                                                <input data-ng-model="vm.search" class="form-control" type="text" placeholder="{{'0015' | translate}}">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <table class="table table-fixed" style="height: 307px;margin-bottom: 0px;">
+                                            <tbody vs-repeat="30">
+                                                <tr class="row-list" data-ng-repeat="Edi in vm.filtered = ((vm.Estado | filter: vm.search )| orderBy:vm.sortType:sortReverse)" data-ng-click="vm.getId(Edi.id,$index,Form);vm.selected1=-1" ng-class="{info: $index == vm.selected}">
+                                                    <td class="col-md-12" data-ng-bind="Edi.name"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div uib-accordion-group class="panel panel-default panel-padding" is-open="status.one" heading="Custom template">
+                                        <uib-accordion-heading>
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title panel-third">
+                                                    <span class="badge" data-ng-bind="vm.filtered1.length"></span>
+                                                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.one, 'glyphicon-chevron-right': !status.one}"></i>
+                                                    {{'0395' | translate}}
+                                                </h4>
+                                            </div>
+                                        </uib-accordion-heading>
+                                        <div class="form-group-sm">
+                                            <div class="input-group">
+                                                <input data-ng-model="vm.search1" class="form-control" type="text" placeholder="{{'0015' | translate}}">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-fixed" style="height: 307px;margin-bottom: 0px;">
+                                            <tbody vs-repeat="30">
+                                                <tr class="row-list" data-ng-repeat="Edi in vm.filtered1 = ((vm.private | filter: vm.search1 )| orderBy:vm.sortType:sortReverse)" data-ng-click="vm.getId(Edi.id,$index,Form);vm.selected=-1" ng-class="{info: $index == vm.selected1}">
+                                                    <td class="col-md-12" data-ng-bind="Edi.name"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </uib-accordion>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+                    <div class="panel-list">
+                        <div class="panel panel-primary general-container">
+                            <div class="panel-body panel-form" style="overflow:auto;padding: 4px 15px">
+                                <form name="Form" id="Form" class="form-horizontal panel-body" style="    padding: 9px;">
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 text-right label-pading" style="padding-right: 0px;  padding-left: 0px;">{{'0375' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" id="code" maxlength="60" ng-model="vm.Detail.claimCode" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 text-right label-pading" style="padding-right: 0px;
+                                                                  padding-left: 0px;">{{'0377' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" data-ng-model="vm.Detail.interchangeSender" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0386' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <select ng-options="obj.id as obj.name for obj in vm.claimType" data-ng-model="vm.Detail.claimType" class="form-control" ng-required="true" ng-disabled="vm.isDisabled"></select>
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0379' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" data-ng-model="vm.Detail.applicationSendCode" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 label-pading  text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0382' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" ng-model="vm.Detail.formatMemberId" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0378' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" data-ng-model="vm.Detail.interchangeQualifier" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0387' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <select ng-options="obj.id as obj.name for obj in vm.transactionType" data-ng-model="vm.Detail.transactionType" class="form-control" ng-required="true" ng-disabled="vm.isDisabled"></select>
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0380' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" data-ng-model="vm.Detail.labSubmitter" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0381' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" ng-model="vm.Detail.identificationPayer" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0385' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" data-ng-model="vm.Detail.outputFileName" ng-disabled="vm.isDisabled" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0383' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <select ng-options="obj as obj.name for obj in vm.datareceiver track by obj.id" data-ng-model="vm.Detail.receiver1" class="form-control" ng-required="true" ng-disabled="vm.isDisabled"></select>
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 label-pading text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0384' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3">
+                                            <input class="form-control" maxlength="60" data-ng-model="vm.Detail.consecutive" ng-disabled="true" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0376' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3 text-left">
+                                                    <toggle 
+                                                                ng-model="vm.Detail.eligibility" 
+                                                                on="{{'0068' | translate}}" 
+                                                                off="{{'0492' | translate}}"
+                                                                ng-disabled="vm.isDisabled"
+                                                                size="btn-sm"
+                                                    ></toggle>                                          
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0374' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3 text-left">
+                                             <toggle 
+                                                                ng-model="vm.Detail.applyTypePayer" 
+                                                                on="{{'0068' | translate}}" 
+                                                                off="{{'0492' | translate}}"
+                                                                ng-disabled="vm.isDisabled"
+                                                                size="btn-sm"
+                                             ></toggle>  
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0389' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3 text-left">
+                                           <toggle 
+                                                                ng-model="vm.Detail.assingBenefits" 
+                                                                on="{{'0068' | translate}}" 
+                                                                off="{{'0492' | translate}}"
+                                                                ng-disabled="vm.isDisabled"
+                                                                size="btn-sm"
+                                           ></toggle> 
+                                        </div>
+                                        <label class="col-lg-3 col-md-3 text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0388' | translate}}:</label>
+                                        <div class="col-lg-3 col-md-3 text-left">
+                                           <toggle 
+                                                                ng-model="vm.Detail.supplierSignature" 
+                                                                on="{{'0068' | translate}}" 
+                                                                off="{{'0492' | translate}}"
+                                                                ng-disabled="vm.isDisabled"
+                                                                size="btn-sm"
+                                           ></toggle> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm ">
+                                        <label class="col-lg-3 col-md-3 text-right" style="padding-right: 0px;  padding-left: 0px;">{{'0406' | translate}}:</label>
+                                        <div class="col-lg-5 col-md-5 text-left">
+                                            <div class="btn-group btn-group-sm" style="width: 62%; min-width: 200px">
+                                                <label class="btn btn-primary radio-button" ng-disabled="vm.isDisabled" ng-model="vm.Detail.electronicClaim" uib-btn-radio="false" uib-uncheckable="uncheckable" style="width: 50%">
+                                                    <span ng-if="!vm.Detail.electronicClaim" class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'0405' | translate}}
+                                                </label>
+                                                <label class="btn btn-primary radio-button " ng-disabled="vm.isDisabled" ng-model="vm.Detail.electronicClaim" uib-btn-radio="true" uib-uncheckable="uncheckable" style="width: 50%">
+                                                    <span ng-if="vm.Detail.electronicClaim" class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'0412' | translate}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="container" style="width: 100%">
+                                   <!--  <button type="button" class=" btn btn-success button-list" ng-click="vm.New(Form)" ng-disabled="true">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'0005' | translate}}
+                                    </button> -->
+                                    <button type="button" style="width: calc(100% / 4 - 4px)" class="btn btn-warning button-list" ng-click="vm.Edit()" ng-disabled="vm.isDisabledEdit">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                                    </button>
+                                    <button type="button" style="width: calc(100% / 4 - 4px)" class="btn btn-primary button-list" ng-click="vm.save(Form)" ng-disabled="!Form.$valid || vm.isDisabledSave">
+                                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                                    </button>
+                                    <button type="button" style="width: calc(100% / 4 - 4px)" class="btn btn-info button-list" ng-click="vm.cancel(Form)" ng-disabled="vm.isDisabledCancel">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                                    </button>
+                                     <button type="button" style="width: calc(100% / 4 - 4px)" class="btn btn-violet button-list" ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint">
+                                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/ng-template" id="Requerido.html">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="col-md-2"
+                                 ng-class="{'col-md-offset-2':reciverhide > 0 || ratehide > 0}"></div>
+                            <div class="col-md-4" ng-hide="reciverhide > 0">
+                                <a ng-click="close('reciver')" class="thumbnail" data-dismiss="modal" style="height: 133px;">
+                                    <img src="images/reciver.png">
+                                    <h6 class="text-center"> {{'0383' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-4" ng-hide="ratehide > 0">
+                                <a ng-click="close('rate')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/rate.png">
+                                    <h6 class="text-center"> {{'0494' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

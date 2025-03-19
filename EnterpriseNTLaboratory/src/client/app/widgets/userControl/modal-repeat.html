@@ -1,0 +1,83 @@
+<style>
+  label {
+    font-size: 12px;
+    color: #727272;
+  }
+</style>
+
+<div id="repeatmodal" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true"
+  style="display: none; overflow-y: scroll; ">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-light-blue-700">
+        <div class="md-card-toolbar-actions" style="padding-top: 0px">
+          <div>
+            <i class="md-icon material-icons md-color-grey-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}" ng-click="modalrepeat.Comment=''; modalrepeat.motive.id=-1">&#xE5CD;</i>
+          </div>
+        </div>
+        <span style="float: left; margin: 8px 8px 0 0; display: block;"><i class="material-icons md-color-brown-50"
+            style="line-height: 32px; font-size: 28px">&#xE040;</i></span>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+          {{'1441' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="height: calc(100% - 76px);">
+        <div class="uk-grid uk-grid-small" style="width: 100%; margin-left: 0px;height: 116px">
+          <div class="uk-width-1-3" style="padding-left: 0px;height: 100%;">
+            <cardorder order="modalrepeat.order" typeordercode="modalrepeat.patient.typeordercode"
+              typeordercolor="modalrepeat.patient.typeordercolor" testcode="modalrepeat.TestSelect.code"
+              testname="modalrepeat.TestSelect.name"></cardorder>
+          </div>
+          <div class="uk-width-1-3" style="height: 100%;">
+            <cardpatient patientname="modalrepeat.patient.name" patientdocument="modalrepeat.patient.document"
+              patientage="modalrepeat.patient.age" patientgender="modalrepeat.patient.gender"  orderdemo="modalrepeat.orderdemo"
+              photopatient="modalrepeat.photopatient" patientid="modalrepeat.patient.id" orderpatient="modalrepeat.order"></cardpatient>
+          </div>
+          <div class="uk-width-1-3" style="height: 100%;">
+            <commentordermodal type="1" orderhistory="modalrepeat.order" viewdirectic="modalrepeat.viewcomment">
+            </commentordermodal>
+          </div>
+        </div>
+        <form class="form md-card md-card-hover" name="myForm" style="height: calc(100% - 205px); padding: 20px">
+          <div class="uk-form-row uk-width-1-1" style="height: 100%">
+            <div class="uk-form-row"></div>
+            <div class="uk-form-row" style="margin-top: 15px; height: 100% ">
+              <table class="uk-table uk-table-small uk-table-middle tablescrollable" style="height: calc(100% - 60px)">
+                <div class="uk-grid">
+                  <div class="uk-input-group uk-width-1-1" style="float: left;">
+                    <label>{{'0154' | translate}}</label>
+                    <input type="text" class="md-input" ng-model="modalrepeat.filter1" md-input>
+                    <span class="uk-input-group-addon" style="height: 10px;">
+                      <i class="material-icons md-24">&#xE8B6;</i>
+                    </span>
+                  </div>
+                </div>
+                <thead class="theadscrollable" style="width: calc(100% - 0px)">
+                  <tr class="uk-width-1-1" style="display: inline-table;">
+                    <th class="uk-width-1-6">{{'0289' | translate}}</th>
+                    <th class="uk-width-1-6 uk-text-center">{{'0325' | translate}}</th>
+                    <th class="uk-width-1-6">{{'0113' | translate}}</th>
+                    <th class="uk-width-1-6">{{'0001' | translate}}</th>
+                    <th class="uk-width-1-2">{{'0597' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody class="tbodyscrollable" style="height: calc(100% - 60px); overflow-y: scroll;">
+                  <tr class="uk-grid" data-ng-repeat="Repeat in modalrepeat.repeats | filter: modalrepeat.filter1"
+                    style="margin-left: 0px; margin-top: 0px; height: 32px;">
+                    <td data-ng-bind="Repeat.result" class="uk-width-1-6"></td>
+                    <td class="uk-width-1-6 uk-text-center">
+                      {{ Repeat.resultDate | date: modalrepeat.formatDate | lowercase }}</td>
+                    <td data-ng-bind="Repeat.reason" class="uk-width-1-6"></td>
+                    <td data-ng-bind="Repeat.repeatUser.userName" class="uk-width-1-6"></td>
+                    <td data-ng-bind="Repeat.reasonComment" class="uk-width-1-3"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

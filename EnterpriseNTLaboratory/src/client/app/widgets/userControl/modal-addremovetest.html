@@ -1,0 +1,136 @@
+<style>
+  label {
+    font-size: 12px;
+    color: #727272;
+  }
+ 
+</style>
+<div id="addremovetestmodal" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true"
+  style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-orange-A700">
+        <div class="md-card-toolbar-actions">
+          <i class="md-icon material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}"
+            ng-click="modaladdremovetest.modal.hide();
+            modaladdremovetest.selectedTest= [];">&#xE5CD;</i>
+        </div>
+        <span style="float: left; margin: 8px 8px 0 0; display: block;"><i class="material-icons md-color-grey-50"
+            style="line-height: 32px; font-size: 28px">exposure</i></span>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+          {{'0654' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="height: calc(100% - 79px);">
+        <div class="uk-grid uk-grid-small" style="width: 100%; margin-left:
+          0px;height: 121px">
+          <div class="uk-width-1-3" style="padding-left: 0px;height:
+            100%;">
+            <cardorder order="modaladdremovetest.order" typeordercode="modaladdremovetest.patient.typeordercode"
+              typeordercolor="modaladdremovetest.patient.typeordercolor" testcode="modaladdremovetest.TestSelect.code"
+              testname="modaladdremovetest.TestSelect.name">
+            </cardorder>
+          </div>
+          <div class="uk-width-1-3" style="z-index: 200;height: 100%;">
+            <cardpatient patientname="modaladdremovetest.patient.name" orderdemo="modaladdremovetest.orderdemo"
+              patientdocument="modaladdremovetest.patient.document" patientage="modaladdremovetest.patient.age"
+              patientgender="modaladdremovetest.patient.gender" photopatient="modaladdremovetest.photopatient"
+              patientid="modaladdremovetest.patient.id" orderpatient="modaladdremovetest.order">
+            </cardpatient>
+          </div>
+          <div class="uk-width-1-3" style="height: 100%;">
+            <loadpage view="modaladdremovetest.loading"></loadpage>
+            <commentordermodal type="1" orderhistory="modaladdremovetest.order" 
+              viewdirectic="modaladdremovetest.viewcomment">
+            </commentordermodal>
+          </div>
+        </div>
+        <form class="form md-card md-card-hover" name="myForm" style="height: calc(100% - 170px); padding: 20px; padding-top: 0px
+          !important; margin-top: 11px">
+          <div class="uk-form-row uk-width-1-1" style="height: calc(100% -
+            60px);">
+
+            <div class="uk-form-row" style="margin-top: 10px; height: calc(100%
+              - 60px)">
+              <listtest 
+                 disabled="false" 
+                 id="'tests'" 
+                 getdatatests="modaladdremovetest.listDataTest"
+                 setdatatests="modaladdremovetest.selectedTest" 
+                 cleantests="modaladdremovetest.cleanTests"
+                 infopatient="modaladdremovetest.validPatienTest" 
+                 ratedefault="modaladdremovetest.rateId"
+                 clientdefault="modaladdremovetest.account"
+                 setsamples="modaladdremovetest.samples" 
+                 viewsamples="true" 
+                 viewhead="false" 
+                 viewrate="true"
+                 usepatient="true" 
+                 save="modaladdremovetest.save" 
+                 order="modaladdremovetest.order"
+                 blockservice="modaladdremovetest.blockservice">
+              </listtest>
+            </div>
+          </div>
+          <div class="md-fab-wrapper md-fab-in-card" style="margin-bottom: 0px">
+            <button type="button" class="md-fab md-fab-small md-fab md-fab-wave-light waves-effect
+              waves-light md-color-grey-50 md-bg-orange-A700" ng-focus="modaladdremovetest.save= true;"
+              ng-click="modaladdremovetest.saveTestAddRemove()">
+              <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                title="{{'0007' | translate}}">&#xE161;</i>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="logErrorTest1" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;" bg-close="false">
+  <div class="uk-modal-dialog" style="{{modaladdremovetest.dimensions}}">
+    <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px;"
+      ng-class="{'md-bg-red-A700' : modaladdremovetest.numError !== '0', 'md-bg-yellow-700': modaladdremovetest.numError === '0'}">
+      <h3 class="uk-modal-title">{{modaladdremovetest.messageNotTittle}}</h3>
+    </div>
+    <div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+      <form class="form" name="myForm">
+        <div class="uk-form-row">
+          <div class="uk-grid uk-container-center" ng-if="modaladdremovetest.numError !== '6'">
+            <div class="uk-width-3-10" style="width: 20%; padding-left: 10px">
+              <i class="material-icons md-color-red-A700"
+                ng-class="{'md-color-red-A700' : modaladdremovetest.numError !== '0', 'md-color-yellow-700': modaladdremovetest.numError === '0'}"
+                style="font-size: 64px">warning</i>
+            </div>
+            <div class="uk-width-7-10" style="margin-top: 3%; padding-left: 10px">
+              <label style="white-space: normal;">{{modaladdremovetest.messageNotSave}}</label>
+            </div>
+          </div>
+          <div class="uk-grid uk-container-center" ng-if="modaladdremovetest.numError === '6'">
+            <div class="uk-width-3-10" style="width: 10%;padding-left: 10px;">
+              <i class="material-icons md-color-red-A700" style="font-size: 32px;">warning</i>
+            </div>
+            <div class="uk-width-7-10" style="margin-top: 2%;padding-left: 10px;">
+              <label style="white-space: normal;" class="ng-binding">{{'0331' | translate}}</label>
+            </div>
+          </div>
+          <div class="uk-form-row" ng-if="modaladdremovetest.numError === '6'" style="margin-top: -4px">
+            <table class="uk-table  uk-table-small uk-table-middle tablescrollable" style="font-size: 11px">
+              <tbody class="tbodyscrollable"
+                style="height: 200px; border-color: #ddd;border-style: solid;border-width: 1px; overflow-y: scroll;">
+                <tr class="uk-grid" data-ng-repeat="Test in modaladdremovetest.listError"
+                  style="margin-left: 0px; margin-top: 3px">
+                  <td class="uk-width-1-1" data-ng-bind="Test.test"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' | translate}}</button>
+    </div>
+  </div>
+</div>

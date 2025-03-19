@@ -1,0 +1,354 @@
+<style>
+  .appointmentsearch-padding-search {
+    padding-top: 5px;
+  }
+
+  .appointmentsearch-uppercase {
+    text-transform: uppercase;
+  }
+
+  .appointmentsearch-filter-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .appointmentsearch-filter-padding {
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
+  input.appointmentsearch-data-input {
+    padding-bottom: 5px !important;
+    margin-top: -6px !important;
+    background-color: transparent !important;
+    width: 100% !important;
+    border-bottom-width: 1px !important;
+    position: relative !important;
+    top: -38px !important;
+    border-bottom-color: #ccc !important;
+  }
+
+  span.k-picker-wrap,
+  span.k-state-default,
+  span.k-state-default:hover,
+  span.k-state-default:focus {
+    padding: 0px !important;
+    height: 35px !important;
+    border-style: none;
+    background-color: #fff !important;
+  }
+
+  .md-input-wrapper {
+    width: 96% !important;
+  }
+
+  #div_date {
+    width: 210px !important;
+  }
+
+  #div_date>div.md-input-wrapper {
+    width: 174px !important;
+  }
+</style>
+<div id="appointmentsearch" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+  <loadpage view="appointmentsearch.loadingdata"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-orange-A700">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-grey-50 " ng-click="appointmentsearch.getCloset()"
+              data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-grey-50 md-33">&#xE8B6;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+          {{'0424' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+
+        <div class="uk-form-row">
+          <div class="md-card md-card-hover">
+            <div class="md-card-content">
+              <div class="uk-tab-center">
+                <ul class="uk-tab" data-uk-tab="{connect:'#tabs_filter',swiping: false}" change.uk.tab="">
+                  <li class="uk-active">
+                    <a ng-click="appointmentsearch.eventSelectOrder()">{{'0110' | translate}}</a>
+                  </li>
+                  <li>
+                    <a href="#" ng-click="appointmentsearch.eventSelectPatientId()">{{'0117' | translate}}</a>
+                  </li>
+                  <li>
+                    <a href="#" ng-click="appointmentsearch.eventSelectPatient()">{{'0398' | translate}}</a>
+                  </li>
+                  <li>
+                    <a href="#" ng-click="appointmentsearch.eventSelectDate()">{{'0325' | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+              <ul id="tabs_filter" class="uk-switcher uk-margin appointmentsearch-filter-margin">
+                <li class="appointmentsearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center appointmentsearch-filter-padding">
+                      <div class="uk-width-5-10 uk-row-first">
+                        <div class="md-input-wrapper">
+                          <label>{{'0110' | translate}}</label>
+                          <input id="txt_appointmentsearch_order" type="number" class="md-input"
+                            ng-model="appointmentsearch.orderToSearch"
+                            ng-keypress="$event.keyCode === 13 && appointmentsearch.searchByOrder()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-3-10" style="width: 35%; padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="appointmentsearch.searchByOrder()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 15%; padding-top: 10px">
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{appointmentsearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="appointmentsearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center appointmentsearch-filter-padding">
+                      <div class="uk-width-2-5" ng-if="appointmentsearch.showDocumentType">
+                        <label style="top: -6px;font-size: 12px;">{{'0233' | translate}}</label>
+                        <select id="txt_appointmentsearch_patient_id1" class="md-input"
+                          ng-options="obj.id as obj.name for obj in appointmentsearch.documentTypes"
+                          ng-change="appointmentsearch.searchByPatientId()"
+                          data-ng-model="appointmentsearch.patientDocToSearch"></select>
+                        <span class="md-input-bar"></span>
+                      </div>
+                      <div class="uk-width-1-5 uk-row-first" style="padding: 2px;">
+                        <label>{{'0117' | translate}}</label>
+                        <input id="txt_appointmentsearch_patient_id" type="text" class="md-input appointmentsearch-uppercase"
+                          ng-model="appointmentsearch.patientIdToSearch"
+                          ng-keypress="$event.keyCode === 13 && appointmentsearch.searchByPatientId()">
+                        <span class="md-input-bar"></span>
+                      </div>
+                      <div class="uk-width-1-5" style="width: 25%;padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="appointmentsearch.searchByPatientId()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 15%;padding-top: 10px">
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{appointmentsearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="appointmentsearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center appointmentsearch-filter-padding">
+                      <div class="uk-width-1-5 uk-row-first">
+                        <div class="md-input-wrapper">
+                          <label>{{'0234' | translate}}</label>
+                          <input id="txt_appointmentsearch_patient_last_name" type="text"
+                            class="md-input appointmentsearch-uppercase" ng-model="appointmentsearch.lastNameToSearch"
+                            ng-keypress="$event.keyCode === 13 && appointmentsearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5">
+                        <div class="md-input-wrapper">
+                          <label>{{'0235' | translate}}</label>
+                          <input type="text" class="md-input appointmentsearch-uppercase"
+                            ng-model="appointmentsearch.surNameToSearch"
+                            ng-keypress="$event.keyCode === 13 && appointmentsearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5">
+                        <div class="md-input-wrapper">
+                          <label>{{'0236' | translate}}</label>
+                          <input type="text" class="md-input appointmentsearch-uppercase" ng-model="appointmentsearch.name1ToSearch"
+                            ng-keypress="$event.keyCode === 13 && appointmentsearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5">
+                        <div class="md-input-wrapper">
+                          <label>{{'0237' | translate}}</label>
+                          <input type="text" class="md-input appointmentsearch-uppercase" ng-model="appointmentsearch.name2ToSearch"
+                            ng-keypress="$event.keyCode === 13 && appointmentsearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5" style="width: 7%;padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="appointmentsearch.searchByPatient()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 13%;padding-top: 10px">
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{appointmentsearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="appointmentsearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center appointmentsearch-filter-padding">
+                      <div class="uk-width-1-6 uk-row-first" style="margin-top: 10px;">
+                        <md-datepicker ng-model="appointmentsearch.dateToSearch" name="dateField1"
+                          ng-change="appointmentsearch.searchByDate()" md-open-on-focus md-is-open="appointmentsearch.isOpen2"
+                          ng-required="true" >
+                        </md-datepicker>
+                      </div>
+                      <div class="uk-width-1-5" style="width: 67%;padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="appointmentsearch.searchByDate()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 15%;padding-top: 10px">
+                        <!-- ng-if="appointmentsearch.orders.length!==0" -->
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{appointmentsearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="uk-width-1-1" style="margin-top: 10px;height: 70%" ng-show="appointmentsearch.viewtable">
+          <div class="md-card md-card-hover" style="height: 100%;">
+            <div class="md-card-content" style="height: 100%;padding: 0px;">
+              <div class="md-card-content fullheight" style="padding: 0px;">
+                <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head" style="height: 39px;">
+                  <div class="uk-width-1-10" style="padding-left: 10px;"
+                    ng-click="appointmentsearch.sortType = 'order'; appointmentsearch.sortReverse = !appointmentsearch.sortReverse">
+                    <resultssort sortvalue="'order'" sorttype="appointmentsearch.sortType"
+                      sortreverse="appointmentsearch.sortReverse"></resultssort>
+                    {{'0110' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;" ng-if="appointmentsearch.showDocumentType"
+                    ng-click="appointmentsearch.sortType = 'documentTypeId'; appointmentsearch.sortReverse = !appointmentsearch.sortReverse">
+                    <resultssort sortvalue="'documentTypeId'" sorttype="appointmentsearch.sortType"
+                      sortreverse="appointmentsearch.sortReverse"></resultssort>{{'0233' | translate}}
+                  </div>
+                  <div style="padding-left: 10px;"
+                    ng-click="appointmentsearch.sortType = 'patientId'; appointmentsearch.sortReverse = !appointmentsearch.sortReverse"
+                    ng-class="{'uk-width-2-10' : appointmentsearch.showDocumentType,'uk-width-4-10' : !appointmentsearch.showDocumentType}">
+                    <resultssort sortvalue="'patientId'" sorttype="appointmentsearch.sortType"
+                      sortreverse="appointmentsearch.sortReverse"></resultssort>{{'0398' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="appointmentsearch.sortType = 'lastName'; appointmentsearch.sortReverse = !appointmentsearch.sortReverse">
+                    <resultssort sortvalue="'lastName'" sorttype="appointmentsearch.sortType"
+                      sortreverse="appointmentsearch.sortReverse"></resultssort>{{'0120' | translate}}
+                  </div>
+                 
+                  <div class="uk-width-1-10" style="padding-left: 10px;"
+                    ng-click="appointmentsearch.sortType = 'sex'; appointmentsearch.sortReverse = !appointmentsearch.sortReverse">
+                    <resultssort sortvalue="'sex'" sorttype="appointmentsearch.sortType"
+                      sortreverse="appointmentsearch.sortReverse"></resultssort>{{'0426' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                  ng-click="appointmentsearch.sortType = 'birthday'; appointmentsearch.sortReverse = !appointmentsearch.sortReverse">
+                    <resultssort sortvalue="'birthday'" sorttype="appointmentsearch.sortType"
+                    sortreverse="appointmentsearch.sortReverse"></resultssort>Jornada
+                  </div>
+                </div>
+                <div class="vs-repeat-custom-scroll" style="height: calc(100% - 40px);" vs-repeat="20"
+                  data-scroll-to-top='appointmentsearch.orders'>
+                  <div ng-repeat="order in appointmentsearch.orders | orderBy:appointmentsearch.sortType:appointmentsearch.sortReverse"
+                    class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table" style="margin-top: 0px;">
+                    <div class="uk-width-1-10" style="padding-left: 10px;">
+                      <a href="#" ng-click="appointmentsearch.selectOrder(order.order)">{{order.order}}</a>
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 15px;" ng-if="appointmentsearch.showDocumentType">
+                      {{order.documentType.toUpperCase() === 'DEFECTO' ? 'SIN TIPO DE DOCUMENTO' :
+                      order.documentType.toUpperCase()}}
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 15px;">{{order.patientId}}. {{order.lastName.toUpperCase() + ' ' + (order.surName === null || order.surName === '' ? '' :
+                      order.surName.toUpperCase()
+                      + ' ') + order.name1.toUpperCase() + ' ' + ((order.name1 === null || order.name2 === '' ? '' :
+                      order.name2.toUpperCase())) }}</div>
+                    
+                    <div style="padding-left: 23px;" class="uk-width-2-10">{{order.birthday}}</div>
+                    <div style="padding-left: 27px;" class="uk-width-1-10">{{order.sex}}</div>
+                    <div style="padding-left: 20px;"
+                      ng-class="{'uk-width-2-10' : appointmentsearch.showDocumentType,'uk-width-4-10' : !appointmentsearch.showDocumentType}">
+                      {{order.appointment.shift.name}} ({{order.appointment.shift.init}} - {{order.appointment.shift.end}})
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid uk-width-1-1 uk-grid-medium" style="margin-top: 10px;height: 70%"
+          ng-show="appointmentsearch.nofound && !appointmentsearch.viewtable">
+          <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+            <img class="img-responsive" style="height: 90px; width: 90px;" src="images/data.png">
+          </div>
+          <div class="uk-width-1-1 uk-text-center">
+            <h3 class="ng-binding">{{'1077' | translate}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

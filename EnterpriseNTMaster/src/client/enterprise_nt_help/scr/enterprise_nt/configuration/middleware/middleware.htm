@@ -1,0 +1,375 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Integración de middleware por laboratorio</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+
+
+
+<style>
+html,div { margin: 0; padding: 0;}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	overflow: auto;
+	height: 100%;
+}
+
+#winchm_template_button{
+	float: right;
+	width: 93px;
+	top: 7px;
+	position: relative;
+	text-align: right;
+	right: 5px;
+	height: auto;
+}
+
+#winchm_template_top{
+	padding: 0px;
+	margin: 0px;
+	border-bottom: 1px solid #9B9B9B;
+	background-color: #B1CEFE;
+}
+
+#winchm_template_navigation{
+	margin: 0px;
+	padding-top: 7px;
+	padding-left: 7px;
+	padding-bottom: 3px;
+	padding-right: 0px;
+	font-size: 8.5pt;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #585858;
+}
+
+#winchm_template_title{
+	margin: 0px;
+	padding-top: 4px;
+	padding-left: 7px;
+	padding-bottom: 7px;
+	padding-right: 0px;
+	font-size: 18px; 
+	font-family: Verdana, Geneva, sans-serif;
+	color: #363636;
+}
+
+#winchm_template_content{
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	width: auto  !important;
+	width: 100%;
+}
+
+#winchm_template_footer{
+	border-width: 1px;
+	border-color: #B1CEFE;
+	border-top-style: solid;
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	padding-top: 7px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 8.5pt;
+	color: #696969;
+	width: auto;
+	text-align: left;
+}
+
+
+#winchm_template_container{
+	margin: 0px;
+	padding: 0px;
+	position: static;
+	padding-bottom: 3px;
+	overflow: auto;
+	background-color: #FFFFFF;
+}
+
+
+@media print
+{
+#winchm_template_container{
+	position: static;	
+	margin: 0px;
+	padding: 5px;
+	
+	width: auto;
+	height: auto;
+	overflow: auto;
+}
+#winchm_template_button{
+visibility:hidden;
+}
+}
+
+#winchm_template_navigation A:link	{text-decoration: none; color:#004080}
+#winchm_template_navigation A:visited  {text-decoration: none; color: #004080}
+#winchm_template_navigation A:active {text-decoration: none; color: #004080 }
+#winchm_template_navigation A:hover {text-decoration: none;color: #0080FF}
+
+A:link	{text-decoration: underline; color:#0033CC}
+A:visited  {text-decoration: underline; color: #0033CC}
+A:active {text-decoration: underline; color: #0033CC }
+A:hover {text-decoration: underline;color: #FF0000;}
+</style>
+<script type="text/javascript">
+function isMobile(){
+Agent = window.navigator.userAgent;
+if (Agent.indexOf("iPhone")>=1 || Agent.indexOf("iPad")>=1 || Agent.indexOf("iPod")>=1 || Agent.indexOf("Android")>=1){
+return true;
+}else{
+return false;	
+}
+
+}
+function d_onresize(){
+if (window.navigator.userAgent.indexOf("MSIE")>=1){
+document.getElementById('winchm_template_container').style.pixelWidth = document.body.offsetWidth - 3;
+document.getElementById('winchm_template_container').style.pixelHeight = document.body.offsetHeight - document.getElementById('winchm_template_top').offsetHeight - 4;
+}
+document.getElementById('winchm_template_container').style.top = document.getElementById('winchm_template_top').offsetHeight + 'px';
+}
+
+function d_onbeforeprint(){
+document.getElementById('winchm_template_container').style.width = 'auto';
+document.getElementById('winchm_template_container').style.height = 'auto';
+}
+
+function d_onafterprint(){
+d_onresize();
+}
+
+if(!isMobile()){
+
+window.onload = d_onresize;
+window.onresize = d_onresize;
+window.onbeforeprint = d_onbeforeprint;
+window.onafterprint = d_onafterprint;
+
+document.write("<style>\n");
+document.write("body {overflow: hidden;}\n");
+document.write("#winchm_template_container {position: absolute;overflow: auto;top : 0px;right: 0px;bottom: 0px;left: 0px;}\n");
+document.write("</style>\n");
+}
+
+</script>
+</head>
+
+<body><script language="JavaScript" type="text/JavaScript">
+function syn(){
+if(parent.nav.tree){
+ if(parent.nav.tree.loaded){
+  parent.nav.tree.selectNode(48);
+ }else{
+  setTimeout("syn()",500);
+}
+  }else{
+  setTimeout("syn()",500);
+  }}
+if(parent!=self){
+  setTimeout("syn()",100);
+}else{
+  parent.location.href = "../../../../index.htm?page=enterprise_nt/configuration/middleware/middleware.htm";
+}
+originalOnload = window.onload;
+if(originalOnload==null){
+window.onload = function(){parent.contentLoaded = true;};
+}else{
+window.onload = function(){originalOnload();parent.contentLoaded = true;};
+}
+</script> 
+
+
+<div id="winchm_template_top">
+	<div id="winchm_template_button"><A href="../taxbytest/taxbytest.htm" title="Previous topic"><img id="winchm_template_prev" alt="Previous topic" src="../../../template2/btn_prev_n.png" border="0"></a><A href="../demographicitem/demographicItem.htm" title="Next topic"><img id="winchm_template_next" alt="Next topic" src="../../../template2/btn_next_n.png" border="0"></a></div>
+	<div id="winchm_template_navigation">Help &gt; 
+Configuracion &gt; </div>
+	<div id="winchm_template_title">Integración de middleware por laboratorio</div>
+</div>
+<div id="winchm_template_container">
+	<div id="winchm_template_content"><FONT size=2> 
+<P><SPAN style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Este 
+formulario permite relacionar una URL de servicio web&nbsp;para integrar el 
+sistema&nbsp;Middleware&nbsp;con los laboratorios internos&nbsp;registrados en 
+el sistema LIS. </SPAN><SPAN 
+style='FONT-SIZE: 11pt; FONT-FAMILY: "Arial","sans-serif"'><?xml:namespace 
+prefix = "o" ns = "urn:schemas-microsoft-com:office:office" 
+/><o:p></o:p></SPAN></P>
+<P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"; mso-ansi-language: ES-CO; mso-bidi-font-size: 11.0pt'>
+<SPAN >
+A continuación, se muestra una ventana típica con sus 
+partes:</SPAN></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+</SPAN>                     
+      
+    </FONT><FONT face="Arial"><FONT size=2> </P>
+<P align=center>
+<SPAN lang=ES-CO style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-bidi-font-size: 11.0pt'><IMG style="HEIGHT: 379px; WIDTH: 878px" alt="" src="../../img/middleware_01.png" width=1356 height=625></SPAN>              </P></FONT></FONT>
+<P>              </P><FONT face="Arial"><FONT size=2>
+<SPAN lang=ES-CO style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-bidi-font-size: 11.0pt'></SPAN>
+<P style="TEXT-ALIGN: center" align=center><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>&nbsp;</SPAN><STRONG><SPAN 
+style='FONT-SIZE: 7.5pt; FONT-FAMILY: "Arial","sans-serif"'>[Imagen 01 - 
+Formulario de integración de middleware]</SPAN></STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> 
+<o:p></o:p></SPAN></P><FONT face="Arial"><FONT size=2>
+<P><STRONG><SPAN style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>1. 
+Buscador.</SPAN></STRONG><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> <br></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Se escribe o se 
+introduce un valor alfa-numérico para filtrar elementos de la lista de datos de 
+los laboratorios. El filtro se da de manera dinámica; a medida que se vaya 
+digitando un valor, la lista va mostrando las filas coincidentes con las 
+columnas visibles. <o:p></o:p></SPAN></P>
+<p><STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>2. Ordenamiento. 
+</SPAN>  
+</STRONG><?xml:namespace prefix = "v" ns = 
+"urn:schemas-microsoft-com:vml" /><v:shapetype id=_x0000_t75 
+coordsize="21600,21600" o:spt="75" o:preferrelative="t" 
+path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f"><v:stroke 
+joinstyle="miter"></v:stroke><v:formulas><v:f 
+eqn="if lineDrawn pixelLineWidth 0"></v:f><v:f eqn="sum @0 1 0"></v:f><v:f 
+eqn="sum 0 0 @1"></v:f><v:f eqn="prod @2 1 2"></v:f><v:f 
+eqn="prod @3 21600 pixelWidth"></v:f><v:f 
+eqn="prod @3 21600 pixelHeight"></v:f><v:f eqn="sum @0 0 1"></v:f><v:f 
+eqn="prod @6 1 2"></v:f><v:f eqn="prod @7 21600 pixelWidth"></v:f><v:f 
+eqn="sum @8 21600 0"></v:f><v:f eqn="prod @7 21600 pixelHeight"></v:f><v:f 
+eqn="sum @10 21600 0"></v:f></v:formulas><v:path o:extrusionok="f" 
+gradientshapeok="t" o:connecttype="rect"></v:path><o:lock v:ext="edit" 
+aspectratio="t"></o:lock></v:shapetype><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Se usa el 
+ordenamiento por columnas de menor a mayor o viceversa, la lista se organiza ya 
+sea alfabéticamente, numéricamente o por valor (falso o verdadero). El icono 
+cambia según el orden.<o:p></o:p></SPAN></p>
+<p><STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>3. Cantidad. 
+</SPAN>  
+</STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Este control 
+muestra la cantidad de laboratorios activos e internos visualizados en la lista 
+de datos. Su valor cambia a medida que se vayan filtrando valores en el cuadro 
+de búsqueda.<o:p></o:p></SPAN></p>
+<p><STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>4. Botón ayuda.&nbsp; 
+</SPAN></STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'><BR>Despliegue del 
+manual de cada página.&nbsp;<o:p></o:p></SPAN></p>
+<p><a name=OLE_LINK10></a><a 
+name=OLE_LINK33></a><a name=OLE_LINK32></a><strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>5. Fecha de última 
+actualización - Usuario.</SPAN>    
+  </strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'> <BR>Aquí se muestra la fecha y el usuario que modificaron el 
+registro que ha sido seleccionado. Por defecto no aparece visible, solo cuando 
+se selecciona una fila de la lista de laboratorios.<o:p></o:p></SPAN></p>
+<p><strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>6. 
+URL.</SPAN> </strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>&nbsp; <BR>        
+ Es la ruta de acceso al servicio web para integrar 
+Middleware con el laboratorio seleccionado.&nbsp;Este campo es requerido. 
+<o:p></o:p></SPAN></p>
+<p><strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>7. Probar 
+conexión.</SPAN></strong><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>  <BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Es un botón que 
+valida la URL introducida, si la URL no es válida o falla la 
+conexión&nbsp;aparece un mensaje en rojo indicando dicho 
+inconveniente.<o:p></o:p></SPAN></p>
+<p>
+<strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>8. Enviar orden desde 
+el ingreso de órdenes. </SPAN>
+</strong><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>
+    
+  
+ 
+<BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Indica si el LIS 
+en&nbsp;el módulo de ingreso de órdenes envía la información de la orden para 
+que sea recibida y almacenada por el Middleware. Se valida que al menos un tipo 
+de envío deba estar activo.<o:p></o:p></SPAN></p>
+<p><STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>9. Enviar orden desde 
+la verificación de muestras. </SPAN> </STRONG><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>
+  
+<BR>Indica si el LIS en&nbsp;el módulo de&nbsp;verificación de 
+muestras&nbsp;envía la información de la orden para que sea recibida y 
+almacenada por el Middleware. Se valida que al menos un tipo de envío deba estar 
+activo. <o:p></o:p></SPAN>    </p><p ><strong ><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>10. Botón editar. 
+</SPAN></strong><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>
+   
+<BR ></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Este botón permite editar&nbsp;la 
+URL del laboratorio&nbsp;selecciono de la lista de datos; es habilitado cuando se selecciona un registro. 
+Se cargan los datos en la caja de texto URL&nbsp;y al pulsarlo el botón<strong ><SPAN 
+style='FONT-FAMILY: "Arial","sans-serif"'> Editar</SPAN> </strong>, se habilitan todos los controles del 
+formulario. Se habilitan los botones<strong ><SPAN style='FONT-FAMILY: "Arial","sans-serif"'> 
+Guardar</SPAN> </strong> y <STRONG><SPAN 
+style='FONT-FAMILY: "Arial","sans-serif"'>Cancelar</SPAN></STRONG>.<o:p></o:p></SPAN></p><p ><strong ><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>11. Botón guardar. 
+</SPAN></strong><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>
+   
+<BR ></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Este botón permite guardar los cambios realizados 
+en la URL y tipo de envío de orden 
+del laboratorio seleccionado. Al pulsarlo se deshabilitan los botones <strong><SPAN 
+style='FONT-FAMILY: "Arial","sans-serif"'>Editar</SPAN></strong>, <strong><SPAN 
+style='FONT-FAMILY: "Arial","sans-serif"'>Cancelar</SPAN></strong> y el propio 
+botón.<o:p></o:p></SPAN></p>
+<p><strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>12. Botón 
+cancelar.</SPAN></strong><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>  <BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Este      botón cancela, 
+limpia y deshabilita los controles del formulario. Deshabilita los botones <strong><SPAN 
+style='FONT-FAMILY: "Arial","sans-serif"'>Editar</SPAN></strong> y <strong><SPAN 
+style='FONT-FAMILY: "Arial","sans-serif"'>Guardar.</SPAN> 
+</strong><o:p></o:p></SPAN></p>
+<p><strong><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>13. Listado de 
+laboratorios.</SPAN></strong><B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>  <BR></SPAN></B><SPAN 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial","sans-serif"'>Es una lista de datos 
+que contiene dos campos:&nbsp;Laboratorio que aparece con el código unido al 
+nombre&nbsp;y la URL del servicio web. Dicha lista puede ser ordenada y/o 
+filtrada por cada campo. La fila seleccionada siempre se mostrará resaltada en 
+azul claro.</SPAN>        
+               
+              
+       </FONT></FONT></P></FONT></FONT><BR><font color="#FF0000" size="1" face="Arial">This document is created with WinCHM trial version. (The registered version will not show this message!)</font></div>	
+	<div id="winchm_template_footer">     
+   Copyright © 2017. CLTech Colombia All rights reserved.</div>
+</div>
+
+</body>
+</html>

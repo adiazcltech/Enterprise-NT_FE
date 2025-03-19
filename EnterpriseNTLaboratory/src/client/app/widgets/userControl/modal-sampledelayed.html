@@ -1,0 +1,41 @@
+<div id="samplerejectmodal" class="uk-modal" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header md-bg-purple-300" style="border-bottom: 0px;">
+            <h3 class="uk-modal-title">Muestras retrazadas</h3>
+        </div>
+        <div class="uk-form-row" style="height: 419px;">
+            <form class="form" name="myForm">
+                <div class="uk-form-row">
+                    <div class="uk-form-row">
+                        <table class="uk-table uk-table-middle" style="width: 100%;">
+                            <thead style=" width: 100%;height: 20px;">
+                                <tr>
+                                    <th class="uk-width-2-10 ">Orden</th>
+                                    <th class="uk-width-2-10 ">Código</th>
+                                    <th class="uk-width-2-10 ">Muestras</th>
+                                    <th class="uk-width-2-10 ">Destinos</th>
+                                    <th class="uk-width-1-10 ">Tiempo esperado</th>
+                                    <th class="uk-width-1-10 ">Tiempo total(min)</th>
+                                </tr>
+                            </thead>
+                            <tbody style="height: 300px;width: 100%; overflow: auto;margin-top: 18px;">
+                                <tr data-ng-repeat="sample in modalsampledelayed.Detail">
+                                    <td data-ng-bind="sample.order"></td>
+                                    <td data-ng-bind="sample.sample.codesample"></td>
+                                    <td data-ng-bind="sample.sample.name"></td>
+                                    <td data-ng-bind="sample.destination.name"></td>
+                                    <td data-ng-bind="sample.expectedTime"></td>
+                                    <td data-ng-bind="sample.totalTime"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0008' |
+                translate}}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions> 
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+
+
+<style type="text/css">
+   .bodyPanel {
+      height: calc(100% - 7.4em) !important;; 
+      overflow-y: scroll; 
+      padding-bottom: 0px !important;
+    }
+
+   .footPanel {
+      height: 70px;
+      overflow: hidden;
+      margin-top: -14px;
+      padding-bottom: 0px !important;
+      padding-top: 0px !important;
+      vertical-align: bottom;
+      overflow-y: scroll;
+
+    }
+
+    fieldset, input, select {
+     font-size: 13px !important;
+     padding-left: 10px !important;
+
+    }  
+
+   table > thead > th {
+      padding-bottom: 0px !important;
+    }
+
+    .tbody-list {
+      overflow-y: scroll;
+      height: calc(100% - 84px);
+      position: absolute;
+    }
+
+    .md-bg-blue-grey-100{
+      cursor: default;
+    }
+
+    .uk-tab > li > a:hover, .uk-tab > li > a:focus {
+        color: #1976d2;
+    } 
+
+    .messageWork{
+      height: auto;
+      top: 10px !important; 
+      width: 35%;
+      border-radius: 4px;
+    }
+
+    .messageTextWork {
+      width: 300px;
+      float: left;
+      padding-top: 5%;
+      white-space: nowrap;
+    }
+
+    .cltech-btn-no, 
+    .cltech-btn-no:hover, 
+    .cltech-btn-no:active {
+        padding-left: 12.5px;
+        padding-right: 12.5px;
+        background: white;
+        border-color: #c6c6c6;
+        border-style: solid;
+        border-width: 0.5px;
+        color: #777;
+    }   
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+ <div id="page_content" style="overflow: hidden !important;">
+  <div id="page_content_inner" class="bodyPanel">
+
+  <!--   <h3 class="heading_b uk-margin-bottom"></h3> class="named_tab" class="uk-disabled width: 98.69%;-->
+    <form id="Form" class="md-card" charset="utf-8" >
+      <div class="md-card-content">
+        <div class="uk-grid">
+          <div class="uk-width-1-1">
+                <div class ="uk-grid" style="margin-left: 0px; position: relative; ">  
+                  <fieldset class="fieldset uk-width-1-2" style="height: 105px !important; padding-top: 15px; margin-right: 0.5%; width: 49.5%">
+                    <legend>{{'1586' | translate}}</legend> 
+                    <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd"
+                      typefilter="vm.filterRange" isopenreport="vm.button" typeview="2">
+                    </orderfilter>
+                  </fieldset>  
+                  <fieldset class="fieldset uk-width-1-2 " style=" height: 105px; margin-bottom: 10px; padding-top: 15px" >
+                      <legend>{{'1293' | translate}}</legend>  
+                      <div class="radio-check">      
+                         <input ng-if="vm.PHYSICIAN_WEBQUERY" type="radio" name="typeUnlock" id="PHYSICIAN" checked value="1" ng-model="vm.usertype" >
+                         <label ng-if="vm.PHYSICIAN_WEBQUERY" for="PHYSICIAN" >{{'0086' | translate}}</label>
+                         <input ng-if="vm.PATIENT_WEBQUERY" type="radio" name="typeUnlock" id="PATIENT" value="2" ng-model="vm.usertype">
+                         <label ng-if="vm.PATIENT_WEBQUERY" for="PATIENT" style="margin-left: 10px;" >{{'0398' | translate}}</label> 
+                         <input ng-if="vm.ACCOUNT_WEBQUERY" type="radio" name="typeUnlock" id="ACCOUNT" value="3" ng-model="vm.usertype">
+                         <label ng-if="vm.ACCOUNT_WEBQUERY" for="ACCOUNT" style="margin-left: 10px;" >{{'0085' | translate}}</label> 
+                         <input ng-if="vm.DEMOGRAPHIC_WEBQUERY" type="radio" name="typeUnlock" id="DEMOGRAPHIC" value="5" ng-model="vm.usertype">
+                         <label ng-if="vm.DEMOGRAPHIC_WEBQUERY" for="DEMOGRAPHIC" style="margin-left: 10px;" >{{'0083' | translate}}</label> 
+                         <input ng-if="vm.RATE_WEBQUERY" type="radio" name="typeUnlock" id="RATE" value="6" ng-model="vm.usertype">
+                         <label ng-if="vm.RATE_WEBQUERY" for="RATE" style="margin-left: 10px;" >{{'0087' | translate}}</label>                    
+                      </div>  
+                  </fieldset>
+
+                 
+
+                </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div id="page_content_inner" class="footPanel">
+            <form class="md-card" style="margin-bottom: 0px !important; ">
+
+              <div class="md-card-content uk-text-right" style="width: 97%">
+            
+                <div style="display: inline-block;">  
+                    <button type="button" data-uk-modal="{target:'#confirmation'}" class="md-fab md-fab-small md-fab-success" ng-disabled="(vm.usertype === '0')" ng-class="{'md-bg-blue-grey-100' : (vm.usertype === '0')}" >
+                        <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0246' | translate}}" style="font-weight: bold;">&#xE876;</i>
+                    </button>                
+                </div>
+              </div>
+          </form>
+   </div>
+</div>
+<div id="confirmation" class="uk-modal">
+  <div class="uk-modal-dialog">
+      <div class="uk-form-row">
+          <form class="form" name="myForm">
+              <div class="uk-grid uk-container-center">
+                  <div class="uk-width-2-10" style="padding-left: 17px;">
+                      <img src="images/Question.png" height="90" width="90">
+                  </div>
+                  <div class="uk-width-8-10" style="margin-top: 3%;">
+                      <span class="uk-text-justify"><strong>{{'0658' | translate}}:</strong> <br> </span>
+                      <span class="uk-text-justify">{{'3669' | translate}}</span>
+                  </div>
+               
+              </div>
+          </form>
+      </div>
+      <div class="uk-modal-footer uk-text-right">
+          <button type="button" class="md-btn md-btn-primary uk-modal-close md-btn-wave-light waves-effect waves-button waves-light" ng-click="vm.accept()">
+              {{'0219' | translate}}
+          </button>
+          <button type="button" class="uk-modal-close md-btn md-btn-flat">{{'0220' | translate}}</button>
+      </div>
+  </div>
+</div>
+
+<!-- <script src="widgets/angular-icheck.js"></script> -->

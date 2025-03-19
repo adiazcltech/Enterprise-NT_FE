@@ -1,0 +1,138 @@
+<div id="page_content" style="margin-left: 0px; height: calc(100% - 51px); overflow: auto">
+  <div id="page_content_inner" style="padding: 5px 15px">
+    <div class="md-card uk-margin-top">
+      <div class="md-card-content">
+        <div class="uk-grid" data-uk-grid-margin>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[0].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0050' | translate}}</label>
+            <span class="uk-form-help-block help-small">{{'0051' | translate}}</span>
+          </div>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[1].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0052' | translate}}</label>
+            <span class="uk-form-help-block help-small">{{'0053' | translate}}</span>
+          </div>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[2].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0054' | translate}}</label>
+            <span class="uk-form-help-block help-small">{{'0055' | translate}}</span>
+          </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin>
+          <div class="uk-width-medium-1-3">
+            <div class="uk-grid" data-uk-grid-margin>
+              <div class="uk-width-medium-1-2" style="width: 53%">
+                <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[3].value"
+                  checked id="switch_demo_large" color="#1e88e5" />
+                <label for="switch_demo_large" class="inline-label">{{'0056' | translate}}</label>
+              </div>
+              <div class="uk-width-medium-1-2" style="width: 47%; padding-left: 0px"
+                ng-if="vm.dataconfig[3].value==true">
+                <div class="uk-input-group">
+                  <label>{{'0191' | translate}}</label>
+                  <input type="text" class="md-input label-fixed" ng-model="vm.dataconfig[10].value" md-input />
+                </div>
+              </div>
+            </div>
+            <span class="uk-form-help-block help-small uk-text-danger"
+              ng-if="vm.keyrequerid && vm.dataconfig[3].value==true">
+              {{'0192' | translate}}</span>
+            <span class="uk-form-help-block help-small" ng-if="!vm.keyrequerid">
+              {{'0057' | translate}}</span>
+          </div>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[4].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0058' | translate}}</label>
+            <span class="uk-form-help-block help-small">{{'0059' | translate}}</span>
+          </div>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[5].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0060' | translate}}</label>
+            <span class="uk-form-help-block help-small">{{'0061' | translate}}
+            </span>
+          </div>
+        </div>
+        <div class="uk-grid" data-uk-grid-margin>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[6].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0062' | translate}}</label>
+            <span class="uk-form-help-block help-small">
+              {{'0063' | translate}}</span>
+          </div>
+          <div class="uk-width-medium-1-3">
+            <input type="checkbox" class="switchery switchery-large" ui-switch ng-model="vm.dataconfig[7].value" checked
+              id="switch_demo_large" color="#1e88e5" />
+            <label for="switch_demo_large" class="inline-label">{{'0064' | translate}}</label>
+            <span class="uk-form-help-block help-small">{{'0065' | translate}}</span>
+          </div>
+          <div class="uk-width-medium-1-3">
+            <label class="uk-form-label">{{'0066' | translate}}</label>
+            <select id="select_demo_2" ng-model="vm.dataconfig[8].value" class="md-input">
+              <option value="0">{{'0067' | translate}}</option>
+              <option value="1">{{'0068' | translate}}</option>
+              <option value="2">{{'0069' | translate}}</option>
+            </select>
+            <span class="uk-form-help-block help-small" style="margin-top: 0px;margin-bottom: 10px;">{{'0070' |
+              translate}}</span>
+          </div>
+        </div>
+        <form name="Form">
+          <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-3">
+              <label class="uk-form-label">{{'0071' | translate}}</label>
+              <select id="select_demo_2" ng-model="vm.dataconfig[9].value" class="md-input">
+                <option value="5">{{'0072' | translate}}</option>
+                <option value="0">{{'0073' | translate}}</option>
+              </select>
+              <span class="uk-form-help-block help-small">{{'0074' | translate}}</span>
+            </div>
+            <div class="uk-width-medium-1-3">
+              <label class="uk-form-label">{{'0178' | translate}}</label>
+              <input type="url" name="code" id="code" class="md-input label-fixed" ng-model="vm.dataconfig[12].value"
+                ng-class="{'md-input-danger':Form.code.$invalid && Form.code.$touched}" ng-required="true" md-input />
+              <span class="uk-form-help-block uk-text-danger label-error" style="margin-top: 0px;"
+                ng-show="Form.code.$invalid && Form.code.$touched &&!Form.code.$error.url">{{ '0020' | translate
+                }}</span>
+              <span class="uk-form-help-block uk-text-danger label-error" style="margin-top: 0px;"
+                ng-show="Form.code.$error.url">{{ '0082' | translate }}</span>
+
+              <span class="uk-form-help-block help-small">{{'0179' | translate}}</span>
+            </div>
+            <div class="uk-width-medium-1-3">
+              <label class="uk-form-label">{{'0193' | translate}}</label>
+              <input type="text" name="path" id="path" class="md-input label-fixed" ng-model="vm.dataconfig[13].value"
+                ng-class="{'md-input-danger':Form.path.$invalid && Form.path.$touched}" ng-required="true" md-input />
+              <span class="uk-form-help-block uk-text-danger label-error" style="margin-top: 0px;"
+                ng-show="Form.path.$invalid && Form.path.$touched">{{ '0020' | translate }}</span>
+              <span class="uk-form-help-block help-small">{{'0194' | translate}}</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<footer id="footer" style="margin-left: 0px">
+  <div class="uk-clearfix" style="padding-bottom: 10px; padding-top: 10px">
+    <div class="uk-float-right">
+      <button type="button" class="md-fab md-fab-small md-fab md-fab-success" ng-click="vm.save(Form)"
+        style="background: {{vm.dataconfig[11].value}}">
+        <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}">&#xE161;</i>
+      </button>
+    </div>
+  </div>
+</footer>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

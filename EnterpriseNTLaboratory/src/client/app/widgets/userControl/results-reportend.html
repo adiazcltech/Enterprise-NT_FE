@@ -1,0 +1,75 @@
+<style>
+    .md-virtual-repeat-container {
+        z-index: 1900 !important;
+    }
+</style>
+<loadpage view="vmd.loading"></loadpage>
+<div id="logNoDataFinal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-body" style="height: 75px; top: 0px">
+            <div style="width: 18%; float: left">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="uk-flex uk-flex-middle">
+                <label style="margin-top: 20px; margin-left: 5px; font-size: 15px">{{vmd.message}}</label>
+            </div>
+        </div>
+        <div class="uk-modal-footer">
+        </div>
+    </div>
+</div>
+<div id="modalfinalreport" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-body">
+            <filterprintreports destination="vmd.destination" destination="vmd.destination"
+                defaulttypeprint="vmd.defaulttypeprint" viewpreliminary="false" viewpreviou="false" viewordering="false"
+                viewtypeprint="true" activateexecution="vmd.activateExecution" isactivemail="true" visible="true"
+                functionexecute="vmd.printOrder" receiveresult="vmd.receiveresult"
+                update="vmd.update" filteritems="vmd.filteritems" demo="vmd.demo"
+                showadditionalmail="vmd.showadditionalmail">
+            </filterprintreports>
+            <md-content class="md-padding autocomplete" layout="column" ng-if="vmd.filterarea">
+                <label id="toLabel">{{'3123' | translate}}:</label>
+                <md-contact-chips ng-model="vmd.arelist" md-contacts="vmd.querySearch($query)" md-contact-name="name"
+                    md-require-match="true" md-separator-keys="vmd.keys" md-highlight-flags="i"
+                    placeholder="Adicione el area" secondary-placeholder="Adicionar area"
+                    input-aria-label="Intended Recipients">
+                </md-contact-chips>
+            </md-content>
+            <md-content class="md-padding autocomplete" layout="column" ng-if="vmd.filteritems && vmd.demo">
+                <label id="toLabel">Enviar email item demografico:</label>
+                <md-contact-chips ng-model="vmd.emailist" md-contacts="vmd.querySearch1($query)" md-contact-name="demographic"
+                    md-require-match="true" md-separator-keys="vmd.keys" md-highlight-flags="i"
+                    placeholder="Adicionar demográfico" secondary-placeholder="Adicionar demográfico"
+                    input-aria-label="Adicionar demográfico">
+                </md-contact-chips>
+            </md-content>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+                ng-class="{'md-bg-blue-grey-100': vmd.arelist.length === 0 && vmd.filterarea ||  vmd.demo && vmd.emailist.length === 0}"
+                ng-disabled="vmd.arelist.length === 0 && vmd.filterarea || vmd.demo && vmd.emailist.length === 0 "
+                ng-click="vmd.activateExecution = true">{{'0246' | translate}}</button>
+            <button type="button" class="md-btn md-btn-default uk-modal-close" ng-click=" vmd.loading = false">{{'0008'
+                | translate}}</button>
+        </div>
+    </div>
+</div>
+<div id="logNoSerialPrincipal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-body" style="height: 75px; top: 0px">
+            <div style="width: 18%; float: left">
+                <img class="img-responsive" src="images/Warning.png">
+            </div>
+            <div class="messageTextError">
+                <p>{{'1085' | translate}}</p>
+            </div>
+        </div>
+        <div class="uk-modal-footer">
+        </div>
+    </div>
+</div>
+<modalexceptions openmodal="vmd.ShowPopupError" detailerror="vmd.Error" idcontrol="'modal-exception-report'">
+</modalexceptions>

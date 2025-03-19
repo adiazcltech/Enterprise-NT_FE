@@ -1,0 +1,43 @@
+<style>
+  .colorview {
+    color: #ffffff !important;
+  }
+
+</style>
+<!-- card que muestra los datos de la entrevista-->
+<loadpage view="interviewdestiny.loading"></loadpage>
+<div class="md-card  md-card-hover" style="height: 100%;width: 100%" ng-if="interviewdestiny.ListInterview.length!==0">
+  <div class="md-card-toolbar" style="background-color: #e6e6e6;">
+    <h3 class="md-card-toolbar-heading-text">
+      <img class="md-card-head-avatar" style="width: 38px; height: 38px;margin-top: 0px;"
+        ng-src="images/microbiology/checklist.png" />
+      {{'0191' | translate}}
+    </h3>
+  </div>
+  <div class="md-card-content contentscroll"
+    style="height: calc(100% - 50px);width: 100%;overflow-y: auto !important;padding: 0px 16px 0px 14px;">
+    <ul class="md-list md-list-addon">
+      <li data-ng-repeat="interview in interviewdestiny.ListInterview" style="margin-left: 34px;">
+        <div class="md-list-addon-element" style="width: 33px;margin-left: 26px;">
+          <span class="uk-badge uk-badge-primary"> {{$index + 1}}</span>
+        </div>
+        <div class="md-list-content">
+          <span class="md-list-heading" style="font-weight: 700;"> {{interview.question}}</span>
+          <span class="uk-text-small uk-text-muted" ng-class="{'colorview' : interview.interviewAnswer===undefined}"
+            style="margin-left: 15px;">
+            {{interview.interviewAnswer===undefined?'.':interview.interviewAnswer}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="md-card  md-card-hover" style="height: 100%;width: 100%" ng-if="interviewdestiny.viewzero">
+  <div class="md-card-content uk-grid" style="height: 90%">
+    <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+      <img class="img-responsive" style="height: 90px; width: 90px;" src="images/data.png">
+    </div>
+    <div class="uk-width-1-1 uk-text-center">
+      <h3>{{'1491' | translate}}</h3>
+    </div>
+  </div>
+</div>

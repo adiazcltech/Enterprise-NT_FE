@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head class="header">
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        
+        .ng-hide {
+            display: none !important;
+        }
+    </style>
+
+    <title ng-bind="title">
+        enterpriseNT
+    </title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <base href="/Master">
+
+
+    <link rel="stylesheet" href="stimulsoft/css/stimulsoft.designer.office2013.whiteblue.css">
+    <link rel="stylesheet" href="stimulsoft/css/stimulsoft.viewer.office2013.whiteblue.css">
+
+
+
+    <script src="stimulsoft/scripts/stimulsoft.reports.js"></script>
+    <script src="stimulsoft/scripts/stimulsoft.viewer.js"></script>
+    <script src="stimulsoft/scripts/stimulsoft.designer.js"></script>
+
+
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/bower_components/spectrum/spectrum.css" />
+    <link rel="stylesheet" href="/bower_components/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
+    <link rel="stylesheet" href="/bower_components/angular-dialog-service/dist/dialogs.css" />
+    <link rel="stylesheet" href="/bower_components/intro.js/introjs.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="/bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="/bower_components/angular-treasure-overlay-spinner/dist/treasure-overlay-spinner.min.css" />
+    <link rel="stylesheet" href="/bower_components/angular-tooltips/dist/angular-tooltips.min.css" />
+    <link rel="stylesheet" href="/bower_components/ng-tags-input/ng-tags-input.css" />
+    <link rel="stylesheet" href="/bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="/bower_components/nz-tour/dist/nz-tour.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/app.css -->
+    <!-- inject:css -->
+
+    <link rel="stylesheet" href="/.tmp/styles.css">
+
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body>
+
+    <div class="general-container" ng-include="'app/layout/shell.html'">
+        <script src="assets/js/custom/tinymce/tinymce.js"></script>
+        <script src="assets/js/custom/tinymce/langs/es.js"></script>
+        <script src="http://192.168.1.147:5001/socket.io/socket.io.js"></script>
+    </div>
+
+
+
+    <!-- build:js js/lib.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/spectrum/spectrum.js"></script>
+    <script src="/bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
+    <script src="/bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.js"></script>
+    <script src="/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/bower_components/angular-dialog-service/dist/dialogs.js"></script>
+    <script src="/bower_components/angular-dialog-service/dist/dialogs-default-translations.js"></script>
+    <script src="/bower_components/intro.js/intro.js"></script>
+    <script src="/bower_components/angular-intro.js/build/angular-intro.min.js"></script>
+    <script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="/bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="/bower_components/file-saver/FileSaver.js"></script>
+    <script src="/bower_components/angular-hotkeys/angular-hotkeys.js"></script>
+    <script src="/bower_components/angular-hotkeys/angular-hotkeys.min.js"></script>
+    <script src="/bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="/bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script src="/bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
+    <script src="/bower_components/angular-treasure-overlay-spinner/dist/treasure-overlay-spinner.min.js"></script>
+    <script src="/bower_components/angular-vs-repeat-flww2/src/angular-vs-repeat.js"></script>
+    <script src="/bower_components/ng-caret-aware/dist/caretaware.min.js"></script>
+    <script src="/bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
+    <script src="/bower_components/ng-tags-input/ng-tags-input.js"></script>
+    <script src="/bower_components/ng-csv/build/ng-csv.min.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="/bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="/bower_components/ng-ScrollSpy.js/src/ng-ScrollSpy.js"></script>
+    <script src="/bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="/bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="/bower_components/nz-tour/dist/nz-tour.js"></script>
+    <script src="/bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="/bower_components/angular-lodash/angular-lodash.js"></script>
+    <script src="/bower_components/angular-lz-string/angular-lz-string.js"></script>
+    <script src="/bower_components/angular-dynamic-locale/dist/tmhDynamicLocale.js"></script>
+    <script src="/bower_components/ng-idle/angular-idle.js"></script>
+    <script src="/bower_components/angular-websocket/dist/angular-websocket.js"></script>
+    <script src="/bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script src="assets/js/angular-socket-io/socket.js"></script>
+
+    <!-- build:js js/app.js -->
+    <!-- inject:js -->
+    <script src="/src/client/app/modules/app.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/blocks/router/router.module.js"></script>
+    <script src="/src/client/app/blocks/settings/settings.module.js"></script>
+    <script src="/src/client/app/core/core.module.js"></script>
+    <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/modules/account/account.module.js"></script>
+    <script src="/src/client/app/modules/account/configureinitial/configureinitial.module.js"></script>
+    <script src="/src/client/app/modules/account/login/login.module.js"></script>
+    <script src="/src/client/app/modules/configuration/appointment/shifts/shifts.module.js"></script>
+    <script src="/src/client/app/modules/configuration/appointment/shiftsbybranch/shiftsbybranch.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/bank/bank.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/card/card.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/contract/contract.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/customer/customer.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/customerate/customerate.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/discounts/discounts.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/dutybytest/dutybytest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/edi/edi.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/feeschedules/feeschedules.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/paymenttypes/paymenttypes.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/priceassigment/priceassigment.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/provider/provider.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/rate/rate.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/reciver/reciver.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/resolution/resolution.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/rips/rips.module.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/taxprinter/taxprinter.module.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration.module.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/generalconfig/generalconfig.module.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/groupingorders/groupingorders.module.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/holidays/holidays.module.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/installation/installation.module.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/serviceprinting/serviceprinting.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/branch/branch.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/branchdemographic/branchdemographic.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/configdemographics/configdemographics.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/defaultvalue/defaultvalue.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographic/demographic.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographicbranch/demographicbranch.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/Demographicdependency/Demographicdependency.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographicsItem/demographicsItem.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographictest/demographictest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/diagnosticsfortest/diagnosticsfortest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/documenttypes/documenttypes.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/orderingdemographic/orderingdemographic.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/ordertype/ordertype.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/physician/physician.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/populationgroup/populationgroup.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/race/race.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/reportencryption/reportencryption.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/service/service.module.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/specialty/specialty.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/alarmday/alarmday.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/centralsystem/centralsystem.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/demographicapproval/demographicapproval.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/demographicwebconsultation/demographicwebconsultation.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/middleware/middleware.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/standarization/standarization.module.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/userstandardization/userstandardization.module.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/answer/answer.module.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/interview/interview.module.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/question/question.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/anatomicalsite/anatomicalsite.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibiogram/antibiogram.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibiotic/antibiotic.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibioticreferencevalues/antibioticreferencevalues.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/collectionmethod/collectionmethod.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/destinationmicrobiology/destinationmicrobiology.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/etiologicalagent/etiologicalagent.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/meansofcultivation/meansofcultivation.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/meansofcultivationfortest/meansofcultivationfortest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/microorganism/microorganism.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/process/process.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/processfortest/processfortest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/subsample/subsample.module.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/task/task.module.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/histogram/histogram.module.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/oportunityofsample/oportunityofsample.module.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/samplebyservice/samplebyservice.module.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/testservice/testservice.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/areapathology/areapathology.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/casete/casete.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/coloration/coloration.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/colorationbytest/colorationbytest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/containerpathology/containerpathology.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/event/event.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/field/field.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/fixative/fixative.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/macroscopytemplate/macroscopytemplate.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/organ/organ.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/pathologist/pathologist.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/processingtime/processingtime.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/protocol/protocol.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/schedule/schedule.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/specimen/specimen.module.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/studytype/studytype.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/alarm/alarm.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/area/area.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/automatictest/automatictest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/branchforlaboratory/branchforlaboratory.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/comment/comment.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/container/container.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/deltacheck/deltacheck.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/diagnostic/diagnostic.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/excludetestsbydemographics/excludetestsbydemographics.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/groups/groups.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/hematologicalcounter/hematologicalcounter.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/laboratory/laboratory.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/laboratorytest/laboratorytest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/literalresult/literalresult.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/literalresultfortest/literalresultfortest.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/printorder/printorder.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/processingday/processingday.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/profil/profil.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/referencevalues/referencevalues.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/relationresult/relationresult.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/requirement/requirement.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/resultemplate/resultemplate.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/sample/sample.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/technique/technique.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/test/testlab.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testalarm/testalarm.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testdemographicpyp/testdemographicpyp.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testedition/testedition.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/unit/unit.module.js"></script>
+    <script src="/src/client/app/modules/configuration/test/worksheets/worksheets.module.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/destination/destination.module.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/destinationassignment/destinationassignment.module.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/motive/motive.module.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/refrigerator/refrigerator.module.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/samplingSites/samplingSites.module.js"></script>
+    <script src="/src/client/app/modules/configuration/transplants/institution/institution.module.js"></script>
+    <script src="/src/client/app/modules/configuration/transplants/insurance/insurance.module.js"></script>
+    <script src="/src/client/app/modules/configuration/user/excludetestbyuser/excludetestbyuser.module.js"></script>
+    <script src="/src/client/app/modules/configuration/user/integrationanalyzer/integrationanalyzer.module.js"></script>
+    <script src="/src/client/app/modules/configuration/user/role/role.module.js"></script>
+    <script src="/src/client/app/modules/configuration/user/user/user.module.js"></script>
+    <script src="/src/client/app/modules/menuMaster/menuMaster.module.js"></script>
+    <script src="/src/client/app/widgets/widgets.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
+    <script src="/src/client/app/blocks/settings/settings.js"></script>
+    <script src="/src/client/app/core/auth/auth.interceptor.config.js"></script>
+    <script src="/src/client/app/core/auth/auth.interceptor.js"></script>
+    <script src="/src/client/app/core/auth/auth.service.js"></script>
+    <script src="/src/client/app/core/config.js"></script>
+    <script src="/src/client/app/core/constants.js"></script>
+    <script src="/src/client/app/core/core.route.js"></script>
+    <script src="/src/client/app/core/dataservice.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/appointment/shiftsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/bankDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/cardDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/contractDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/customerDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/discountsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/feescheduleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/paymenttypesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/priceassigmentDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/providerDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/rateDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/receiversDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/resolutionDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/ripsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/taxprinterDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/agegroupsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/branchDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicsItemDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicsoonDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicTestDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicwebqueryDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/documenttypesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/excludedemographicsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/ordertypeDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/physicianDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/populationgroupDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/raceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/serviceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/specialtyDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/holidays/holidaysDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/integration/alarmdayDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/integration/centralsystemDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/integration/demographicapprovalDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/integration/sigaDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/integration/standarizationDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/interview/answerDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/interview/interviewDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/interview/questionDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/anatomicalsiteDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/antibioticDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/collectionmethodDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/destinationmicrobiologyDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/etiologicalagentDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/mediaCulturesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/microorganismDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/processDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/referencemicrobiologyDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/sensitivitieDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/subsampleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/microbiology/taskDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/opportunity/histogramDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/opportunity/oportunityofsampleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/opportunity/samplebyserviceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/opportunity/testserviceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/areapathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/caseteDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/colorationbytestDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/colorationDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/containerpathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/eventPathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/fieldDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/fixativeDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/macroscopytemplateDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/organDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/pathologistDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/processingtimeDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/protocolDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/scheduleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/specimenDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/pathology/studytypeDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/alarmDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/areaDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/automatictestsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/commentDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/containerDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/deltacheckDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/diagnosticDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/groupsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/hematologicalcounterDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/laboratoryDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/literalresultDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/referencevaluesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/relationresultDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/requirementDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/resultemplateDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/sampleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/techniqueDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/testdemographicpypDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/testDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/unitDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/worksheetsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/destinationDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/motiveDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/refrigeratorDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/samplingSitesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/transplants/institutionDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/transplants/insuranceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/user/authenticationsessionDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/user/roleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/user/userDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/version/versionDS.js"></script>
+    <script src="/src/client/app/dataservice/General/ConfigurationDS.js"></script>
+    <script src="/src/client/app/dataservice/General/generalFunction.js"></script>
+    <script src="/src/client/app/dataservice/General/listDS.js"></script>
+    <script src="/src/client/app/dataservice/General/moduleDS.js"></script>
+    <script src="/src/client/app/dataservice/General/serviceprintDS.js"></script>
+    <script src="/src/client/app/dataservice/Utilitys/exceptionDS.js"></script>
+    <script src="/src/client/app/dataservice/Utilitys/socket.js"></script>
+    <script src="/src/client/app/layout/ht-sidebar.directive.js"></script>
+    <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
+    <script src="/src/client/app/layout/shell.controller.js"></script>
+    <script src="/src/client/app/layout/sidebar.controller.js"></script>
+    <script src="/src/client/app/modules/account/configureinitial/configureinitial.controller.js"></script>
+    <script src="/src/client/app/modules/account/configureinitial/configureinitial.route.js"></script>
+    <script src="/src/client/app/modules/account/login/login.controller.js"></script>
+    <script src="/src/client/app/modules/account/login/login.router.js"></script>
+    <script src="/src/client/app/modules/configuration/appointment/shifts/shifts.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/appointment/shifts/shifts.router.js"></script>
+    <script src="/src/client/app/modules/configuration/appointment/shiftsbybranch/shiftsbybranch.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/appointment/shiftsbybranch/shiftsbybranch.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/bank/bank.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/bank/bank.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/card/card.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/card/card.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/contract/contract.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/contract/contract.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/customer/customer.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/customer/customer.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/customerate/customerate.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/customerate/customerate.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/discounts/discounts.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/discounts/discounts.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/dutybytest/dutybytest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/dutybytest/dutybytest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/edi/edi.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/edi/edi.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/feeschedules/feeschedules.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/feeschedules/feeschedules.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/paymenttypes/paymenttypes.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/paymenttypes/paymenttypes.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/priceassigment/priceassigment.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/priceassigment/priceassigment.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/provider/provider.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/provider/provider.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/rate/rate.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/rate/rate.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/reciver/reciver.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/reciver/reciver.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/resolution/resolution.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/resolution/resolution.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/rips/rips.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/rips/rips.router.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/taxprinter/taxprinter.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/billing/taxprinter/taxprinter.router.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/generalconfig/generalconfig.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/generalconfig/generalconfig.router.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/groupingorders/groupingorders.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/groupingorders/groupingorders.router.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/holidays/holidays.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/holidays/holidays.router.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/installation/installation.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/installation/installation.router.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/serviceprinting/serviceprinting.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/configuration/serviceprinting/serviceprinting.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/branch/branch.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/branch/branch.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/branchdemographic/branchdemographic.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/branchdemographic/branchdemographic.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/configdemographics/configdemographics.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/configdemographics/configdemographics.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/defaultvalue/defaultvalue.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/defaultvalue/defaultvalue.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographic/demographic.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographic/demographic.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographicbranch/demographicbranch.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographicbranch/demographicbranch.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/Demographicdependency/Demographicdependency.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/Demographicdependency/Demographicdependency.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographicsItem/demographicsItem.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographicsItem/demographicsItem.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographictest/demographictest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/demographictest/demographictest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/diagnosticsfortest/diagnosticsfortest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/diagnosticsfortest/diagnosticsfortest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/documenttypes/documenttypes.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/documenttypes/documenttypes.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/orderingdemographic/orderingdemographic.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/orderingdemographic/orderingdemographic.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/ordertype/ordertype.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/ordertype/ordertype.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/physician/physician.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/physician/physician.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/populationgroup/populationgroup.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/populationgroup/populationgroup.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/race/race.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/race/race.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/reportencryption/reportencryption.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/reportencryption/reportencryption.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/service/service.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/service/service.router.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/specialty/specialty.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/demographics/specialty/specialty.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/alarmday/alarmday.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/alarmday/alarmday.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/centralsystem/centralsystem.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/centralsystem/centralsystem.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/demographicapproval/demographicapproval.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/demographicapproval/demographicapproval.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/demographicwebconsultation/demographicwebconsultation.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/demographicwebconsultation/demographicwebconsultation.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/middleware/middleware.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/middleware/middleware.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/standarization/standarization.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/standarization/standarization.router.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/userstandardization/userstandardization.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/integration/userstandardization/userstandardization.router.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/answer/answer.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/answer/answer.router.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/interview/interview.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/interview/interview.router.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/question/question.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/interview/question/question.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/anatomicalsite/anatomicalsite.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/anatomicalsite/anatomicalsite.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibiogram/antibiogram.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibiogram/antibiogram.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibiotic/antibiotic.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibiotic/antibiotic.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibioticreferencevalues/antibioticreferencevalues.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/antibioticreferencevalues/antibioticreferencevalues.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/collectionmethod/collectionmethod.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/collectionmethod/collectionmethod.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/destinationmicrobiology/destinationmicrobiology.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/destinationmicrobiology/destinationmicrobiology.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/etiologicalagent/etiologicalagent.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/etiologicalagent/etiologicalagent.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/meansofcultivation/meansofcultivation.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/meansofcultivation/meansofcultivation.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/meansofcultivationfortest/meansofcultivationfortest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/meansofcultivationfortest/meansofcultivationfortest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/microorganism/microorganism.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/microorganism/microorganism.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/process/process.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/process/process.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/processfortest/processfortest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/processfortest/processfortest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/subsample/subsample.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/subsample/subsample.router.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/task/task.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/microbiology/task/task.router.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/histogram/histogram.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/histogram/histogram.router.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/oportunityofsample/oportunityofsample.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/oportunityofsample/oportunityofsample.router.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/samplebyservice/samplebyservice.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/samplebyservice/samplebyservice.router.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/testservice/testservice.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/opportunity/testservice/testservice.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/areapathology/areapathology.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/areapathology/areapathology.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/casete/casete.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/casete/casete.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/coloration/coloration.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/coloration/coloration.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/colorationbytest/colorationbytest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/colorationbytest/colorationbytest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/containerpathology/containerpathology.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/containerpathology/containerpathology.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/event/event.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/event/event.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/field/field.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/field/field.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/fixative/fixative.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/fixative/fixative.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/macroscopytemplate/macroscopytemplate.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/macroscopytemplate/macroscopytemplate.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/organ/organ.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/organ/organ.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/pathologist/pathologist.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/pathologist/pathologist.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/processingtime/processingtime.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/processingtime/processingtime.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/protocol/protocol.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/protocol/protocol.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/schedule/schedule.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/schedule/schedule.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/specimen/specimen.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/specimen/specimen.router.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/studytype/studytype.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/pathology/studytype/studytype.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/alarm/alarm.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/alarm/alarm.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/area/area.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/area/area.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/automatictest/automatictest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/automatictest/automatictest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/branchforlaboratory/branchforlaboratory.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/branchforlaboratory/branchforlaboratory.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/comment/comment.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/comment/comment.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/container/container.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/container/container.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/deltacheck/deltacheck.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/deltacheck/deltacheck.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/diagnostic/diagnostic.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/diagnostic/diagnostic.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/excludetestsbydemographics/excludetestsbydemographics.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/excludetestsbydemographics/excludetestsbydemographics.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/groups/groups.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/groups/groups.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/hematologicalcounter/hematologicalcounter.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/hematologicalcounter/hematologicalcounter.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/laboratory/laboratory.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/laboratory/laboratory.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/laboratorytest/laboratorytest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/laboratorytest/laboratorytest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/literalresult/literalresult.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/literalresult/literalresult.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/literalresultfortest/literalresultfortest.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/literalresultfortest/literalresultfortest.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/printorder/printorder.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/printorder/printorder.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/processingday/processingday.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/processingday/processingday.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/profil/profil.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/profil/profil.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/referencevalues/referencevalues.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/referencevalues/referencevalues.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/relationresult/relationresult.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/relationresult/relationresult.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/requirement/requirement.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/requirement/requirement.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/resultemplate/resultemplate.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/resultemplate/resultemplate.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/sample/sample.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/sample/sample.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/technique/technique.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/technique/technique.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/test/testlab.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/test/testlab.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testalarm/testalarm.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testalarm/testalarm.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testdemographicpyp/testdemographicpyp.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testdemographicpyp/testdemographicpyp.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testedition/testedition.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/testedition/testedition.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/unit/unit.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/unit/unit.router.js"></script>
+    <script src="/src/client/app/modules/configuration/test/worksheets/worksheets.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/test/worksheets/worksheets.router.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/destination/destination.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/destination/destination.router.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/destinationassignment/destinationassignment.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/destinationassignment/destinationassignment.router.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/motive/motive.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/motive/motive.router.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/refrigerator/refrigerator.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/refrigerator/refrigerator.router.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/samplingSites/samplingSites.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/traceability/samplingSites/samplingSites.router.js"></script>
+    <script src="/src/client/app/modules/configuration/transplants/institution/institution.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/transplants/institution/institution.router.js"></script>
+    <script src="/src/client/app/modules/configuration/transplants/insurance/insurance.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/transplants/insurance/insurance.router.js"></script>
+    <script src="/src/client/app/modules/configuration/user/excludetestbyuser/excludetestbyuser.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/user/excludetestbyuser/excludetestbyuser.router.js"></script>
+    <script src="/src/client/app/modules/configuration/user/integrationanalyzer/integrationanalyzer.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/user/integrationanalyzer/integrationanalyzer.router.js"></script>
+    <script src="/src/client/app/modules/configuration/user/role/role.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/user/role/role.router.js"></script>
+    <script src="/src/client/app/modules/configuration/user/user/user.controller.js"></script>
+    <script src="/src/client/app/modules/configuration/user/user/user.router.js"></script>
+    <script src="/src/client/app/modules/menuMaster/menuMaster.controller.js"></script>
+    <script src="/src/client/app/modules/menuMaster/menuMaster.router.js"></script>
+    <script src="/src/client/app/widgets/angular-wysiwyg.js"></script>
+    <script src="/src/client/app/widgets/calculator.directive.js"></script>
+    <script src="/src/client/app/widgets/checkboxnt.directive.js"></script>
+    <script src="/src/client/app/widgets/concurrence.directive.js"></script>
+    <script src="/src/client/app/widgets/csvpricetest.directive.js"></script>
+    <script src="/src/client/app/widgets/csvtojson.directive.js"></script>
+    <script src="/src/client/app/widgets/customSelect.js"></script>
+    <script src="/src/client/app/widgets/dragdrop-box.directive.js"></script>
+    <script src="/src/client/app/widgets/dragdrop-list.directive.js"></script>
+    <script src="/src/client/app/widgets/eventscroll.js"></script>
+    <script src="/src/client/app/widgets/fileimg.directive.js"></script>
+    <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
+    <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
+    <script src="/src/client/app/widgets/loadcombobox-directive.js"></script>
+    <script src="/src/client/app/widgets/loadpage-directive.js"></script>
+    <script src="/src/client/app/widgets/modalerror.directive.js"></script>
+    <script src="/src/client/app/widgets/modalmessage.directive.js"></script>
+    <script src="/src/client/app/widgets/modalreport-directive.js"></script>
+    <script src="/src/client/app/widgets/modalstate.directive.js"></script>
+    <script src="/src/client/app/widgets/multiselect.directive.js"></script>
+    <script src="/src/client/app/widgets/ngmask.js"></script>
+    <script src="/src/client/app/widgets/number-input.js"></script>
+    <script src="/src/client/app/widgets/reportview.direcive.js"></script>
+    <script src="/src/client/app/widgets/scrollToTop.directive.js"></script>
+    <script src="/src/client/app/widgets/template-directive.js"></script>
+    <script src="/src/client/app/widgets/toggle.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<style type="text/css">
+  .top_buttons {
+      margin-left: 5px;
+      margin-right: -5px;
+      height: 63px;
+      margin-top: 14px;
+      padding: 13px;
+  }
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner" style="height: 97%">
+      <div id="confirmation" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+          <div class="uk-modal-dialog">
+              <div class="uk-form-row">
+                  <form class="form" name="myForm">
+                      <div class="uk-grid uk-container-center">
+                          <div class="uk-width-3-10">
+                              <img src="images/iconinfo.png" height="90" width="90">
+                          </div>
+                          <div class="uk-width-7-10" style="margin-top: 3%;">
+                              <span>{{'3148' | translate}}</span>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="uk-modal-footer uk-text-right">
+                  <button type="button"
+                      class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+                      ng-click="vm.save()">
+                      {{'0246' | translate}}
+                  </button>
+                  <button type="button"
+                      class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0008' | translate}}</button>
+              </div>
+          </div>
+      </div>
+      <div style="height: 100%" class="uk-grid">
+          <div class="uk-width-1-1 " style="height: 100px;">
+              <div style="height: 100%;" class="md-card">
+                  <div style="height: 95px;padding-top: 8px;padding-bottom: 8px;" class="md-card-content">
+                      <div class="uk-grid">
+                          <div class="uk-width-5-6" style="padding-top: 16px">
+                              <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                                  isopenreport="vm.button" beforechange="vm.cleanlist" typelabel='2'></orderfilter>
+                          </div>
+                          <div class="uk-width-1-6 top_buttons uk-text-center">
+                              <div class="uk-float-right">
+                                  <div style="display: inline-block; margin-right: 5px;">
+                                      <button type="button" class="md-fab md-fab-smallY md-fab md-fab-primary"
+                                          ng-class="{'md-bg-blue-grey-100' : !vm.button}" ng-click="vm.search()"
+                                          ng-disabled="!vm.button">
+                                          <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                              title="{{'0154' | translate}}">&#xE8B6;</i>
+                                      </button>
+                                  </div>
+                                  <div style="display: inline-block;margin-right: 5px;">
+                                      <button type="button" class="md-fab md-fab-smallY md-bg-purple-A700"
+                                          ng-class="{'md-bg-blue-grey-100' : vm.listSamples.length === 0}"
+                                          ng-click="vm.generateFile()" ng-disabled="vm.listSamples.length === 0">
+                                          <i class="material-icons md-color-grey-50"
+                                              data-uk-tooltip="{pos:'top'}"
+                                              title="{{'0158' | translate}}">&#xE8AD;</i>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="uk-width-1-1" style="height: calc(100% - 185px); z-index: 100">
+              <div class="md-card  md-card-hover" style="height: 100%;">
+                  <div class="md-card-content" style="height: 100%;padding: 0px;">
+                      <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                          style="height: 100%;margin-bottom: 0px;">
+                          <thead style=" display: inline-block;width: 100%">
+                              <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                  <th class="uk-table-middle small_col uk-text-center" style="width: 2%;"
+                                      ng-show="vm.listSamples.length == 0">
+                                      <input type="checkbox" icheck ng-model="vm.Allcheck" ng-change="vm.selectallcheck()" ng-disabled="true">
+                                  </th>
+                                  <th class="uk-table-middle small_col uk-text-center" style="width: 2%;"
+                                      ng-show="vm.listSamples.length != 0">
+                                      <input type="checkbox" icheck ng-model="vm.Allcheck"
+                                          ng-change="vm.selectallcheck()">
+                                  </th>
+                                  <th class="uk-width-1-10">
+                                    <a
+                                        ng-click="$event.stopPropagation(); vm.sortType = 'study'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                        <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                        <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                        <span ng-show="vm.sortType == 'study' && !sortReverse"></span>
+                                        <span ng-show="vm.sortType == 'study' && sortReverse"></span>
+                                    </a>{{'3138' | translate}}
+                                  </th>
+                                  <th class="uk-width-1-10">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'orderNumber'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'orderNumber' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'orderNumber' && sortReverse"></span>
+                                      </a>{{'0110' | translate}}
+                                  </th>
+                                  <th class="uk-width-1-10">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'patientId'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'patientId' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'patientId' && sortReverse"></span>
+                                      </a>{{'0117' | translate}}
+                                  </th>
+                                  <th class="uk-width-1-10">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'name'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'name' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'name' && sortReverse"></span>
+                                      </a>{{'0118' | translate}}
+                                  </th>
+                                  <th class="uk-width-1-10">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'lastName'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'lastName' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'lastName' && sortReverse"></span>
+                                      </a>{{'0686' | translate}}
+                                  </th>
+                                  <th class="uk-width-1-10" style="width: 16%;">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'username'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'username' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'username' && sortReverse"></span>
+                                      </a>{{'3146' | translate}}
+                                  </th>
+                                  <th class="uk-width-1-10">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'datedeleted'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'datedeleted' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'datedeleted' && sortReverse"></span>
+                                      </a>{{'0265' | translate}}
+                                  </th>
+                                  <th class="uk-width-2-10">
+                                      <a
+                                          ng-click="$event.stopPropagation(); vm.sortType = 'reasondeleted'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                          <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                          <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                          <span ng-show="vm.sortType == 'reasondeleted' && !sortReverse"></span>
+                                          <span ng-show="vm.sortType == 'reasondeleted' && sortReverse"></span>
+                                      </a>{{'0113' | translate}}
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody vs-repeat="{size: 50}" class="tbodyscrollable"
+                              style="margin-top: 5px;height: calc(100% - 44px);width: 100% !important;">
+                              <tr ng-repeat="case in vm.listSamples | orderBy:vm.sortType:sortReverse" class="uk-grid"
+                                  style="margin-left: 0px;margin-top: 0px;">
+                                  <td class="uk-table-middle small_col uk-text-center" style="width: 2%;">
+                                      <input type="checkbox" icheck ng-model="case.check" class="check_row" table-check-row>
+                                  </td>
+                                  <td class="uk-width-1-10">{{ case.study }}</td>
+                                  <td class="uk-width-1-10">{{ case.orderNumber }}</td>
+                                  <td class="uk-width-1-10">{{ case.patientId }}</td>
+                                  <td class="uk-width-1-10">{{ case.name1 }}</td>
+                                  <td class="uk-width-1-10">{{case.lastName}}</td>
+                                  <td class="uk-width-1-10" style="width: 16%;">{{case.username}}</td>
+                                  <td class="uk-width-1-10">{{ case.datedeleted }}</td>
+                                  <td class="uk-width-2-10">{{ case.reasondeleted }}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <div class="uk-width-1-1 " style="height: 65px;">
+              <div style="height: 100%;" class="md-card md-card-hover">
+                  <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                      <div class="uk-grid" style="height: 100%">
+                          <div class="uk-width-1-1" style="float: right">
+                              <button style="float: right" type="button"
+                                  ng-disabled="!vm.button || ((vm.listSamples | filter:{ check: true}).length === 0 )"
+                                  class="md-fab md-fab-middle md-fab-success"
+                                  ng-class="{'md-bg-blue-grey-100' : !vm.button || ((vm.listSamples | filter:{ check: true }).length === 0 )}"
+                                  ng-click="vm.changecheck()">
+                                  <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                      title="{{'3147' | translate}}">&#xE065;</i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

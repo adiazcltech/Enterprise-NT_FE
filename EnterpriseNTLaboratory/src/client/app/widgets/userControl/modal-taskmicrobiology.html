@@ -1,0 +1,444 @@
+<style type="text/css">
+    .node-name {
+        font-size: 14px;
+    }
+
+    .md-list .uk-nestable-list>li,
+    .md-list>li {
+        padding: 4px 0px;
+    }
+</style>
+<div class="uk-modal uk-modal-card-fullscreen" id="taskmodalmicrobiology">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-purple-300">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="modaltaskmicrobiology.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;"><img
+                        ng-src="images/microbiology/microscope-side-view.png" /></i></span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0582'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid" style="height: 100%;">
+                    <div class="uk-width-1-2" style="height: 100%;width: 26%;padding-left: 27px;">
+                        <div style="height: 150px;">
+                            <cardorder order="modaltaskmicrobiology.order"
+                                typeordercode="modaltaskmicrobiology.patient.typeordercode"
+                                typeordercolor="modaltaskmicrobiology.patient.typeordercolor"
+                                testcode="modaltaskmicrobiology.testdata[0].code"
+                                testname="modaltaskmicrobiology.testdata[0].name"></cardorder>
+                        </div>
+                        <div class="md-card md-card-hover md-card-horizontal uk-animation-scale-up"
+                            style="min-height: 22.9%;margin-top: 10px;">
+                            <div class="md-card-head" style="width: 46%;">
+                                <div class="uk-text-center" style="margin-top: 10px;">
+                                    <img class="md-list-addon-icon material-icons"
+                                        ng-src="images/microbiology/blood-testverification.png"
+                                        style="font-size: 48px;" />
+                                </div>
+                                <h3 class="md-card-head-text uk-text-center">
+                                    {{'0024'| translate}}
+                                </h3>
+                            </div>
+                            <div class="md-card-content" style="width: 48%;margin-left: 46%;padding: 14px;">
+                                <ul class="md-list">
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0325'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                style="font-size: 13px;">{{modaltaskmicrobiology.datevericationmicro}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0001'| translate}}</span>
+                                            <span class="md-list-heading uk-text-truncate"
+                                                style="font-size: 13px;">{{modaltaskmicrobiology.uservericationmicro}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="md-card md-card-hover md-card-horizontal uk-animation-scale-up"
+                            style="min-height: 22.9%;margin-top: 10px;">
+                            <div class="md-card-head" style="width: 46%;">
+                                <div class="uk-text-center" style="margin-top: 21px;">
+                                    <img class="md-list-addon-icon material-icons"
+                                        ng-src="images/microbiology/petri-dish.png" style="font-size: 48px;" />
+                                </div>
+                                <h3 class="md-card-head-text uk-text-center">
+                                    {{'0509'| translate}}
+                                </h3>
+                            </div>
+                            <div class="md-card-content" style="width: 48%;margin-left: 46%;padding: 14px;">
+                                <ul class="md-list">
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0325'| translate}}</span>
+                                            <span class="md-list-heading"
+                                                style="font-size: 13px;">{{modaltaskmicrobiology.dateGrowth}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0001'| translate}}</span>
+                                            <span class="md-list-heading uk-text-truncate"
+                                                style="font-size: 13px;">{{modaltaskmicrobiology.userGrowth}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="md-card md-card-hover md-card-horizontal uk-animation-scale-up"
+                            style="min-height: 22.9%;margin-top: 10px;">
+                            <div class="md-card-head" style="width: 46%;">
+                                <div class="uk-text-center" style="margin-top: 21px;">
+                                    <img class="md-list-addon-icon material-icons"
+                                        ng-src="images/microbiology/result.png" style="font-size: 48px;" />
+                                </div>
+                                <h3 class="md-card-head-text uk-text-center">
+                                    {{'0289'| translate}}
+                                </h3>
+                            </div>
+                            <div class="md-card-content" style="width: 48%;margin-left: 46%;padding: 14px;">
+                                <ul class="md-list">
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0325'| translate}}</span>
+                                            <span class="md-list-heading" style="font-size: 13px;"
+                                                ng-class="{'md-color-grey-50' : modaltaskmicrobiology.dateresult==='.'}">{{modaltaskmicrobiology.dateresult}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted">{{'0001'| translate}}</span>
+                                            <span class="md-list-heading uk-text-truncate" style="font-size: 13px;"
+                                                ng-class="{'md-color-grey-50' : modaltaskmicrobiology.userresult==='.'}">{{modaltaskmicrobiology.userresult}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2" style="height: 100%;width: 74%;padding-left: 9px;">
+                        <div class="uk-grid" style="height: 100%;margin-left: -12px;">
+                            <div class="uk-width-1-2"
+                                style="width: 30%;padding-left: 9px;height: 150px;">
+                                <cardpatient patientname="modaltaskmicrobiology.patient.name"
+                                    patientdocument="modaltaskmicrobiology.patient.document"
+                                    patientage="modaltaskmicrobiology.patient.age"
+                                    patientgender="modaltaskmicrobiology.patient.gender"
+                                    photopatient="modaltaskmicrobiology.photopatient"
+                                    patientid="modaltaskmicrobiology.patient.id" orderpatient="modaltaskmicrobiology.order"></cardpatient>
+                            </div>
+                            <div class="uk-width-1-2"
+                                style="height: 150px;width: 30%;padding-left: 9px;">
+                                <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+                                    <div class="md-card-content large-padding" style="padding: 0px 10px;">
+                                        <div class="uk-width-1-1" style="padding-left: 0px; padding-right: 24px;">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <img class="md-list-addon-icon material-icons md-26"
+                                                            ng-src="images/microbiology/blood-sample.png" />
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted">{{'0111' | translate}}</span>
+                                                        <span
+                                                            class="md-list-heading uk-text-truncate">{{modaltaskmicrobiology.detailtask.sample.name}}</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <img class="md-list-addon-icon material-icons md-26"
+                                                            ng-src="images/microbiology/lab.png" />
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted">{{'0461' | translate}}</span>
+                                                        <span class="md-list-heading uk-text-truncate"
+                                                            ng-class="{'md-color-grey-50' : modaltaskmicrobiology.collectionMethodcard==='.'}">{{modaltaskmicrobiology.collectionMethodcard}}</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <img class="md-list-addon-icon material-icons md-26"
+                                                            ng-src="images/microbiology/anatomy.png" />
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span
+                                                            class="uk-text-small uk-text-muted">{{'0462' | translate}}</span>
+                                                        <span class="md-list-heading uk-text-truncate"
+                                                            ng-class="{'md-color-grey-50' : modaltaskmicrobiology.anatomicalSitecard==='.'}">{{modaltaskmicrobiology.anatomicalSitecard}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-2"
+                                style="height: 150px;width: 40%;padding-left: 9px;">
+                                <commentordermodal type="3"
+                                    orderhistory="modaltaskmicrobiology.detailtask.order.orderNumber"
+                                    viewdirectic="modaltaskmicrobiology.viewcomment"
+                                    idtest="modaltaskmicrobiology.detailtask.test.id">
+                                </commentordermodal>                          
+                            </div>
+                            <div class="uk-width-1-1"
+                                style="height: calc(100% - 154px);padding-left: 9px;margin-top: 10px;">
+                                <div class="uk-grid" style="height: 97%">
+                                    <div class="uk-width-1-2" style="height: 100%;width: 31.7%;">
+                                        <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%;">
+                                            <div class="tree-container"
+                                                style="height: calc(100% - 0px);overflow: auto;">
+                                                <tree nodes="modaltaskmicrobiology.basicTree"
+                                                    options="modaltaskmicrobiology.options"></tree>
+                                                <div class="md-fab-wrapper md-fab-in-card">
+                                                    <button type="button"
+                                                        ng-disabled="modaltaskmicrobiology.newdisabled"
+                                                        ng-class="{'md-bg-blue-grey-100' : modaltaskmicrobiology.newdisabled }"
+                                                        class="md-fab md-fab-small md-fab-primary"
+                                                        ng-click="modaltaskmicrobiology.open= true">
+                                                        <i class="uk-icon-file" data-uk-tooltip="{pos:'top'}"
+                                                            title="Nuevo"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2"
+                                        ng-show="modaltaskmicrobiology.taskdetail.length!==0"
+                                        style="height: 100%;width: 68%;padding-left: 9px;">
+                                        <div class="uk-grid" style="height: 100%;margin-left: -8px;">
+                                            <div class="uk-width-1-2"
+                                                style="height: 150px;width: 43%;padding-left: 9px;">
+                                                <div class="md-card md-card-hover uk-animation-scale-up"
+                                                    style="height: 100%;">
+                                                    <div class="md-card-content large-padding"
+                                                        style="padding: 11px 10px;">
+                                                        <div class="uk-width-1-1"
+                                                            style="padding-left: 0px; padding-right: 24px;">
+                                                            <ul class="md-list md-list-addon">
+                                                                <li style="padding: 7px 0px;">
+                                                                    <div class="md-list-addon-element">
+                                                                        <img class="md-list-addon-icon material-icons"
+                                                                            ng-src="images/microbiology/add-user.png" />
+                                                                    </div>
+                                                                    <div class="md-list-content">
+                                                                        <span
+                                                                            class="uk-text-small uk-text-muted">Usuario
+                                                                            creador</span>
+                                                                        <span
+                                                                            class="md-list-heading uk-text-truncate">{{modaltaskmicrobiology.taskdetail.userRegister.name}}
+                                                                            {{modaltaskmicrobiology.taskdetail.userRegister.lastName}}</span>
+                                                                    </div>
+                                                                </li>
+                                                                <li style="padding: 15px 0px;">
+                                                                    <div class="md-list-addon-element">
+                                                                        <img class="md-list-addon-icon material-icons"
+                                                                            ng-src="images/microbiology/working.png" />
+                                                                    </div>
+                                                                    <div class="md-list-content">
+                                                                        <span
+                                                                            class="uk-text-small uk-text-muted">{{'0157'| translate}}</span>
+                                                                        <span
+                                                                            class="md-list-heading uk-text-truncate">{{modaltaskmicrobiology.taskdetail.destination.name}}</span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-1-2"
+                                                style="height: 150px; width: 57%;padding-left: 9px;">
+                                                <div class="md-card md-card-hover md-card-horizontal uk-animation-scale-up"
+                                                    style="height: 100%;min-height: 22%">
+                                                    <div class="md-card-head" style="width: 38%;">
+                                                        <div class="uk-text-center" style="margin-top: 21px;">
+                                                            <img class="md-list-addon-icon material-icons"
+                                                                ng-src="images/microbiology/tasks.png"
+                                                                style="font-size: 48px;" />
+                                                        </div>
+                                                        <h3 class="md-card-head-text uk-text-center">
+                                                            {{'0578'| translate}}
+                                                        </h3>
+                                                    </div>
+                                                    <div class="md-card-content"
+                                                        style="width: 58%;margin-left: 38%;padding: 7px;overflow: auto;height: 126px;;">
+                                                        <ul class="md-list">
+                                                            <li style="min-height: 38%;"
+                                                                ng-repeat="task in modaltaskmicrobiology.taskdetail.tasks">
+                                                                <div class="md-list-content">
+                                                                    <span class="uk-text-small uk-text-muted">
+                                                                        {{task.description}}
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-1-1"
+                                                style="height: calc(100% - 158px); padding-left: 9px;margin-top: 8px;">
+                                                <div class="md-card md-card-hover uk-animation-scale-up"
+                                                    style="height: 100%;width: 100%;">
+                                                    <div class="md-card-toolbar" style="padding: 0px 7px;">
+                                                        <div class="md-card-toolbar-actions">
+                                                            <span
+                                                                class="uk-text-small uk-text-muted">{{modaltaskmicrobiology.datemodificationcomment}}-{{modaltaskmicrobiology.taskdetail.user.userName}}
+                                                            </span>
+                                                        </div>
+                                                        <h3 class="md-card-toolbar-heading-text">
+                                                            {{'0114' | translate}}
+                                                        </h3>
+                                                    </div>
+                                                    <div class="md-card-content"
+                                                        style="height: calc(100% - 74px);overflow: auto;width: 90%;padding: 8px;width: 98%;">
+                                                        <p
+                                                            ng-bind-html="modaltaskmicrobiology.taskdetail.comment | trust">
+                                                        </p>
+                                                        <div class="md-fab-wrapper md-fab-in-card">
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-1-3"
+                                                                    style=" width: 34.333%;padding-left: 0px;">
+                                                                    <button type="button" ng-disabled="false"
+                                                                        class="md-fab md-fab-small md-fab-warning"
+                                                                        ng-class="{'md-bg-blue-grey-100' : false}">
+                                                                        <i class="uk-icon-pencil"
+                                                                            data-uk-modal="{target:'#modalcommenttask'}"
+                                                                            ng-click="modaltaskmicrobiology.comment1=modaltaskmicrobiology.taskdetail.comment"
+                                                                            data-uk-tooltip="{pos:'top'}"
+                                                                            title="{{'0556'| translate}}"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="uk-width-1-3"
+                                                                    style="padding-left: 14px;">
+                                                                    <button type="button" ng-disabled="false"
+                                                                        class="md-fab md-fab-small md-fab-success"
+                                                                        ng-class="{'md-bg-blue-grey-100' : false}">
+                                                                        <i class="material-icons"
+                                                                            data-uk-tooltip="{pos:'top'}"
+                                                                            title="{{'0046'| translate}}"
+                                                                            data-uk-modal="{target:'#modalTraceabilitytask'}">&#xE422;</i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<modalexceptions idcontrol="'modaltaskmicrobiology'" openmodal="modaltaskmicrobiology.ShowPopupError"
+    detailerror="modaltaskmicrobiology.Error"></modalexceptions>
+<modaltask idcontrol="'modaltaskmicrobiology'" openmodal="modaltaskmicrobiology.open"
+    order="modaltaskmicrobiology.detailtask.order.orderNumber" test="modaltaskmicrobiology.detailtask.test.id"
+    testcode="modaltaskmicrobiology.detailtask.test.code" testname="modaltaskmicrobiology.detailtask.test.name"
+    typetaask="modaltaskmicrobiology.tasktype" idtask="modaltaskmicrobiology.idtask"
+    closed="modaltaskmicrobiology.namewindows" functionexecute="modaltaskmicrobiology.getdetailtask"
+    patientinformation="modaltaskmicrobiology.patient" photopatient="modaltaskmicrobiology.photopatient">
+</modaltask>
+<div class="uk-modal uk-modal-card-fullscreen" id="modalcommenttask">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-amber-800">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" data-uk-modal="{target:'#taskmodalmicrobiology'}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;"> <i
+                        class=" uk-icon-pencil md-36 md-color-blue-50"></i></span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0114' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: 88%">
+                <div style="height: 90%">
+                    <codedcomment comment="modaltaskmicrobiology.comment1"></codedcomment>
+                </div>
+                <div class="md-fab-wrapper md-fab-in-card">
+                    <button type="button" class="md-fab md-fab-small md-fab md-fab-warning"
+                        ng-click="modaltaskmicrobiology.updatecommenttask()">
+                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                            title=" {{'0007' | translate}} ">&#xE161;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal uk-modal-card-fullscreen" id="modalTraceabilitytask">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-green-700">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" data-uk-modal="{target:'#taskmodalmicrobiology'}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-blue-50 md-36">&#xE422;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0114' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: 88%">
+                <div style="height: 100%">
+                    <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                        style="margin-bottom: 0px;height: 100%;">
+                        <thead class="theadscrollable" style="height: 37px;">
+                            <tr class="uk-grid" style="margin-left: 0px;">
+                                <th class="uk-width-1-10">{{'0001'| translate}}</th>
+                                <th class="uk-width-2-10">{{'0579'| translate}}</th>
+                                <th class="uk-width-3-10">{{'0580'| translate}}</th>
+                                <th class="uk-width-4-10">{{'0581'| translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbodyscrollable" style="margin-top: 0px;height: calc(100% - 55px);">
+                            <tr class="uk-grid" ng-repeat="tracking in modaltaskmicrobiology.commenttracking"
+                                style="margin-left: 0px;    margin-top: 2px;" ng-if="tracking.previous!=''">
+                                <td class="uk-width-1-10">
+                                    <img class="md-user-image md-list-addon-avatar" ng-src="images/user1.png"
+                                        ng-if="tracking.photo === ''" />
+                                    <img class="md-user-image md-list-addon-avatar"
+                                        ng-src="data:image/jpeg;base64,{{tracking.photo}}"
+                                        ng-if="tracking.photo !== ''" />
+                                    <span class="uk-text-small uk-text-muted" style="margin-bottom: 12px;">
+                                        {{tracking.user.userName}} </span>
+                                </td>
+                                <td class="uk-width-2-10 uk-text-truncate">
+                                    {{tracking.datemoment}}
+                                </td>
+                                <td class="uk-width-3-10 uk-text-truncate" ng-bind-html="tracking.previous | trust">
+                                </td>
+                                <td class="uk-width-4-10 uk-text-truncate" ng-bind-html="tracking.current | trust"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

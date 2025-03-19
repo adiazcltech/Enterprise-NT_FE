@@ -1,0 +1,253 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden">
+    <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+      <div style="height:100%" class="uk-width-1-1">
+
+        <div class="md-card" style="min-height: 51px">
+          <div class="md-card-content" style="padding-bottom: 2px;padding-top:7px; padding-left: 10px">
+            <div class="uk-input-group">
+              <span class="uk-input-group-addon" style="min-width: 28px; padding: 10px; padding-left: 0px">
+                <img class="md-list-addon-icon material-icons md-22" ng-src="images/inconsistency/order.png">
+              </span>
+              <div class="md-input-wrapper md-input-filled">
+                <label style="top: -6px; font-size: 12px;">{{ '0061' | translate }}: </label>
+                <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove"
+                  ng-model="vm.searchorder" ng-keypress="vm.autocomplenumberorder($event)"
+                  maxlength="{{vm.maxcantdigit}}" md-input="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="uk-width-1-1 " style="margin-top: 10px;height: calc(100% - 116px)"
+          ng-if="vm.tests.length!==0">
+
+          <div class="uk-grid" style="height: 100%">
+
+            <div class="uk-width-7-10" style="height: calc(100% - -385px);">
+              <div class="md-card md-card-hover" style="height: calc(100% - 335px);">
+                <div class="md-card-content" style="height: 100%;padding: 0px;">
+                  <div class="md-card-content fullheight" style="padding: 0px;">
+                    <div class="uk-grid uk-flex uk-flex-middle div-head" style="height: 39px;">
+                      <div class="uk-width-1-10" style="padding-left: 10px;"
+                        ng-click="vm.sortType = 'testCode'; vm.sortReverse = !vm.sortReverse">
+                        <resultssort sortvalue="'testCode'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                        </resultssort>{{'0098' | translate}}
+                      </div>
+                      <div style="padding-left: 10px;" class="uk-width-3-10"
+                        ng-click="vm.sortType = 'testName'; vm.sortReverse = !vm.sortReverse">
+                        <resultssort sortvalue="'testName'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                        </resultssort>{{'0118' | translate}}
+                      </div>
+                      <div style="padding-left: 10px;" class="uk-width-2-10"
+                        ng-click="vm.sortType = 'rate'; vm.sortReverse = !vm.sortReverse">
+                        <resultssort sortvalue="'rate'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                        </resultssort>{{'0087' | translate}}
+                      </div>
+                      <div class="uk-width-2-10" style="padding-left: 10px;"
+                        ng-click="vm.sortType = 'patientPrice'; vm.sortReverse = !vm.sortReverse">
+                        <resultssort sortvalue="'patientPrice'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                        </resultssort>{{'0455' | translate}}
+                      </div>
+                      <div class="uk-width-2-10" style="padding-left: 10px;"
+                        ng-click="vm.sortType = 'insurancePrice'; vm.sortReverse = !vm.sortReverse">
+                        <resultssort sortvalue="'insurancePrice'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                        </resultssort>{{'0456' | translate}}
+                      </div>
+                    </div>
+                    <div vs-repeat class="vs-repeat-custom-scroll" style="height: calc(100% - 40px);">
+                      <div ng-repeat="test in vm.tests | orderBy:vm.sortType:vm.sortReverse"
+                        class="uk-grid uk-flex uk-flex-middle div-table" style="margin-top: 0px;">
+                        <div class="uk-width-1-10" style="font-size: 12px;">{{test.testCode}}</div>
+                        <div class="uk-width-3-10" style="font-size: 12px;">{{test.testName}}</div>
+                        <div class="uk-width-2-10" style="font-size: 12px;">{{test.billing.rate.name }}</div>
+                        <div class="uk-width-2-10">
+                          <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove"
+                            ng-model="test.billing.patientPrice" md-input="" style="font-size: 12px;min-height: 32px;"
+                            ng-blur="vm.calculate()">
+                        </div>
+                        <div class="uk-width-2-10">
+                          <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove"
+                            ng-model="test.billing.insurancePrice" md-input=""
+                            style="font-size: 12px;min-height: 32px;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="uk-width-3-10">
+
+              <div class="md-card md-card-hover" style="height: calc(100% - 335px);overflow: auto;">
+                <div class="md-card-content" style="height: 100%;padding: 0px;">
+                  <div class="md-card-content fullheight" style="padding: 0px;">
+
+                    <fieldset class="fieldset uk-grid" style="padding: 3px 5px;margin-left: 0px;margin-top: 0px;">
+                      <ul class="md-list md-list-addon" style="width: 95%;">
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/subtotal.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'1852' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.subtotal | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/discountg.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'1873' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.discountValue | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/tax.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'0470' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.taxValue | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/discount.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'1790' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.discounttest | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/copayment.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'1548' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.copay | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/fee.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'1578' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.fee | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/total.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">Total</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.total | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/installments.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'0471' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.balance | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="md-list-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/billing/balance.png" />
+                          </div>
+                          <div class="md-list-content">
+                            <span class="md-list-heading">{{'0472' | translate}}</span>
+                            <span class="uk-text-small uk-text-muted">{{ vm.invoice.totalPaid | currency : vm.simbolmoney :
+                              vm.decimal }}</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+        <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+          <div style="height: 100%; padding-top: 5px" class="md-card-content">
+            <div class="uk-grid" style="height: 100%">
+              <div class="uk-width-1-1" style="float: right">
+                <button style="float: right; margin-left: 10px" type="button" data-uk-tooltip="{pos:'top'}"
+                  title="{{'0007' | translate}}"
+                  class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-light-blue-A700"
+                  ng-click="vm.save()"
+                  ng-disabled="vm.order===undefined"
+                  ng-class="{'md-bg-blue-grey-100' : vm.order===undefined}"
+                >
+                  <i class="material-icons md-24 no_margin">&#xE227;</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal-error" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ vm.dataerror}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ventana modal para cuando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{'0962' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

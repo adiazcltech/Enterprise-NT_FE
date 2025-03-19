@@ -1,0 +1,82 @@
+<style>
+    .dependencedemo-header-avatar {
+        margin-top: 10px !important;
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .dependencedemo-header-text {
+        padding-bottom: 0px !important;
+        font-size: 14pt;
+    }
+
+    .dependencedemo-md-card {
+        height: 40px !important;
+        line-height: 40px;
+    }
+
+    .dependencedemo-card-content {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        overflow-y: auto !important;
+    }
+
+    .dependencedemo-addon-element {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        min-height: 40px;
+        height: 40px !important;
+    }
+
+    .dependencedemo-list-content {
+        font-size: 14px !important;
+        height: 50px;
+        line-height: 50px;
+        font-weight: bold !important;
+    }
+
+    .dependencedemo-demo-item {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        margin-bottom: 5px;
+    }
+
+    .md-list > li {
+        min-height: 0px !important;
+    }
+
+    .dependencedemo-demographic-text {
+        text-transform: capitalize !important;
+    }
+  
+</style>
+<!-- <modalexceptions openmodal="dependencedemo.ShowPopupError" detailerror="dependencedemo.Error"></modalexceptions> -->
+<div class="uk-modal" id="dependencemodal" tabindex="1" aria-hidden="false" >
+   <div class="uk-modal-dialog" style="height: 60%;">
+      <div class="md-card md-card-hover uk-animation-fade" style="height: 100%">
+            <div class="md-card-head md-bg-light-blue-600 dependencedemo-md-card">
+                <h3 class="md-card-head-text uk-text-left md-color-white dependencedemo-header-text">
+      <!--               {{dependencedemo.patientdata.completeName}} -->
+                    <span style="font-size: 15px; line-height: 30px;">
+                        <b>{{'0780' | translate}}</b>
+                    </span>
+                </h3>
+            </div>
+            <div class="md-card-content dependencedemo-card-content" style="height: calc(100% - 52px)">
+                <ul class="md-list md-list-addon">
+                    <li class="dependencedemo-demo-item" ng-repeat="demo in dependencedemo.dependences">
+                        <div class="md-list-addon-element dependencedemo-addon-element">
+                             <img class="md-list-addon-icon material-icons md-36" ng-src="{{demo.image}}" />
+                        </div>
+                        <div class="md-list-content dependencedemo-list-content">
+                            <span class="uk-text-small uk-text-muted md-list-heading dependencedemo-list-content">{{demo.name}} - {{demo.origin}}</span>
+                        </div>                      
+                    </li>
+                </ul>
+            </div>
+      </div>
+      <div class="uk-modal-footer uk-text-right" style="margin-top: 13px;">
+          <button type="button" class="md-btn md-btn-default" ng-click="dependencedemo.cancel()" >{{'0008' | translate | trim}}</button>
+      </div>
+   </div>
+</div>    

@@ -1,0 +1,91 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="overflow: hidden">
+        <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+            <div style="height:100%" class="uk-width-1-1">
+                <div class="md-card md-card-hover uk-animation-fade" style="margin-bottom: 5px ;height: 100%">
+                    <div class="md-card  md-card-hover fullheight">
+                        <div class="md-card-content fullheight" style="padding: 0px;" >
+                            <div class="uk-grid uk-flex uk-flex-middle div-head">
+                                <div class="uk-width-1-10 uk-text-center uk-table-middle small_col" style="width: 5%; padding-left: 2px;"></div>
+                                <div class="uk-width-2-10 uk-text-bold ">
+                                    {{'0325' | translate}}
+                                </div>
+                                <div class="uk-width-2-10 uk-text-bold">
+                                    {{'0003' | translate}}
+                                </div>
+                                <div class="uk-width-2-10 uk-text-bold">
+                                    {{'0001' | translate}}
+                                </div>
+                                <div class="uk-width-3-10 uk-text-bold">
+                                    IP
+                                </div>
+                            </div>
+                            <div class="div-conttable" style="height: calc(100% - 40px)">
+                              <div ng-repeat="section in vm.usersOnline" ng-if="section.id !== vm.userAuth.id && vm.usersOnline.length > 1" class="uk-grid uk-flex  uk-flex-middle div-table" style="margin-top: 0px">
+                                  <div class="uk-width-1-10 uk-text-center uk-table-middle small_col" style="width: 5%; padding-left: 2px;">
+                                      <input
+                                          type="checkbox"
+                                          icheck
+                                          ng-model="section.selected"
+                                          class="check_row"
+                                          table-check-row
+                                      >
+                                  </div>
+                                  <div class="uk-width-2-10">{{(section.date  | date : 'dd/MM/yyyy h:mma')}}</div>
+                                  <div class="uk-width-2-10 uk-text-truncate">
+                                      {{section.branchname}}
+                                  </div>
+                                  <div class="uk-width-2-10 uk-text-truncate" style="text-transform: capitalize;">
+                                      {{section.name}} {{ section.lastName }}
+                                  </div>
+                                  <div class="uk-width-3-10 uk-text-truncate">
+                                      {{section.ip}}
+                                  </div>
+                              </div>
+                              <div style="text-align-last: center;margin-top: 2%;" ng-if="vm.usersOnline.length <= 1">
+                                <span class="uk-badge badge-info" style="font-size: 20px;padding: 10px;border-radius: 10px;">{{ '1529' | translate }}</span>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+            <div style="height: 100%;" class="md-card md-card-hover uk-animation-fade">
+                <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                    <div class="uk-grid" style="height: 100%">
+                        <div class="uk-width-1-1" style="float: right">
+                            <button
+                                style="float: right"
+                                type="button"
+                                class="md-fab md-fab-small md-fab-success"
+                                ng-class="{'md-bg-blue-grey-100' : ((vm.usersOnline | filter:{ selected: true}).length === 0 )}"
+                                ng-disabled="((vm.usersOnline | filter:{ selected: true}).length === 0 )"
+                                ng-click="vm.save()"
+                            >
+                                <i class="material-icons md-24 no_margin md-color-blue-50" data-uk-tooltip="{pos:'top'}" title="{{'0056' | translate}}">vpn_key</i>
+                            </button>
+                            <button
+                                style="float: right;margin-right: 14px;"
+                                type="button"
+                                class="md-fab md-fab-small md-fab-primary"
+                                ng-click="vm.all()"
+                            >
+                                <i class="material-icons md-24 no_margin md-color-blue-50" data-uk-tooltip="{pos:'top'}" title="{{'1504' | translate}}">&#xE065;</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

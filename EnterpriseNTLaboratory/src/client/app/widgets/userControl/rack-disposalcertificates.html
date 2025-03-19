@@ -1,0 +1,345 @@
+<style>
+    .timeline_icon_success {
+        background: #f44336;
+        color: white;
+        font-size: 20px;
+        line-height: 37px;
+    }
+    .modal-above {
+        z-index: 1303;
+    }
+</style>
+<!-- ventana modal desecho de muestras en gradillas -->
+<loadpage view="rackdisposalcertificates.loading" style="z-index: 9999;position: absolute;"></loadpage>
+<div class="uk-modal uk-modal-card-fullscreen"  id="modaldiscardsample" >
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-orange-600" >
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i style="margin-top: 0px"
+                        class="md-icon material-icons md-color-light-green-50 uk-modal-close"
+                        data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}"
+                        ng-click="rackdisposalcertificates.closemodalwarnings()"
+                        >&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin:13px 6px 0px 0px; display: block;">
+                    <i class="material-icons md-24 md-color-light-green-50">delete_sweep</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-light-green-50">
+                    {{'0736'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid" style="height: 100%;">
+                <div class="uk-width-4-10" style="height: 100%;">
+                    <div class="md-card md-card-hover" style="height: 50px">
+                        <div class="md-card-content">
+                            <div class=" uk-flex uk-flex-center uk-flex-middle">
+                                <p style="margin-left: 7px">
+                                    <input type="radio" name="typefilter" id="typefilterall" icheck
+                                    ng-model="rackdisposalcertificates.typefilter" value="1" ng-change="rackdisposalcertificates.changetypefilter(1)"  />
+                                    <label style="margin-right: 20px" for="typefilterall" class="inline-label">{{'0215' | translate}}</label>
+                                    <input type="radio" name="typefilter" id="typefilteropen" icheck ng-model="rackdisposalcertificates.typefilter" value="2" ng-change="rackdisposalcertificates.changetypefilter(2)"/>
+                                    <label style="margin-right: 20px" for="typefilteropen" class="inline-label">{{'0785' | translate}}</label>
+                                    <input type="radio" name="typefilter" id="typefilterclose" icheck ng-model="rackdisposalcertificates.typefilter" value="3" ng-change="rackdisposalcertificates.changetypefilter(3)"/>
+                                    <label for="typefilterclose" class="inline-label">{{'0786' | translate}}</label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-card  md-card-hover" style="height: calc(100% - 60px); margin-top: 10px">
+                        <div class="md-card-content" style="height: 95%;">
+                            <div class="uk-input-group">
+                                <input type="text" name="search" id="search" md-input label-fixed class="md-input  label-fixed" ng-model="rackdisposalcertificates.search" placeholder="{{'0154' | translate}}">
+                                <span class="uk-input-group-addon" style="min-width: 28px;">
+                                    <img ng-src="images/microbiology/search.png" />
+                                </span>
+                            </div>
+                            <table class="uk-table uk-margin-top  uk-table-small uk-table-middle tablescrollable" style="height: 74%; margin-top: 0px;">
+                                 <thead style=" display: inline-block;width: 100%;height: 39px;">
+                                    <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                        <th ng-if="false" class="uk-width-2-10">
+                                           {{ '0098' | translate }}
+                                        </th>
+                                        <th class="uk-width-8-10">
+                                           {{ '0118' | translate }}
+                                        </th>
+                                         <th class="uk-width-2-10">
+                                         {{ '0364' | translate }}
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="tbodyscrollable" style="height: calc(100% - 39px); margin-top: 0px;">
+                                    <tr data-ng-repeat="disposal in rackdisposalcertificates.listdisposalcertificates | filter: rackdisposalcertificates.search"  ng-class="{'md-bg-blue-50': disposal.id == rackdisposalcertificates.selected}" ng-click=" rackdisposalcertificates.getdetaildisposalcertificate(disposal.id, disposal.closed)" class="uk-grid" style="margin-left: 0px;margin-top: 0px;">
+                                        <td class="uk-width-8-10" data-ng-bind="disposal.name"></td>
+                                        <td class="uk-width-2-10 uk-text-center">
+                                            <img ng-if="disposal.closed == false" ng-src="images/rack/listopen.png" />
+                                            <img ng-if="disposal.closed == true" ng-src="images/rack/listclose.png" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="uk-flex uk-flex-right uk-flex-middle">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-2" >
+                                        <button type="button" class="md-fab md-fab-small md-fab-success" data-uk-modal="{target:'#modaladddisponsalcertificates',modal:false}" ng-click="rackdisposalcertificates.adddisponsalcertificates()">
+                                            <i class="uk-icon-plus md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0005' | translate }}"></i>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-6-10" style="height: 100%;">
+                    <div class="md-card  md-card-hover" style="height: 100%">
+                        <div class="md-card-content" style="height: 96%;">
+
+                            <div class="uk-tab" style="height: 88%">
+                                <ul ng-if="rackdisposalcertificates.selected !== null" class="uk-tab" data-uk-tab="{connect:'#tabs_description'}">
+                                    <li  ng-class="{'uk-active':rackdisposalcertificates.tabactive === 1}">
+                                        <a ng-click="rackdisposalcertificates.getdetaildisposalcertificate(rackdisposalcertificates.selected, rackdisposalcertificates.statedisposalcertificate)">{{'0793' | translate }}</a>
+                                    </li>
+                                    <li ng-if="rackdisposalcertificates.statedisposalcertificate === false" ng-class="{'uk-active':rackdisposalcertificates.tabactive === 2}">
+                                        <a href="#" ng-click="rackdisposalcertificates.getracktodiscard()">{{ '0794' | translate }}</a>
+                                    </li>
+                                    <li  ng-if="rackdisposalcertificates.statedisposalcertificate === false" ng-class="{'uk-active':rackdisposalcertificates.tabactive === 3}">
+                                        <a href="#" ng-click="rackdisposalcertificates.view = 3">{{ '0795' | translate }}</a>
+                                    </li>
+                                </ul>
+                                <ul ng-if="rackdisposalcertificates.selected !== null" id="tabs_description" class="uk-switcher uk-margin" style="height: calc(100% - 32px);">
+                                    <li style="height: 100%;" >
+                                       <table ng-if="rackdisposalcertificates.listdetaildisposalcertificates.length > 0" class="uk-table  uk-table-small uk-table-middle tablescrollable" style="height: 100%;">
+                                            <thead style=" display: inline-block;width: 100%;height: 39px; font-size: 12px">
+                                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                                    <th class="uk-width-3-10">
+                                                       {{'0111' | translate}}
+                                                    </th>
+                                                    <th class="uk-width-3-10">
+                                                       {{'0110' | translate}}
+                                                    </th>
+                                                    <th class="uk-width-3-10">
+                                                       {{'0705' | translate}}
+                                                    </th>
+                                                    <td class="uk-width-1-10 uk-text-center">
+                                                       {{'0706' | translate}}
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbodyscrollable" vs-repeat="20" style="overflow: auto; margin-top: 0px;height: calc(100% - 43px);width: 100% !important; font-size: 12px" >
+                                                <tr ng-repeat="disposal in rackdisposalcertificates.listdetaildisposalcertificates" class="uk-grid" style="margin-left: 0px;margin-top: 0px">
+                                                    <td class="uk-width-3-10">
+                                                        {{disposal.sample.codesample}}. {{disposal.sample.name}}
+                                                    </td>
+                                                    <td class="uk-width-3-10">
+                                                        {{disposal.order}}
+                                                    </td>
+                                                    <td class="uk-width-3-10">
+                                                        {{disposal.rack.code}}. {{disposal.rack.name}}
+                                                    </td>
+                                                    <td class="uk-width-1-10 uk-text-center">
+                                                       {{disposal.positioncalculate}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div ng-if="rackdisposalcertificates.listdetaildisposalcertificates.length === 0">{{ '0796' | translate }}</div>
+                                    </li>
+                                    <li style="height: 100%;">
+                                        <table ng-if="rackdisposalcertificates.listracktodiscard.length > 0" class="uk-table   uk-table-small uk-table-middle tablescrollable" style="height: 90%; margin-top: 0px;">
+                                             <thead style=" display: inline-block;width: 100%;height: 39px;">
+                                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                                    <th class="uk-table-middle small_col uk-text-center" style="width: 2%;">
+                                                        <input type="checkbox" icheck ng-model="vm.Allcheck" ng-change="vm.selectallcheck()" ng-disabled="true">
+                                                    </th>
+                                                    <th class="uk-width-6-10" style="width: 54%">
+                                                       {{'0705' | translate}}
+                                                    </th>
+                                                     <th class="uk-width-4-10 uk-text-center">
+                                                       {{ '0797' | translate }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbodyscrollable" vs-repeat="30" data-scroll-to-top='rackdisposalcertificates.listracktodiscard.length' style="height: calc(100% - 39px); margin-top: 0px;">
+                                                <tr data-ng-repeat="rack in rackdisposalcertificates.listracktodiscard" class="uk-grid" style="margin-left: 0px;margin-top: 0px;">
+                                                    <td class="uk-table-middle small_col uk-text-center" style="width: 2%;">
+                                                        <input type="checkbox" icheck ng-model="rack.check" class="check_row" table-check-row>
+                                                    </td>
+                                                    <td class="uk-width-6-10" style="width: 54%" data-ng-bind="rack.name"></td>
+                                                    <td class="uk-width-4-10 uk-text-center" data-ng-bind="rack.storageDays"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div ng-if="rackdisposalcertificates.listracktodiscard.length === 0">{{ '0798' | translate }}</div>
+                                    </li>
+                                    <li style="height: 100%;">
+                                        <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-top">
+                                            <ordersample order="rackdisposalcertificates.order" sample="rackdisposalcertificates.sample" size='30' functionexecute="rackdisposalcertificates.validOrderSample"></ordersample>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="uk-flex uk-flex-right uk-flex-middle uk-margin-top">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-2" ng-if="rackdisposalcertificates.view === 1">
+                                        <button type="button" ng-click="rackdisposalcertificates.printReport()" class="md-fab md-fab-small md-bg-purple-A700"  ng-disabled="rackdisposalcertificates.selected === null || rackdisposalcertificates.listdetaildisposalcertificates.length === 0" ng-class="{'md-bg-blue-grey-100' : rackdisposalcertificates.selected === null || rackdisposalcertificates.listdetaildisposalcertificates.length === 0}">
+                                             <i style="color: white" class="material-icons" >&#xE8AD;</i>
+                                        </button>
+                                    </div>
+                                    <div class="uk-width-1-2" ng-if="rackdisposalcertificates.view === 1" style="padding-left: 20px">
+                                        <button type="button" ng-click="rackdisposalcertificates.closedisposalcertificates()" class="md-fab md-fab-small md-fab-danger" data-uk-modal="{target:'#modaladdrackandsample',modal:false}" ng-disabled="rackdisposalcertificates.statedisposalcertificate === true || rackdisposalcertificates.selected === null || rackdisposalcertificates.listdetaildisposalcertificates.length === 0"  ng-class="{'md-bg-blue-grey-100' : rackdisposalcertificates.statedisposalcertificate === true || rackdisposalcertificates.selected === null || rackdisposalcertificates.listdetaildisposalcertificates.length === 0}">
+                                            <i class="uk-icon-close md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="Cerrar acta"></i>
+                                        </button>
+                                    </div>
+                                    <div class="uk-width-1-2" ng-if="rackdisposalcertificates.view === 2" style="padding-left: 20px">
+                                        <button type="button" ng-click="rackdisposalcertificates.insertrackdisposalcertificates()"  class="md-fab md-fab-small md-fab-primary" data-uk-modal="{target:'#modaladdrackandsample',modal:false}" ng-disabled="(rackdisposalcertificates.listracktodiscard|filter:{ check : true }).length === 0"  ng-class="{'md-bg-blue-grey-100' : (rackdisposalcertificates.listracktodiscard|filter:{ check : true }).length === 0}">
+                                            <i style="font-size: 30px !important" data-uk-tooltip="{pos:'top'}" title="Desechar gradillas" class="material-icons md-24 md-color-grey-50">delete_forever</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="modaladddisponsalcertificates" class="uk-modal" bg-close="false" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header md-bg-light-green-500" style="border-bottom: 0px">
+            <h2 class="uk-modal-title">{{ '0784' | translate }}</h2>
+        </div>
+
+        <div class="uk-grid uk-flex uk-flex-center uk-flex-middle" style="padding-right: 50px; padding-left: 50px">
+
+            <div class="uk-width-1-1">
+                <div class="md-input-wrapper md-input-filled">
+                    <label style="top: -6px; font-size: 12px;">{{ '0118' | translate }}: </label>
+                    <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove" ng-model="rackdisposalcertificates.detaildisponsal.name"  md-input="">
+                    <span ng-if="rackdisposalcertificates.repeatname" style="margin-top: 0px" class="uk-form-help-block uk-text-danger">{{ '0463' | translate }}</span>
+                </div>
+            </div>
+            <div class="uk-width-1-1 uk-margin-top">
+                 <label style="top: -6px; font-size: 12px;">{{ '0332' | translate }}: </label>
+                <textarea style="height: 75px !important; min-height: 75px;" class="md-input comment-remove-sample" ng-model="rackdisposalcertificates.detaildisponsal.description"></textarea>
+            </div>
+        </div>
+         <div class="uk-overflow-container" style="margin-top: 0px">
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button ng-disabled="rackdisposalcertificates.detaildisponsal.name === '' || rackdisposalcertificates.detaildisponsal.description === ''" class="md-btn md-bg-light-green-500 md-color-light-green-50" ng-class="{'md-bg-grey-300' :rackdisposalcertificates.detaildisponsal.name === '' || rackdisposalcertificates.detaildisponsal.description === ''}" type="button" ng-click="rackdisposalcertificates.insertdisponsalcertificates()">{{ '0007' | translate }}</button>
+            <button class="md-btn md-btn-default uk-modal-close" type="button">{{ '0008' | translate }}</button>
+        </div>
+    </div>
+</div>
+
+<div id="modallistsamplerack" class="uk-modal" bg-close="false" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header md-bg-light-green-500" style="border-bottom: 0px">
+            <h2 class="uk-modal-title">{{ '0736' | translate }}</h2>
+        </div>
+        <div class="uk-grid uk-flex uk-flex-center uk-flex-middle" style="padding-right: 10px; padding-left: 10px">
+            <div class="uk-width-1-1" style="max-height: 300px">
+                {{ '0799' | translate }}:
+            </div>
+            <div class="uk-width-1-1 uk-margin-top" style="max-height: 300px; height: 300px">
+                <table class="uk-table  uk-table-small uk-table-middle tablescrollable" style="height: 100%;">
+                    <thead style=" display: inline-block;width: 100%;height: 39px; font-size: 12px">
+                        <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                            <th class="uk-width-2-10">
+                                {{'0705'| translate}}
+                            </th>
+                            <th class="uk-width-1-10">
+                                {{'0680'| translate}}
+                            </th>
+                            <th class="uk-width-1-10">
+                                {{'0364'| translate}}
+                            </th>
+                            <td class="uk-width-1-10 uk-text-center">
+                                {{'0706'| translate}}
+                            </td>
+                            <th class="uk-width-2-10">
+                                {{'0003'| translate}}
+                            </th>
+                            <th class="uk-width-1-10" style="width: 15%">
+                                {{'0710'| translate}}
+                            </th>
+                            <th class="uk-width-1-10">
+                                {{'0711'| translate}}
+                            </th>
+                            <th class="uk-width-1-10" style="width: 5%">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyscrollable" vs-repeat="20" style="overflow: auto; margin-top: 0px;height: calc(100% - 43px);width: 100% !important; font-size: 12px" >
+                        <tr ng-repeat="rack in rackdisposalcertificates.listracksample" class="uk-grid" style="margin-left: 0px;margin-top: 0px" ng-class="{'md-bg-light-blue-100': rack.rack.id == rackdisposalcertificates.selectedracksearch}">
+                            <td class="uk-width-2-10">
+                                {{rack.name}}{{rackdisposalcertificates.selectedracksearch}}
+                            </td>
+                            <td class="uk-width-1-10">
+                                {{rack.rack.typename}}
+                            </td>
+                            <td class="uk-width-1-10">
+                                {{rack.rack.isOpenText}}
+                            </td>
+                            <td class="uk-width-1-10 uk-text-center">
+                                {{rack.positioncalculate}}
+                            </td>
+                            <td class="uk-width-2-10" >
+                                {{rack.branch.name}}
+                            </td>
+                            <td class="uk-width-1-10" style="width: 15%">
+                                {{rack.rack.refrigerator.name}}
+                            </td>
+                            <td class="uk-width-1-10">
+                                {{rack.rack.floor}}
+                            </td>
+                            <td class="uk-width-1-10" style="cursor: pointer; width: 5%" ng-click="rackdisposalcertificates.insertsampledisposalcertificates(rack)">
+                                <i data-uk-tooltip="{pos:'top'}" title="Desechar muestra" class="material-icons md-24 md-color-light-blue-300">delete_forever</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+         <div class="uk-overflow-container" style="margin-top: 0px">
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="md-btn md-btn-default uk-modal-close" type="button">{{ '0008' | translate }}</button>
+        </div>
+    </div>
+</div>
+
+<!-- ventana modal para mensajes informativos -->
+<div id="modalinformativedisponsalcertificates" class="uk-modal" aria-hidden="true" bg-close="false" style="display: none; overflow-y: scroll; min-height: 300px">
+    <div  class="uk-modal-dialog">
+        <div   class="uk-overflow-container" style="margin-top: 0px; margin-bottom: 0px;">
+
+            <div class="uk-grid uk-flex uk-flex-center uk-flex-middle">
+                <div class="uk-width-1-5" >
+                    <img class="img-responsive" src="images/iconinfo.png">
+                </div>
+                <div class="uk-width-4-5" style="padding-left: 0px; margin-left: -10px; " ng-if="rackdisposalcertificates.textcenter === true">
+                    <h5 class="uk-text-center"" ng-bind-html="rackdisposalcertificates.messageinformativegeneral"></h5>
+                </div>
+                 <div class="uk-width-4-5" style="padding-left: 20px; margin-left: -10px;" ng-if="rackdisposalcertificates.textcenter === false">
+                    <label class="uk-text-left" ng-bind-html="rackdisposalcertificates.messageinformativegeneral"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<modalexceptions idcontrol="'modalerrordisposalcertificates'" openmodal="rackdisposalcertificates.ShowPopupError" detailerror="rackdisposalcertificates.Error"></modalexceptions>

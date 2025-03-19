@@ -1,0 +1,155 @@
+<style>
+    .tree-node-ico.tree-node-expanded {
+        background-image: url(../../images/folder.png) !important;
+        height: 24px;
+        width: 24px;    
+        margin-right: -4px;
+        background-position-y: 2px;
+        background-position-x: 2px;
+    }
+    .tree-node-ico.tree-node-collapsed {
+        background-image: url(../../images/folder-closed_1.png) !important;
+        height: 24px;
+        width: 24px;
+        margin-right: -4px;
+        background-position-y: 2px;
+        background-position-x: 2px;
+    } 
+    .md-tree-image {
+        width: auto !important;
+        height: auto !important;
+        border-style: none;
+        border-radius: 0 !important;
+    }
+ 
+    .node-name{
+        margin-left: -4px !important;
+        display: inline-grid;
+        margin-top: -7px;
+        vertical-align: text-top;
+    }  
+    .treenode-cltech {
+        height: calc(100% - 48px);
+        overflow: auto;
+        margin-left: 0px;
+        overflow-x: auto;
+    }    
+
+    audio, canvas, img, svg, video {
+        max-width: initial !important;
+        height: auto;
+        box-sizing: border-box;
+    } 
+
+    treenode ul li {
+        margin-right: 5px;
+        margin-top: -2px !important;
+        padding-left: -16px;
+    }  
+
+
+
+/*    treenode ul li {
+       
+    } */
+</style>
+
+<loadpage view="vm.loadingReport"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content" style="overflow: hidden;">
+    <div id="page_content_inner" style="padding: 0px 10px 0px; height: 96%;">
+        <div class="uk-grid" style="height: 100%">
+            <div class="uk-width-1-1" style="height: 100%">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content uk-grid" style="height: 100%;">  
+                        <div class="uk-width-1-4" style="width: 23.5%;height: 98%;">
+                            <div class="md-card md-card-hover uk-animation-fade" style="height: 97%">
+                                <div style="height: 96%;padding: 5px" class="md-card-content">
+                                    <div class="uk-input-group" style="padding-left: 0px;">
+                                        <label>{{'0154' | translate}}</label>
+                                        <input type="text" class="md-input" ng-model="vm.options5.filter.name" md-input>
+                                        <span class="uk-input-group-addon" style="padding: 0 0px;">
+                                            <i class="material-icons md-24">&#xE8B6;</i>
+                                        </span>
+                                    </div>
+                                    <div class="tree-container treenode-cltech">
+                                        <div style="margin-left: -22px">
+                                            <tree nodes="vm.basicTree" options="vm.options5"></tree>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  <!--       <form class="uk-width-3-4" style="padding: 0px !important"  action="\Proyectos\02_EnterpriseNT_FE\EnterpriseNTLaboratory" method='POST' enctype='multipart/form-data'> -->
+                        <form class="uk-width-3-4" style="padding: 0px !important" >
+<!--                             <button type="button" class="md-fab md-fab-small md-fab-success" ng-click="vm.loadReportDesigner();" >
+                                <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0158' | translate}}" >&#xE8AD;</i>
+                            </button> -->
+                            <!-- <div class="js_loader" id="load_wheel" style="position:absolute;z-index:70000;top:254px;display:none"></div> -->
+<!--                               <input type="file" name='archivo'>
+                                <input type="submit" value='Subir'> -->
+                            <div id="designerContent" class="md-card md-card-hover uk-animation-fade" style="height: 95.2%; width: 103%; overflow-y: auto;"> </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalReportDemographics" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="width: 500px; height: 500px;">
+        <div class="uk-modal-header md-bg-blue-600" style="border-bottom: 0px;">
+            <h3 class="uk-modal-title">{{'0295' | translate}}: {{vm.nameDemographic | uppercase}}</h3>
+        </div>
+        <div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+          <form class="form" name="myForm">
+            <div class="uk-form-row">
+                <label style="white-space: normal;">{{'0937' | translate}}</label>
+                <hr/>
+                <div class="uk-form-row" >
+                    <table class="uk-table uk-table-small uk-table-middle tablescrollable">
+                        <div class="uk-grid">
+                          <div class="uk-input-group uk-width-1-1" style="float: left;">
+                            <label>{{'0154' | translate}}</label>
+                            <input type="text" class="md-input" ng-model="vm.filter1" md-input>
+                            <span class="uk-input-group-addon" style="height: 10px;">
+                              <i class="material-icons md-24">&#xE8B6;</i>
+                            </span>
+                          </div>
+                        </div>
+                        <thead class="theadscrollable" style="width: calc(100% - 15px)">
+                          <tr class="uk-width-1-1" style="display: inline-table;"> 
+                            <th class="uk-width-1-1" >{{'0118' | translate}}</th>                         
+                          </tr>
+                        </thead>
+                        <tbody class="tbodyscrollable" style="max-height: 250px;">
+                            <tr class="uk-grid" data-ng-repeat="reportDemo in vm.reportsDemographicsFalse | filter: {displayname: vm.filter1} | limitTo: 50" style="margin-left: 0px; margin-top: 0px; height: 32px;">
+                              <td class="uk-width-1-1" >
+                                 <a data-ng-bind="reportDemo.displayname" href="#" ng-click="vm.loadDesingnerAndData(vm.pathReports + reportDemo.filejson, vm.pathReports + 'reports.mrt', reportDemo.filejson, reportDemo.filename)"  class="uk-modal-close" >
+                                </a>
+                              </td>
+                            </tr>                                                        
+                        </tbody>
+                    </table>                       
+                </div>
+            </div>          
+          </form>
+
+        </div>
+        <div class="uk-modal-footer uk-text-right md-bg-grey-200">        
+          <button type="button" class="uk-modal-close md-btn md-btn-flat buttonCancel">{{'0329' | translate}}</button>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+
+<!--  -->
+<script type="text/javascript" src="http://js.stimulsoft.com/zip/zip.js?v=20170227"></script>
+  

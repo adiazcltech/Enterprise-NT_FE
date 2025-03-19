@@ -1,0 +1,8 @@
+# Ignorar carpetas node_modules en todos los subproyectos
+**/node_modules/
+**/node_modules.rar
+# Ignorar carpetas bower en todos los subproyectos
+**/bower_components/
+**/bower_components.rar
+#REPORT ENTERPRISE 
+EnterpriseNTLaboratory/report/

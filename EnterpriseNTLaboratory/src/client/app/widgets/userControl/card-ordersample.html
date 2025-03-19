@@ -1,0 +1,28 @@
+<div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+    <div class="md-card-content">
+        <div class="uk-grid" style="width: 100%; margin-left: 0px;height: 100%">
+            <div class="uk-width-1-1" style="padding-left: 0px">
+                <ul class="md-list md-list-addon  uk-text-center">
+                    <div class="uk-badge"
+                        style="background-color: {{cardordersample.typeordercolor}}; font-size: 33px;margin-right: 10px;font-weight: 500;padding: 11px 8px 13px; border-radius: 10px;display: inline-block; margin-top: -21px;">
+                        {{cardordersample.typeordercode}}
+                    </div>
+                    <div style="display: inline-block;">
+                        <h1 class="uk-text-center" style="margin-bottom: 5px">
+                            {{cardordersample.order}}
+                        </h1>
+                    </div>
+                    <hr style="margin-bottom: 10px; margin-top: 5px">
+                    </hr>
+                    <p style="margin-top: 0px" ng-if="!cardordersample.multiple">{{cardordersample.samplename}}</p>
+                    <select ng-if="cardordersample.multiple" class="md-input" charset="utf-8"
+                        style="margin-top: -6px; text-align-last: center"
+                        ng-change="cardordersample.getSelectSample(cardordersample.sampleId)"
+                        ng-options="obj as obj.name for obj in cardordersample.listsamples track by obj.id"
+                        data-ng-model="cardordersample.sampleId" class="form-control">
+                    </select>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

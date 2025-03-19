@@ -1,0 +1,181 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<style type="text/css">
+  .line-head {
+    width: 100%;
+    font-weight: bold;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #d6d6d6;
+    padding: 0px;
+    margin: 0px
+  }
+
+  td.md-list-content {
+    width: 33.33%
+  }
+
+  thead.bold-text>tr>th {
+    font-weight: bold;
+    font-size: 13PX;
+  }
+
+  .tbody-test {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(100% - 63px);
+    display: -webkit-inline-box;
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .patientsearch-uppercase {
+    text-transform: uppercase;
+    font-size: 12px !important;
+    padding-bottom: 0px !important
+  }
+</style>
+
+<div id="page_content" style="height: 100%; overflow: hidden">
+  <div id="page_content_inner">
+    <loadpage view="vm.loading"></loadpage>
+    <div style="height: 100%" class="uk-grid uk-animation-scale-up uk-animation-40">
+      <div class="uk-width-2-6 ">
+        <div style="height: 100%;" class="md-card md-card-hover uk-animation-scale-up uk-animation-40">
+          <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+              <strong>Datos de la orden</strong>
+            </h3>
+          </div>
+          <div style="height: 100%" class="md-card-content">
+            <div style="height: calc(100% - 140px)">
+              <div class="uk-grid">
+                <div class="uk-width-1-1">
+                  <label>{{'0072' | translate}}</label>
+                  <select md-input label-fixed class="md-input label-fixed" charset="utf-8"
+                    ng-options="obj.id as obj.name for obj in vm.listYear | orderBy:'name'" data-ng-model="vm.listYear.id"></select>
+                </div>
+                <div class="uk-width-1-1" style="padding-top: 10px">
+                  <label>{{'0110' | translate}}</label>
+                  <input id="order" md-input label-fixed class="md-input label-fixed " type="text"
+                    ng-model="vm.codeorder" ng-keypress="vm.keyselect($event)" />
+                  <!-- ng-blur="vm.keyselect(undefined);" -->
+                  <span ng-if="vm.logorder === 1" class="uk-container-center help-block">{{'0179' | translate}}</span>
+                </div>
+                <div class="uk-width-1-1" style="padding-top: 10px">
+                  <fieldset class="fieldset">
+                    <legend style="font-size: 13px; margin-bottom: 10px;">{{'0669' | translate}}</legend>
+                    <div ng-if="vm.managedocumenttype" style="margin-bottom: 10px;">
+                      <label>{{'0233' | translate}}</label>
+                      <select id="txt_patientsearch_patient_doc" class="md-input patientsearch-uppercase"
+                        ng-model="vm.patientDocToSearch" ng-change="vm.keyselectpatientid()">
+                        <option ng-repeat="doc in vm.documentTypes | orderBy:'name'" value="{{doc.id}}">
+                          {{doc.name.toUpperCase()}}
+                        </option>
+                      </select>
+                    </div>
+                    <label>{{'0117' | translate}}</label> <!-- 0243 -->
+                    <input md-input label-fixed class="md-input label-fixed" type="text" ng-model="vm.patientid"
+                      ng-keypress="vm.keyselectpatientid($event)" ng-disabled="vm.patientDocToSearch === '0'"
+                      style="padding-bottom: 4px;"  ng-focus="vm.errorExp = false;"  ng-blur="vm.keyselectpatientid()" />
+                    <span ng-if="vm.logopatient === 1 && vm.patientid !== ''"
+                      class="uk-container-center help-block">{{'0231' | translate}}</span>              
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="-1-1" style="margin-top: 10px; height: 60px">
+              <div class="uk-float-right"> 
+                <button type="button" ng-disabled="vm.logorder === 1 || vm.logopatient === 1 || vm.disableSave || vm.patientiddirective ===-1 || vm.order ==='0'"
+                  class="md-fab md-fab-small md-fab-primary"
+                  ng-class="{'md-bg-blue-grey-100' : vm.logorder === 1 || vm.logopatient === 1  || vm.disableSave || vm.patientiddirective ===-1 || vm.order ==='0'}"
+                  ng-click="vm.save()"><i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                    title="{{'0007' | translate | trim}}">&#xE161;</i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100%" class="uk-width-2-6" ng-show="vm.patientview.patientId!==undefined">
+        <patient order="vm.order" heightline="10" datapatient="vm.patientview"></patient>
+      </div>
+
+      <div style="height:100%" class="uk-width-2-6" ng-show="vm.patientview1.patientId!==undefined">
+        <patient iddb="vm.patientiddirective" heightline="10" datapatient="vm.patientview1"></patient>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="testinvalid" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 75%;">
+    <div class="uk-modal-header md-bg-red-600" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title">{{'0013' | translate}}</h3>
+    </div>
+    <div class="uk-form-row" style="height: 446px;">
+      <form class="form" name="myForm" style="height: 100%;">
+
+        <div class="uk-form-row" style="height: 100%;">
+          <p class="line-head" style="height: 40px"><label>{{'0232' | translate}}: </label></p>
+          <div class="uk-form-row" style="height: 100%;">
+            <table class="uk-table uk-table-nowrap uk-table-small uk-table-middle tablescrollable" style="height: 100%">
+              <thead class="bold-text" style="width: 100%; display: inline-table;">
+                <tr class="uk-grid" style="margin-left: 0px">
+                  <th class="uk-width-1-6">{{'0098' | translate}}</th>
+                  <th class="uk-width-1-3">{{'0013' | translate}}</th>
+                  <th class="uk-width-1-2">{{'0113' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody class="tbody-test">
+                <tr class="uk-grid" data-ng-repeat="Test in vm.listtest"
+                  style="margin-left: 0px; margin-top: 0px;  display: inline-table; ; {{vm.widthGrid}}">
+                  <td class="uk-width-1-6" data-ng-bind="Test.code"></td>
+                  <td class="uk-width-1-3" data-ng-bind="Test.name"></td>
+                  <td class="uk-width-1-2" data-ng-bind="Test.reason"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<div id="orderinvalid" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title">{{'0659' | translate}}</h3>
+    </div>
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-3-10" style="width: 20%; padding-left: 10px">
+            <i class="material-icons md-color-red-A700" style="font-size: 64px">warning</i>
+          </div>
+          <div class="uk-width-7-10" style="margin-top: 3%; padding-left: 10px">
+            <span>{{vm.messageOrder}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

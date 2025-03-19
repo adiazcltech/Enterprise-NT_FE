@@ -1,0 +1,91 @@
+<div class="uk-modal uk-modal-card-fullscreen" id="modalcommenttest">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+      <div class="md-card uk-height-viewport">
+          <div class="md-card-toolbar md-bg-light-blue-A100">
+              <div class="md-card-toolbar-actions">
+                  <div>
+                      <i class="md-icon material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                          title="{{'0329'| translate}}"
+                          ng-click="resultstestcomment.closemodalcommenttest()">&#xE5CD;</i>
+                  </div>
+              </div>
+              <span style="float: left; margin:13px 6px 0px 0px; display: block;">
+                  <i class="uk-icon-commenting md-color-light-blue-50" style="font-size: 24px;"></i>
+              </span>
+              <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                  {{'0631' | translate}}
+              </h3>
+          </div>
+          <div class="md-card-content">
+              <div class="uk-grid uk-grid-small" style="height: 107px">
+                  <div class="uk-width-1-3" style="height: 100%">
+                      <cardorder order="resultstestcomment.order"
+                          typeordercode="resultstestcomment.patient.typeordercode"
+                          typeordercolor="resultstestcomment.patient.typeordercolor"
+                          testcode="resultstestcomment.testcode" testname="resultstestcomment.testname"></cardorder>
+                  </div>
+                  <div class="uk-width-1-3" style="height: 100%">
+                      <cardpatient patientname="resultstestcomment.patient.name"
+                          patientdocument="resultstestcomment.patient.document"
+                          orderdemo="resultstestcomment.orderdemo"
+                          patientage="resultstestcomment.patient.age"
+                          patientgender="resultstestcomment.patient.gender"
+                          photopatient="resultstestcomment.photopatient" patientid="resultstestcomment.patient.id" orderpatient="resultstestcomment.order">
+                      </cardpatient>
+                  </div>
+                  <div class="uk-width-1-3" style="height: 100%">
+                      <commentordermodal type="1" orderhistory="resultstestcomment.order"
+                          viewdirectic="resultstestcomment.viewcomment">
+                      </commentordermodal>
+                  </div>
+              </div>
+              <div class="uk-grid" style="height: calc(100vh - 211px)">
+                  <div class="uk-width-1-1">
+                      <div class="md-card md-card-hover" style="height: 100%">
+                          <div class="md-card-content">
+                              <div class="uk-width-1-1 uk-margin-remove" style="margin-top: 10px">
+                                  <codedcomment comment="resultstestcomment.commentresult"></codedcomment>
+                              </div>
+                              <div class="uk-width-1-1 uk-margin-remove" style="margin-top: 10px !important;">
+                                  <input type="checkbox" icheck ng-model="resultstestcomment.commentpatology"
+                                      id="checkbox_pathology" />
+                                  <label for="checkbox_pathology" class="inline-label">{{'0323' | translate}}</label>
+                              </div>
+                              <div class="uk-flex uk-flex-right"
+                                  style="position: fixed; bottom: 0; right: 0; left: 0; background: transparent; padding: 25px 21px; line-height: 48px;">
+                                  <!-- guardar -->
+                                  <button type="button"
+                                      class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-light-blue-A100"
+                                      ng-click="resultstestcomment.savecomment()">
+                                      <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}"
+                                          data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE161;</i>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="uk-modal" id="confirmationcomment" bg-close="false">
+  <div class="uk-modal-dialog">
+      <div class="uk-modal-body">
+          <div ng- class="uk-overflow-container" style="margin-top: 0px">
+              <div style="width: 80px; float: left;">
+                  <img class="img-responsive" src="images/iconinfo.png">
+              </div>
+              <div class="uk-text-center" style="margin-top: 26px">
+                  <h4>{{'2078' | translate}}</h4>
+              </div>
+          </div>
+      </div>
+      <div class="uk-modal-footer uk-text-right">
+          <button type="button"
+              class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+              ng-click="resultstestcomment.saveDocuments()"> {{'0246' | translate}}</button>
+          <button type="button" class="md-btn md-btn-default uk-modal-close">{{'0008' | translate}}</button>
+      </div>
+  </div>
+</div>

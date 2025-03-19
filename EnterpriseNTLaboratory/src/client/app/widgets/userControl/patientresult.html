@@ -1,0 +1,123 @@
+<style>
+    .patient-header-avatar {
+        margin-top: 10px !important;
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .patient-header-text {
+        padding-bottom: 0px !important;
+    }
+
+    .patient-md-card {
+        height: 120px !important;
+    }
+
+    .patient-card-content {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        overflow-y: auto !important;
+    }
+
+    .patient-addon-element {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        min-height: 40px;
+        height: 40px !important;
+    }
+
+    .patient-list-content {
+        font-size: 12px !important;
+    }
+
+    .patient-demo-item {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+
+        margin-bottom: {
+                {
+                patient.height_line
+            }
+        }
+
+        ;
+    }
+
+    .md-list>li {
+        min-height: 0px !important;
+    }
+
+    .patient-demographic-text {
+        text-transform: capitalize !important;
+    }
+</style>
+<modalexceptions openmodal="patientresult.ShowPopupError" detailerror="patientresult.Error"></modalexceptions>
+<div class="md-card md-card-hover uk-animation-fade" style="height: 100%">
+    <div class="md-card-head md-bg-light-blue-600 patient-md-card">
+        <div class="uk-text-center">
+            <img class="md-card-head-avatar patient-header-avatar" src="{{patientresult.patientdata.photo}}" alt=""
+                ng-if="patient.patientdata.photo !== '' && patient.patientdata.photo !== undefined">
+            <img class="md-card-head-avatar patient-header-avatar" src="images/user1.png" alt=""
+                ng-if="patient.patientdata.photo === '' || patient.patientdata.photo === undefined">
+        </div>
+        <h3 class="md-card-head-text uk-text-center md-color-white patient-header-text"
+            style="font: 500 13px / 13px 'Roboto', sans-serif; padding: 8px 5px 5px;">
+            {{patientresult.patientdata.completeName | uppercase}}
+            <span>
+                <b>{{patientresult.patientdata.documentType + patientresult.labeldocument +
+                    patientresult.patientdata.patientId}}</b>
+            </span>
+        </h3>
+    </div>
+    <div class="md-card-content patient-card-content contentscroll" style="height: calc(100% - 130px)">
+        <ul class="md-list md-list-addon">
+            <li class="patient-demo-item" ng-repeat="Demographics in patientresult.orderdemo">
+                <div class="md-list-addon-element patient-addon-element">
+                    <img class="md-list-addon-icon material-icons md-22" ng-if="Demographics.id ===-104"
+                        ng-src="images/patient/genders.png" />
+                    <img class="md-list-addon-icon material-icons md-22" ng-if="Demographics.id ===-105"
+                        ng-src="images/patient/calendar.png" />
+                    <img class="md-list-addon-icon material-icons md-22" ng-if="Demographics.id ===-110"
+                        ng-src="images/patient/age.png" />
+                    <img class="md-list-addon-icon material-icons md-22" ng-if="Demographics.id ===-106"
+                        ng-src="images/patient/email.png" />
+                    <img class="md-list-addon-icon material-icons md-22" ng-if="Demographics.id ===-111"
+                        ng-src="images/patient/phone.png" />
+                    <i class="md-list-addon-icon material-icons uk-text-success"
+                        ng-if="Demographics.id ===-112">&#xE55F;</i>
+                    <img ng-if="Demographics.id ===-8 || Demographics.id ===-9  || Demographics.id ===-7"
+                        class="md-list-addon-icon material-icons md-22" ng-src="images/patient/demo.png" />
+                    <img class="md-list-addon-icon material-icons md-22" ng-if="Demographics.id  > 0"
+                        ng-src="images/patient/demo.png" />
+                </div>
+                <div class="md-list-content patient-list-content">
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-9">{{'0239' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-8">{{'0238' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-7">{{'0091' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-104">{{'0426' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-105">{{'0120' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-110">{{'0102' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-106">{{'0135' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-111">{{'0188' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id ===-112">{{'0187' | translate}}</span>
+                    <span class="uk-text-small uk-text-muted patient-list-content"
+                        ng-if="Demographics.id  > 0">{{Demographics.name}}</span>
+
+                    <span  class="md-list-heading uk-text-break"
+                        ng-class="{'md-color-grey-50' : Demographics.value===undefined}">
+                        {{Demographics.value}}
+                    </span>
+                </div>
+            </li>          
+        </ul>
+    </div>
+</div>

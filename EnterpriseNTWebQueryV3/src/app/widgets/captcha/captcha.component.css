@@ -1,0 +1,33 @@
+.capchatbackgtound {
+    border: 2px solid #ddd !important;
+    padding: 15px 0px !important;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+    background: rgb(250 250 250) !important;  
+    margin-bottom: 10px;
+  }
+  
+  .capchabuttonpopover {
+    height: 15px !important;
+    width: 15px !important;
+    padding: 11px 12px !important;
+    border: 2px solid #857676 !important;
+  }
+  
+  .capchabuttonreffres {
+    font-size: 24px !important;
+    color: rgb(36 199 33 / 87%) !important;
+    float: left !important;
+    margin-left: 10px !important;
+  }
+  
+  .capchaimagen {
+    height: 35px !important;
+    width: 35px !important;
+    float: right !important;
+    margin-top: 5px !important;
+  }
+  
+  .popover.top {
+    left: 72px !important;
+  }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<div class="container p-5">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <label *ngIf="initDate" class="label-date">
+                Fecha inicial: {{ initDate.year }}/{{ initDate.month }}/{{ initDate.day }}
+            </label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dpinit" [(ngModel)]="initDate" ngbDatepicker
+                    #dpinit="ngbDatepicker" (ngModelChange)="changeInit($event)" [maxDate]="maxDate">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="dpinit.toggle()" type="button"
+                        style="border: 1px solid #b3b3b3;">
+                        <img src="assets/schedule.png" style="width: 20px;" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label *ngIf="endDate" class="label-date">
+                Fecha Final: {{ endDate.year }}/{{ endDate.month }}/{{ endDate.day }}
+            </label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dpend" [(ngModel)]="endDate" ngbDatepicker
+                    #dpend="ngbDatepicker" (ngModelChange)="changeEnd($event)" [maxDate]="maxDate">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="dpend.toggle()" type="button"
+                        style="border: 1px solid #b3b3b3;">
+                        <img src="assets/schedule.png" style="width: 20px;" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón Exportar -->
+    <div class="text-center mt-4">
+        <button class="btn btn-success" (click)="exportDates()">
+            Exportar
+        </button>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+/*!
+ * =============================================================
+ * dropify v0.2.2 - Override your input files with style.
+ * https://github.com/JeremyFagis/dropify
+ *
+ * (c) 2017 - Jeremy FAGIS <jeremy@fagis.fr> (http://fagis.fr)
+ * =============================================================
+ */
+
+* {
+  box-sizing: border-box;
+  outline: none; }
+
+*, *::before, *::after, *:before, *:after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+

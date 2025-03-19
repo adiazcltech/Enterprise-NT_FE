@@ -1,0 +1,582 @@
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError">
+</modalerror>
+<style type="text/css">
+  label {
+    font-size: 14px !important;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class="col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0992' | translate | uppercase}}
+          </strong>
+        </div>
+        <div class="col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario">
+          </strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-placement="bottom" data-toggle="tooltip"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/configdemographics/configdemographics.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"
+            title="Ctrl + B">
+          </span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll">
+        <div class="col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form panel-padding panel-scroll
+                contentscroll" style="height: calc(100% - 60px);">
+                <form class="form-horizontal panel-body panel-padding" id="Form" name="Form" style="height: 99%">
+                  <div id="login-container" ng-if="vm.sectionId == 0">
+                    <div class="row center-login" style="width: 100%">
+                      <div class="col-3 col-md-3 col-sm-3">
+                        <div class="sesion-container">
+                          <div class="text-center">
+                            <label translate="0108">
+                            </label>
+                          </div>
+                        </div>
+                        <div class="text-center barracolor-container">
+                          <img class="img-responsive" src="images/barra_color.png">
+                        </div>
+                        <div class="panel panel-default panel-body" style="padding-bottom: 0px;">
+                          <div class="panel-body">
+
+                            <div class="form-group">
+                              <div ng-class="{'has-error':Form.user.$invalid &&
+                                Form.user.$touched}">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user">
+                                    </i>
+                                  </div>
+                                  <input class="form-control" data-ng-model="vm.user.user" name="user"
+                                    placeholder="{{'0001' | translate}}" required="" type="text">
+                                </div>
+                                <span class="help-block" ng-if="Form.user.$error.required &&
+                                  Form.user.$touched">
+                                  {{'0016' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div ng-class="{'has-error':Form.password.$invalid
+                                && Form.password.$touched}">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock">
+                                    </i>
+                                  </div>
+                                  <input class="form-control" data-ng-model="vm.user.password" name="password"
+                                    placeholder="{{'0002' | translate}}" required="" type="Password">
+                                </div>
+                                <span class="help-block" ng-if="Form.password.$error.required &&
+                                  Form.password.$touched">
+                                  {{'0016' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div ng-class="{'has-error':Form.location.$invalid
+                                && Form.location.$touched}" ng-if="false">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-home">
+                                    </i>
+                                  </div>
+                                  <select charset="utf-8" class="form-control" data-ng-model="vm.user.location"
+                                    name="location" ng-options="obj.id as
+                                    obj.name for obj in vm.ListBranch" placeholder="{{'0003' | translate}}"
+                                    required="true"></select>
+                                </div>
+                                <span class="help-block" ng-if="Form.location.$error.required &&
+                                  Form.location.$touched">
+                                  {{'0016' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="text-center">
+                              <button class="btn btn-info" data-ng-click="vm.login('configdemographics')"
+                                data-ng-disabled="Form.$invalid" translate="0004"></button>
+                            </div>
+                            <div class="text-center" ng-class="{'has-error':
+                              vm.menssageInvalid}" ng-show="vm.menssageInvalid">
+                              <span class="help-block">
+                                {{vm.menssageInvalid}}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="panel-footer text-center
+                            version-container" style="margin-left: -15px; margin-right: -15px;
+                            height: 48px;">
+                            <label translate="0109">
+                            </label>
+                            <label>
+                              {{vm.version}}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="generalconfig" ng-if="vm.sectionId == 1">
+                    <fieldset style="height: 100%; background-color: #fff"></fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">
+                        {{'0665' | translate}}
+                      </legend>
+                      <div class="col-md-12 panel-padding" ng-if="vm.viewulr">
+                        <label class="col-lg-4 text-right" style="white-space:
+                            nowrap; padding-left: 4px;">
+                          {{'1154' | translate}}:</label>
+                        <div class="col-lg-8 form-group-min has-feedback" ng-class="{'has-error': Form.SedeCentral.$invalid &&
+                            Form.SedeCentral.$touched}">
+                          <select name="SedeCentral" id="SedeCentral" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listbranch track by obj.id" class="form-control" data-ng-model="vm.value[13].value"
+                            ng-required="true"></select>
+                          <span class="help-block" ng-if="Form.SedeCentral.$invalid
+                              && Form.SedeCentral.$touched">
+                            {{'0016' | translate}}
+                          </span>
+                          <span aria-hidden="true" class="glyphicon
+                              glyphicon-remove form-control-feedback" ng-if="Form.SedeCentral.$invalid &&
+                              Form.SedeCentral.$touched">
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-8 text-right" style="white-space: nowrap; padding-left: 4px;">{{'0682'
+                          | translate}}:</label>
+                        <div class="col-lg-4 form-group-min">
+                          <select name="DemograficoExcluirPrueba" id="entryorder8" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listdemographic track by obj.id" class="form-control"
+                            data-ng-model="vm.value[0].value" ng-disabled="vm.listdemographic.length === 0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-6 text-right" style="white-space: nowrap;">{{'0772' | translate}}:</label>
+                        <div class="col-lg-6 form-group-min">
+                          <select name="DemograficoPyP" id="resultreport17" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listdemographic track by obj.id" class="form-control"
+                            data-ng-model="vm.value[2].value" ng-disabled="vm.listdemographic.length === 0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-8 text-right">{{'0744' |
+                          translate}}:</label>
+                        <div class="col-lg-4 form-group-min">
+                          <select name="DemograficoTituloInforme" id="resultreport14" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listdemographic track by obj.id" class="form-control"
+                            data-ng-model="vm.value[3].value" ng-disabled="vm.listdemographic.length === 0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-6 text-right">{{'1151' |
+                          translate}}:</label>
+                        <div class="col-lg-6 form-group-min">
+                          <select name="DemograficoTituloInforme" id="resultreport14" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listdemographic track by obj.id" class="form-control"
+                            data-ng-model="vm.value[10].value" ng-disabled="vm.listdemographic.length === 0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-8 text-right">{{'1133' |
+                          translate}}:</label>
+                        <div class="col-lg-4 form-group-min">
+                          <select name="DemograficoTituloInforme" id="resultreport14" ng-options="obj as obj.name for obj in
+                              vm.listdemograpencored track by obj.id" class="form-control"
+                            data-ng-model="vm.value[9].value" ng-disabled="vm.listdemographic.length === 0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-6 text-right" style="white-space: nowrap;">{{'0715' | translate}}:</label>
+                        <div class="col-lg-6 form-group-min">
+                          <select name="DemograficoInconsistensias" id="entryorder9" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listdemographicincosn track by obj.id" class="form-control"
+                            data-ng-model="vm.value[1].value" ng-disabled="vm.listdemographicincosn.length ===
+                              0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-12 panel-padding">
+                        <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'1304' | translate}}:</label>
+                        <div class="col-lg-2 form-group-min">
+                          <toggle ng-model="vm.value[18].value" on="{{'0032' |
+                              translate}}" off="{{'0033' | translate}}" size="btn-sm"
+                            ng-change="vm.changecentrasystem(Form)">
+                          </toggle>
+                        </div>
+                        <label class="col-lg-3 text-right" style="white-space:nowrap">
+                          {{'0280' | translate}}:</label>
+                        <div class="col-lg-3 form-group-min" ng-if="vm.value[18].value" ng-class="{'has-error':
+                          Form.centralsystem.$invalid &&
+                          Form.centralsystem.$touched}">
+                          <select ng-required="true" id="centralsystem" name="centralsystem" ng-options="obj as obj.name for obj in
+                        vm.CentralSystem track by obj.id" class="form-control" data-ng-model="vm.value[19].value"
+                            ng-disabled="!vm.value[18].value"></select>
+                          <span aria-hidden="true" class="glyphicon
+                            glyphicon-remove form-control-feedback" ng-if="Form.centralsystem.$invalid &&
+                            Form.centralsystem.$touched">
+                          </span>
+                          <span class="help-block" ng-if="Form.centralsystem.$invalid
+                            && Form.centralsystem.$touched">
+                            {{'0016' | translate}}
+                          </span>
+                        </div>
+                        <div class="col-lg-3 form-group-min" ng-if="!vm.value[18].value">
+                          <select ng-required="false" ng-options="obj as obj.name for obj in
+                        vm.CentralSystem track by obj.id" class="form-control" data-ng-model="vm.value[19].value"
+                            ng-disabled="!vm.value[18].value"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-12 panel-padding">
+                        <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'1102' | translate}}:</label>
+                        <div class="col-lg-2 form-group-min">
+                          <toggle ng-model="vm.value[7].value" on="{{'0032' |
+                              translate}}" off="{{'0033' | translate}}" size="btn-sm"
+                            ng-change="vm.changewebquery(Form)">
+                          </toggle>
+                        </div>
+                        <label class="col-lg-3 text-right" style="white-space:nowrap">
+                          {{'1103' | translate}}:</label>
+                        <div class="col-lg-3 form-group-min" ng-if="vm.value[7].value" ng-class="{'has-error':
+                            Form.demographiwebquery.$invalid &&
+                            Form.demographiwebquery.$touched}">
+                          <select ng-required="true" id="demographiwebquery" name="demographiwebquery" ng-options="obj as obj.name for obj in
+                              vm.listdemograpencored track by obj.id" class="form-control"
+                            data-ng-model="vm.value[8].value" ng-disabled="!vm.value[7].value"></select>
+                          <span aria-hidden="true" class="glyphicon
+                              glyphicon-remove form-control-feedback" ng-if="Form.demographiwebquery.$invalid &&
+                              Form.demographiwebquery.$touched">
+                          </span>
+                          <span class="help-block" ng-if="Form.demographiwebquery.$invalid
+                              && Form.demographiwebquery.$touched">
+                            {{'0016' | translate}}
+                          </span>
+                        </div>
+                        <div class="col-lg-3 form-group-min" ng-if="!vm.value[7].value">
+                          <select ng-required="false" ng-options="obj as obj.name for obj in
+                              vm.listdemographiwebquery track by obj.id" class="form-control"
+                            data-ng-model="vm.value[8].value" ng-disabled="!vm.value[7].value"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-12 panel-padding">
+                        <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'1105' | translate}}:</label>
+                        <div class="col-lg-2 form-group-min" ng-class="{'has-error':
+                            Form.password1changepassword.$invalid &&
+                            Form.password1changepassword.$touched}">
+                          <input class="form-control" id="password1changepassword" type="password"
+                            ng-disabled="!vm.value[7].value" name="password1changepassword"
+                            data-ng-model="vm.value[4].value" ng-required="vm.value[7].value">
+                          <span aria-hidden="true" class="glyphicon
+                              glyphicon-remove form-control-feedback" ng-if="Form.password1changepassword.$invalid &&
+                              Form.password1changepassword.$touched">
+                          </span>
+                          <span class="help-block" ng-if="Form.password1changepassword.$invalid
+                              && Form.password1changepassword.$touched">
+                            {{'0016' | translate}}
+                          </span>
+                        </div>
+                        <label class="col-lg-3 text-right" style="white-space:
+                        nowrap;">{{'1293' | translate}}:</label>
+                        <div class="col-lg-3 form-group-min">
+                          <select name="clientePorDefecto" id="clientePorDefecto" charset="utf-8" ng-options="obj as obj.name for obj in
+                          vm.listcustomer track by obj.id" class="form-control"
+                            data-ng-model="vm.value[17].value"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-8 text-right" style="white-space:
+                            nowrap;">{{'1155' | translate}}:</label>
+                        <div class="col-lg-4 form-group-min">
+                          <select name="DemograficoHistograma" id="resultreport24" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.emailsend track by obj.id" class="form-control" data-ng-model="vm.value[11].value"
+                            ng-change="vm.getDemographicsItems(vm.value[11].value.id)"
+                            ng-disabled="vm.emailsend.length === 0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 panel-padding">
+                        <label class="col-lg-6 text-right" style="white-space:
+                            nowrap;">{{'1156' | translate}}:</label>
+                        <div class="col-lg-6 form-group-min">
+                          <select name="DemograficoItemHistograma" id="resultreport25" charset="utf-8" ng-options="obj as obj.name for obj in
+                              vm.listdemographicItems track by obj.id" class="form-control"
+                            data-ng-model="vm.value[12].value" ng-disabled="vm.listdemographicItems.length ===
+                              0"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-12 panel-padding">
+
+                      </div>
+                      <!-- Notificacion de resultados y retoma -->
+                      <div class="col-md-12 panel-padding">
+                        <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'1372' | translate}}:</label>
+                        <div class="col-lg-2 form-group-min">
+                          <toggle ng-model="vm.value[27].value" on="{{'0032' | translate}}" off="{{'0033' | translate}}"
+                            size="btn-sm" ng-change="vm.changenotification(Form)">
+                          </toggle>
+                        </div>
+                        <label class="col-lg-3 text-right" style="white-space:nowrap">{{'1373' | translate}}:</label>
+                        <div class="col-lg-3 form-group-min" ng-if="vm.value[27].value" ng-class="{'has-error':
+                          Form.demographicnotification.$invalid && Form.demographicnotification.$touched}">
+                          <select ng-required="true" id="demographicnotification" name="demographicnotification"
+                            ng-options="obj as obj.name for obj in vm.listdemograpencored track by obj.id"
+                            class="form-control" data-ng-model="vm.value[28].value" ng-disabled="!vm.value[27].value">
+                          </select>
+                          <span aria-hidden="true" class="glyphicon
+                            glyphicon-remove form-control-feedback" ng-if="Form.demographicnotification.$invalid &&
+                            Form.demographicnotification.$touched">
+                          </span>
+                          <span class="help-block" ng-if="Form.demographicnotification.$invalid
+                            && Form.demographicnotification.$touched">
+                            {{'0016' | translate}}
+                          </span>
+                        </div>
+                        <div class="col-lg-3 form-group-min" ng-if="!vm.value[27].value">
+                          <select ng-required="false"
+                            ng-options="obj as obj.name for obj in vm.listdemograpencored track by obj.id"
+                            class="form-control" data-ng-model="vm.value[28].value" ng-disabled="!vm.value[27].value">
+                          </select>
+                        </div>
+                      </div>
+                    </fieldset>
+
+
+
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">{{'3196' | translate}}</legend>
+                      <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'3164' | translate}}:</label>
+                      <div class="col-lg-2 form-group-min">
+                        <toggle ng-model="vm.value[22].value" on="{{'0032' |
+                            translate}}" off="{{'0033' | translate}}" size="btn-sm" ng-change="vm.changecedule(Form)">
+                        </toggle>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space:nowrap">
+                        {{'3165' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min" ng-if="vm.value[22].value" ng-class="{'has-error':
+                        Form.demotarget.$invalid && Form.demotarget.$touched}">
+                        <select ng-required="true" id="demotarget" name="demotarget" ng-options="obj as obj.name for obj in
+                      vm.listtypedocument track by obj.id" class="form-control" data-ng-model="vm.value[23].value"
+                          ng-disabled="!vm.value[22].value"></select>
+                        <span aria-hidden="true" class="glyphicon
+                          glyphicon-remove form-control-feedback" ng-if="Form.demotarget.$invalid &&
+                          Form.demotarget.$touched">
+                        </span>
+                        <span class="help-block" ng-if="Form.demotarget.$invalid
+                          && Form.demotarget.$touched">
+                          {{'0016' | translate}}
+                        </span>
+                      </div>
+                      <div class="col-lg-3 form-group-min" ng-if="!vm.value[22].value">
+                        <select ng-required="false" ng-options="obj as obj.name for obj in
+                      vm.listtypedocument track by obj.id" class="form-control" data-ng-model="vm.value[23].value"
+                          ng-disabled="!vm.value[22].value"></select>
+                      </div>
+                      <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'3197' | translate}}:</label>
+                      <div class="col-lg-2 form-group-min">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.value[30].value"
+                          id="SeparadorScannerCedula" name="SeparadorScannerCedula" ng-disabled="!vm.value[22].value"
+                          ng-options="obj.id as obj.name for obj in  vm.listseparate"></select>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space:nowrap">
+                        {{'3198' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.value[29].value"
+                          id="FormatoFechaNacimiento" name="FormatoFechaNacimiento" ng-disabled="!vm.value[22].value"
+                          ng-options="obj.id as obj.name for obj in  vm.listFormatDate"></select>
+                      </div>
+                      <label class="col-lg-4 text-right" style="white-space: nowrap;">{{'3199' | translate}}:</label>
+                      <div class="col-lg-2 form-group-min" ng-class="{'has-error':
+                      vm.value[31].value == vm.value[32].value || vm.value[31].value == vm.value[33].value || vm.value[31].value == vm.value[34].value || 
+                        vm.value[32].value == vm.value[33].value || vm.value[32].value == vm.value[34].value || vm.value[33].value == vm.value[34].value}">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.value[31].value"
+                          id="LectorCedulaPrimeraPosicion" name="LectorCedulaPrimeraPosicion"
+                          ng-disabled="!vm.value[22].value"
+                          ng-options="obj.id as obj.name for obj in  vm.orderingname"></select>
+                        <span class="help-block" ng-if="vm.value[31].value == vm.value[32].value || vm.value[31].value == vm.value[33].value || vm.value[31].value == vm.value[34].value || 
+                        vm.value[32].value == vm.value[33].value || vm.value[32].value == vm.value[34].value || vm.value[33].value == vm.value[34].value">
+                          Los valores no pueden repertirse
+                        </span>
+                      </div>
+                      <div class="col-lg-2 form-group-min" style="padding-left: 5px;" ng-class="{'has-error':
+                      vm.value[31].value == vm.value[32].value || vm.value[31].value == vm.value[33].value || vm.value[31].value == vm.value[34].value || 
+                        vm.value[32].value == vm.value[33].value || vm.value[32].value == vm.value[34].value || vm.value[33].value == vm.value[34].value}">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.value[32].value"
+                          id="LectorCedulaSegundaPosicion" name="LectorCedulaSegundaPosicion"
+                          ng-disabled="!vm.value[22].value"
+                          ng-options="obj.id as obj.name for obj in  vm.orderingname"></select>
+                      </div>
+                      <div class="col-lg-2 form-group-min" style="padding-left: 5px;" ng-class="{'has-error':
+                      vm.value[31].value == vm.value[32].value || vm.value[31].value == vm.value[33].value || vm.value[31].value == vm.value[34].value || 
+                        vm.value[32].value == vm.value[33].value || vm.value[32].value == vm.value[34].value || vm.value[33].value == vm.value[34].value}">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.value[33].value"
+                          id="LectorCedulaTerceraPosicion" name="LectorCedulaTerceraPosicion"
+                          ng-disabled="!vm.value[22].value"
+                          ng-options="obj.id as obj.name for obj in  vm.orderingname"></select>
+                      </div>
+                      <div class="col-lg-2 form-group-min" style="padding-left: 5px;" ng-class="{'has-error':
+                      vm.value[31].value == vm.value[32].value || vm.value[31].value == vm.value[33].value || vm.value[31].value == vm.value[34].value || 
+                        vm.value[32].value == vm.value[33].value || vm.value[32].value == vm.value[34].value || vm.value[33].value == vm.value[34].value}">
+                        <select charset="utf-8" class="form-control" data-ng-model="vm.value[34].value"
+                          id="LectorCedulaCuartaPosicion" name="LectorCedulaCuartaPosicion"
+                          ng-disabled="!vm.value[22].value"
+                          ng-options="obj.id as obj.name for obj in  vm.orderingname"></select>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">{{'0942' | translate}}</legend>
+                      <label class="col-lg-4 text-right" style="white-space:
+                          nowrap;">{{'0749' | translate}}:</label>
+                      <div class="col-lg-2 form-group-min">
+                        <select name="DemograficoHistograma" id="resultreport24" charset="utf-8" ng-options="obj as obj.name for obj in
+                            vm.listdemographicOnly track by obj.id" class="form-control"
+                          data-ng-model="vm.value[5].value" ng-change="vm.getDemographicsItems(Form.DemograficoHistograma.$viewValue.id,
+                            true)" ng-disabled="vm.listdemographicOnly.length === 0"></select>
+                      </div>
+
+                      <label class="col-lg-3 text-right" style="white-space:
+                          nowrap;">{{'0750' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="DemograficoItemHistograma" id="resultreport25" charset="utf-8" ng-options="obj as obj.name for obj in
+                            vm.listdemographicItems track by obj.id" class="form-control"
+                          data-ng-model="vm.value[6].value" ng-disabled="vm.listdemographicItems.length === 0"></select>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">{{'0306' | translate }}</legend>
+                      <label class="col-lg-3 text-right" style="white-space:nowrap;">{{'0254' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="DemograficoEstado" id="resultreport26" charset="utf-8" class="form-control"
+                          ng-options="obj as obj.name for obj in vm.listdemographicOnly track by obj.id"
+                          data-ng-model="vm.value[13].value"
+                          ng-change="vm.getDemographicsItems(Form.DemograficoHistograma.$viewValue.id, true)"
+                          ng-disabled="vm.listdemographicOnly.length === 0">
+                        </select>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space:nowrap;">{{'0255' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="DemograficoMunicipio" id="resultreport27" charset="utf-8" class="form-control"
+                          ng-options="obj as obj.name for obj in vm.listdemographicOnly track by obj.id"
+                          data-ng-model="vm.value[14].value"
+                          ng-change="vm.getDemographicsItems(Form.DemograficoHistograma.$viewValue.id, true)"
+                          ng-disabled="vm.listdemographicOnly.length === 0">
+                        </select>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">{{'1267' | translate}}</legend>
+                      <label class="col-lg-3 text-right" style="white-space:nowrap;">{{'1268' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="idItemDemoGestacion" id="idItemDemoGestacion" charset="utf-8" class="form-control"
+                          ng-options="obj as obj.name for obj in vm.listdemographicOnly track by obj.id"
+                          data-ng-model="vm.value[15].value" ng-disabled="vm.listdemographicOnly.length === 0">
+                        </select>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space:nowrap;">{{'1269' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="idItemDemoEpsArs" id="idItemDemoEpsArs" charset="utf-8" class="form-control"
+                          ng-options="obj as obj.name for obj in vm.listdemographicOnly track by obj.id"
+                          data-ng-model="vm.value[16].value" ng-disabled="vm.listdemographicOnly.length === 0">
+                        </select>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig">
+                      <legend class="legendConfig">Tableros</legend>
+                      <label class="col-lg-4 text-right" style="white-space:
+                          nowrap;">Demografico:</label>
+                      <div class="col-lg-2 form-group-min">
+                        <select name="DemograficoHistograma" id="resultreport24" charset="utf-8" ng-options="obj as obj.name for obj in
+                            vm.listdemographicOnly track by obj.id" class="form-control"
+                          data-ng-model="vm.value[20].value" ng-change="vm.getDemographicsItemstable(Form.DemograficoHistograma.$viewValue.id,
+                            true)" ng-disabled="vm.listdemographicOnly.length === 0"></select>
+                      </div>
+
+                      <label class="col-lg-3 text-right" style="white-space:
+                          nowrap;">Item demografico:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="DemograficoItemHistograma" id="resultreport25" charset="utf-8" ng-options="obj as obj.name for obj in
+                            vm.listdemographicItemstable track by obj.id" class="form-control"
+                          data-ng-model="vm.value[21].value"
+                          ng-disabled="vm.listdemographicItemstable.length === 0"></select>
+                      </div>
+                    </fieldset>
+                    <fieldset class="col-lg-12 fieldsetConfig" ng-if="vm.minsa">
+                      <legend class="legendConfig">{{'3180' | translate}}</legend>
+                      <label class="col-lg-4 text-right" style="white-space:
+                          nowrap;">{{'3181' | translate}}:</label>
+                      <div class="col-lg-2 form-group-min">
+                        <select name="FechaSintomas" id="FechaSintomas" charset="utf-8" ng-options="obj as obj.name for obj in
+                            vm.listdemodate track by obj.id" class="form-control" data-ng-model="vm.value[24].value"
+                          ng-disabled="vm.listdemodate.length === 0 || !vm.minsa"></select>
+                      </div>
+                      <label class="col-lg-3 text-right" style="white-space:
+                      nowrap;">{{'3182' | translate}}:</label>
+                      <div class="col-lg-3 form-group-min">
+                        <select name="FechaToma" id="FechaToma" charset="utf-8" ng-options="obj as obj.name for obj in
+                    vm.listdemodate track by obj.id" class="form-control" data-ng-model="vm.value[25].value"
+                          ng-disabled="vm.listdemodate.length === 0 || !vm.minsa"></select>
+                      </div>
+                      <label class="col-lg-4 text-right" style="white-space:
+                          nowrap;">{{'3183' | translate}}:</label>
+                      <div class="col-lg-2 form-group-min">
+                        <select name="FechaResultado" id="FechaResultado" charset="utf-8" ng-options="obj as obj.name for obj in
+                            vm.listdemodate track by obj.id" class="form-control" data-ng-model="vm.value[26].value"
+                          ng-disabled="vm.listdemodate.length === 0 || !vm.minsa"></select>
+                      </div>
+                    </fieldset>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+              <div class="panel-footer" ng-if="vm.sectionId == 1">
+                <div class="container" style="width: 100%">
+                  <button class="btn btn-primary button-list" style="width:
+                    calc(100% / 2 - 4px)" ng-click="vm.saveCancel(Form)" ng-disabled="vm.sectionId ===
+                    0" type="button">
+                    <span aria-hidden="true" class="glyphicon
+                      glyphicon-floppy-disk">
+                    </span>
+                    {{'0007' | translate}}
+                  </button>
+                  <button class="btn btn-info button-list" style="width:
+                    calc(100% / 2 - 4px)" ng-click="vm.cancel(Form)" ng-disabled="vm.sectionId === 0" type="button">
+                    <span aria-hidden="true" class="glyphicon glyphicon-remove">
+                    </span>
+                    {{'0008' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script id="Confirmation.html" type="text/ng-template">
+  <div class="modal fade" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/Question.png">
+                        </div>
+                        <div style="width: 80%; float: left; padding-top: 20px">
+                            <span style="margin-top: 10px; margin-left: 10px">{{'0040' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="close('yes')" data-dismiss="modal">{{'0032' | translate}}</button>
+                        <button type="button" class="btn btn-default" ng-click="close('no')" data-dismiss="modal">{{'0033' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

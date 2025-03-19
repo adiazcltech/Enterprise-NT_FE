@@ -1,0 +1,127 @@
+<loadpage view="modalbarcode.loading"></loadpage>
+<div class="uk-modal uk-modal-card-fullscreen" id="barcodemodalsample">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-blue-800">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="modalbarcode.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="uk-icon-barcode md-color-light-blue-50" style="font-size: 33px;"></i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0151'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="md-card" style="margin-bottom: 15px">
+                    <div class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-1">
+                                <div class="uk-form-row">
+                                    <form class="form" name="myForm">
+                                        <div class="uk-form-row">
+                                            <div class="uk-form-row">
+                                                <table class="uk-table  uk-table-small uk-table-middle tablescrollable">
+                                                    <thead class="theadscrollable">
+                                                        <tr>
+                                                            <th class=" uk-width-1-10 small_col">
+                                                                <input type="checkbox" icheck
+                                                                    ng-model="modalbarcode.selectAllcheck"
+                                                                    class="check_all"
+                                                                    ng-change="modalbarcode.selectall()"
+                                                                    table-check-all>
+                                                            </th>
+                                                            <th class="uk-width-7-10">{{'0111' | translate}}</th>
+                                                            <th class="uk-width-2-10">{{'0194' | translate}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbodyscrollable" style="height: calc(100vh - 280px)">
+                                                        <tr data-ng-repeat="sample in modalbarcode.Detail">
+                                                            <td
+                                                                class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                                                <input type="checkbox" icheck ng-model="sample.select"
+                                                                    class="check_row" table-check-row>
+                                                            </td>
+                                                            <td class="uk-width-7-10" data-ng-bind="sample.name"></td>
+                                                            <td class="uk-width-2-10" ng-if="sample.select">
+
+
+                                                                <input  class="md-input" ng-model="sample.canstiker"
+                                                                type="text"
+                                                                ng-keypress="modalbarcode.keyselect($event,sample.canstiker)">
+                                                               <!--  <input kendo-numeric-text-box
+                                                                    k-ng-model="sample.canstiker" k-min="0" k-max="10"
+                                                                    k-format="'n0'" /> -->
+                                                            </td>
+                                                            <td class="uk-width-2-10"
+                                                                ng-if="!sample.select||sample.select===undefined">
+                                                                {{sample.canstiker}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="uk-form-row">
+                                                <!-- -->
+                                                <div ng-show="modalbarcode.stickerAditionals > 0">
+                                                    <input type="checkbox" icheck ng-model="modalbarcode.printAddLabel"
+                                                        class="check_row" table-check-row
+                                                        ng-show="modalbarcode.stickerAditionals > 0">
+                                                    <label class="inline-label"
+                                                        ng-show="modalbarcode.stickerAditionals > 0">
+                                                        {{'0195' | translate}}
+                                                        ({{modalbarcode.stickerAditionals}})
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="uk-form-row" ng-show="!modalbarcode.printStickerAditional"></div> -->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <button style="float: right;" type="button"
+                        ng-disabled="((modalbarcode.Detail | filter:{ select: true}).length === 0 )"
+                        class="md-fab md-fab-small  md-bg-light-blue-800"
+                        ng-class="{'md-bg-blue-grey-100': ((modalbarcode.Detail | filter:{ select: true}).length === 0 )}"
+                        ng-click="modalbarcode.printlabels()">
+                        <i class="material-icons md-color-light-blue-50">&#xE8AD;</i>
+                    </button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalprogressprint" class="uk-modal" data-uk-modal>
+    <div class="uk-modal-dialog">
+        <div class="uk-progress uk-progress-striped uk-active" style="margin-bottom: 3px">
+            <div class="uk-progress-bar" style="width: {{modalbarcode.porcent}}%;">{{modalbarcode.porcent}}%</div>
+        </div>
+        <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+            {{modalbarcode.ind}}
+            {{modalbarcode.prepotition}} {{modalbarcode.totalCanStickers}}
+        </div>
+    </div>
+</div>
+<div id="logNoData" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-body" style="height: 75px; top: 0px">
+            <div style="width: 18%; float: left">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageText uk-text-center" style="height: 100%;width: 92%;">
+                <label style="margin-top: 20px; margin-left: 5px; font-size: 13px">{{modalbarcode.message}}</label>
+            </div>
+        </div>
+        <div class="uk-modal-footer">
+        </div>
+    </div>
+</div>

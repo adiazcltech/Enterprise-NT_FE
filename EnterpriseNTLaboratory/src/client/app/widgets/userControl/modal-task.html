@@ -1,0 +1,181 @@
+<div class="uk-modal uk-modal-card-fullscreen" id="{{'taskmodal' + modaltask.idcontrol }}">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-purple-A400" ng-show=" modaltask.type == 1">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="modaltask.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <img ng-src="images/microbiology/celLwhite.png" />
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0486'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-toolbar md-bg-purple-A700" ng-show="modaltask.type == 2">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="modaltask.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <img ng-src="images/microbiology/test-tubewhite.png" />
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0487'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid uk-grid-small" style="width: 100%; height: 147px; margin-left: 0px">
+                    <div class="uk-width-1-3" style="
+                    padding-left: 0px;">
+                        <cardorder order="modaltask.order" typeordercode="modaltask.patient.typeordercode"
+                            typeordercolor="modaltask.patient.typeordercolor" testcode="modaltask.testcode"
+                            testname="modaltask.testname"></cardorder>
+                    </div>
+                    <div class="uk-width-1-3" style="padding-left: 5px">
+                        <cardpatient patientname="modaltask.patient.name" patientdocument="modaltask.patient.document"
+                            patientage="modaltask.patient.age" patientgender="modaltask.patient.gender"
+                            photopatient="modaltask.photopatient" patientid="modaltask.patient.id" orderpatient="modaltask.order"></cardpatient>
+                    </div>
+                    <div class="uk-width-1-3" style="padding-left: 5px;">
+                        <div class="md-card md-card-hover">
+                            <div class="uk-grid md-card-content">
+                                <div class="uk-width-1-1">
+                                    <div class="uk-form-row" ng-show="modaltask.type == 2" style="margin-top: 5px;">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img ng-src="images/microbiology/test-tube.png" />
+                                            </span>
+                                            <label class="labels-selectize"> {{'0487'| translate}}</label>
+                                            <ui-select ng-model="modaltask.procedure.selected" theme="select2"
+                                                ng-disabled="modaltask.idtask !== undefined" style="width: 100%;">
+                                                <ui-select-match placeholder="">{{$select.selected.procedure.name}}
+                                                </ui-select-match>
+                                                <ui-select-choices
+                                                    repeat="procedure in modaltask.procedure | filter: $select.search">
+                                                    <small
+                                                        ng-bind-html="procedure.procedure.name | highlight: $select.search"></small>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-form-row" ng-show="modaltask.type == 1" style="margin-top: 5px;">
+                                        <div class="uk-grid  uk-grid-medium">
+                                            <div class="uk-width-1-2" style="width: 100%;">
+                                                <div class="uk-form-row">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img ng-src="images/microbiology/cell.png" />
+                                                        </span>
+                                                        <label class="labels-selectize"> {{'0486'| translate}}</label>
+                                                        <ui-select ng-model="modaltask.mediacultures.selected"
+                                                            theme="select2" ng-disabled="modaltask.idtask !== undefined"
+                                                            style="width: 100%;" title="">
+                                                            <ui-select-match placeholder="">{{$select.selected.name}}
+                                                            </ui-select-match>
+                                                            <ui-select-choices
+                                                                repeat="mediacultures in modaltask.mediacultures | filter: $select.search">
+                                                                <small
+                                                                    ng-bind-html="mediacultures.name | highlight: $select.search"></small>
+                                                            </ui-select-choices>
+                                                        </ui-select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img ng-src="images/microbiology/working.png" />
+                                            </span>
+                                            <label class="labels-selectize"> {{'0157'| translate}}</label>
+                                            <ui-select ng-model="modaltask.destinations.selected" theme="select2"
+                                                ng-disabled="false" style="width: 100%;">
+                                                <ui-select-match placeholder="">{{$select.selected.name}}
+                                                </ui-select-match>
+                                                <ui-select-choices
+                                                    repeat="destinations in modaltask.destinations | filter: $select.search">
+                                                    <span
+                                                        ng-bind-html="destinations.name | highlight: $select.search"></span>-
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-row" style="margin-top: 5px;height: 72%;">
+                    <div class="uk-grid" style="height: 100%;">
+                        <div class="uk-width-1-2" style="height: 100%;width: 51%;">
+                            <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+                                <div class="md-card-content" style="height: 93%">
+                                    <codedcomment comment="modaltask.comment"></codedcomment>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2" style="height: 100%;padding-left: 7px;width: 49%;">
+                            <div class="md-card md-card-hover uk-animation-scale-up" style="height: 100%">
+                                <div class="md-card-content">
+                                    <div class="uk-input-group">
+                                        <input type="text" name="search" id="search" md-input label-fixed
+                                            class="md-input  label-fixed" ng-model="modaltask.search"
+                                            placeholder="{{'0531'| translate}}"
+                                            ng-keypress="modaltask.keyselect($event)"
+                                            ng-disabled="modaltask.task.length===0">
+                                        <span class="uk-input-group-addon">
+                                            <i class="material-icons md-24">&#xE8B6;</i>
+                                        </span>
+                                    </div>
+                                    <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                        style="margin-top: 0px;">
+                                        <tbody class="tbodyscrollable" vs-repeat="20" style="height: 248px;">
+                                            <tr
+                                                data-ng-repeat="task in modaltask.task| filter: {description:modaltask.search} | orderBy : 'description'">
+                                                <td class="uk-width-1-10 uk-text-center uk-table-middle small_col">
+                                                    <input type="checkbox" icheck ng-model="task.selected"
+                                                        class="check_row" table-check-row>
+                                                </td>
+                                                <td class="uk-width-9-10" data-ng-bind="task.description"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="md-fab-wrapper md-fab-in-card">
+                                        <button type="button" ng-show="modaltask.type == 1"
+                                            ng-disabled="((modaltask.task | filter:{ selected: true}).length === 0 ) || modaltask.mediacultures.selected === 0|| modaltask.destinations.selected === 0 "
+                                            ng-class="{'md-bg-blue-grey-100' : ((modaltask.task | filter:{ selected: true}).length === 0 ) || modaltask.mediacultures.selected === 0 || modaltask.destinations.selected === 0 }"
+                                            class="md-fab md-fab-small md-fab md-fab-success"
+                                            ng-click="modaltask.Savetaskmediaculture()">
+                                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                title=" {{'0007' | translate}} ">&#xE161;</i>
+                                        </button>
+                                        <button type="button" ng-show="modaltask.type == 2"
+                                            ng-disabled="((modaltask.task | filter:{ selected: true}).length === 0 ) || modaltask.procedure.selected === 0|| modaltask.destinations.selected === 0 "
+                                            ng-class="{'md-bg-blue-grey-100' : ((modaltask.task | filter:{ selected: true}).length === 0 ) || modaltask.procedure.selected === 0|| modaltask.destinations.selected === 0 }"
+                                            class="md-fab md-fab-small md-fab md-bg-deep-purple-200"
+                                            ng-click="modaltask.Savetaskprocedure()">
+                                            <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                                                title=" {{'0007' | translate}} ">&#xE161;</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<modalexceptions idcontrol="'taskmodal'" openmodal="modaltask.ShowPopupError" detailerror="modaltask.Error">
+</modalexceptions>

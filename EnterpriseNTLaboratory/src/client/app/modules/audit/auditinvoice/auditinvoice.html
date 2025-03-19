@@ -1,0 +1,116 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="overflow: hidden">
+        <div class="md-card" style="height: 92%;padding: 20px;">
+            <div class="uk-grid fullheight">
+                <div class="uk-width-6-10">
+                    <div class="md-card md-card-hover" style="min-height: 82px;">
+                        <div class="md-card-content" style="padding: 0;">
+                            <div class="uk-grid">
+                                <div class="uk-width-9-10" style="margin-top: 10px;">
+                                    <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd"
+                                        typefilter="vm.filterRange" isopenreport="vm.button" typeview="2">
+                                    </orderfilter>
+                                </div>
+                                <div class="uk-width-1-10 uk-flex uk-flex-center uk-flex-middle"
+                                    style="width: 7%;padding-left: 0px;">
+                                    <button type="button" class="md-fab md-fab-smallY md-fab md-fab-primary"
+                                        ng-class="{'md-bg-blue-grey-100' : !vm.button}" ng-click="vm.search()"
+                                        ng-disabled="!vm.button">
+                                        <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                            title="{{'0154' | translate}}">&#xE8B6;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-4-10">
+                    <div class="md-card md-card-hover" style="min-height: 82px;">
+                        <div class="md-card-content fullheight">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img ng-src="images/search.png" />
+                                </span>
+                                <div class="md-input-wrapper md-input-filled">
+                                    <label>{{'0154' | translate}}</label>
+                                    <input type="text" name="search" id="search" md-input label-fixed
+                                        class="md-input  label-fixed" ng-model="vm.searchorder"
+                                        ng-disabled="vm.ListOrder.length == 0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1" style="margin-top: 10px;height: calc(100% - 103px);margin-top: 15px;"
+                    ng-if="vm.data.length!==0">
+                    <div class="md-card md-card-hover" style="height: 100%;margin-left: 8px;margin-right: 5px;">
+                        <div class="md-card-content" style="height: 100%;padding: 0px;">
+                            <div class="md-card-content fullheight" style="padding: 0px;">
+                                <div class="uk-grid uk-flex uk-flex-middle div-head" style="height: 39px;">
+                                    <div class="uk-width-3-10" style="padding-left: 10px;"
+                                        ng-click="vm.sortType = 'invoiceNumber'; vm.sortReverse = !vm.sortReverse">
+                                        <resultssort sortvalue="'invoiceNumber'" sorttype="vm.sortType"
+                                            sortreverse="vm.sortReverse">
+                                        </resultssort>{{'1533' | translate}}
+                                    </div>
+                                    <div style="padding-left: 10px;" class="uk-width-3-10"
+                                        ng-click="vm.sortType = 'userName'; vm.sortReverse = !vm.sortReverse">
+                                        <resultssort sortvalue="'userName'" sorttype="vm.sortType"
+                                            sortreverse="vm.sortReverse">
+                                        </resultssort>{{'0001' | translate}}
+                                    </div>
+                                    <div class="uk-width-3-10" style="padding-left: 10px;"
+                                        ng-click="vm.sortType = 'expirationDate'; vm.sortReverse = !vm.sortReverse">
+                                        <resultssort sortvalue="'expirationDate'" sorttype="vm.sortType"
+                                            sortreverse="vm.sortReverse">
+                                        </resultssort>{{'3032' | translate}}
+                                    </div>
+                                    <div class="uk-width-4-10" style="padding-left: 10px;">
+                                    </div>
+                                </div>
+                                <div vs-repeat class="vs-repeat-custom-scroll contentscroll"
+                                    style="height: calc(100% - 40px);">
+                                    <div ng-repeat="invoice in vm.data | orderBy:vm.sortType:vm.sortReverse"
+                                        class="uk-grid uk-flex uk-flex-middle div-table" style="margin-top: 0px;">
+                                        <div class="uk-width-3-10">{{invoice.invoiceNumber}}</div>
+                                        <div class="uk-width-3-10">{{invoice.username}}</div>
+                                        <div class="uk-width-3-10">{{invoice.date| date: 'dd/MM/yyyy HH:mm:ss'}}</div>
+                                        <div class="uk-width-1-10"> <button type="button"
+                                                class="md-btn  md-btn-success md-btn-mini md-btn-icon"
+                                                ng-click="vm.datachangeaudit(invoice.invoiceNumber)"><i
+                                                    class="uk-icon-file-pdf-o no_margin"></i></button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-2-10" style="padding-left: 17px;">
+                        <img src="images/Question.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-8-10" style="margin-top: 3%;">
+                        <span class="uk-text-justify">{{'0962' | translate}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

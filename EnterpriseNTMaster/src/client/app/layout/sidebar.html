@@ -1,0 +1,54 @@
+<style type="text/css">
+  .dropdown-menu .divider {
+    margin: 1px 0;
+  }
+
+  .line-separate {
+    background-color: #e5e5e5;
+    height: 2px;
+    width: 100%;
+    display: block;
+  }
+
+</style>
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError">
+</modalerror>
+<div ng-controller="SidebarController as vm">
+  <div class="header" ng-show="vm.menu">
+    <nav class="navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <!-- Modulo de usuarios -->
+          <li ng-repeat="item in vm.listMenu" ng-show="item.show !== false"
+            ng-class="{'li-disabled': item.permission === false }" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <span style="float: left; margin-top: 3px" class="{{item.icon}}"> </span>
+              <div style="float: left;margin-left: 5px" class="visible-lg">{{item.name}}</div>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="item2 in item.submodule"
+                ng-class="{'li-disabled': item2.permission === false, 'dropdown-submenu': item2.submodule.length > 0 }">
+                <a ng-if="item2.submodule === undefined && item2.show !== false" ng-href="{{item2.ref}}"
+                  title="{{item2.name}}">{{item2.name}}</a>
+                <a ng-if="item2.submodule.length > 0" href="#" class="dropdown-toggle"
+                  data-toggle="dropdown">{{item2.name}}</a>
+                <ul class="dropdown-menu" ng-if="item2.submodule.length > 0">
+                  <li ng-repeat="item3 in item2.submodule" ng-class="{'li-disabled': item3.permission === false }">
+                    <a ng-href="{{item3.ref}}" title="{{item3.name}}">{{item3.name}}</a>
+                    <span ng-if="item3.showLine === true" class="line-separate"></span>
+                  </li>
+                </ul>
+                <span ng-if="item2.showLine === true" class="line-separate"></span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-click="vm.logout()"><a style="padding-right: 5px; padding-left: 0px" href="#"> <b> <span
+                  class="btn-logout glyphicon glyphicon-log-in"></span> </b></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

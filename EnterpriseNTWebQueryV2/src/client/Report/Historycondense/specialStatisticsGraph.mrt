@@ -1,0 +1,2756 @@
+{
+  "ReportVersion": "2019.1.1",
+  "ReportGuid": "53ec4f5711c67afeefdf36f631959ea0",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportFile": "specialStatisticsGraph.mrt",
+  "ReportCreated": "/Date(-18000000-0500)/",
+  "ReportChanged": "/Date(1640229080000-0500)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "ReportUnit": "Inches",
+  "Styles": {
+    "0": {
+      "Ident": "StiStyle",
+      "Name": "Style1",
+      "Border": ";;;;;;;solid:0,0,0",
+      "Brush": "solid:Transparent",
+      "TextBrush": "solid:0,0,0"
+    }
+  },
+  "Dictionary": {
+    "Resources": {
+      "0": {
+        "Name": "Historycondense",
+        "Alias": "Historycondense",
+        "Type": "Json",
+        "Image": "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"
+      }
+    },
+    "DataSources": {
+      "0": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_testdetail",
+        "Alias": "data_testdetail",
+        "Columns": {
+          "0": {
+            "Name": "datevalid",
+            "Index": -1,
+            "NameInSource": "datevalid",
+            "Alias": "datevalid",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "order",
+            "Index": -1,
+            "NameInSource": "order",
+            "Alias": "order",
+            "Type": "System.Decimal"
+          },
+          "2": {
+            "Name": "result",
+            "Index": -1,
+            "NameInSource": "result",
+            "Alias": "result",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "min",
+            "Index": -1,
+            "NameInSource": "min",
+            "Alias": "min",
+            "Type": "System.Decimal"
+          },
+          "4": {
+            "Name": "max",
+            "Index": -1,
+            "NameInSource": "max",
+            "Alias": "max",
+            "Type": "System.Decimal"
+          },
+          "5": {
+            "Name": "referencevalues",
+            "Index": -1,
+            "NameInSource": "referencevalues",
+            "Alias": "referencevalues",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "patology",
+            "Index": -1,
+            "NameInSource": "patology",
+            "Alias": "patology",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_testdetail"
+      },
+      "1": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options_tooltip",
+        "Alias": "data_options_tooltip",
+        "Columns": {
+          "0": {
+            "Name": "trigger",
+            "Index": -1,
+            "NameInSource": "trigger",
+            "Alias": "trigger",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options_tooltip"
+      },
+      "2": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options_legend_data",
+        "Alias": "data_options_legend_data",
+        "Columns": {
+          "0": {
+            "Name": "value",
+            "Index": -1,
+            "NameInSource": "value",
+            "Alias": "value",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options_legend_data"
+      },
+      "3": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options_legend",
+        "Alias": "data_options_legend",
+        "Columns": {
+          "0": {
+            "Name": "data",
+            "Index": -1,
+            "NameInSource": "data",
+            "Alias": "data",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options_legend"
+      },
+      "4": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options_xAxis_data",
+        "Alias": "data_options_xAxis_data",
+        "Columns": {
+          "0": {
+            "Name": "value",
+            "Index": -1,
+            "NameInSource": "value",
+            "Alias": "value",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options_xAxis_data"
+      },
+      "5": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options_xAxis",
+        "Alias": "data_options_xAxis",
+        "Columns": {
+          "0": {
+            "Name": "name",
+            "Index": -1,
+            "NameInSource": "name",
+            "Alias": "name",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "nameLocation",
+            "Index": -1,
+            "NameInSource": "nameLocation",
+            "Alias": "nameLocation",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "nameGap",
+            "Index": -1,
+            "NameInSource": "nameGap",
+            "Alias": "nameGap",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "type",
+            "Index": -1,
+            "NameInSource": "type",
+            "Alias": "type",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "boundaryGap",
+            "Index": -1,
+            "NameInSource": "boundaryGap",
+            "Alias": "boundaryGap",
+            "Type": "System.Boolean"
+          },
+          "5": {
+            "Name": "data",
+            "Index": -1,
+            "NameInSource": "data",
+            "Alias": "data",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options_xAxis"
+      },
+      "6": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options_yAxis",
+        "Alias": "data_options_yAxis",
+        "Columns": {
+          "0": {
+            "Name": "name",
+            "Index": -1,
+            "NameInSource": "name",
+            "Alias": "name",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "type",
+            "Index": -1,
+            "NameInSource": "type",
+            "Alias": "type",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "nameGap",
+            "Index": -1,
+            "NameInSource": "nameGap",
+            "Alias": "nameGap",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options_yAxis"
+      },
+      "7": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_options",
+        "Alias": "data_options",
+        "Columns": {
+          "0": {
+            "Name": "tooltip",
+            "Index": -1,
+            "NameInSource": "tooltip",
+            "Alias": "tooltip",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "calculable",
+            "Index": -1,
+            "NameInSource": "calculable",
+            "Alias": "calculable",
+            "Type": "System.Boolean"
+          },
+          "2": {
+            "Name": "legend",
+            "Index": -1,
+            "NameInSource": "legend",
+            "Alias": "legend",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "xAxis",
+            "Index": -1,
+            "NameInSource": "xAxis",
+            "Alias": "xAxis",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "yAxis",
+            "Index": -1,
+            "NameInSource": "yAxis",
+            "Alias": "yAxis",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_options"
+      },
+      "8": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_datagraphics_data",
+        "Alias": "data_datagraphics_data",
+        "Columns": {
+          "0": {
+            "Name": "value",
+            "Index": -1,
+            "NameInSource": "value",
+            "Alias": "value",
+            "Type": "System.Decimal"
+          },
+          "1": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_datagraphics_data"
+      },
+      "9": {
+        "Ident": "StiDataTableSource",
+        "Name": "data_datagraphics",
+        "Alias": "data_datagraphics",
+        "Columns": {
+          "0": {
+            "Name": "name",
+            "Index": -1,
+            "NameInSource": "name",
+            "Alias": "name",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "type",
+            "Index": -1,
+            "NameInSource": "type",
+            "Alias": "type",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "data",
+            "Index": -1,
+            "NameInSource": "data",
+            "Alias": "data",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "relationId",
+            "Index": -1,
+            "NameInSource": "relationId",
+            "Alias": "relationId",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data_datagraphics"
+      },
+      "10": {
+        "Ident": "StiDataTableSource",
+        "Name": "data",
+        "Alias": "data",
+        "Columns": {
+          "0": {
+            "Name": "name",
+            "Index": -1,
+            "NameInSource": "name",
+            "Alias": "name",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "type",
+            "Index": -1,
+            "NameInSource": "type",
+            "Alias": "type",
+            "Type": "System.Decimal"
+          },
+          "2": {
+            "Name": "testdetail",
+            "Index": -1,
+            "NameInSource": "testdetail",
+            "Alias": "testdetail",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "options",
+            "Index": -1,
+            "NameInSource": "options",
+            "Alias": "options",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "datagraphics",
+            "Index": -1,
+            "NameInSource": "datagraphics",
+            "Alias": "datagraphics",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.data"
+      },
+      "11": {
+        "Ident": "StiDataTableSource",
+        "Name": "Labels",
+        "Alias": "Labels",
+        "Columns": {
+          "0": {
+            "Name": "0000",
+            "Index": -1,
+            "NameInSource": "0000",
+            "Alias": "0000",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "0001",
+            "Index": -1,
+            "NameInSource": "0001",
+            "Alias": "0001",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "0002",
+            "Index": -1,
+            "NameInSource": "0002",
+            "Alias": "0002",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "0003",
+            "Index": -1,
+            "NameInSource": "0003",
+            "Alias": "0003",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "0004",
+            "Index": -1,
+            "NameInSource": "0004",
+            "Alias": "0004",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "0005",
+            "Index": -1,
+            "NameInSource": "0005",
+            "Alias": "0005",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "0006",
+            "Index": -1,
+            "NameInSource": "0006",
+            "Alias": "0006",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "0007",
+            "Index": -1,
+            "NameInSource": "0007",
+            "Alias": "0007",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "0008",
+            "Index": -1,
+            "NameInSource": "0008",
+            "Alias": "0008",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "0009",
+            "Index": -1,
+            "NameInSource": "0009",
+            "Alias": "0009",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "0010",
+            "Index": -1,
+            "NameInSource": "0010",
+            "Alias": "0010",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "0011",
+            "Index": -1,
+            "NameInSource": "0011",
+            "Alias": "0011",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "0012",
+            "Index": -1,
+            "NameInSource": "0012",
+            "Alias": "0012",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "0013",
+            "Index": -1,
+            "NameInSource": "0013",
+            "Alias": "0013",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "0014",
+            "Index": -1,
+            "NameInSource": "0014",
+            "Alias": "0014",
+            "Type": "System.String"
+          },
+          "15": {
+            "Name": "0015",
+            "Index": -1,
+            "NameInSource": "0015",
+            "Alias": "0015",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "0016",
+            "Index": -1,
+            "NameInSource": "0016",
+            "Alias": "0016",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "0017",
+            "Index": -1,
+            "NameInSource": "0017",
+            "Alias": "0017",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "0018",
+            "Index": -1,
+            "NameInSource": "0018",
+            "Alias": "0018",
+            "Type": "System.String"
+          },
+          "19": {
+            "Name": "0019",
+            "Index": -1,
+            "NameInSource": "0019",
+            "Alias": "0019",
+            "Type": "System.String"
+          },
+          "20": {
+            "Name": "0020",
+            "Index": -1,
+            "NameInSource": "0020",
+            "Alias": "0020",
+            "Type": "System.String"
+          },
+          "21": {
+            "Name": "0021",
+            "Index": -1,
+            "NameInSource": "0021",
+            "Alias": "0021",
+            "Type": "System.String"
+          },
+          "22": {
+            "Name": "0022",
+            "Index": -1,
+            "NameInSource": "0022",
+            "Alias": "0022",
+            "Type": "System.String"
+          },
+          "23": {
+            "Name": "0023",
+            "Index": -1,
+            "NameInSource": "0023",
+            "Alias": "0023",
+            "Type": "System.String"
+          },
+          "24": {
+            "Name": "0024",
+            "Index": -1,
+            "NameInSource": "0024",
+            "Alias": "0024",
+            "Type": "System.String"
+          },
+          "25": {
+            "Name": "0025",
+            "Index": -1,
+            "NameInSource": "0025",
+            "Alias": "0025",
+            "Type": "System.String"
+          },
+          "26": {
+            "Name": "0026",
+            "Index": -1,
+            "NameInSource": "0026",
+            "Alias": "0026",
+            "Type": "System.String"
+          },
+          "27": {
+            "Name": "0027",
+            "Index": -1,
+            "NameInSource": "0027",
+            "Alias": "0027",
+            "Type": "System.String"
+          },
+          "28": {
+            "Name": "0028",
+            "Index": -1,
+            "NameInSource": "0028",
+            "Alias": "0028",
+            "Type": "System.String"
+          },
+          "29": {
+            "Name": "0029",
+            "Index": -1,
+            "NameInSource": "0029",
+            "Alias": "0029",
+            "Type": "System.String"
+          },
+          "30": {
+            "Name": "0030",
+            "Index": -1,
+            "NameInSource": "0030",
+            "Alias": "0030",
+            "Type": "System.String"
+          },
+          "31": {
+            "Name": "0031",
+            "Index": -1,
+            "NameInSource": "0031",
+            "Alias": "0031",
+            "Type": "System.String"
+          },
+          "32": {
+            "Name": "0032",
+            "Index": -1,
+            "NameInSource": "0032",
+            "Alias": "0032",
+            "Type": "System.String"
+          },
+          "33": {
+            "Name": "0033",
+            "Index": -1,
+            "NameInSource": "0033",
+            "Alias": "0033",
+            "Type": "System.String"
+          },
+          "34": {
+            "Name": "0034",
+            "Index": -1,
+            "NameInSource": "0034",
+            "Alias": "0034",
+            "Type": "System.String"
+          },
+          "35": {
+            "Name": "0035",
+            "Index": -1,
+            "NameInSource": "0035",
+            "Alias": "0035",
+            "Type": "System.String"
+          },
+          "36": {
+            "Name": "0036",
+            "Index": -1,
+            "NameInSource": "0036",
+            "Alias": "0036",
+            "Type": "System.String"
+          },
+          "37": {
+            "Name": "0037",
+            "Index": -1,
+            "NameInSource": "0037",
+            "Alias": "0037",
+            "Type": "System.String"
+          },
+          "38": {
+            "Name": "0038",
+            "Index": -1,
+            "NameInSource": "0038",
+            "Alias": "0038",
+            "Type": "System.String"
+          },
+          "39": {
+            "Name": "0039",
+            "Index": -1,
+            "NameInSource": "0039",
+            "Alias": "0039",
+            "Type": "System.String"
+          },
+          "40": {
+            "Name": "0040",
+            "Index": -1,
+            "NameInSource": "0040",
+            "Alias": "0040",
+            "Type": "System.String"
+          },
+          "41": {
+            "Name": "0041",
+            "Index": -1,
+            "NameInSource": "0041",
+            "Alias": "0041",
+            "Type": "System.String"
+          },
+          "42": {
+            "Name": "0042",
+            "Index": -1,
+            "NameInSource": "0042",
+            "Alias": "0042",
+            "Type": "System.String"
+          },
+          "43": {
+            "Name": "0043",
+            "Index": -1,
+            "NameInSource": "0043",
+            "Alias": "0043",
+            "Type": "System.String"
+          },
+          "44": {
+            "Name": "0044",
+            "Index": -1,
+            "NameInSource": "0044",
+            "Alias": "0044",
+            "Type": "System.String"
+          },
+          "45": {
+            "Name": "0045",
+            "Index": -1,
+            "NameInSource": "0045",
+            "Alias": "0045",
+            "Type": "System.String"
+          },
+          "46": {
+            "Name": "0046",
+            "Index": -1,
+            "NameInSource": "0046",
+            "Alias": "0046",
+            "Type": "System.String"
+          },
+          "47": {
+            "Name": "0047",
+            "Index": -1,
+            "NameInSource": "0047",
+            "Alias": "0047",
+            "Type": "System.String"
+          },
+          "48": {
+            "Name": "0048",
+            "Index": -1,
+            "NameInSource": "0048",
+            "Alias": "0048",
+            "Type": "System.String"
+          },
+          "49": {
+            "Name": "0049",
+            "Index": -1,
+            "NameInSource": "0049",
+            "Alias": "0049",
+            "Type": "System.String"
+          },
+          "50": {
+            "Name": "0050",
+            "Index": -1,
+            "NameInSource": "0050",
+            "Alias": "0050",
+            "Type": "System.String"
+          },
+          "51": {
+            "Name": "0051",
+            "Index": -1,
+            "NameInSource": "0051",
+            "Alias": "0051",
+            "Type": "System.String"
+          },
+          "52": {
+            "Name": "0052",
+            "Index": -1,
+            "NameInSource": "0052",
+            "Alias": "0052",
+            "Type": "System.String"
+          },
+          "53": {
+            "Name": "0053",
+            "Index": -1,
+            "NameInSource": "0053",
+            "Alias": "0053",
+            "Type": "System.String"
+          },
+          "54": {
+            "Name": "0054",
+            "Index": -1,
+            "NameInSource": "0054",
+            "Alias": "0054",
+            "Type": "System.String"
+          },
+          "55": {
+            "Name": "0055",
+            "Index": -1,
+            "NameInSource": "0055",
+            "Alias": "0055",
+            "Type": "System.String"
+          },
+          "56": {
+            "Name": "0056",
+            "Index": -1,
+            "NameInSource": "0056",
+            "Alias": "0056",
+            "Type": "System.String"
+          },
+          "57": {
+            "Name": "0057",
+            "Index": -1,
+            "NameInSource": "0057",
+            "Alias": "0057",
+            "Type": "System.String"
+          },
+          "58": {
+            "Name": "0058",
+            "Index": -1,
+            "NameInSource": "0058",
+            "Alias": "0058",
+            "Type": "System.String"
+          },
+          "59": {
+            "Name": "0059",
+            "Index": -1,
+            "NameInSource": "0059",
+            "Alias": "0059",
+            "Type": "System.String"
+          },
+          "60": {
+            "Name": "0060",
+            "Index": -1,
+            "NameInSource": "0060",
+            "Alias": "0060",
+            "Type": "System.String"
+          },
+          "61": {
+            "Name": "0061",
+            "Index": -1,
+            "NameInSource": "0061",
+            "Alias": "0061",
+            "Type": "System.String"
+          },
+          "62": {
+            "Name": "0062",
+            "Index": -1,
+            "NameInSource": "0062",
+            "Alias": "0062",
+            "Type": "System.String"
+          },
+          "63": {
+            "Name": "0063",
+            "Index": -1,
+            "NameInSource": "0063",
+            "Alias": "0063",
+            "Type": "System.String"
+          },
+          "64": {
+            "Name": "0064",
+            "Index": -1,
+            "NameInSource": "0064",
+            "Alias": "0064",
+            "Type": "System.String"
+          },
+          "65": {
+            "Name": "0065",
+            "Index": -1,
+            "NameInSource": "0065",
+            "Alias": "0065",
+            "Type": "System.String"
+          },
+          "66": {
+            "Name": "0066",
+            "Index": -1,
+            "NameInSource": "0066",
+            "Alias": "0066",
+            "Type": "System.String"
+          },
+          "67": {
+            "Name": "0067",
+            "Index": -1,
+            "NameInSource": "0067",
+            "Alias": "0067",
+            "Type": "System.String"
+          },
+          "68": {
+            "Name": "0068",
+            "Index": -1,
+            "NameInSource": "0068",
+            "Alias": "0068",
+            "Type": "System.String"
+          },
+          "69": {
+            "Name": "0069",
+            "Index": -1,
+            "NameInSource": "0069",
+            "Alias": "0069",
+            "Type": "System.String"
+          },
+          "70": {
+            "Name": "0070",
+            "Index": -1,
+            "NameInSource": "0070",
+            "Alias": "0070",
+            "Type": "System.String"
+          },
+          "71": {
+            "Name": "0071",
+            "Index": -1,
+            "NameInSource": "0071",
+            "Alias": "0071",
+            "Type": "System.String"
+          },
+          "72": {
+            "Name": "0072",
+            "Index": -1,
+            "NameInSource": "0072",
+            "Alias": "0072",
+            "Type": "System.String"
+          },
+          "73": {
+            "Name": "0073",
+            "Index": -1,
+            "NameInSource": "0073",
+            "Alias": "0073",
+            "Type": "System.String"
+          },
+          "74": {
+            "Name": "0074",
+            "Index": -1,
+            "NameInSource": "0074",
+            "Alias": "0074",
+            "Type": "System.String"
+          },
+          "75": {
+            "Name": "0075",
+            "Index": -1,
+            "NameInSource": "0075",
+            "Alias": "0075",
+            "Type": "System.String"
+          },
+          "76": {
+            "Name": "0076",
+            "Index": -1,
+            "NameInSource": "0076",
+            "Alias": "0076",
+            "Type": "System.String"
+          },
+          "77": {
+            "Name": "0077",
+            "Index": -1,
+            "NameInSource": "0077",
+            "Alias": "0077",
+            "Type": "System.String"
+          },
+          "78": {
+            "Name": "0078",
+            "Index": -1,
+            "NameInSource": "0078",
+            "Alias": "0078",
+            "Type": "System.String"
+          },
+          "79": {
+            "Name": "0079",
+            "Index": -1,
+            "NameInSource": "0079",
+            "Alias": "0079",
+            "Type": "System.String"
+          },
+          "80": {
+            "Name": "0080",
+            "Index": -1,
+            "NameInSource": "0080",
+            "Alias": "0080",
+            "Type": "System.String"
+          },
+          "81": {
+            "Name": "0081",
+            "Index": -1,
+            "NameInSource": "0081",
+            "Alias": "0081",
+            "Type": "System.String"
+          },
+          "82": {
+            "Name": "0082",
+            "Index": -1,
+            "NameInSource": "0082",
+            "Alias": "0082",
+            "Type": "System.String"
+          },
+          "83": {
+            "Name": "0083",
+            "Index": -1,
+            "NameInSource": "0083",
+            "Alias": "0083",
+            "Type": "System.String"
+          },
+          "84": {
+            "Name": "0084",
+            "Index": -1,
+            "NameInSource": "0084",
+            "Alias": "0084",
+            "Type": "System.String"
+          },
+          "85": {
+            "Name": "0085",
+            "Index": -1,
+            "NameInSource": "0085",
+            "Alias": "0085",
+            "Type": "System.String"
+          },
+          "86": {
+            "Name": "0086",
+            "Index": -1,
+            "NameInSource": "0086",
+            "Alias": "0086",
+            "Type": "System.String"
+          },
+          "87": {
+            "Name": "0087",
+            "Index": -1,
+            "NameInSource": "0087",
+            "Alias": "0087",
+            "Type": "System.String"
+          },
+          "88": {
+            "Name": "0088",
+            "Index": -1,
+            "NameInSource": "0088",
+            "Alias": "0088",
+            "Type": "System.String"
+          },
+          "89": {
+            "Name": "0089",
+            "Index": -1,
+            "NameInSource": "0089",
+            "Alias": "0089",
+            "Type": "System.String"
+          },
+          "90": {
+            "Name": "0090",
+            "Index": -1,
+            "NameInSource": "0090",
+            "Alias": "0090",
+            "Type": "System.String"
+          },
+          "91": {
+            "Name": "0091",
+            "Index": -1,
+            "NameInSource": "0091",
+            "Alias": "0091",
+            "Type": "System.String"
+          },
+          "92": {
+            "Name": "0092",
+            "Index": -1,
+            "NameInSource": "0092",
+            "Alias": "0092",
+            "Type": "System.String"
+          },
+          "93": {
+            "Name": "0093",
+            "Index": -1,
+            "NameInSource": "0093",
+            "Alias": "0093",
+            "Type": "System.String"
+          },
+          "94": {
+            "Name": "0094",
+            "Index": -1,
+            "NameInSource": "0094",
+            "Alias": "0094",
+            "Type": "System.String"
+          },
+          "95": {
+            "Name": "0095",
+            "Index": -1,
+            "NameInSource": "0095",
+            "Alias": "0095",
+            "Type": "System.String"
+          },
+          "96": {
+            "Name": "0096",
+            "Index": -1,
+            "NameInSource": "0096",
+            "Alias": "0096",
+            "Type": "System.String"
+          },
+          "97": {
+            "Name": "0097",
+            "Index": -1,
+            "NameInSource": "0097",
+            "Alias": "0097",
+            "Type": "System.String"
+          },
+          "98": {
+            "Name": "0098",
+            "Index": -1,
+            "NameInSource": "0098",
+            "Alias": "0098",
+            "Type": "System.String"
+          },
+          "99": {
+            "Name": "0099",
+            "Index": -1,
+            "NameInSource": "0099",
+            "Alias": "0099",
+            "Type": "System.String"
+          },
+          "100": {
+            "Name": "0100",
+            "Index": -1,
+            "NameInSource": "0100",
+            "Alias": "0100",
+            "Type": "System.String"
+          },
+          "101": {
+            "Name": "0101",
+            "Index": -1,
+            "NameInSource": "0101",
+            "Alias": "0101",
+            "Type": "System.String"
+          },
+          "102": {
+            "Name": "0102",
+            "Index": -1,
+            "NameInSource": "0102",
+            "Alias": "0102",
+            "Type": "System.String"
+          },
+          "103": {
+            "Name": "0103",
+            "Index": -1,
+            "NameInSource": "0103",
+            "Alias": "0103",
+            "Type": "System.String"
+          },
+          "104": {
+            "Name": "0104",
+            "Index": -1,
+            "NameInSource": "0104",
+            "Alias": "0104",
+            "Type": "System.String"
+          },
+          "105": {
+            "Name": "0105",
+            "Index": -1,
+            "NameInSource": "0105",
+            "Alias": "0105",
+            "Type": "System.String"
+          },
+          "106": {
+            "Name": "0106",
+            "Index": -1,
+            "NameInSource": "0106",
+            "Alias": "0106",
+            "Type": "System.String"
+          },
+          "107": {
+            "Name": "0107",
+            "Index": -1,
+            "NameInSource": "0107",
+            "Alias": "0107",
+            "Type": "System.String"
+          },
+          "108": {
+            "Name": "0108",
+            "Index": -1,
+            "NameInSource": "0108",
+            "Alias": "0108",
+            "Type": "System.String"
+          },
+          "109": {
+            "Name": "0109",
+            "Index": -1,
+            "NameInSource": "0109",
+            "Alias": "0109",
+            "Type": "System.String"
+          },
+          "110": {
+            "Name": "0110",
+            "Index": -1,
+            "NameInSource": "0110",
+            "Alias": "0110",
+            "Type": "System.String"
+          },
+          "111": {
+            "Name": "0111",
+            "Index": -1,
+            "NameInSource": "0111",
+            "Alias": "0111",
+            "Type": "System.String"
+          },
+          "112": {
+            "Name": "0112",
+            "Index": -1,
+            "NameInSource": "0112",
+            "Alias": "0112",
+            "Type": "System.String"
+          },
+          "113": {
+            "Name": "0113",
+            "Index": -1,
+            "NameInSource": "0113",
+            "Alias": "0113",
+            "Type": "System.String"
+          },
+          "114": {
+            "Name": "0114",
+            "Index": -1,
+            "NameInSource": "0114",
+            "Alias": "0114",
+            "Type": "System.String"
+          },
+          "115": {
+            "Name": "0115",
+            "Index": -1,
+            "NameInSource": "0115",
+            "Alias": "0115",
+            "Type": "System.String"
+          },
+          "116": {
+            "Name": "0116",
+            "Index": -1,
+            "NameInSource": "0116",
+            "Alias": "0116",
+            "Type": "System.String"
+          },
+          "117": {
+            "Name": "0117",
+            "Index": -1,
+            "NameInSource": "0117",
+            "Alias": "0117",
+            "Type": "System.String"
+          },
+          "118": {
+            "Name": "0118",
+            "Index": -1,
+            "NameInSource": "0118",
+            "Alias": "0118",
+            "Type": "System.String"
+          },
+          "119": {
+            "Name": "0119",
+            "Index": -1,
+            "NameInSource": "0119",
+            "Alias": "0119",
+            "Type": "System.String"
+          },
+          "120": {
+            "Name": "0120",
+            "Index": -1,
+            "NameInSource": "0120",
+            "Alias": "0120",
+            "Type": "System.String"
+          },
+          "121": {
+            "Name": "0121",
+            "Index": -1,
+            "NameInSource": "0121",
+            "Alias": "0121",
+            "Type": "System.String"
+          },
+          "122": {
+            "Name": "0122",
+            "Index": -1,
+            "NameInSource": "0122",
+            "Alias": "0122",
+            "Type": "System.String"
+          },
+          "123": {
+            "Name": "0123",
+            "Index": -1,
+            "NameInSource": "0123",
+            "Alias": "0123",
+            "Type": "System.String"
+          },
+          "124": {
+            "Name": "0124",
+            "Index": -1,
+            "NameInSource": "0124",
+            "Alias": "0124",
+            "Type": "System.String"
+          },
+          "125": {
+            "Name": "0125",
+            "Index": -1,
+            "NameInSource": "0125",
+            "Alias": "0125",
+            "Type": "System.String"
+          },
+          "126": {
+            "Name": "0126",
+            "Index": -1,
+            "NameInSource": "0126",
+            "Alias": "0126",
+            "Type": "System.String"
+          },
+          "127": {
+            "Name": "0127",
+            "Index": -1,
+            "NameInSource": "0127",
+            "Alias": "0127",
+            "Type": "System.String"
+          },
+          "128": {
+            "Name": "0128",
+            "Index": -1,
+            "NameInSource": "0128",
+            "Alias": "0128",
+            "Type": "System.String"
+          },
+          "129": {
+            "Name": "0129",
+            "Index": -1,
+            "NameInSource": "0129",
+            "Alias": "0129",
+            "Type": "System.String"
+          },
+          "130": {
+            "Name": "0130",
+            "Index": -1,
+            "NameInSource": "0130",
+            "Alias": "0130",
+            "Type": "System.String"
+          },
+          "131": {
+            "Name": "0131",
+            "Index": -1,
+            "NameInSource": "0131",
+            "Alias": "0131",
+            "Type": "System.String"
+          },
+          "132": {
+            "Name": "0132",
+            "Index": -1,
+            "NameInSource": "0132",
+            "Alias": "0132",
+            "Type": "System.String"
+          },
+          "133": {
+            "Name": "0133",
+            "Index": -1,
+            "NameInSource": "0133",
+            "Alias": "0133",
+            "Type": "System.String"
+          },
+          "134": {
+            "Name": "0134",
+            "Index": -1,
+            "NameInSource": "0134",
+            "Alias": "0134",
+            "Type": "System.String"
+          },
+          "135": {
+            "Name": "0135",
+            "Index": -1,
+            "NameInSource": "0135",
+            "Alias": "0135",
+            "Type": "System.String"
+          },
+          "136": {
+            "Name": "0136",
+            "Index": -1,
+            "NameInSource": "0136",
+            "Alias": "0136",
+            "Type": "System.String"
+          },
+          "137": {
+            "Name": "0137",
+            "Index": -1,
+            "NameInSource": "0137",
+            "Alias": "0137",
+            "Type": "System.String"
+          },
+          "138": {
+            "Name": "0138",
+            "Index": -1,
+            "NameInSource": "0138",
+            "Alias": "0138",
+            "Type": "System.String"
+          },
+          "139": {
+            "Name": "0139",
+            "Index": -1,
+            "NameInSource": "0139",
+            "Alias": "0139",
+            "Type": "System.String"
+          },
+          "140": {
+            "Name": "0140",
+            "Index": -1,
+            "NameInSource": "0140",
+            "Alias": "0140",
+            "Type": "System.String"
+          },
+          "141": {
+            "Name": "0141",
+            "Index": -1,
+            "NameInSource": "0141",
+            "Alias": "0141",
+            "Type": "System.String"
+          },
+          "142": {
+            "Name": "0142",
+            "Index": -1,
+            "NameInSource": "0142",
+            "Alias": "0142",
+            "Type": "System.String"
+          },
+          "143": {
+            "Name": "0143",
+            "Index": -1,
+            "NameInSource": "0143",
+            "Alias": "0143",
+            "Type": "System.String"
+          },
+          "144": {
+            "Name": "0144",
+            "Index": -1,
+            "NameInSource": "0144",
+            "Alias": "0144",
+            "Type": "System.String"
+          },
+          "145": {
+            "Name": "0145",
+            "Index": -1,
+            "NameInSource": "0145",
+            "Alias": "0145",
+            "Type": "System.String"
+          },
+          "146": {
+            "Name": "0146",
+            "Index": -1,
+            "NameInSource": "0146",
+            "Alias": "0146",
+            "Type": "System.String"
+          },
+          "147": {
+            "Name": "0147",
+            "Index": -1,
+            "NameInSource": "0147",
+            "Alias": "0147",
+            "Type": "System.String"
+          },
+          "148": {
+            "Name": "0148",
+            "Index": -1,
+            "NameInSource": "0148",
+            "Alias": "0148",
+            "Type": "System.String"
+          },
+          "149": {
+            "Name": "0149",
+            "Index": -1,
+            "NameInSource": "0149",
+            "Alias": "0149",
+            "Type": "System.String"
+          },
+          "150": {
+            "Name": "0150",
+            "Index": -1,
+            "NameInSource": "0150",
+            "Alias": "0150",
+            "Type": "System.String"
+          },
+          "151": {
+            "Name": "0151",
+            "Index": -1,
+            "NameInSource": "0151",
+            "Alias": "0151",
+            "Type": "System.String"
+          },
+          "152": {
+            "Name": "0152",
+            "Index": -1,
+            "NameInSource": "0152",
+            "Alias": "0152",
+            "Type": "System.String"
+          },
+          "153": {
+            "Name": "0153",
+            "Index": -1,
+            "NameInSource": "0153",
+            "Alias": "0153",
+            "Type": "System.String"
+          },
+          "154": {
+            "Name": "0154",
+            "Index": -1,
+            "NameInSource": "0154",
+            "Alias": "0154",
+            "Type": "System.String"
+          },
+          "155": {
+            "Name": "0155",
+            "Index": -1,
+            "NameInSource": "0155",
+            "Alias": "0155",
+            "Type": "System.String"
+          },
+          "156": {
+            "Name": "0156",
+            "Index": -1,
+            "NameInSource": "0156",
+            "Alias": "0156",
+            "Type": "System.String"
+          },
+          "157": {
+            "Name": "0157",
+            "Index": -1,
+            "NameInSource": "0157",
+            "Alias": "0157",
+            "Type": "System.String"
+          },
+          "158": {
+            "Name": "0158",
+            "Index": -1,
+            "NameInSource": "0158",
+            "Alias": "0158",
+            "Type": "System.String"
+          },
+          "159": {
+            "Name": "0159",
+            "Index": -1,
+            "NameInSource": "0159",
+            "Alias": "0159",
+            "Type": "System.String"
+          },
+          "160": {
+            "Name": "0160",
+            "Index": -1,
+            "NameInSource": "0160",
+            "Alias": "0160",
+            "Type": "System.String"
+          },
+          "161": {
+            "Name": "0161",
+            "Index": -1,
+            "NameInSource": "0161",
+            "Alias": "0161",
+            "Type": "System.String"
+          },
+          "162": {
+            "Name": "0162",
+            "Index": -1,
+            "NameInSource": "0162",
+            "Alias": "0162",
+            "Type": "System.String"
+          },
+          "163": {
+            "Name": "0163",
+            "Index": -1,
+            "NameInSource": "0163",
+            "Alias": "0163",
+            "Type": "System.String"
+          },
+          "164": {
+            "Name": "0164",
+            "Index": -1,
+            "NameInSource": "0164",
+            "Alias": "0164",
+            "Type": "System.String"
+          },
+          "165": {
+            "Name": "0165",
+            "Index": -1,
+            "NameInSource": "0165",
+            "Alias": "0165",
+            "Type": "System.String"
+          },
+          "166": {
+            "Name": "0166",
+            "Index": -1,
+            "NameInSource": "0166",
+            "Alias": "0166",
+            "Type": "System.String"
+          },
+          "167": {
+            "Name": "0167",
+            "Index": -1,
+            "NameInSource": "0167",
+            "Alias": "0167",
+            "Type": "System.String"
+          },
+          "168": {
+            "Name": "0168",
+            "Index": -1,
+            "NameInSource": "0168",
+            "Alias": "0168",
+            "Type": "System.String"
+          },
+          "169": {
+            "Name": "0169",
+            "Index": -1,
+            "NameInSource": "0169",
+            "Alias": "0169",
+            "Type": "System.String"
+          },
+          "170": {
+            "Name": "0170",
+            "Index": -1,
+            "NameInSource": "0170",
+            "Alias": "0170",
+            "Type": "System.String"
+          },
+          "171": {
+            "Name": "0171",
+            "Index": -1,
+            "NameInSource": "0171",
+            "Alias": "0171",
+            "Type": "System.String"
+          },
+          "172": {
+            "Name": "0172",
+            "Index": -1,
+            "NameInSource": "0172",
+            "Alias": "0172",
+            "Type": "System.String"
+          },
+          "173": {
+            "Name": "0173",
+            "Index": -1,
+            "NameInSource": "0173",
+            "Alias": "0173",
+            "Type": "System.String"
+          },
+          "174": {
+            "Name": "0174",
+            "Index": -1,
+            "NameInSource": "0174",
+            "Alias": "0174",
+            "Type": "System.String"
+          },
+          "175": {
+            "Name": "0175",
+            "Index": -1,
+            "NameInSource": "0175",
+            "Alias": "0175",
+            "Type": "System.String"
+          },
+          "176": {
+            "Name": "0176",
+            "Index": -1,
+            "NameInSource": "0176",
+            "Alias": "0176",
+            "Type": "System.String"
+          },
+          "177": {
+            "Name": "0177",
+            "Index": -1,
+            "NameInSource": "0177",
+            "Alias": "0177",
+            "Type": "System.String"
+          },
+          "178": {
+            "Name": "0178",
+            "Index": -1,
+            "NameInSource": "0178",
+            "Alias": "0178",
+            "Type": "System.String"
+          },
+          "179": {
+            "Name": "0179",
+            "Index": -1,
+            "NameInSource": "0179",
+            "Alias": "0179",
+            "Type": "System.String"
+          },
+          "180": {
+            "Name": "0180",
+            "Index": -1,
+            "NameInSource": "0180",
+            "Alias": "0180",
+            "Type": "System.String"
+          },
+          "181": {
+            "Name": "0181",
+            "Index": -1,
+            "NameInSource": "0181",
+            "Alias": "0181",
+            "Type": "System.String"
+          },
+          "182": {
+            "Name": "0182",
+            "Index": -1,
+            "NameInSource": "0182",
+            "Alias": "0182",
+            "Type": "System.String"
+          },
+          "183": {
+            "Name": "0183",
+            "Index": -1,
+            "NameInSource": "0183",
+            "Alias": "0183",
+            "Type": "System.String"
+          },
+          "184": {
+            "Name": "0184",
+            "Index": -1,
+            "NameInSource": "0184",
+            "Alias": "0184",
+            "Type": "System.String"
+          },
+          "185": {
+            "Name": "0185",
+            "Index": -1,
+            "NameInSource": "0185",
+            "Alias": "0185",
+            "Type": "System.String"
+          },
+          "186": {
+            "Name": "0186",
+            "Index": -1,
+            "NameInSource": "0186",
+            "Alias": "0186",
+            "Type": "System.String"
+          },
+          "187": {
+            "Name": "0187",
+            "Index": -1,
+            "NameInSource": "0187",
+            "Alias": "0187",
+            "Type": "System.String"
+          },
+          "188": {
+            "Name": "0188",
+            "Index": -1,
+            "NameInSource": "0188",
+            "Alias": "0188",
+            "Type": "System.String"
+          },
+          "189": {
+            "Name": "0189",
+            "Index": -1,
+            "NameInSource": "0189",
+            "Alias": "0189",
+            "Type": "System.String"
+          },
+          "190": {
+            "Name": "0190",
+            "Index": -1,
+            "NameInSource": "0190",
+            "Alias": "0190",
+            "Type": "System.String"
+          },
+          "191": {
+            "Name": "0191",
+            "Index": -1,
+            "NameInSource": "0191",
+            "Alias": "0191",
+            "Type": "System.String"
+          },
+          "192": {
+            "Name": "0192",
+            "Index": -1,
+            "NameInSource": "0192",
+            "Alias": "0192",
+            "Type": "System.String"
+          },
+          "193": {
+            "Name": "0193",
+            "Index": -1,
+            "NameInSource": "0193",
+            "Alias": "0193",
+            "Type": "System.String"
+          },
+          "194": {
+            "Name": "0194",
+            "Index": -1,
+            "NameInSource": "0194",
+            "Alias": "0194",
+            "Type": "System.String"
+          },
+          "195": {
+            "Name": "0195",
+            "Index": -1,
+            "NameInSource": "0195",
+            "Alias": "0195",
+            "Type": "System.String"
+          },
+          "196": {
+            "Name": "0196",
+            "Index": -1,
+            "NameInSource": "0196",
+            "Alias": "0196",
+            "Type": "System.String"
+          },
+          "197": {
+            "Name": "0197",
+            "Index": -1,
+            "NameInSource": "0197",
+            "Alias": "0197",
+            "Type": "System.String"
+          },
+          "198": {
+            "Name": "0198",
+            "Index": -1,
+            "NameInSource": "0198",
+            "Alias": "0198",
+            "Type": "System.String"
+          },
+          "199": {
+            "Name": "0199",
+            "Index": -1,
+            "NameInSource": "0199",
+            "Alias": "0199",
+            "Type": "System.String"
+          },
+          "200": {
+            "Name": "0200",
+            "Index": -1,
+            "NameInSource": "0200",
+            "Alias": "0200",
+            "Type": "System.String"
+          },
+          "201": {
+            "Name": "0201",
+            "Index": -1,
+            "NameInSource": "0201",
+            "Alias": "0201",
+            "Type": "System.String"
+          },
+          "202": {
+            "Name": "0202",
+            "Index": -1,
+            "NameInSource": "0202",
+            "Alias": "0202",
+            "Type": "System.String"
+          },
+          "203": {
+            "Name": "0203",
+            "Index": -1,
+            "NameInSource": "0203",
+            "Alias": "0203",
+            "Type": "System.String"
+          },
+          "204": {
+            "Name": "0204",
+            "Index": -1,
+            "NameInSource": "0204",
+            "Alias": "0204",
+            "Type": "System.String"
+          },
+          "205": {
+            "Name": "0205",
+            "Index": -1,
+            "NameInSource": "0205",
+            "Alias": "0205",
+            "Type": "System.String"
+          },
+          "206": {
+            "Name": "0206",
+            "Index": -1,
+            "NameInSource": "0206",
+            "Alias": "0206",
+            "Type": "System.String"
+          },
+          "207": {
+            "Name": "0207",
+            "Index": -1,
+            "NameInSource": "0207",
+            "Alias": "0207",
+            "Type": "System.String"
+          },
+          "208": {
+            "Name": "0208",
+            "Index": -1,
+            "NameInSource": "0208",
+            "Alias": "0208",
+            "Type": "System.String"
+          },
+          "209": {
+            "Name": "0209",
+            "Index": -1,
+            "NameInSource": "0209",
+            "Alias": "0209",
+            "Type": "System.String"
+          },
+          "210": {
+            "Name": "0210",
+            "Index": -1,
+            "NameInSource": "0210",
+            "Alias": "0210",
+            "Type": "System.String"
+          },
+          "211": {
+            "Name": "0211",
+            "Index": -1,
+            "NameInSource": "0211",
+            "Alias": "0211",
+            "Type": "System.String"
+          },
+          "212": {
+            "Name": "0212",
+            "Index": -1,
+            "NameInSource": "0212",
+            "Alias": "0212",
+            "Type": "System.String"
+          },
+          "213": {
+            "Name": "0213",
+            "Index": -1,
+            "NameInSource": "0213",
+            "Alias": "0213",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.Labels"
+      },
+      "12": {
+        "Ident": "StiDataTableSource",
+        "Name": "Variables",
+        "Alias": "Variables",
+        "Columns": {
+          "0": {
+            "Name": "entity",
+            "Index": -1,
+            "NameInSource": "entity",
+            "Alias": "entity",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "abbreviation",
+            "Index": -1,
+            "NameInSource": "abbreviation",
+            "Alias": "abbreviation",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "paciente",
+            "Index": -1,
+            "NameInSource": "paciente",
+            "Alias": "paciente",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "username",
+            "Index": -1,
+            "NameInSource": "username",
+            "Alias": "username",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "date",
+            "Index": -1,
+            "NameInSource": "date",
+            "Alias": "date",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Historycondense.Variables"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiJsonDatabase",
+        "Name": "Historycondense",
+        "Alias": "Historycondense",
+        "PathData": "resource://Historycondense"
+      }
+    },
+    "Relations": {
+      "0": {
+        "Name": "data",
+        "ChildColumns": {
+          "0": "relationId"
+        },
+        "ParentColumns": {
+          "0": "testdetail"
+        },
+        "NameInSource": "data",
+        "Alias": "data",
+        "IsCloud": null,
+        "ParentSource": "data",
+        "ChildSource": "data_testdetail"
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "a008cdc03fc1426e93db917ca41a3c79",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:Transparent",
+      "Components": {
+        "0": {
+          "Ident": "StiText",
+          "Name": "Text30",
+          "Guid": "6bd44a1912c1df7b5d69de72a1473d34",
+          "ClientRectangle": "0,10,4.3,0.2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Text": {
+            "Value": "{Labels.n0145}: {Variables.username}, {Variables.date}"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:Transparent",
+          "TextBrush": "solid:Black",
+          "Type": "Expression"
+        },
+        "1": {
+          "Ident": "StiText",
+          "Name": "Text31",
+          "Guid": "4bdf022d4724cb7983af17b3ecfc9e5e",
+          "ClientRectangle": "6.2,10,1.5,0.2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Text": {
+            "Value": "{Labels.n0146} {PageNumber} {Labels.n0147} {TotalPageCount}"
+          },
+          "HorAlignment": "Right",
+          "Border": ";;;;;;;solid:0,0,0",
+          "Brush": "solid:Transparent",
+          "TextBrush": "solid:0,0,0",
+          "Type": "Expression"
+        },
+        "2": {
+          "Ident": "StiReportTitleBand",
+          "Name": "ReportTitleBand1",
+          "ClientRectangle": "0,0.2,7.72,0.7",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:Transparent",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text4",
+              "Guid": "c6a3e49d92a5c2e5d12e91db0814df05",
+              "ClientRectangle": "0,0.1,3.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Variables.entity} ({Variables.abbreviation})"
+              },
+              "Font": ";14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text8",
+              "Guid": "70ec6aac307742a82d5833fc57a09728",
+              "ClientRectangle": "0,0.4,1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Labels.n0076}:"
+              },
+              "Font": ";10;Bold;",
+              "Border": ";;;;;;;solid:0,0,0",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "Guid": "465743905ebb4b97041e1f255d0fafb8",
+              "ClientRectangle": "1.1,0.4,6.4,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Variables.paciente}"
+              },
+              "VertAlignment": "Center",
+              "Font": ";10;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black"
+            }
+          }
+        },
+        "3": {
+          "Ident": "StiGroupHeaderBand",
+          "Name": "GroupHeaderBand1",
+          "ClientRectangle": "0,1.3,7.72,2.7",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:Transparent",
+          "Components": {
+            "0": {
+              "Ident": "StiChart",
+              "Name": "Chart2",
+              "ClientRectangle": "0,0.3,7.7,0",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:255,255,255",
+              "Series": {
+                "0": {
+                  "Ident": "StiLineSeries",
+                  "ShowShadow": false,
+                  "SeriesLabels": {
+                    "Ident": "StiOutsideEndAxisLabels",
+                    "MarkerSize": {
+                      "Width": 8,
+                      "Height": 6
+                    },
+                    "ValueTypeSeparator": "-",
+                    "LabelColor": "50,58,69",
+                    "BorderColor": "Transparent",
+                    "Brush": "solid:Transparent",
+                    "Font": ";10;;"
+                  },
+                  "TrendLine": {
+                    "Ident": "StiTrendLineNone",
+                    "ShowShadow": true
+                  },
+                  "Title": {
+                    "Value": "Series 1"
+                  },
+                  "Marker": {
+                    "Visible": false,
+                    "Brush": "solid:152,252,255",
+                    "BorderColor": "0,52,119"
+                  },
+                  "LineMarker": {
+                    "Brush": "solid:102,202,255",
+                    "BorderColor": "0,2,69"
+                  },
+                  "LineColor": "52,152,219",
+                  "Lighting": false
+                }
+              },
+              "Area": {
+                "Ident": "StiClusteredColumnArea",
+                "BorderColor": "171,172,173",
+                "Brush": "solid:255,255,255",
+                "InterlacingHor": {
+                  "InterlacedBrush": "solid:10,155,155,155",
+                  "Area": true
+                },
+                "InterlacingVert": {
+                  "InterlacedBrush": "solid:10,155,155,155",
+                  "Area": true
+                },
+                "GridLinesHor": {
+                  "Color": "100,105,105,105",
+                  "MinorColor": "100,105,105,105",
+                  "Area": true
+                },
+                "GridLinesHorRight": {
+                  "Visible": false,
+                  "Area": true
+                },
+                "GridLinesVert": {
+                  "Color": "100,105,105,105",
+                  "MinorColor": "100,105,105,105",
+                  "Area": true
+                },
+                "YAxis": {
+                  "Ident": "StiYLeftAxis",
+                  "Labels": {
+                    "Color": "140,140,140"
+                  },
+                  "LineColor": "140,140,140",
+                  "Title": {
+                    "Color": "140,140,140",
+                    "Direction": "BottomToTop"
+                  }
+                },
+                "YRightAxis": {
+                  "Ident": "StiYRightAxis",
+                  "Labels": {
+                    "Color": "140,140,140",
+                    "TextAlignment": "Left"
+                  },
+                  "LineColor": "140,140,140",
+                  "Title": {
+                    "Color": "140,140,140",
+                    "Direction": "TopToBottom"
+                  }
+                },
+                "XAxis": {
+                  "Ident": "StiXBottomAxis",
+                  "Labels": {
+                    "Color": "140,140,140"
+                  },
+                  "LineColor": "140,140,140",
+                  "Title": {
+                    "Color": "140,140,140"
+                  }
+                },
+                "XTopAxis": {
+                  "Ident": "StiXTopAxis",
+                  "Labels": {
+                    "Color": "140,140,140"
+                  },
+                  "LineColor": "140,140,140",
+                  "Title": {
+                    "Color": "140,140,140"
+                  }
+                }
+              },
+              "Table": {
+                "GridLineColor": "225,225,225",
+                "Header": {
+                  "Brush": "solid:White"
+                },
+                "DataCells": {
+                  "TextColor": "140,140,140"
+                }
+              },
+              "SeriesLabels": {
+                "Ident": "StiCenterAxisLabels",
+                "MarkerSize": {
+                  "Width": 8,
+                  "Height": 6
+                },
+                "ValueTypeSeparator": "-",
+                "LabelColor": "50,58,69",
+                "BorderColor": "Transparent",
+                "Brush": "solid:Transparent",
+                "Font": ";10;;"
+              },
+              "Legend": {
+                "ShowShadow": false,
+                "BorderColor": "225,225,225",
+                "Brush": "solid:255,255,255",
+                "TitleColor": "105,105,105",
+                "LabelsColor": "140,140,140",
+                "MarkerSize": {
+                  "Width": 10,
+                  "Height": 10
+                },
+                "Columns": 0,
+                "Size": "0,0"
+              },
+              "Title": {
+                "Brush": "solid:140,140,140"
+              },
+              "Style": {
+                "Ident": "StiStyle29"
+              }
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "Guid": "b0f3a7a0105528e55802aadbdbc9c86c",
+              "ClientRectangle": "0,0,7.6,0.4",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{data_testdetail.data.name}"
+              },
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": ";105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiSubReport",
+              "Name": "SubReport1",
+              "ClientRectangle": "0,0.6,7.7,1",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:Transparent",
+              "SubReportPageGuid": "354b6b8bb5d79229313e3101edf309da",
+              "Parameters": {
+                "0": {
+                  "Name": "relation",
+                  "Expression": {
+                    "Value": "data_testdetail.relationId"
+                  }
+                }
+              }
+            }
+          },
+          "Condition": {
+            "Value": "{data_testdetail.data.name}"
+          }
+        },
+        "4": {
+          "Ident": "StiTable",
+          "Name": "Tabledata_testdetail",
+          "ClientRectangle": "0,4.4,7.72,0.6",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:Transparent",
+          "Components": {
+            "0": {
+              "Ident": "StiTableCell",
+              "Name": "Tabledata_testdetail_Cell1",
+              "Guid": "d0fb56dcf243e6e03f2bccf1cbb85395",
+              "ClientRectangle": "0,0,2.57,0.3",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Nº"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";;Bold;",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 0
+            },
+            "1": {
+              "Ident": "StiTableCell",
+              "Name": "Tabledata_testdetail_Cell2",
+              "Guid": "17e2635d851258bc483f14d795b44807",
+              "ClientRectangle": "2.57,0,2.47,0.3",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Orden"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";;Bold;",
+              "Border": "Top, Left, Bottom;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 1
+            },
+            "2": {
+              "Ident": "StiTableCell",
+              "Name": "Tabledata_testdetail_Cell3",
+              "Guid": "f85a6586abeabe5ff72d94f8ebf444d1",
+              "ClientRectangle": "5.05,0,2.67,0.3",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Resultado"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";;Bold;",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 2
+            },
+            "3": {
+              "Ident": "StiTableCell",
+              "Name": "Tabledata_testdetail_Cell4",
+              "Guid": "cb8bfbb44fa117a1db97c14d43bc8c76",
+              "ClientRectangle": "0,0.3,2.57,0.3",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Line}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 3
+            },
+            "4": {
+              "Ident": "StiTableCell",
+              "Name": "Tabledata_testdetail_Cell5",
+              "Guid": "585fa4f0502b633b746059971b77e2a2",
+              "ClientRectangle": "2.57,0.3,2.47,0.3",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{data_testdetail.order}"
+              },
+              "VertAlignment": "Center",
+              "Border": "Top, Left, Bottom;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Margins": {
+                "Left": 5,
+                "Right": 0,
+                "Top": 0,
+                "Bottom": 0
+              },
+              "ID": 4
+            },
+            "5": {
+              "Ident": "StiTableCell",
+              "Name": "Tabledata_testdetail_Cell6",
+              "Guid": "b502c1d8cde9216d6b7e0f59bab0fc54",
+              "ClientRectangle": "5.05,0.3,2.67,0.3",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{data_testdetail.result}"
+              },
+              "VertAlignment": "Center",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:Transparent",
+              "TextBrush": "solid:Black",
+              "Margins": {
+                "Left": 5,
+                "Right": 0,
+                "Top": 0,
+                "Bottom": 0
+              },
+              "ID": 5
+            }
+          },
+          "MinHeight": 0.2,
+          "DataSourceName": "data_testdetail",
+          "RowCount": 2,
+          "ColumnCount": 3,
+          "HeaderRowsCount": 1,
+          "NumberID": 6
+        },
+        "5": {
+          "Ident": "StiGroupFooterBand",
+          "Name": "GroupFooterBand1",
+          "ClientRectangle": "0,5.4,7.72,0.2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:Transparent"
+        }
+      },
+      "PaperSize": "Letter",
+      "PageWidth": 8.5,
+      "PageHeight": 11,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.39,
+        "Right": 0.39,
+        "Top": 0.39,
+        "Bottom": 0.39
+      }
+    },
+    "1": {
+      "Ident": "StiPage",
+      "Name": "subReport_1",
+      "Guid": "354b6b8bb5d79229313e3101edf309da",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:Transparent",
+      "Components": {
+        "0": {
+          "Ident": "StiChart",
+          "Name": "Chart4",
+          "ClientRectangle": "0.3,0.1,7.2,3.1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:255,255,255",
+          "DataSourceName": "data_testdetail",
+          "Series": {
+            "0": {
+              "Ident": "StiLineSeries",
+              "ShowShadow": false,
+              "SeriesLabels": {
+                "Ident": "StiOutsideEndAxisLabels",
+                "MarkerSize": {
+                  "Width": 8,
+                  "Height": 6
+                },
+                "ValueTypeSeparator": "-",
+                "LabelColor": "50,58,69",
+                "BorderColor": "Transparent",
+                "Brush": "solid:Transparent",
+                "Font": ";10;;"
+              },
+              "TrendLine": {
+                "Ident": "StiTrendLineNone",
+                "ShowShadow": true
+              },
+              "ValueDataColumn": "data_testdetail.result",
+              "Argument": {
+                "Value": "{data_testdetail.order}"
+              },
+              "Title": {
+                "Value": "Resultado"
+              },
+              "Marker": {
+                "Visible": false,
+                "Brush": "solid:152,252,255",
+                "BorderColor": "0,52,119"
+              },
+              "LineMarker": {
+                "Brush": "solid:102,202,255",
+                "BorderColor": "0,2,69"
+              },
+              "LineColor": "52,152,219",
+              "Lighting": false
+            },
+            "1": {
+              "Ident": "StiLineSeries",
+              "ShowShadow": false,
+              "SeriesLabels": {
+                "Ident": "StiOutsideEndAxisLabels",
+                "MarkerSize": {
+                  "Width": 8,
+                  "Height": 6
+                },
+                "ValueTypeSeparator": "-",
+                "LabelColor": "50,58,69",
+                "BorderColor": "Transparent",
+                "Brush": "solid:Transparent",
+                "Font": ";10;;"
+              },
+              "TrendLine": {
+                "Ident": "StiTrendLineNone",
+                "ShowShadow": true
+              },
+              "ValueDataColumn": "data_testdetail.min",
+              "Title": {
+                "Value": "Minimo"
+              },
+              "Marker": {
+                "Visible": false,
+                "Brush": "solid:255,213,222",
+                "BorderColor": "139,13,22"
+              },
+              "LineMarker": {
+                "Brush": "solid:255,163,172",
+                "BorderColor": "89,0,0"
+              },
+              "LineColor": "239,113,122",
+              "Lighting": false,
+              "LineColorNegative": "0,176,240"
+            },
+            "2": {
+              "Ident": "StiLineSeries",
+              "ShowShadow": false,
+              "SeriesLabels": {
+                "Ident": "StiOutsideEndAxisLabels",
+                "MarkerSize": {
+                  "Width": 8,
+                  "Height": 6
+                },
+                "ValueTypeSeparator": "-",
+                "LabelColor": "50,58,69",
+                "BorderColor": "Transparent",
+                "Brush": "solid:Transparent",
+                "Font": ";10;;"
+              },
+              "TrendLine": {
+                "Ident": "StiTrendLineNone",
+                "ShowShadow": true
+              },
+              "ValueDataColumn": "data_testdetail.max",
+              "Title": {
+                "Value": "Maximo"
+              },
+              "Marker": {
+                "Visible": false,
+                "Brush": "solid:209,255,255",
+                "BorderColor": "9,103,79"
+              },
+              "LineMarker": {
+                "Brush": "solid:159,253,229",
+                "BorderColor": "0,53,29"
+              },
+              "LineColor": "109,203,179",
+              "Lighting": false,
+              "LineColorNegative": "112,173,71"
+            }
+          },
+          "Area": {
+            "Ident": "StiClusteredColumnArea",
+            "BorderColor": "171,172,173",
+            "Brush": "solid:255,255,255",
+            "InterlacingHor": {
+              "InterlacedBrush": "solid:10,155,155,155",
+              "Area": true
+            },
+            "InterlacingVert": {
+              "InterlacedBrush": "solid:10,155,155,155",
+              "Area": true
+            },
+            "GridLinesHor": {
+              "Color": "100,105,105,105",
+              "MinorColor": "100,105,105,105",
+              "Area": true
+            },
+            "GridLinesHorRight": {
+              "Visible": false,
+              "Area": true
+            },
+            "GridLinesVert": {
+              "Color": "100,105,105,105",
+              "MinorColor": "100,105,105,105",
+              "Area": true
+            },
+            "YAxis": {
+              "Ident": "StiYLeftAxis",
+              "Labels": {
+                "Color": "140,140,140"
+              },
+              "LineColor": "140,140,140",
+              "Title": {
+                "Color": "140,140,140",
+                "Direction": "BottomToTop"
+              }
+            },
+            "YRightAxis": {
+              "Ident": "StiYRightAxis",
+              "Labels": {
+                "Color": "140,140,140",
+                "TextAlignment": "Left"
+              },
+              "LineColor": "140,140,140",
+              "Title": {
+                "Color": "140,140,140",
+                "Direction": "TopToBottom"
+              }
+            },
+            "XAxis": {
+              "Ident": "StiXBottomAxis",
+              "Labels": {
+                "Color": "140,140,140"
+              },
+              "LineColor": "140,140,140",
+              "Title": {
+                "Color": "140,140,140"
+              }
+            },
+            "XTopAxis": {
+              "Ident": "StiXTopAxis",
+              "Labels": {
+                "Color": "140,140,140"
+              },
+              "LineColor": "140,140,140",
+              "Title": {
+                "Color": "140,140,140"
+              }
+            }
+          },
+          "Table": {
+            "GridLineColor": "225,225,225",
+            "Header": {
+              "Brush": "solid:White"
+            },
+            "DataCells": {
+              "TextColor": "140,140,140"
+            }
+          },
+          "SeriesLabels": {
+            "Ident": "StiCenterAxisLabels",
+            "MarkerSize": {
+              "Width": 8,
+              "Height": 6
+            },
+            "ValueTypeSeparator": "-",
+            "Visible": false,
+            "LabelColor": "50,58,69",
+            "BorderColor": "Transparent",
+            "Brush": "solid:Transparent",
+            "Font": ";10;;"
+          },
+          "Legend": {
+            "ShowShadow": false,
+            "BorderColor": "225,225,225",
+            "Brush": "solid:255,255,255",
+            "TitleColor": "105,105,105",
+            "LabelsColor": "140,140,140",
+            "MarkerSize": {
+              "Width": 10,
+              "Height": 10
+            },
+            "Columns": 0,
+            "Size": "0,0"
+          },
+          "Title": {
+            "Brush": "solid:140,140,140"
+          },
+          "Style": {
+            "Ident": "StiStyle29"
+          },
+          "Filters": {
+            "0": {
+              "Ident": "StiFilter",
+              "DataType": "Numeric",
+              "Column": "relationId",
+              "Value1": "this[\"relation\"]"
+            }
+          }
+        }
+      },
+      "PageWidth": 8.48,
+      "PageHeight": 11.69,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.39,
+        "Right": 0.39,
+        "Top": 0.39,
+        "Bottom": 0.39
+      }
+    }
+  }
+}

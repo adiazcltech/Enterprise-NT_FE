@@ -1,0 +1,318 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="height: 98%;padding: 0px 10px 0px;">
+        <div style="height: 97%;width: 100%;margin-left: 0px;margin-top: 10px;" class="uk-grid">
+            <div class="uk-width-1-1 " style="height: 78px;padding-left: 0px;">
+                <div style="height: 100%;" class="md-card">
+                    <div style="height: 100%;padding: 0px 13px 0px 13px;" class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-5-6" style="padding-top: 16px;width: 100%">
+                                <div class="uk-grid">
+                                    <div class="uk-width-3-10" style="padding-top: 4px;">
+                                        <label style="top: -6px; font-size: 12px;">{{'0009' | translate}}</label>
+                                        <select class="md-input" style="font-size: 12px;" ng-change="vm.getseach()"
+                                            ng-options="obj as obj.name for obj in vm.report track by obj.id"
+                                            data-ng-model="vm.selectReport"></select>
+                                    </div>
+                                    <div class="uk-width-7-10">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img ng-src="images/search.png" />
+                                            </span>
+                                            <div class="md-input-wrapper md-input-filled">
+                                                <label>{{'0154' | translate}}</label>
+                                                <input type="text" name="searchgrille" id="searchgrille" md-input
+                                                    label-fixed class="md-input  label-fixed" style="font-size: 12px;"
+                                                    ng-model="vm.searchreception">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" ng-if="!vm.viewpreliminar && vm.selectReport.id===8"
+                style="height: calc(100% - 100px); z-index: 100;padding-left: 0px;padding-top: 0px;">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="height: 100%;    margin-bottom: 0px;">
+                            <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+                                        ID
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0325' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3603' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0132' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'1815' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0371' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'1027' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'3607' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3605' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0132' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                                style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                <tr ng-repeat="report in vm.Listreport | filter:vm.searchreception" class="uk-grid"
+                                    style="margin-left: 0px;margin-top: 0px;"
+                                    ng-class="{'md-bg-light-blue-50': report.idReport === vm.selected}">
+                                    <td class="uk-width-1-10" style="width: 5%;">{{report.idReport}}</td>
+                                    <td class="uk-width-1-10">{{report.Dategeneration}}</td>
+                                    <td class="uk-width-1-10">{{report.nameReceptor}}</td>
+                                    <td class="uk-width-1-10">{{report.identificationReceptor}}</td>
+                                    <td class="uk-width-1-10">{{report.institution}}</td>
+                                    <td class="uk-width-1-10">{{report.Datedeliver}}</td>
+                                    <td class="uk-width-1-10">{{report.analystuser}}</td>
+                                    <td class="uk-width-1-10">{{report.approveruser}}</td>
+                                    <td class="uk-width-1-10">{{report.nameDonor}}</td>
+                                    <td class="uk-width-1-10">{{report.identificationDonor}}</td>
+                                    <td class="uk-width-1-10" style="width: 5%;">
+                                        <img class="md-list-addon-icon material-icons md-22"
+                                            ng-click="vm.eventEdit(report)" ng-src="images/transplants/pdf.png"
+                                            title="{{'3640' | translate}}" data-uk-tooltip="{pos:'top'}" role="button"
+                                            tabindex="0" src="images/transplants/pdf.png">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" ng-if="!vm.viewpreliminar && vm.selectReport.id===9"
+                style="height: calc(100% - 100px); z-index: 100;padding-left: 0px;padding-top: 0px;">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="height: 100%;    margin-bottom: 0px;">
+                            <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+                                        ID
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0325' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3034' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'1815' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0371' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'1027' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'3607' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                                style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                <tr ng-repeat="report in vm.Listreport | filter:vm.searchreception" class="uk-grid"
+                                    style="margin-left: 0px;margin-top: 0px;"
+                                    ng-class="{'md-bg-light-blue-50': report.idReport === vm.selected}">
+                                    <td class="uk-width-1-10" style="width: 5%;">{{report.idReport}}</td>
+                                    <td class="uk-width-1-10">{{report.Dategeneration}}</td>
+                                    <td class="uk-width-1-10">{{report.nameReceptor}}</td>
+                                    <td class="uk-width-2-10">{{report.institution}}</td>
+                                    <td class="uk-width-1-10">{{report.Datedeliver}}</td>
+                                    <td class="uk-width-2-10">{{report.analystuser}}</td>
+                                    <td class="uk-width-2-10">{{report.approveruser}}</td>
+                                    <td class="uk-width-1-10" style="width: 5%;">
+                                        <img class="md-list-addon-icon material-icons md-22"
+                                            ng-click="vm.eventEdit(report)" ng-src="images/transplants/download.png"
+                                            data-uk-tooltip="{pos:'top'}" title="{{'3639' | translate}}" role="button"
+                                            tabindex="0" src="images/transplants/download.png">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1"
+                ng-if="!vm.viewpreliminar && vm.selectReport.id===11 || !vm.viewpreliminar && vm.selectReport.id===12"
+                style="height: calc(100% - 100px); z-index: 100;padding-left: 0px;padding-top: 0px;">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="height: 100%;    margin-bottom: 0px;">
+                            <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+                                        ID
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0325' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0132' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'3605' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'1815' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0371' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'1027' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'3607' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                                style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                <tr ng-repeat="report in vm.Listreport | filter:vm.searchreception" class="uk-grid"
+                                    style="margin-left: 0px;margin-top: 0px;"
+                                    ng-class="{'md-bg-light-blue-50': report.idReport === vm.selected}">
+                                    <td class="uk-width-1-10" style="width: 5%;">{{report.idReport}}</td>
+                                    <td class="uk-width-1-10">{{report.Dategeneration}}</td>
+                                    <td class="uk-width-1-10">{{report.identificationDonor}}</td>
+                                    <td class="uk-width-2-10">{{report.nameDonor}}</td>
+                                    <td class="uk-width-2-10">{{report.institution}}</td>
+                                    <td class="uk-width-1-10">{{report.Datedeliver}}</td>
+                                    <td class="uk-width-1-10">{{report.analystuser}}</td>
+                                    <td class="uk-width-1-10">{{report.approveruser}}</td>
+                                    <td class="uk-width-1-10" style="width: 5%;">
+                                        <img class="md-list-addon-icon material-icons md-22"
+                                            ng-click="vm.eventEdit(report)" ng-src="images/transplants/pdf.png"
+                                            title="{{'3640' | translate}}" data-uk-tooltip="{pos:'top'}" role="button"
+                                            tabindex="0" src="images/transplants/pdf.png">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1"
+                ng-if="!vm.viewpreliminar && vm.selectReport.id !== 8 && vm.selectReport.id !== 9 &&  vm.selectReport.id !== 11 && vm.selectReport.id !== 12"
+                style="height: calc(100% - 100px); z-index: 100;padding-left: 0px;padding-top: 0px;">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="height: 100%;    margin-bottom: 0px;">
+                            <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+                                        ID
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0325' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3603' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0132' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'1815' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0371' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'1027' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'3607' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 5%;">
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                                style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                <tr ng-repeat="report in vm.Listreport | filter:vm.searchreception" class="uk-grid"
+                                    style="margin-left: 0px;margin-top: 0px;"
+                                    ng-class="{'md-bg-light-blue-50': report.idReport === vm.selected}">
+                                    <td class="uk-width-1-10" style="width: 5%;">{{report.idReport}}</td>
+                                    <td class="uk-width-1-10">{{report.Dategeneration}}</td>
+                                    <td class="uk-width-2-10">{{report.nameReceptor}}</td>
+                                    <td class="uk-width-1-10">{{report.identificationReceptor}}</td>
+                                    <td class="uk-width-2-10">{{report.institution}}</td>
+                                    <td class="uk-width-1-10">{{report.Datedeliver}}</td>
+                                    <td class="uk-width-1-10">{{report.analystuser}}</td>
+                                    <td class="uk-width-1-10">{{report.approveruser}}</td>
+                                    <td class="uk-width-1-10" style="width: 5%;">
+                                        <img class="md-list-addon-icon material-icons md-22"
+                                            title="{{'3640' | translate}}" ng-click="vm.eventEdit(report)"
+                                            ng-src="images/transplants/pdf.png" data-uk-tooltip="{pos:'top'}"
+                                            role="button" tabindex="0" src="images/transplants/pdf.png">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" ng-if="vm.viewpreliminar" style="height: calc(100% - 100px);
+                z-index: 100;
+                padding-left: 0px;
+                padding-top: 0px;
+                background: rgb(82 86 89);">
+                <iframe id="previreport" scrolling="auto" width="100%" style="border-width: 0px;"
+                    class="contentscroll"></iframe>
+                <div class="md-fab-wrapper md-fab-speed-dial ng-scope">
+                    <div class="uk-flex uk-flex-center measureButtons">
+                        <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                            <button type="button"
+                                class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-purple-700"
+                                ng-click="vm.eventUndo()" style="margin-top: 4px;">
+                                <i class="material-icons md-24 md-light no_margin" title="{{'0776' | translate}}"
+                                    data-uk-tooltip="{pos:'top'}">&#xE166;</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

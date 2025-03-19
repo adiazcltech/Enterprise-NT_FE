@@ -1,0 +1,1154 @@
+<style>
+    .mt-5 {
+        margin-top: 5px !important;
+    }
+    
+    .mt-10 {
+        margin-top: 10px !important;
+    }
+    
+    .mt-20 {
+        margin-top: 20px !important;
+    }
+    
+    .div-cases {
+        height: 480px;
+        overflow-y: auto;
+    }
+    
+    .btn-icon {
+        padding: 0px;
+    }
+    
+    .btn-icon:hover,
+    .btn-icon:focus,
+    .btn-icon:active {
+        background: #ffffff !important;
+    }
+    
+    .sheet_header {
+        background-color: #ffffff !important;
+        padding: 0 15px;
+        border-radius: 50%;
+    }
+    
+    .coloration_sheet {
+        float: right;
+        margin-right: 0px;
+        position: relative;
+        margin-top: 5px;
+    }
+    
+    .thumbnail-sheet {
+        width: 30px !important;
+        height: 30px !important;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0 100%);
+    }
+    
+    .color_black {
+        color: black !important;
+    }
+    
+    .m-0 {
+        margin: 0;
+    }
+    
+    .p-2 {
+        padding: 2px !important;
+    }
+    
+    .button_anotation {
+        float: right;
+        margin-bottom: 10px;
+    }
+    
+    .div-sheets {
+        height: 373px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    .file-microscopy {
+        padding: 3px 15px;
+    }
+    
+    .span_form_microscopy {
+        font-size: 11px;
+        align-self: center;
+    }
+    
+    .measureButtons>div {
+        margin-top: 5px;
+        margin-left: 4px
+    }
+    
+    .measureButtons>div>span {
+        font-size: 9px;
+        text-align: center;
+        width: 60px;
+        max-height: 40px;
+        line-height: 10px;
+        margin-top: 6px;
+    }
+    
+    .aling-self-center {
+        align-self: center !important;
+    }
+    
+    .f-12 {
+        font-size: 12px !important;
+    }
+    
+    .f-16 {
+        font-size: 16px !important;
+    }
+    
+    .f-22 {
+        font-size: 22px !important;
+    }
+    
+    .label_info {
+        padding: 2px 12px;
+        font-size: 14px;
+    }
+    
+    .label_card_case {
+        font-weight: bold;
+        font-size: 12px;
+        padding: 2px 0px
+    }
+    
+    .title_card_case {
+        font-size: 18px !important;
+        font-weight: bold !important;
+    }
+    
+    .badge_info_case {
+        margin: 15px !important;
+        font-size: 15px !important;
+    }
+    
+    .btn_close {
+        float: right !important;
+        background-color: #7a7a7a;
+        margin: 0px 0px 0px 8px !important;
+        color: aliceblue;
+    }
+    
+    .md-card .head-pat {
+        width: 42px;
+        height: 42px;
+        margin-top: 5px;
+    }
+    
+    .badge_level {
+        font-size: 13px;
+        padding: 4px 8px;
+        margin-left: 20px;
+        background: #44c5ff66;
+        border-color: #edf5ff;
+        color: #000000;
+        border-radius: 5px;
+        margin-bottom: 2px;
+    }
+    
+    .p-absolute {
+        position: absolute !important;
+        z-index: 9999 !important;
+    }
+    
+    .dataTables_wrapper .uk-overflow-container th,
+    .dataTables_wrapper .uk-overflow-container td {
+        white-space: normal !important;
+    }
+    
+    .dataTables_filter input[type="search"] {
+        border: none !important;
+        border-bottom: 1px solid #dddddd !important;
+    }
+    
+    table.dataTable thead th,
+    table.dataTable thead td {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .dataTables_wrapper.no-footer .dataTables_scrollBody {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        color: #fff !important;
+        border: 1px solid #34c0ff !important;
+        background-color: #34c0ff !important;
+        background: #34c0ff;
+        border-radius: 5px !important;
+        font-weight: bold !important;
+        box-shadow: none !important;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        color: white !important;
+        border: 1px solid #34c0ff;
+        background-color: #34c0ff;
+        background: #34c0ff;
+        border-radius: 5px;
+        box-shadow: none !important;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.3em 0.8em !important;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+        background-color: #03a9f5 !important;
+        background: #03a9f5 !important;
+        box-shadow: none !important;
+    }
+    
+    .dataTables_wrapper .uk-table thead .sorting:after {
+        content: none;
+    }
+    
+    .dataTables_wrapper .uk-table thead .sorting_desc:after {
+        content: none;
+    }
+    
+    .dataTables_wrapper .uk-table thead .sorting_asc:after {
+        content: none;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+        cursor: default;
+        color: #607D8B !important;
+        background-color: #f2f2f2 !important;
+    }
+    
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>th,
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>td,
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>th,
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>td {
+        background-color: transparent !important;
+    }
+    
+    .span-participants {
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 3px 10px;
+        text-transform: capitalize;
+        float: left !important;
+    }
+    
+    .k-block,
+    .k-draghandle,
+    .k-grid-header,
+    .k-grouping-header,
+    .k-header,
+    .k-pager-wrap,
+    .k-treemap-tile,
+    html .km-pane-wrapper .k-header {
+        background-color: #ffffff;
+    }
+    
+    .text-disabled {
+        color: #d2d2d2;
+    }
+</style>
+<loadpage view="vm.loadingdata" class="p-absolute"></loadpage>
+<div id="page_content" style="overflow: hidden;">
+    <div id="page_content_inner" style="padding: 1px 13px 0px;">
+        <div class="uk-grid fullheight">
+            <div class="uk-width-3-10" data-uk-grid-margin style="width: 25% !important;">
+
+                <div class="mt-5">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="md-input-wrapper">
+                                <label>{{ '3028' | translate }}</label>
+                                <input ng-model="search" type="text" class="md-input label-fixed ng-isolate-scope md-input-processed" autocomplete="off">
+                                <span class="md-input-bar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="div-cases mt-5 contentscroll">
+                    <div class="md-card md-card-primary mt-5" ng-repeat="case in vm.cases | filter:search">
+                        <div class="md-card-toolbar">
+                            <div class="md-card-toolbar-actions">
+                                <a href="#" data-uk-tooltip title="{{'3029' | translate}}" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary btn-icon" ng-model="collapsed" ng-click="collapsed=!collapsed">
+                                    <img ng-src="images/pathology/microscopy/informacion.png">
+                                </a>
+                                <a href="#" data-uk-tooltip title="{{'3027' | translate}}" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary btn-icon" ng-click="vm.loadSheets(case.id); vm.getParaffinBlock(case.id); vm.getRequest(case.id); vm.getMeetingPathologistCase(case.id)">
+                                    <img ng-src="images/pathology/microscopy/microscopio.png">
+                                </a>
+                            </div>
+                            <h3 class="md-card-toolbar-heading-text">
+                                {{ case.entry.type }}{{ case.entry.number }}
+                            </h3>
+                        </div>
+                        <div class="md-card-content" ng-show="collapsed">
+                            <div class="uk-grid mt-5">
+                                <img ng-src="images/pathology/microscopy/fecha.png">
+                                <label class="uk-form-label label_info">{{ case.createdAt | date:vm.dateFormat }}</label>
+                            </div>
+                            <div class="uk-grid mt-5">
+                                <img ng-src="images/pathology/microscopy/id.png">
+                                <label class="uk-form-label label_info">{{ case.order.patient.patientId }}</label>
+                            </div>
+                            <div class="uk-grid mt-5">
+                                <img ng-src="images/pathology/microscopy/paciente.png">
+                                <label class="uk-form-label label_info">{{ case.order.patient.name1 }} {{ case.order.patient.lastName }}</label>
+                            </div>
+                            <div class="uk-grid mt-5">
+                                <img ng-src="images/pathology/microscopy/tejido.png">
+                                <label class="uk-form-label label_info">{{ case.organ.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-1-3">
+                    <div class="uk-modal" id="modalNotCases">
+                        <div class="uk-modal-dialog">
+                            <div class="uk-modal-header">
+                                <h3 class="uk-modal-title">{{ '3030' | translate }}</h3>
+                            </div>
+                            <p>{{ '3031' | translate }}</p>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button type="button" class="md-btn md-btn-flat uk-modal-close">{{ '0329' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="uk-width-7-10" data-uk-grid-margin ng-if="vm.caseSelected && vm.sheets.length > 0" style="width: 75% !important;">
+                <div>
+                    <div class="md-card md-card-primary mt-5">
+                        <div class="md-card-toolbar">
+                            <h3 class="md-card-toolbar-heading-text title_card_case">
+                                {{ vm.caseSelected.entry.type }}{{ vm.caseSelected.entry.number }}
+                            </h3>
+                        </div>
+                        <div class="md-card-content" style="padding: 10px 16px;">
+                            <div class="uk-grid">
+                                <div class="uk-width-1-4">
+                                    <img ng-src="images/pathology/microscopy/fecha.png">
+                                    <label class="uk-form-label label_card_case">{{ vm.caseSelected.createdAt | date:vm.dateFormat }}</label>
+                                </div>
+                                <div class="uk-width-1-4">
+                                    <img ng-src="images/pathology/microscopy/id.png">
+                                    <label class="uk-form-label label_card_case">{{ vm.caseSelected.order.patient.patientId }}</label>
+                                </div>
+                                <div class="uk-width-1-4">
+                                    <img ng-src="images/pathology/microscopy/paciente.png">
+                                    <label class="uk-form-label label_card_case">{{ vm.caseSelected.order.patient.name1 }} {{ vm.caseSelected.order.patient.lastName }}</label>
+                                </div>
+                                <div class="uk-width-1-4">
+                                    <img ng-src="images/pathology/microscopy/tejido.png">
+                                    <label class="uk-form-label label_card_case">{{ vm.caseSelected.organ.name }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+
+                    <div class="uk-grid uk-grid-small" ng-if="vm.sheets.length > 0">
+                        <div class="uk-width-1-2">
+                            <div class="div-sheets contentscroll">
+                                <div class="md-card" ng-repeat="sheet in vm.sheets | filter:search | limitTo: vm.sheets.length /2: 0" ng-class="{'mt-10': $index > 0 }">
+                                    <div class="user_heading sheet_header">
+                                        <div class="user_heading_avatar coloration_sheet">
+                                            <div class="thumbnail thumbnail-sheet" ng-style='{ "background-color": "{{ sheet.coloration.color }}" }'></div>
+                                        </div>
+                                        <div class="user_heading_content" style="padding: 5px 0;">
+                                            <h2 class="heading_b">
+                                                <p class="m-0">
+                                                    <span class="color_black">{{ sheet.paraffinBlock.number }}</span>
+                                                    <span class="uk-badge uk-badge-primary badge_level">{{ '3035' | translate }}: <b>{{ sheet.level }}</b> </span>
+                                                </p>
+                                            </h2>
+
+                                            <div class="uk-grid uk-grid-small">
+                                                <div class="uk-width-1-3">
+                                                    <span class="sub-heading color_black f-12">{{ '3032' | translate }}: <b>{{ sheet.createdAt | date:vm.dateFormat }}</b></span>
+                                                </div>
+                                                <div class="uk-width-1-3">
+                                                    <span class="sub-heading color_black f-12">{{ '3033' | translate }}: <b>{{ sheet.area.name }}</b> </span>
+                                                </div>
+                                                <div class="uk-width-1-3">
+                                                    <span class="sub-heading color_black f-12">{{ '3034' | translate }}: <b>{{ sheet.organ.name }}</b> </span>
+                                                </div>
+
+                                            </div>
+
+                                            <hr style="margin: 5px 0 !important;">
+
+                                            <span ng-if="sheet.annotations.length > 0" class="uk-badge uk-badge-success">{{ '3049' | translate}}</span>
+
+                                            <button data-uk-tooltip title="{{ '3036' | translate }}" data-uk-modal="{target:'#modalAnnotations'}" ng-click="vm.sheetSelected = sheet; vm.resetRecordPathologist()" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary btn-icon button_anotation"
+                                                type="button">
+                                                <img ng-src="images/pathology/microscopy/anotacion.png">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="uk-width-1-2">
+
+                            <div class="div-sheets contentscroll">
+                                <div class="md-card" ng-repeat="sheet in vm.sheets | filter:search | limitTo: vm.sheets.length /2: vm.sheets.length /2" ng-class="{'mt-10': $index > 0 }">
+                                    <div class="user_heading sheet_header">
+                                        <div class="user_heading_avatar coloration_sheet">
+                                            <div class="thumbnail thumbnail-sheet" ng-style='{ "background-color": "{{ sheet.coloration.color }}" }'></div>
+                                        </div>
+                                        <div class="user_heading_content" style="padding: 5px 0;">
+                                            <h2 class="heading_b">
+                                                <p class="m-0">
+                                                    <span class="color_black">{{ sheet.paraffinBlock.number }}</span>
+                                                    <span class="uk-badge uk-badge-primary badge_level">{{ '3035' | translate }}: <b>{{ sheet.level }}</b> </span>
+                                                </p>
+                                            </h2>
+
+                                            <div class="uk-grid uk-grid-small">
+                                                <div class="uk-width-1-3">
+                                                    <span class="sub-heading color_black f-12">{{ '3032' | translate }}: <b>{{ sheet.createdAt | date:vm.dateFormat }}</b></span>
+                                                </div>
+                                                <div class="uk-width-1-3">
+                                                    <span class="sub-heading color_black f-12">{{ '3033' | translate }}: <b>{{ sheet.area.name }}</b> </span>
+                                                </div>
+                                                <div class="uk-width-1-3">
+                                                    <span class="sub-heading color_black f-12">{{ '3034' | translate }}: <b>{{ sheet.organ.name }}</b> </span>
+                                                </div>
+                                            </div>
+
+                                            <hr style="margin: 5px 0 !important;">
+
+                                            <span ng-if="sheet.annotations.length > 0" class="uk-badge uk-badge-success">{{ '3049' | translate}}</span>
+
+                                            <button data-uk-tooltip title="{{ '3036' | translate }}" data-uk-modal="{target:'#modalAnnotations'}" ng-click="vm.sheetSelected = sheet; vm.resetRecordPathologist()" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary btn-icon button_anotation"
+                                                type="button">
+                                                <img ng-src="images/pathology/microscopy/anotacion.png">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="uk-grid mt-5">
+                        <div class="uk-width-1-1">
+                            <div class="md-card">
+                                <div class="md-card-content p-2">
+                                    <div class="uk-flex uk-flex-center measureButtons">
+
+                                        <div class="uk-flex uk-flex-column ">
+                                            <button type="button" data-uk-modal="{target:'#modal_full'}" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                <i class="material-icons">assignment</i>
+                                            </button>
+                                            <span>Informe</span>
+                                        </div>
+
+                                        <div class="uk-flex uk-flex-column" ng-if="vm.hasMeetingPathologist">
+                                            <button type="button" data-uk-modal="{target:'#board_pathologists'}" class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                <i class="material-icons">supervised_user_circle</i>
+                                            </button>
+                                            <span>Junta Patológos</span>
+                                        </div>
+
+                                        <div class="uk-flex uk-flex-column" ng-if="!vm.hasMeetingPathologist">
+                                            <button type="button" data-uk-modal="{target:'#meeting_pathologists_new'}" ng-click="vm.resetMeetingPathologist()" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center md-bg-green-500">
+                                                <i class="material-icons">supervised_user_circle</i>
+                                            </button>
+                                            <span>{{ '3071' | translate }}</span>
+                                        </div>
+
+                                        <div class="uk-flex uk-flex-column ">
+                                            <button type="button" data-uk-modal="{target:'#requests'}" ng-click="vm.resetRequest()" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center md-bg-purple-700">
+                                                <i class="material-icons md-24 md-light no_margin">fact_check</i>
+                                            </button>
+                                            <span>{{ '3055' | translate }}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-modal uk-modal-card-fullscreen" id="modalAnnotations">
+                    <div class="uk-modal-dialog uk-modal-dialog-blank">
+                        <div class="md-card uk-height-viewport">
+                            <div class="md-card-toolbar">
+                                <span class="md-icon material-icons uk-modal-close">&#xE5C4;</span>
+                                <h3 class="md-card-toolbar-heading-text" style="width: 95%;">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-4">
+                                            {{ '3037' | translate }}
+                                        </div>
+                                        <div class="uk-width-1-4">
+                                            {{ '3038' | translate}}: <b>{{ vm.caseSelected.entry.type }}{{ vm.caseSelected.entry.number }}</b>
+                                        </div>
+                                        <div class="uk-width-1-4">
+                                            {{ '3039' | translate}}: <b>{{ vm.sheetSelected.paraffinBlock.number }}</b>
+                                        </div>
+                                        <div class="uk-width-1-4">
+                                            {{ '3035' | translate}}: <b>{{ vm.sheetSelected.level }}</b>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="md-card-content">
+                                <div class="uk-grid">
+                                    <div ng-if="vm.sheetSelected.annotations.length > 0" class="uk-width-2-10 contentscroll" style="height: 545px;overflow-y: auto;">
+
+                                        <div ng-repeat="annotation in vm.sheetSelected.annotations" class="md-card md-card-hover md-card-primary" ng-click="vm.loadAnnotation(annotation)" ng-class="{'mt-20': $index > 0 }">
+                                            <div class="md-card-head" style="padding: 0px 10px;height: 120px;">
+                                                <h3 class="md-card-head-text uk-text-center" style="padding: 7px;">
+                                                    <img ng-src="images/pathology/microscopy/fecha.png" style="margin-right: 5px;">{{ '3054' | translate }}: {{ annotation.createdAt | date:vm.dateFormat }}
+                                                </h3>
+                                                <h3 class="md-card-head-text uk-text-center" style="padding: 7px;">
+                                                    <img ng-src="images/pathology/microscopy/junta.png"> {{ annotation.userCreated.name }} {{ annotation.userCreated.lastName }}
+                                                </h3>
+
+                                                <h3 ng-if="annotation.file.id" class="md-card-head-text uk-text-center">
+                                                    <span class="uk-badge uk-badge-success" style="border-radius: 5px;">{{ '3050' | translate }}</span>
+                                                </h3>
+
+                                                <h3 ng-if="!annotation.file.id" class="md-card-head-text uk-text-center">
+                                                    <span class="uk-badge uk-badge-danger" style="border-radius: 5px;">{{ '3051' | translate }}</span>
+                                                </h3>
+                                            </div>
+                                            <div ng-if="annotation.updatedAt" class="md-card-content" style="padding: 0px 10px;">
+                                                <h3 class="md-card-head-text uk-text-center" style="padding: 7px;">
+                                                    <img ng-src="images/pathology/microscopy/fecha.png" style="margin-right: 5px;">{{ '3053' | translate }}: {{ annotation.updatedAt | date:vm.dateFormat }}
+                                                </h3>
+                                                <h3 class="md-card-head-text uk-text-center" style="padding: 7px;">
+                                                    <img ng-src="images/pathology/microscopy/junta.png"> {{ annotation.userUpdated.name }} {{ annotation.userUpdated.lastName }}
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div ng-class="{'uk-width-8-10': vm.sheetSelected.annotations.length > 0, 'uk-width-1-1': vm.sheetSelected.annotations.length === 0 }">
+                                        <div class="uk-grid">
+                                            <div class="uk-width-3-10" style="text-align: center;">
+                                                <div class="uk-flex" ng-if="vm.microphonePermission" style="justify-content: center;">
+                                                    <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                                                        <button type="button" ng-disabled="vm.recordingPathologist || vm.isEditAnnotation" ng-click="vm.recordPathologist()" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center" ng-class="{'md-bg-blue-grey-100': vm.recordingPathologist || vm.isEditAnnotation}">
+                                                            <i class="material-icons" style="font-weight: bold;">mic</i>
+                                                        </button>
+                                                        <span>{{'3040' | translate}}</span>
+                                                    </div>
+                                                    <div ng-if="!vm.pausedRecordPathologist" class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;margin-left: 10px;margin-right: 10px;">
+                                                        <button type="button" ng-disabled="!vm.recordingPathologist || vm.isEditAnnotation" ng-click="vm.pauseRecordPathologist()" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center" ng-class="{'md-bg-blue-grey-100': !vm.recordingPathologist || vm.isEditAnnotation}">
+                                                            <i class="material-icons" style="font-weight: bold;">pause_circle_filled</i>
+                                                        </button>
+                                                        <span>{{'3041' | translate}}</span>
+                                                    </div>
+                                                    <div ng-if="vm.pausedRecordPathologist" class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;margin-left: 10px;margin-right: 10px;">
+                                                        <button type="button" ng-disabled="!vm.recordingPathologist || vm.isEditAnnotation" ng-click="vm.resumeRecordPathologist()" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center" ng-class="{'md-bg-blue-grey-100': !vm.recordingPathologist || vm.isEditAnnotation}">
+                                                            <i class="material-icons" style="font-weight: bold;">play_arrow</i>
+                                                        </button>
+                                                        <span>{{'3043' | translate}}</span>
+                                                    </div>
+                                                    <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                                                        <button type="button" ng-disabled="!vm.recordingPathologist || vm.isEditAnnotation" ng-click="vm.stopRecordPathologist()" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center" ng-class="{'md-bg-blue-grey-100': !vm.recordingPathologist || vm.isEditAnnotation}">
+                                                            <i class="material-icons" style="font-weight: bold;">stop</i>
+                                                        </button>
+                                                        <span>{{'3042' | translate}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-flex" ng-if="!vm.microphonePermission">
+                                                    <span class="uk-badge uk-badge-danger" style="font-size: 15px;border-radius: 5px;padding: 5px;">{{ '3044' | translate }}</span>
+                                                </div>
+
+                                                <timer ng-if="vm.microphonePermission" autostart="false" style="font-size: 15px;font-weight: 600;">{{hours}} {{'0477' | translate}} : {{minutes}} {{'0478' | translate}} : {{seconds}} {{'0479' | translate}}.</timer>
+                                            </div>
+                                            <div class="uk-width-3-10" style="align-self: center;">
+                                                <audio ng-if="vm.srcPathologistAudio" ng-disabled="vm.isEditAnnotation" ng-src="{{vm.srcPathologistAudio}}" controls="" style="height: revert"></audio>
+                                            </div>
+                                            <div class="uk-width-4-10" ng-if="vm.annotation" style="align-self: center;">
+                                                <input type="checkbox" id="checkbox_print_annotation" icheck ng-model="vm.printAnnotation" />
+                                                <label for="checkbox_print_annotation" class="inline-label">{{ '3045' | translate }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="uk-form-row mt-5">
+                                            <textarea id="ui-annotation" ui-tinymce="vm.editorAnnotation" ng-model="vm.annotation"></textarea>
+                                        </div>
+
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1-1">
+                                                <div class="md-card">
+                                                    <div class="md-card-content p-2">
+                                                        <div class="uk-flex uk-flex-center measureButtons">
+
+                                                            <div class="uk-flex uk-flex-column ">
+                                                                <button type="button" ng-disabled="(!vm.annotation && !vm.printAnnotation) || vm.isEditAnnotation" ng-click="vm.saveAnnotation()" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;"
+                                                                    ng-class="{'md-bg-blue-grey-100': (!vm.annotation && !vm.printAnnotation) || vm.isEditAnnotation}">
+                                                                        <i class="material-icons">save</i>
+                                                                    </button>
+                                                                <span>{{ '0007' | translate }}</span>
+                                                            </div>
+
+                                                            <div class="uk-flex uk-flex-column ">
+                                                                <button type="button" ng-disabled="!vm.isEditAnnotation" ng-click="vm.editAnnotation()" class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-class="{'md-bg-blue-grey-100': !vm.isEditAnnotation}">
+                                                                        <i class="material-icons">edit</i>
+                                                                    </button>
+                                                                <span>{{ '0006' | translate }}</span>
+                                                            </div>
+
+                                                            <div class="uk-flex uk-flex-column ">
+                                                                <button type="button" ng-disabled="!vm.isEditAnnotation" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-click="vm.resetRecordPathologist()" ng-class="{'md-bg-blue-grey-100': !vm.isEditAnnotation}">
+                                                                        <i class="material-icons">block</i>
+                                                                    </button>
+                                                                <span>{{ '0008' | translate }}</span>
+                                                            </div>
+
+                                                            <div class="uk-flex uk-flex-column ">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-default md-fab-wave-light waves-effect waves-light aling-self-center uk-modal-close" style="margin: 2px 0px !important;">
+                                                                        <i class="material-icons">close</i>
+                                                                    </button>
+                                                                <span>{{ '0329' | translate }}</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-modal uk-modal-card-fullscreen" id="modal_full">
+                    <div class="uk-modal-dialog uk-modal-dialog-blank">
+                        <div class="md-card uk-height-viewport">
+                            <div class="md-card-toolbar" style="background-color: #2196f3;">
+                                <span class="md-icon material-icons uk-modal-close" style="color: white;">&#xE5C4;</span>
+                                <h3 class="md-card-toolbar-heading-text" style="color: white;">
+                                    Informe del caso: <b>{{ vm.caseSelected.entry.type }}{{ vm.caseSelected.entry.number }}</b>
+                                </h3>
+                            </div>
+                            <div class="md-card-content">
+
+                                <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+                                    <div class="uk-width-1-10">
+                                        <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#diagnosis', animation:'slide-horizontal'}">
+                                            <li class="uk-active"><a href="#" class="f-12">Descripción Macroscopica</a></li>
+                                            <li><a href="#" class="f-12">Descripción Microscopica</a></li>
+                                            <li><a href="#" class="f-12">Diagnostico</a></li>
+                                            <li><a href="#" class="f-12">Notas</a></li>
+                                            <li><a href="#" class="f-12">Adjuntos</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="uk-width-9-10">
+                                        <ul id="diagnosis" class="uk-switcher uk-margin-small-top">
+                                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda at, dignissimos esse eveniet id itaque laudantium modi nisi perferendis placeat provident quia recusandae reprehenderit sed sit soluta voluptas!
+                                                Architecto, laboriosam?
+                                            </li>
+                                            <li>
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-1-1">
+                                                        <div class="uk-flex">
+                                                            <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                                            <i class="material-icons" style="font-weight: bold;">mic</i>
+                                                                        </button>
+                                                                <span>Grabar</span>
+                                                            </div>
+
+                                                            <div class="uk-flex uk-flex-column" style="font-size: 11px; margin-left: 10px;align-items: center;">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                                            <i class="material-icons">play_circle_filled</i>
+                                                                        </button>
+                                                                <span>Reproducir</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="uk-form-row mt-5">
+                                                            <textarea ui-tinymce="vm.editorDiagnosis" ng-model="vm.tinymce_content"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-1-1">
+                                                        <div class="uk-flex">
+                                                            <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                                            <i class="material-icons" style="font-weight: bold;">mic</i>
+                                                                        </button>
+                                                                <span>Grabar</span>
+                                                            </div>
+
+                                                            <div class="uk-flex uk-flex-column" style="font-size: 11px; margin-left: 10px;align-items: center;">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                                            <i class="material-icons">play_circle_filled</i>
+                                                                        </button>
+                                                                <span>Reproducir</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="uk-form-row mt-5">
+                                                            <textarea ui-tinymce="vm.editorDiagnosis" ng-model="vm.tinymce_content"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-1-1">
+                                                        <div class="uk-flex">
+                                                            <div class="uk-flex uk-flex-column" style="font-size: 11px;align-items: center;">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                                            <i class="material-icons" style="font-weight: bold;">mic</i>
+                                                                        </button>
+                                                                <span>Grabar</span>
+                                                            </div>
+
+                                                            <div class="uk-flex uk-flex-column" style="font-size: 11px; margin-left: 10px;align-items: center;">
+                                                                <button type="button" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center">
+                                                                            <i class="material-icons">play_circle_filled</i>
+                                                                        </button>
+                                                                <span>Reproducir</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="uk-form-row mt-5">
+                                                            <textarea ui-tinymce="vm.editorDiagnosis" ng-model="vm.tinymce_content"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="md-card">
+                                                    <div class="md-card-content">
+                                                        <h3 class="heading_a">
+                                                            Adjuntos del informe
+                                                            <span class="sub-heading"></span>
+                                                        </h3>
+                                                        <div class="uk-grid">
+                                                            <div class="uk-width-1-1">
+                                                                <div id="file_upload-drop" class="uk-file-upload">
+                                                                    <p class="uk-text">Suelte el archivo para subir</p>
+                                                                    <p class="uk-text-muted uk-text-small uk-margin-small-bottom">ó</p>
+                                                                    <span class="uk-form-file md-btn">Elija el archivo<input id="file_upload-select" type="file" ng-model="file_upload.input_1"></span>
+                                                                </div>
+                                                                <div id="file_upload-progressbar" class="uk-progress uk-hidden">
+                                                                    <div class="uk-progress-bar" style="width:0">0%</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="uk-text-right mt-5" style="margin-top: 0px; padding: 0px 15px;">
+                                    <button type="button" class="md-btn md-btn-flat uk-modal-close btn_close">Cerrar</button>
+                                    <button type="button" class="md-btn md-btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-modal" id="meeting_pathologists_new">
+                    <div class="uk-modal-dialog" style="width: 60%;">
+                        <div class="uk-modal-header md-bg-green-500" style="border-color: #4caf50;">
+                            <h3 class="md-card-toolbar-heading-text" style="color: white;">
+                                {{ '3071' | translate }}. {{ '3038' | translate }}: <b>{{ vm.caseSelected.entry.type }}{{ vm.caseSelected.entry.number }}</b>
+                            </h3>
+                        </div>
+                        <div class="uk-grid">
+                            <div class="uk-width-4-10">
+                                <div style="margin-bottom: 10px;">
+                                    <div class="md-card">
+                                        <div class="md-card-content" style="padding: 5px 15px;">
+                                            <div class="md-input-wrapper">
+                                                <label>{{ '3028' | translate }}</label>
+                                                <input ng-model="searchMeeting" type="text" class="md-input label-fixed ng-isolate-scope md-input-processed" autocomplete="off">
+                                                <span class="md-input-bar"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentscroll" style="max-height: 390px;overflow-y: auto;">
+                                    <div class="md-card md-card-primary" ng-repeat="meeting in vm.meetingPathologist | filter:searchMeeting" ng-class="{'mt-10': $index > 0 }" ng-click="vm.selectMeeting(meeting)" style="margin-bottom: 10px;">
+                                        <div class="md-card-content" style="padding: 5px 10px;">
+                                            <div class="uk-grid mt-5">
+                                                <img ng-src="images/pathology/microscopy/meeting.png">
+                                                <label class="uk-form-label label_info">{{ meeting.name }}</label>
+                                            </div>
+                                            <div class="uk-grid mt-5">
+                                                <img ng-src="images/pathology/microscopy/date.png">
+                                                <label class="uk-form-label label_info">{{ meeting.date | date:vm.dateFormat }}</label>
+                                            </div>
+                                            <!--<h3 class="heading_c">{{ '3074' | translate }}</h3>
+                                            <ul class="md-list md-list-addon contentscroll" style="max-height: 145px;overflow-y: auto;">
+                                                <li ng-repeat="participant in meeting.participants">
+                                                    <div class="md-list-addon-element">
+                                                        <img class="md-user-image md-list-addon-avatar" ng-src="images/pathology/microscopy/participant.png" alt="" />
+                                                    </div>
+                                                    <div class="md-list-content" style="margin-top: 5px;">
+                                                        <span class="uk-badge uk-badge-info span-participants">
+                                                            {{ participant.name }} {{ participant.lastName }}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-6-10">
+                                <div class="md-card" style="padding: 25px 0px;height: 315px;">
+                                    <form>
+                                        <div class="uk-grid" style="margin-left: 0px !important;justify-content: center;">
+                                            <div class="uk-width-1-1">
+                                                <div class="uk-input-group">
+                                                    <label class="labels-selectize" style="font-size: 14px;font-weight: bold;">{{'3073' | translate}} </label>
+                                                    <input type="text" class="md-input" md-input ng-model="vm.meetingPathologisModel.name" style="width: 400px;margin-top: 20px;" ng-disabled="!vm.newMeetingPathologist" />
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-width-1-1 mt-20">
+                                                <div class="uk-input-group mt-20">
+                                                    <label class="labels-selectize" style="font-size: 14px;font-weight: bold;" ng-class="{'text-disabled': !vm.newMeetingPathologist}">{{'3063' | translate}} </label>
+                                                    <input kendo-date-picker k-ng-model="vm.meetingPathologisModel.date" ng-disabled="!vm.newMeetingPathologist" style="width: 400px;border-bottom: 1px solid #e0e0e0;" id="kUI_datepicker_a" k-format="'{{vm.dateFormat}}'" min="vm.min" />
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-width-1-1 mt-20">
+                                                <div class="uk-input-group mt-20">
+                                                    <label class="labels-selectize" style="font-size: 14px;font-weight: bold;" ng-class="{'text-disabled': !vm.newMeetingPathologist}">{{'3074' | translate}} </label>
+                                                    <select kendo-multi-select k-options="vm.selectOptions" ng-disabled="!vm.newMeetingPathologist" k-ng-model="vm.meetingPathologisModel.participants" k-data-source="vm.listUsers" style="margin-top: 20px;width: 400px;max-height: 115px;overflow-y: auto;"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="uk-grid" style="margin-top: 15px;">
+                                    <div class="uk-width-1-1">
+                                        <div class="md-card">
+                                            <div class="md-card-content p-2">
+                                                <div class="uk-flex uk-flex-center measureButtons">
+
+                                                    <div class="uk-flex uk-flex-column" style="align-items: center;">
+                                                        <button type="button" ng-disabled="!vm.meetingEdit" ng-click="vm.sendCasePathologistsMeeting()" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-class="{'md-bg-blue-grey-100': !vm.meetingEdit}">
+                                                                <i class="material-icons">send</i>
+                                                        </button>
+                                                        <span>{{ '3099' | translate }}</span>
+                                                    </div>
+
+                                                    <div class="uk-flex uk-flex-column" style="align-items: center;">
+                                                        <button type="button" ng-disabled="vm.newMeetingPathologist" ng-click="vm.newMeetingPathologist = !vm.newMeetingPathologist; vm.resetMeetingPathologist()" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center"
+                                                            style="margin: 2px 0px !important;" ng-class="{'md-bg-blue-grey-100': vm.newMeetingPathologist}">
+                                                                <i class="material-icons">add</i>
+                                                        </button>
+                                                        <span>{{ '3100' | translate }}</span>
+                                                    </div>
+
+                                                    <div class="uk-flex uk-flex-column" style="align-items: center;">
+                                                        <button type="button" ng-disabled="!vm.meetingPathologisModel.name || !vm.meetingPathologisModel.date || !vm.meetingPathologisModel.participants || vm.meetingPathologisModel.participants.length === 0 || vm.meetingEdit" ng-click="vm.saveMeetingPathologist(false)"
+                                                            class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-class="{'md-bg-blue-grey-100': !vm.meetingPathologisModel.name || !vm.meetingPathologisModel.date|| !vm.meetingPathologisModel.participants || vm.meetingPathologisModel.participants.length === 0 || vm.meetingEdit}">
+                                                                    <i class="material-icons">save</i>
+                                                                </button>
+                                                        <span>{{ '0007' | translate }}</span>
+                                                    </div>
+
+                                                    <!--<div class="uk-flex uk-flex-column" style="align-items: center;">
+                                                        <button type="button" ng-disabled="!vm.meetingPathologisModel.name || !vm.meetingPathologisModel.date || !vm.meetingPathologisModel.participants || vm.meetingPathologisModel.participants.length === 0 || !vm.meetingEdit" ng-click="vm.saveMeetingPathologist(true)"
+                                                            class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-class="{'md-bg-blue-grey-100': !vm.meetingPathologisModel.name || !vm.meetingPathologisModel.date || !vm.meetingPathologisModel.participants || vm.meetingPathologisModel.participants.length === 0 || !vm.meetingEdit}">
+                                                                        <i class="material-icons">edit</i>
+                                                                    </button>
+                                                        <span>{{ '0006' | translate }}</span>
+                                                    </div>-->
+
+                                                    <div class="uk-flex uk-flex-column" style="align-items: center;">
+                                                        <button type="button" ng-disabled="!vm.newMeetingPathologist" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-click="vm.newMeetingPathologist = false; vm.resetMeetingPathologist()"
+                                                            ng-class="{'md-bg-blue-grey-100': !vm.newMeetingPathologist }">
+                                                                        <i class="material-icons">block</i>
+                                                                    </button>
+                                                        <span>{{ '0008' | translate }}</span>
+                                                    </div>
+
+                                                    <div class="uk-flex uk-flex-column ">
+                                                        <button id="close_meeting_pathologists_new" type="button" class="md-fab md-fab-small md-fab-default md-fab-wave-light waves-effect waves-light aling-self-center uk-modal-close" style="margin: 2px 0px !important;">
+                                                                            <i class="material-icons">close</i>
+                                                                        </button>
+                                                        <span>{{ '0329' | translate }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="uk-modal uk-modal-card-fullscreen" id="board_pathologists">
+                    <div class="uk-modal-dialog uk-modal-dialog-blank">
+                        <div class="md-card uk-height-viewport">
+                            <div class="md-card-toolbar">
+                                <div class="md-card-toolbar-actions">
+                                    <div class="md-card-dropdown" data-uk-dropdown="{pos:'bottom-right'}">
+                                        <i class="md-icon material-icons">&#xE5D4;</i>
+                                    </div>
+                                </div>
+                                <span class="md-icon material-icons uk-modal-close">&#xE5C4;</span>
+                                <h3 class="md-card-toolbar-heading-text">
+                                    Junta de Patólogos. Caso: <b>{{ vm.caseSelected.case }}</b>
+                                </h3>
+                            </div>
+                            <div class="md-card-content">
+                                <div class="uk-grid-width-large-1-1 hierarchical_show" hierarchical-show>
+                                    <div ng-repeat="pathologist in vm.boardPathologists" on-last-repeat style="visibility: visible !important;" ng-class="{'mt-10': $index > 0 }">
+                                        <div class="md-card md-card-hover md-card-horizontal md-card-primary" style="min-height: 120px">
+                                            <div class="md-card-head" style="width: 140px;">
+                                                <div class="uk-text-center">
+                                                    <img class="md-card-head-avatar head-pat" ng-src="images/user.png" alt="" />
+                                                </div>
+                                                <h3 class="md-card-head-text uk-text-center">
+                                                    {{pathologist.user.name}} {{pathologist.user.lastname}}
+                                                </h3>
+                                            </div>
+                                            <div class="md-card-content" style="margin-left: 140px;padding: 10px;">
+                                                <ul class="md-list">
+                                                    <li>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">Anotación</span>
+                                                            <span class="uk-text-small uk-text-muted">{{pathologist.annotation}}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading">Fecha</span>
+                                                            <span class="uk-text-small uk-text-muted uk-text-truncate">{{pathologist.date}}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-modal uk-modal-card-fullscreen" id="requests" style="padding: 0;">
+                <div class="uk-modal-dialog uk-modal-dialog-blank">
+                    <div class="md-card uk-height-viewport">
+                        <div class="md-card-toolbar" style="background-color: #7b1fa2 !important;">
+                            <span class="md-icon material-icons uk-modal-close" style="color: white;">&#xE5C4;</span>
+                            <h3 class="md-card-toolbar-heading-text" style="color: white;">
+                                {{ '3056' | translate }} {{ '3038' | translate }}: <b>{{ vm.caseSelected.entry.type }}{{ vm.caseSelected.entry.number }}</b>
+                            </h3>
+                        </div>
+                        <div class="md-card-content">
+                            <div class="uk-grid">
+                                <div class="uk-width-1-2">
+                                    <div class="md-card" style="height: 545px;">
+                                        <div class="md-card-toolbar">
+                                            <h3 class="md-card-toolbar-heading-text f-22">
+                                                {{ '3062' | translate }}
+                                            </h3>
+                                        </div>
+                                        <div class="md-card-content">
+                                            <div class="uk-grid" data-uk-grid-margin>
+                                                <div class="uk-width-1-1">
+                                                    <div class="uk-overflow-container">
+                                                        <table datatable="ng" dt-options="vm.dtOptions" dt-column-defs="vm.dtColumnDefs" class="uk-table uk-table-hover" cellspacing="0" width="100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>Id</td>
+                                                                    <th>{{ '3061' | translate }}</th>
+                                                                    <th>{{ '3057' | translate }}</th>
+                                                                    <th>{{ '3059' | translate }}</th>
+                                                                    <th>{{ '1094' | translate }}</th>
+                                                                    <th>{{ '0364' | translate }}</th>
+                                                                    <th>{{ '3063' | translate }}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="request in vm.requests">
+                                                                    <td>
+                                                                        {{ request.id }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ request.paraffinBlock.number }}
+                                                                    </td>
+                                                                    <td style="text-align: -webkit-center;">
+                                                                        <div class="md-fab-wrapper" style="position: static;">
+                                                                            <a class="md-fab md-fab-danger" href="#" style="width: 30px;height: 30px;" ng-style='{ "background-color": "{{ request.coloration.color }}" }'></a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ request.quantity }}
+                                                                    </td>
+                                                                    <td ng-if="!request.updatedAt">
+                                                                        {{ request.userCreated.name }} {{ request.userCreated.lastName }}
+                                                                    </td>
+                                                                    <td ng-if="request.updatedAt">
+                                                                        {{ request.userUpdated.name }} {{ request.userUpdated.lastName }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="uk-badge uk-badge-primary" ng-if="!request.status">{{ '3065' | translate}}</span>
+                                                                        <span class="uk-badge uk-badge-primary" ng-if="request.status === 1">{{ '3065' | translate}}</span>
+                                                                        <span class="uk-badge uk-badge-success" ng-if="request.status === 2">{{ '3066' | translate}}</span>
+                                                                        <span class="uk-badge uk-badge-danger" ng-if="request.status === 3">{{ '3067' | translate}}</span>
+                                                                        <span class="uk-badge uk-badge-success" ng-if="request.status === 4">{{ '3068' | translate}}</span>
+                                                                    </td>
+                                                                    <td ng-if="!request.updatedAt">
+                                                                        {{ request.createdAt | date:vm.dateFormat }}
+                                                                    </td>
+                                                                    <td ng-if="request.updatedAt">
+                                                                        {{ request.updatedAt | date:vm.dateFormat }}
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-1-2">
+
+                                    <div class="md-card" style="height: 443px;">
+                                        <div class="md-card-toolbar">
+                                            <h3 class="md-card-toolbar-heading-text f-22">
+                                                {{ '3060' | translate }}
+                                            </h3>
+                                        </div>
+                                        <div class="md-card-content">
+                                            <div class="uk-grid" style="justify-content: center;">
+
+                                                <div class="mt-20">
+                                                    <div class="uk-form-row">
+                                                        <div class="uk-input-group">
+                                                            <label class="labels-selectize" style="font-size: 14px;font-weight: bold;">{{'3061' | translate}} </label>
+                                                            <ui-select ng-model="vm.paraffinBlock" theme="select2" style="width: 400px;margin-top: 20px;">
+                                                                <ui-select-match placeholder="{{ '3058' | translate }}">{{$select.selected.number}}</ui-select-match>
+                                                                <ui-select-choices repeat="paraffinBlock in vm.paraffinBlocks | filter: $select.search">
+                                                                    <span ng-bind-html="paraffinBlock.number | highlight: $select.search"></span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-20">
+                                                    <div class="uk-form-row">
+                                                        <div class="uk-input-group">
+                                                            <label class="labels-selectize" style="font-size: 14px;font-weight: bold;">{{'3057' | translate}} </label>
+                                                            <ui-select ng-model="vm.coloration" theme="select2" style="width: 400px;margin-top: 20px;">
+                                                                <ui-select-match placeholder="{{ '3058' | translate }}">{{$select.selected.name}}</ui-select-match>
+                                                                <ui-select-choices repeat="coloration in vm.colorations | filter: $select.search">
+                                                                    <span ng-bind-html="coloration.name | highlight: $select.search"></span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-20">
+                                                    <div class="uk-form-row">
+                                                        <div class="uk-input-group">
+                                                            <label class="labels-selectize" style="font-size: 14px;font-weight: bold;">{{'3059' | translate}} </label>
+                                                            <input type="text" class="md-input" md-input ng-model="vm.quantity" style="width: 400px;margin-top: 20px;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1">
+                                            <div class="md-card">
+                                                <div class="md-card-content p-2">
+                                                    <div class="uk-flex uk-flex-center measureButtons">
+
+                                                        <div class="uk-flex uk-flex-column ">
+                                                            <button type="button" ng-disabled="(!vm.coloration || !vm.paraffinBlock || !vm.quantity) || vm.requestSelected" ng-click="vm.saveRequest()" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;"
+                                                                ng-class="{'md-bg-blue-grey-100': (!vm.coloration || !vm.paraffinBlock || !vm.quantity) || vm.requestSelected }">
+                                                                    <i class="material-icons">save</i>
+                                                                </button>
+                                                            <span>{{ '0007' | translate }}</span>
+                                                        </div>
+
+                                                        <div class="uk-flex uk-flex-column ">
+                                                            <button type="button" ng-disabled="!vm.requestSelected" ng-click="vm.editRequest()" class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;" ng-class="{'md-bg-blue-grey-100': !vm.requestSelected}">
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                            <span>{{ '0006' | translate }}</span>
+                                                        </div>
+
+                                                        <div class="uk-flex uk-flex-column ">
+                                                            <button type="button" ng-disabled="(!vm.coloration && !vm.paraffinBlock && !vm.quantity) || !vm.requestSelected" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center" style="margin: 2px 0px !important;"
+                                                                ng-click="vm.resetRequest()" ng-class="{'md-bg-blue-grey-100': (!vm.coloration && !vm.paraffinBlock && !vm.quantity) || !vm.requestSelected}">
+                                                                    <i class="material-icons">block</i>
+                                                                </button>
+                                                            <span>{{ '0008' | translate }}</span>
+                                                        </div>
+
+                                                        <div class="uk-flex uk-flex-column ">
+                                                            <button type="button" class="md-fab md-fab-small md-fab-default md-fab-wave-light waves-effect waves-light aling-self-center uk-modal-close" style="margin: 2px 0px !important;">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            <span>{{ '0329' | translate }}</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

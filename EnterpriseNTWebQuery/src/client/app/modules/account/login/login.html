@@ -1,0 +1,892 @@
+<style>
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+        display: none !important;
+    }
+
+    .password-view {
+        float: right;
+        position: relative;
+        bottom: 38px;
+        right: 10px;
+    }
+
+    .k-dropdown .k-state-default {
+        background-color: white;
+        border-top: 0px;
+        border-right: : 0px;
+        border-left: : 0px;
+    }
+
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+    }
+
+    input:-webkit-autofill {
+        -webkit-text-fill-color: #000 !important;
+    }
+
+    .login_page_wrapper {
+        width: 475px;
+        max-width: 100%;
+        margin: 0 auto;
+        transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .material-icons.md-48 {
+        font-size: 72px !important;
+        vertical-align: -14px;
+        border-radius: 100%;
+        border: 2px solid #ead2d285;
+    }
+
+    .md-card .md-card-content.large-padding {
+        padding: 11px 33px;
+    }
+
+    .css-form input.ng-invalid.ng-touched {
+        background-color: #FA787E;
+    }
+
+    .form-hint {
+        font-size: 7pt;
+        line-height: 9pt;
+        margin: 1px auto 0px;
+        color: #999;
+    }
+
+    .form-hint.error {
+        color: #C00;
+        font-weight: bold;
+        font-size: 8pt;
+    }
+
+    .password-count {
+        float: right;
+        position: relative;
+        bottom: 24px;
+        right: 10px;
+    }
+
+    .strength-meter {
+        position: relative;
+        height: 8px;
+        background: #DDD;
+        margin: 1px auto 5px;
+        border-radius: 3px;
+    }
+
+    .strength-meter:before,
+    .strength-meter:after {
+        content: '';
+        height: inherit;
+        background: transparent;
+        display: block;
+        border-color: #FFF;
+        border-style: solid;
+        border-width: 0 5px 0 5px;
+        position: absolute;
+        width: 107px;
+        z-index: 10;
+    }
+
+    .strength-meter:before {
+        left: 90px;
+    }
+
+    .strength-meter:after {
+        right: 90px;
+    }
+
+    .strength-meter-fill {
+        background: transparent;
+        height: inherit;
+        position: absolute;
+        width: 0;
+        border-radius: inherit;
+        transition: width 0.5s ease-in-out, background 0.25s;
+    }
+
+    .strength-meter-fill[data-strength='0'] {
+        background: red;
+        width: 20%;
+    }
+
+    .strength-meter-fill[data-strength='1'] {
+        background: orangered;
+        width: 40%;
+    }
+
+    .strength-meter-fill[data-strength='2'] {
+        background: orange;
+        width: 60%;
+    }
+
+    .strength-meter-fill[data-strength='3'] {
+        background: yellowgreen;
+        width: 80%;
+    }
+
+    .strength-meter-fill[data-strength='4'] {
+        background: green;
+        width: 100%;
+    }
+
+    input.ng-pristine+ul#strength {
+        display: none;
+    }
+
+    ul#strength {
+        display: inline;
+        list-style: none;
+        margin: 0;
+        margin-left: 15px;
+        padding: 0;
+        vertical-align: 2px;
+    }
+
+    .point:last {
+        margin: 0 !important;
+    }
+
+    .point {
+        background: #DDD;
+        border-radius: 2px;
+        display: inline-block;
+        height: 5px;
+        margin-right: 1px;
+        width: 20px;
+    }
+
+
+    .md-list .uk-nestable-list>li,
+    .md-list>li {
+        padding: 0px 4px;
+        min-height: 31px;
+    }
+
+    @media screen and (max-width: 667px) {
+        .fontsmall {
+            font-size: 12px;
+            font: 500 12px / 31px "Roboto", sans-serif !important
+        }
+    }
+
+    .base64-data {
+        background-image: url({{vm.backgroundlogin}});
+        background-size: 100% 100%;
+    }
+</style>
+<loadpage view="vm.loading"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error" id="informationmodal"></modalexceptions>
+<div class="uk-grid" ng-class="{'base64-data': vm.backgroundlogin != ''}" style="height: 100%">
+    <div class="uk-width-medium-1-1" style="overflow: hidden">
+        <div class="login_page uk-flex uk-flex-middle" style="padding: 10px 10px 9px 10px;">
+            <div class="login_page_wrapper">
+                <div class="md-card md-card-hover" id="login_card" style="height: calc(100% - 125px)">
+                    <div class="md-card-toolbar uk-flex uk-flex-center uk-flex-middle"
+                        style="height: 124px;padding-bottom: 4px;">
+                        <div class="md-card-toolbar-actions uk-hidden-small">
+                            <ul ng-if="vm.viewupdatepassword === false" class="uk-tab"
+                                data-uk-tab="{connect:'#card_tabs',animation:'slide-horizontal'}">
+                                <li ng-if="vm.PHYSICIAN[0].visible === true"
+                                   ng-click="vm.idrol = 1;vm.typepassword='password';"
+                                    ng-class="{'uk-active': vm.idrol === 1}">
+                                    <a href="#">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 71px; height: 71px;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    src="{{vm.PHYSICIAN[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold" style="margin: 5px;">
+                                        {{'0075' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.PATIENT[0].visible === true"
+                                    ng-click="vm.idrol = 2;vm.typepassword='password';"
+                                    ng-class="{'uk-active': vm.idrol === 2}">
+                                    <a href="#">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 71px; height: 71px;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    src="{{vm.PATIENT[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold" style="margin: 5px;">
+                                        {{'0076' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.ACCOUNT[0].visible === true" ng-click="vm.idrol = 3;vm.typepassword='password';"
+                                    ng-class="{'uk-active': vm.idrol === 3}">
+                                    <a href="#">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 71px; height: 71px;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    src="{{vm.ACCOUNT[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold" style="margin: 5px;">
+                                        {{'0077' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.USERLIS[0].visible === true && vm.viewforgetpassword === false"
+                                    ng-click="vm.idrol = 4;vm.typepassword='password';" ng-class="{'uk-active': vm.idrol === 4}">
+                                    <a href="#">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 71px; height: 71px;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    src="{{vm.USERLIS[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold" style="margin: 5px;">
+                                        {{'0078' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.viewdemogra === true && vm.viewforgetpassword === false && vm.USERDEMO[0].visible===true"
+                                    ng-click="vm.idrol = 5;vm.typepassword='password';" ng-class="{'uk-active': vm.idrol === 5}">
+                                    <a href="#">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 71px; height: 71px;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    src="{{vm.USERDEMO[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold" style="margin: 5px;">
+                                        {{vm.demoname.name}}
+                                    </h6>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="md-card-toolbar-actions uk-visible-small">
+                            <ul ng-if="vm.viewupdatepassword === false" class="uk-tab"
+                                data-uk-tab="{connect:'#card_tabs',animation:'slide-horizontal'}">
+                                <li ng-if="vm.PHYSICIAN[0].visible === true" ng-click="vm.idrol = 1;vm.typepassword='password';"
+                                    ng-class="{'uk-active': vm.idrol === 1}">
+                                    <a href="#" style="min-width: 60px;">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 50px;height: 50px;;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    style="font-size: 50px !important;vertical-align: -5px;"
+                                                    src="{{vm.PHYSICIAN[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold"
+                                        style="margin: 5px;font-size: 10px;">
+                                        {{'0075' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.PATIENT[0].visible === true" ng-click="vm.idrol = 2;vm.typepassword='password';"
+                                    ng-class="{'uk-active': vm.idrol === 2}">
+                                    <a href="#" style="min-width: 60px;">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 50px;height: 50px;;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    style="font-size: 50px !important;vertical-align: -5px;"
+                                                    src="{{vm.PATIENT[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold"
+                                        style="margin: 5px;font-size: 10px;">
+                                        {{'0076' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.ACCOUNT[0].visible === true" ng-click="vm.idrol = 3;vm.typepassword='password';"
+                                    ng-class="{'uk-active': vm.idrol === 3}">
+                                    <a href="#" style="min-width: 60px;">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 50px;height: 50px;;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    style="font-size: 50px !important;vertical-align: -5px;"
+                                                    src="{{vm.ACCOUNT[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold"
+                                        style="margin: 5px;font-size: 10px;">
+                                        {{'0077' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.USERLIS[0].visible === true && vm.viewforgetpassword === false"
+                                    ng-click="vm.idrol = 4;vm.typepassword='password';" ng-class="{'uk-active': vm.idrol === 4}">
+                                    <a href="#" style="min-width: 60px;">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 50px;height: 50px;;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    style="font-size: 50px !important;vertical-align: -5px;"
+                                                    src="{{vm.USERLIS[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold"
+                                        style="margin: 5px;font-size: 10px;">
+                                        {{'0078' | translate}}
+                                    </h6>
+                                </li>
+                                <li ng-if="vm.viewdemogra === true && vm.viewforgetpassword === false && vm.USERDEMO[0].visible===true"
+                                    ng-click="vm.idrol = 5;vm.typepassword='password';" ng-class="{'uk-active': vm.idrol === 5}">
+                                    <a href="#" style="min-width: 60px;">
+                                        <button type="button" class="md-fab md-fab"
+                                            style="width: 50px;height: 50px;;background: #ffffff;">
+                                            <i>
+                                                <img class="md-list-addon-icon material-icons md-48"
+                                                    style="font-size: 50px !important;vertical-align: -5px;"
+                                                    src="{{vm.USERDEMO[0].image}}">
+                                            </i>
+                                        </button>
+                                    </a>
+                                    <h6 class="uk-text-bold uk-text-center uk-text-bold"
+                                        style="margin: 5px;font-size: 10px;">
+                                        {{vm.demoname.name}}
+                                    </h6>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="uk-grid" ng-if="vm.viewupdatepassword === true">
+                            <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                                    <img class="md-list-addon-icon material-icons md-48" src="images/resetpassword.png">
+                                </span>
+                            </div>
+                            <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                                <h3 ng-if="vm.viewupdatepassword === true" class="md-card-toolbar-heading-text">
+                                    {{'0094' | translate}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-card-content large-padding fontsmall" id="login_form"
+                        style="overflow: auto; height: calc(100% - 252px); padding-bottom: 0px; padding-top: 0px">
+                        <div class="uk-grid fontsmall"
+                            ng-if="vm.viewforgetpassword === false  && vm.viewupdatepassword === false">
+                            <div class="uk-width-medium-1-1 uk-animation-slide-right">
+                                <div class="uk-grid uk-margin uk-flex-right uk-text-right">
+                                    <div class="uk-width-medium-2-3 sidebar_actions" style="width: 165px">
+                                        <select id="customers" k-ng-model="vm.lenguaje" kendo-drop-down-list
+                                            style="width: 100%" k-options="vm.customOptions"
+                                            k-on-change="vm.changeLanguage(vm.lenguaje)"></select>
+                                    </div>
+                                </div>
+                                <form class="form" name="myForm">
+                                    <div class="uk-form-row">
+                                        <label for="username">{{'0001' | translate}}</label>
+                                        <input md-input label-fixed class="md-input label-fixed"
+                                            ng-init="vm.validusername = true"
+                                            ng-class="{'md-input-danger':myForm.username.$invalid && !vm.validusername}"
+                                            type="text" id="username" name="username"
+                                            ng-blur="vm.validusername = vm.user.username === '' || vm.user.username === undefined ? false : true"
+                                            data-ng-model="vm.user.username" required />
+                                        <span ng-if="!vm.validusername" class="help-block">{{'0020' | translate}}</span>
+                                    </div>
+                                    <div class="uk-form-row">
+                                        <label>{{'0002' | translate}}</label>
+                                        <input md-input label-fixed class="md-input label-fixed "
+                                            ng-init="vm.validpassword = true"
+                                            ng-class="{'md-input-danger':myForm.password.$invalid && !vm.validpassword }"
+                                            type="{{vm.typepassword}}" id="password" name="password"
+                                            ng-blur="vm.validpassword = vm.user.password === '' || vm.user.password === undefined ? false : true"
+                                            data-ng-model="vm.user.password" required />
+                                        <div class="label password-view"
+                                            ng-click="vm.chagueviewpaswword()" ng-cloak>
+                                            <i class="uk-icon-eye" title="{{'0209' | translate}}" ng-if="vm.typepassword==='password'"
+                                            data-uk-tooltip="{pos:'top-left'}" style="font-size: 18px;cursor: pointer;"></i>
+                                            <i class="uk-icon-eye-slash" title="{{'0210' | translate}}" ng-if="vm.typepassword==='text'"
+                                            data-uk-tooltip="{pos:'top-left'}" style="font-size: 18px;cursor: pointer;"></i>
+                                        </div>
+
+                                        <span ng-if="!vm.validpassword" class="help-block">{{'0020' | translate}}</span>
+                                    </div>
+                                    <div class="uk-form-row md-input-wrapper md-input-filled"
+                                        ng-if="vm.idrol === 2 && vm.listconfiguration[12].value === 'True'">
+                                        <label style="padding-left: 2px">{{'0110' | translate}}</label>
+                                        <select id="documentype" name="documentytpe" class="md-input fontsmall"
+                                            charset="utf-8"
+                                            ng-options="obj.id as obj.name for obj in vm.listDocumentype"
+                                            data-ng-model="vm.documentTypeSelect" required></select>
+                                    </div>
+                                    <div ng-show="vm.menssageInvalid" class="uk-text-center">
+                                        <span class="help-block">{{vm.menssageInvalid}}</span>
+                                    </div>
+                                    <div ng-show="vm.invalidUser" ng-class="{'help-block': vm.invalidUser}"
+                                        class="uk-text-center">
+                                        <span class="help-block" translate="0121"></span>
+                                    </div>
+                                    <div ng-show="vm.invalidDate" ng-class="{'help-block': vm.invalidDate}"
+                                        class="uk-text-center">
+                                        <span class="help-block" translate="0120"></span>
+                                    </div>
+                                    <div style="margin-top: 20px" ng-if="vm.listconfiguration[1].value"
+                                        class="uk-form-row uk-flex uk-flex-center uk-flex-middle" vc-recaptcha
+                                        theme="'light'" type="'image'" on-create="vm.setWidgetId(widgetId)"
+                                        key="vm.keygoogle.key" lang="vm.Language" on-expire="vm.cbExpiration()">
+                                    </div>
+                                    <div class="uk-margin-small-top uk-text-center">
+                                        <button
+                                            class="md-btn md-btn-wave-light fontsmall waves-effect waves-button waves-light"
+                                            data-ng-click="vm.login()"
+                                            ng-class="{'md-btn-primary': !myForm.$invalid, 'disabled': myForm.$invalid}"
+                                            translate="0004" ng-disabled="myForm.$invalid"
+                                            ng-style="{'background' : myForm.$invalid  ? '' : vm.listconfiguration[5].value}"></button>
+                                        <div class="uk-form-row md-input-wrapper uk-text-center">
+                                            <a ng-if="vm.listconfiguration[2].value && vm.idrol !== 4 && vm.idrol !== 5"
+                                                ng-click="vm.viewforgetpassword = true">{{'0105' | translate}}</a>
+                                            <h6 data-uk-modal="{target:'#modal-termsandConditions'}"
+                                                class="uk-text-muted uk-text-bold"
+                                                style="margin-top: 2px; cursor: pointer">
+                                                {{'0013' | translate}}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="uk-grid fontsmall"
+                            ng-if="vm.viewforgetpassword === true && vm.viewupdatepassword === false">
+                            <div class="uk-width-1-1 uk-animation-slide-right">
+                                <form name="myFormEmail" id="myFormEmail" class="uk-grid" style="margin-top: 50px;">
+                                    <div class="uk-form-row" style="width: 80%">
+                                        <div class="uk-width-1-1" style="margin-bottom: 15px">
+                                            <label>{{'0189' | translate}}</label>
+                                            <input id="history" name="history" type="text" class="md-input"
+                                                ng-model="vm.history" ng-focus="vm.messagerecoverpassword = ''"
+                                                ng-class="{'md-input-danger':myFormEmail.history.$invalid && myFormEmail.history.$touched ||vm.messagerecoverpassword}"
+                                                ng-required="true" md-input />
+                                            <span class="help-block"
+                                                ng-show="vm.messagerecoverpassword">{{vm.messagerecoverpassword}}</span>
+                                            <span class="uk-form-help-block uk-text-danger label-error"
+                                                ng-show="myFormEmail.history.$invalid && myFormEmail.history.$touched"
+                                                style="padding: 0px; margin-top: 0px;">{{'0020' | translate}}</span>
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom: 15px">
+                                            <label>{{'0138' | translate}}</label>
+                                            <input id="emailrecovery" name="emailrecovery" type="email" class="md-input"
+                                                ng-model="vm.usernamerecovery" ng-focus="vm.messagerecoverpassword = ''"
+                                                ng-class="{'md-input-danger':myFormEmail.emailrecovery.$invalid && myFormEmail.emailrecovery.$touched ||vm.messagerecoverpassword }"
+                                                ng-required="true" md-input />
+                                            <span class="help-block"
+                                                ng-show="vm.messagerecoverpassword">{{vm.messagerecoverpassword}}</span>
+                                            <span class="uk-form-help-block uk-text-danger label-error"
+                                                ng-show="myFormEmail.emailrecovery.$invalid && myFormEmail.emailrecovery.$touched"
+                                                style="padding: 0px; margin-top: 0px;">{{'0139' | translate}}</span>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="uk-width-medium-1-1 uk-flex uk-flex-center uk-flex-middle"
+                                    style="margin-bottom: 12px;">
+                                    <button
+                                        class="md-btn-primary md-btn md-btn-wave-light waves-effect fontsmall waves-button waves-light"
+                                        data-ng-click="vm.passwordrecovery()"
+                                        ng-class="{'disabled': !myFormEmail.$valid}" ng-disabled="!myFormEmail.$valid">
+                                        {{'0140' | translate}}
+                                    </button>
+                                    <button
+                                        class="md-btn-default md-btn md-btn-wave-light waves-effect fontsmall waves-button waves-light"
+                                        data-ng-click="vm.viewforgetpassword = false; vm.messagerecoverpassword = ''; vm.usernamerecovery = '';vm.history = ''">
+                                        {{'0008' | translate}}
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="uk-grid fontsmall" ng-if="vm.viewupdatepassword === true">
+                            <div class="uk-width-medium-1-1 uk-animation-slide-right">
+                                <form class="uk-grid" name="Formchange" style="margin-top: 10px;">
+                                    <div class="uk-width-1-1" style="padding-bottom: 10px">
+                                        <label>{{'0103' | translate}}</label>
+                                        <input type="password" name="pswd" id="pswd" class="md-input label-fixed"
+                                            ng-model="vm.passwordupdate" ng-change="vm.CheckStrngth()"
+                                            ng-class="{'md-input-danger':Formchange.pswd.$invalid && Formchange.pswd.$touched || vm.strength!=='' || vm.viewvalited}"
+                                            ng-required="true" md-input />
+                                        <span class="help-block"
+                                            ng-show="Formchange.pswd.$invalid && Formchange.pswd.$touched"
+                                            style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                                        <span ng-if="vm.viewvalited" class="help-block">{{'0154' | translate}}</span>
+                                        <div class="uk-text-muted uk-text-small" style="font-size: 11px !important;
+                                        line-height: 12px;">
+                                            <div ng-style="{'color' : vm.color}">
+                                                {{vm.strengthlabel}}
+                                            </div>
+                                            <div class="strength-meter">
+                                                <div class="strength-meter-fill" data-strength="{{vm.data}}"></div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    {{'0153' | translate}}.
+                                                </div>
+                                                <div>
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength0"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength0"></i>
+                                                    {{'0156' | translate}} {{vm.lettersize}}
+                                                    {{'0157' | translate}}
+                                                </div>
+                                                <div>
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength1"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength1"></i>
+                                                    {{'0158' | translate}}
+                                                </div>
+                                                <div>
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength2"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength2"></i>
+                                                    {{'0159' | translate}}
+                                                </div>
+                                                <div>
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength3"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength3"></i>
+                                                    {{'0160' | translate}}
+                                                </div>
+                                                <div>
+                                                    <i class="uk-icon-check-circle md-color-green-500"
+                                                        style="margin: 3px;" ng-if="!vm.strength4"></i>
+                                                    <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                                        ng-if="vm.strength4"></i>
+                                                    {{'0161' | translate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label>{{'0104' | translate}}</label>
+                                        <input type="password" name="word" id="word" class="md-input label-fixed"
+                                            ng-model="vm.passwordupdaterepeat"
+                                            ng-class="{'md-input-danger':Formchange.word.$invalid && Formchange.word.$touched || vm.passwordupdate!==vm.passwordupdaterepeat}"
+                                            ng-required="true" md-input />
+                                        <span class="uk-form-help-block uk-text-danger label-error"
+                                            ng-show="vm.test=Formchange.word.$invalid && Formchange.word.$touched"
+                                            style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                                        <span class="uk-form-help-block uk-text-danger label-error"
+                                            ng-show="vm.passwordupdate!==vm.passwordupdaterepeat && !vm.test && Formchange.word.$touched"
+                                            style="padding: 0px; margin-top: 0px;">
+                                            {{'0162' | translate}}
+                                        </span>
+                                    </div>
+                                    <div class="uk-width-1-1" ng-show="vm.messageupdatepassword" class="uk-text-center">
+                                        <span class="help-block">{{vm.messageupdatepassword}}</span>
+                                    </div>
+                                    <div class="uk-width-1-1 uk-margin-medium-top uk-text-center">
+                                        <button data-ng-click="vm.resetpassword()"
+                                            ng-class="{'md-btn-primary': vm.strength==='' && vm.passwordupdate===vm.passwordupdaterepeat && vm.passwordupdate!==''&& vm.passwordupdaterepeat!==''}"
+                                            ng-disabled="vm.strength===''&& vm.passwordupdate!==vm.passwordupdaterepeat || vm.passwordupdaterepeat===undefined || vm.passwordupdaterepeat===''"
+                                            class="md-btn">
+                                            {{'0007' | translate}}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="uk-text-center">
+                        <h6 class=uk-text-small uk-text-bold" style="margin : 0px">
+                            {{vm.listconfiguration[9].value}}
+                        </h6>
+                        <h6 ng-if="vm.listconfiguration[10].value !== ''" class="uk-text-small uk-text-bold"
+                            style="margin : 0px">
+                            {{vm.listconfiguration[10].value}}
+                        </h6>
+                    </footer>
+                    <div id="content-email" ng-show="false">
+                        <ng-bind-html ng-bind-html="vm.loadtermsandConditions(vm.contentemail)"></ng-bind-html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-informative" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-3-10">
+                        <img src="images/iconinfo.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-7-10 fontsmall" style="margin-top: 3%;">
+                        <span>{{'0102' | translate}}</span>
+                    </div>
+                </div>
+                <div class="uk-overflow-container"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="modal-error" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-3-10">
+                        <img src="images/iconinfo.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-7-10 fontsmall" style="margin-top: 3%;">
+                        <span>{{'0204' | translate}}</span>
+                    </div>
+                </div>
+                <div class="uk-overflow-container"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="modal-termsandConditions" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header md-color-grey-50">{{'0013' | translate}}</div>
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-1-1 fontsmall" style="margin-top: 3%;">
+                        <ng-bind-html ng-bind-html="vm.loadtermsandConditions(vm.listconfiguration[3].value)">
+                        </ng-bind-html>
+                    </div>
+                </div>
+                <div class="uk-overflow-container"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="modalchangepassword1" class="uk-modal" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title fontsmall">{{'0166' | translate}}</h2>
+        </div>
+        <div class="uk-modal-body fontsmall">
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-10">
+                </div>
+                <div class="uk-width-medium-3-10">
+                    <form class="form" name="Formchange">
+                        <div class="uk-form-row  uk-flex uk-flex-center">
+                            <div class="user_heading_avatar">
+                                <div class="thumbnail">
+                                    <img ng-src="images/user.png" alt="user avatar" />
+                                </div>
+                            </div>
+                            <h3 class="md-card-head-text uk-text-center ng-binding">
+                                <ul class="md-list">
+                                    <li>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">{{vm.user.username}}</span>
+                                            <span class="uk-text-small uk-text-muted">{{'0001' | translate}} </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </h3>
+                        </div>
+                        <div class="uk-form-row">
+                            <label>{{'0103' | translate}}</label>
+                            <input type="password" name="pswd" id="pswd" class="md-input label-fixed"
+                                ng-model="vm.userchangepassword.password1" ng-change="vm.CheckStrngth1()"
+                                ng-class="{'md-input-danger':Formchange.pswd.$invalid && Formchange.pswd.$touched || vm.strength!=='' || vm.viewvalited}"
+                                ng-required="true" md-input />
+                            <span class="help-block" ng-show="Formchange.pswd.$invalid && Formchange.pswd.$touched"
+                                style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                            <span ng-if="vm.viewvalited" class="help-block">{{'0154' | translate}}</span>
+                        </div>
+                        <div class="uk-form-row">
+                            <label>{{'0167' | translate}}</label>
+                            <input type="password" name="pass" id="pass" class="md-input label-fixed"
+                                ng-model="vm.userchangepassword.password2"
+                                ng-class="{'md-input-danger':Formchange.pass.$invalid && Formchange.pass.$touched || vm.userchangepassword.password1!==vm.userchangepassword.password2}"
+                                ng-required="true" md-input />
+                            <span class="uk-form-help-block uk-text-danger label-error"
+                                ng-show="vm.test=Formchange.pass.$invalid && Formchange.pass.$touched"
+                                style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                            <span class="uk-form-help-block uk-text-danger label-error"
+                                ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && !vm.test && Formchange.pass.$touched"
+                                style="padding: 0px; margin-top: 0px;">
+                                {{'0162' | translate}}
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="uk-width-medium-1-10">
+                </div>
+                <div class="uk-width-medium-5-10">
+                    <div class="uk-form-row">
+                        <h6>
+                            {{'0153' | translate}}.
+                        </h6>
+                    </div>
+                    <div class="uk-form-row">
+
+                        <div class="form-hint" ng-style="{'color' : vm.color}">
+                            {{vm.strengthlabel}}
+                        </div>
+                        <div class="strength-meter">
+                            <div class="strength-meter-fill" data-strength="{{vm.data}}"></div>
+                        </div>
+                    </div>
+                    <ul class="md-list">
+                        <li class="ng-scope">
+                            <div class="md-list-content">
+                                <div class="uk-margin-small-top">
+                                    <span class="uk-margin-right">
+                                        <i class="uk-icon-check-circle md-color-green-500" style="margin: 3px;"
+                                            ng-if="!vm.strength0"></i>
+                                        <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                            ng-if="vm.strength0"></i>
+                                        <span class="uk-text-muted uk-text-small ng-binding">
+                                            {{'0156' | translate}} {{vm.lettersize}} {{'0157' | translate}}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ng-scope">
+                            <div class="md-list-content">
+                                <div class="uk-margin-small-top">
+                                    <span class="uk-margin-right">
+                                        <i class="uk-icon-check-circle md-color-green-500" style="margin: 3px;"
+                                            ng-if="!vm.strength1"></i>
+                                        <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                            ng-if="vm.strength1"></i>
+
+                                        <span class="uk-text-muted uk-text-small ng-binding">
+                                            {{'0158' | translate}}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ng-scope">
+                            <div class="md-list-content">
+                                <div class="uk-margin-small-top">
+                                    <span class="uk-margin-right">
+                                        <i class="uk-icon-check-circle md-color-green-500" style="margin: 3px;"
+                                            ng-if="!vm.strength2"></i>
+                                        <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                            ng-if="vm.strength2"></i>
+
+                                        <span class="uk-text-muted uk-text-small ng-binding">
+                                            {{'0159' | translate}}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ng-scope">
+                            <div class="md-list-content">
+                                <div class="uk-margin-small-top">
+                                    <span class="uk-margin-right">
+                                        <i class="uk-icon-check-circle md-color-green-500" style="margin: 3px;"
+                                            ng-if="!vm.strength3"></i>
+                                        <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                            ng-if="vm.strength3"></i>
+
+                                        <span class="uk-text-muted uk-text-small ng-binding">
+                                            {{'0160' | translate}}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ng-scope">
+                            <div class="md-list-content">
+                                <div class="uk-margin-small-top">
+                                    <span class="uk-margin-right">
+                                        <i class="uk-icon-check-circle md-color-green-500" style="margin: 3px;"
+                                            ng-if="!vm.strength4"></i>
+                                        <i class="uk-icon-close  md-color-red-600" style="margin: 3px;"
+                                            ng-if="vm.strength4"></i>
+                                        <span class="uk-text-muted uk-text-small ng-binding">
+                                            {{'0161' | translate}}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="submit" class="md-btn"
+                ng-class="{'md-btn-primary': vm.strength==='' && vm.userchangepassword.password1===vm.userchangepassword.password2 && vm.userchangepassword.password1!==''&& vm.userchangepassword.password2!==''}"
+                ng-disabled="vm.strength===''&& vm.userchangepassword.password1!==vm.userchangepassword.password2 || vm.userchangepassword.password2===undefined || vm.userchangepassword.password2===''"
+                ng-click="vm.changepassword(myFormchangepassword)">
+                {{'0140' | translate}}
+            </button>
+            <button type="button" class="md-btn md-btn-default uk-modal-close">{{'0008' | translate}}</button>
+        </div>
+    </div>
+</div>
+<div id="modalchangepassword" class="uk-modal" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title fontsmall">{{'0166' | translate}}</h2>
+        </div>
+        <div class="uk-modal-body fontsmall">
+            <p>{{'0168' | translate}}</p>
+            <form class="form" name="myFormchangepassword">
+                <div class="uk-form-row">
+                    <label for="password1changepassword">{{'0103' | translate}}</label>
+                    <input md-input label-fixed class="md-input label-fixed" id="password1changepassword"
+                        name="password1changepassword" data-ng-model="vm.userchangepassword.password1"
+                        ng-required="true"
+                        ng-class="{'md-input-danger':myFormchangepassword.password1changepassword.$invalid && myFormchangepassword.password1changepassword.$touched || vm.messageerrorpassword}"
+                        type="password" />
+                    <span
+                        ng-if="myFormchangepassword.password1changepassword.$invalid && myFormchangepassword.password1changepassword.$touched"
+                        class="help-block">{{'0020' | translate}}</span>
+                    <span ng-if="vm.viewvalited" class="help-block">{{'0154' | translate}}</span>
+                </div>
+                <div class="uk-form-row">
+                    <label for="password2changepassword">{{'0167' | translate}}</label>
+                    <input md-input label-fixed class="md-input label-fixed" type="password"
+                        id="password2changepassword" name="password2changepassword"
+                        data-ng-model="vm.userchangepassword.password2" ng-required="true"
+                        ng-class="{'md-input-danger':myFormchangepassword.password2changepassword.$invalid && myFormchangepassword.password2changepassword.$touched || vm.messageerrorpassword || m.userchangepassword.password1!==vm.userchangepassword.password2 && myFormchangepassword.password2changepassword.$touched}" />
+                    <span class="uk-form-help-block uk-text-danger label-error"
+                        ng-show="vm.test=Formchange.password2changepassword.$invalid && Formchange.password2changepassword.$touched"
+                        style="padding: 0px; margin-top: 0px;">{{ '0020' | translate }}</span>
+                    <span class="uk-form-help-block uk-text-danger label-error"
+                        ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && myFormchangepassword.password2changepassword.$touched"
+                        style="padding: 0px; margin-top: 0px;">
+                        {{'0162' | translate}}
+                    </span>
+                    <span
+                        ng-show="vm.userchangepassword.password1!==vm.userchangepassword.password2 && Formchange.password2changepassword.$touched"
+                        class="help-block">la contraseña debe ser igual</span>
+                </div>
+                <div ng-show="vm.messageerrorpassword" class="has-error uk-text-center">
+                    <span class="help-block">{{vm.messageerrorpassword}}</span></br>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="submit" class="md-btn"
+                ng-class="{'md-btn-primary': vm.strength==='' && vm.userchangepassword.password1===vm.userchangepassword.password2 && vm.userchangepassword.password1!==''&& vm.userchangepassword.password2!==''}"
+                ng-disabled="vm.strength===''&& vm.userchangepassword.password1!==vm.userchangepassword.password2 || vm.userchangepassword.password2===undefined || vm.userchangepassword.password2===''"
+                ng-click="vm.changepassword(myFormchangepassword)">
+                {{'0140' | translate}}
+            </button>
+            <button type="button" class="md-btn md-btn-default uk-modal-close">{{'0008' | translate}}</button>
+        </div>
+    </div>
+</div>
+<script src="assets/js/custom/dropify/dist/js/dropify.js"></script>

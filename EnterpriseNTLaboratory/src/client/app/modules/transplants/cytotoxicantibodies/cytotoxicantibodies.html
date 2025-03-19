@@ -1,0 +1,997 @@
+<style type="text/css">
+    .top_buttons {
+        margin-left: 5px;
+        margin-right: -5px;
+        height: 63px;
+        margin-top: 14px;
+        padding: 13px;
+    }
+
+    .labelmaterial {
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+
+    .md-fab.md-fab-Xsmall>i {
+        line-height: 31px;
+        height: inherit;
+        width: inherit;
+        font-size: 17px;
+    }
+
+    .md-fab.md-fab-Xsmall {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .requerid {
+        border-bottom: 1px solid #c71111;
+    }
+
+    .k-select {
+        display: none !important;
+    }
+
+    /* 
+    // input */
+
+    .md-datepicker-input-container {
+        width: 100% !important;
+        min-height: 27px !important;
+        margin-left: 0px !important;
+    }
+
+    .md-icon-button+.md-datepicker-input-container {
+        margin-left: 0px !important;
+    }
+
+    .md-datepicker-button {
+        display: none;
+    }
+
+    .md-datepicker-input {
+        padding: 10px 0 5px;
+        font-size: 11px !important;
+    }
+
+    .md-inputsm {
+        font: 400 11px / 18px 'Roboto', sans-serif !important;
+        padding: 4px 4px !important;
+        min-height: 25px !important;
+    }
+
+    .labelmd-input {
+        top: -6px;
+        font-weight: bold !important;
+        font-size: 10px !important;
+        text-transform: capitalize !important;
+    }
+
+    .dateleft {
+        margin-left: 49px !important;
+    }
+
+    .select2-container .select2-choice {
+        font: 400 12px / 18px "Roboto", sans-serif;
+    }
+
+    .select-requerid {
+        border-bottom: 1px solid #f30043;
+    }
+</style>
+
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="height: 100%;padding: 0px 0px 0px;">
+        <div style="height: 100%;width: 100%;margin-left: -10px;" class="uk-grid">
+            <div class="uk-width-1-1 " style="height: 78px;padding-left: 19px;">
+                <div style="height: 100%;" class="md-card">
+                    <div style="height: 100%;padding: 0px 0px 0px 13px;" class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-5-6">
+                                <div class="uk-grid">
+                                    <div class="uk-width-3-10">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img class="md-list-addon-icon material-icons md-24"
+                                                    ng-src="images/patient/history.png" />
+                                            </span>
+                                            <label class="labelmaterial">{{'3318' | translate}}</label>
+                                            <loadcomboboxrecepcion listorigin="vm.ListDonorPopup" placeholder="'3310'"
+                                                ng-model="vm.bodiessearch.donor.selected" fieldCode="patientId"
+                                                change="vm.getseach()" fieldName="name"></loadcomboboxrecepcion>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-3-10">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img class="md-list-addon-icon material-icons md-24"
+                                                    ng-src="images/transplants/receptor.png" />
+                                            </span>
+                                            <label class="labelmaterial">{{'3317' | translate}}</label>
+                                            <loadcomboboxrecepcion listorigin="vm.Listreceiver" placeholder="'3309'"
+                                                change="vm.getseach()" fieldCode="patientId" fieldName="name"
+                                                ng-model="vm.bodiessearch.receiver.selected"></loadcomboboxrecepcion>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-10" style="margin-top: 26px;">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img class="md-list-addon-icon material-icons md-24"
+                                                    ng-src="images/transplants/calendar.png" />
+                                            </span>
+                                            <label class="labelmaterial">{{'0075' | translate}}</label>
+                                            <md-datepicker ng-model="vm.bodiessearch.dateinit" md-open-on-focus
+                                                md-is-open="vm.dateI" ng-change="vm.changeDatePicker(1)"
+                                                ng-blur="vm.focusdateInit()"
+                                                class="md-input md-inputsm label-fixed orderentrytab"
+                                                md-max-date="vm.maxDate" md-min-date="vm.minDateinit">
+                                            </md-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-10" style="margin-top: 26px;">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img class="md-list-addon-icon material-icons md-24"
+                                                    ng-src="images/transplants/calendar.png" />
+                                            </span>
+                                            <label class="labelmaterial">{{'0076' | translate}}</label>
+                                            <md-datepicker ng-model="vm.bodiessearch.dateend" md-open-on-focus
+                                                ng-blur="vm.focusdateend()" md-is-open="vm.dateF"
+                                                ng-change="vm.changeDatePicker(2)"
+                                                class="md-input md-inputsm label-fixed orderentrytab"
+                                                md-max-date="vm.maxDate" md-min-date="vm.minDateinit">
+                                            </md-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-6 uk-flex uk-flex-middle uk-flex-center"
+                                style="padding: 0px 0px;margin-top: 15px;">
+                                <div class="uk-float-right">
+                                    <div style="display: inline-block; margin-right: 5px;">
+                                        <button type="button" class="md-fab md-fab-smallY md-fab md-fab-success"
+                                            ng-click="vm.eventNew()">
+                                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                title="{{'3100' | translate}}">&#xE145;</i>
+                                        </button>
+                                    </div>
+                                    <div style="display: inline-block;margin-right: 5px;">
+                                        <button type="button" class="md-fab md-fab-smallY md-bg-purple-A700"
+                                            ng-class="{'md-bg-blue-grey-100' : (vm.listcytotoxicantibodies | filter:{ select: true}).length === 0}"
+                                            ng-click="vm.generateFileblock()"
+                                            ng-disabled="(vm.listcytotoxicantibodies | filter:{ select: true}).length === 0">
+                                            <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                                title="{{'3347' | translate}}">&#xE8AD;</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" style="height: calc(100% - 100px);
+            z-index: 100;
+            padding-left: 19px;
+            padding-top: 0px;">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="height: 100%;    margin-bottom: 0px;">
+                            <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                    <th class="uk-width-1-10" style="width: 3%;padding: 8px 5px;">
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3502' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3503' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'1815' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3504' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3505' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'3506' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;width: 7%">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                                style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                <tr ng-repeat="antibodies in vm.listcytotoxicantibodies" class="uk-grid"
+                                    style="margin-left: 0px;margin-top: 0px;">
+                                    <td class="uk-width-1-10" style="width: 3%;padding: 8px 5px;">
+                                        <md-checkbox class="md-primary" ng-disabled="antibodies.datestudy===undefined"
+                                            ng-model="antibodies.select" aria-label="select"></md-checkbox>
+                                    </td>
+                                    <td class="uk-width-1-10">{{antibodies.receiverPatient.patientId}}</td>
+                                    <td class="uk-width-2-10">{{antibodies.receiverPatient.lastName | uppercase}}
+                                        {{antibodies.receiverPatient.surName |
+                                        uppercase}} {{antibodies.receiverPatient.name1 | uppercase}}
+                                        {{antibodies.receiverPatient.name2 | uppercase}}</td>
+                                    <td class="uk-width-2-10">{{antibodies.institution.name}}</td>
+
+                                    <td class="uk-width-1-10">{{antibodies.datestudy | date:'dd/MM/yyyy'}}</td>
+                                    <td class="uk-width-1-10">
+                                        {{antibodies.donorPatient.patientId}}
+                                    </td>
+                                    <td class="uk-width-2-10">
+                                        {{antibodies.donorPatient.lastName | uppercase}}
+                                        {{antibodies.donorPatient.surName |
+                                        uppercase}} {{antibodies.donorPatient.name1 | uppercase}}
+                                        {{antibodies.donorPatient.name2 | uppercase}}
+                                    </td>
+                                    <td class="uk-width-1-10" style="width: 7%;">
+                                        <div class="uk-float-right">
+                                            <div style="display: inline-block; margin-right: 5px;">
+                                                <img class="md-list-addon-icon material-icons md-22"
+                                                    ng-click="vm.eventEdit(antibodies)"
+                                                    ng-src="images/transplants/edit.png" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'0006' | translate}}" />
+                                            </div>
+                                            <div style="display: inline-block; margin-right: 5px;">
+                                                <img class="md-list-addon-icon material-icons md-22"
+                                                    ng-click="vm.eventPrint(antibodies)"
+                                                    ng-src="images/transplants/pdf.png" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'3347' | translate}}" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_new_cytotoxicantibodies" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <loadpage view="vm.loading"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar" style="background: rgb(37 152 243);">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}"  ng-click="vm.getseach()" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">how_to_reg</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{vm.labelnew}}
+                </h3>
+            </div>
+            <div class="md-card-content uk-grid uk-margin-small-top"
+                style="height: calc(100% - 61px);padding: 2px 4px 2px 20px" pdk-next-input-on-enter>
+                <div class="uk-width-1-1 order-entry-order-padding" style="padding: 0px 13px; height: 99%">
+                    <div class="uk-width-1-1 uk-grid uk-grid-small" style="padding: 0px 10px;">
+                        <div class="uk-width-1-2">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/patient/history.png" />
+                                </span>
+                                <label class="labelmaterial">{{'3318' | translate}}</label>
+                                <loadcomboboxrecepcion listorigin="vm.ListDonor" placeholder="'3310'"
+                                    requerid="vm.requeriddonor" ng-model="vm.new.donor.selected" fieldCode="patientId"
+                                    ng-disabled="vm.editdisabled" change="vm.changue(1)" fieldName="name">
+                                </loadcomboboxrecepcion>
+                            </div>
+                            <span ng-show="vm.requeriddonor" class="help-block uk-text-bottom ng-binding"
+                                style="margin-left: 51px;">{{'0060' |
+                                translate}}</span>
+                            <span ng-show="!vm.requeriddonor" style="margin-left: 51px;color: #eee;">.</span>
+                        </div>
+                        <div class="uk-width-1-2" style="margin-top: 10px;">
+                            <ul class="md-list md-list-addon">
+                                <li class="patient-demo-item">
+                                    <div class="md-list-addon-element patient-addon-element">
+                                        <img class="md-list-addon-icon material-icons md-22"
+                                            ng-src="images/transplants/practice.png" />
+                                    </div>
+                                    <div class="md-list-content patient-list-content">
+                                        <span class="uk-text-small uk-text-muted patient-list-content">{{'3504' |
+                                            translate}}</span>
+                                        <span class="md-list-heading">
+                                            {{vm.new.datestudy | date:'dd/MM/yyyy'}}
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="uk-width-1-3" style="margin-top: 26px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/branch.png" />
+                                </span>
+                                <label class="labelmaterial">{{'1815' | translate}}</label>
+                                <loadcombobox change="vm.recepcionChange()" listorigin="vm.ListInstitution"
+                                    placeholder="'3311'" requerid="vm.requeriddonor" fieldCode="code" fieldName="name"
+                                    ng-model="vm.new.institutions.selected" ng-disabled="vm.editdisabled">
+                                </loadcombobox>
+                            </div>
+                            <span ng-show="vm.requeridinstistution" style="margin-left: 51px;"
+                                class="help-block uk-text-bottom ng-binding">{{'0060' | translate}}</span>
+                            <span ng-show="!vm.requeridinstistution" style="margin-left: 51px;color: #eee;">.</span>
+                        </div>
+                        <div class="uk-width-1-3" style="margin-top: 26px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/receptor.png" />
+                                </span>
+                                <label class="labelmaterial">{{'3317' | translate}}</label>
+                                <loadcomboboxrecepcion listorigin="vm.Listreceiverpopup" placeholder="'3309'"
+                                    ng-disabled="vm.editdisabled" change="vm.changue(2)" fieldCode="patientId"
+                                    fieldName="name" requerid="vm.requeriddonor" ng-model="vm.new.receiver.selected">
+                                </loadcomboboxrecepcion>
+                            </div>
+                            <span ng-show="vm.requeridreceiver" style="margin-left: 51px;"
+                                class="help-block uk-text-bottom ng-binding">{{'0060' |
+                                translate}}</span>
+                        </div>
+                        <div class="uk-width-1-3" style="margin-top: 52px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/blood-tube.png" />
+                                </span>
+                                <label class="labelmaterial">{{'3508' | translate}}</label>
+                                <md-datepicker ng-model="vm.new.datesamplecollection" md-open-on-focus
+                                    md-is-open="vm.datesample" class="md-input md-inputsm label-fixed orderentrytab"
+                                    md-max-date="vm.maxDate">
+                                </md-datepicker>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 30px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/1.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloT4</label>
+                                    <md-select ng-model="vm.new.aloT4" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 30px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/2.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloB4</label>
+                                    <md-select ng-model="vm.new.aloB4" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 30px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/3.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloT20</label>
+                                    <md-select ng-model="vm.new.aloT20" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 30px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/4.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloB20</label>
+                                    <md-select ng-model="vm.new.aloB20" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 30px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/5.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloT37</label>
+                                    <md-select ng-model="vm.new.aloT37" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 30px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/6.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloB37</label>
+                                    <md-select ng-model="vm.new.aloB37" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 21px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/7.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloDttT4</label>
+                                    <md-select ng-model="vm.new.aloDttT4" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 21px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/8.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloDttB4</label>
+                                    <md-select ng-model="vm.new.aloDttB4" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 21px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/1.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloDttT20</label>
+                                    <md-select ng-model="vm.new.aloDttT20" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 21px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/2.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloDttB20</label>
+                                    <md-select ng-model="vm.new.aloDttB20" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 21px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/3.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloDttT37</label>
+                                    <md-select ng-model="vm.new.aloDttT37" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-6" style="margin-top: 21px;">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <img class="md-list-addon-icon material-icons md-24"
+                                        ng-src="images/transplants/4.png" />
+                                </span>
+                                <md-input-container style="width: 100%">
+                                    <label>AloDttB37</label>
+                                    <md-select ng-model="vm.new.aloDttB37" ng-class="orderentrytab">
+                                        <md-option ng-repeat="s in vm.score" ng-value="s.id">
+                                            {{s.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="md-fab-wrapper md-fab-speed-dial" style="bottom: 6px;right: 12px;">
+                            <button type="button" class="md-fab  md-fab-small md-fab md-fab-success"
+                            ng-click="vm.newcitotoxican()">
+                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                title="{{'3100' | translate}}">&#xE145;</i>
+                             </button>
+                            <button type="button"
+                                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                                ng-click="vm.savecytotoxicantibodies()">
+                                <i class="material-icons md-color-blue-50" title="{{'0007' | translate}}"
+                                    data-uk-tooltip="{pos:'top'}" data-uk-tooltip="{pos:'top'}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_print_cytotoxicantibodies" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <loadpage view="vm.loading"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar" style="background: rgb(37 152 243);">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">how_to_reg</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'3509' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content uk-grid uk-margin-small-top"
+                style="height: calc(100% - 61px);padding: 2px 4px 2px 20px" pdk-next-input-on-enter>
+                <div class="uk-width-1-1 order-entry-order-padding" ng-if="vm.generateReport && !vm.viewpreliminar"
+                    style="padding: 0px 13px; height: 99%">
+                    <div style="height: 100%;" class="md-card">
+                        <div style="height: 100%;padding: 1px 15px 0px 27px;" class="md-card-content">
+                            <div class="uk-grid" style="height: calc(100% - 66px);">
+                                <div class="uk-width-5-6" style="padding-top: 16px;width: 100%;height: 100%;">
+                                    <div class="uk-grid uk-grid-small" style="height: 100%;">
+                                        <fieldset class="fieldset" style="width: 98%;">
+                                            <div class="uk-width-1-1 uk-grid">
+                                                <div class="uk-width-5-10">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/inconsistency/patient.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3600'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{vm.dataprint.receiverPatient.patientId}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/patient/age.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3601'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{vm.dataprint.receiverPatient.age}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/inconsistency/patient.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3602'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{vm.dataprint.donorPatient.patientId}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="uk-width-5-10">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/inconsistency/lasname.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3603'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{ vm.dataprint.receiverPatient.lastName |
+                                                                    uppercase}} {{vm.dataprint.receiverPatient.surName
+                                                                    |uppercase}} {{ vm.dataprint.receiverPatient.name1 |
+                                                                    uppercase}}
+                                                                    {{ vm.dataprint.receiverPatient.name2 | uppercase}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/patient/genders.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3604'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{vm.dataprint.receiverPatient.genderName}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/inconsistency/lasname.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3605'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{ vm.dataprint.donorPatient.lastName |
+                                                                    uppercase}} {{vm.dataprint.donorPatient.surName
+                                                                    |uppercase}} {{ vm.dataprint.donorPatient.name1 |
+                                                                    uppercase}}
+                                                                    {{ vm.dataprint.donorPatient.name2 | uppercase}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <hr class="uk-grid-divider">
+                                            <div class="uk-width-1-1 uk-grid">
+                                                <div class="uk-width-5-10" style="margin-top: 21px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/blood-tube.png" />
+                                                        </span>
+                                                        <label style="color: #727272;font-size: 12px;"
+                                                            class="labelmd-inpu uk-text-truncate">{{'3606' |
+                                                            translate}}</label>
+                                                        <md-datepicker ng-model="vm.dataprint.deliveryresults"
+                                                            md-open-on-focus md-is-open="vm.datedelivery"
+                                                            ng-disabled="vm.disabledcontrolHLA"
+                                                            ng-class="{'requerid': vm.requeriddeliveryresults}"
+                                                            class="md-input md-inputsm label-fixed"
+                                                            md-max-date="vm.maxDate">
+                                                        </md-datepicker>
+                                                    </div>
+                                                    <span ng-show="vm.requeriddeliveryresults"
+                                                        style="margin-left: 51px;"
+                                                        class="help-block uk-text-bottom ng-binding">{{'0060' |
+                                                        translate}}</span>
+                                                    <span ng-show="!vm.requeriddeliveryresults"
+                                                        style="margin-left: 51px;color: #eee;">.</span>
+                                                </div>
+                                                <div class="uk-width-5-10" style="margin-top: 8px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/approved.png" />
+                                                        </span>
+                                                        <label class="labelmaterial"
+                                                            style="color: #727272;font-size: 12px;">{{'3607' |
+                                                            translate}}</label>
+                                                        <loadcombobox listorigin="vm.ListUser"
+                                                            change="vm.changuerequerid()" placeholder="'3313'"
+                                                            fieldCode="identification" fieldName="name"
+                                                            requerid="vm.requeridapprover"
+                                                            ng-model="vm.dataprint.approver.selected">
+                                                        </loadcombobox>
+                                                    </div>
+                                                    <span ng-show="vm.requeridapprover" style="margin-left: 51px;"
+                                                        class="help-block uk-text-bottom ng-binding">{{'0060' |
+                                                        translate}}</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-card-content uk-flex uk-flex-right" style="padding: 5px;">
+                                <div class="md-fab-in-card" style="bottom: 6px;">
+                                    <div class="uk-flex uk-flex-center measureButtons">
+                                        <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                                            <button type="button" style="margin-top: 3px;"
+                                                class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light"
+                                                ng-click="vm.preliminary(1)">
+                                                <i class="uk-icon-file-pdf-o md-color-brown-50"
+                                                    title="{{'3608' | translate}}" data-uk-tooltip="{pos:'top'}"></i>
+                                            </button>
+                                        </div>
+                                        <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                                            <button type="button" style="margin-top: 4px;"
+                                                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                                                ng-click="vm.savepdfReport()">
+                                                <i class="material-icons" title="{{'3609' | translate}}"
+                                                    data-uk-tooltip="{pos:'top'}">&#xE161;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1 order-entry-order-padding" ng-if="vm.viewpreliminar" style="padding: 0px 13px; height: 99%; z-index: 100;
+                padding-left: 0px;
+                padding-top: 0px;
+                background: rgb(82 86 89);">
+                    <iframe id="previreport" scrolling="auto" width="100%" style="border-width: 0px;"
+                        class="contentscroll"></iframe>
+                    <div class="md-fab-wrapper md-fab-speed-dial ng-scope">
+                        <div class="uk-flex uk-flex-center measureButtons">
+                            <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                                <button type="button"
+                                    class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-purple-700"
+                                    ng-click="vm.eventUndo()" style="margin-top: 4px;">
+                                    <i class="material-icons md-24 md-light no_margin" title="{{'0776' | translate}}"
+                                        data-uk-tooltip="{pos:'top'}">&#xE166;</i>
+                                </button>
+                            </div>
+                            <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                                <button type="button" style="margin-top: 4px;"
+                                    class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                                    ng-click="vm.savepdfReport()">
+                                    <i class="material-icons" title="{{'3609' | translate}}"
+                                        data-uk-tooltip="{pos:'top'}">&#xE161;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_block_cytotoxicantibodies" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <loadpage view="vm.loading"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar" style="background: rgb(37 152 243);">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">how_to_reg</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'3610' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content uk-grid uk-margin-small-top"
+                style="height: calc(100% - 56px);padding: 2px 4px 2px 20px;">
+                <div class="uk-width-1-1 order-entry-order-padding" style="padding: 0px 13px; height: 99%">
+                    <div style="height: 100%;">
+                        <div style="height: 100%;padding: 1px 15px 0px 27px;" class="md-card-content">
+                            <div class="uk-grid" style="height: calc(100% - 66px);">
+                                <div class="uk-width-5-6" style="padding-top: 16px;width: 100%;height: 100%;">
+                                    <div class="uk-grid uk-grid-small" style="height: 100%;">
+                                        <div class="uk-width-1-1"
+                                            style="height: calc(100% - 144px);z-index: 100;padding-left: 19px;padding-top: 0px;">
+                                            <div class="md-card" style="height: 100%;">
+                                                <div class="md-card-content" style="height: 100%;padding: 0px;">
+                                                    <table
+                                                        class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                                        style="height: 100%;    margin-bottom: 0px;">
+                                                        <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                                            <tr class="uk-grid"
+                                                                style="margin-left: 0px;background-color: #eee;">
+                                                                <th class="uk-width-1-10 uk-text-truncate"
+                                                                    style="font-size: 12px;">
+                                                                    {{'3502' | translate}}
+                                                                </th>
+                                                                <th class="uk-width-2-10 uk-text-truncate"
+                                                                    style="font-size: 12px;">
+                                                                    {{'3503' | translate}}
+                                                                </th>
+                                                                <th class="uk-width-3-10 uk-text-truncate"
+                                                                    style="font-size: 12px;">
+                                                                    {{'1815' | translate}}
+                                                                </th>
+                                                                <th class="uk-width-1-10 uk-text-truncate"
+                                                                    style="font-size: 12px;">
+                                                                    {{'3505' | translate}}
+                                                                </th>
+                                                                <th class="uk-width-3-10 uk-text-truncate"
+                                                                    style="font-size: 12px;">
+                                                                    {{'3506' | translate}}
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody vs-repeat="{size: 50}"
+                                                            class="tbodyscrollable contentscroll"
+                                                            style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                                            <tr ng-repeat="antibodies in vm.datazip" class="uk-grid"
+                                                                style="margin-left: 0px;margin-top: 0px;">
+                                                                <td class="uk-width-1-10">
+                                                                    {{antibodies.receiverPatient.patientId}}</td>
+                                                                <td class="uk-width-2-10">
+                                                                    {{antibodies.receiverPatient.lastName | uppercase}}
+                                                                    {{antibodies.receiverPatient.surName |
+                                                                    uppercase}} {{antibodies.receiverPatient.name1 |
+                                                                    uppercase}}
+                                                                    {{antibodies.receiverPatient.name2 | uppercase}}
+                                                                </td>
+                                                                <td class="uk-width-3-10">
+                                                                    {{antibodies.institution.name}}</td>
+                                                                <td class="uk-width-1-10">
+                                                                    {{antibodies.donorPatient.patientId}}
+                                                                </td>
+                                                                <td class="uk-width-3-10">
+                                                                    {{antibodies.donorPatient.lastName | uppercase}}
+                                                                    {{antibodies.donorPatient.surName |
+                                                                    uppercase}} {{antibodies.donorPatient.name1 |
+                                                                    uppercase}}
+                                                                    {{antibodies.donorPatient.name2 | uppercase}}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <fieldset class="fieldset" style="width: 97%;margin-left: 19px;">
+                                            <div class="uk-width-1-1 uk-grid">
+                                                <div class="uk-width-5-10" style="margin-top: 33px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/blood-tube.png" />
+                                                        </span>
+                                                        <label style="color: #727272;font-size: 12px;"
+                                                            class="labelmd-inpu uk-text-truncate">{{'3606' |
+                                                            translate}}</label>
+                                                        <md-datepicker ng-model="vm.dataprintblock.deliveryresults"
+                                                            md-open-on-focus md-is-open="vm.dateblock"
+                                                            ng-change="vm.requeriddeliveryresultsblock=false"
+                                                            ng-class="{'requerid': vm.requeriddeliveryresultsblock}"
+                                                            class="md-input md-inputsm label-fixed"
+                                                            md-max-date="vm.maxDate">
+                                                        </md-datepicker>
+                                                    </div>
+                                                    <span ng-show="vm.requeriddeliveryresultsblock"
+                                                        style="margin-left: 51px;"
+                                                        class="help-block uk-text-bottom ng-binding">{{'0060' |
+                                                        translate}}</span>
+                                                    <span ng-show="!vm.requeriddeliveryresultsblock"
+                                                        style="margin-left: 51px;color: #eee;">.</span>
+                                                </div>
+                                                <div class="uk-width-5-10" style="margin-top: 8px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/approved.png" />
+                                                        </span>
+                                                        <label class="labelmaterial"
+                                                            style="color: #727272;font-size: 12px;">{{'3607' |
+                                                            translate}}</label>
+                                                        <loadcombobox listorigin="vm.ListUser"
+                                                            change="vm.changuerequeridblock()" placeholder="'3313'"
+                                                            fieldCode="identification" fieldName="name"
+                                                            requerid="vm.requeridapproverblock"
+                                                            ng-model="vm.dataprintblock.approver.selected">
+                                                        </loadcombobox>
+                                                    </div>
+                                                    <span ng-show="vm.requeridapproverblock" style="margin-left: 51px;"
+                                                        class="help-block uk-text-bottom ng-binding">{{'0060' |
+                                                        translate}}</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-card-content uk-flex uk-flex-right" style="padding: 5px;">
+                                <div class="md-fab-in-card" style="bottom: 6px;">
+                                    <div class="uk-flex uk-flex-center measureButtons">
+                                        <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                                            <button type="button" style="margin-top: 3px;"
+                                                class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light"
+                                                ng-click="vm.preliminaryblock(1)">
+                                                <i class="uk-icon-cloud-download" title="{{'3608' | translate}}"
+                                                    data-uk-tooltip="{pos:'top'}"></i>
+                                            </button>
+                                        </div>
+                                        <div class="uk-flex uk-flex-column" style="margin-left: 9px;">
+                                            <button type="button" style="margin-top: 4px;"
+                                                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                                                ng-click="vm.preliminaryblock(2)">
+                                                <i class="material-icons" title="{{'3609' | translate}}"
+                                                    data-uk-tooltip="{pos:'top'}">&#xE161;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalprogressprint" class="uk-modal" bg-close="false" data-uk-modal>
+    <div class="uk-modal-dialog">
+        <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">{{'3611' |
+            translate}}</div>
+        <div class="uk-progress uk-progress-striped uk-active" style="margin-bottom: 3px">
+            <div class="uk-progress-bar" style="width: {{vm.porcentdownload}}%;">{{vm.porcentdownload}}%</div>
+        </div>
+        <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">{{vm.totaldownload}} {{vm.prepotition}}
+            {{vm.datazip.length}}</div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

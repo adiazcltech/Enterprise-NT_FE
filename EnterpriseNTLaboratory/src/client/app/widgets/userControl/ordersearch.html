@@ -1,0 +1,369 @@
+<style>
+  .ordersearch-padding-search {
+    padding-top: 5px;
+  }
+
+  .ordersearch-uppercase {
+    text-transform: uppercase;
+  }
+
+  .ordersearch-filter-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .ordersearch-filter-padding {
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
+  input.ordersearch-data-input {
+    padding-bottom: 5px !important;
+    margin-top: -6px !important;
+    background-color: transparent !important;
+    width: 100% !important;
+    border-bottom-width: 1px !important;
+    position: relative !important;
+    top: -38px !important;
+    border-bottom-color: #ccc !important;
+  }
+
+  span.k-picker-wrap,
+  span.k-state-default,
+  span.k-state-default:hover,
+  span.k-state-default:focus {
+    padding: 0px !important;
+    height: 35px !important;
+    border-style: none;
+    background-color: #fff !important;
+  }
+
+  .md-input-wrapper {
+    width: 96% !important;
+  }
+
+  #div_date {
+    width: 210px !important;
+  }
+
+  #div_date>div.md-input-wrapper {
+    width: 174px !important;
+  }
+</style>
+<div id="ordersearch" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+  <loadpage view="ordersearch.loadingdata"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-orange-A700">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-grey-50 " ng-click="ordersearch.getCloset()"
+              data-uk-tooltip="{pos:'top'}" title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-grey-50 md-33">&#xE8B6;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+          {{'0424' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+
+        <div class="uk-form-row">
+          <div class="md-card md-card-hover">
+            <div class="md-card-content">
+              <div class="uk-tab-center">
+                <ul class="uk-tab" data-uk-tab="{connect:'#tabs_filter'}" change.uk.tab="">
+                  <li class="uk-active">
+                    <a ng-click="ordersearch.eventSelectOrder()">{{'0110' | translate}}</a>
+                  </li>
+                  <li>
+                    <a href="#" ng-click="ordersearch.eventSelectPatientId()">{{'0117' | translate}}</a>
+                  </li>
+                  <li>
+                    <a href="#" ng-click="ordersearch.eventSelectPatient()">{{'0398' | translate}}</a>
+                  </li>
+                  <li>
+                    <a href="#" ng-click="ordersearch.eventSelectDate()">{{'0325' | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+              <ul id="tabs_filter" class="uk-switcher uk-margin ordersearch-filter-margin">
+                <li class="ordersearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                      <div class="uk-width-5-10 uk-row-first">
+                        <div class="md-input-wrapper">
+                          <label>{{'0110' | translate}}</label>
+                          <input id="txt_ordersearch_order" type="number" class="md-input"
+                            ng-model="ordersearch.orderToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByOrder()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-3-10" style="width: 35%; padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="ordersearch.searchByOrder()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 15%; padding-top: 10px">
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{ordersearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="ordersearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                      <div class="uk-width-2-5" ng-if="ordersearch.showDocumentType">
+                        <label style="top: -6px;font-size: 12px;">{{'0233' | translate}}</label>
+                        <select id="txt_ordersearch_patient_id1" class="md-input"
+                          ng-options="obj.id as obj.name for obj in ordersearch.documentTypes"
+                          ng-change="ordersearch.searchByPatientId()"
+                          data-ng-model="ordersearch.patientDocToSearch"></select>
+                        <span class="md-input-bar"></span>
+                      </div>
+                      <div class="uk-width-1-5 uk-row-first" style="padding: 2px;">
+                        <label>{{'0117' | translate}}</label>
+                        <input id="txt_ordersearch_patient_id" type="text" class="md-input ordersearch-uppercase"
+                          ng-model="ordersearch.patientIdToSearch"
+                          ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatientId()">
+                        <span class="md-input-bar"></span>
+                      </div>
+                      <div class="uk-width-1-5" style="width: 25%;padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="ordersearch.searchByPatientId()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 15%;padding-top: 10px">
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{ordersearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="ordersearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                      <div class="uk-width-1-5 uk-row-first" ng-if="ordersearch.twosurnames">
+                        <div class="md-input-wrapper">
+                          <label>{{'0234' | translate}}</label>
+                          <input id="txt_ordersearch_patient_last_name" type="text"
+                            class="md-input ordersearch-uppercase" ng-model="ordersearch.lastNameToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5" ng-if="ordersearch.twosurnames">
+                        <div class="md-input-wrapper">
+                          <label>{{'0235' | translate}}</label>
+                          <input type="text" class="md-input ordersearch-uppercase"
+                            ng-model="ordersearch.surNameToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-2-5 uk-row-first" ng-if="!ordersearch.twosurnames">
+                        <div class="md-input-wrapper">
+                          <label>{{'3657' | translate}}</label>
+                          <input id="txt_ordersearch_patient_last_name" type="text"
+                            class="md-input ordersearch-uppercase" ng-model="ordersearch.lastNameToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5" ng-if="ordersearch.twoNames">
+                        <div class="md-input-wrapper">
+                          <label>{{'0236' | translate}}</label>
+                          <input type="text" class="md-input ordersearch-uppercase" ng-model="ordersearch.name1ToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5" ng-if="ordersearch.twoNames">
+                        <div class="md-input-wrapper">
+                          <label>{{'0237' | translate}}</label>
+                          <input type="text" class="md-input ordersearch-uppercase" ng-model="ordersearch.name2ToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-2-5" ng-if="!ordersearch.twoNames">
+                        <div class="md-input-wrapper">
+                          <label>{{'3656' | translate}}</label>
+                          <input type="text" class="md-input ordersearch-uppercase" ng-model="ordersearch.name1ToSearch"
+                            ng-keypress="$event.keyCode === 13 && ordersearch.searchByPatient()">
+                          <span class="md-input-bar"></span>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-5" style="width: 7%;padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="ordersearch.searchByPatient()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 13%;padding-top: 10px">
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{ordersearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="ordersearch-padding-search">
+                  <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center ordersearch-filter-padding">
+                      <div class="uk-width-1-6 uk-row-first" style="margin-top: 10px;">
+                        <md-datepicker ng-model="ordersearch.dateToSearch" name="dateField1"
+                          ng-change="ordersearch.searchByDate()" md-open-on-focus md-is-open="ordersearch.isOpen2"
+                          ng-required="true" md-max-date="ordersearch.maxDate">
+                        </md-datepicker>
+                      </div>
+                      <div class="uk-width-1-5" style="width: 67%;padding-top: 10px">
+                        <button type="button"
+                          class="md-fab md-fab-xsmall md-fab-success md-fab-wave-light waves-effect waves-light md-bg-orange-A700"
+                          ng-click="ordersearch.searchByDate()">
+                          <i class="material-icons md-24 md-light no_margin">&#xE8B6;</i>
+                        </button>
+                      </div>
+                      <div class="uk-width-2-10" style="width: 15%;padding-top: 10px">
+                        <!-- ng-if="ordersearch.orders.length!==0" -->
+                        <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                          <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                              <img class="md-list-addon-icon material-icons md-26"
+                                ng-src="images/order/totalorder1.png">
+                            </div>
+                            <div class="md-list-content" style="padding-left: 30px;">
+                              <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                              <span class="md-list-heading uk-text-small" style="font-size: 18px !important;">
+                                {{ordersearch.orders.length}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="uk-width-1-1" style="margin-top: 10px;height: 70%" ng-show="ordersearch.viewtable">
+          <div class="md-card md-card-hover" style="height: 100%;">
+            <div class="md-card-content" style="height: 100%;padding: 0px;">
+              <div class="md-card-content fullheight" style="padding: 0px;">
+                <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head" style="height: 39px;">
+                  <div class="uk-width-1-10" style="padding-left: 10px;"
+                    ng-click="ordersearch.sortType = 'order'; ordersearch.sortReverse = !ordersearch.sortReverse">
+                    <resultssort sortvalue="'order'" sorttype="ordersearch.sortType"
+                      sortreverse="ordersearch.sortReverse"></resultssort>
+                    {{'0110' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;" ng-if="ordersearch.showDocumentType"
+                    ng-click="ordersearch.sortType = 'documentTypeId'; ordersearch.sortReverse = !ordersearch.sortReverse">
+                    <resultssort sortvalue="'documentTypeId'" sorttype="ordersearch.sortType"
+                      sortreverse="ordersearch.sortReverse"></resultssort>{{'0233' | translate}}
+                  </div>
+                  <div style="padding-left: 10px;"
+                    ng-click="ordersearch.sortType = 'patientId'; ordersearch.sortReverse = !ordersearch.sortReverse"
+                    ng-class="{'uk-width-2-10' : ordersearch.showDocumentType,'uk-width-4-10' : !ordersearch.showDocumentType}">
+                    <resultssort sortvalue="'patientId'" sorttype="ordersearch.sortType"
+                      sortreverse="ordersearch.sortReverse"></resultssort>{{'0117' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="ordersearch.sortType = 'lastName'; ordersearch.sortReverse = !ordersearch.sortReverse">
+                    <resultssort sortvalue="'lastName'" sorttype="ordersearch.sortType"
+                      sortreverse="ordersearch.sortReverse"></resultssort>{{'0398' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="ordersearch.sortType = 'birthday'; ordersearch.sortReverse = !ordersearch.sortReverse">
+                    <resultssort sortvalue="'birthday'" sorttype="ordersearch.sortType"
+                      sortreverse="ordersearch.sortReverse"></resultssort>{{'0120' | translate}}
+                  </div>
+                  <div class="uk-width-1-10" style="padding-left: 10px;"
+                    ng-click="ordersearch.sortType = 'sex'; ordersearch.sortReverse = !ordersearch.sortReverse">
+                    <resultssort sortvalue="'sex'" sorttype="ordersearch.sortType"
+                      sortreverse="ordersearch.sortReverse"></resultssort>{{'0426' | translate}}
+                  </div>
+                </div>
+                <div class="vs-repeat-custom-scroll" style="height: calc(100% - 40px);" vs-repeat="20"
+                  data-scroll-to-top='ordersearch.orders'>
+                  <div ng-repeat="order in ordersearch.orders | orderBy:ordersearch.sortType:ordersearch.sortReverse"
+                    class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table" style="margin-top: 0px;">
+                    <div class="uk-width-1-10" style="padding-left: 10px;">
+                      <a href="#" ng-click="ordersearch.selectOrder(order.order)">{{order.order}}</a>
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 15px;" ng-if="ordersearch.showDocumentType">
+                      {{order.documentType.toUpperCase() === 'DEFECTO' ? 'SIN TIPO DE DOCUMENTO' :
+                      order.documentType.toUpperCase()}}
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 15px;">{{order.patientId}}</div>
+                    <div style="padding-left: 20px;"
+                      ng-class="{'uk-width-2-10' : ordersearch.showDocumentType,'uk-width-4-10' : !ordersearch.showDocumentType}">
+                      {{order.lastName.toUpperCase() + ' ' + (order.surName === null || order.surName === '' ? '' :
+                      order.surName.toUpperCase()
+                      + ' ') + order.name1.toUpperCase() + ' ' + ((order.name1 === null || order.name2 === '' ? '' :
+                      order.name2.toUpperCase()))
+                      }}
+                    </div>
+                    <div style="padding-left: 23px;" class="uk-width-2-10">{{order.birthday}}</div>
+                    <div style="padding-left: 27px;" class="uk-width-1-10">{{order.sex}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid uk-width-1-1 uk-grid-medium" style="margin-top: 10px;height: 70%"
+          ng-show="ordersearch.nofound && !ordersearch.viewtable">
+          <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+            <img class="img-responsive" style="height: 90px; width: 90px;" src="images/data.png">
+          </div>
+          <div class="uk-width-1-1 uk-text-center">
+            <h3 class="ng-binding">{{'1077' | translate}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,181 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions> 
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+
+
+<style type="text/css">
+   .bodyPanel {
+      height: calc(100% - 7.4em) !important;; 
+      overflow-y: scroll; 
+      padding-bottom: 0px !important;
+    }
+
+   .footPanel {
+      height: 70px;
+      overflow: hidden;
+      margin-top: -14px;
+      padding-bottom: 0px !important;
+      padding-top: 0px !important;
+      vertical-align: bottom;
+      overflow-y: scroll;
+
+    }
+
+    fieldset, input, select {
+     font-size: 13px !important;
+     padding-left: 10px !important;
+
+    }  
+
+   table > thead > th {
+      padding-bottom: 0px !important;
+    }
+
+    .tbody-list {
+      overflow-y: scroll;
+      height: calc(100% - 84px);
+      position: absolute;
+    }
+
+    .md-bg-blue-grey-100{
+      cursor: default;
+    }
+
+    .uk-tab > li > a:hover, .uk-tab > li > a:focus {
+        color: #1976d2;
+    } 
+
+    .messageWork{
+      height: auto;
+      top: 10px !important; 
+      width: 35%;
+      border-radius: 4px;
+    }
+
+    .messageTextWork {
+      width: 300px;
+      float: left;
+      padding-top: 5%;
+      white-space: nowrap;
+    }
+
+    .cltech-btn-no, 
+    .cltech-btn-no:hover, 
+    .cltech-btn-no:active {
+        padding-left: 12.5px;
+        padding-right: 12.5px;
+        background: white;
+        border-color: #c6c6c6;
+        border-style: solid;
+        border-width: 0.5px;
+        color: #777;
+    }   
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+ <div id="page_content" style="overflow: hidden !important;">
+  <div id="page_content_inner" class="bodyPanel">
+
+  <!--   <h3 class="heading_b uk-margin-bottom"></h3> class="named_tab" class="uk-disabled width: 98.69%;-->
+    <form id="Form" class="md-card" charset="utf-8" >
+      <div class="md-card-content">
+        <div class="uk-grid">
+          <div class="uk-width-1-1">
+                <div class ="uk-grid" style="margin-left: 0px; position: relative; ">  
+                  <fieldset class="fieldset " ng-class="{'-1-1' : vm.byOrder === '3', 'uk-width-1-2': vm.byOrder !== '3'}" style=" height: 105px; margin-bottom: 10px; padding-top: 15px" >
+                      <legend>{{'0242' | translate}}</legend>  
+                      <div class="radio-check">      
+                         <input type="radio" name="typeUnlock" id="order" checked value="1" ng-model="vm.byOrder" >
+                         <label for="order" >{{'0110' | translate}}</label>
+                         <input type="radio" name="typeUnlock" id="history" value="2" ng-model="vm.byOrder">
+                         <label for="history" style="margin-left: 15px;" >{{'0117' | translate}}</label> 
+                         <input type="radio" name="typeUnlock" id="all" value="3" ng-model="vm.byOrder">
+                         <label for="all" style="margin-left: 15px;" >{{'0353' | translate}}</label>                    
+                      </div>  
+                  </fieldset>
+
+                  <fieldset class="fieldset uk-width-1-2" style="height: 105px !important; padding-top: 15px; margin-left: 0.5%; width: 49.5%" ng-if="vm.byOrder !== '3'">
+                      <legend ng-if="vm.byOrder === '1'">{{'0110' | translate}}</legend> 
+                      <legend ng-if="vm.byOrder === '2'">{{'0117' | translate}}</legend> 
+                      <div class="uk-grid" ng-show="vm.byOrder === '1'"> 
+					            <div class="uk-width-1-3">
+					               <label for="listYear" >{{'0072' | translate}}</label>
+					               <select md-input label-fixed class="md-input label-fixed" id="listYear" charset="utf-8" ng-options="obj.id as obj.name for obj in vm.listYear" data-ng-model="vm.listYear.id"  ng-change="vm.changeYear()"></select>
+					            </div>  
+					            <div class="uk-width-1-2" style="margin-top: -1px" >
+					                <label for="orderNumber">{{'0061' | translate}}</label>
+					                <input id="orderNumber" md-input label-fixed class="md-input label-fixed" type="text" ng-model="vm.orderNumber" ng-keypress="vm.keySelectOrder($event)" ng-blur="vm.keySelectOrder(undefined)" maxlength="{{vm.maxLenght}}" ng-class="{'md-input-danger': vm.orderNotFound }" />
+					                <span class="uk-container-center help-block" ng-show="vm.orderNotFound && vm.byOrder === '1'">{{'0244' | translate }}</span>        
+					            </div>
+	                   </div> 
+	                   <div class="uk-grid" ng-show="vm.byOrder === '2'" style="margin-top: 0px;">  
+	                      <div class="uk-width-1-2" ng-if="vm.documentType">
+                          <label for="documentType">{{'0233' | translate}}</label>
+                          
+	                         <select md-input label-fixed class="md-input label-fixed" id="documentType" charset="utf-8" ng-options="obj as obj.name for obj in vm.listDocumentType track by obj.id" data-ng-model="vm.modelDocumentType" md-input class="md-input" ng-change = "vm.changeDocument()" ></select>
+	                      </div> 
+	                      <div class="uk-width-1-2">
+	                      	<label for="historyNumber">{{'0117' | translate}}</label>
+ 									 <input id="historyNumber" md-input label-fixed class="md-input label-fixed" type="text" ng-model="vm.historyNumber" ng-keypress="vm.keySelectHistory($event)" ng-blur="vm.keySelectHistory(undefined)" ng-class="{'md-input-danger': vm.historyNotFound }" ng-disabled="vm.documentType && vm.modalDocumentType.id === 0"/>          	                      	
+	                         <span class="uk-container-center help-block" ng-show="vm.historyNotFound && vm.byOrder === '2'">{{'0245' | translate }}</span>  
+	                      </div>
+	                   </div>    
+                  </fieldset>  
+
+                </div>
+          </div>
+        </div>
+      </div>
+<!--         <div class="uk-modal" id="modalConfirmation" tabindex="1" aria-hidden="true">
+          <div class="uk-modal-dialog messageWork">
+              <div class="uk-modal-body" style="height: 90px; top: 0px">
+                 <div style="width: 20%; float: left; margin-right: 4px">
+                      <img class="img-responsive" src="images/Question.png">
+                  </div>
+                  <div class="messageTextWork">
+                      <label style="margin-top: 20px; white-space: normal;">{{'0221' | translate}}</label>
+                  </div>
+              </div>
+              <div class="uk-modal-footer" style="text-align: right;">
+                  <button type="button" class="uk-modal-close md-btn-primary md-btn-wave md-btn-wave-light waves-effect waves-button waves-light" ng-click="vm.getWorkListDelete()" >
+                         {{'0219' | translate}}
+                  </button>               
+                  <button type="button" class="uk-modal-close cltech-btn-no md-btn-wave md-btn-wave-light waves-effect waves-button waves-light"  >
+                        {{'0220' | translate}}
+                  </button> 
+              </div>
+          </div>
+        </div> -->
+    </form>
+  </div>
+  <div id="page_content_inner" class="footPanel">
+            <form class="md-card" style="margin-bottom: 0px !important; ">
+
+              <div class="md-card-content uk-text-right" style="width: 97%">
+  <!--          <button type="button" class="md-btn md-btn-success md-btn-wave-light waves-effect waves-button waves-light" ng-disabled="false" >
+                  <i class="material-icons" >&#xE145;</i>{{'0005' | translate}}
+                </button>
+                <button type="button" class="md-btn md-btn-warning md-btn-wave-light waves-effect waves-button waves-light" ng-click="vm.edit()" ng-disabled="false">
+                  <i class="material-icons">&#xE254;</i>{{'0006' | translate}}
+                </button>
+                <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="" ng-disabled="false">
+                  <i class="material-icons">&#xE161;</i>{{'0007' | translate}}
+                </button> -->
+<!--                 <div style="display: inline-block;">
+
+                </div> -->             
+                <div style="display: inline-block;">  
+                    <button type="button" class="md-fab md-fab-small md-fab-success" ng-disabled="(vm.byOrder === '1' && vm.orderNumber === '') || (vm.byOrder === '2' && vm.historyNumber === '')" ng-class="{'md-bg-blue-grey-100' : (vm.byOrder === '1' && vm.orderNumber === '') || (vm.byOrder === '2' && vm.historyNumber === '')}" ng-click="vm.accept()">
+                        <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0246' | translate}}" style="font-weight: bold;">&#xE876;</i>
+                    </button>                
+                </div>
+              </div>
+          </form>
+   </div>
+</div>
+
+
+<!-- <script src="widgets/angular-icheck.js"></script> -->

@@ -1,0 +1,178 @@
+<style>
+    label {
+        font-size: 12px;
+        color: #727272;
+    }
+
+    .patient-header-avatar {
+        margin-top: 10px !important;
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .patient-header-text {
+        padding-bottom: 0px !important;
+    }
+
+    .patient-md-card {
+        height: 120px !important;
+    }
+
+    .patient-card-content {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        overflow-y: auto !important;
+    }
+
+    .patient-addon-element {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        min-height: 40px;
+        height: 40px !important;
+    }
+
+    .patient-list-content {
+        font-size: 12px !important;
+    }
+
+    .patient-demo-item {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+
+        margin-bottom: {
+                {
+                patient.height_line
+            }
+        }
+
+        ;
+    }
+
+    .md-list>li {
+        min-height: 0px !important;
+    }
+
+    .patientdisabled {
+        background: #ebebe4;
+    }
+
+    .patient-demographic-text {
+        text-transform: capitalize !important;
+    }
+</style>
+
+<div class="md-card md-card-hover" style="height: 100%;" ng-class="{'patientdisabled':vma.orderdetail === undefined}">
+    <div class="uk-padding-remove uk-margin-remove" style="height: 98%;" ng-if="vma.orderdetail!==undefined">
+        <div class="uk-grid uk-flex uk-flex-middle" style="margin-left: 0px;margin-right: 0px;height: 100%;">
+            <div class="uk-width-5-10" style="padding-left: 4px;">
+                <ul class="md-list md-list-addon">
+                    <li class="patient-demo-item">
+                        <div class="md-list-addon-element patient-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/user1.png" />
+                        </div>
+                        <div class="md-list-content patient-list-content">
+                            <span class="md-list-heading">
+                                {{vma.selectedorder.idtype===''?'HC ': vma.selectedorder.idtype}}
+                                {{vma.selectedorder.patientCode}}
+                            </span>
+                            <span class="uk-text-small uk-text-muted patient-list-content uk-text-truncate">
+                                {{vma.selectedorder.patientLastName | uppercase }}
+                                {{vma.selectedorder.patientName | uppercase}}</span>
+                        </div>
+                    </li>
+                    <li class="patient-demo-item">
+                        <div class="md-list-addon-element patient-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/patient/genders.png" />
+                        </div>
+                        <div class="md-list-content patient-list-content">
+                            <span class="uk-text-small uk-text-muted patient-list-content">{{'0426' | translate}}</span>
+                            <span class="md-list-heading">
+                                {{vma.orderdetail.gender}}
+                            </span>
+                        </div>
+                    </li>
+                    <li class="patient-demo-item">
+                        <div class="md-list-addon-element patient-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/patient/age.png" />
+                        </div>
+                        <div class="md-list-content patient-list-content">
+                            <span class="uk-text-small uk-text-muted patient-list-content">{{'0102' | translate}}</span>
+                            <span class="md-list-heading">
+                                {{vma.orderdetail.age}} - {{vma.datebirth | date:'dd/MM/yyyy'}}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-width-5-10" style="padding-left: 0px;">
+                <ul class="md-list md-list-addon">
+                    <li class="patient-demo-item" style="margin-left: 21px;">
+                        <span class="uk-badge"
+                            style="background-color: {{vma.ordercolor}}; font-size: 140%; padding: 6px;">
+                            {{vma.selectedorder.orderType}}
+                        </span>
+                        <span class="uk-badge"
+                            style="background-color: transparent; color: #000; font-size: 190%; padding: 6px;margin-left: 10px;">
+                            <!-- background-color: #68C3F0; -->
+                            {{vma.selectedorder.order.toString().substring(vma.numerOrder)}}
+                        </span>
+                        <span title="{{'1148' | translate}}"
+                            data-uk-tooltip="{cls:'uk-tooltip-small long-text', pos:'top'}" class="uk-margin-right"
+                            ng-if="vma.selectedorder.daughterOrder.length > 0">
+                            <img style="height: 20px;width: 20px;" ng-src="images/order/retakechild.png" />
+                            <div class="uk-button-dropdown" data-uk-dropdown="" aria-haspopup="true"
+                                aria-expanded="false">
+                                <a>({{vma.selectedorder.daughterOrder.length}})</a>
+                                <div class="uk-dropdown uk-dropdown-bottom" aria-hidden="true" tabindex=""
+                                    style="min-width: 100px; top: 10px;">
+                                    <ul class="md-list">
+                                        <li ng-repeat="order in vma.selectedorder.daughterOrder"><a
+                                                ng-click="vma.loadOrder(order)">{{order}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </span>
+                        <span title="{{'1147' | translate}}"
+                            data-uk-tooltip="{cls:'uk-tooltip-small long-text', pos:'top'}" class="uk-margin-right"
+                            ng-if="vma.selectedorder.fatherOrder !== undefined">
+                            <div class="uk-button-dropdown" data-uk-dropdown="" aria-haspopup="true"
+                                aria-expanded="false">
+                                <img style="height: 20px;width: 20px;" ng-src="images/order/retakefather.png" />
+                                <div class="uk-dropdown uk-dropdown-bottom" aria-hidden="true" tabindex=""
+                                    style="min-width: 100px; top: 10px;">
+                                    <ul class="md-list">
+                                        <li><a
+                                                ng-click="vma.loadOrder(vma.selectedorder.fatherOrder)">{{vma.selectedorder.fatherOrder}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="patient-demo-item">
+                        <div class="md-list-addon-element patient-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/patient/age.png" />
+                        </div>
+                        <div class="md-list-content patient-list-content">
+                            <span class="uk-text-small uk-text-muted patient-list-content">Fecha de ingreso</span>
+                            <span class="md-list-heading">
+                                {{vma.datecreateorder | date:'dd/MM/yyyy , HH:mm:ss'}}
+                            </span>
+                        </div>
+                    </li>
+                    <li class="patient-demo-item" ng-if="vma.orderdetail.service!==''">
+                        <div class="md-list-addon-element patient-addon-element">
+                            <img class="md-list-addon-icon material-icons md-22" ng-src="images/order/ordertype.png" />
+                        </div>
+                        <div class="md-list-content patient-list-content">
+                            <span class="uk-text-small uk-text-muted patient-list-content">{{'0090' | translate}}</span>
+                            <span class="md-list-heading uk-text-truncate">
+                                {{vma.orderdetail.service}}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

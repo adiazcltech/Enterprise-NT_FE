@@ -1,0 +1,183 @@
+<style type="text/css">
+	%content {
+	  font-size: 32px;
+	  text-align: center;
+	  margin: 0 5px;
+	}
+	.bin {
+	  @extend %content;
+	  min-height: 90px;
+	  min-width: 90px;
+	  width: 101px;
+	  float: left;
+	  border: 1px solid #BBB;
+	  padding: 5px;
+	  border-radius: 5px;
+	}
+
+	.item {
+	  @extend %content;
+	  height: 90px;
+	  width: 90px;
+	  background: #337ab7;
+	  font-size: 12px;	 
+	  float: right;
+	  color: white;
+	  cursor: move;
+	  border-radius: 5px;
+	}
+
+
+	.itemPerfil {
+	  @extend %content;
+	  height: 90px;
+	  width: 90px;
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform: scale(1, 1);
+	  font-size: 12px;
+	  color: white;
+	  cursor: move;
+	  border-radius: 5px;
+	  background-color: #875FCA;
+	}
+
+
+	.item:active, .itemPerfil:active {
+	  background: #d9edf7 !important;
+	  border-color: #fff !important;
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform-style: preserve-3d;
+	  transform: scale(1.1, 1.1);
+	  color: black !important;
+	  cursor: move;
+	}	
+
+
+    .itemSelected {
+	  background: #d9edf7;    
+	  border-color: #66b3f6; 
+	  float: right;
+	  font-size: 12px;	
+	  color: black;
+	  cursor: move;
+	}
+
+	.itemDelay {
+	  height: 90px;
+	  width: 90px;
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform: scale(1, 1);
+	  font-size: 12px;	
+	  cursor: move;
+	  border-radius: 5px;
+	}
+
+	.animationItem{
+	  @extend %content;
+	  height: 90px;
+	  width: 90px;
+	  float: right;
+	  transition: all 0.8s ease;
+	  transform-style: preserve-3d;
+	  transform: scale(1, 1);
+	  color: white;
+	  cursor: move;
+	  border-radius: 5px;
+	  animation-name: AnimationLast;
+	  animation-iteration-count: 1;
+	  animation-duration: 0.8s;
+	  animation-delay: 0s;
+	  /*animation-fill-mode: both;*/
+	}
+
+	.animationItem:active{
+	  @extend %content;
+	  transition: all 0.8s ease;
+	  transform-style: preserve-3d;
+	  transform: scale(1.1, 1.1);
+	  background: #d9edf7;
+	  color: black;
+	}
+
+
+	@keyframes AnimationLast
+	{
+		from
+		{
+			opacity: 0.7;
+			transform-style: preserve-3d;
+			transform: translateX(0px) translateY(0px) translateZ(0px) rotate(0deg) scale(1.1, 1.1);
+			background: #d9edf7;
+			color: black;
+		}
+	    to
+	    {
+			opacity: 1;
+			color: #d9edf7;
+			transition: all 0.8s ease;
+			transform-style: preserve-3d;
+	    }
+	}
+
+
+
+	.orderStyle {
+	    padding-right: 10px;
+	    width: 90px;
+	    z-index: 0;
+	    height: 40px;
+	    padding-top: 5px;
+	    margin-bottom: -15px;
+	    background-color: transparent;
+	    border: none;
+	}
+
+	.toolptipStyle{
+	  background: #d9edf7;
+	  float: right;
+	  transition: all 0.2s ease;
+	  color: black;
+	  cursor: move;	
+	  border: 1px solid #66b3f6;
+	  font-size: 11px;	
+	  white-space: nowrap;
+/*	  z-index: 10;
+	  position: fixed;
+	  display: inline-block;*/
+	}
+
+
+	.drag {
+	  opacity: 0.5;
+	  transition: all 0.2s ease;
+	  background: #31b0d5;
+	  color: #555;
+	}
+	.over {
+	  background: #31b0d5;
+	  transition: all 0.3s ease;
+	  transform: scale(1, 1);
+	}
+
+	.inputNumber {
+	    height: 18px;
+	    width: 40px;
+	    padding: 0px;
+	    margin: 0px;
+	    border: none;
+	    border-radius: 3px;
+	    background-color: transparent;
+	    text-align: right;
+	}
+
+</style> 
+
+<div class="bin col-md-2" bin="bin" id="bin{{ bin.printOrder }}"  >
+<div class="panel-padding text-center btn btn-primary itemDelay" id="item{{ bin.id }}" draggable="true" draggablebox="true"  item="item" ng-class="{'itemPerfil': bin.testType !='', 'item': bin.testType ==''}" ><header class="text-right orderStyle" id="order{{ bin.printOrder }}" data-toggle="tooltip" data-placement="top" data-html="'true'" title="{{bin.name}}">{{bin.printOrder}}</header>
+{{bin.code}}</br>
+{{bin.abbr}}</br>
+{{bin.testType}}</br></div></div>
+<div id="bin0" style="display: block; height: 0px"></div> 

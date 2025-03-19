@@ -1,0 +1,547 @@
+<style type="text/css">
+  .day-header-schedule {
+    border: 1px solid #d2d2d2 !important;
+    font-size: 15px !important;
+    color: #525252;
+  }
+
+  .td-schedule {
+    height: 65px !important;
+    border: 1px solid #d2d2d2 !important;
+    width: 80px !important;
+  }
+
+  .day-schedule {
+    height: 100% !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding: 5px !important;
+    overflow: auto !important;
+  }
+
+  .icon-schedule {
+    padding: 8px;
+    background-color: #00abeb;
+    color: white;
+    margin: 5px 0px;
+    border-radius: 10px;
+  }
+
+  .event.today {
+    background-color: #00abeb;
+    color: white;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 12px;
+    padding: 7px;
+  }
+
+  .today-schedule {
+    color: white;
+    background-color: #00abeb;
+    padding: 6px 25px;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+
+  .day-schedule-active:hover {
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  .day-schedule-disabled:hover {
+    cursor: no-drop;
+  }
+
+  .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently*/
+  }
+
+  .macroscopy {
+    border-left: 4px solid #8bc34a!important;
+  }
+
+  .microscopy {
+    border-left: 4px solid #00bcd4!important;
+  }
+
+  .activity {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 7px;
+    float: left;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 5px;
+    border: 1px solid #b1b1b1;
+  }
+
+  .day-invalid{
+    background-color: #f44336;
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 12px;
+  }
+
+  .pl-0 {
+    padding-left: 0px;
+  }
+
+  .pr-0 {
+    padding-right: 0px;
+  }
+
+  .filter {
+    height: 100%;
+    border-style: solid;
+    border-top: 0;
+    border-bottom: 0px;
+    border-left: 0px;
+    padding-right: 40px;
+    margin-right: 0px;
+    border-color: #d6d3d6;
+  }
+
+  .conventions {
+    margin-left: 5px;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+</style>
+
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<modalreport openmodal="vm.open"></modalreport>
+<loadpage view="vm.loadingdata"></loadpage>
+
+<section class="general-container">
+
+
+  <div class="row general-container">
+
+    <div class="panel panel-primary panel-principal">
+
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">{{'3084' | translate |uppercase}}</strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/schedule/schedule.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+
+        <div class="col-md-3 panel-padding" style="height: 100%;">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text" placeholder="{{'0015' | translate}}" ng-change="vm.changeSearch()">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-4 text-center">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = vm.user; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.user"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.user"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.user && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType ==vm.user && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.user  && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.user  && vm.sortReverse"></span>
+                        </a>{{'0001' | translate}}
+                      </th>
+                      <th class="col-md-8">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = vm.name ; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" style="width: 95.5%; height: calc(100% - 13rem);">
+                    <tr class="row-list"
+                      data-ng-repeat="pathologist in vm.filtered = (vm.listPathologist | filter: vm.search) | orderBy:vm.sortType:vm.sortReverse"
+                      data-ng-click="vm.getPathologistById(pathologist, $index, this)"
+                      ng-class="{info: pathologist.id == vm.selected}">
+                      <td class="col-md-4 text-center" data-ng-bind="pathologist.userName"></td>
+                      <td class="col-md-8" data-ng-bind="pathologist.nameuserall" style="text-transform: capitalize;"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 panel-padding" style="padding: 0 10px;height: 100%;">
+
+          <div class="col-md-10" style="padding: 5px;">
+            <div class="panel-list" id="persCal" style="height: calc(100% - 90px);text-align-last: center;">
+              <div class="months-container" style="display: block;height: 100%;">
+                <div class="month-container repeated-item" ng-class="monthContainerClass" style="height: calc(100vh - 180px);">
+                    <table class="month" style="width: 100%;height: 98%;">
+                        <thead>
+                            <tr style="height: 50px;">
+                              <th>
+                                <i class="glyphicon glyphicon-menu-left icon-schedule" ng-click="vm.previous()"></i>
+                              </th>
+                              <th>
+                                <span class="today-schedule" ng-click="vm.todaySchedule()">{{ '3085' | translate }}</span>
+                              </th>
+                              <th class="month-title bg-skin" colspan="4">{{vm.dates.months[vm.month.m]}}  {{ vm.month.y }}</th>
+                              <th>
+                                <i class="glyphicon glyphicon-menu-right icon-schedule" ng-click="vm.next()"></i>
+                              </th>
+                            </tr>
+                            <tr><th class="text-muted day-header-schedule" ng-repeat="days in vm.dates.daysShort track by $index">{{ days }}</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="week in vm.month.w">
+                                <td ng-repeat="day in week track by $index" class="td-schedule {{ day.class }}"
+                                    ng-style="vm.styleFn(vm.mouseHoverList, vm.thisyear, vm.month.m, day.dd, day.valid)"
+                                    ng-mousedown="vm.initSelect($event,day,vm.thisyear, vm.month.m, day.dd, day.valid)"
+                                    ng-mousemove="vm.moveSelect($event, vm.thisyear, vm.month.m, day.dd, day.valid)"
+                                    ng-mouseup="vm.endSelect($event,day)">
+                                    <div uib-popover="{{day.event}}" popover-trigger="'mouseenter'" ng-class="{ 'day-schedule-active': vm.selected !== -1,  'day-schedule-disabled': vm.selected === -1 }"  class="day-schedule noselect contentscroll" ng-class="day.oclass" ng-show="day.dd">
+                                      <span style="float: right;" ng-class="day.oeclass">
+                                        {{ day.dd }}
+                                      </span>
+                                      <br>
+                                      <div ng-if='day.event !== ""' style="margin-bottom: 10px;">
+                                        <span class="event" ng-class="day.oclass">{{ day.event }}</span>
+                                      </div>
+                                      <div ng-if="day.events.length > 0">
+                                        <span class="activity" ng-repeat="event in day.events" ng-class="{'macroscopy': event.type === 1, 'microscopy': event.type === 2 }" ng-style="{'border-left': event.activity.colour ? '4px solid' : '1px solid', 'border-left-color': event.activity.colour ? event.activity.colour : '#b1b1b1'  }">
+                                          {{ event.event }}
+                                        </span>
+                                      </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2" style="margin-top: 15px;">
+
+            <span>{{ '3105' | translate }}:</span>
+
+            <ul style="list-style: none;padding-left: 15px;margin-top: 5px;">
+              <li>
+                <span style="background-color: #f44336;padding: 0px 8px;"></span>
+                <span class="conventions">{{ '3106' | translate }}</span>
+              </li>
+              <li>
+                <span style="background-color: #8bc34a;padding: 0px 8px;"></span>
+                <span class="conventions">{{ '3086' | translate }}</span>
+              </li>
+              <li>
+                <span style="background-color: #00bcd4;padding: 0px 8px;"></span>
+                <span class="conventions">{{ '3087' | translate }}</span>
+              </li>
+              <li ng-repeat="event in vm.events" >
+                <span style="padding: 0px 8px;" ng-style="{'background-color': event.colour}"></span>
+                <span class="conventions">{{ event.name }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="panel-footer">
+            <div class="container" style="width: 100%">
+              <button type="button" ng-click="vm.cancel()" style="width: calc(100% / 2 - 3px)" class="btn btn-info button-list">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+              </button>
+              <button class="btn btn-violet button-list" ng-click="vm.generateFile()" style="width: calc(100% / 2 - 3px)" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-print"></span>{{'0009' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/ng-template" id="modalinsertschedule.html">
+  <div class="modal fade" data-keyboard="false">
+      <div class="modal-dialog" style="width: 1100px;">
+          <div class="modal-content">
+              <div class="modal-header modal-header-prymary" style="display: flex;">
+                  <h4>
+                      {{'3084' | translate}} -
+                  </h4>
+                  <span ng-show="date1 === date2" style="margin: 10px;font-size: 15px;">
+                    {{rangeDatesinicial | date: 'dd/MM/yyyy'}}
+                  </span>
+                  <span ng-show="date1!== date2" style="margin: 10px;font-size: 15px;">
+                    {{rangeDatesinicial | date: 'dd/MM/yyyy'}} AL {{rangeDatesfinal | date: 'dd/MM/yyyy'}}
+                  </span>
+              </div>
+
+              <div class="modal-body" style="padding: 0px 25px;">
+                  <form name="Form" id="Form" class="form-horizontal panel-body" style="padding: 4px 25px;">
+
+                    <div class="row">
+
+                      <div class="col-md-6 filter">
+
+                        <label style="margin: 10px -12px;font-weight: bold;padding: 0;">{{'0144' | translate}}</label>
+
+                        <div class="row" style="border: 1px solid #d8d8d8;margin-bottom: 4px;">
+
+                          <div class="col-md-12" style="background-color: #8bc34a;padding: 10px;color: white;">
+                            <label class="col-md-6" style="margin:0">{{'3086' | translate}}</label>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6" ng-class="{'has-error': Form.name.$invalid && Form.name.$touched }">
+                              <div class="col-md-12" style="display: flex;align-items: center;">
+                                <label class="col-md-5 text-right">
+                                    {{ '3089' | translate }}
+                                </label>
+                                  <div uib-timepicker ng-model="initmacroscopy" hour-step="hstep" minute-step="mstep" show-meridian="true">
+                                  </div>
+                                  <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback" ng-if="Form.name.$invalid && Form.name.$touched "></span>
+                                  <span class="help-block " ng-if="Form.name.$invalid && Form.name.$touched">
+                                      {{'0016' | translate}}
+                                  </span>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6" ng-class="{'has-error': Form.name.$invalid && Form.name.$touched }">
+                              <div class="col-md-12" style="display: flex;align-items: center;">
+                                <label class="col-md-5 text-right">
+                                    {{ '3090' | translate }}
+                                </label>
+                                  <div uib-timepicker ng-model="endmacroscopy" hour-step="hstep" minute-step="mstep" show-meridian="true">
+                                  </div>
+                                  <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback" ng-if="Form.name.$invalid && Form.name.$touched "></span>
+                                  <span class="help-block " ng-if="Form.name.$invalid && Form.name.$touched">
+                                      {{'0016' | translate}}
+                                  </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div ng-if="idmacroscopy" style="text-align: right;" >
+                            <button type="button" class="btn btn-danger" ng-click="deleteMacroscopy()" style="margin: 5px">{{ '1013' | translate }}</button>
+                          </div>
+                          <div ng-if="invalidMacroscopy">
+                            <label style="margin-left: 10px;color: red;font-weight: bold;font-size: 11px;">
+                              {{ '3091' | translate }}
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="row" style="border: 1px solid #d8d8d8;margin-bottom: 4px;margin-top: 25px;">
+
+                          <div class="col-md-12" style="background-color: #00bcd4;padding: 10px;color: white;">
+                            <label class="col-md-6" style="margin:0">{{'3087' | translate}}</label>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6" ng-class="{'has-error': Form.name.$invalid && Form.name.$touched }">
+                              <div class="col-md-12" style="display: flex;align-items: center;">
+                                <label class="col-md-5 text-right">
+                                    {{ '3089' | translate }}
+                                </label>
+                                  <div uib-timepicker ng-model="initmicroscopy" hour-step="hstep" minute-step="mstep" show-meridian="true">
+                                  </div>
+                                  <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback" ng-if="Form.name.$invalid && Form.name.$touched "></span>
+                                  <span class="help-block " ng-if="Form.name.$invalid && Form.name.$touched">
+                                      {{'0016' | translate}}
+                                  </span>
+                              </div>
+                            </div>
+                            <div class="col-md-6" ng-class="{'has-error': Form.name.$invalid && Form.name.$touched }">
+                              <div class="col-md-12" style="display: flex;align-items: center;">
+                                <label class="col-md-5 text-right">
+                                    {{ '3090' | translate }}
+                                </label>
+                                  <div uib-timepicker ng-model="endmicroscopy" hour-step="hstep" minute-step="mstep" show-meridian="true">
+                                  </div>
+                                  <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback" ng-if="Form.name.$invalid && Form.name.$touched "></span>
+                                  <span class="help-block " ng-if="Form.name.$invalid && Form.name.$touched">
+                                      {{'0016' | translate}}
+                                  </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!--Cantidad de casos por dia-->
+                          <div class="form-group form-group-sm has-feedback" ng-class="{'has-error':Form.quantityMic.$invalid && Form.quantityMic.$touched}" style="padding: 0px 10px 0px 30px;">
+                            <div class="col-sm-3" style="text-align: left;">
+                                <label>{{'0053' | translate}}:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input data-ng-model="quantityMic" maxlength="70" ng-disabled="vm.isDisabled" ng-required="true" class="form-control" type="text">
+                                <!-- <number-input ng-model="quantityMic" max="100" min="1" step="1"
+                                  start="1" disabledecimal="true" decimalplaces="0" disable="vm.isDisabled">
+                                </number-input> -->
+                                <span ng-if="Form.quantityMic.$invalid && Form.quantityMic.$touched" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span ng-if="Form.quantityMic.$error.required && Form.quantityMic.$touched" class="help-block">{{'0016' | translate}}</span>
+                            </div>
+                          </div>
+
+
+                          <div ng-if="idmicroscopy" style="text-align: right;" >
+                            <button type="button" class="btn btn-danger" ng-click="deleteMicroscopy()" style="margin: 5px">{{ '1013' | translate }}</button>
+                          </div>
+                          <div ng-if="invalidMicroscopy">
+                            <label style="margin-left: 10px;color: red;font-weight: bold;font-size: 11px;">
+                              {{ '3091' | translate }}
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="row" ng-if="invalidDates">
+                          <label style="color: red;font-weight: bold;font-size: 11px;">{{ '3092' | translate }}</label>
+                        </div>
+
+                        <div class="row" ng-if="required">
+                          <label style="color: red;font-weight: bold;font-size: 11px;">{{ '3098' | translate }}</label>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-6" style="padding-right: 0px;padding-left: 25px;">
+
+                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                          <label class="col-md-11" style="margin: 10px 0px;font-weight: bold;padding: 0;">{{'3103' | translate}}</label>
+                          <div class="col-md-1" style="margin: 10px 0px;padding: 0;">
+                            <a href="javascript:void(0)" ng-click="cloneSection()" style="color: white;padding: 4px 6px;border-radius: 5px;margin: 0px;background-color: #337ab7;">
+                              <i class="fa fa-plus-square" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="contentscroll" style="margin-right: 0px;margin-left: 0px;max-height: calc(100vh - 285px);overflow-y: auto;overflow-x: hidden;">
+
+                            <div class="col-md-12" ng-repeat="section in events" style="border: 1px solid #d8d8d8;margin-bottom: 25px;border-radius: 5px;" ng-style="{'border-left': section[0].value.colour ? '4px solid' : '1px solid', 'border-left-color': section[0].value.colour ? section[0].value.colour : '#d8d8d8'}">
+                              <div style="padding: 0;" ng-class="{ 'col-md-11': events.length > 1, 'col-md-12': events.length === 1 }">
+                                  <div ng-repeat="input in section" on-last-repeat style="margin-right: 0px;margin-left: 0px;">
+
+                                      <div class="col-md-6" ng-if="input.type == 'text'" ng-class="input.class">
+                                        <div class="form-group form-group-sm" style="display: flex;align-items: center;">
+                                          <div class="col-sm-2">
+                                            <label>{{ input.label }}</label>
+                                          </div>
+                                          <div class="col-md-10">
+                                            <div uib-timepicker ng-model="input.value" hour-step="hstep" minute-step="mstep" show-meridian="true"></div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="form-group form-group-sm" ng-if="input.type == 'selectize'" style="margin-top: 10px;">
+                                          <div class="col-sm-2">
+                                              <label>{{ input.label }}:</label>
+                                          </div>
+                                          <div class="col-md-10 pl-0">
+                                              <select charset="utf-8" ng-options="obj as obj.name for obj in input.data track by obj.id" data-ng-model="input.value" class="form-control" ng-required="input.required" ng-disabled="vm.isDisabled"></select>
+                                          </div>
+                                      </div>
+
+                                      <div ng-if="input.name == 'id' && input.value != ''" style="text-align: right;" >
+                                        <button type="button" class="btn btn-danger" ng-click="clearEvent(section)" style="margin-bottom: 5px">{{ '1013' | translate }}</button>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-1" ng-if="events.length > 1 && section[3].value === '' ">
+                                  <div style="margin-top: 4px;display: flex;">
+                                      <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" style="color: white;padding: 2px 6px;border-radius: 5px;margin: 7px;background: #ff6e63;margin-left: 0px;margin-right: 0px;">
+                                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                      </a>
+                                  </div>
+                              </div>
+                            </div>
+                            <span ng-if="invalidEvent" class="help-block" style="margin-left: 10px;font-weight: bold;">{{'0016' | translate}}</span>
+                            <span ng-if="repeatedEvent" class="help-block" style="margin-left: 10px;font-weight: bold;">{{'3104' | translate}}</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" ng-disabled="Form.$invalid" class="btn btn-primary button-list" ng-click="save(Form)">
+                      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{'0022' | translate}}
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="Requeridschedule.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="col-md-2"
+                                 ng-class="{'col-md-offset-2':Pathologist > 0 || events > 0}"></div>
+                            <div class="col-md-4" ng-hide="Pathologist > 0">
+                                <a ng-click="close('user')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/user.png">
+                                    <h6 class="text-center"> {{'0001' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-4" ng-hide="events > 0">
+                                <a ng-click="close('event')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/literalresult.png">
+                                    <h6 class="text-center"> {{'0661' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

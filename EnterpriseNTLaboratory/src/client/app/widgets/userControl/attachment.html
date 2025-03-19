@@ -1,0 +1,1206 @@
+<style>
+  .rs-opacity-delete {
+    opacity: 0.25;
+  }
+
+  .rs-width-medium {
+    width: 49%;
+  }
+</style>
+<loadpage view="vmd.loadingdata"></loadpage>
+<div
+  class="uk-modal uk-modal-card-fullscreen"
+  id="modal-orderattachment"
+  bg-close="false"
+>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <loadpage view="vmd.loading"></loadpage>
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-light-blue-A400">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i
+              class="md-icon material-icons md-color-blue-50"
+              data-uk-tooltip="{pos:'top', delay: 3000}"
+              title="{{'0329'| translate}}"
+              ng-click="vmd.close()"
+              >&#xE5CD;</i
+            >
+          </div>
+        </div>
+        <span style="float: left; margin: 8px 8px 0 0; display: block">
+          <i class="material-icons md-24 md-light">&#xE226;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+          {{'0376' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+        <div
+          class="uk-grid uk-grid-small"
+          style="width: 100%; margin-left: 0px"
+        >
+          <div class="uk-width-1-3 uk-padding-remove">
+            <cardorder
+              order="vmd.order"
+              typeordercode="vmd.patient.typeordercode"
+              typeordercolor="vmd.patient.typeordercolor"
+              testcode="vmd.testcode"
+              testname="vmd.testname"
+            >
+            </cardorder>
+          </div>
+          <div class="uk-width-1-3" style="z-index: 9999">
+            <cardpatient
+              patientname="vmd.patient.name"
+              patientdocument="vmd.patient.document"
+              patientage="vmd.patient.age"
+              patientgender="vmd.patient.gender"
+              orderdemo="vmd.orderdemo"
+              photopatient="vmd.photopatient"
+              patientid="vmd.patient.id"
+              orderpatient="vmd.order"
+            >
+            </cardpatient>
+          </div>
+          <div class="uk-width-1-3">
+            <div
+              class="md-card md-card-hover md-card1-horizontal uk-animation-scale-up"
+              style="height: 100%"
+            >
+              <div class="md-card1-head" style="width: 46%">
+                <div class="uk-text-center" style="padding-top: 22px">
+                  <img
+                    style="width: 60px; height: 60px"
+                    ng-src="images/formatimage.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div
+                class="md-card-content"
+                style="width: 49%; margin-left: 47%; padding: 10px"
+              >
+                <ul class="md-list">
+                  <li>
+                    <div class="md-list-content">
+                      <span class="md-list-heading"
+                        >{{'0589' | translate}}</span
+                      >
+                      <span class="uk-text-small uk-text-muted uk-text-truncate"
+                        >{{vmd.extsToPrint}}</span
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="uk-grid"
+          style="margin-top: 5px; height: calc(100% - 140px); margin-left: 0px"
+        >
+          <div
+            class="uk-width-1-1 uk-padding-remove"
+            ng-class="{'rs-width-medium' : vmd.testId > 0}"
+            style="height: 100%"
+          >
+            <div
+              class="md-card md-card-hover uk-animation-scale-up"
+              style="height: 100%"
+            >
+              <div class="md-card-toolbar" style="height: 7%">
+                <div
+                  class="md-card-toolbar-heading-text"
+                  style="margin-top: -6px"
+                >
+                  <strong>{{'0585' | translate}}</strong>
+                </div>
+              </div>
+              <div class="md-card-content" style="height: 78%; padding: 5px">
+                <div
+                  class="gallery_grid uk-grid-width-large-1-3 {{vmd.testId ? 'uk-grid-width-large-1-3' : 'uk-grid-width-large-1-6'}}"
+                  id="galleryGrid"
+                  ng-if="vmd.repeatname==false && vmd.viewtakephotoorder === false"
+                >
+                  <div
+                    ng-repeat="attach in vmd.orderDocuments"
+                    ng-if="!attach.hidden"
+                    on-last-repeat
+                  >
+                    <div class="md-card md-card-hover">
+                      <div class="gallery_grid_item md-card-content">
+                        <div
+                          class="md-card-content uk-flex uk-flex-center uk-flex-middle"
+                        >
+                          <a
+                            data-lightbox-type="image"
+                            data-uk-lightbox
+                            ng-if=" attach.extension.toLowerCase() !== 'pdf'"
+                            href="{{ attach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + attach.fileType + ';base64,' + attach.file}}"
+                            data-uk-lightbox="{group:'gallery'}"
+                          >
+                            <img
+                              ng-src="{{ attach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + attach.fileType + ';base64,' + attach.file}}"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                          <a
+                            ng-if="attach.extension.toLowerCase() === 'pdf'"
+                            ng-click="vmd.viewPDF(attach)"
+                          >
+                            <img
+                              ng-src="images/analytical/resultsentry/pdfimage.png"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                        </div>
+                        <div class="gallery_grid_image_caption">
+                          <div class="gallery_grid_image_menu">
+                            <md-checkbox
+                              ng-model="attach.viewresul"
+                              ng-change="attach.new?'':attach.replace=true; vmd.orderChange=true;"
+                              class="md-primary"
+                            >
+                              {{'3234' | translate}}
+                            </md-checkbox>
+                            <i
+                              class="md-icon material-icons"
+                              ng-click="vmd.objectDocument=attach;vmd.Comment = '';vmd.orderDeleteDocument(attach)"
+                              >&#xE872;</i
+                            >
+                            <i
+                              class="md-icon material-icons"
+                              ng-click="vmd.downloadDocument(attach)"
+                              >arrow_downward</i
+                            >
+                          </div>
+                          <span style="display: none"
+                            >{{attach.id=$index}}</span
+                          >
+                          <span class="gallery_image_title uk-text-truncate"
+                            >{{attach.name}}</span
+                          >
+                          <span class="uk-text-muted uk-text-small"
+                            >{{attach.date | date:
+                            vmd.formatDate}}-{{attach.user.userName}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="uk-grid uk-width-1-1 uk-flex uk-flex-center uk-flex-middle"
+                  ng-if="vmd.repeatname==true"
+                >
+                  <div
+                    class="uk-text-center"
+                    style="width: 100%; margin-bottom: 22px"
+                  >
+                    <span><strong> {{'0621' | translate}} </strong></span><br />
+                    <span><strong> {{'0622' | translate}} </strong></span>
+                  </div>
+
+                  <div class="uk-width-1-3">
+                    <div class="md-card">
+                      <div class="md-card md-card-hover">
+                        <div
+                          class="md-card-content uk-flex uk-flex-center uk-flex-middle"
+                        >
+                          <!--   <a data-lightbox-type="image" data-uk-lightbox ng-if="vmd.indexorderTemporal[0].extension.toLowerCase() !== 'pdf'"
+                                                        href="{{ vmd.indexorderTemporal[0] .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.indexorderTemporal[0].fileType + ';base64,' + vmd.indexorderTemporal[0].file}}"
+                                                        data-uk-lightbox="{group:'gallery'}">
+                                                        <img ng-src="{{ vmd.indexorderTemporal[0].extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.indexorderTemporal[0].fileType + ';base64,' + vmd.indexorderTemporal[0].file}}"
+                                                            style="min-height: 97px; max-height: 97px;">
+                                                    </a> -->
+                          <a
+                            data-lightbox-type="image"
+                            data-uk-lightbox
+                            ng-if="vmd.indexorderTemporal[0].extension.toLowerCase() !== 'pdf'"
+                            href="{{ vmd.indexorderTemporal[0] .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.indexorderTemporal[0].fileType + ';base64,' + vmd.indexorderTemporal[0].file}}"
+                            data-uk-lightbox="{group:'gallery'}"
+                          >
+                            <img
+                              ng-src="{{ vmd.indexorderTemporal[0].extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.indexorderTemporal[0].fileType + ';base64,' + vmd.indexorderTemporal[0].file}}"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                          <a
+                            ng-if="vmd.indexorderTemporal[0].extension.toLowerCase() === 'pdf'"
+                            ng-click="vmd.viewPDF(vmd.indexorderTemporal[0])"
+                          >
+                            <img
+                              ng-src="images/analytical/resultsentry/pdfimage.png"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                        </div>
+                        <div class="md-card-content">
+                          <span class="gallery_image_title uk-text-truncate"
+                            >{{vmd.indexorderTemporal[0].name}}</span
+                          >
+                          <span class="uk-text-muted uk-text-small"
+                            >{{vmd.indexorderTemporal[0].date | date:
+                            vmd.formatDate}}-{{vmd.indexorderTemporal[0].user.userName}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-column-small">
+                    <i class="md-icon material-icons md-48 uk-text-success"
+                      >&#xE028;</i
+                    >
+                  </div>
+
+                  <div class="uk-width-1-3">
+                    <div class="md-card">
+                      <div class="md-card md-card-hover">
+                        <div
+                          class="md-card-content uk-flex uk-flex-center uk-flex-middle"
+                        >
+                          <!--   <a data-lightbox-type="image" data-uk-lightbox
+                                                        href="{{ vmd.changeattach .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changeattach.fileType + ';base64,' + vmd.changeattach.file}}"
+                                                        data-uk-lightbox="{group:'gallery'}">
+                                                        <img ng-src="{{ vmd.changeattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changeattach.fileType + ';base64,' + vmd.changeattach.file}}"
+                                                            style="min-height: 97px; max-height: 97px;">
+                                                    </a> -->
+                          <a
+                            data-lightbox-type="image"
+                            data-uk-lightbox
+                            ng-if="vmd.changeattach.extension.toLowerCase() !== 'pdf'"
+                            href="{{ vmd.changeattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changeattach.fileType + ';base64,' + vmd.changeattach.file}}"
+                            data-uk-lightbox="{group:'gallery'}"
+                          >
+                            <img
+                              ng-src="{{ vmd.changeattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changeattach.fileType + ';base64,' + vmd.changeattach.file}}"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                          <a
+                            ng-if="vmd.changeattach.extension.toLowerCase() === 'pdf'"
+                            ng-click="vmd.viewPDF(vmd.changeattach)"
+                          >
+                            <img
+                              ng-src="images/analytical/resultsentry/pdfimage.png"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                        </div>
+                        <div class="md-card-content">
+                          <span class="gallery_image_title uk-text-truncate"
+                            >{{vmd.changeattach.name}}</span
+                          >
+                          <span class="uk-text-muted uk-text-small"
+                            >{{vmd.changeattach.date | date:
+                            vmd.formatDate}}-{{vmd.changeattach.user.userName}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--contenedor toma de foto-->
+                <div
+                  class="uk-grid uk-width-1-1 uk-flex uk-flex-center uk-flex-middle"
+                  ng-if="vmd.viewtakephotoorder==true"
+                >
+                  <div
+                    class="uk-text-center"
+                    style="width: 100%; margin-bottom: 10px; padding-left: 80px"
+                  >
+                    <span><strong> {{'0613' | translate}} </strong></span><br />
+                  </div>
+                  <div class="uk-grid" style="padding-left: 79px">
+                    <div class="uk-width-1-2">
+                      <div class="uk-thumbnail uk-thumbnail-medium">
+                        <figure class="uk-overlay">
+                          <video
+                            ng-show="vmd.validcamera"
+                            id="cameraorder"
+                          ></video>
+                          <img
+                            ng-show="!vmd.validcamera"
+                            ng-src="images/order/attacmentphoto.png"
+                            width=""
+                            height=""
+                            alt=""
+                          />
+                          <figcaption
+                            ng-show="!vmd.validcamera"
+                            class="uk-overlay-panel"
+                          >
+                            {{'0614' | translate}}
+                          </figcaption>
+                        </figure>
+                        <div
+                          class="uk-thumbnail-caption"
+                          style="line-height: 33px"
+                        >
+                          <span><strong> {{'0615' | translate}} </strong></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-2">
+                      <div
+                        class="uk-thumbnail uk-thumbnail-medium uk-text-center"
+                      >
+                        <figure class="uk-overlay">
+                          <img
+                            id="photoorder"
+                            ng-src="images/order/attacmentphoto.png"
+                            width=""
+                            height=""
+                            alt=""
+                          />
+                          <figcaption
+                            ng-if="vmd.photoattachmentorder === ''"
+                            class="uk-overlay-panel"
+                          >
+                            {{'0616' | translate}}
+                          </figcaption>
+                        </figure>
+
+                        <canvas id="canvasorder" style="display: none"></canvas>
+
+                        <div
+                          class="uk-thumbnail-caption"
+                          style="padding-top: 0px"
+                        >
+                          <div style="width: 90%; float: left">
+                            <input
+                              placeholder="{{'0617' | translate}}"
+                              type="text"
+                              class="md-input label-fixed uk-padding-remove"
+                              ng-model="vmd.namephotoattachmentorder"
+                              md-input=""
+                              style="
+                                height: 32px;
+                                min-height: 32px;
+                                font-size: 12px !important;
+                              "
+                              ng-blur="vmd.validnamephotoorder()"
+                            />
+                            <label
+                              ng-if="vmd.messageimageorder"
+                              class="md-color-red-500"
+                              >{{'0618' | translate}}</label
+                            >
+                          </div>
+                          <div style="float: left; padding-top: 17px">
+                            <label> .png </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="uk-flex uk-flex-right uk-position-bottom-right uk-position-fixed"
+                style="margin-bottom: 5px"
+              >
+                <!--agregar foto-->
+                <div
+                  ng-show="(vmd.orderDocuments|filter:{ delete : false }).length < 6 && vmd.repeatnameorder!=true && vmd.viewtakephotoorder!=true "
+                  class="uk-flex uk-flex-column"
+                  style="z-index: 100"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-indigo-400"
+                    ng-click="vmd.loadtakephotoorder()"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0619' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE439;</i
+                    >
+                  </button>
+                </div>
+                <!-- toma de foto orden -->
+                <div
+                  ng-show="vmd.viewtakephotoorder==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <div class="uk-input-group">
+                    <span class="uk-form-file">
+                      <button
+                        type="button"
+                        ng-disabled="!vmd.validcamera"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-indigo-300"
+                        ng-class="{'md-bg-blue-grey-100' : !vmd.validcamera}"
+                        ng-click="vmd.takephotoorder()"
+                      >
+                        <i
+                          class="material-icons md-color-light-blue-50"
+                          title="{{'0620' | translate}}"
+                          data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                          >&#xE412;</i
+                        >
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- adjuntar foto orden -->
+                <div
+                  ng-show="vmd.viewtakephotoorder==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <div class="uk-input-group">
+                    <span class="uk-form-file">
+                      <button
+                        type="button"
+                        ng-disabled="vmd.photoattachmentorder === '' || vmd.namephotoattachmentorder === '' || vmd.messageimageorder === true"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-blue-500"
+                        ng-class="{'md-bg-blue-grey-100' : (vmd.photoattachmentorder === '' || vmd.namephotoattachmentorder === '' || vmd.messageimageorder === true)}"
+                        ng-click="vmd.addphotoattachmentorder()"
+                      >
+                        <i
+                          class="material-icons md-color-light-blue-50"
+                          title="{{'0007' | translate}}"
+                          data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                          >&#xE2C3;</i
+                        >
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- cancelar toma de foto -->
+                <div
+                  ng-show="vmd.viewtakephotoorder==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-red-A700"
+                    ng-click="vmd.viewtakephotoorder=false; vmd.photoattachmentorder = ''"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0008' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE5CD;</i
+                    >
+                  </button>
+                </div>
+                <div
+                  ng-show="(vmd.orderDocuments|filter:{ delete : false }).length < 6 && vmd.repeatname!=true && vmd.viewtakephotoorder === false"
+                  class="uk-flex uk-flex-column"
+                >
+                  <!-- adjuntar / orden -->
+                  <div class="uk-input-group">
+                    <span class="uk-form-file">
+                      <input
+                        type="file"
+                        ng-model="vmd.orderTemporalInput"
+                        name="file_upload-select1"
+                        base-sixty-four-input
+                        multiple
+                        accept="image/jpg, image/jpeg, image/png, application/pdf"
+                        maxsize="100"
+                        required
+                        minnum="2"
+                        on-change="onChange"
+                        class="file"
+                        style="height: 50px; padding-left: 0px !important"
+                      />
+                      <button
+                        type="button"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-blue-500"
+                      >
+                        <i
+                          class="material-icons md-color-light-blue-50"
+                          title="{{'0007' | translate}}"
+                          data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                          >&#xE2C3;</i
+                        >
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- guardar / orden -->
+                <div
+                  ng-show="vmd.testId == 0 && vmd.repeatname!=true && vmd.viewtakephotoorder === false"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    ng-disabled="!vmd.orderChange"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500"
+                    ng-class="{'md-bg-blue-grey-100' :!vmd.orderChange}"
+                    ng-click="vmd.save()"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0007' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE161;</i
+                    >
+                  </button>
+                </div>
+                <div
+                  ng-show="vmd.repeatname==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500"
+                    ng-click="vmd.change()"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0007' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE028;</i
+                    >
+                  </button>
+                </div>
+                <div
+                  ng-show="vmd.repeatname==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-red-A700"
+                    ng-click="vmd.repeatname=false;"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0007' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE5CD;</i
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="uk-width-1-1"
+            style="padding-left: 5px; height: 100%; width: 51%"
+            ng-show="vmd.testname!==undefined"
+          >
+            <div class="md-card md-card-hover" style="height: 100%">
+              <div class="md-card-toolbar" style="height: 7%">
+                <div
+                  class="md-card-toolbar-heading-text"
+                  style="margin-top: -6px"
+                >
+                  <strong>{{'0586' | translate}}</strong>
+                </div>
+              </div>
+              <div class="md-card-content" style="height: 78%; padding: 5px">
+                <!--contenedor lista de adjuntos del examen-->
+                <div
+                  class="gallery_grid1 uk-grid-width-large-1-3"
+                  id="galleryGrid1"
+                  ng-if="vmd.repeatnametest==false && vmd.viewtakephototest === false"
+                >
+                  <div
+                    ng-repeat="attachtest in vmd.testDocuments"
+                    ng-if="!attachtest.hidden"
+                    on-last-repeat
+                  >
+                    <div class="md-card md-card-hover">
+                      <div class="gallery_grid_item md-card-content">
+                        <div
+                          class="md-card-content uk-flex uk-flex-center uk-flex-middle"
+                        >
+                          <a
+                            data-lightbox-type="image"
+                            data-uk-lightbox
+                            ng-if="attachtest.extension.toLowerCase() !== 'pdf'"
+                            href="{{ attachtest.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + attachtest.fileType + ';base64,' + attachtest.file}}"
+                          >
+                            <img
+                              ng-src="{{ attachtest.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + attachtest.fileType + ';base64,' + attachtest.file}}"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                          <a
+                            ng-if="attachtest.extension.toLowerCase() === 'pdf'"
+                            ng-click="vmd.viewPDF(attachtest)"
+                          >
+                            <img
+                              ng-src="images/analytical/resultsentry/pdfimage.png"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                        </div>
+                        <div class="gallery_grid_image_caption">
+                          <div class="gallery_grid_image_menu">
+                            <md-checkbox
+                              ng-model="attachtest.viewresul"
+                              ng-change="attachtest.new?'':attachtest.replace=true;vmd.orderChange=true;"
+                              class="md-primary"
+                            >
+                              {{'3234' | translate}}
+                            </md-checkbox>
+                            <i
+                              class="md-icon material-icons"
+                              ng-if="vmd.teststate < 4"
+                              ng-click="vmd.objectDocument=attachtest;vmd.Comment = '';vmd.testDeleteDocument(attachtest)"
+                              >&#xE872;</i
+                            >
+                            <i
+                              class="md-icon material-icons"
+                              ng-click="vmd.downloadDocument(attachtest)"
+                              >arrow_downward</i
+                            >
+                          </div>
+                          <span style="display: none"
+                            >{{attachtest.id=$index}}</span
+                          >
+                          <span class="gallery_image_title uk-text-truncate"
+                            >{{attachtest.name}}</span
+                          >
+                          <span class="uk-text-muted uk-text-small"
+                            >{{attachtest.date | date:
+                            vmd.formatDate}}-{{attachtest.user.userName}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--contenedor reemplazo de adjunto-->
+                <div
+                  class="uk-grid uk-width-1-1 uk-flex uk-flex-center uk-flex-middle"
+                  ng-if="vmd.repeatnametest==true"
+                >
+                  <div
+                    class="uk-text-center"
+                    style="width: 100%; margin-bottom: 22px"
+                  >
+                    <span><strong> {{'0621' | translate}} </strong></span><br />
+                    <span><strong> {{'0622' | translate}} </strong></span>
+                  </div>
+
+                  <div class="uk-width-1-3">
+                    <div class="md-card">
+                      <div class="md-card md-card-hover">
+                        <div
+                          class="md-card-content uk-flex uk-flex-center uk-flex-middle"
+                        >
+                          <a
+                            data-lightbox-type="image"
+                            data-uk-lightbox
+                            ng-if="vmd.indextestTemporal[0] .extension.toLowerCase() !== 'pdf'"
+                            href="{{ vmd.indextestTemporal[0] .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.indextestTemporal[0].fileType + ';base64,' + vmd.indextestTemporal[0].file}}"
+                            data-uk-lightbox="{group:'gallery'}"
+                          >
+                            <img
+                              ng-src="{{ vmd.indextestTemporal[0].extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.indextestTemporal[0].fileType + ';base64,' + vmd.indextestTemporal[0].file}}"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                          <a
+                            ng-if="vmd.indextestTemporal[0].extension.toLowerCase() === 'pdf'"
+                            ng-click="vmd.viewPDF(vmd.indextestTemporal[0])"
+                          >
+                            <img
+                              ng-src="images/analytical/resultsentry/pdfimage.png"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                        </div>
+                        <div class="md-card-content">
+                          <span class="gallery_image_title uk-text-truncate"
+                            >{{vmd.indextestTemporal[0].name}}</span
+                          >
+                          <span class="uk-text-muted uk-text-small"
+                            >{{vmd.indextestTemporal[0].date | date:
+                            vmd.formatDate}}-{{vmd.indextestTemporal[0].user.userName}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-column-small">
+                    <i class="md-icon material-icons md-48 uk-text-success"
+                      >&#xE028;</i
+                    >
+                  </div>
+
+                  <div class="uk-width-1-3">
+                    <div class="md-card">
+                      <div class="md-card md-card-hover">
+                        <div
+                          class="md-card-content uk-flex uk-flex-center uk-flex-middle"
+                        >
+                          <!--  <a data-lightbox-type="image" data-uk-lightbox
+                                                        href="{{ vmd.changetestattach .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changetestattach.fileType + ';base64,' + vmd.changetestattach.file}}"
+                                                        data-uk-lightbox="{group:'gallery'}">
+                                                        <img ng-src="{{ vmd.changetestattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changetestattach.fileType + ';base64,' + vmd.changetestattach.file}}"
+                                                            style="min-height: 97px; max-height: 97px;">
+                                                    </a> -->
+                          <a
+                            data-lightbox-type="image"
+                            data-uk-lightbox
+                            ng-if="vmd.changetestattach.extension.toLowerCase() !== 'pdf'"
+                            href="{{ vmd.changetestattach .extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changetestattach.fileType + ';base64,' + vmd.changetestattach.file}}"
+                            data-uk-lightbox="{group:'gallery'}"
+                          >
+                            <img
+                              ng-src="{{ vmd.changetestattach.extension.toLowerCase() == 'pdf'? 'images/analytical/resultsentry/pdfimage.png' : 'data:' + vmd.changetestattach.fileType + ';base64,' + vmd.changetestattach.file}}"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                          <a
+                            ng-if="vmd.changetestattach.extension.toLowerCase() === 'pdf'"
+                            ng-click="vmd.viewPDF(vmd.changetestattach)"
+                          >
+                            <img
+                              ng-src="images/analytical/resultsentry/pdfimage.png"
+                              style="min-height: 97px; max-height: 97px"
+                            />
+                          </a>
+                        </div>
+                        <div class="md-card-content">
+                          <span class="gallery_image_title uk-text-truncate"
+                            >{{vmd.changetestattach.name}}</span
+                          >
+                          <span class="uk-text-muted uk-text-small"
+                            >{{vmd.changetestattach.date | date:
+                            vmd.formatDate}}-{{vmd.changetestattach.user.userName}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--contenedor toma de foto-->
+                <div
+                  class="uk-grid uk-width-1-1 uk-flex uk-flex-center uk-flex-middle"
+                  ng-if="vmd.viewtakephototest==true"
+                >
+                  <div
+                    class="uk-text-center"
+                    style="width: 100%; margin-bottom: 10px; padding-left: 80px"
+                  >
+                    <span><strong> {{'0613' | translate}} </strong></span><br />
+                  </div>
+                  <div class="uk-grid" style="padding-left: 79px">
+                    <div class="uk-width-1-2">
+                      <div class="uk-thumbnail uk-thumbnail-medium">
+                        <figure class="uk-overlay">
+                          <video
+                            ng-show="vmd.validcamera"
+                            id="cameratest"
+                          ></video>
+                          <img
+                            ng-show="!vmd.validcamera"
+                            ng-src="images/order/attacmentphoto.png"
+                            width=""
+                            height=""
+                            alt=""
+                          />
+                          <figcaption
+                            ng-show="!vmd.validcamera"
+                            class="uk-overlay-panel"
+                          >
+                            {{'0614' | translate}}
+                          </figcaption>
+                        </figure>
+                        <div
+                          class="uk-thumbnail-caption"
+                          style="line-height: 33px"
+                        >
+                          <span><strong> {{'0615' | translate}} </strong></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-2">
+                      <div
+                        class="uk-thumbnail uk-thumbnail-medium uk-text-center"
+                      >
+                        <figure class="uk-overlay">
+                          <img
+                            id="phototest"
+                            ng-src="images/order/attacmentphoto.png"
+                            width=""
+                            height=""
+                            alt=""
+                          />
+                          <figcaption
+                            ng-if="vmd.photoattachmenttest === ''"
+                            class="uk-overlay-panel"
+                          >
+                            {{'0616' | translate}}
+                          </figcaption>
+                        </figure>
+
+                        <canvas id="canvas" style="display: none"></canvas>
+
+                        <div
+                          class="uk-thumbnail-caption"
+                          style="padding-top: 0px"
+                        >
+                          <div style="width: 90%; float: left">
+                            <input
+                              placeholder="{{'0617' | translate}}"
+                              type="text"
+                              class="md-input label-fixed uk-padding-remove"
+                              ng-model="vmd.namephotoattachmenttest"
+                              md-input=""
+                              style="
+                                height: 32px;
+                                min-height: 32px;
+                                font-size: 12px !important;
+                              "
+                              ng-blur="vmd.validnamephototest()"
+                            />
+                            <label
+                              ng-if="vmd.messageimagetest"
+                              class="md-color-red-500"
+                              >{{'0618' | translate}}</label
+                            >
+                          </div>
+                          <div style="float: left; padding-top: 17px">
+                            <label> .png </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="uk-flex uk-flex-right uk-position-bottom-right uk-position-fixed"
+                ng-if="vmd.teststate < 4"
+                style="margin-bottom: 5px"
+              >
+                <!--agregar foto-->
+                <div
+                  ng-show="(vmd.testDocuments|filter:{ delete : false }).length < 6 && vmd.repeatnametest!=true && vmd.viewtakephototest!=true "
+                  class="uk-flex uk-flex-column"
+                  style="z-index: 100"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-indigo-400"
+                    ng-click="vmd.loadtakephototest()"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0619' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE439;</i
+                    >
+                  </button>
+                </div>
+                <!-- toma de foto examen -->
+                <div
+                  ng-show="vmd.viewtakephototest==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <div class="uk-input-group">
+                    <span class="uk-form-file">
+                      <button
+                        type="button"
+                        ng-disabled="!vmd.validcamera"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-indigo-300"
+                        ng-class="{'md-bg-blue-grey-100' : !vmd.validcamera}"
+                        ng-click="vmd.takephototest()"
+                      >
+                        <i
+                          class="material-icons md-color-light-blue-50"
+                          title="{{'0620' | translate}}"
+                          data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                          >&#xE412;</i
+                        >
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- adjuntar foto examen -->
+                <div
+                  ng-show="vmd.viewtakephototest==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <div class="uk-input-group">
+                    <span class="uk-form-file">
+                      <button
+                        type="button"
+                        ng-disabled="vmd.photoattachmenttest === '' || vmd.namephotoattachmenttest === '' || vmd.messageimagetest === true"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-blue-500"
+                        ng-class="{'md-bg-blue-grey-100' : (vmd.photoattachmenttest === '' || vmd.namephotoattachmenttest === '' || vmd.messageimagetest === true)}"
+                        ng-click="vmd.addphotoattachmenttest()"
+                      >
+                        <i
+                          class="material-icons md-color-light-blue-50"
+                          title="{{'0007' | translate}}"
+                          data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                          >&#xE2C3;</i
+                        >
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- cancelar toma de foto -->
+                <div
+                  ng-show="vmd.viewtakephototest==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-red-A700"
+                    ng-click="vmd.viewtakephototest=false; vmd.photoattachmenttest = ''"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0008' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE5CD;</i
+                    >
+                  </button>
+                </div>
+
+                <!-- adjuntar / examen -->
+                <div
+                  ng-show="(vmd.testDocuments|filter:{ delete : false }).length < 6 && vmd.repeatnametest!=true && vmd.viewtakephototest!=true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <div class="uk-input-group">
+                    <span class="uk-form-file">
+                      <input
+                        type="file"
+                        ng-model="vmd.testTemporalInput"
+                        name="file_upload-select1"
+                        base-sixty-four-input
+                        multiple
+                        accept="image/jpg, image/jpeg, image/png, application/pdf"
+                        maxsize="100"
+                        required
+                        minnum="2"
+                        on-change="onChange"
+                        style="height: 50px; padding-left: 0px !important"
+                      />
+                      <button
+                        type="button"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-blue-500"
+                      >
+                        <i
+                          class="material-icons md-color-light-blue-50"
+                          title="{{'0007' | translate}}"
+                          data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                          >&#xE2C3;</i
+                        >
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <!-- guardar / prueba -->
+                <div
+                  class="uk-flex uk-flex-column"
+                  ng-show="vmd.viewtakephototest!=true"
+                  style="z-index: 100"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500"
+                    ng-click="vmd.save()"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0007' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE161;</i
+                    >
+                  </button>
+                </div>
+                <!-- reemplazar imagen -->
+                <div
+                  ng-show="vmd.repeatnametest==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-green-500"
+                    ng-click="vmd.changetest()"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0007' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE028;</i
+                    >
+                  </button>
+                </div>
+                <!-- cancelar reemplazo -->
+                <div
+                  ng-show="vmd.repeatnametest==true"
+                  class="uk-flex uk-flex-column"
+                >
+                  <button
+                    type="button"
+                    class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-red-A700"
+                    ng-click="vmd.repeatnametest=false;"
+                  >
+                    <i
+                      class="material-icons md-color-light-blue-50"
+                      title="{{'0008' | translate}}"
+                      data-uk-tooltip="{pos:'top-left', delay: 3000}"
+                      >&#xE5CD;</i
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="modalconfirmation" bg-close="false">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-body">
+      <div ng- class="uk-overflow-container" style="margin-top: 0px">
+        <div style="width: 80px; float: left">
+          <img class="img-responsive" src="images/iconinfo.png" />
+        </div>
+        <div class="uk-text-center" style="margin-top: 26px">
+          <h4>{{'2079' | translate}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button
+        type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+        ng-click="vmd.saveDocuments()"
+      >
+        {{'0246' | translate}}
+      </button>
+      <button type="button" class="md-btn md-btn-default uk-modal-close">
+        {{'0008' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+<div id="deletedModal" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px">
+      <h3 class="uk-modal-title">Motivo de eliminación</h3>
+    </div>
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-form-row">
+          <div class="uk-form-row">
+            <label>{{'0332' | translate}}:</label>
+            <div class="md-input-wrapper">
+              <textarea
+                cols="30"
+                rows="4"
+                data-ng-model="vmd.Comment"
+                class="md-input no_autosize"
+                style="margin: 0px -10.5px 0px 0px; width: 564px; height: 121px"
+              ></textarea
+              ><span class="md-input-bar"></span>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+              <button
+                type="button"
+                ng-click="vmd.motiveeditsave(vmd.objectDocument)"
+                class="md-btn md-btn md-btn-danger md-btn-wave-light waves-effect waves-button waves-light"
+                ng-class="{'disabled': vmd.Comment === '','md-btn md-btn-danger': vmd.Comment !== ''}"
+              >
+                {{'0007' | translate}}
+              </button>
+              <button
+                type="button"
+                class="uk-modal-close md-btn md-btn-flat uk-modal-close"
+                ng-click="vmd.Comment=''"
+              >
+                {{'0008' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="deletedModalTest" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px">
+      <h3 class="uk-modal-title">Motivo de eliminación</h3>
+    </div>
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-form-row">
+          <div class="uk-form-row">
+            <label>{{'0332' | translate}}:</label>
+            <div class="md-input-wrapper">
+              <textarea
+                cols="30"
+                rows="4"
+                data-ng-model="vmd.Comment"
+                class="md-input no_autosize"
+                style="margin: 0px -10.5px 0px 0px; width: 564px; height: 121px"
+              ></textarea
+              ><span class="md-input-bar"></span>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+              <button
+                type="button"
+                ng-click="vmd.motiveeditsavetest(vmd.objectDocument)"
+                class="md-btn md-btn md-btn-danger md-btn-wave-light waves-effect waves-button waves-light"
+                ng-class="{'disabled': vmd.Comment === '','md-btn md-btn-danger': vmd.Comment !== ''}"
+              >
+                {{'0007' | translate}}
+              </button>
+              <button
+                type="button"
+                class="uk-modal-close md-btn md-btn-flat uk-modal-close"
+                ng-click="vmd.Comment=''"
+              >
+                {{'0008' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  id="modalviewviewPDF"
+  class="uk-modal"
+  aria-hidden="true"
+  uk-modal="stack: true"
+  bg-close="false"
+  style="display: none; overflow-y: scroll; min-height: 300px"
+>
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <a class="uk-modal-close uk-close"></a>
+    <div class="uk-container" style="height: 448px; padding: 0 10px">
+      <div class="uk-grid uk-grid-small">
+        <div class="uk-width-1-3" style="height: 445px">
+          <patient order="vmd.order"></patient>
+        </div>
+        <div class="uk-width-2-3">
+          <iframe
+            id="viewPDF"
+            scrolling="auto"
+            width="100%"
+            height="100%"
+            class="contentscroll"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<modalexceptions
+  openmodal="vmd.ShowPopupError"
+  detailerror="vmd.Error"
+  idcontrol="'rs-modal-orderattachment'"
+>
+</modalexceptions>

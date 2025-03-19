@@ -1,0 +1,48 @@
+(function () {
+    'use strict';
+
+    angular
+        .module('app.core', [
+            'ngAnimate',
+            'ngSanitize',
+            'blocks.exception',
+            'blocks.logger',
+            'blocks.router',
+            'blocks.settings',
+            'LocalStorageModule',
+            'ngCookies',
+            'ui.router',
+            'pascalprecht.translate',
+            'angularSpectrumColorpicker',
+            'dialogs.main',
+            'ngTagsInput',
+            'naif.base64',
+            'angular-velocity',
+            'angular-echarts',
+            'ui.calendar',
+            'ncy-angular-breadcrumb',
+            'ngIdle',
+            'oc.lazyLoad',
+            'ngResource',
+            'chart.js',
+            'angular-notification-icons',
+            'angular-svg-round-progressbar',
+            'ngWebSocket',
+            'selectize',
+            'angular.filter',
+            'vs-repeat',
+            'ui.select',
+            'timer',
+            'lz-string',
+            'ngBase64Download',
+            'angular-click-outside',
+            'ui.switchery',
+            'RecursionHelper',
+            'ngMaterial',
+            'ngMessages',
+            'datatables',
+            'ngFileUpload',
+            'ui.sortable',
+            'treeControl'
+        ]);
+})();

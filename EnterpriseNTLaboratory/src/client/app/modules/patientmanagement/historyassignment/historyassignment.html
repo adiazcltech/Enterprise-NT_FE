@@ -1,0 +1,275 @@
+
+<style type="text/css">
+
+  span.md-input-bar{
+    display: none;
+  }
+
+  span > div.md-input-wrapper{
+    top: -43px;
+    width: 101% !important;
+    padding-top: 3px;
+  }
+
+  span.k-picker-wrap, span.k-state-default, span.k-state-default:hover, span.k-state-default:focus {
+    padding: 0px !important;
+    height: 30px !important;
+    border-style: none;
+    background-color: #fff !important
+
+  }
+
+  span.k-widget, span.k-datepicker, span.k-header{
+      padding-bottom: 0px;
+      margin-top: 8px !important;
+  }
+
+  span.k-select{
+    margin-top: -2px
+  }
+
+  span.k-select > span.uk-input-group-icon:before, span.uk-icon-calendar:before{
+    color: #727272;
+  }
+
+  .k-input{
+    background-color: transparent;
+    padding-bottom: 0px;
+    margin-top: -6px;
+    width: 113%;
+  }
+
+  .k-block, .k-draghandle, .k-grid-header,
+  .k-grouping-header, .k-header, .k-pager-wrap,
+  .k-treemap-tile, html .km-pane-wrapper .k-header {
+      background-color: #2196f3;
+  }
+
+  td.k-calendar, td.k-today {
+    background-color: #2196f3 !important;
+  }
+
+  .k-calendar td {
+      border-radius: 50%;
+      border-style: none !important;
+  }
+
+  .k-calendar td.k-state-focused, .k-calendar td.k-state-selected.k-state-focused {
+     -webkit-box-shadow: none !important;
+     box-shadow: none !important;
+  }
+
+  .k-calendar td.k-state-selected {
+    background-color: #CCC;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  div.k-footer > a.k-link, a.k-nav-today {
+      color: #2196f3 !important;
+  }
+
+  td.md-list-content{
+    width: 33.33%
+  }
+
+  .line-head{
+    width: 100%;
+    font-weight: bold;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #d6d6d6;
+    padding: 0px;
+    margin: 0px
+  }
+
+  thead.bold-text > tr > th{
+     font-weight: bold;
+     font-size: 13PX;
+  }
+
+  .tbody-test {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: calc(100% - 63px);
+      display: -webkit-inline-box;
+      width: 100%;
+      font-size: 12px;
+  }
+
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner">
+    	<div style="height: 100%" class="uk-grid" >
+            <div style="height: 100%" class="uk-width-1-2">
+                <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40 md-card-primary">
+                    <div style="height: 100%; padding-left: 14px; padding-right: 14px">
+                        <div class="uk-width-1-3"  style="height: 50px; float: left; line-height: 50px">
+                            <span>{{'0189' | translate}}:</span>
+                        </div>
+                        <div class="uk-width-1-3"  style="height: 50px; float: left;">
+                              <input kendo-date-picker
+                                     k-ng-model="vm.dateseach"
+                                     style="width: 100%;"
+                                     id="kUI_datepicker_a"
+                                     k-format="'{{vm.formatDate}}'"
+                                     max="vm.max"
+                                     k-on-change="vm.getorder()"/>
+                        </div>
+                        <hr class="line-head" style="border-width: 0.5px;">
+                        <div class="uk-width-1-1" style="margin-top: 3px; height: 30px; ">
+                              <table class="line-head">
+                                <tr>
+                                    <td class="md-list-content">
+                                        <span>{{'0110' | translate}}</span>
+                                    </td>
+                                    <td class="md-list-content">
+                                        <span>{{'0088' | translate}}</span>
+                                    </td>
+                                    <td class="md-list-content">
+                                        <span>{{'0003' | translate}}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                         <div class="uk-width-1-1" style="margin-top: 10px; height: calc(100% - 103px);overflow: auto; ">
+                            <ul class="md-list"  ng-repeat="Order in vm.ListOrder | filter: vm.filter" ng-class="{selected: Order.orderNumber == vm.selected}" data-ng-click="vm.getDetail(Order.orderNumber)"  on-last-repeat >
+                                <li style="border-bottom: 1px solid #ddd;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td class="md-list-content">
+                                                <span>{{Order.orderNumber}}</span>
+                                            </td>
+                                            <td class="md-list-content">
+                                                <span>{{Order.type.name}}</span>
+                                            </td>
+                                            <td class="md-list-content">
+                                                <span>{{Order.branch.name}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:100%"  class="uk-width-1-2">
+                <div  style="height: calc(100% - 70px); width: 100%;" class="uk-width-4-6" pdk-next-input-on-enter>
+                    <!-- <demographics disabled="true" type="'H'" state="vm.statepatient" log="vm.logpatient" datademographics="vm.patient" cleanform="vm.cleanform" functionexecute="vm.changestate" formvalid="vm.formvalid" photopatient ="vm.photopatient" labelalign="'right'" viewtakephoto="false" ></demographics> -->
+                  <orderfield type="'H'"
+                              statecontrol="vm.patientDemosDisabled"
+                              values="vm.patientDemosValues"
+                              data="vm.patient"
+                              selectedpatientid="vm.selectedPatientId"
+                              selectedpatientname="vm.selectedPatientName"
+                              listenerdate="vm.eventSelectDate"
+                              loadpatientsearch="vm.loadPatient(patient)"
+                              viewsearch="true"
+                              patientphoto="vm.patientPhoto"
+                              opensearch="vm.openSearch"></orderfield>
+                </div>
+                <div class="uk-width-1-1 md-card" style="margin-top: 10px">
+                    <div class="md-card-content" style="height: 38px; padding-top: 5px">
+                        <div class="uk-float-right">
+                           <button type="button" class="md-fab md-fab-small md-fab-danger" ng-click="vm.eventCancel()" ><i class="material-icons">&#xE14C;</i></button>
+                        </div>
+                        <div class="uk-float-right" style="padding-right: 11px;">
+                            <button type="button"  ng-disabled="vm.disabledSave || vm.order==''"  class="md-fab md-fab-small md-fab-primary" ng-class="{'md-bg-blue-grey-100' : vm.disabledSave || vm.order==''}" ng-click="vm.save()" ><i class="material-icons" data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate | trim}}" >&#xE161;</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="testinvalid" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+            <div class="uk-modal-dialog" style="width: 75%;">
+                <div class="uk-modal-header md-bg-red-600" style="border-bottom: 0px;">
+                    <h3 class="uk-modal-title">{{'0013' | translate}}</h3>
+                </div>
+                <div class="uk-form-row" style="height: 446px;">
+                    <form class="form" name="myForm" style="height: 100%;">
+
+                        <div class="uk-form-row" style="height: 100%;">
+                            <p class="line-head" style="height: 40px"><label>{{'0232' | translate}}: {{vm.order}}</label></p>
+                            <div class="uk-form-row" style="height: 100%;">
+                                <table class="uk-table uk-table-nowrap uk-table-small uk-table-middle tablescrollable" style="height: 100%">
+                                    <thead class="bold-text" style="width: 100%; display: inline-table;">
+                                        <tr class="uk-grid" style="margin-left: 0px">
+                                            <th class="uk-width-1-6">{{'0098' | translate}}</th>
+                                            <th class="uk-width-1-3">{{'0013' | translate}}</th>
+                                            <th class="uk-width-1-2">{{'0113' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody-test">
+                                        <tr class="uk-grid" data-ng-repeat="Test in vm.listtest" style="margin-left: 0px; margin-top: 0px;  display: inline-table; {{vm.widthGrid}}">
+                                            <td class="uk-width-1-6" data-ng-bind="Test.code"></td>
+                                            <td class="uk-width-1-3" data-ng-bind="Test.name"></td>
+                                            <td class="uk-width-1-2" data-ng-bind="Test.reason"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close" ng-click="vm.getDetail(vm.order);">{{'0329' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div id="orderinvalid" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+           <div class="uk-modal-dialog">
+                <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px;">
+                    <h3 class="uk-modal-title">{{'0659' | translate}}</h3>
+                </div>
+                <div class="uk-form-row">
+                    <form class="form" name="myForm" >
+                       <div class="uk-grid uk-container-center">
+                            <div class="uk-width-3-10" style="width: 20%; padding-left: 10px">
+                               <i class="material-icons md-color-red-A700" style="font-size: 64px" >warning</i>
+                            </div>
+                            <div class="uk-width-7-10" style="margin-top: 3%; padding-left: 10px">
+                                <span>{{vm.messageOrder}}</span>
+                            </div>
+                       </div>
+                    </form>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close" >{{'0329' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div id="validmodal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+           <div class="uk-modal-dialog">
+                <div class="uk-form-row">
+                      <form class="form" name="myForm" >
+                       <div class="uk-grid uk-container-center">
+                            <div class="uk-width-3-10">
+                               <img src="images/iconinfo.png" height="90" width="90">
+                       </div>
+                      <div class="uk-width-7-10" style="margin-top: 3%;">
+                         <span>{{'0672' | translate}}</span>
+                       </div>
+                       </div>
+                    </form>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button" class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light uk-modal-close" ng-click="vm.statepatient = 3">Aceptar</button>
+                    <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close" >{{'0008' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dependencedemo listdemographics="vm.patient"></dependencedemo>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

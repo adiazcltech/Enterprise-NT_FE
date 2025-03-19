@@ -1,0 +1,310 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content" style="height: 100%; overflow: hidden">
+  <div id="page_content_inner">
+    <div class="uk-grid uk-container-center" style="height: 100%;" data-uk-grid-margin>
+      <div class="uk-width-large-1-1" style="height: 100%;">
+        <div class="uk-grid" style="height: 100%;" data-uk-grid-margin>
+          <div class="uk-width-5-10">
+            <div class="md-card" style="height: 106px;">
+              <div class="md-card-content">
+                <div class="uk-form-row">
+                  <div class="uk-input-group" style="padding: 0px 0px;width:
+                    100%;">
+                    <div class="md-input-wrapper md-input-wrapper-disabled">
+                      <label class="ng-binding">{{'0098' | translate}}</label>
+                      <input id="code" oncopy="return false" onpaste="return
+                        false" type="text" class="md-input label-fixed ng-isolate-scope
+                        md-input-processed ng-pristine ng-valid ng-empty
+                        ng-touched" autocomplete="off" ng-model="vm.code" ng-keypress="vm.keyselectcode($event)"
+                        md-input="" aria-invalid="false" style="font-size: 30px;"> <span class="md-input-bar"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-5-10">
+            <div class="md-card" style="height: 106px;">
+              <div class="md-card-content">
+                <div class="uk-form-row">
+                  <div class="uk-input-group" style="padding: 0px 0px;width:
+                    100%;">
+                    <div class="md-input-wrapper md-input-wrapper-disabled">
+                      <label class="ng-binding">{{'0117' | translate}}</label>
+                      <input id="identification" oncopy="return false" onpaste="return false" type="text" class="md-input label-fixed ng-isolate-scope
+                        md-input-processed ng-pristine ng-valid ng-empty
+                        ng-touched" autocomplete="off" ng-model="vm.identification"
+                        ng-keypress="vm.keyselectidenti($event)" md-input="" aria-invalid="false"
+                        style="font-size: 30px;"> <span class="md-input-bar"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-1" style="height: calc(100% - 130px);" ng-if="vm.borgaslist.length === 0">
+            <div class="md-card md-card-hover uk-animation-fade" style="height:100%">
+              <div class="md-card-content patient-card-content contentscroll" style="height: calc(100% - 60px);overflow: auto;width: calc(100%
+              - 1px);padding: 0px;">
+                <div class="uk-grid uk-flex uk-flex-center uk-flex-middle" style="height: 70%">
+                  <div class="uk-width-1-1 uk-text-center">
+                    <img style="height:100px; width:100px" ng-src="images/patient/patient.png" />
+                  </div>
+                  <div class="uk-width-1-1 uk-text-center">
+                    {{'0392' | translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-3" style="height: calc(100% - 130px);" ng-if="vm.viewborgas.length !== 0">
+            <div class="md-card md-card-hover uk-animation-fade" style="height:
+              100%">
+              <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                  {{'1533' | translate}}
+                </h3>
+              </div>
+              <div class="md-card-content patient-card-content contentscroll" style="height: calc(100% - 60px);overflow: auto;width: calc(100%
+                - 1px);padding: 0px;">
+                <ul class="md-list md-list-addon" style="border-bottom: 1px solid #E5E5E5;" ng-repeat="demo in
+                  vm.viewborgas" >
+                  <li class="patient-demo-item">
+                    <div class="md-list-addon-element patient-addon-element">
+                      <img ng-if="demo.id===-10" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/documenttype.png" />
+                      <img ng-if="demo.id===-100" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/history.png" />
+                      <img ng-if="demo.id===-11" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/documenttype.png" />
+                      <img ng-if="demo.id===-101" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/lasname.png" />
+                      <img ng-if="demo.id===-102" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/lasname.png" />
+                      <img ng-if="demo.id===-103" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/name.png" />
+                      <img ng-if="demo.id===-109" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/name.png" />
+                      <img ng-if="demo.id===-104" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/genders.png" />
+                      <img ng-if="demo.id===-105" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/calendar.png" />
+                      <img ng-if="demo.id===-110" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/age.png" />
+                      <img ng-if="demo.id===-106" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/email.png" />
+                      <img ng-if="demo.id===-111" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/phone.png" />
+                      <i ng-if="demo.id===-112" class="md-list-addon-icon
+                        material-icons uk-text-success">&#xE55F;</i>
+                      <img ng-if="demo.id>0" class="md-list-addon-icon
+                      material-icons md-22" ng-src="images/patient/demo.png" />
+                    </div>
+                    <div class="md-list-content patient-list-content">
+                      <span class="uk-text-small uk-text-muted
+                        patient-list-content">
+                        {{demo.name}}
+                      </span>
+                      <span class="md-list-heading">
+                        {{demo.valuename===''||demo.valuename===null||demo.valuename===undefined? vm.datanull :demo.valuename}}
+                       <!--  {{demo.valuename}} -->
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-3" style="height: calc(100% - 130px);" ng-if="vm.viewborgas.length !== 0">
+            <div class="md-card md-card-hover uk-animation-fade" style="height:
+              100%">
+              <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                  LIS
+                </h3>
+                <md-input-container style="float: right;margin: 11px 0 0 0;">
+                  <md-checkbox class="md-primary" style="margin-bottom: 0px;" ng-model="vm.printbarcode">
+                    {{'1514' | translate}}
+                  </md-checkbox>
+                </md-input-container>
+              </div>
+              <div class="md-card-content patient-card-content contentscroll" style="height: calc(100% - 60px);overflow: auto;width: calc(100%
+                - 1px);padding: 0px;">
+                <ul class="md-list md-list-addon" style="border-bottom: 1px solid #E5E5E5;" ng-repeat="demo in
+                  vm.viewlist" ng-if="demo.id!==-111 && demo.id!==-112">
+                  <li class="patient-demo-item">
+                    <div class="md-list-addon-element patient-addon-element">
+                      <img ng-if="demo.id===-10" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/documenttype.png" />
+                      <img ng-if="demo.id===-100" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/history.png" />
+                      <img ng-if="demo.id===-11" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/documenttype.png" />
+                      <img ng-if="demo.id===-101" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/lasname.png" />
+                      <img ng-if="demo.id===-102" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/lasname.png" />
+                      <img ng-if="demo.id===-103" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/name.png" />
+                      <img ng-if="demo.id===-109" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/name.png" />
+                      <img ng-if="demo.id===-104" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/genders.png" />
+                      <img ng-if="demo.id===-105" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/calendar.png" />
+                      <img ng-if="demo.id===-110" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/age.png" />
+                      <img ng-if="demo.id===-106" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/email.png" />
+                      <img ng-if="demo.id===-111" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/phone.png" />
+                      <i ng-if="demo.id===-112" class="md-list-addon-icon
+                        material-icons uk-text-success">&#xE55F;</i>
+                      <img ng-if="demo.id>0" class="md-list-addon-icon
+                      material-icons md-22" ng-src="images/patient/demo.png" />
+                    </div>
+                    <div class="md-list-content patient-list-content">
+                      <span class="uk-text-small uk-text-muted
+                        patient-list-content">
+                        {{demo.name}}
+                      </span>
+                      <span class="md-list-heading">
+                        {{demo.valuename===''||demo.valuename===null||demo.valuename===undefined? vm.datanull :demo.valuename}}
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+                <div class="uk-grid uk-flex uk-flex-center uk-flex-middle" style="height: 70%"
+                  ng-if="vm.viewlist.length == 0">
+                  <div class="uk-width-1-1 uk-text-center">
+                    <img style="height:100px; width:100px" ng-src="images/patient/patient.png" />
+                  </div>
+                  <div class="uk-width-1-1 uk-text-center">
+                    {{'1515' | translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-1-3" style="height: calc(100% - 130px);" ng-if="vm.viewborgas.length !== 0">
+            <div class="md-card md-card-hover uk-animation-fade" style="height:
+              100%">
+              <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                  {{'0013' | translate}}
+                </h3>
+              </div>
+              <div class="md-card-content patient-card-content contentscroll" style="height: calc(100% - 87px);overflow: auto;">
+                <md-list-item ng-repeat="test in vm.listtestview" style="border-bottom: 1px solid #E5E5E5;">
+                  <ul class="md-list">
+                    <li>
+                      <div class="md-list-content">
+                        <span class="md-list-heading">{{test.code}} -
+                          {{test.abbr}}</span>
+                        <span class="uk-text-small uk-text-muted">{{test.name}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                  <md-checkbox class="md-secondary md-primary" ng-model="test.select"></md-checkbox>
+                </md-list-item>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md-fab-wrapper">
+          <button type="button" ng-disabled="!(vm.listtest | filter:{ select:
+            true}).length> 0" class="md-fab md-fab-small md-fab-primary" ng-class="{'md-bg-blue-grey-100' :!(vm.listtest | filter:{ select:
+            true}).length> 0}" ng-click="vm.validated()"><i class="material-icons" data-uk-tooltip="{pos:'top'}"
+              title="{{'0007' | translate}}">&#xE161;</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="errordata" class="uk-modal" aria-hidden="true">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px; margin-bottom: 0px;">
+      <div class="uk-grid uk-flex uk-flex-center uk-flex-middle">
+        <div class="uk-width-1-5">
+          <img class="img-responsive" src="images/config.png">
+        </div>
+        <div class="uk-width-4-5" style="padding-left: 0px; margin-left: -10px;">
+          <h5 class="uk-text-center"> {{'1516' | translate}}</h5>
+          <h5 class="uk-text-center"> {{'1517' | translate}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button ng-show="vm.viewadministrator" type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="vm.gologin(1)">
+        {{'1518' | translate}}</button>
+      <button ng-show="!vm.viewadministrator" type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+        ng-click="vm.gologin(2)">{{'1519' | translate}}</button>
+    </div>
+  </div>
+</div>
+<div id="testinvalid" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header md-bg-red-600" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title"> {{'1520' | translate}}</h3>
+    </div>
+    <div class="uk-overflow-container" style="margin-top: 0px; margin-bottom: 0px;">
+      <div class="uk-form-row contentscroll" style="height: 300px;overflow-y: scroll;">
+        <ul class="md-list md-list-addon" style="border-bottom: 1px solid #E5E5E5;"
+          ng-repeat="demo in vm.finalalidatedsytem">
+          <li class="patient-demo-item">
+            <div class="md-list-addon-element patient-addon-element">
+              <img ng-if="demo.id===-10" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/documenttype.png" />
+              <img ng-if="demo.id===-100" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/history.png" />
+              <img ng-if="demo.id===-11" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/documenttype.png" />
+              <img ng-if="demo.id===-101" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/lasname.png" />
+              <img ng-if="demo.id===-102" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/lasname.png" />
+              <img ng-if="demo.id===-103" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/name.png" />
+              <img ng-if="demo.id===-109" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/name.png" />
+              <img ng-if="demo.id===-104" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/genders.png" />
+              <img ng-if="demo.id===-105" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/calendar.png" />
+              <img ng-if="demo.id===-110" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/age.png" />
+              <img ng-if="demo.id===-106" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/email.png" />
+              <img ng-if="demo.id===-111" class="md-list-addon-icon
+                        material-icons md-22" ng-src="images/patient/phone.png" />
+              <i ng-if="demo.id===-112" class="md-list-addon-icon
+                        material-icons uk-text-success">&#xE55F;</i>
+              <img ng-if="demo.id>0" class="md-list-addon-icon
+                      material-icons md-22" ng-src="images/patient/demo.png" />
+            </div>
+            <div class="md-list-content patient-list-content">
+              <span class="md-list-heading">
+                {{demo.name}}
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' | translate}}</button>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

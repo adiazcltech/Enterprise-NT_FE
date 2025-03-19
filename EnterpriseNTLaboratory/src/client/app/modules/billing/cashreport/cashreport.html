@@ -1,0 +1,131 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden">
+    <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+      <div style="height:100%" class="uk-width-1-1">
+        <div class="md-card" style="margin-bottom: 5px ;height: 100%">
+          <div class="md-card-content uk-grid uk-grid-small">
+            <div class="uk-width-5-10">
+              <fieldset class="fieldset" style="height: 58px;padding: 12px 15px 1px 23px;">
+                <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                  isopenreport="vm.isOpenReport" typeview="2">
+                </orderfilter>
+              </fieldset>
+            </div>
+            <div class="uk-width-5-10">
+              <fieldset class="fieldset uk-grid" style="height: 58px;padding: 12px 15px 1px 0px;margin-left: 0px;">
+                <div class="uk-width-1-2">
+                  <label style="top: -6px; font-size: 12px;">{{'0003' | translate}}</label>
+                  <select class="md-input" ng-options="obj.id as obj.name for obj in vm.branch"
+                    data-ng-model="vm.databranch"></select>
+                </div>
+                <div class="uk-width-1-2">
+                  <label style="top: -6px; font-size: 12px;">{{'0001' | translate}}</label>
+                  <select class="md-input" md-input
+                    ng-options="obj as obj.namecompleted for obj in vm.user track by obj.id" data-ng-model="vm.list"
+                    ng-disabled="vm.filterTpye === 1 || vm.filterTpye === 4"></select>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="uk-width-1-1">
+              <fieldset class="fieldset uk-grid" style="height: 58px;padding: 12px 15px 1px 0px;margin-left: 0px;">
+                <legend style="padding-left: 12px;">{{'0161' | translate}}</legend>
+                <div class="uk-width-1-1 radio-check"
+                  style="white-space: nowrap; margin-bottom: 5px;padding-left: 10px;">
+                  <input type="radio" name="filtertype" id="filtertype_1" value="1" ng-checked="vm.filterTpye === 1">
+                  <label for="filtertype_1" ng-click="vm.clickFilterType(1)">{{'1854' | translate}}</label>
+                  <input type="radio" name="filtertype" id="filtertype_2" value="2" ng-checked="vm.filterTpye === 2" />
+                  <label for="filtertype_2" ng-click="vm.clickFilterType(2)">{{'0321' | translate}}</label>
+                  <input type="radio" name="filtertype" id="filtertype_5" value="5" ng-checked="vm.filterTpye === 5" />
+                  <label for="filtertype_5" ng-click="vm.clickFilterType(5)">{{'2025' | translate}}</label>
+                  <input type="radio" name="filtertype" id="filtertype_3" value="3" ng-checked="vm.filterTpye === 3" />
+                  <label for="filtertype_3" ng-click="vm.clickFilterType(3)">{{'2020' | translate}}</label>
+                  <input type="radio" name="filtertype" id="filtertype_4" value="4" ng-checked="vm.filterTpye === 4" />
+                  <label for="filtertype_4" ng-click="vm.clickFilterType(4)">{{'2022' | translate}}</label>
+                  <input type="radio" name="filtertype" id="filtertype_6" value="6" ng-checked="vm.filterTpye === 6" />
+                  <label for="filtertype_6" ng-click="vm.clickFilterType(6)">{{'1876' | translate}}</label>
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+        <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+          <div style="height: 100%; padding-top: 5px" class="md-card-content">
+            <div class="uk-grid" style="height: 100%">
+              <div class="-1-1" style="float: right">
+                <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+                  ng-click="vm.print('pdf');" >
+                  <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                    title="Descargar pdf"></i>
+                </button>
+
+                <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-green-A700"
+                  ng-click="vm.print('xls');" >
+                  <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                    title="Descargar excel"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal-error" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ vm.dataerror}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{'0962' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="modalprogress" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress  uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;"></div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      {{ '2024' | translate }}....
+    </div>
+  </div>
+
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+

@@ -1,0 +1,468 @@
+{
+  "data": [
+    {
+      "name": "1011 PROTEINAS TOTALES",
+      "type": 1,
+      "testdetail": [
+        {
+          "datevalid": "08/11/2021, 8:06:36 am",
+          "order": 2021110801024,
+          "result": "7.0",
+          "min":6,
+          "max":8.3,
+          "referencevalues": "6 - 8.3",
+          "patology": "Normal"
+        },
+        {
+          "datevalid": "18/11/2021, 2:24:53 pm",
+          "order": 2021111801003,
+          "result": "10.0",
+          "min":6,
+          "max":8.3,
+          "referencevalues": "6 - 8.3",
+          "patology": "*"
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "trigger": "axis"
+        },
+        "calculable": true,
+        "legend": {
+          "data": [
+            "Resultado",
+            "Referencia mínima",
+            "Referencia máxima"
+          ]
+        },
+        "xAxis": {
+          "name": "Tiempo",
+          "nameLocation": "middle",
+          "nameGap": "30",
+          "type": "category",
+          "boundaryGap": false,
+          "data": [
+            "18/11/2021, 2:24:53 pm",
+            "08/11/2021, 8:06:36 am"
+          ]
+        },
+        "yAxis": {
+          "name": "Resultado",
+          "type": "value",
+          "nameGap": "10"
+        }
+      },
+      "datagraphics": [
+        {
+          "name": "Resultado",
+          "type": "line",
+          "data": [
+            10,
+            7
+          ]
+        },
+        {
+          "name": "Referencia mínima",
+          "type": "line",
+          "data": [
+            6,
+            6
+          ]
+        },
+        {
+          "name": "Referencia máxima",
+          "type": "line",
+          "data": [
+            8.3,
+            8.3
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1012 ALBÚMINA",
+      "type": 1,    
+      "testdetail": [
+        {
+          "datevalid": "08/11/2021, 8:06:36 am",
+          "order": 2021110801024,
+          "result": "5.0",
+          "referencevalues": "4 - 5.2",
+          "patology": "Normal",
+          "min":4,
+          "max":5.2
+        },
+        {
+          "datevalid": "18/11/2021, 2:24:54 pm",
+          "order": 2021111801003,
+          "result": "20.0",
+          "referencevalues": "4 - 5.2",
+          "patology": "*",
+          "min":4,
+          "max":5.2
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "trigger": "axis"
+        },
+        "calculable": true,
+        "legend": {
+          "data": [
+            "Resultado",
+            "Referencia mínima",
+            "Referencia máxima"
+          ]
+        },
+        "xAxis": {
+          "name": "Tiempo",
+          "nameLocation": "middle",
+          "nameGap": "30",
+          "type": "category",
+          "boundaryGap": false,
+          "data": [
+            "18/11/2021, 2:24:54 pm",
+            "08/11/2021, 8:06:36 am"
+          ]
+        },
+        "yAxis": {
+          "name": "Resultado",
+          "type": "value",
+          "nameGap": "10"
+        }
+      },
+      "datagraphics": [
+        {
+          "name": "Resultado",
+          "type": "line",
+          "data": [
+            20,
+            5
+          ]
+        },
+        {
+          "name": "Referencia mínima",
+          "type": "line",
+          "data": [
+            4,
+            4
+          ]
+        },
+        {
+          "name": "Referencia máxima",
+          "type": "line",
+          "data": [
+            5.2,
+            5.2
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1013 GLOBULINA",
+      "type": 1,     
+      "testdetail": [
+        {
+          "datevalid": "08/11/2021, 8:06:36 am",
+          "order": 2021110801024,
+          "result": "2.0",
+          "referencevalues": "2 - 3",
+          "patology": "Normal",
+          "min":2,
+          "max":3
+        },
+        {
+          "datevalid": "18/11/2021, 2:24:54 pm",
+          "order": 2021111801003,
+          "result": "30.0",
+          "referencevalues": "2 - 3",
+          "patology": "*",
+          "min":2,
+          "max":3
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "trigger": "axis"
+        },
+        "calculable": true,
+        "legend": {
+          "data": [
+            "Resultado",
+            "Referencia mínima",
+            "Referencia máxima"
+          ]
+        },
+        "xAxis": {
+          "name": "Tiempo",
+          "nameLocation": "middle",
+          "nameGap": "30",
+          "type": "category",
+          "boundaryGap": false,
+          "data": [
+            "18/11/2021, 2:24:54 pm",
+            "08/11/2021, 8:06:36 am"
+          ]
+        },
+        "yAxis": {
+          "name": "Resultado",
+          "type": "value",
+          "nameGap": "10"
+        }
+      },
+      "datagraphics": [
+        {
+          "name": "Resultado",
+          "type": "line",
+          "data": [
+            30,
+            2
+          ]
+        },
+        {
+          "name": "Referencia mínima",
+          "type": "line",
+          "data": [
+            2,
+            2
+          ]
+        },
+        {
+          "name": "Referencia máxima",
+          "type": "line",
+          "data": [
+            3,
+            3
+          ]
+        }
+      ]
+    }
+  ],
+  "Labels": [
+    {
+      "0000": "es",
+      "0001": "Usuario",
+      "0002": "Contraseña",
+      "0003": "Sede",
+      "0004": "Iniciar sesión",
+      "0005": "Nuevo",
+      "0006": "Editar",
+      "0007": "Guardar",
+      "0008": "Cancelar",
+      "0009": "Configuración",
+      "0010": "Datos de cliente",
+      "0011": "Opciones",
+      "0012": "Tipo de usuario",
+      "0013": "Términos y condiciones",
+      "0014": "Configuración de correos",
+      "0015": "Español",
+      "0016": "Inglés",
+      "0017": "Usuario inválido",
+      "0018": "Contraseña incorrecta",
+      "0019": "La contraseña para este usuario expiró",
+      "0020": "Requerido",
+      "0021": "Cerrar sesión",
+      "0022": "Datos guardados con éxito",
+      "0023": "XMLHttpRequest no se puede cargar, la respuesta a la solicitud de preflight no pasa la comprobación de control de acceso: No hay encabezado 'Access-Control-Allow-Origin' presente en el recurso solicitado. Por lo tanto no se permite el acceso",
+      "0024": "Código del error",
+      "0025": "Mensaje del error",
+      "0026": "Detalle",
+      "0027": "la sección a caducado",
+      "0028": "Error",
+      "0029": "Error en el sistema",
+      "0030": "Arrastre y suelte un archivo aquí o haga clic en",
+      "0031": "Arrastre y suelte o haga clic para reemplazar",
+      "0032": "Eliminar",
+      "0033": "Ooops, algo pasó mal.",
+      "0034": "El tamaño es demasiado grande ({{ value }} max).",
+      "0035": "El ancho de la imagen es demasiado pequeño ({{value}}} px min).",
+      "0036": "El ancho de la imagen es demasiado grande ({{value}}} px max).",
+      "0037": "La altura de la imagen es demasiado pequeña ({{value}}} px min).",
+      "0038": "El alto de la imagen es demasiado grande ({{value}} px max).",
+      "0039": "El formato de imagen no está permitido ({{value}} solamente).",
+      "0040": "Información para mostrar en el pie de página",
+      "0041": "Imagen que se mostrará en el banner",
+      "0042": "Información adicional",
+      "0043": "Imagen de fondo para el banner",
+      "0044": "Dirección URL de la página principal",
+      "0045": "Información adicional para mostrar en pie de página",
+      "0046": "Color de personalización para la consulta web",
+      "0047": "Nombre cliente",
+      "0048": "Texto que se  mostrara en el banner de la página",
+      "0049": "Información",
+      "0050": "Histórico",
+      "0051": "Permite mostrar tabla de históricos",
+      "0052": "Gráfico histórico",
+      "0053": "Permite mostrar gráfica de históricos",
+      "0054": "Histórico condensado",
+      "0055": "Permite mostrar el reporte de históricos en PDF",
+      "0056": "Login con captcha",
+      "0057": "Añade la funcionalidad captcha al autenticarse",
+      "0058": "Cambio de contraseña",
+      "0059": "Agrega una funcionalidad para permitir el cambio de contraseña",
+      "0060": "Saldo pendiente",
+      "0061": "Habilitar la validación por saldo pendiente",
+      "0062": "Búsqueda por orden",
+      "0063": "Agrega un nuevo tab para poder filtrar por un número de orden específico",
+      "0064": "Mostrar confidenciales",
+      "0065": "Permite mostrar a los usuarios los resultados de los exámenes que sean marcados como confidenciales en LIS",
+      "0066": "Tipo bloqueo pánico",
+      "0067": "No bloqueo",
+      "0068": "Bloquea examen",
+      "0069": "Bloquea orden",
+      "0070": "Bloquea o muestra los exámenes que se encuentran en patologico segun la opción que seleccione",
+      "0071": "Mostrar resultados",
+      "0072": "Ingresados",
+      "0073": "Verificados",
+      "0074": "Permite mostrar los resultados ségun el estado que se encuentra",
+      "0075": "Médico",
+      "0076": "Paciente",
+      "0077": "Cliente",
+      "0078": "Laboratorio",
+      "0079": "Todos",
+      "0080": "Cantidad ordenes",
+      "0081": "Usuario Activo",
+      "0082": "URL no válida",
+      "0083": "Para configurar los términos y condiciones, escribir los términos y condiciones o en su defecto copiarlos",
+      "0084": "Establece un formato de cuerpo de correo electrónico para los mensajes de restablecimiento de contraseña",
+      "0085": "Añadir usuario",
+      "0086": "Añadir link",
+      "0087": "Añadir fecha actual",
+      "0088": "Añadir laborario",
+      "0089": "Debe añadir el usuario y el link",
+      "0090": "Debe añadir el link",
+      "0091": "Debe añadir el usuario",
+      "0092": "ya se añadio el usuario",
+      "0093": "ya se añadio el link",
+      "0094": "Restauración de contraseña",
+      "0095": "Debe configurar un correo electrónico para realizar la restauración de la contraseña!",
+      "0096": "Verifiqué el rol y/o usuario!",
+      "0097": "Digite el usuario",
+      "0098": "Contraseña actualizada correctamente",
+      "0099": "El link ya expiro o fue utilizado",
+      "0100": "¡Las contraseñas no coinciden!",
+      "0101": "¡Ambas contraseñas son requeridas para poder realizar la actualización!",
+      "0102": "Por favor verifique la bandeja de entrada de su correo electrónico, le hemos enviado un mensaje para restablecer la contraseña",
+      "0103": "Nueva contraseña",
+      "0104": "Confirme la contraseña",
+      "0105": "Obtener contraseña",
+      "0106": "Fecha",
+      "0107": "Historia",
+      "0108": "Orden",
+      "0109": "La fecha seleccionada no puede ser mayor al día de hoy",
+      "0110": "Tipo de Documento",
+      "0111": "Apellido",
+      "0112": "Nombre",
+      "0113": "Seleccionar año",
+      "0114": "Prueba",
+      "0115": "Resultado",
+      "0116": "Unidad",
+      "0117": "Referencia",
+      "0118": "Pánico",
+      "0119": "Delta",
+      "0120": "Bloqueado",
+      "0121": " Orden bloqueada. Por favor contacte a su médico",
+      "0122": "Texto",
+      "0123": "Gráfico",
+      "0124": "Condensado",
+      "0125": "Fecha de validación",
+      "0126": "valores de referencia",
+      "0127": "Patológico",
+      "0128": "¡No existe un informe de históricos para las pruebas escogidas!",
+      "0129": "Referencia mínima",
+      "0130": "Referencia máxima",
+      "0131": "Tiempo",
+      "0132": "Normal",
+      "0133": "Configuración de correo",
+      "0134": "Protocolo",
+      "0135": "Puerto",
+      "0136": "Correo origen",
+      "0137": "Correo inválido",
+      "0138": "Correo",
+      "0139": "Formato inválido",
+      "0140": "Aceptar",
+      "0141": "Informe de resultados",
+      "0142": "Resultado con validación preliminar",
+      "0143": "Fecha y hora de ingreso",
+      "0144": "Fecha de impresión",
+      "0145": "Informe generado por",
+      "0146": "Página",
+      "0147": "de",
+      "0148": "Débil",
+      "0149": "Medio",
+      "0150": "Buena",
+      "0151": "Segura",
+      "0152": "Muy segura",
+      "0153": "Por su seguridad es necesario establecer una nueva contraseña, para cumplir con nuestra política de contraseña segura, debe utilizar una contraseña suficientemente segura",
+      "0154": "Esta contraseña ya ha sido usada por favor cambiar contraseña",
+      "0155": "La contraseña ingresada no debe ser igual a contraseñas usadas anteriormente",
+      "0156": "La contraseña debe tener mínimo",
+      "0157": "caracteres",
+      "0158": "La contraseña debe contener mayúsculas",
+      "0159": "La contraseña debe contener minúsculas",
+      "0160": "La contraseña debe contener números",
+      "0161": "La contraseña debe contener caracteres especiales",
+      "0162": "La contraseña no es igual",
+      "0163": "Ha excedido el número máximo de intentos de inicio de sesión, el usuario se ha desactivado",
+      "0164": "Usuario inactivo",
+      "0165": "El usuario no se encuentra activo",
+      "0166": "La contraseña ha expirado",
+      "0167": "Repetir contraseña",
+      "0168": "Por su seguridad es necesario establecer una nueva contraseña",
+      "0169": "Cargando",
+      "0170": "Ayuda",
+      "0171": "No tiene licencia para el producto",
+      "0172": "No tiene permisos para esta sede",
+      "0173": "El Limite de usuarios conectados a llegado a su limite",
+      "0174": "Las pruebas deben estar validadas para poder generar el reporte",
+      "0175": "LDAP La autenticación no es compatible con el servidor",
+      "0176": "Contraseña o nombre de usuario incorrecto LDAP",
+      "0177": "Conexión de falla LDAP",
+      "0178": "URL servicios de LIS",
+      "0179": "Permite conectarse a los servicios del LIS",
+      "0180": "La licencia registrada ha expirado.",
+      "0181": "Año",
+      "0182": "Años",
+      "0183": "Mes",
+      "0184": "Meses",
+      "0185": "Día",
+      "0186": "Días",
+      "0187": "Edad no valida",
+      "0188": "No se encontro contraseña asignada",
+      "0189": "Identificación",
+      "0190": "Informe preliminar",
+      "0191": "llave google",
+      "0192": "Si desea usar captchan debe crear llave en google",
+      "0193": "PATH del LIS consultar reportes",
+      "0194": "PATH para consultar los reportes del LIS",
+      "0195": "EL path para consultar lis no se encuentra configurado comuniquese con el administrador",
+      "0196": "Digite una identificación",
+      "0197": "Digite los nombres o apellidos",
+      "0198": "Cliente",
+      "0199": "Médico",
+      "0200": "Tarifa",
+      "0201": "Tipo de orden",
+      "0202": "Servicio",
+      "0203": "Raza",
+      "0204": "Comuníquese con el administrador, algún dato en la configuración de correos contiene datos erróneos",
+      "0205": "Buscar",
+      "0206": "Filtros",
+      "0207": "ver PDF",
+      "0208": "Seleccione la fecha",
+      "0209": "Ver contraseña",
+      "0210": "Ocultar contraseña",
+      "0211": "El archivo ha sido descargado",
+      "0212": "No se encontraron datos",
+      "0213": "Cerrar"
+    }
+  ],
+  "Variables": [
+    {
+      "entity": "CLTECH",
+      "abbreviation": "CLT",
+      "paciente": "Prueba Prueba Prueba Prueba",
+      "username": "adiaz",
+      "date": "2017/10/20a"
+    }
+  ]
+}

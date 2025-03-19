@@ -1,0 +1,364 @@
+<style type="text/css">
+    .top_buttons {
+        margin-left: 5px;
+        margin-right: -5px;
+        height: 63px;
+        margin-top: 14px;
+        padding: 13px;
+    }
+
+
+    .md-fab.md-fab-Xsmall>i {
+        line-height: 31px;
+        height: inherit;
+        width: inherit;
+        font-size: 17px;
+    }
+
+    .md-fab.md-fab-Xsmall {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .requerid {
+        border-bottom: 1px solid #c71111;
+    }
+
+    .k-select {
+        display: none !important;
+    }
+
+    /* 
+    // input */
+
+    .md-datepicker-input-container {
+        width: 100% !important;
+        min-height: 27px !important;
+        margin-left: 0px !important;
+    }
+
+    .md-icon-button+.md-datepicker-input-container {
+        margin-left: 0px !important;
+    }
+
+    .md-datepicker-button {
+        display: none;
+    }
+
+    .md-datepicker-input {
+        padding: 7px 0 5px;
+        font-size: 11px !important;
+    }
+
+    .md-inputsm {
+        font: 400 11px / 18px 'Roboto', sans-serif !important;
+        padding: 4px 4px !important;
+        min-height: 25px !important;
+    }
+
+    .labelmd-input {
+        top: -6px;
+        font-weight: bold !important;
+        font-size: 10px !important;
+        text-transform: capitalize !important;
+    }
+
+    .dateleft {
+        margin-left: 49px !important;
+    }
+
+    .select2-container .select2-choice {
+        padding: 7px 4px;
+        min-height: 29px;
+    }
+
+    .md-button.md-icon-button {
+        margin: 0px 0px;
+        width: 25px;
+        padding: 0px;
+    }
+</style>
+
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="height: calc(100% - 307px);padding: 0px 0px 0px;">
+        <div style="height: 183px;width: 100%;margin-left: -10px;" class="uk-grid">
+            <div class="uk-width-1-1 " style="height: 100%;padding-left: 19px;">
+                <div style="height: 100%;" class="md-card">
+                    <div style="height: 100%;padding: 0px 5px 0px 5px;" class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-1">
+                                <fieldset class="fieldset">
+                                    <legend>{{'3650' | translate}}:</legend>
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1" style="padding-right: 13px;">
+                                            <div class="uk-grid">
+                                                <div class="uk-width-3-10" style="padding-top: 0px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/branch.png" />
+                                                        </span>
+                                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold"
+                                                            style="color: #727272;font-size: 12px;">{{'3651' |
+                                                            translate}}</label>
+                                                        <loadcombobox change="vm.getdonor(1)"
+                                                            listorigin="vm.ListInstitution" placeholder="'3311'"
+                                                            ng-model="vm.institution.selected">
+                                                        </loadcombobox>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-3-10" style="padding-top: 8px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/organ-donation.png" />
+                                                        </span>
+                                                        <label
+                                                            class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3034'
+                                                            | translate}}</label>
+                                                        <select class="md-input md-input label-fixed orderentrytab"
+                                                            style="padding: 7px 4px;min-height: 33px"
+                                                            ng-change="vm.getdonor(2)"
+                                                            ng-options="obj.id as obj.name for obj in vm.organ"
+                                                            id="idorgantype" name="idorgantype"
+                                                            data-ng-model="vm.idorgantype"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-4-10" style="padding-top: 3px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/patient/history.png" />
+                                                        </span>
+                                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold"
+                                                            style="color: #727272;font-size: 12px;">{{'3318'
+                                                            | translate}}</label>
+                                                        <loadcomboboxrecepcion listorigin="vm.ListDonor"
+                                                            placeholder="'3310'" ng-model="vm.donor.selected"
+                                                            fieldCode="patientId" change="vm.getdonorchangue()"
+                                                            fieldName="name">
+                                                        </loadcomboboxrecepcion>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </fieldset>
+                            </div>
+                            <div class="uk-width-1-1">
+                                <fieldset class="fieldset">
+                                    <legend>{{'3652' | translate}}:</legend>
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1">
+                                            <div class="uk-grid uk-grid-small" style="margin-left: 0px;">
+                                                <div class="uk-width-2-10">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/blood-type.png" />
+                                                        </span>
+                                                        <label
+                                                            class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3336'
+                                                            | translate}}</label>
+                                                        <select class="md-input md-input label-fixed"
+                                                            ng-change="vm.getseach()"
+                                                            ng-options="obj.id as obj.name for obj in vm.ListBloodtype"
+                                                            data-ng-model="vm.datadonor.bloodgroup"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-2-10" style="padding-top: 2px;width: 25%;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/1.png" />
+                                                        </span>
+                                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold">HLA -
+                                                            DRB1</label>
+                                                        <input type="text" ng-keypress="vm.searchkey($event)"
+                                                            class="md-input label-fixed ordersearch-uppercase"
+                                                            style="font-size: 12px;padding: 7px 4px;min-height: 33px"
+                                                            data-ng-model="vm.datadonor.hladbr1" md-input />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-2-10" style="padding-top: 2px;width: 25%;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/2.png" />
+                                                        </span>
+                                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold">HLA -
+                                                            B</label>
+                                                        <input type="text" ng-keypress="vm.searchkey($event)"
+                                                            class="md-input label-fixed ordersearch-uppercase"
+                                                            style="font-size: 12px;padding: 7px 4px;min-height: 33px"
+                                                            data-ng-model="vm.datadonor.hlab" md-input />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-2-10" style="padding-top: 2px;width: 25%;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/3.png" />
+                                                        </span>
+                                                        <label class="labelmd-inpu uk-text-truncate uk-text-bold">HLA -
+                                                            A</label>
+                                                        <input type="text" ng-keypress="vm.searchkey($event)"
+                                                            class="md-input label-fixed ordersearch-uppercase"
+                                                            style="font-size: 12px;padding: 7px 4px;min-height: 33px"
+                                                            data-ng-model="vm.datadonor.hlaa" md-input />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-10 uk-flex uk-flex-middle uk-flex-center"
+                                                    style="padding: 0px 0px;width: 5%;">
+                                                    <div class="uk-float-right">
+                                                        <div style="display: inline-block; margin-right: 5px;">
+                                                            <button type="button"
+                                                                class="md-fab md-fab-smallY md-fab md-fab-success"
+                                                                ng-click="vm.getseach()">
+                                                                <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                                    title="{{'0154' | translate}}">search</i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-1-1" style=" height: calc(100% - -101px);
+        padding-left: 10px;
+        padding-top: 0px;
+        margin-top: 6px;
+        padding-right: 10px;">
+            <div class="md-card  md-card-hover" style="height: 100%;">
+                <div class="md-card-content" style="height: 100%;padding: 0px;">
+                    <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                        style="height: 100%;    margin-bottom: 0px;">
+                        <thead style=" display: inline-block;width: 100%;height: 36px;">
+                            <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                <th class="uk-width-2-10" style="font-size: 12px;">
+                                    {{'3603' | translate}}
+                                </th>
+                                <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                    {{'3601' | translate}}
+                                </th>
+                                <th class="uk-width-1-10  uk-text-truncate" style="font-size: 12px;width: 12%;">
+                                    {{'3653' | translate}}
+                                </th>
+                                <th class="uk-width-2-10" style="font-size: 12px;width: 18%">
+                                    {{'3324' | translate}}
+                                </th>
+                                <th class="uk-width-1-10 uk-text-center uk-text-truncate" style="font-size: 12px;">
+                                    {{'3336' | translate}}
+                                </th>
+                                <th class="uk-width-1-10 uk-text-truncate uk-text-center" style="font-size: 12px;">
+                                    HLA - DRB1
+                                </th>
+                                <th class="uk-width-1-10 uk-text-center uk-text-truncate" style="font-size: 12px;">
+                                    HLA - B
+                                </th>
+                                <th class="uk-width-1-10 uk-text-center uk-text-truncate" style="font-size: 12px;">
+                                    HLA - A
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                            style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                            <tr ng-repeat="seleccion in vm.listSelection" class="uk-grid"
+                                style="margin-left: 0px;margin-top: 0px;">
+                                <td class="uk-width-2-10">
+                                    <md-menu ng-if="vm.searchSelection.organ === 2">
+                                        <md-button aria-label="Open demo menu" class="md-icon-button"
+                                            ng-click="$mdMenu.open($event)">
+                                            <img class="md-list-addon-icon material-icons md-24"
+                                                ng-src="images/transplants/results.png" data-uk-tooltip="{pos:'top'}"
+                                                title="Detalle del puntaje" />
+                                        </md-button>
+                                        <md-menu-content class="md-dense" width="6">
+                                            <md-menu-header class="demo-select-header">
+                                                <ul class="md-list md-list-addon" style="width: 100%;">
+                                                    <li>
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/blood-donation.png" />
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span
+                                                                class="uk-text-small uk-text-muted uk-text-bold">{{'3654'
+                                                                | translate}}</span>
+                                                            <span class="md-list-heading">{{seleccion.total}}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </md-menu-header>
+                                            <div>
+                                                <md-menu-item ng-repeat="item in seleccion.listscore">
+                                                    <md-button>
+                                                        <i class="uk-badge">{{item.score}} {{'3655' | translate}}</i>
+                                                        {{item.name}}
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </div>
+                                        </md-menu-content>
+                                    </md-menu>
+                                    <i class="uk-badge" ng-if="vm.searchSelection.organ === 2"
+                                        style="float: left;font-size: 10px;padding: 1px 2px;line-height: 11px;">{{seleccion.total}}</i>
+                                    {{seleccion.lastName | uppercase}} {{seleccion.surName |
+                                    uppercase}} {{seleccion.name1 | uppercase}}
+                                    {{seleccion.name2 | uppercase}}
+                                </td>
+                                <td class="uk-width-1-10">{{seleccion.age}}
+                                </td>
+                                <td class="uk-width-1-10" style="width: 12%">{{seleccion.dateinclusionwaitinglist |
+                                    date:'dd/MM/yyyy' }}
+                                </td>
+                                <td class="uk-width-2-10" style="width: 18%">{{seleccion.insurance.name}} </td>
+                                <td class="uk-width-1-10 uk-text-center">{{seleccion.bloodgroup}}
+                                </td>
+                                <td class="uk-width-1-10 uk-text-center uk-text-bold uk-text-truncate"
+                                    style="font-size: 14px;">
+                                    {{seleccion.drb1}}
+                                    <div class="uk-progress uk-progress-mini uk-progress-primary uk-margin-remove">
+                                        <div class="uk-progress-bar" ng-style="{'width': seleccion.percentagedrb +'%'}">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="uk-width-1-10 uk-text-center uk-text-bold uk-text-truncate"
+                                    style="font-size: 14px;">
+                                    {{seleccion.b}}
+                                    <div class="uk-progress uk-progress-mini uk-progress-success uk-margin-remove">
+                                        <div class="uk-progress-bar" ng-style="{'width': seleccion.percentageb +'%'}">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="uk-width-1-10 uk-text-center uk-text-bold uk-text-truncate"
+                                    style="font-size: 14px;">{{seleccion.a}}
+                                    <div class="uk-progress uk-progress-mini uk-progress-warning uk-margin-remove">
+                                        <div class="uk-progress-bar" ng-style="{'width': seleccion.percentagea +'%'}">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

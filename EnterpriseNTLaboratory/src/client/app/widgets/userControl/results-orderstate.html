@@ -1,0 +1,39 @@
+<style>
+	.k-progressbar .k-state-selected {
+		background-color: rgb(3, 162, 93);
+		border-color: rgb(3, 162, 93);
+	}
+
+	.k-progress-status {
+		color: transparent !important;
+	}
+</style>
+
+<div class="uk-grid fullheight"
+	ng-if="vmd.statevalue === vmd.teststate.ORDERED || vmd.statevalue === vmd.teststate.RERUN">
+	<div class="uk-width-1-1">
+		<div kendo-progress-bar="progressBar" k-min="0" k-max="100" value="0" orientation="'vertical'"
+			style="width: 100%;height: 98%;color:rgb(3, 162, 93)"></div>
+	</div>
+</div>
+
+<div class="uk-grid fullheight" ng-if="vmd.statevalue === vmd.teststate.REPORTED">
+	<div class="uk-width-1-1">
+		<div kendo-progress-bar="progressBar" k-min="0" k-max="100" value="25" orientation="'vertical'"
+			style="width: 100%;height: 95%;color:rgb(3, 162, 93);"></div>
+	</div>
+</div>
+
+<div class="uk-grid fullheight" ng-if="vmd.statevalue === vmd.teststate.PREVIEW">
+	<div class="uk-width-1-1">
+		<div kendo-progress-bar="progressBar" k-min="0" k-max="100" value="50" orientation="'vertical'"
+			style="width: 100%;height: 95%;color:rgb(3, 162, 93);"></div>
+	</div>
+</div>
+
+<div class="uk-grid fullheight " ng-if="vmd.statevalue === vmd.teststate.VALIDATED">
+	<div class="uk-width-1-1">
+		<div kendo-progress-bar="progressBar" k-min="0" k-max="100" value="100" orientation="'vertical'"
+			style="width: 100%;height: 95%;color:rgb(3, 162, 93);"></div>
+	</div>
+</div>

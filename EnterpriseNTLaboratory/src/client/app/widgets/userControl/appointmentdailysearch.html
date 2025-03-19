@@ -1,0 +1,174 @@
+<style>
+    .appointmentdailysearch-padding-search {
+        padding-top: 5px;
+    }
+
+    .appointmentdailysearch-uppercase {
+        text-transform: uppercase;
+    }
+
+    .appointmentdailysearch-table-row {
+        margin-top: 10px !important;
+    }
+
+    .appointmentdailysearch-table-container {
+        margin-top: 0px;
+        height: calc(100% - -43px);
+        width: 100% !important;
+    }
+
+    .appointmentdailysearch-filter-margin {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .appointmentdailysearch-filter-padding {
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+</style>
+<loadpage view="appointmentdailysearch.loadingsearch"></loadpage>
+<div id="appointmentdailysearch" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-cyan-400">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">&#xE916;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0773' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid" style="height: 100%;">
+                    <div class="uk-width-8-10" style="height: 14%">
+                        <div class="md-card md-card-hover">
+                            <div class="md-card-content">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">
+                                        <img ng-src="images/search.png" />
+                                    </span>
+                                    <div class="md-input-wrapper md-input-filled">
+                                        <label>{{'0640' | translate}}</label>
+                                        <input type="text" name="search" id="search" md-input label-fixed
+                                            class="md-input  label-fixed" ng-model="appointmentdailysearch.search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-2-10" style="padding-left: 11px;height: 14%">
+                        <div class="md-card md-card-hover">
+                            <div class="md-card-content">
+                                <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                                    <li style="margin-left: 0px">
+                                        <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                                            <img class="md-list-addon-icon material-icons md-26"
+                                                ng-src="images/order/totalorder1.png">
+                                        </div>
+                                        <div class="md-list-content" style="padding-left: 30px;">
+                                            <span class="uk-text-small uk-text-muted">{{'0100' | translate}}</span>
+                                            <span class="md-list-heading uk-text-small"
+                                                style="font-size: 18px !important;">
+                                                {{appointmentdailysearch.filtered.length}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-1" style="margin-top: 10px;height: 83%"
+                        ng-show="appointmentdailysearch.orders.length!==0">
+                        <div class="md-card md-card-hover" style="height: 100%;">
+                            <div class="md-card-content" style="height: 100%;padding: 0px;">
+                                <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head"
+                                    style="height: 39px;">
+                                    <div class="uk-width-1-10" style="padding-left: 10px;"
+                                        ng-click="appointmentdailysearch.sortType = 'order'; appointmentdailysearch.sortReverse = !appointmentdailysearch.sortReverse">
+                                        <resultssort sortvalue="'order'" sorttype="appointmentdailysearch.sortType"
+                                            sortreverse="appointmentdailysearch.sortReverse"></resultssort>
+                                        {{'0110' | translate}}
+                                    </div>
+                                    <div class="uk-width-2-10" style="padding-left: 10px;"
+                                        ng-if="appointmentdailysearch.showDocumentType"
+                                        ng-click="appointmentdailysearch.sortType = 'documentTypeId'; appointmentdailysearch.sortReverse = !appointmentdailysearch.sortReverse">
+                                        <resultssort sortvalue="'documentTypeId'" sorttype="appointmentdailysearch.sortType"
+                                            sortreverse="appointmentdailysearch.sortReverse"></resultssort>{{'0233' |
+                                        translate}}
+                                    </div>
+                                    <div style="padding-left: 10px;"
+                                        ng-click="appointmentdailysearch.sortType = 'patientId'; appointmentdailysearch.sortReverse = !appointmentdailysearch.sortReverse"
+                                        ng-class="{'uk-width-2-10' : appointmentdailysearch.showDocumentType,'uk-width-4-10' : !appointmentdailysearch.showDocumentType}">
+                                        <resultssort sortvalue="'patientId'" sorttype="appointmentdailysearch.sortType"
+                                            sortreverse="appointmentdailysearch.sortReverse"></resultssort>{{'0398' |
+                                            translate}}
+                                    </div>
+                                   
+                                    <div class="uk-width-2-10" style="padding-left: 10px;"
+                                        ng-click="appointmentdailysearch.sortType = 'birthday'; appointmentdailysearch.sortReverse = !appointmentdailysearch.sortReverse">
+                                        <resultssort sortvalue="'birthday'" sorttype="appointmentdailysearch.sortType"
+                                            sortreverse="appointmentdailysearch.sortReverse"></resultssort>{{'0120' |
+                                        translate}}
+                                    </div>
+                                    <div class="uk-width-1-10" style="padding-left: 10px;"
+                                        ng-click="appointmentdailysearch.sortType = 'sex'; appointmentdailysearch.sortReverse = !appointmentdailysearch.sortReverse">
+                                        <resultssort sortvalue="'sex'" sorttype="appointmentdailysearch.sortType"
+                                            sortreverse="appointmentdailysearch.sortReverse"></resultssort>{{'0426' |
+                                        translate}}
+                                    </div>
+                                    <div class="uk-width-2-10" style="padding-left: 10px;"
+                                    ng-click="appointmentdailysearch.sortType = 'lastName'; appointmentdailysearch.sortReverse = !appointmentdailysearch.sortReverse">
+                                        <resultssort sortvalue="'lastName'" sorttype="appointmentdailysearch.sortType"
+                                            sortreverse="appointmentdailysearch.sortReverse"></resultssort>Jornada
+                                    </div>
+                                </div>
+                                <div class="vs-repeat-custom-scroll" style="height: calc(100% - 40px);" vs-repeat="20"
+                                    data-scroll-to-top='appointmentdailysearch.orders'>
+                                    <div ng-repeat="order in appointmentdailysearch.filtered = ( appointmentdailysearch.orders | filter:appointmentdailysearch.search | orderBy:appointmentdailysearch.sortType:appointmentdailysearch.sortReverse)"
+                                        class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table"
+                                        ng-if="appointmentdailysearch.orders.length!==0" style="margin-top: 0px;">
+                                        <div class="uk-width-1-10" style="padding-left: 10px;">
+                                            <a href="#"
+                                                ng-click="appointmentdailysearch.selectOrder(order.order)">{{order.order}}</a>
+                                        </div>
+                                        <div class="uk-width-2-10" style="padding-left: 15px;"
+                                            ng-if="appointmentdailysearch.showDocumentType">{{order.documentType.toUpperCase()
+                                            === 'DEFECTO' ? 'SIN TIPO DE DOCUMENTO' : order.documentType.toUpperCase()}}
+                                        </div>
+                                        <div class="uk-width-2-10" style="padding-left: 15px;">{{order.patientId}} {{order.lastName.toUpperCase() + ' ' + (order.surName === null ||
+                                            order.surName === '' ? '' : order.surName.toUpperCase()
+                                            + ' ') + order.name1.toUpperCase() + ' ' + ((order.name1 === null ||
+                                            order.name2 === '' ? '' : order.name2.toUpperCase()))
+                                            }}</div>
+                                       
+                                        <div style="padding-left: 23px;" class="uk-width-2-10">{{order.birthday}}</div>
+                                        <div style="padding-left: 27px;" class="uk-width-1-10">{{order.sex}}</div>
+                                        <div style="padding-left: 20px;" ng-class="{'uk-width-2-10' : appointmentdailysearch.showDocumentType,'uk-width-4-10' : !appointmentdailysearch.showDocumentType}">
+                                        {{order.appointment.shift.name}} ({{order.appointment.shift.init}} - {{order.appointment.shift.end}})
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid uk-width-1-1 uk-grid-medium" style="margin-top: 10px;height: 70%"
+                        ng-show="appointmentdailysearch.orders.length===0">
+                        <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                            <img class="img-responsive" style="height: 90px; width: 90px;" src="images/data.png">
+                        </div>
+                        <div class="uk-width-1-1 uk-text-center">
+                            <h3 class="ng-binding">{{'1078' | translate}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

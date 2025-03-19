@@ -1,0 +1,201 @@
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+
+
+<style type="text/css">
+   .bodyPanel {
+      height: calc(100% - 7.4em) !important;;
+      overflow-y: scroll;
+      padding-bottom: 0px !important;
+    }
+
+   .footPanel {
+      height: 70px;
+      overflow: hidden;
+      margin-top: -14px;
+      padding-bottom: 0px !important;
+      padding-top: 0px !important;
+      vertical-align: bottom;
+      overflow-y: scroll;
+
+    }
+
+    fieldset, input, select {
+     font-size: 13px !important;
+     padding-left: 10px !important;
+    }
+
+
+   table > thead > th {
+      padding-bottom: 0px !important;
+    }
+
+    .tbody-list {
+      overflow-y: scroll;
+      height: calc(100% - 84px);
+      position: absolute;
+    }
+
+    .md-bg-blue-grey-100{
+      cursor: default;
+    }
+
+    .uk-tab > li > a:hover, .uk-tab > li > a:focus {
+        color: #1976d2;
+    }
+
+    .messageWork{
+      height: auto;
+      top: 10px !important;
+      width: 35%;
+      border-radius: 4px;
+    }
+
+    .messageTextWork {
+      width: 300px;
+      float: left;
+      padding-top: 5%;
+      white-space: nowrap;
+    }
+
+    .cltech-btn-no,
+    .cltech-btn-no:hover,
+    .cltech-btn-no:active {
+        padding-left: 12.5px;
+        padding-right: 12.5px;
+        background: white;
+        border-color: #c6c6c6;
+        border-style: solid;
+        border-width: 0.5px;
+        color: #777;
+    }
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.ShowPopupReport" orientation="vm.orientation" ></loadreport>
+ <div id="page_content" style="overflow: hidden !important;">
+  <div id="page_content_inner" class="bodyPanel">
+
+  <!--   <h3 class="heading_b uk-margin-bottom"></h3> class="named_tab" class="uk-disabled width: 98.69%;-->
+    <form id="Form" class="md-card" charset="utf-8" >
+      <div class="md-card-content">
+        <div class="uk-grid">
+          <div class="uk-width-1-1">
+              <div >
+
+                <div class ="uk-grid" style="margin-left: 0px; position: relative; ">
+                  <fieldset class="fieldset uk-width-1-1" >
+                      <div class="uk-grid">
+
+                        <div class="uk-width-1-3">
+                          <label style="top: 0px">{{'0212' | translate}}</label>
+                          <select id="worksheet" charset="utf-8" ng-options="obj as obj.name for obj in vm.listWorkSheet track by obj.id" data-ng-model="vm.modelWorkSheet" md-input class="md-input" ng-change = "vm.clickGenerateWorkList(4)" style="padding-bottom: 0px; "></select>
+                        </div>
+
+                        <div class="uk-width-1-3" style="padding-top: 30px">
+                          <label style="top: 0px; color: #777; font-size: 12px; margin-right: 20px" data-ng-bind = "vm.infoWorkSheet1"></label>
+                          <label style="top: 0px; color: #777; font-size: 12px;" data-ng-bind = "vm.infoWorkSheet2"></label>
+                        </div>
+
+                        <div class="uk-width-1-3">
+                            <label style="top: 0px;">{{'0003' | translate}}</label>
+                            <select md-input class="md-input" charset="utf-8" ng-options="obj.id as obj.name for obj in vm.branch" data-ng-model="vm.databranch" style="padding-bottom: 0px; ">
+                            </select>
+                        </div>
+
+                      </div>
+                  </fieldset>
+                  <fieldset class="fieldset uk-width-1-2" style="width: 60%; height: 85px;" ng-disabled="vm.modelWorkSheet.id === undefined" style="height: 82px !important">
+                      <legend>{{'0217' | translate}}</legend>
+                      <div style="width: 60% !important; padding-top: 15px;" class="radio-check">
+                         <input type="radio" name="generate" id="new" checked value="1" ng-focus="vm.clickGenerateWorkList(1)">
+                         <label for="new" ng-click="vm.clickGenerateWorkList(1)">{{'0218' | translate}}</label>
+                         <input type="radio" name="generate" id="previous" value="2" ng-focus="vm.clickGenerateWorkList(2)">
+                         <label for="previous" ng-click="vm.clickGenerateWorkList(2)">{{'0213' | translate}}</label>
+                         <input type="radio" name="generate" id="restart" value="3" ng-focus="vm.clickGenerateWorkList(3)"  >
+                         <label for="restart" ng-click="vm.clickGenerateWorkList(3)"  >{{'0214' | translate}}</label>
+         <!--                 <label ng-show="vm.modelWorkSheet.id === undefined">{{'0214' | translate}}</label>  data-uk-modal="{target: '#modal'}"-->
+                      </div>
+                      <div class="radio-check uk-width-1-3" style="width: 39%;" ng-if="vm.generateType === 2">
+                         <select id="sequence" charset="utf-8" ng-options="obj as obj.date for obj in vm.listSequence track by obj.id" data-ng-model="vm.modelSequence" md-input class="md-input" ng-change = "" style="padding-bottom: 0px; padding-top: 0px"></select>
+                      </div>
+                  </fieldset>
+                  <fieldset class="fieldset uk-width-1-2" style="width: 39.15%; margin-left: 0.85%" ng-disabled="vm.modelWorkSheet.id === undefined"  >
+                      <legend>{{'0013' | translate}}</legend>
+                      <div class="radio-check" style="padding-top: 15px;">
+                         <input type="radio" name="testResult" id="all" checked value="true" ng-focus="vm.clickTestResult(1)" ng-model="vm.resultPending" >
+                         <label for="all" ng-click="vm.clickTestResult(1)">{{'0215' | translate}}</label>
+                         <input type="radio" name="testResult" id="pendingResult" value="false" ng-focus="vm.clickTestResult(2)" ng-model="vm.resultPending">
+                         <label for="pendingResult" ng-click="vm.clickTestResult(2)">{{'0216' | translate}}</label>
+                      </div>
+                  </fieldset>
+                </div>
+                <fieldset class="fieldset"  ng-disabled="vm.modelWorkSheet.id === undefined" >
+                    <div style="width: 50%">
+                      <label style="top: 0px">{{'0088' | translate}}</label>
+                      <select id="ordertype" charset="utf-8" ng-options="obj as obj.name for obj in vm.listOrderType track by obj.id" data-ng-model="vm.modelOrderType" md-input class="md-input" ng-change = "" style="padding-bottom: 0px; "></select>
+                    </div>
+                </fieldset>
+
+                <div ng-if="vm.modelWorkSheet.id !== undefined || vm.generateType < 1" >
+                    <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                    isopenreport="vm.isOpenReport"></orderfilter>
+                </div>
+
+
+              </div>
+          </div>
+        </div>
+      </div>
+        <div class="uk-modal" id="modalConfirmation" tabindex="1" aria-hidden="true">
+          <div class="uk-modal-dialog messageWork">
+              <div class="uk-modal-body" style="height: 90px; top: 0px">
+                 <div style="width: 20%; float: left; margin-right: 4px">
+                      <img class="img-responsive" src="images/Question.png">
+                  </div>
+                  <div class="messageTextWork">
+                      <label style="margin-top: 20px; white-space: normal;">{{'0221' | translate}}</label>
+                  </div>
+              </div>
+              <div class="uk-modal-footer" style="text-align: right;">
+                  <button type="button" class="uk-modal-close md-btn-primary md-btn-wave md-btn-wave-light waves-effect waves-button waves-light" ng-click="vm.getWorkListDelete()" >
+                         {{'0219' | translate}}
+                  </button>
+                  <button type="button" class="uk-modal-close cltech-btn-no md-btn-wave md-btn-wave-light waves-effect waves-button waves-light"  >
+                        {{'0220' | translate}}
+                  </button>
+              </div>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div id="page_content_inner" class="footPanel">
+            <form class="md-card" style="margin-bottom: 0px !important; ">
+
+              <div class="md-card-content uk-text-right" style="width: 97%">
+                <div style="display: inline-block;">
+                    <!-- <reportview  ng-show="vm.generateType !== 3 " openmodal="vm.ShowPopupReport" pathreport="vm.pathreport" listreport="vm.listreport" labelsreport="vm.labelsreport" ng-click="vm.generateFile()"  disabled="(vm.isOpenReport && vm.generateType === 1)  || (vm.modelSequence.id === undefined && vm.generateType === 2)" orientation = "vm.orientation" ></reportview> -->
+                    <div ng-show="vm.generateType !== 3 ">
+                        <button ng-show="vm.progressPrint === true" type="button" ng-disabled="!vm.isOpenReport" class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : (!vm.isOpenReport && vm.generateType === 1)  || (vm.modelSequence.id === undefined && vm.generateType === 2)}">
+                            <i style="color: white" class="uk-icon-refresh uk-icon-spin" data-uk-tooltip="{pos:'top'}" title="{{'0154'| translate}}"></i>
+                        </button>
+                        <button ng-show="vm.progressPrint === false" type="button" class="md-fab md-fab-small md-bg-purple-A700 md-fab-wave-light waves-effect waves-light " ng-click="vm.progressPrint = true; vm.generateFile();" ng-disabled="(!vm.isOpenReport && vm.generateType === 1)  || (vm.modelSequence.id === undefined && vm.generateType === 2)" ng-class="{'md-bg-blue-grey-100': (!vm.isOpenReport && vm.generateType === 1)  || (vm.modelSequence.id === undefined && vm.generateType === 2)}" style="margin-left: 8px">
+                            <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0158' | translate}}" >&#xE8AD;</i>
+                        </button>
+                    </div>
+                    <button type="button" class="md-fab md-fab-small md-bg-purple-A700 md-fab-wave-light waves-effect waves-light"  ng-disabled="true"  ng-show="vm.generateType === 3 ">
+                        <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="{{'0158' | translate}}" >&#xE8AD;</i>
+                    </button>
+                </div>
+              </div>
+          </form>
+   </div>
+</div>
+
+
+<!-- <script src="widgets/angular-icheck.js"></script> -->

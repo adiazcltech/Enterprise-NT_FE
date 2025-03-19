@@ -1,0 +1,1259 @@
+<style>
+    .measureButtons>div {
+        margin-top: 5px;
+        margin-left: 4px;
+        align-items: center;
+    }
+
+    .measureButtons>div>span {
+        font-size: 9px;
+        text-align: center;
+        width: 60px;
+        max-height: 40px;
+        line-height: 10px;
+        margin-top: 6px;
+    }
+
+    .mt-5 {
+        margin-top: 5px !important;
+    }
+
+    .mt-15 {
+        margin-top: 15px !important;
+    }
+
+    .labeldisabled {
+        color: rgba(0, 0, 0, 0.26) !important;
+    }
+
+    .labelenabled {
+        color: #727272 !important;
+    }
+
+    .filter-history-order {
+        height: 32px;
+        min-height: 32px !important;
+        font-size: 12px !important
+    }
+
+    .select2-container .select2-choice {
+        font: 400 13px / 18px "Roboto", sans-serif !important;
+        min-height: 20px !important;
+        padding: 0px 0px !important;
+        height: 20px !important;
+        margin-top: 5px !important;
+    }
+    .select2-container .select2-choice .select2-arrow {
+        top: 0px !important;
+    }
+
+    .select2-container-multi .select2-choices .select2-search-choice {
+        background: #e6e6e6 !important;
+        font-size: 12px !important;
+        color: black !important;
+        border-radius: 8px !important;
+        padding: 3px 20px !important;
+        font-size: 10px !important;
+    }
+
+    .select2-container-multi .select2-choices .select2-search-field input {
+        padding: 0px !important;
+        margin: 0px 0 !important;
+        font-size: 11px !important;
+    }
+
+    .select2-container-multi .select2-choices {
+        max-height: 50px;
+        overflow-y: auto;
+    }
+
+    .select2-choices::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+    }
+
+    .select2-choices::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+
+    .select2-choices::-webkit-scrollbar-thumb {
+        background-color: #999;
+    }
+
+    .user_heading_bg .bg_overlay:before {
+      background: transparent !important;
+    }
+
+    .filters {
+      height: 100%;
+      border-style: solid;
+      border-top: 0;
+      border-bottom: 0px;
+      border-left: 0px;
+      padding-right: 20px;
+      padding-left: 40px;
+      margin-right: 0px;
+      border-color: #d6d3d6;
+    }
+
+    html input[disabled] {
+      color: #dde0e7 !important;
+    }
+
+    .targetactive {
+      text-decoration: none;
+      font-weight: bold;
+      background-color: #f5f5f5;
+      box-shadow: 0 2px 5px #3131315c, 0 3px 0 #eee, 0px 3px 10px rgb(0 0 0 / 40%), inset 0px 0px 3px rgb(255 255 255 / 20%), inset 0 -2px 10px rgb(0 0 0 / 20%);
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      text-shadow: 0px -1px 0px rgb(0 0 0 / 20%);
+    }
+
+    .targetactive .md-card-toolbar-heading-text {
+      font-weight: bold;
+    }
+
+    .md-icon:hover, .md-icon:focus, .md-icon:active, .md-icon.active {
+      background: rgb(210 210 210) !important;
+    }
+
+    .input-quantity {
+        border: transparent !important;
+        border-bottom: 1px solid #e0e0e0 !important;
+        height: 20px !important;
+        font-size: 13px !important;
+        min-height: 20px !important;
+    }
+
+    .warning {
+        background-color: #ffac21!important;
+        color: white;
+    }
+
+    .success {
+      background-color: #7cb342 !important;
+      color: white;
+    }
+
+    .rejected {
+      background-color: #e53935 !important;
+      color: white;
+    }
+
+    .uk-form input[type=text]:disabled {
+      background-color: transparent !important;
+    }
+
+    .add {
+      color: #03A9F4
+    }
+    .remove {
+      color: #F44336;
+    }
+    .disabled-form {
+      color: #999999;
+    }
+
+    .isDisabled {
+      color: currentColor;
+      cursor: not-allowed;
+      opacity: 0.5;
+      text-decoration: none;
+    }
+
+    .uk-modal-header-reject {
+      background: #e53935 !important;
+      border-bottom: 1px solid #e53935 !important;
+    }
+
+    .uk-modal-header-assignment {
+      background: #00443d !important;
+      border-bottom: 1px solid #00443d !important;
+    }
+</style>
+<loadpage view="vm.loadingdata" class="p-absolute"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error" id="modalerrorresultentry"></modalexceptions>
+<casedailysearch openmodal="vm.showModalDailySearch" listener="vm.caseSearchEvent" date="vm.selectedDate"></casedailysearch>
+<files openmodal="vm.opencaseattachment" case="vm.caseFiles" functionexecute="vm.saveAttachment"></files>
+<schedule openmodal="vm.openassignpathologist" case="vm.caseFiles" init="vm.initDate" end="vm.endDate" days="vm.days" functionexecute="vm.closeAssignPathologist" listener="vm.assignPathologist"></schedule>
+
+<div id="page_content" style="overflow: hidden;">
+    <div id="page_content_inner" style="padding: 1px 13px 0px;">
+        <div class="uk-grid">
+            <div class="uk-width-1-4 filters">
+                <button ng-click="vm.modalfilter()" style="width: 100%; height: 60px; text-align: left;border-radius: 10px;" class="md-btn">
+                    <ul class="md-list md-list-addon" style="margin-left: 16px; margin-top: 8px; height: 135px">
+                        <li style="margin-left: 0px">
+                            <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                                <i class="md-list-addon-icon material-icons md-color-blue-400">&#xE2C9;</i>
+                            </div>
+                            <div class="md-list-content" style="padding-left: 22px;">
+                                <span style="float: left; margin-right: 3%" class="uk-text-small uk-text-muted">
+                                    {{vm.filterinfo.textinit}}:
+                                </span>
+                                <span class="uk-text-truncate uk-text-small">
+                                    {{vm.filterinfo.valueinit}}
+                                </span>
+                                <span style="float: left; margin-right: 8%" class=" uk-text-small uk-text-muted">
+                                    {{vm.filterinfo.textend}}:
+                                </span>
+                                <span class="uk-text-truncate uk-text-small">
+                                    {{vm.filterinfo.valueend}}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+
+                <div class="md-card" style="min-height: 51px;margin-top: 10px;">
+                    <div class="md-card-content" style="padding-bottom: 12px;padding-top: 7px;">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon" style="min-width: 20px;padding: 10px;padding-left: 0px;">
+                                <img class="md-list-addon-icon material-icons md-22"
+                                    ng-src="images/inconsistency/order.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -6px; font-size: 12px;">{{ '0061' | translate }}: </label>
+                                <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove" style="padding-left: 4px !important;" ng-model="vm.searchorder" ng-keypress="vm.autocomplenumberorder($event)" maxlength="{{vm.maxcantdigit}}" md-input="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md-card" style="margin-top: 10px;">
+                    <div class="md-card-content" style="padding-bottom: 15px;padding-top: 4px;">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon" style="min-width: 22px;padding: 10px;padding-left: 0;">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/search.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -6px; font-size: 12px;" ng-class="{'labeldisabled' : vm.orders.length===0,'labelenabled' : vm.orders.length!==0}">{{ '0640' | translate }}:</label>
+                                <input name="search_order" type="text" class="md-input label-fixed uk-padding-remove filter-history-order" style="padding-left: 4px !important;" ng-disabled="vm.orders.length===0" ng-model="vm.searchFilter" md-input="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md-card" style="height: calc(100vh - 277px);margin-top: 10px;">
+                    <div class="md-card-toolbar" style="height: auto;padding: 0px;">
+                        <div class="uk-text-bold uk-text-center" style="background-color: #1976d2; color: white">
+                            {{ '3108' | translate}}
+                            <span class="uk-badge uk-badge-primary">{{ (vm.orders | filter: vm.searchFilter).length }}</span>
+                        </div>
+                    </div>
+                    <div class="md-card-content" style="padding: 1px 1px 5px 1px; overflow-y: hidden">
+                        <div class="uk-grid uk-grid-small" style="height: 100%">
+                            <div class="uk-width-1-1 contentscroll" vs-repeat="{latch : vm.orders, size: 17}" style="height: calc(100vh - 302px);overflow-y: auto;">
+                                <div style="margin-top: 5px" class="md-card uk-width-1-1" ng-repeat="obj in vm.orders | filter: vm.searchFilter">
+                                    <div class="md-card-content" style="padding: 0px 0 0 10px">
+                                        <div class="uk-grid uk-grid-small" style="place-content: center;">
+                                            <div class="uk-width-8-10 uk-text-bold uk-text-center" style="font-size: 15px">
+                                                <div class="uk-grid uk-grid-small">
+                                                    <div class="uk-width-7-10">
+                                                        <a ng-click="vm.selectOrder(obj);">{{obj.numberOrder.toString().substring(3)}}</a>
+                                                    </div>
+                                                    <div class="uk-width-1-10" style="margin-top: -1px">
+                                                        <i style="cursor: pointer;" class="material-icons" ng-click="collapsed = !collapsed">{{ collapsed === false ? 'add_circle' : 'remove_circle' }}</i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-1-1" ng-if="collapsed">
+                                                <div class="uk-grid uk-grid-small">
+                                                    <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                                                        {{ '3112' | translate }}:
+                                                    </div>
+                                                    <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                                                        {{obj.patientId}}
+                                                    </div>
+                                                    <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                                                        {{ '3109' | translate }}:
+                                                    </div>
+                                                    <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                                                        {{obj.lastName}} {{obj.surName}} {{obj.name1}} {{obj.name2}}
+                                                    </div>
+                                                    <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                                                        {{ '3110' | translate }}:
+                                                    </div>
+                                                    <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                                                        {{ obj.sex }}
+                                                    </div>
+                                                    <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                                                        {{ '3111' | translate }}:
+                                                    </div>
+                                                    <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                                                        {{ obj.service }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-width-3-4">
+                <div class="uk-grid" ng-if="vm.order">
+                    <div class="uk-width-3-10">
+                        <div class="md-card  md-card-hover" style="min-height: 50px;">
+                            <div class="md-card-content" style="padding-top: 0px; padding-bottom: 5px;">
+                                <ul class="md-list md-list-addon" style="position: absolute">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <img class="md-user-image md-list-addon-avatar" ng-src="images/user1.png" style="margin-top: -7px; width: 45px !important; height: 45px !important">
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="uk-text-small uk-text-muted ">{{ '0398' | translate }}</span>
+                                            <span class="md-list-heading uk-text-truncate">{{ vm.order.numberOrder }}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="uk-button-dropdown" style="display: block;position: relative; float: right; margin-right: 16px; margin-top: 4px" data-uk-dropdown="{mode:'click', pos:'right-top'}">
+                                    <button class="md-btndrobox">
+                                        <i class="md-icon material-icons" style="font-size: 20px;float: right;">&#xE5D4;</i>
+                                    </button>
+                                    <div class="uk-dropdown uk-dropdown-width-2 " style="min-width: 330px;top: 5px;left: 30px;width: 109px;">
+                                        <div class="uk-grid uk-dropdown-grid">
+                                            <div class="uk-width-1-1" style="padding-left: 8px;padding-right: 8px;height: 490px;">
+                                                <orderinfo ordernumber="vm.order.numberOrder"></orderinfo>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="height:  calc(100vh - 215px); width: 100%; margin-top: 10px;" ng-show="vm.order.numberOrder !== null">
+                            <patient order="vm.order.numberOrder"></patient>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-7-10">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-2">
+                                <div class="md-card">
+                                  <div class="md-card-content" style="padding: 4px 10px;">
+                                      <div class="uk-input-group">
+                                          <span class="uk-input-group-addon" style="min-width: 22px;padding: 10px;padding-left: 0;">
+                                              <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/study.png">
+                                          </span>
+                                          <div class="md-input-wrapper md-input-filled" style="padding: 5px;">
+                                              <p style="font-size: 12px;margin: 0;">{{ '3138' | translate }}:</p>
+                                              <p style="font-size: 12px;margin: 0;font-weight: bold;color: black;" ng-if="vm.casePat">{{ vm.casePat.studyType.code }} | {{ vm.casePat.studyType.name }}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-2">
+                                <div class="md-card">
+                                    <div class="md-card-content" style="padding: 4px 10px;">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon" style="min-width: 22px;padding: 10px;padding-left: 0;">
+                                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/entryreject.png">
+                                            </span>
+                                            <div class="md-input-wrapper md-input-filled">
+                                                <p style="font-size: 12px;margin: 0;">{{ '3114' | translate }}: <span class="uk-badge uk-badge-primary" style="border-radius: 50px;margin-left: 5px;font-weight: bold;">{{ vm.totalReceive }}</span></p>
+                                                <p style="font-size: 12px;margin: 2px 0 0 0;">{{ '3115' | translate }}: <span class="uk-badge uk-badge-primary" style="border-radius: 50px;margin-left: 5px;font-weight: bold;"> {{ vm.totalReject }}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uk-grid" style="margin-top: 0px;">
+                            <div class="uk-width-1-2" ng-repeat="case in vm.cases" style="margin-top: 10px;">
+                                <div class="md-card uk-animation-scale-up" style="cursor: pointer;" ng-click="vm.selectStudy(case);" ng-class="{'targetactive': case.active}">
+                                    <div class="md-card-toolbar" style="padding: 5px 10px;height: auto;" ng-class="{'warning':  !case.numberCase && !case.rejected, 'success': case.numberCase, 'rejected': case.rejected }">
+                                        <span style="font-size: 12px;margin: 0px;font-weight: 500;" ng-class="{'mt-15': !case.numberCase, 'mt-5': case.numberCase }">{{ case.studyType.code }} | {{ case.studyType.name }}</span>
+                                        <span class="uk-badge" ng-if="case.numberCase" style="background-color: white;color: black;font-weight: bold;margin: 0;font-size: 12px;border-radius: 5px;float: inline-end;">{{ case.numberCase }}</span>
+                                    </div>
+                                    <div class="md-card-content" style="padding-top: 5px;">
+
+                                        <div class="uk-grid">
+
+                                          <div class="uk-width-2-3">
+                                            <div class="uk-width-1-1">
+                                              <div>
+                                                <span class="sub-heading" style="text-transform: capitalize;color: black;font-size: 12px;">
+                                                  {{ '3154' | translate }}:
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                            <div ng-if="case.pathologist.id">
+                                              <div class="uk-width-1-1">
+                                                <div style="margin-left: 13px;display: flex;align-items: center;">
+                                                  <img class="logo_regular" style="width: 35px;" src="images/pathology/samplereception/pathologist.png">
+                                                  <label ng-if="case.pathologist.id" style="cursor: context-menu;color: black;text-transform: capitalize;margin-left: 10px;display: inline-grid;font-size: 9px;">{{ case.pathologist.name }} {{ case.pathologist.lastName }}
+                                                    <span ng-if="case.schedule" style="font-size: 9px;">{{ case.schedule.date }}: {{ case.schedule.init | date:'h:mma' }} - {{ case.schedule.end | date:'h:mma' }}</span>
+                                                  </label>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div ng-if="!case.pathologist.id">
+                                              <div class="uk-width-1-1">
+                                                <div style="margin-left: 13px;display: flex;align-items: center;">
+                                                  <img class="logo_regular" style="width: 35px;" src="images/pathology/samplereception/pathologist.png">
+                                                  <label ng-if="!case.pathologist.id" style="cursor: context-menu;color: black;text-transform: capitalize;margin-left: 10px;">{{ '0664' | translate }}</label>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                          <div class="uk-width-1-3" ng-if="case.status > 1 ">
+
+                                            <div class="uk-width-1-1">
+                                              <div>
+                                                <span class="sub-heading" style="text-transform: capitalize;color: black;font-size: 12px;">
+                                                  {{ '0364' | translate }}:
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                            <div>
+                                              <div class="uk-width-1-1">
+                                                <label ng-if="case.status === 2"  class="uk-badge uk-badge-primary" style="border-radius: 5px;"> {{ '3001' | translate }}</label>
+                                                <label ng-if="case.status === 3"  class="uk-badge uk-badge-primary" style="border-radius: 5px;"> {{ '3183' | translate }}</label>
+                                                <label ng-if="case.status === 4"  class="uk-badge uk-badge-primary" style="border-radius: 5px;"> {{ '3007' | translate }}</label>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                        </div>
+
+                                        <div class="uk-width-1-1">
+                                          <div>
+                                              <span class="sub-heading" style="text-transform: capitalize;color: black;font-size: 12px;">
+                                                {{ '0451' | translate }}:
+                                              </span>
+                                          </div>
+                                        </div>
+                                        <div>
+                                            <div class="uk-width-1-1">
+                                                <ul class="md-list md-list-addon md-list-interactive contentscroll" style="height: 50px;overflow: auto;">
+                                                    <li ng-repeat="specimen in case.specimens" style="padding: 0;">
+                                                        <div class="md-list-addon-element" style="padding: 0;cursor: initial;">
+                                                            <img class="logo_regular" src="images/pathology/samplereception/test.png" style="width: 30%;">
+                                                        </div>
+                                                        <div class="md-list-content" style="cursor: context-menu;color: black;text-transform: capitalize;font-size: 10px;">
+                                                            {{ specimen.code }} - {{ specimen.name }}
+                                                        </div>
+                                                        <ul class="md-list md-list-addon md-list-interactive contentscroll">
+                                                          <li ng-repeat="study in specimen.studies" style="padding: 0px;margin-left: 25px;">
+                                                              <div class="md-list-content" style="cursor: context-menu;color: black;text-transform: capitalize;font-size: 10px;">
+                                                                  {{ study.code }} - {{ study.name }}
+                                                              </div>
+                                                          </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-grid uk-width-3-4" style="margin-top: 10px;position: absolute;bottom: 8px;padding-left: 0;">
+                    <div class="uk-width-1-1">
+                        <div class="md-card">
+                            <div class="md-card-content" style="padding: 2px;">
+                                <div class="uk-flex uk-flex-center measureButtons">
+                                    <!-- Recepcionar -->
+                                    <div class="uk-flex uk-flex-column">
+                                        <button type="button" data-uk-modal="{target:'#modal_cases'}" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="vm.disabledReceive" ng-class="{'md-bg-blue-grey-100': vm.disabledReceive }">
+                                            <i class="material-icons">check</i>
+                                        </button>
+                                        <span>{{ '3116' | translate }}</span>
+                                    </div>
+
+                                    <!-- Rechazar -->
+                                    <div class="uk-flex uk-flex-column">
+                                        <button type="button" data-uk-modal="{target:'#modal_reject_samples'}" class="md-fab md-fab-small md-fab-danger md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="vm.disabledReject" ng-class="{'md-bg-blue-grey-100': vm.disabledReject }">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                        <span>{{ '3117' | translate }}</span>
+                                    </div>
+
+                                    <!-- Diario -->
+                                    <div class="uk-flex uk-flex-column">
+                                        <button type="button" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-cyan-400" ng-click="vm.eventDailySearch()" ng-disabled="vm.order" ng-class="{'md-bg-blue-grey-100': vm.order}">
+                                            <i class="material-icons md-24 no_margin">&#xE916;</i>
+                                        </button>
+                                        <span>{{'0773' | translate}}</span>
+                                    </div>
+
+                                    <!-- Deshacer -->
+                                    <div class="uk-flex uk-flex-column">
+                                      <button type="button" ng-click="vm.undo()" class="md-fab md-fab-small md-bg-deep-orange-600 md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="!vm.order" ng-class="{'md-bg-blue-grey-100': !vm.order}">
+                                        <i class="material-icons md-24 md-light no_margin">&#xE166;</i>
+                                      </button>
+                                      <span>{{ '0776' | translate }}</span>
+                                    </div>
+
+                                    <!-- Adjuntos -->
+                                    <div class="uk-flex uk-flex-column">
+                                      <button type="button" ng-click="vm.eventFiles()" ng-disabled="vm.disabledAttachment" class="md-fab md-fab-small md-bg-indigo-600 md-fab-wave-light waves-effect waves-light" ng-class="{'md-bg-blue-grey-100' : vm.disabledAttachment}">
+                                          <i class="material-icons md-color-grey-50">&#xE226;</i>
+                                      </button>
+                                      <span class="uk-text-middle textbutton"> {{'0376' | translate}}</span>
+                                    </div>
+
+                                    <!-- Asignación de patólogos -->
+                                    <div class="uk-flex uk-flex-column">
+                                      <button type="button" ng-click="vm.eventAssignPathologist()" ng-disabled="vm.disabledSchedule" class="md-fab md-fab-small md-bg-green-600 md-fab-wave-light waves-effect waves-light" ng-class="{'md-bg-blue-grey-100' : vm.disabledSchedule}">
+                                          <i class="material-icons md-color-grey-50">assignment_ind</i>
+                                      </button>
+                                      <span class="uk-text-middle textbutton"> {{'3153' | translate}}</span>
+                                    </div>
+
+                                    <!-- Definición de Casetes -->
+                                    <div class="uk-flex uk-flex-column">
+                                      <button type="button" ng-click="vm.loadCasetes()"  ng-disabled="vm.disabledCasete" class="md-fab md-fab-small md-bg-light-blue-800 md-fab-wave-light waves-effect waves-light" ng-class="{'md-bg-blue-grey-100' : vm.disabledCasete}">
+                                          <i class="material-icons md-color-grey-50">grid_on</i>
+                                      </button>
+                                      <span class="uk-text-middle textbutton"> {{'3158' | translate}}</span>
+                                    </div>
+
+                                    <!-- Código de barras -->
+                                    <div class="uk-flex uk-flex-column">
+                                        <button type="button"ng-click="vm.eventBarcodes()"  class="md-fab md-fab-small md-fab-wave-light waves-effect waves-light" ng-class="{'md-bg-blue-grey-100' : vm.disableBarCode, 'md-bg-blue-grey-400': !vm.disableBarCode }" ng-disabled="vm.disableBarCode">
+                                          <i class="uk-icon-barcode" style="color: white;"></i>
+                                        </button>
+                                        <span>{{'0211' | translate}}</span>
+                                    </div>
+
+                                    <!-- Enviar a macroscopia -->
+                                    <div class="uk-flex uk-flex-column">
+                                      <button type="button" data-uk-modal="{target:'#modalConfirmMacroscopy'}"  class="md-fab md-fab-small md-fab-wave-light waves-effect waves-light md-bg-lime-600" ng-class="{'md-bg-blue-grey-100' : vm.disabledMacroscopy}" ng-disabled="vm.disabledMacroscopy">
+                                        <i class="uk-icon-file-audio-o" style="color: white;"></i>
+                                      </button>
+                                      <span>{{'3001' | translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ventana modal para el filtro de fechas -->
+<div id="modalfilter-date" class="uk-modal" bg-close="false" aria-hidden="true" style=" min-height: 300px" ng-if="vm.showModalFilter">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">
+                <i style="padding-top: 5px; padding-right: 5px" class="material-icons md-color-light-blue-50">&#xE8B6;</i> {{ '0642' | translate }}
+            </h3>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <orderfilter rangeinit="vm.rangeInit" rangeinittemp="vm.rangeinittemp" rangeendtemp="vm.rangeendtemp" rangeend="vm.rangeEnd" typefilter="vm.filterRange" isopenreport="vm.isOpenReport"></orderfilter>
+            </div>
+        </div>
+        <div class="uk-overflow-container">
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-focus="vm.stateFilters = 1;" ng-click="vm.searchorder= ''; vm.setFilter();">{{'0643' | translate}}</button>
+            <button type="button" class="md-btn md-btn-default uk-modal-close">{{'0008' | translate}}</button>
+        </div>
+    </div>
+</div>
+
+<!-- ventana modal para confirmar el rechazo -->
+<div id="modalConfirmCancel" class="uk-modal" aria-hidden="true"
+    style="display: none; overflow-y: scroll; min-height: 300px">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container" style="margin-top: 0px">
+            <div style="float: left;">
+                <img class="img-responsive" src="images/Question.png">
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+                    <h5 class="uk-text-bold">{{'3145' | translate}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="md-btn md-btn-primary" type="button" ng-click="vm.rejecteSamples()" >{{'0219' | translate}}</button>
+            <button class="md-btn md-btn-default uk-modal-close" type="button">{{'0220' | translate}}</button>
+        </div>
+    </div>
+</div>
+
+<!-- ventana modal para cuando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-2-10" style="padding-left: 17px;">
+                        <img src="images/Question.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-8-10" style="margin-top: 3%;">
+                        <span class="uk-text-justify">{{ '3113' | translate }}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ventana modal para registrar casos -->
+<div class="uk-modal uk-modal-card-fullscreen" id="modal_cases">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar" style="background: #2196f3;">
+                <div class="md-card-toolbar-actions" style="padding: 0;">
+                    <div style="margin-top: 10px;">
+                        <i class="md-icon material-icons md-color-blue-50" ng-click="vm.closeModal()" data-uk-tooltip title="{{'0329'| translate}}">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="md-icon material-icons uk-modal-close" ng-click="vm.closeModal()" style="color: white;" data-uk-tooltip title="{{'0329'| translate}}">&#xE5C4;</span>
+                <h3 class="md-card-toolbar-heading-text" style="color: white;font-size: 12px;">
+                    {{ '0110' | translate }}: <span class="uk-badge" style="background-color: white;color: black;font-weight: bold;padding: 1px 5px;">{{ vm.order.numberOrder }}</span>
+                    &nbsp;&nbsp;&nbsp;
+                    {{ '3138' | translate }}: <span class="uk-badge" style="background-color: white;color: black;font-weight: bold;padding: 1px 5px;">{{ vm.casePat.studyType.name }}</span>
+                    <span ng-if="vm.casePat.numberCase">
+                        &nbsp;&nbsp;&nbsp;
+                        {{ '3038' | translate }}:
+                        <span class="uk-badge" style="background-color: white;color: black;font-weight: bold;padding: 1px 5px;">{{ vm.casePat.numberCase }}</span>
+                    </span>
+                </h3>
+            </div>
+
+            <form class="uk-form md-card-content" name="Form" id="Form">
+                <div class="uk-width-1-1">
+                    <div class="md-card" style="height: calc(100vh - 150px);">
+                        <div class="md-card-content">
+                            <ul class="uk-tab" data-uk-tab="{connect:'#specimens', animation:'slide-horizontal'}">
+                                <li ng-repeat="specimen in vm.casePat.specimens" ng-class="{'uk-active': $index === 0 }">
+                                    <a href="#" style="font-size: 11px;">{{ specimen.name }}</a>
+                                </li>
+                            </ul>
+                            <ul id="specimens" class="uk-switcher uk-margin">
+                                <li ng-repeat="specimen in vm.casePat.specimens" ng-class="{'uk-active': $index === 0 }">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-3-10 filters" style="height: calc(100vh - 220px);">
+                                            <div class="md-card" style="height: calc(100vh - 230px);">
+                                                <div class="md-card-toolbar" style="background-color: #2196f3;">
+                                                    <h3 class="md-card-toolbar-heading-text" style="color: white;text-align: center;float: none;">
+                                                        <span style="font-size: 14px;text-transform: capitalize;">{{ specimen.code }} | {{ specimen.name }}</span>
+                                                    </h3>
+                                                </div>
+                                                <div class="md-card-content">
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-4-10" style="text-align: center;">
+                                                            <img ng-if="!specimen.container.image" class="img-responsive" src="images/sintubo.png" style="width: 120px;height: 120px;"/>
+                                                            <img ng-if="specimen.container.image" style="width: 120px;height: 120px;" ng-src="data:image/png;base64,{{ specimen.container.image }}" alt="user avatar"/>
+                                                        </div>
+                                                        <div class="uk-width-6-10" style="padding-left: 15px;">
+
+                                                          <div style="margin-top: 10px;">
+                                                            <span class="uk-text-small uk-text-muted reception-label">{{ '3120' | translate }}</span>
+                                                            <ui-select id="select-organ" ng-required="true" ng-model="specimen.organ" theme="select2" style="width: 100%;" ng-disabled="vm.disabled" ng-change="vm.selectOrgan(specimen)">
+                                                                <ui-select-match placeholder="{{ '3058' | translate }}">
+                                                                    {{ $select.selected.name }}
+                                                                </ui-select-match>
+                                                                <ui-select-choices class="contentscroll" repeat="organ in specimen.organs | filter: {name:$select.search}">
+                                                                    <span ng-bind-html="organ.name | highlight: $select.search"></span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                          </div>
+
+                                                          <div ng-if="specimen.subSamples.length > 0" style="margin-top: 10px;">
+                                                            <span class="uk-text-small uk-text-muted reception-label">{{ '0460' | translate }}</span>
+                                                            <ui-select ng-model="specimen.subSample" theme="select2" style="width: 100%;" ng-disabled="true" ng-required="true">
+                                                                <ui-select-match placeholder="{{ '3058' | translate }}">
+                                                                    {{ $select.selected.name }}
+                                                                </ui-select-match>
+                                                                <ui-select-choices class="contentscroll" repeat="subsample in specimen.subSamples | filter: {name:$select.search}  | orderBy: 'name' " >
+                                                                    <span ng-bind-html="subsample.name | highlight: $select.search"></span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <div style="padding-left: 0px;">
+                                                      <div style="padding: 0px 20px;">
+                                                          <span class="sub-heading" style="text-transform: capitalize;font-weight: 500;color: black;font-size: 12px;">
+                                                            {{ '3118' | translate }}:
+                                                          </span>
+                                                      </div>
+                                                      <ul class="md-list md-list-addon md-list-interactive contentscroll" style="height: calc(100vh - 485px);overflow: auto;">
+                                                          <li ng-repeat="study in specimen.studies">
+                                                              <div class="md-list-addon-element" style="cursor: initial;">
+                                                                  <img class="logo_regular" src="images/pathology/samplereception/_studies.png">
+                                                              </div>
+                                                              <div class="md-list-content" style="cursor: context-menu;">
+                                                                  <span class="uk-text-small">{{ study.code }} - {{ study.name }}</span>
+                                                              </div>
+                                                          </li>
+                                                      </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-7-10 uk-animation-scale-up contentscroll" style="height: calc(100vh - 230px);overflow: auto;">
+                                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="section in specimen.form">
+                                                <div class="uk-grid uk-width-9-10">
+                                                    <div class="uk-width-1-3" ng-repeat="input in section" on-last-repeat>
+                                                        <div class="parsley-row" ng-if="input.type == 'text'">
+                                                            <span class="uk-text-small uk-text-muted patient-list-content">{{ input.label }}</span>
+                                                            <input type="{{ input.type }}" ng-model="input.value" class="md-input input-quantity" required md-input style="border: transparent;border-bottom: 1px solid #e0e0e0;" ng-disabled="vm.disabled">
+                                                        </div>
+                                                        <div class="parsley-row" ng-class="{ 'uk-margin-small-top' : input.position }" ng-if="input.type == 'selectize'">
+                                                            <span class="uk-text-small uk-text-muted reception-label">{{ input.label }}</span>
+                                                            <ui-select ng-model="input.value" theme="select2" style="width: 100%;" ng-required="input.required" ng-disabled="vm.disabled">
+                                                                <ui-select-match placeholder="{{input.placeholder}}">
+                                                                    {{$select.selected.name}}
+                                                                </ui-select-match>
+                                                                <ui-select-choices class="contentscroll" repeat="item in input.data | filter: {name:$select.search}">
+                                                                    <span ng-bind-html="item.name | highlight: $select.search"></span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-10 uk-text-center" style="width: 12%;">
+                                                    <div class="uk-vertical-align uk-height-1-1">
+                                                        <div class="uk-vertical-align-middle">
+                                                            <a href="javascript:void(0)" ng-click="vm.cloneSection($event, $index, specimen)" ng-class="{'isDisabled': vm.disabledAdd}" ng-if="$last">
+                                                                <i class="material-icons md-36" ng-class="{'disabled-form': vm.disabledAdd, 'add': !vm.disabledAdd }">&#xE146;</i>
+                                                            </a>
+                                                            <a href="javascript:void(0)" ng-click="vm.deleteSection($event,$index, specimen)" ng-class="{'isDisabled': vm.disabledAdd}" ng-if="specimen.form.length > 1">
+                                                                <i class="material-icons md-36" ng-class="{'disabled-form': vm.disabledAdd, 'remove': !vm.disabledAdd }">&#xE872;</i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-grid uk-width-1-1" style="margin-top: 10px;position: absolute;bottom: 8px;padding-left: 0;">
+                    <div class="uk-width-1-1">
+                        <div class="md-card">
+                            <div class="md-card-content" style="padding: 2px;">
+                                <div class="uk-flex uk-flex-center measureButtons">
+
+                                    <!-- Guardar -->
+                                    <div class="uk-flex uk-flex-column">
+                                        <button type="button" ng-click="vm.save(Form)" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="!Form.$valid || vm.disabledSave" ng-class="{'md-bg-blue-grey-100': !Form.$valid || vm.disabledSave}">
+                                            <i class="material-icons">save</i>
+                                        </button>
+                                        <span>{{ '0007' | translate }}</span>
+                                    </div>
+
+                                    <!-- Editar -->
+                                    <div class="uk-flex uk-flex-column">
+                                      <button type="button" ng-click="vm.stateButton('edit'); vm.edit = true;" class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="vm.disabledEdit" ng-class="{'md-bg-blue-grey-100': vm.disabledEdit}">
+                                          <i class="material-icons">create</i>
+                                      </button>
+                                      <span>{{ '0006' | translate }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="uk-modal" id="modal_reject_samples">
+  <div class="uk-modal-dialog">
+      <div class="uk-modal-header uk-modal-header-reject">
+          <h3 class="uk-modal-title uk-grid" style="color: white;font-size: 12px;">
+            {{ '0110' | translate }}: <span class="uk-badge" style="background-color: white;color: black;font-weight: bold;padding: 4px;margin: 3px 5px;font-size: 12px;">{{ vm.order.numberOrder }}</span>
+            | {{ '3138' | translate }}: <span class="uk-badge" style="background-color: white;color: black;font-weight: bold;padding: 4px;font-size: 12px;margin: 3px 5px;">{{ vm.casePat.studyType.name }}</span>
+          </h3>
+      </div>
+
+      <div class="uk-width-1-1">
+          <span class="uk-text-small uk-text-muted">{{ '3131' | translate }}</span>
+          <ui-select ng-model="vm.motive" theme="select2" style="width: 100%;">
+              <ui-select-match placeholder="{{ '3058' | translate}}">
+                  {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices class="contentscroll" repeat="item in vm.motives | filter: {name:$select.search}">
+                  <span ng-bind-html="item.name | highlight: $select.search"></span>
+              </ui-select-choices>
+          </ui-select>
+      </div>
+
+      <div class="uk-form-row" style="margin-top: 10px;">
+          <span class="uk-text-small uk-text-muted">{{ '3128' | translate }}</span>
+          <textarea id="ui-annotation" ui-tinymce="vm.editor" ng-model="vm.observation"></textarea>
+      </div>
+
+      <div class="uk-modal-footer uk-text-right">
+          <button type="button" class="md-btn md-btn-flat uk-modal-close" style="background: #828282;color: white;">{{ '0329' | translate }}</button>
+          <button type="button" data-uk-modal="{target:'#modalConfirmCancel'}" class="md-btn md-btn-flat md-btn-danger" ng-disabled="!vm.motive || !vm.observation" ng-class="{'md-bg-blue-grey-100': !vm.motive || !vm.observation}">{{ '3117' | translate }}</button>
+      </div>
+  </div>
+</div>
+
+
+<!-- ventana modal para confirmar la asignacion -->
+<div id="modalConfirmAssignment" class="uk-modal" aria-hidden="true"
+    style="display: none; overflow-y: scroll; min-height: 300px">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container" style="margin-top: 0px">
+            <div style="float: left;">
+                <img class="img-responsive" src="images/Question.png">
+            </div>
+            <h5 class="uk-text-bold" style="margin: 20px 0px 0px;padding-left: 70px;">{{'3156' | translate}}</h5>
+            <div class="uk-grid">
+              <div class="uk-width-3-10 uk-margin-top uk-margin-bottom" style="text-align-last: right;margin-top: 5px !important;">
+                <div>
+                  <span>{{ '3154' | translate }}: </span>
+                </div>
+                <div>
+                  <span>{{ '0110' | translate }}: </span>
+                </div>
+                <div>
+                  <span>{{ '3038' | translate }}: </span>
+                </div>
+                <div>
+                  <span>{{ '3138' | translate }}: </span>
+                </div>
+                <div>
+                  <span>{{ '0325' | translate }}: </span>
+                </div>
+              </div>
+              <div class="uk-width-7-10 uk-margin-top uk-margin-bottom" style="padding-left: 10px;margin-top: 5px !important;">
+                <div>
+                  <label style="font-weight: bold;text-transform: capitalize;" >{{ vm.pathologist.name }} {{ vm.pathologist.lastName }}</label>
+                </div>
+                <div>
+                  <label style="font-weight: bold;text-transform: capitalize;" >{{ vm.caseFiles.order.numberOrder }}</label>
+                </div>
+                <div>
+                  <label style="font-weight: bold;text-transform: capitalize;" >{{ vm.caseFiles.numberCase }}</label>
+                </div>
+                <div>
+                  <label style="font-weight: bold;text-transform: capitalize;" >{{ vm.caseFiles.studyType.name }}</label>
+                </div>
+                <div>
+                  <label style="font-weight: bold;text-transform: capitalize;" >{{ vm.date }}: {{ vm.daySelected.init | date:'h:mma' }} - {{ vm.daySelected.end | date:'h:mma' }}</label>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="md-btn md-btn-primary" type="button" ng-click="vm.confirmAssignment()">{{'0219' | translate}}</button>
+            <button class="md-btn md-btn-default uk-modal-close" type="button" ng-click="vm.pathologist = null;vm.daySelected = null;vm.date=null">{{'0220' | translate}}</button>
+        </div>
+    </div>
+</div>
+
+<!--Modal para definir los casetes del caso-->
+<div class="uk-modal uk-modal-card-fullscreen" id="modal_casetes"  >
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar" style="background-color: #0277bd;">
+          <span class="md-icon material-icons uk-modal-close" style="color: white;" ng-click="vm.stateButton('new')">&#xE5C4;</span>
+          <h3 class="md-card-toolbar-heading-text" style="color: white;">
+              {{ '3159' | translate }}
+          </h3>
+      </div>
+      <div class="md-card-content">
+        <div class="uk-grid">
+          <div class="uk-width-1-4 filters">
+            <div class="md-card">
+              <div class="md-card-content">
+                <div class="uk-input-group" style="height: 35px;">
+                    <span class="uk-input-group-addon">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/inconsistency/order.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled">
+                        <label style="top: -6px; font-size: 13px;">{{ '0061' | translate }}: </label>
+                        <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ vm.caseFiles.order.numberOrder }}</label>
+                    </div>
+                </div>
+                <div class="uk-input-group" style="height: 35px;">
+                    <span class="uk-input-group-addon">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/patient.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled">
+                        <label style="top: -6px; font-size: 13px;">{{ '0398' | translate }}: </label>
+                        <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ vm.caseFiles.order.name1 }} {{ vm.caseFiles.order.name2 }} {{ vm.caseFiles.order.lastName }} {{ vm.caseFiles.order.surName }}</label>
+                    </div>
+                </div>
+                <div class="uk-input-group" style="height: 35px;">
+                    <span class="uk-input-group-addon">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/study.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled">
+                        <label style="top: -6px; font-size: 13px;">{{ '3138' | translate }}: </label>
+                        <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ vm.caseFiles.studyType.code }} | {{ vm.caseFiles.studyType.name }}</label>
+                    </div>
+                </div>
+                <div class="uk-input-group" style="height: 35px;">
+                    <span class="uk-input-group-addon">
+                        <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/case.png">
+                    </span>
+                    <div class="md-input-wrapper md-input-filled">
+                        <label style="top: -6px; font-size: 13px;">{{ '3038' | translate }}: </label>
+                        <label style="top: 7px;font-size: 11px;font-weight: bold;">{{ vm.caseFiles.numberCase }}</label>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="md-card">
+              <div class="md-card-toolbar" style="height: auto;padding: 0px;">
+                  <div class="uk-text-bold uk-text-center" style="background-color: #1976d2; color: white">
+                      {{ '3160' | translate}}
+                      <span class="uk-badge uk-badge-primary">{{ vm.caseFiles.specimens.length }}</span>
+                  </div>
+              </div>
+              <div class="md-card-content" style="padding: 1px 1px 5px 1px; overflow-y: hidden">
+                  <div class="uk-grid uk-grid-small" style="height: 100%">
+                      <div class="uk-width-1-1 contentscroll" style="height: calc(100vh - 304px);overflow-y: auto;">
+                          <div style="margin-top: 5px" class="md-card uk-width-1-1" ng-repeat="specimen in vm.caseFiles.specimens">
+                              <div class="md-card-content" style="padding: 0px 0 0 10px">
+                                  <div class="uk-grid uk-grid-small" style="place-content: center;">
+                                      <div class="uk-width-8-10 uk-text-bold uk-text-center" style="font-size: 15px;padding-left: 0px;">
+                                          <div class="uk-grid uk-grid-small">
+                                              <div class="uk-width-1-1">
+                                                  <a ng-click="vm.loadConsecutive(specimen)">{{ specimen.code }} | {{ specimen.name }}</a>
+                                                  <br>
+                                                  <label ng-if="!specimen.print" class="uk-badge uk-badge-warning" style="font-size: 9px;margin-bottom: 5px;padding: 0px 5px;border-radius: 5px;">{{ '3163' | translate }}</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <form class="uk-form uk-width-3-4" name="FormCasete" id="FormCasete">
+            <div class="uk-width-1-1" ng-if="vm.specimen">
+              <div class="uk-grid">
+                <div class="uk-width-1-4" style="padding-left: 20px;">
+                  <div class="md-card">
+                      <div class="md-card-content">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/specimen.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -15px; font-size: 12px;">{{ '3119' | translate }}: </label>
+                                <label style="top: 0px;font-size: 11px;font-weight: bold;">{{ vm.specimen.code }} | {{ vm.specimen.name }}</label>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="uk-width-1-4" style="padding-left: 10px;">
+                  <div class="md-card">
+                      <div class="md-card-content contentscroll" style="padding: 0px 0px 14px;height: 40px;overflow: auto;">
+                        <label style="font-size: 12px;margin-left: 13px;font-weight: bold;">{{ '3118' | translate }}: </label>
+                        <div class="uk-input-group" style="padding: 5px 0px 10px;" ng-repeat="studie in vm.specimen.studies">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/test.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled" >
+                                <label style="top: -12px;font-size: 11px;font-weight: bold;">{{ studie.code }} | {{ studie.name }}</label>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="uk-width-1-4" style="padding-left: 10px;">
+                  <div class="md-card">
+                      <div class="md-card-content">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/organ.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -15px; font-size: 12px;">{{ '3034' | translate }}: </label>
+                                <label style="top: 0px;font-size: 11px;font-weight: bold;">{{ vm.specimen.organ.code }} | {{ vm.specimen.organ.name }}</label>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="uk-width-1-4" style="padding-left: 10px;">
+                  <div class="md-card">
+                      <div class="md-card-content">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/protocol.png">
+                            </span>
+                            <div class="md-input-wrapper md-input-filled">
+                                <label style="top: -15px; font-size: 12px;">{{ '1328' | translate }}: </label>
+                                <label style="top: -4px;font-size: 11px;font-weight: bold;" ng-if="vm.protocol">{{ '3161' | translate}}: {{ vm.protocol.casete.name }}</label>
+                                <label style="top: -4px;font-size: 11px;font-weight: bold;" ng-if="!vm.protocol">{{ '3161' | translate}}: {{ '3162' | translate }}</label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;" ng-if="vm.protocol">{{ '0194' | translate}}: {{ vm.protocol.quantity }}</label>
+                                <label style="top: 7px;font-size: 11px;font-weight: bold;" ng-if="!vm.protocol">{{ '0194' | translate}}: {{ '3162' | translate }}</label>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-grid" style="margin-top: 10px;">
+                <div class="uk-width-1-1" style="padding-left: 20px;">
+                  <div class="md-card md-card-hover uk-animation-fade">
+                    <div class="md-card-content" style="padding: 5px 16px;">
+                      <ul class="uk-tab" data-uk-tab="{connect:'#samples', animation:'slide-horizontal'}">
+                          <li ng-repeat="sample in vm.specimen.samples" ng-if="sample.consecutive" ng-class="{'uk-active': $index === 0 }">
+                              <a href="#" style="font-size: 11px;">
+                              {{ '0111' | translate }} {{ $index + 1 }}
+                              </a>
+                          </li>
+                      </ul>
+                      <ul id="samples" class="uk-switcher uk-margin">
+                        <li ng-repeat="sample in vm.specimen.samples" ng-if="sample.consecutive" ng-class="{'uk-active': $index === 0 }">
+                          <div class="uk-grid">
+                            <div class="uk-width-1-3 filters" style="height: calc(100vh - 301px);">
+                              <div class="md-card" style="height: calc(100vh - 303px);">
+                                <div class="md-card-toolbar" style="background-color: #2196f3;height: 30px;">
+                                    <h3 class="md-card-toolbar-heading-text" style="color: white;text-align: center;float: none;height: 30px;line-height: 35px;">
+                                        <span style="font-size: 14px;text-transform: capitalize;">{{ '0111' | translate }} {{ $index + 1 }}</span>
+                                    </h3>
+                                </div>
+                                <div class="md-card-content" style="padding: 5px 16px;">
+                                  <div class="uk-grid">
+                                    <div class="uk-width-6-10" style="text-align: center;">
+                                        <img ng-if="!sample.container.image" class="img-responsive" src="images/sintubo.png" style="width: 90px;height: 90px;"/>
+                                        <img ng-if="sample.container.image" style="width: 90px;height: 90px;" ng-src="data:image/png;base64,{{ sample.container.image }}" alt="user avatar"/>
+                                    </div>
+                                    <div class="uk-width-3-10" style="padding-left: 0px;margin-top: 15px;">
+                                      <div class="uk-input-group" style="height: 30px;">
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <label style="top: -8px; font-size: 12px;">{{ '3122' | translate }}: </label>
+                                            <label style="top: 4px;font-size: 11px;font-weight: bold;">{{ sample.container.name }}</label>
+                                        </div>
+                                      </div>
+                                      <div class="uk-input-group" style="height: 30px;">
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <label style="top: -8px; font-size: 12px;">{{ '3144' | translate }}: </label>
+                                            <label style="top: 4px;font-size: 11px;font-weight: bold;">{{ sample.fixative.name }}</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr style="margin: 10px;">
+                                  <div class="contentscroll" style="height: calc(100vh - 530px);overflow: auto;">
+                                    <div class="md-card uk-width-1-1" ng-repeat="consecutive in sample.consecutive" style="margin-top: 5px;">
+                                      <div class="md-card-content" style="padding: 0px">
+                                        <div class="uk-grid uk-grid-small" style="place-content: center;">
+                                          <div class="uk-width-8-10 uk-text-bold uk-text-center" style="font-size: 15px">
+                                            <div class="uk-grid uk-grid-small">
+                                              <div class="uk-width-1-1">
+                                                  <a ng-click="vm.setCasete(sample, consecutive)">{{ sample.container.name }} {{ consecutive.consecutive }}</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="uk-width-2-3" ng-repeat="consecutive in sample.consecutive"  style="height: calc(100vh - 301px);" ng-show="consecutive.show">
+                              <div class="md-card">
+                                <div class="md-card-toolbar" style="background-color: #2196f3;height: 30px;">
+                                  <h3 class="md-card-toolbar-heading-text" style="color: white;text-align: center;float: none;height: 30px;line-height: 35px;">
+                                      <span style="font-size: 14px;text-transform: capitalize;">{{ sample.container.name }} {{ consecutive.consecutive }}</span>
+                                  </h3>
+                                </div>
+                                <div class="md-card-content" style="padding: 10px 25px;">
+                                  <div class="uk-grid">
+                                    <div class="uk-width-1-2">
+                                      <span class="uk-text-small uk-text-muted">{{ '3161' | translate }}</span>
+                                      <ui-select ng-model="consecutive.casete" theme="select2" style="width: 100%;" required ng-disabled="vm.disabled">
+                                          <ui-select-match placeholder="{{ '3058' | translate}}">
+                                              {{$select.selected.name}}
+                                          </ui-select-match>
+                                          <ui-select-choices class="contentscroll" repeat="item in vm.casetes | filter: {name:$select.search}">
+                                              <span ng-bind-html="item.name | highlight: $select.search"></span>
+                                          </ui-select-choices>
+                                      </ui-select>
+                                    </div>
+                                    <div class="uk-width-1-2">
+                                      <span class="uk-text-small uk-text-muted patient-list-content">{{ '0194' | translate }}</span>
+                                      <input type="text" class="md-input input-quantity" ng-model="consecutive.quantity" ng-pattern="[0-9]+" max="20" min="1" required md-input ng-disabled="vm.disabled" style="border: transparent;border-bottom: 1px solid #e0e0e0;">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="uk-grid contentscroll" style="margin-top: 0px;max-height: calc(100vh - 392px);overflow: auto;">
+                                <div class="uk-width-1-2"  ng-repeat="n in [] | range:consecutive.quantity">
+                                  <div class="md-card" style="margin-top: 10px;border-left: 4px solid;margin-bottom: 5px;" ng-style="{'border-color': consecutive.casete.colour}">
+                                    <div class="md-card-content" style="padding: 5px 25px;">
+                                      <div class="uk-grid">
+                                        <div class="uk-width-1-2">
+                                          <label style="top: 0px;font-size: 14px;font-weight: bold;">
+                                              {{ vm.caseFiles.studyType.code }}{{ vm.caseFiles.numberCase  }}
+                                          </label>
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                          <label style="top: 0px;font-size: 14px;font-weight: bold;">
+                                              {{ vm.specimen.organ.code }}
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div class="uk-grid" style="margin-top: 0px;">
+                                        <div class="uk-width-1-2">
+                                          <label style="top: 0px;font-size: 11px;font-weight: 500;">
+                                              {{ vm.caseFiles.initialsPatient }}
+                                          </label>
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                          <label style="top: 0px;font-size: 11px;font-weight: 500;">
+                                              {{ $index + 1 }}{{ consecutive.consecutive }}
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-grid" style="margin-top: 10px">
+                <div class="uk-width-1-1" style="padding-left: 20px;">
+                  <div class="md-card md-card-hover uk-animation-fade">
+                    <div class="md-card-content" style="padding: 2px;">
+                      <div class="uk-flex uk-flex-center measureButtons">
+                        <!-- Guardar -->
+                        <div class="uk-flex uk-flex-column">
+                            <button type="button" ng-click="vm.saveCasetes()"  class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="!FormCasete.$valid || vm.disabledSave" ng-class="{'md-bg-blue-grey-100': !FormCasete.$valid || vm.disabledSave}">
+                                <i class="material-icons">save</i>
+                            </button>
+                            <span>{{ '0007' | translate }}</span>
+                        </div>
+                        <!-- Editar -->
+                        <div class="uk-flex uk-flex-column">
+                          <button type="button" ng-click="vm.stateButton('edit');" class="md-fab md-fab-small md-fab-warning md-fab-wave-light waves-effect waves-light aling-self-center" ng-disabled="vm.disabledEdit" ng-class="{'md-bg-blue-grey-100': vm.disabledEdit}">
+                              <i class="material-icons">create</i>
+                          </button>
+                          <span>{{ '0006' | translate }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal para configurar el cliente de impresion-->
+<div id="logNoData" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+      <button type="button" class="uk-modal-close uk-close"></button>
+      <div class="uk-modal-body" style="height: 75px; top: 0px">
+          <div style="width: 18%; float: left">
+              <img class="img-responsive" src="images/iconinfo.png">
+          </div>
+          <div class="messageText uk-text-center" style="height: 100%;width: 92%;">
+              <label style="font-size: 13px;height: 100%;margin: 7px">{{vm.message}}</label>
+          </div>
+      </div>
+      <div class="uk-modal-footer">
+      </div>
+  </div>
+</div>
+
+<!--Modal para definir la cantidad de codigos a imprimir-->
+<div id="modalquantitybarcode" class="uk-modal" aria-hidden="true" style="display:none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 270px;">
+    <div class="uk-modal-header md-bg-blue-600" style="border-bottom: 0px;">
+      <h3 class="uk-modal-title">{{'0151' | translate}}</h3>
+    </div>
+    <label style="font-size: 11px;color: gray;font-weight: bold;">
+      {{ '3170' | translate }}: {{vm.minQuantity}} -
+      {{ '3169' | translate }}: {{vm.maxQuantity}}
+    </label>
+    <div class="uk-form-row" style="margin-top: 5px;">
+      <div class="uk-input-group uk-width-1-1" style="float: left;">
+        <label>{{'0194' | translate}}</label>
+        <input  kendo-numeric-text-box k-ng-model="vm.quantityBarcode" ng-blur="vm.validateQuantity()" maxlength="2" k-format="'n0'" style="width: 100%">
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right md-bg-grey-200">
+      <button type="button" class="uk-modal-close md-btn md-btn-flat md-bg-blue-600 md-color-grey-50" ng-click="vm.getProcessPrint()" ng-disabled="vm.invalidQuantity" ng-class="{'md-bg-blue-grey-100': vm.invalidQuantity}">{{'0158' | translate}}</button>
+      <button type="button" class="uk-modal-close md-btn md-btn-flat buttonCancel" ng-click="vm.quantityBarcode = null">{{'0329' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalprogressprint" class="uk-modal" aria-hidden="true">
+  <div class="uk-modal-dialog">
+    <div class="uk-progress uk-progress-striped uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;">{{vm.porcent}}%</div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">{{ vm.ind }}
+      {{vm.prepotition}}
+      {{ vm.quantityBarcode }}</div>
+  </div>
+</div>
+
+<!-- ventana modal para confirmar el envio a macroscopia -->
+<div id="modalConfirmMacroscopy" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div style="float: left;">
+          <img class="img-responsive" src="images/Question.png">
+      </div>
+      <div class="uk-grid">
+          <div class="uk-width-1-1 uk-margin-top uk-margin-bottom">
+              <h5 class="uk-text-bold">{{'3186' | translate}}</h5>
+          </div>
+      </div>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+        <button class="md-btn md-btn-primary" type="button" ng-click="vm.changeStatus()" >{{'0219' | translate}}</button>
+        <button class="md-btn md-btn-default uk-modal-close" type="button">{{'0220' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

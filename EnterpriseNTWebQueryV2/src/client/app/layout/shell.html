@@ -1,0 +1,45 @@
+<style>
+  .loader--text:after {
+    content: "Cargando";
+    font-weight: bold;
+    animation-name: loading-text;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes loading-text {
+    0% {
+      content: "Cargando";
+    }
+
+    25% {
+      content: "Cargando.";
+    }
+
+    50% {
+      content: "Cargando..";
+    }
+
+    75% {
+      content: "Cargando...";
+    }
+  }
+</style>
+<div ng-controller="ShellController as vm" style="height: 100%;">
+  <section id="content" class="content" style="height: 100%;">
+    <div ng-include="'app/layout/sidebar.html'" style="height: 0px;width: 100%;"></div>
+    <div ui-view class="shuffle-animation" style="height: 100%;"></div>
+    <div ngplus-overlay ngplus-overlay-delay-in="10" ngplus-overlay-delay-out="300"
+      ngplus-overlay-animation="dissolve-animation">
+      <div class="loader">
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--dot"></div>
+        <div class="loader--text"></div>
+      </div>
+    </div>
+  </section>
+</div>

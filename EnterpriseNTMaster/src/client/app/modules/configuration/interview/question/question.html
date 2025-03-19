@@ -1,0 +1,273 @@
+<loadpage view="vm.loadingdata">
+</loadpage>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0595' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/question/question.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-7">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.question; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.question"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.question"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.question && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.question && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.question && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.question && vm.sortReverse"></span>
+                        </a> {{'0011' | translate}}
+                      </th>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.openname; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.openname"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.openname"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.openname && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.openname && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.openname && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.openname && vm.sortReverse"></span>
+                        </a> {{'0035' | translate}}
+                      </th>
+                      <th class="col-md-2">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.state && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.state && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.state && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.state && vm.sortReverse"></span>
+                        </a>{{'0014' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll" data-scroll-to-top='vm.filtered.length'>
+                    <tr class="row-list"
+                      data-ng-repeat="question in vm.filtered = ((vm.data | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getId(question.id,$index,Form)"
+                      ng-class="{info: question.id == vm.selected, danger: question.state == 0 }">
+                      <td class="col-md-7" data-ng-bind="question.question"></td>
+                      <td class="col-md-3" data-ng-bind="question.openname"></td>
+                      <td class="col-md-2 text-center">
+                        <i ng-if="question.state == true" class="glyphicon glyphicon-ok green"></i>
+                        <i ng-if="question.state == false" class="glyphicon glyphicon-ban-circle red"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form contentscroll"
+                style="overflow:auto; padding-top: 0px;padding-bottom: 0px">
+                <form name="Form" id="Form" class="form-horizontal panel-body" style="padding-bottom: 0px">
+                  <div class="col-md-12 form-group form-group-sm">
+                    <label class="col-md-3 text-right">{{'0595' | translate}}:</label>
+                    <div ng-class="{'has-error': Form.question.$invalid && Form.question.$touched||vm.Repeatquestion }"
+                      class="col-md-9" style="padding-left: 5px; padding-right: 10px">
+                      <input class="form-control" maxlength="255" data-ng-model="vm.Detail.question" ng-required="true"
+                        ng-disabled="vm.isDisabled" ng-change="vm.Detail.name=vm.Detail.question" name="question"
+                        id="question" class="form-control" type="text" ng-focus="vm.Repeatquestion = false">
+                      <span ng-if="Form.question.$invalid && Form.question.$touched ||vm.Repeatquestion"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="Form.question.$invalid && Form.question.$touched"
+                        class="help-block ">{{'0016' | translate}}</span>
+                      <span ng-if="vm.Repeatquestion" class="help-block ">{{'0038' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-12 form-group form-group-sm">
+                    <label class="col-md-3  text-right">Tipo respuesta:</label>
+                    <div class="col-md-5 text-left " style="padding-left: 5px; padding-right: 10px">
+                      <div class="btn-group btn-group-sm col-md-12" style="padding-right: 0px;
+                      padding-left: 0px;">
+                        <div class="dropdown">
+                          <button style="width: 100%;text-align: left !important;" ng-disabled="vm.isDisabled"
+                            class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                            <span ng-if="vm.Detail.control===1" style="float: left;margin-right: 5px;margin-top: 2px;"
+                              class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                            <span ng-if="vm.Detail.control===2" style="float: left;margin-right: 5px;margin-top: 2px;"
+                              class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                            <span ng-if="vm.Detail.control===3" style="float: left;margin-right: 5px;margin-top: 2px;"
+                              data-toggle="tooltip" title="{{'0178' | translate}}"
+                              class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                            <span ng-if="vm.Detail.control===4" style="float: left;margin-right: 5px;margin-top: 2px;"
+                              data-toggle="tooltip" title="{{'0072' | translate}}" class="glyphicon glyphicon-calendar"
+                              aria-hidden="true"></span>
+                            <span ng-if="vm.Detail.control===5" style="float: left;margin-right: 5px;margin-top: 2px;"
+                              data-toggle="tooltip" title="{{'0623' | translate}}"
+                              class="glyphicon glyphicon glyphicon-check" aria-hidden="true"></span>
+                            <span ng-if="vm.Detail.control===6" style="float: left;margin-right: 5px;margin-top: 2px;"
+                              data-toggle="tooltip" title="{{'0624' | translate}}" class="glyphicon glyphicon-list"
+                              aria-hidden="true"></span>
+                            {{vm.Detail.control===1?vm.one:vm.Detail.control===2?vm.two:vm.Detail.control===3?vm.tres:vm.Detail.control===4?vm.four:vm.Detail.control===5?vm.five:vm.six}}
+                            <span style="float: right;margin-top: 9px;" class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-interview">
+                            <li ng-class="{'selectinterview': vm.Detail.control === 3}"><a style="padding: 3px 8px;"
+                                href="#" ng-click=" vm.changeTypeQuestion(3)"><span
+                                  class="glyphicon glyphicon-menu-hamburger"></span> {{vm.tres}}</a></li>
+                            <li ng-class="{'selectinterview': vm.Detail.control === 4}"><a style="padding: 3px 8px;"
+                                href="#" ng-click=" vm.changeTypeQuestion(4)"><span
+                                  class="glyphicon glyphicon-calendar"></span> {{vm.four}}</a></li>
+                            <li ng-class="{'selectinterview': vm.Detail.control === 6}"><a style="padding: 3px 8px;"
+                                href="#" ng-click=" vm.changeTypeQuestion(6)"><span
+                                  class="glyphicon glyphicon-list"></span> {{vm.six}}</a></li>
+                            <li ng-class="{'selectinterview': vm.Detail.control === 5}"><a style="padding: 3px 8px;"
+                                href="#" ng-click=" vm.changeTypeQuestion(5)"><span
+                                  class="glyphicon glyphicon glyphicon-check"></span> {{vm.five}}</a></li>
+                            <li ng-class="{'selectinterview': vm.Detail.control === 2}"><a href="#"
+                                style="padding: 3px 8px;" ng-click=" vm.changeTypeQuestion(2)"><span
+                                  class="glyphicon glyphicon-asterisk"></span> {{vm.two}}</a></li>
+                            <li ng-class="{'selectinterview': questions.control === 1}"><a
+                                style="padding: 3px 8px;margin-left: 5px;" href="#"
+                                ng-click=" vm.changeTypeQuestion(1)"><span
+                                  class="glyphicon glyphicon-text-background"></span> {{vm.one}}</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <label class="col-md-2 text-right">{{'0014' | translate}}: </label>
+                    <div class="col-md-2 text-right">
+                      <toggle ng-model="vm.Detail.state" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                        ng-change="vm.changeState()" ng-disabled="vm.isDisabledState" size="btn-sm">
+                      </toggle>
+                    </div>
+                  </div>
+                  <div class="col-md-12 panel-padding form-group form-group-sm">
+                  </div>
+                  <div ng-if="(vm.Detail.control === 5 || vm.Detail.control === 6)"
+                    class="col-md-12 panel-padding form-group form-group-sm"
+                    style="margin-bottom: 0px;padding-left: 37px;">
+                    <fieldset class="col-md-12">
+                      <legend>
+                        {{'0599' | translate}}
+                        <span ng-if="!vm.isDisabled" ng-click="vm.newAnswer(vm.selected)"
+                          style="background-color: #337ab7" class="badge" popover-placement="left"
+                          uib-popover="Agregar respuesta" popover-trigger="'mouseenter'">+</span>
+                      </legend>
+                      <div class="panel-body" style="padding-left: 0px; padding-right: 0px">
+                        <div class="panel-body general-container" style="padding: 5px">
+                          <div>
+                            <div class="input-group col-md-12 ">
+                              <input data-ng-model="vm.search1" class="form-control" type="text"
+                                placeholder="{{'0015' | translate}}">
+                              <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-search"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <table class="table table-hover table-fixed" style="margin-bottom: 0px;">
+                            <tbody style="height: 35vh" id="contenanswer" class="contentscroll">
+                              <tr
+                                data-ng-repeat="answer in vm.Detail.answers | filter: {'name' : vm.search1} | orderBy:vm.sortType2:vm.sortReverse2">
+                                <td ng-if="vm.answeredit.value === $index && answer.quantity === 0 && !vm.isDisabled"
+                                  class="col-md-10"
+                                  ng-class="{'has-error': Form.answer.$invalid && Form.answer.$touched || vm.erroranswer || vm.RepeatnameAnswer}">
+                                  <input class="form-control" maxlength="60" id="{{'answer' + answer.id}}"
+                                    data-ng-model="answer.name" type="text"
+                                    ng-change="vm.erroranswer = Form.answer.$invalid" ng-blur="vm.validAnswer($index)"
+                                    ng-focus="vm.RepeatnameAnswer = false; vm.valueant = answer.name">
+                                  <span ng-if="Form.answer.$invalid && Form.answer.$touched || vm.erroranswer "
+                                    class="help-block ">{{'0016' | translate}}</span>
+                                  <span ng-if="vm.RepeatnameAnswer" class="help-block ">{{'0038' | translate}}</span>
+                                </td>
+                                <td ng-if="vm.answeredit.value !== $index || answer.quantity  > 0 || vm.isDisabled"
+                                  class="col-md-10">
+                                  {{answer.name}}
+                                </td>
+                                <td class="col-md-2 text-center"
+                                  ng-if="vm.answeredit.value !== $index || answer.quantity  > 0 || vm.isDisabled">
+                                  <label class="btn btn-default panel-padding" style="height: 20px; width: 20px;"
+                                    ng-disabled="vm.isDisabled || !answer.state">
+                                    <input type="checkbox" autocomplete="off" ng-model="answer.selected"
+                                      style="display: none;" ng-change="vm.selectAnswer(answer.selected)"
+                                      ng-disabled="vm.isDisabled || !answer.state">
+                                    <i ng-if="answer.selected" class="glyphicon glyphicon-ok green"></i>
+                                    <i ng-if="!answer.selected" class="glyphicon"></i>
+                                  </label>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.Detail.state"></modalstate>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class=" btn btn-success button-list" style="width: calc(100% / 4 - 4px)"
+                    ng-click="vm.New(Form)" ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'0005' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-warning button-list" style="width: calc(100% / 4 - 4px)"
+                    ng-click="vm.Edit()" ng-disabled="vm.isDisabledEdit ">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary button-list" style="width: calc(100% / 4 - 4px)"
+                    ng-click="vm.save(Form)"
+                    ng-disabled="!Form.$valid || vm.isDisabledSave || (vm.selectCant === 0 && (vm.Detail.control === 5 || vm.Detail.control === 6)) || (vm.RepeatnameAnswer === true)">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" style="width: calc(100% / 4 - 4px)"
+                    ng-click="vm.cancel(Form)" ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

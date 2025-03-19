@@ -1,0 +1,398 @@
+<style>
+  .md-card {
+    background: #fff;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 1px 2px rgba(0, 0, 0, 0.0);
+    border: none;
+  }
+
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content">
+  <div id="page_content_inner" style="padding: 5px 15px 0px;">
+    <div class="uk-grid fullheight">
+      <div class="uk-width-1-1 fullheight">
+        <div class="md-card fullheight">
+          <div style="height: 92%" class="md-card-content">
+            <div class="uk-width-1-1 fullheight">
+              <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1',swiping:
+                false}" style="height: 36px">
+                <li class="uk-active" ng-click="vm.clearalltab()"><a href="#">{{'0034'
+                    | translate}}</a></li>
+                <li ng-click="vm.clearalltab()"><a href="#">{{'0123' |
+                    translate}}</a></li>
+                <li ng-click="vm.clearalltab()"><a href="#">{{'0468' |
+                    translate}}</a></li>
+                <li ng-click="vm.clearalltab()"> <a href="#">{{'0225' |
+                    translate}}</a></li>
+              </ul>
+              <ul id="tabs_1" class="uk-switcher uk-margin" style="height:
+                calc(100% - 32px);">
+                <!-- Pestaña de estaditicas especiales -->
+                <li class="fullheight">
+                  <div style="height: calc(100% - 55px)">
+                    <div style="height: auto" class="uk-grid">
+                      <div class="uk-width-5-10">
+                        <fieldset class="fieldset" style="height: 58px;padding:
+                          12px 16px;">
+                          <orderfilter rangeinit="vm.rangeInitSE" rangeend="vm.rangeEndSE" typefilter="vm.filterRange"
+                            isopenreport="vm.isOpenReportSE" typeview="2"></orderfilter>
+                        </fieldset>
+                      </div>
+                      <div class="uk-width-5-10" style="padding-left: 10px">
+                        <fieldset class="fieldset" style="height: 58px;
+                          padding-top: 15px">
+                          <div class="uk-grid" style="margin-top: 3px">
+
+                            <div class="uk-width-5-10">
+                              <div class="uk-form-row md-input-wrapper
+                                md-input-filled">
+                                <label style="padding-left: 2px">{{'0493' |
+                                  translate}}: {{vm.typefilte}}</label>
+                                <p style="margin-left: 7px">
+
+                                  <input type="radio" name="filter1" id="filter1_1" icheck ng-model="vm.typefilter"
+                                    value="1" ng-change="vm.button('1')" />
+                                  <label for="filter1_1" class="inline-label">{{'0078'
+                                    | translate}}</label>
+                                  <input type="radio" name="filter1" id="filter1_1" icheck ng-model="vm.typefilter"
+                                    value="2" ng-change="vm.button('2')" />
+                                  <label for="filter1_1" class="inline-label">{{'0494'
+                                    | translate}}</label>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="uk-width-5-10" style="padding-left: 15px">
+                              <div class="uk-form-row md-input-wrapper
+                                md-input-filled">
+                                <label style="padding-left: 2px">{{'0161' |
+                                  translate}}:</label>
+                                <p style="margin-left: 7px">
+                                  <input type="radio" name="typereport" id="typereportlist" icheck
+                                    ng-model="vm.typereport" value="1" ng-change="vm.changetyreport('1')" />
+                                  <label style="margin-right: 20px" for="typereportlist"
+                                    class="inline-label">{{'0495' | translate}}</label>
+                                  <input type="radio" name="typereport" id="typereportgraph" icheck
+                                    ng-model="vm.typereport" value="2" ng-change="vm.changetyreport('2')" />
+                                  <label for="typereportgraph" class="inline-label">{{'0415' | translate}}</label>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="uk-width-3-10" style="padding-left: 15px" ng-if="vm.typereport==='2'">
+                              <div style="width: 80px; float: left;
+                                margin-right: 10px">
+                                <div class="uk-form-row md-input-wrapper
+                                  md-input-filled">
+                                  <label style="margin-left: -8px" class="inline-label">{{'0769' | translate}}</label>
+                                  <div style="margin-top: 6px">
+                                    <input k-min="1" k-max="10" kendo-numeric-text-box k-ng-model="vm.serie"
+                                      maxlength="2" k-format="'n0'" ng-disabled="vm.typereport==='1'"
+                                      style="width: 100%">
+                                  </div>
+                                </div>
+                              </div>
+                              <div style="width:calc(100% - 90px); float: left">
+                                <div class="uk-form-row md-input-wrapper
+                                  md-input-filled">
+                                  <label style="margin-left: -8px" class="inline-label">{{'0770' | translate}}</label>
+                                  <div>
+                                    <select ng-disabled="vm.typereport ==='1' ||
+                                      vm.typeresult !== '0'" class="md-input" ng-options="obj.id as obj.name for obj in
+                                      vm.listtypegraph" data-ng-model="vm.graphtype"></select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="uk-width-1-1" ng-if="vm.typefilter === '2'">
+                        <filterdemographic id="'filterDemographics'" excludetypeorder="false"
+                          demographic="vm.demographics" demosmask="vm.demosmask"></filterdemographic>
+                      </div>
+                      <div class="uk-width-1-1">
+                        <fieldset class="fieldset">
+                          <legend>{{'0027' | translate}}:</legend>
+                          <div class="uk-grid">
+                            <div class="uk-width-1-1 uk-text-center">
+                              <div class="uk-form-row md-input-wrapper
+                                md-input-filled">
+                                <p style="margin-left: 7px">
+                                  <input type="radio" name="typeresult" id="typeresult1" icheck ng-model="vm.typeresult"
+                                    value="0" ng-change="vm.getTest('0')" />
+                                  <label style="margin-right: 20px" for="typeresult1"
+                                    class="inline-label">{{'0496' | translate}}</label>
+                                  <input type="radio" name="typeresult" id="typeresult2" icheck ng-model="vm.typeresult"
+                                    value="1" ng-change="vm.getTest('1')" />
+                                  <label style="margin-right: 20px" for="typeresult2"
+                                    class="inline-label">Literal</label>
+                                  <input type="radio" name="typeresult" id="typeresult3" icheck ng-model="vm.typeresult"
+                                    value="2" ng-change="vm.getTest('2')" />
+                                  <label for="typeresult3" class="inline-label">{{'0114'
+                                    | translate}}</label>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="uk-width-3-4" style="margin-bottom: 10px">
+                              <label class="inline-label">{{'0459' |
+                                translate}}:</label>
+                              <loadcombobox ng-model="vm.dataTest.selected" listorigin="vm.dataTest" cleanselect="false"
+                                change="vm.changuedate()"></loadcombobox>
+                            </div>
+                            <div class="uk-width-1-4">
+                              <label style="font-size: 14px; color: #444444;
+                                margin-left: -8px" class="inline-label">{{'0124' | translate}}</label>
+                              <select class="md-input" style="margin-top: 13px" ng-options="obj.id as obj.name for obj in
+                                vm.dataGender" data-ng-model="vm.gender"></select>
+                            </div>
+                            <div class="uk-width-1-2 uk-container-center">
+                              <div class="uk-grid">
+                                <div class="uk-width-1-2">
+                                  <label class="inline-label">{{'0497' |
+                                    translate}}</label>
+                                  <input  kendo-numeric-text-box k-ng-model="vm.minimumage" maxlength="3" k-format="'n0'"
+                                    ng-blur="vm.validage()" style="width: 100%">
+                                </div>
+                                <div class="uk-width-1-2">
+                                  <label class="inline-label">{{'0498' |
+                                    translate}}</label>
+                                  <input kendo-numeric-text-box k-ng-model="vm.maximumage" maxlength="3" k-format="'n0'"
+                                    ng-blur="vm.validage()" style="width: 100%">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="uk-width-1-2 uk-container-center">
+                              <div class="uk-grid" ng-if="vm.typeresult ===
+                                '0'">
+                                <div class="uk-width-1-2">
+                                  {{'0499' | translate}}
+                                  <input kendo-numeric-text-box k-ng-model="vm.minimalreference" maxlength="16"
+                                    k-format="vm.format" k-rebind="vm.format;vm.decimal" k-decimals="vm.decimal"
+                                    ng-blur="vm.validref()" style="width: 100%">
+                                </div>
+                                <div class="uk-width-1-2">
+                                  {{'0500' | translate}}
+                                  <input kendo-numeric-text-box k-ng-model="vm.maximumreference" maxlength="16"
+                                    k-format="vm.format" k-rebind="vm.format;vm.decimal" k-decimals="vm.decimal"
+                                    ng-blur="vm.validref()" style="width: 100%">
+                                </div>
+                              </div>
+                              <div class="uk-grid" ng-if="vm.typeresult ===
+                                '1'">
+                                <label for="username">{{'0289' | translate}}</label>
+                                <div class="uk-width-1-1" style="margin-top: -8px">
+                                  <input md-input class="md-input" data-ng-model="vm.result" />
+                                </div>
+                              </div>
+                              <div class="uk-grid" ng-if="vm.typeresult ===
+                                '2'">
+                                <label for="username">{{'0114' | translate}}</label>
+                                <div class="uk-width-1-1" style="margin-top: -8px">
+                                  <input md-input class="md-input" data-ng-model="vm.comment" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+                      ng-click="vm.printReportspecialstadistics('pdf')"
+                      ng-disabled="!vm.isOpenReportSE || vm.minimumage === null
+                      || vm.maximumage === null || vm.dataTest.selected === null
+                      || (vm.typeresult === '0' && (vm.minimalreference === null
+                      || vm.maximumreference === null) ) || (vm.typeresult ===
+                      '1' && vm.result === null) || (vm.typeresult === '2' &&
+                      vm.comment === null) || (vm.typereport === '2' && vm.serie
+                      === null)"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReportSE || vm.minimumage === null
+                      || vm.maximumage === null || vm.dataTest.selected === null
+                      || (vm.typeresult === '0' && (vm.minimalreference === null
+                      || vm.maximumreference === null) ) || (vm.typeresult ===
+                      '1' && vm.result === null) || (vm.typeresult === '2' &&
+                      vm.comment === null) || (vm.typereport === '2' && vm.serie
+                      === null) }">
+                      <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar pdf"></i>
+                    </button>
+                    <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+                      ng-click="vm.printReportspecialstadistics('xls')"
+                      ng-disabled="!vm.isOpenReportSE || vm.minimumage === null
+                      || vm.maximumage === null || vm.dataTest.selected === null
+                      || (vm.typeresult === '0' && (vm.minimalreference === null
+                      || vm.maximumreference === null) ) || (vm.typeresult ===
+                      '1' && vm.result === null) || (vm.typeresult === '2' &&
+                      vm.comment === null) || (vm.typereport === '2' && vm.serie
+                      === null)"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReportSE || vm.minimumage === null
+                      || vm.maximumage === null || vm.dataTest.selected === null
+                      || (vm.typeresult === '0' && (vm.minimalreference === null
+                      || vm.maximumreference === null) ) || (vm.typeresult ===
+                      '1' && vm.result === null) || (vm.typeresult === '2' &&
+                      vm.comment === null) || (vm.typereport === '2' && vm.serie
+                      === null) }">
+                      <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar excel"></i>
+                    </button>
+                  </div>
+
+                </li>
+                <!-- Pestaña de estaditicas motivo de rechazo -->
+                <li class="fullheight">
+                  <div class="uk-width-6-10 uk-container-center">
+                    <fieldset class="fieldset" style="height: 58px;padding: 12px
+                      16px;">
+                      <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReport1" typeview="2"></orderfilter>
+                    </fieldset>
+                  </div>
+                  <div style="height: 70%" class="uk-width-1-1">
+                    <groupingstatistics numbergroups="vm.numbergroup" typegroup="1" groupsvalue="vm.listgroup"
+                      controlvalid="vm.controlvalidgroups" idcontrol="'g1'" cleanform="vm.cleang1"></groupingstatistics>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+                      ng-click="vm.printReportmotivereject('pdf')"
+                      ng-disabled="!vm.isOpenReport1 || !vm.controlvalidgroups"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport1 || !vm.controlvalidgroups }">
+                      <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar pdf"></i>
+                    </button>
+                    <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+                      ng-click="vm.printReportmotivereject('xls')"
+                      ng-disabled="!vm.isOpenReport1 || !vm.controlvalidgroups"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport1 || !vm.controlvalidgroups }">
+                      <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar excel"></i>
+                    </button>
+                  </div>
+                </li>
+                <!-- Pestaña de estaditicas motivo de repetición -->
+                <li class="fullheight">
+                  <div class="uk-width-6-10 uk-container-center">
+                    <fieldset class="fieldset" style="height: 58px;padding: 12px
+                      16px;">
+                      <orderfilter rangeinit="vm.rangeInitR" rangeend="vm.rangeEndR" typefilter="vm.filterRange"
+                        isopenreport="vm.isOpenReportR" typeview="2"></orderfilter>
+                    </fieldset>
+                  </div>
+                  <div style="height: 70%" class="uk-width-1-1">
+                    <groupingstatistics numbergroups="vm.numbergroupr" groupsvalue="vm.listgroupr"
+                      controlvalid="vm.controlvalidgroupsr" idcontrol="'g2'" cleanform="vm.cleang2">
+                    </groupingstatistics>
+                  </div>
+
+                  <div class="uk-width-1-1">
+                    <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+                      ng-click="vm.printReporepeated('pdf')"
+                      ng-disabled="!vm.isOpenReportR || !vm.controlvalidgroupsr"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReportR || !vm.controlvalidgroupsr }">
+                      <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar pdf"></i>
+                    </button>
+                    <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+                      ng-click="vm.printReporepeated('xls')"
+                      ng-disabled="!vm.isOpenReportR || !vm.controlvalidgroupsr"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReportR || !vm.controlvalidgroupsr }">
+                      <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar excel"></i>
+                    </button>
+                  </div>
+                </li>
+                <!-- Pestaña de estaditicas microobiologia -->
+                <li class="fullheight">
+                  <div style="margin-left: 0px;" class="uk-grid">
+                    <div class="uk-width-6-10" style="padding-left: 16px;">
+                      <fieldset class="fieldset" style="height: 58px;padding:
+                        12px 16px;">
+                        <orderfilter rangeinit="vm.rangeInit4" rangeend="vm.rangeEnd4" typefilter="vm.filterRange"
+                          isopenreport="vm.isOpenReport4" typeview="2"></orderfilter>
+                      </fieldset>
+                    </div>
+                    <div class="uk-width-4-10" style="padding-left:
+                      10px;padding-right: 16px;">
+                      <fieldset class="fieldset" style="height: 58px;padding:
+                        12px 16px;">
+                        <div class="uk-form-row md-input-wrapper
+                          md-input-filled">
+                          <label style="padding-left: 2px">{{'0161' |
+                            translate}}:</label>
+                          <p style="margin-left: 7px" class="uk-text-center">
+                            <input type="radio" name="radio_demo" id="radio_demo_1" icheck ng-model="vm.type" value="1"
+                              ng-change="vm.buttonmicrobiology('1')" />
+                            <label for="radio_demo_1" style="margin-right: 20px"
+                              class="inline-label">{{'0321' | translate}}</label>
+                            <input type="radio" name="radio_demo" id="radio_demo_2" icheck ng-model="vm.type" value="2"
+                              ng-change="vm.buttonmicrobiology('2')" />
+                            <label for="radio_demo_2" class="inline-label">{{'0432'
+                              | translate}}</label>
+                          </p>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <div style="height: 70%" class="uk-width-1-1
+                    uk-container-center">
+                    <groupingstatistics numbergroups="vm.numbergroup" typegroup="2" groupsvalue="vm.listgroupm"
+                      controlvalid="vm.controlvalidgroups4" idcontrol="'g3'" cleanform="vm.cleang4">
+                    </groupingstatistics>
+                  </div>
+                  <div class="uk-width-1-1">
+                    <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+                      ng-click="vm.printReportmicro('pdf')"
+                      ng-disabled="!vm.isOpenReport4 || !vm.controlvalidgroups4"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport4 || !vm.controlvalidgroups4 }">
+                      <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar pdf"></i>
+                    </button>
+                    <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+                      ng-click="vm.printReportmicro('xls')"
+                      ng-disabled="!vm.isOpenReport4 || !vm.controlvalidgroups4"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport4 || !vm.controlvalidgroups4 }">
+                      <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="Descargar excel"></i>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false">
+  <div class="uk-modal-dialog message">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 100px; top: 0px">
+      <div style="width: 20%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalprogress" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress  uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;"></div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      Generando reporte ....
+    </div>
+  </div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

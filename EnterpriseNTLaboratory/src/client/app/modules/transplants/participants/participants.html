@@ -1,0 +1,242 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner" style="height: 100%;padding: 0px 0px 0px;">
+        <div style="height: 100%;width: 100%;margin-left: -10px;" class="uk-grid">
+            <div class="uk-width-1-1 " style="height: 225px;padding-left: 19px;">
+                <div style="height: 100%;" class="md-card">
+                    <div style="height: 100%;padding: 0px 0px 0px 13px;" class="md-card-content">
+                        <div class="uk-grid">
+                            <div class="uk-width-5-6" style="width: 99%">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-1">
+                                        <fieldset class="fieldset">
+                                            <legend>{{'0387' | translate}}:</legend>
+                                            <div class="uk-grid">
+                                                <div class="uk-width-3-10" style="padding-top: 10px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/Donor-type.png" />
+                                                        </span>
+                                                        <md-radio-group ng-model="vm.typefilter"
+                                                            aria-labelledby="favoriteFruit" ng-change="vm.getseach()">
+                                                            <md-radio-button value="0" class="md-primary">{{'3387' |
+                                                                translate}}</md-radio-button>
+                                                            <md-radio-button value="1" class="md-primary">{{'3388' |
+                                                                translate}}</md-radio-button>
+                                                        </md-radio-group>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-4-10" style="padding-top: 4px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/branch.png" />
+                                                        </span>
+                                                        <label style="top: -6px; font-size: 12px;">{{'1815' |
+                                                            translate}}</label>
+                                                        <loadcombobox listorigin="vm.ListInstitution"
+                                                            change="vm.getseach()" placeholder="'3311'" fieldCode="code"
+                                                            fieldName="name"
+                                                            requerid="vm.listremision.institution.requerid"
+                                                            ng-model="vm.listremision.selected">
+                                                        </loadcombobox>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-3-10" style="padding-top: 17px;">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img class="md-list-addon-icon material-icons md-24"
+                                                                ng-src="images/transplants/body-scan.png" />
+                                                        </span>
+                                                        <label style="top: -6px; font-size: 12px;"> {{'3314' |
+                                                            translate}}</label>
+                                                        <select class="md-input"
+                                                            ng-options="obj.id as obj.name for obj in vm.listSearchorgan"
+                                                            data-ng-model="vm.organsearch.id"
+                                                            ng-change="vm.getseach()"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <fieldset class="fieldset">
+                                            <legend>{{'3389' | translate}}: </legend>
+                                            <div class="uk-grid">
+                                                <div class="uk-width-1-5" style="padding-top: 4px;">
+                                                    <label style="top: -6px; font-size: 12px;">{{'0387' |
+                                                        translate}}:</label>
+                                                    <select class="md-input"
+                                                        ng-options="obj.id as obj.name for obj in vm.typeresport"
+                                                        data-ng-model="vm.typeresport.id"
+                                                        ng-change="vm.changefilter()"></select>
+                                                </div>
+                                                <div class="uk-width-4-5" style="padding-top: 4px;"
+                                                    ng-show="vm.typeresport.id==0">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <img ng-src="images/search.png" />
+                                                        </span>
+                                                        <div class="md-input-wrapper md-input-filled">
+                                                            <label>{{'0154' | translate}}</label>
+                                                            <input type="text" name="searchgrille" id="searchgrille"
+                                                                md-input label-fixed class="md-input  label-fixed"
+                                                                ng-model="vm.searchreception">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-4" style="padding-top: 4px;"
+                                                    ng-show="vm.typeresport.id==1 &&  vm.typedocument  &&  !vm.historyautomatic">
+                                                    <label style="top: -6px; font-size: 12px;"> {{'0233' |
+                                                        translate}}</label>
+                                                    <select class="md-input"
+                                                        ng-options="obj.id as obj.name for obj in vm.documentTypelist"
+                                                        data-ng-model="vm.documentTypepatient.id"
+                                                        ng-change="vm.searchtype()"></select>
+                                                </div>
+                                                <div class="uk-width-1-4" ng-show="vm.typeresport.id==1">
+                                                    <label>{{'0117' | translate}}</label>
+                                                    <input type="text" class="md-input label-fixed"
+                                                        data-ng-model="vm.record" id="txt_patientid"
+                                                        ng-keypress="vm.keyselectpatientid($event)" md-input />
+                                                </div>
+                                                <div class="uk-width-1-6" ng-show="vm.typeresport.id==2">
+                                                    <label>{{'0234' | translate}}</label>
+                                                    <input type="text"
+                                                        class="md-input label-fixed ordersearch-uppercase"
+                                                        id="txt_lastname" data-ng-model="vm.lastname"
+                                                        ng-keypress="vm.keyselectpatientid($event)" md-input />
+                                                </div>
+                                                <div class="uk-width-1-6" ng-show="vm.typeresport.id==2">
+                                                    <label>{{'0235' | translate}}</label>
+                                                    <input type="text"
+                                                        class="md-input label-fixed ordersearch-uppercase"
+                                                        data-ng-model="vm.surname"
+                                                        ng-keypress="vm.keyselectpatientid($event)" md-input />
+                                                </div>
+                                                <div class="uk-width-1-6" ng-show="vm.typeresport.id==2">
+                                                    <label>{{'0236' | translate}}</label>
+                                                    <input type="text"
+                                                        class="md-input label-fixed ordersearch-uppercase"
+                                                        data-ng-model="vm.name1"
+                                                        ng-keypress="vm.keyselectpatientid($event)" md-input />
+                                                </div>
+                                                <div class="uk-width-1-6" ng-show="vm.typeresport.id==2">
+                                                    <label>{{'0237' | translate}}</label>
+                                                    <input type="text"
+                                                        class="md-input label-fixed ordersearch-uppercase"
+                                                        data-ng-model="vm.name2"
+                                                        ng-keypress="vm.keyselectpatientid($event)" md-input />
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" style="height: calc(100% - 242px);
+            z-index: 100;
+            padding-left: 19px;
+            padding-top: 0px;">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content" style="height: 100%;padding: 0px;">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                            style="height: 100%;    margin-bottom: 0px;">
+                            <thead style=" display: inline-block;width: 100%;height: 36px;">
+                                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0132' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0118' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10 uk-text-truncate" style="font-size: 12px;">
+                                        {{'0976' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'0102' | translate}}
+                                    </th>
+                                    <th class="uk-width-2-10" style="font-size: 12px;">
+                                        {{'1815' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        {{'3315' | translate}}
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        G.S
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                        RH
+                                    </th>
+                                    <th class="uk-width-1-10" style="font-size: 12px;">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody vs-repeat="{size: 50}" class="tbodyscrollable contentscroll"
+                                style="margin-top: 0px;height: calc(100% - 36px);width: 100% !important;font-size: 11px;">
+                                <tr ng-repeat="Order in vm.ListOrder | filter:vm.searchreception" class="uk-grid"
+                                    style="margin-left: 0px;margin-top: 0px;">
+                                    <td class="uk-width-1-10">{{Order.documentType.abbr}}.{{Order.patientId}}</td>
+                                    <td class="uk-width-1-10">{{Order.lastName | uppercase}} {{Order.surName |
+                                        uppercase}} {{Order.name1 | uppercase}}
+                                        {{Order.name2 | uppercase}}</td>
+                                    <td class="uk-width-1-10">{{Order.birthday | date:'dd/MM/yyyy' }}</td>
+                                    <td class="uk-width-1-10">{{Order.age | uppercase}}</td>
+                                    <td class="uk-width-2-10" style="padding: 8px 0px;">
+                                        {{Order.listTransplant[0].detailRemission.institution.name | uppercase}}
+                                    </td>
+                                    <td class="uk-width-1-10" style="padding: 8px 0px;">
+                                        <ul>
+                                            <li ng-repeat="organ in Order.listTransplant">
+                                                {{organ.nameorgan | uppercase}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="uk-width-1-10" style="padding: 8px 0px;">
+                                        {{Order.bloodgroup | uppercase}}
+                                    </td>
+                                    <td class="uk-width-1-10" style="padding: 8px 0px;">
+                                        {{Order.rh | uppercase}}
+                                    </td>
+                                    <td class="uk-width-1-10">
+                                        <div class="uk-float-right">
+                                            <div ng-if="vm.typefilter == 0"
+                                                style="margin-top: 2px;margin-left: 17px;float: left;"
+                                                data-uk-tooltip="{pos:'top'}" title="¿Reingreso?">
+                                                <md-checkbox class="md-primary" ng-model="Order.reentry">
+                                                </md-checkbox>
+                                            </div>
+                                            <div style="display: inline-block; margin-right: 5px;">
+                                                <img ng-if="vm.typefilter == 0"
+                                                    class="md-list-addon-icon material-icons md-22"
+                                                    ng-click="vm.assingpartaker(Order.id,1,Order.reentry)"
+                                                    ng-src="images/transplants/selection.png"
+                                                    data-uk-tooltip="{pos:'top'}" title="{{'3390' | translate}}" />
+
+                                                <img ng-if="vm.typefilter == 1"
+                                                    class="md-list-addon-icon material-icons md-22"
+                                                    ng-click="vm.assingpartaker(Order.id,0,Order.reentry)"
+                                                    ng-src="images/transplants/delete.png" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'3391' | translate}}" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

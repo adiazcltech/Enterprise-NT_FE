@@ -1,0 +1,602 @@
+<loadpage view="commentorder.loading"></loadpage>
+<div class="md-card toolbar-fixed" style="height: 100%;" ng-if="commentorder.size===3">
+    <div class="md-card-toolbar">
+        <div class="md-card-toolbar-actions">
+            <i ng-if="commentorder.state" class="md-icon material-icons md-color-light-green-600"
+                data-uk-tooltip="{pos:'top'}" title="{{'0005'| translate}}" style="font-weight: bold;"
+                ng-click="commentorder.openModalAdd()">&#xE145;</i>
+            <i class="md-icon material-icons md-color-purple-A200 " ng-click="commentorder.audit()"
+                data-uk-tooltip="{pos:'top'}" title="{{'0046'| translate}}"
+                style="margin-left: -2px !important;">&#xE068;</i>
+            <i class="md-icon material-icons md-color-light-blue-500" data-uk-tooltip="{pos:'top'}"
+                title="{{'0604'| translate}}" ng-click="commentorder.allcomment()"
+                ng-if="!(commentorder.notes.length === 0 && !commentorder.state)"
+                style="margin-left: -2px !important; margin-right: -4px ">&#xE3C2;</i>
+        </div>
+        <h3 class="md-card-toolbar-heading-text">
+            <strong>{{commentorder.label}} ({{commentorder.notes.length}})</strong>
+        </h3>
+    </div>
+    <div class="md-card-content" style="height: calc(100% - 48px);padding: 0px;">
+        <div class="md-card toolbar-fixed" style="margin-top: 2px;height: 99%;" ng-if="commentorder.notes.length !== 0">
+            <div class="md-card-toolbar md-bg-grey-200" style="padding: 0 16px 0 0px">
+                <div class="md-card-toolbar-actions">
+                    <i class="md-icon material-icons md-color-orange-500"
+                        ng-if="commentorder.notes[0].permissionEdit && commentorder.state" data-uk-tooltip="{pos:'top'}"
+                        title="{{'0006'| translate}}"
+                        ng-click="commentorder.editcomment(commentorder.notes[0])">&#xE254;</i>
+                    <i class="material-icons md-color-grey-700" ng-if="!commentorder.notes[0].permissionEdit"
+                        data-uk-tooltip="{pos:'top'}" title="{{'0647'| translate}}">&#xE88D;</i>
+                    <i class="material-icons md-color-deep-purple-600" ng-if="commentorder.notes[0].print"
+                        data-uk-tooltip="{pos:'top'}" title="{{'1476'| translate}}">&#xE8AD;</i>
+                    <i class="md-icon material-icons md-color-red-500 "
+                        ng-if="commentorder.notes[0].permissionEdit && commentorder.state" data-uk-tooltip="{pos:'top'}"
+                        title="{{'0588'| translate}}" ng-click="commentorder.deletcomment(commentorder.notes[0])"
+                        style="font-weight: normal;">&#xE872;</i>
+                </div>
+            </div>
+            <div class=" md-list-content">
+                <span class="md-list-heading">{{commentorder.notes[0].user.userName}}</span>
+                <span class="uk-text-small uk-text-muted">
+                    {{ commentorder.notes[0].lastTransaction | date: commentorder.formatDate | lowercase}}
+                </span>
+            </div>
+        </div>
+        <div class="md-card-content contentscroll" style="height: calc(100% - 81px);overflow-y:auto">
+            <p ng-bind-html="commentorder.notes[0].commentArray.content | trust" ></p>
+            <ul class="uk-list" ng-if="commentorder.notes[0].commentArray.checklist">
+                <li class="uk-margin-small-top" ng-repeat="checkbox in commentorder.notes[0].commentArray.checklist">
+                    <input type="checkbox" icheck ng-model="checkbox.checked" ng-disabled="true" />
+                    <label class="inline-label" ng-disabled="true">{{ checkbox.title }}</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="md-card toolbar-fixed" style="height: 100%;" ng-if="commentorder.size===2">
+    <div class="md-card-toolbar" style="padding: 0 10px;height: 37px;">
+        <div class="md-card-toolbar-actions uk-flex uk-flex-middle" style="padding-top: 5px;">
+            <i class="md-icon material-icons md-color-purple-A200 " ng-click="commentorder.audit()"
+                data-uk-tooltip="{pos:'top'}" title="{{'0046'| translate}}"
+                style="margin-left: -2px !important;font-size: 22px;width: 30px">&#xE068;</i>
+            <i class="md-icon material-icons md-color-light-blue-500" data-uk-tooltip="{pos:'top'}"
+                title="{{'0604'| translate}}" ng-click="commentorder.allcomment()"
+                ng-if="!(commentorder.notes.length === 0 && !commentorder.state)"
+                style="margin-left: -2px !important;margin-right: -4px;font-size: 22px;width: 30px">&#xE3C2;</i>
+        </div>
+        <h3 class="md-card-toolbar-heading-text uk-flex uk-flex-middle" style="height: 35px;font-size: 12px">
+            <strong>{{commentorder.label}} ({{commentorder.notes.length}})</strong>
+        </h3>
+        <i class="material-icons md-color-deep-purple-600" ng-if="commentorder.notes[0].print"
+            data-uk-tooltip="{pos:'top'}" title="{{'1476'| translate}}" style="    font-weight: normal;
+        font-size: 20px;
+        width: 20px;
+        height: 25px;
+        margin-top: 11px;
+        margin-left: 3px;">&#xE8AD;</i>
+    </div>
+    <div class="md-card-content" style="height: calc(100% - 40px);padding: 0px;">
+        <div class="md-card toolbar-fixed" style="margin-top: 0px;height: 100%;"
+            ng-if="commentorder.notes.length !== 0">
+            <div class="md-card-toolbar md-bg-grey-200" style="padding:0px;height: 30px;">
+                <ul class="md-list" style="width: 83%;">
+                    <li style="padding: 4px 10px;">
+                        <div class=" md-list-content uk-flex uk-flex--middle uk-text-truncate">
+                            <span class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small"
+                                style="font-size: 11px !important;margin-top: 5px!important;"><b>{{commentorder.notes[0].user.userName}}</b>
+                                -
+                                {{ commentorder.notes[0].lastTransaction | date: commentorder.formatDate | lowercase}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="md-card-content contentscroll"
+                style="height: calc(100% - 41px);overflow-y: auto;padding: 5px 0px 0px 5px;">
+                <p ng-bind-html="commentorder.notes[0].commentArray.content | trust"></p>
+                <ul class="uk-list" ng-if="commentorder.notes[0].commentArray.checklist">
+                    <li class="uk-margin-small-top"
+                        ng-repeat="checkbox in commentorder.notes[0].commentArray.checklist">
+                        <input type="checkbox" icheck ng-model="checkbox.checked" ng-disabled="true" />
+                        <label class="inline-label" ng-disabled="true">{{ checkbox.title }}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="md-card toolbar-fixed" style="height: 100%;" ng-if="commentorder.size===1">
+    <div class="md-card-toolbar" style="padding: 0 10px;height: 20px;">
+        <div class="md-card-toolbar-actions uk-flex uk-flex-middle" style="padding-top: 0px;height: 19px;">
+            <i ng-if="commentorder.pru===2 || commentorder.pru===6 || commentorder.pru===3 && !commentorder.notes[0].permissionEdit"
+                class="md-icon material-icons md-color-light-green-600" data-uk-tooltip="{pos:'top'}"
+                title="{{'0005'| translate}}" style="margin-right: -4px;
+            font-size: 22px;            
+            margin-left: -2px !important;
+            margin-left: -2px !important;
+            font-size: 16px;            
+            line-height: 26px !important;
+            height: 25px !important;
+            width: 25px !important;" ng-click="commentorder.openModalAdd()">&#xE145;</i>
+            <i class="md-icon material-icons md-color-purple-A200 " ng-click="commentorder.audit()"
+                data-uk-tooltip="{pos:'top'}" title="{{'0046'| translate}}" style="margin-right: -4px;
+                font-size: 22px;
+                width: 30px;
+                margin-left: -2px !important;
+                margin-left: -2px !important;
+                font-size: 16px;
+                width: 30px;
+                line-height: 26px !important;
+                height: 25px !important;
+                width: 25px !important;"
+                ng-if="commentorder.pru===2 || commentorder.viewbutton || commentorder.pru===6 || commentorder.pru===3">&#xE068;</i>
+            <i class="md-icon material-icons md-color-light-blue-500" data-uk-tooltip="{pos:'top'}"
+                title="{{'0604'| translate}}" ng-click="commentorder.allcomment()"
+                ng-if="commentorder.pru===2 || commentorder.viewbutton || commentorder.notes.length > 1 && commentorder.pru===6 || commentorder.notes.length > 1 &&commentorder.pru===3"
+                style="margin-right: -4px;
+                font-size: 22px;
+                width: 30px;
+                margin-left: -2px !important;
+                margin-left: -2px !important;
+                font-size: 16px;
+                width: 30px;
+                line-height: 26px !important;
+                height: 25px !important;
+                width: 25px !important;">&#xE3C2;</i>
+        </div>
+        <h3 class="md-card-toolbar-heading-text uk-flex uk-flex-middle" style="height: 21px;font-size: 11px">
+            <strong>{{commentorder.label}} ({{commentorder.notes.length}})</strong>
+        </h3>
+        <i class="material-icons md-color-grey-700" ng-if="commentorder.state && !commentorder.notes[0].permissionEdit"
+            style="margin-right: 0px;
+            margin-left: 6px !important;
+            font-size: 16px;
+            line-height: 22px !important;
+            height: 21px !important;
+            width: 25px !important;" data-uk-tooltip="{pos:'top'}" title="No tiene permisos">&#xE88D;</i>
+        <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="No se muestra en el informe final" style="margin-right: 0px;
+            margin-left: 6px !important;
+            font-size: 16px;
+            line-height: 22px !important;
+            height: 21px !important;
+            width: 25px !important;" ng-click="commentorder.notes[0].print=true;commentorder.confirmationprint()"
+            ng-if="commentorder.state && !commentorder.notes[0].print && commentorder.notes[0].permissionEdit">&#xE8AD;</i>
+        <i class="material-icons md-color-deep-purple-600" data-uk-tooltip="{pos:'top'}" title="{{'1476'| translate}}"
+            style="margin-right: 0px;
+             margin-left: 6px !important;
+             font-size: 16px;
+             line-height: 22px !important;
+             height: 21px !important;
+             width: 25px !important;" ng-click="commentorder.notes[0].print=false;commentorder.confirmationprint()"
+            ng-if="commentorder.state && commentorder.notes[0].print && commentorder.notes[0].permissionEdit">&#xE8AD;</i>
+        <i class="material-icons md-color-deep-purple-600" data-uk-tooltip="{pos:'top'}" title="{{'1476'| translate}}"
+            style="margin-right: 0px;
+             margin-left: 6px !important;
+             font-size: 16px;
+             line-height: 22px !important;
+             height: 21px !important;
+             width: 25px !important;" ng-if="commentorder.pru===5 && commentorder.notes[0].print">&#xE8AD;</i>
+    </div>
+    <div class="md-card-content" style="height: calc(100% - 21px);padding: 0px;">
+       <div style="height: 100%;width: 100%;overflow-y: auto"
+            ng-if="commentorder.state && commentorder.notes[0].permissionEdit && commentorder.pru!==6 && commentorder.viewcontrolHTML"
+            ui-tinymce="commentorder.tinymceOptions" ng-model="commentorder.notes[0].commentArray.content"
+            ng-blur="commentorder.saveconfirmation()"
+            class="contentscroll">
+        </div> 
+
+         <textarea class="form-control contentscroll" ng-if="commentorder.state && commentorder.notes[0].permissionEdit && commentorder.pru!==6 && !commentorder.viewcontrolHTML" ng-model="commentorder.notes[0].commentArray.content" style="height: calc(100% - 7px);
+        width: calc(100% - 5px);overflow-y: auto;border-color: #d5e1f2;border-radius: 10px;" class="contentscroll"
+          ng-blur="commentorder.saveconfirmation()"
+        ></textarea> 
+
+
+        <div style="height: 100%;width: 100%;overflow-y: auto;background-color: rgb(235, 235, 228)"
+            ng-if="!commentorder.state  || !commentorder.notes[0].permissionEdit" 
+            ng-bind-html="commentorder.notes[0].commentArray.content | trust" class="contentscroll">
+        </div>
+
+
+      
+
+       <div style="height: 100%;width: 100%;overflow-y: auto"
+            ng-if="commentorder.pru===6 && commentorder.notes[0].permissionEdit && commentorder.viewcontrolHTML"
+            ui-tinymce="commentorder.tinymceOptions" ng-model="commentorder.notes[0].commentArray.content"
+            ng-blur="commentorder.confirmationcomment()" class="contentscroll">
+        </div>  
+
+       
+            <textarea class="form-control contentscroll" ng-if="commentorder.pru===6 && commentorder.notes[0].permissionEdit && !commentorder.viewcontrolHTML" ng-model="commentorder.notes[0].commentArray.content" style="height: calc(100% - 7px);
+            width: calc(100% - 5px);overflow-y: auto;border-color: #d5e1f2;border-radius: 10px;"
+              ng-blur="commentorder.confirmationcomment()" class="contentscroll"
+             ></textarea> 
+
+
+      </div>
+</div>
+<!-- Ventana modal para ver todas las notas -->
+<div id="{{'modal_fullcomment' + commentorder.idcontrol }}" class="uk-modal uk-modal-card-fullscreen">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-blue-700">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span ng-if="commentorder.state" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentorder.openModalAdd()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0005'| translate}}">&#xE145;</span>
+                        <span ng-if="commentorder.state" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentorder.audit()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0046'| translate}}">&#xE068;</span>
+                        <span class="md-icon material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                            ng-click="commentorder.closedallcomment()" title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="line-height: 32px; font-size: 28px">&#xE3C2;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{commentorder.label}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: 89%;overflow: auto;padding-top: 0px;">
+                <div class="uk-grid uk-grid-width-large-1-3 uk-grid-width-medium-1-2 uk-grid-medium">
+                    <div ng-repeat="notes in commentorder.notes">
+                        <div class="md-card" style="margin-top: 12px;" ng-if="notes.commentArray.content!==''">
+                            <div class="md-card-toolbar md-bg-grey-200" style="padding: 0 16px 0 10px">
+                                <div class="md-card-toolbar-actions">
+                                    <i class="md-icon material-icons md-color-orange-500"
+                                        ng-if="notes.permissionEdit && commentorder.state "
+                                        data-uk-tooltip="{pos:'top'}" title="{{'0006'| translate}}"
+                                        ng-click="commentorder.editcomment(notes)">&#xE254;</i>
+                                    <i class="material-icons md-color-grey-700" ng-if="!notes.permissionEdit"
+                                        data-uk-tooltip="{pos:'top'}" title="No tiene permisos">&#xE88D;</i>
+                                    <i class="material-icons md-color-deep-purple-600" ng-if="notes.print"
+                                        data-uk-tooltip="{pos:'top'}" title="se imprime en informe final">&#xE8AD;</i>
+                                    <i class="md-icon material-icons md-color-red-500 "
+                                        ng-if="notes.permissionEdit && commentorder.state" data-uk-tooltip="{pos:'top'}"
+                                        title="Eliminar" ng-click="commentorder.deletcomment(notes)"
+                                        style="font-weight: normal;">&#xE872;</i>
+                                </div>
+                                <ul class="md-list" style="width: 80%;">
+                                    <li>
+                                        <div class=" md-list-content">
+                                            <span class="md-list-heading"
+                                                style="font-weight: 700;">{{notes.user.userName}}</span>
+                                            <span class="uk-text-small uk-text-muted">
+                                                {{ notes.lastTransaction | date: commentorder.formatDate | lowercase}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="md-card-content" style="height: 110px;overflow: auto;">
+                                <p ng-bind-html="notes.commentArray.content | trust"></p>
+                                <!-- <ul class="uk-list" ng-if="notes.commentArray.checklist">
+                                    <li class="uk-margin-small-top"
+                                        ng-repeat="checkbox in notes.commentArray.checklist">
+                                        <input type="checkbox" icheck ng-model="checkbox.checked" ng-disabled="true" />
+                                        <label class="inline-label" ng-disabled="true">{{ checkbox.title }}</label>
+                                    </li>
+                                </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para editar notas -->
+<div id="{{'modalnotes' + commentorder.idcontrol }}" class="uk-modal uk-modal-card-fullscreen" bg-close="false">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-orange-500">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span id="cancel4" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentorder.closedmodal()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" ng-if="commentorder.action == 1"
+                        style="line-height: 32px; font-size: 28px">&#xE145;</i>
+                    <i class="material-icons md-color-grey-50" ng-if="commentorder.action == 2"
+                        style="line-height: 32px; font-size: 28px">&#xE254;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{commentorder.label}} - {{'0006'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: calc(100% - 10px);">
+                <form action="" class="form md-card md-card-hover"
+                    style="height: calc(100% - 115px) ;overflow: hidden; ; padding: 20px">
+                    <div class="md-card-toolbar" style="height: 46px;">
+                        <div style="float: left; width: auto; text-align: left; margin-right: 5px">
+                            <span
+                                class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small"><b>{{commentorder.user.userName}}</b>
+                                - {{commentorder.time | date: commentorder.formatDate | lowercase}}</span>
+
+                        </div>
+                        <div class="md-card-toolbar-heading-text image-check" style="float: right;">
+                            <span class="icheck-inline">
+                                <md-checkbox ng-model="commentorder.additem.print" class="md-primary">
+                                </md-checkbox>
+                                <label class="inline-label">{{'1476'| translate}}</label>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="md-card-content"
+                        style="height: calc(100% - 120px); overflow-y: hidden; overflow-x: hidden; width: 98%; padding-top: 0px;">
+                        <div class="uk-width-1-1" style="margin-top: 15px;">
+                            <textarea ng-required="true" name="name" id="name" ui-tinymce="commentorder.customMenu"
+                                ng-model="commentorder.additem.commentArray.content"></textarea>
+                        </div>
+                        <span ng-if="cardcomment.commentrequired" class="help-block">{{'0060' | translate}}</span>
+                        <!-- <div class="uk-form-row " id="notes_checklist2"
+                            ng-class="{'uk-hidden': ccommentmicrobiology.additem.commentArray.checklist.length == 0}">
+                            <ul class="uk-list uk-list-hover uk-sortable-single" data-uk-sortable
+                                style="max-height: 156px; overflow-y: auto ">
+                                <li class="uk-margin-small-top uk-clearfix"
+                                    ng-repeat="checkbox in commentorder.additem.commentArray.checklist"
+                                    ng-if="checkbox.hidden">
+                                    <a href="#" class="uk-float-right remove_checklist_item"
+                                        ng-click="commentorder.closechecklist($index)"><i
+                                            class="material-icons">&#xE5CD;</i></a>
+                                    <div class="uk-nbfc">
+                                        <input type="checkbox" name="checkboxes" icheck ng-model="checkbox.checked" />
+                                        <label class="inline-label">{{ checkbox.title }}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="uk-input-group">
+                                <input id="textaddcheck2" type="text" class="md-input"
+                                    placeholder="{{'0385'| translate}}" ng-model="commentorder.labelheck"
+                                    ng-keypress="commentorder.checkboxAddKey($event)"
+                                    ng-class="{'md-input-danger':commentorder.required && commentorder.labelheck ==''}"
+                                    style="font-size: 13px !important;" />
+                                <span id="requiredcheck2" ng-if="commentorder.required && commentorder.labelheck ==''"
+                                    class="help-block">{{'0060' | translate}}</span>
+                                <span class="uk-input-group-addon">
+                                    <a id="checkbox_add2" href="#" ng-click="commentorder.checkboxAddClick($event)"><i
+                                            class="material-icons md-24">&#xE145;</i></a>
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="uk-modal-footer" style="margin-top: 5px; padding: 15px">
+                        <div class="uk-form-row uk-clearfix">
+                            <!--  <div class="uk-float-left">
+                                <a href="#" id="addchecklist2" class="uk-margin-left"
+                                    data-uk-toggle="{target:'#notes_checklist2'}"
+                                    ng-click="commentorder.additem.commentArray.checklist=[];commentorder.labelheck='';commentorder.required=false"
+                                    data-uk-tooltip="{pos:'top'}" title="{{'0385'| translate}}"><i
+                                        class="material-icons md-24">&#xE065;</i></a>
+                            </div> -->
+                            <div class="md-fab-wrapper md-fab-in-card" style="top: calc(100% - 58px)">
+                                <button type="button" class="md-fab md-fab-small md-fab md-bg-orange-500"
+                                    ng-click="commentorder.saveComment()"
+                                    ng-disabled="commentorder.additem.commentArray.checklist.length===0 && commentorder.additem.commentArray.content===''"
+                                    ng-class="{'md-bg-blue-grey-100': commentorder.additem.commentArray.checklist.length===0 && commentorder.additem.commentArray.content===''}">
+                                    <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                        title=" {{'0007' | translate}} ">&#xE161;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para adicionar notas -->
+<div id="{{'modalnotesadd' + commentorder.idcontrol }}" class="uk-modal uk-modal-card-fullscreen" bg-close="false"
+    aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-light-green-600">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span id="cancel4" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentorder.closedmodal()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" ng-if="commentorder.action == 1"
+                        style="line-height: 32px; font-size: 28px">&#xE145;</i>
+                    <i class="material-icons md-color-grey-50" ng-if="commentorder.action == 2"
+                        style="line-height: 32px; font-size: 28px">&#xE254;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{commentorder.label}} - {{'0005'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="height: calc(100% - 10px);">
+                <form action="" class="form md-card md-card-hover"
+                    style="height: calc(100% - 115px) ;overflow: hidden; ; padding: 20px">
+                    <div class="md-card-toolbar" style="height: 46px;">
+                        <div style="float: left; width: auto; text-align: left; margin-right: 5px">
+                            <span
+                                class="uk-margin-top uk-text-italic uk-text-muted uk-display-block uk-text-small"><b>{{commentorder.user.userName}}</b>
+                                - {{commentorder.time | date: commentorder.formatDate | lowercase}}</span>
+                        </div>
+                        <div class="md-card-toolbar-heading-text image-check" style="float: right;">
+                            <span class="icheck-inline">
+                                <md-checkbox ng-model="commentorder.additem.print" class="md-primary">
+                                </md-checkbox>
+                                <label class="inline-label">{{'1476'| translate}}</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="md-card-content"
+                        style="height: calc(100% - 120px); overflow-y: hidden; overflow-x: hidden; width: 98%; padding-top: 0px;">
+                        <div class="uk-width-1-1" style="margin-top: 15px;">
+                            <textarea ng-required="true" name="name" id="name" ui-tinymce="commentorder.customMenu"
+                                ng-model="commentorder.additem.commentArray.content"></textarea>
+                        </div>
+                        <span ng-if="cardcomment.commentrequired" class="help-block">{{'0060' | translate}}</span>
+                        <!-- <div class="uk-form-row " id="notes_checklist2"
+                            ng-class="{'uk-hidden': ccommentmicrobiology.additem.commentArray.checklist.length == 0}">
+                            <ul class="uk-list uk-list-hover uk-sortable-single" data-uk-sortable
+                                style="max-height: 156px; overflow-y: auto ">
+                                <li class="uk-margin-small-top uk-clearfix"
+                                    ng-repeat="checkbox in commentorder.additem.commentArray.checklist"
+                                    ng-if="checkbox.hidden">
+                                    <a href="#" class="uk-float-right remove_checklist_item"
+                                        ng-click="commentorder.closechecklist($index)"><i
+                                            class="material-icons">&#xE5CD;</i></a>
+                                    <div class="uk-nbfc">
+                                        <input type="checkbox" name="checkboxes" icheck ng-model="checkbox.checked" />
+                                        <label class="inline-label">{{ checkbox.title }}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="uk-input-group">
+                                <input id="textaddcheck2" type="text" class="md-input"
+                                    placeholder="{{'0385'| translate}}" ng-model="commentorder.labelheck"
+                                    ng-keypress="commentorder.checkboxAddKey($event)"
+                                    ng-class="{'md-input-danger':commentorder.required && commentorder.labelheck ==''}"
+                                    style="font-size: 13px !important;" />
+                                <span id="requiredcheck2" ng-if="commentorder.required && commentorder.labelheck ==''"
+                                    class="help-block">{{'0060' | translate}}</span>
+                                <span class="uk-input-group-addon">
+                                    <a id="checkbox_add2" href="#" ng-click="commentorder.checkboxAddClick($event)"><i
+                                            class="material-icons md-24">&#xE145;</i></a>
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="uk-modal-footer" style="margin-top: 5px; padding: 15px">
+                        <div class="uk-form-row uk-clearfix">
+                            <!--  <div class="uk-float-left">
+                                <a href="#" id="addchecklist2" class="uk-margin-left"
+                                    data-uk-toggle="{target:'#notes_checklist2'}"
+                                    ng-click="commentorder.additem.commentArray.checklist=[];commentorder.labelheck='';commentorder.required=false"
+                                    data-uk-tooltip="{pos:'top'}" title="{{'0385'| translate}}"><i
+                                        class="material-icons md-24">&#xE065;</i></a>
+                            </div> -->
+                            <div class="md-fab-wrapper md-fab-in-card" style="top: calc(100% - 58px)">
+                                <button type="button" class="md-fab md-fab-small md-fab md-bg-light-green-600"
+                                    ng-click="commentorder.saveComment()"
+                                    ng-disabled="commentorder.additem.commentArray.checklist.length===0 && commentorder.additem.commentArray.content===''"
+                                    ng-class="{'md-bg-blue-grey-100': commentorder.additem.commentArray.checklist.length===0 && commentorder.additem.commentArray.content===''}">
+                                    <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                        title=" {{'0007' | translate}} ">&#xE161;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ventana modal para ver la trazabilidad de todas las notas -->
+<div class="uk-modal uk-modal-card-fullscreen" id="{{'modaltrace' + commentorder.idcontrol }}" bg-close="false">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-purple-A200">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <span id="closetrace" class="md-icon material-icons md-color-grey-50"
+                            ng-click="commentorder.closedaudit()" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}">&#xE5CD;</span>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-grey-50" style="line-height: 32px; font-size: 28px">&#xE068;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+                    {{commentorder.label}} - {{'0046'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content" style="padding: 16px 40px 16px 70px; background-color: #ececec;">
+                <div id="notesTrace" class="uk-grid uk-grid-width-large-1-1 uk-grid-medium uk-container-center"
+                    style="margin-top: 4px">
+                    <h3 class="heading_a uk-margin-bottom"
+                        style="padding: 0px !important; margin-bottom: 0px !important; margin-top: 5px; margin-left: -20px">
+                        {{'0609'| translate}}
+                    </h3>
+                    <hr style="border-width: 3px;  margin-left: -20px; width: calc(100% + 20px)">
+                    <div class="timeline">
+                        <div class="timeline_item" ng-repeat="noteTrace in commentorder.notesTracking track by $index">
+                            <div class="timeline_icon" ng-class="{ 'md-bg-light-green-A700': noteTrace.state == 1,
+                                                'md-bg-orange-A700': noteTrace.state == 2 ,
+                                                'md-bg-red-A700': noteTrace.state == 3 }">
+                                <i class="material-icons" style="font-weight: bold;"
+                                    ng-if="noteTrace.state == 1">&#xE145;</i>
+                                <i class="material-icons" style="font-weight: bold;"
+                                    ng-if="noteTrace.state == 2">&#xE254;</i>
+                                <i class="material-icons" style="font-weight: bold;"
+                                    ng-if="noteTrace.state == 3">&#xE14C;</i>
+                            </div>
+                            <div class="timeline_date">
+                                {{ noteTrace.date }}
+                                <span>{{ noteTrace.time }}</span>
+                            </div>
+                            <div class="timeline_content">
+                                {{noteTrace.title}}: {{noteTrace.id}}
+                                <div class="md-card toolbar-fixed">
+                                    <div class="md-card-toolbar"
+                                        ng-class="{ 'md-bg-green-100': noteTrace.state == 1,
+                                        'md-bg-orange-100': noteTrace.state == 2 ,'md-bg-red-100': noteTrace.state == 3 }"
+                                        style="padding: 0 16px 0 0px">
+                                        <div class="md-card-toolbar-actions">
+                                            <i class="material-icons md-color-deep-purple-600" ng-if="noteTrace.print"
+                                                data-uk-tooltip="{pos:'top'}" title="{{'1476'| translate}}">&#xE8AD;</i>
+                                        </div>
+                                        <ul class="md-list md-list-addon" style="height: 100%;">
+                                            <li style="height: 100%;">
+                                                <div class="md-list-addon-element">
+                                                    <img class="md-user-image md-list-addon-avatar"
+                                                        ng-src="{{noteTrace.user.photo}}" alt="" />
+                                                </div>
+                                                <div class=" md-list-content uk-flex uk-flex-middle"
+                                                    style="height: 100%;font-weight: 700;">
+                                                    {{noteTrace.user.userName}}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="md-card-content">
+                                        <p ng-bind-html="noteTrace.commentArray.content | trust"></p>
+                                        <ul class="uk-list" ng-if="noteTrace.commentArray.checklist">
+                                            <li class="uk-margin-small-top"
+                                                ng-repeat="checkbox in noteTrace.commentArray.checklist">
+                                                <input type="checkbox" icheck ng-model="checkbox.checked"
+                                                    ng-disabled="true" />
+                                                <label class="inline-label"
+                                                    ng-disabled="true">{{ checkbox.title }}</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="{{'confirmation' + commentorder.idcontrol }}" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container" style="margin-top: 0px">
+            <div ng- class="uk-overflow-container" style="margin-top: 0px">
+                <div style="width: 80px; float: left;">
+                    <img class="img-responsive" src="images/iconinfo.png">
+                </div>
+                <div class="uk-text-center" style="margin-top: 26px">
+                    <h4>¿Esta seguro de modificar el comentario de la orden?</h4>
+                </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+                ng-click="commentorder.saveconfirmation()">{{'0246' | translate}}</button>
+            <button type="button" class="md-btn md-btn-default"
+                ng-click="commentorder.closedconfirmation()">{{'0008' | translate}}</button>
+        </div>
+    </div>
+</div>

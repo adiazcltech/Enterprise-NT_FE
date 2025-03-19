@@ -1,0 +1,293 @@
+<style type="text/css">
+    .modal-above {
+        z-index: 1303;
+    }
+
+    .div-conttable {
+        margin-top: 0px;
+        overflow: auto;
+        height: calc(100% - 55px);
+        width: 100% !important;
+    }
+</style>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid fullheight">
+            <div class="uk-width-1-1" style="height: 17%">
+                <div class="uk-grid">
+                    <div class="uk-width-4-10 fullheight">
+                        <div class="md-card  md-card-hover fullheight">
+                            <div class="md-card-content fullheight" style=" height: 59px;">
+                                <div class="uk-grid">
+                                    <div class="uk-width-5-10">
+                                        <label style="font-size: 12px;color: #727272;left: 4px; margin-bottom: 3px">{{'0075' | translate}}</label>
+                                        <br>
+                                        <input kendo-date-picker k-ng-model="vm.startDate" style="width: 100%;margin-top: -49px;"
+                                            k-format="'{{vm.formatDate}}'" k-max="vm.max" k-rebind="vm.max"
+                                            k-min="vm.tomorrow" k-on-change="vm.startChange()" class="md-input label-fixed" 
+                                            autocomplete="off" />
+                                    </div>
+                                    <div class="uk-width-5-10">
+                                        <label style="font-size: 12px;color: #727272;left: 4px; margin-bottom: 3px">{{'0076' | translate}}</label>
+                                        <br>  
+                                        <input kendo-date-picker k-ng-model="vm.endDate" style="width: 100%;margin-top: -49px;"
+                                            k-format="'{{vm.formatDate}}'" k-max="vm.maxend" k-min="vm.min"
+                                            k-rebind="vm.min" k-on-change="vm.endChange()" class="md-input label-fixed" 
+                                            autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-4-10 fullheight" style="padding-left: 10px;">
+                        <div class="md-card md-card-hover fullheight">
+                            <div class="md-card-content fullheight" style="padding: 19.5px;">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">
+                                        <img ng-src="images/search.png" />
+                                    </span>
+                                    <div class="md-input-wrapper md-input-filled">
+                                        <label>{{'0154' | translate}}</label>
+                                        <input type="text" name="search" id="search" md-input label-fixed
+                                            class="md-input  label-fixed" ng-model="vm.search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-2-10 fullheight" style="padding-left: 10px;">
+                        <div class="md-card md-card-hover fullheight">
+                            <div class="md-card-content fullheight" style="padding: 19.5px;">
+                                <ul class="md-list md-list-addon" style="margin-left: 16px;height: 51px;">
+                                    <li style="margin-left: 0px">
+                                        <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-10px">
+                                            <img class="md-list-addon-icon material-icons md-26"
+                                                ng-src="images/order/totalorder1.png">
+                                        </div>
+                                        <div class="md-list-content" style="padding-left: 30px;">
+                                            <span class="uk-text-small uk-text-muted">{{'0694' | translate}}</span>
+                                            <span class="md-list-heading uk-text-small"
+                                                style="font-size: 18px !important;"> {{vm.filtered.length}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" style="height: 83%">
+                <div class="md-card  md-card-hover fullheight">
+                    <div class="md-card-content fullheight" style="padding: 0px;">
+                        <div class="uk-grid uk-flex uk-flex-center uk-flex-middle div-head">
+                            <div class="uk-width-2-10" style="width: 12%;padding-left: 15px;">
+                                <a
+                                    ng-click="$event.stopPropagation(); vm.sortType = 'date'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                    <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                    <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                    <span ng-show="vm.sortType == 'date' && !sortReverse"></span>
+                                    <span ng-show="vm.sortType == 'date' && sortReverse"></span>
+                                </a> {{'0325' | translate}}
+                            </div>
+                            <div class="uk-width-3-10">
+                                <a
+                                    ng-click="$event.stopPropagation(); vm.sortType = 'url'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                    <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                    <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                    <span ng-show="vm.sortType == 'url' && !sortReverse"></span>
+                                    <span ng-show="vm.sortType == 'url' && sortReverse"></span>
+                                </a> URL
+                            </div>
+                            <div class="uk-width-1-10">
+                                <a
+                                    ng-click="$event.stopPropagation(); vm.sortType = 'code'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                    <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                    <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                    <span ng-show="vm.sortType == 'code' && !sortReverse"></span>
+                                    <span ng-show="vm.sortType == 'code' && sortReverse"></span>
+                                </a>
+                                {{'0680' | translate}}
+                            </div>
+                            <div class="uk-width-4-10 " style="width: 48%;">
+                                Error
+                            </div>
+                        </div>
+                        <div vs-repeat="{size: 50}" class="div-conttable" data-scroll-to-top='vm.filtered.length'>
+                            <div ng-repeat="exception in vm.filtered= (vm.data | filter: vm.search |  orderBy:vm.sortType:sortReverse)"
+                                data-uk-modal="{target:'#viewerror', modal: false}" ng-click="vm.open(exception)"
+                                class="uk-grid uk-flex uk-flex-center uk-flex-middle div-table"
+                                ng-class="{'md-bg-blue-50': exception.id == vm.Detailexception.id}">
+                                <div class="uk-width-2-10" style="width: 12%;padding-left: 15px;">
+                                    {{exception.printdate=(exception.date  | date : 'dd/MM/yyyy h:mma')}}</div>
+                                <div class="uk-width-3-10 uk-text-truncate">
+                                    {{exception.url}}
+                                </div>
+                                <div class="uk-width-1-10">
+                                    {{exception.nametype = exception.code === 0 ? vm.controle :exception.code === 1? vm.BD : vm.aplicate}}
+                                </div>
+                                <div class="uk-width-4-10 uk-text-truncate" style="width: 48%">
+                                    {{exception.message ==='' ? exception.detail.substring(0,80): exception.message.substring(0,80)}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modalsendemail" bg-close="false">
+    <loadpage view="vm.loading"></loadpage>
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">
+                <i class="material-icons md-color-light-blue-50">&#xE158;</i>
+                {{'0687' | translate}}
+            </h3>
+        </div>
+        <div class="uk-modal-body">
+            <form name="Form">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-form-row uk-width-1-1">
+                        <div class="uk-input-group uk-width-1-1 ">
+                            <label> {{'0688' | translate}}</label>
+                            <input type="email" name="uemail" id="uemail" class="md-input label-fixed"
+                                ng-model="vm.Detail.email" maxlength="30"
+                                ng-class="{'md-input-danger':Form.uemail.$invalid && Form.uemail.$touched}"
+                                ng-required="true" ng-disabled="vm.isDisabled" md-input />
+                            <span class="uk-form-help-block uk-text-danger span-help-block"
+                                ng-show="Form.uemail.$error.required && Form.uemail.$invalid && Form.uemail.$touched">{{'0060' | translate}}</span>
+                            <span class="uk-form-help-block uk-text-danger span-help-block"
+                                ng-show="Form.uemail.$error.email"> {{'0689' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="uk-form-row uk-width-1-1">
+                        <div class="uk-input-group uk-width-1-1 ">
+                            <label> {{'0690' | translate}}</label>
+                            <input type="text" name="subject" id="subject" class="md-input label-fixed"
+                                ng-model="vm.Detail.subject" maxlength="20"
+                                ng-class="{'md-input-danger':Form.subject.$invalid && Form.subject.$touched}"
+                                ng-required="true" md-input />
+                            <span class="uk-form-help-block uk-text-danger span-help-block"
+                                ng-show="Form.subject.$invalid && Form.subject.$touched">{{'0060' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="uk-form-row uk-width-1-1">
+                        <div class="uk-input-group uk-width-1-1 ">
+                            <label>{{'0332' | translate}}</label>
+                            <textarea cols="20" rows="2" name="description" id="description" class="md-input"
+                                ng-model="vm.Detail.description" md-input textarea-autosize></textarea>
+                        </div>
+                    </div>
+                    <div class="uk-form-row uk-width-1-2">
+                        <label class="uk-text-bold"> {{'0691' | translate}}:</label>
+                        <i class="uk-icon-paperclip"></i>
+                        Exception.pdf
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+                ng-click="vm.loading=true;vm.email(Form)" ng-disabled="!Form.$valid"
+                ng-class="{'md-bg-blue-grey-100' : !Form.$valid}"> {{'0692' | translate}}</button>
+            <button type="button" class="md-btn md-btn-default uk-modal-close"
+                ng-click="vm.Detail=[]; Form.$setUntouched()">{{'0008' | translate}}</button>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modalmessajesend">
+    <div class="uk-modal-dialog message">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-body fullheight" style="top: 0px">
+            <div style="width: 20%; float: left">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageText">
+                <label style="margin-top: 20px; margin-left: 5px">{{'0693' | translate}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal uk-modal-card-fullscreen modal-above" id="viewerror">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-red-900">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="vm.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="uk-icon-hover uk-icon-file-text-o md-color-light-blue-50 uk-icon-medium"></i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0677' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid fullheight">
+                    <div class="uk-width-1-1" style="height: 87%;">
+                        <div class="md-card  md-card-hover fullheight">
+                            <div class="md-card-content" style="height: 95%;">
+                                <div class="uk-grid" data-uk-grid-margin style="height: 10%;">
+                                    <div class="uk-width-2-10" style="width: 17%;">
+                                        <h4 class="uk-text-bold">{{'0325' | translate}}</h4>
+                                        {{vm.Detailexception.printdate}}
+                                    </div>
+                                    <div class="uk-width-1-10" style="width: 13%;">
+                                        <h4 class="uk-text-bold">{{'0001' | translate}}</h4> {{vm.Detailexception.user}}
+                                    </div>
+                                    <div class="uk-width-7-10">
+                                        <h4 class="uk-text-bold">URL</h4>{{vm.Detailexception.url}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="uk-text-break" style="height: 83%;overflow: auto;">
+                                    {{vm.Detailexception.detail}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1" style="height: 13%;margin-top: 9px;">
+                        <div class="md-card  md-card-hover">
+                            <div class="md-card-content">
+                                <div class="uk-flex uk-flex-center uk-flex-middle">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-2">
+                                            <button type="button" class="md-fab md-fab-small md-fab-danger"
+                                                ng-click="vm.print()">
+                                                <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                    title="PDF">&#xE415;</i>
+                                            </button>
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                            <button type="button" class="md-fab md-fab-small md-fab-success"
+                                                ng-click="vm.Detail=[]; Form.$setUntouched()"
+                                                data-uk-modal="{target:'#modalsendemail',modal:false}">
+                                                <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                    title="{{'0380' | translate}}">&#xE158;</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

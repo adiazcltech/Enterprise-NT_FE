@@ -1,0 +1,229 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Historia clinicas</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body><SPAN lang=""><FONT size=2>Es el formulario pincipal para la gestión de una história 
+clínica de un paciente. Tiene la capacidad de crear, editar, buscar y filtrar 
+información básica y configurada de un paciente.</FONT>
+<P><FONT size=2>A continuación, se 
+muestra la ventana correspondiente para la gestión de Historias 
+clínicas.</FONT></P>
+<P><IMG style="HEIGHT: 637px; WIDTH: 1006px" alt="" src="img/historypatient/historypatient_01.png" width=1085 height=698 ></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>1. Tipo de 
+documento.</FONT> 
+  </SPAN></B><SPAN><br> 
+<A name=OLE_LINK5></A><A name=OLE_LINK4></A><A name=OLE_LINK3><SPAN 
+style="mso-bookmark: OLE_LINK4"><SPAN><FONT size=2>Es el campo donde el usuario selecciona un tipo de 
+documento por medio de un control especial de lista (Autocompletar). Este campo 
+es requerido y se visualiza solamente cuando la llave de configuración está 
+activa en el maestro de instalación.<o:p></O:P></FONT></SPAN></SPAN></A></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><FONT size=2></FONT></SPAN>&nbsp;</P><SPAN 
+style="mso-bookmark: OLE_LINK5"></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK4"></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK3"></SPAN>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><o:p></O:P></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>2. 
+Historia.</FONT> 
+</SPAN></B><SPAN><br><FONT size=2> 
+Es un control de texto 
+donde el usuario introduce un número de documento de un paciente nuevo o ya 
+existente. Al pulsar Enter se valida si dicho número está registrado en el 
+sistema, si no está, se habilitan el resto de controles, si existe, se cargan 
+los datos del paciente con los controles deshabilitados. La búsqueda del 
+paciente se da con la combinación del tipo de documento; si la llave de 
+configuración del tipo de documento está deshabilitada, la búsqueda solo se hará 
+por el número de documento; si la llave de configuración de historia automática 
+está activada, pues este control no se habilitaría y la búsqueda del paciente se 
+haría por la fecha de nacimiento. Este campo será requerido excepto cuando esté 
+como historia automática.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><FONT size=2></FONT></SPAN>&nbsp;</P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><FONT size=2><o:p></O:P></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><FONT size=2></FONT><o:p></O:P></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>
+3. Nombres y apellidos. </FONT> 
+  </SPAN></B><SPAN><br><FONT size=2>Son campos de texto donde se gestiona el primer 
+y segundo apellido del paciente así como los nombres. Tanto el primer apellido 
+como el primer nombre son campos obligatorios. Estos controles se habilitan 
+cuando se gestiona el número de documento o número de historia no existente en 
+el sistema, si el paciente existe, los controles de nombres y apellidos no se 
+habilitan y se carga la información correspondiente; si la llave de 
+configuración de historia automática está activada, la búsqueda del paciente se 
+hará con la combinación de los nombres, apellidos y fecha de 
+nacimiento.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><FONT size=2></FONT></SPAN>&nbsp;</P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><o:p></O:P><FONT size=2></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>4. Fecha de nacimiento y 
+edad.</FONT> 
+    </SPAN></B><SPAN><FONT size=2> <br>
+Son campos con máscara de entrada para validar el tipo de dato de fecha. La edad 
+se calcula con la fecha de nacimiento digitada, son campos obligatorios y se 
+habilitan dependiendo de la búsqueda del paciente por documento, si el paciente 
+existe, no se habilitan y se carga la fecha de nacimiento con la edad 
+correspondiente; si la llave de configuración de historia automática está 
+activada, el control de fecha de nacimiento aparece habilitado y la búsqueda del 
+paciente se haría pulsando Enter en el mismo y con la combinación de nombres y 
+apellidos gestionados. Ahí se cargaría el resto de la información del 
+paciente.<o:p></O:P></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>5. Campos 
+complementarios.</FONT> 
+ </SPAN></B><SPAN><FONT size=2> <br>
+Son controles de texto no obligatorios donde se introduce información de 
+ubicación del paciente (correo, teléfono, dirección) y la talla y el 
+peso.<o:p></O:P></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><FONT size=2><B 
+style="mso-bidi-font-weight: normal"><SPAN>6. 
+Raza.</SPAN></B><SPAN><br> 
+</SPAN><SPAN>Es el campo donde el usuario selecciona una raza por medio 
+de un control especial de lista (Autocompletar). Este campo no es requerido y se 
+visualiza solamente cuando la llave de configuración de raza está activa en el 
+maestro de instalación.</SPAN></FONT></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><FONT size=2></FONT> </SPAN>&nbsp;</P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><o:p></O:P><FONT size=2></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><o:p></O:P><FONT size=2></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>7.</FONT></SPAN></B><SPAN><FONT size=2> <STRONG><SPAN>Demográficos variables de la 
+historia.</SPAN></STRONG></FONT><SPAN><br><FONT size=2>Son aquellos que el usuario puede crear y 
+configurar desde el maestro de Demográficos, se pueden crear demográficos 
+codificados que cuenta con sus respectivos ítems y demográficos no codificados 
+como se muestran en la imagen de ejemplo (Segunda 
+Dirección).</FONT>  
+</SPAN></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN size="2"><FONT size=2></FONT></SPAN>&nbsp;</P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><FONT size=2><SPAN></SPAN><SPAN style="mso-bookmark: OLE_LINK6"><SPAN 
+style="mso-bookmark: OLE_LINK7"><SPAN><o:p></O:P></SPAN></SPAN></SPAN></FONT></P><SPAN 
+style="mso-bookmark: OLE_LINK7"></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK6"></SPAN>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN><o:p></O:P><FONT size=2></FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>8. Diagnóstico 
+permanente.</FONT> 
+ </SPAN></B><SPAN><br><FONT size=2> Es un control multi-lineal donde el usuario introduce 
+información detallada de las enfermedades, trastornos o patología que presenta 
+el paciente ante una consulta, Se pueden introducir varios diagnósticos a la 
+vez, ver la trazabilidad o ampliar la visibilidad de todos los diagnósticos del 
+paciente. <IMG alt="" src="img/historypatient/historypatient_05.png" 
+align=absMiddle></FONT> 
+</SPAN><V:SHAPETYPE id="_x0000_t75" stroked="f" filled="f" 
+path="m@4@5l@4@11@9@11@9@5xe" o:preferrelative="t" o:spt="75" 
+coordsize="21600,21600"><v:stroke joinstyle="miter"></V:STROKE><v:formulas><v:f 
+eqn="if lineDrawn pixelLineWidth 0"></V:F><v:f eqn="sum @0 1 0"></V:F><v:f 
+eqn="sum 0 0 @1"></V:F><v:f eqn="prod @2 1 2"></V:F><v:f 
+eqn="prod @3 21600 pixelWidth"></V:F><v:f 
+eqn="prod @3 21600 pixelHeight"></V:F><v:f eqn="sum @0 0 1"></V:F><v:f 
+eqn="prod @6 1 2"></V:F><v:f eqn="prod @7 21600 pixelWidth"></V:F><v:f 
+eqn="sum @8 21600 0"></V:F><v:f eqn="prod @7 21600 pixelHeight"></V:F><v:f 
+eqn="sum @10 21600 0"></V:F></V:FORMULAS><v:path o:connecttype="rect" 
+gradientshapeok="t" o:extrusionok="f"></V:PATH><o:lock aspectratio="t" 
+v:ext="edit"></O:LOCK></V:SHAPETYPE><V:SHAPE id=Imagen_x0020_1 
+style="HEIGHT: 15pt; WIDTH: 51.75pt; MARGIN-TOP: 34.55pt; POSITION: absolute; MARGIN-LEFT: 160.95pt; Z-INDEX: 251658240; VISIBILITY: visible; mso-wrap-style: square; mso-wrap-distance-left: 9pt; mso-wrap-distance-top: 0; mso-wrap-distance-right: 9pt; mso-wrap-distance-bottom: 0; mso-position-horizontal: absolute; mso-position-horizontal-relative: text; mso-position-vertical: absolute; mso-position-vertical-relative: text; mso-width-percent: 0; mso-height-percent: 0; mso-width-relative: page; mso-height-relative: page" 
+type="#_x0000_t75" o:spid="_x0000_s1026"><V:IMAGEDATA o:title="" 
+src="file:///C:\Users\LENIN-~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.png"></V:IMAGEDATA></V:SHAPE><SPAN><o:p></O:P></SPAN></P>
+<P style="MARGIN-BOTTOM: 0pt"><STRONG><SPAN><FONT size=2>9. 
+Foto. </FONT> 
+</SPAN></STRONG><SPAN> <br><FONT size=2>Al pulsar el ícono del avatar se muestra la foto del paciente, al digitar 
+la cámara se toma la foto.</FONT>
+    </SPAN></P>
+<P style="MARGIN-BOTTOM: 0pt"><A name=OLE_LINK12><SPAN 
+style="mso-bookmark: OLE_LINK13"><SPAN style="mso-bookmark: OLE_LINK14"><B 
+style="mso-bidi-font-weight: normal"><SPAN size="2"><FONT size=2>10. 
+Ficheros de búsqueda. 
+</FONT>   
+</SPAN></B></SPAN></SPAN></A><SPAN 
+style="mso-bookmark: OLE_LINK12"><br><SPAN style="mso-bookmark: OLE_LINK13"><SPAN 
+style="mso-bookmark: OLE_LINK14"><SPAN><FONT size=2> La búsqueda de un 
+paciente se puede hacer por<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>Historia, Paciente u 
+Orden.</FONT></SPAN></SPAN></SPAN></SPAN></P>
+<UL>
+  <LI>
+<DIV style="MARGIN-BOTTOM: 0pt"><FONT size=2><SPAN 
+style="mso-bookmark: OLE_LINK12"><SPAN style="mso-bookmark: OLE_LINK13"><SPAN 
+style="mso-bookmark: OLE_LINK14"><B style="mso-bidi-font-weight: normal"><SPAN>Historia:</SPAN></B></SPAN></SPAN></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK12"><SPAN style="mso-bookmark: OLE_LINK13"><SPAN 
+style="mso-bookmark: OLE_LINK14"><SPAN> Se busca el paciente 
+por tipo y número de documento, si la llave de configuración del tipo de 
+documento está desactivada solo se buscaría por número de documento o 
+historia.<o:p></O:P></SPAN></SPAN></SPAN></SPAN></FONT></DIV>
+  <LI>
+<DIV style="MARGIN-BOTTOM: 0pt">
+<SPAN style="mso-bookmark: OLE_LINK12"><SPAN><B style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>Paciente:</FONT></SPAN></B></SPAN></SPAN></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK12"><SPAN style="mso-bookmark: OLE_LINK13"><SPAN 
+style="mso-bookmark: OLE_LINK14"><SPAN'><FONT size=2> La 
+  búsqueda se realiza por apellidos y/o 
+  nombres.</FONT></SPAN></SPAN></SPAN></DIV>
+  <LI>
+  <DIV style="MARGIN-BOTTOM: 0pt" DESIGNTIMESP="26854"><SPAN 
+  style="mso-bookmark: OLE_LINK12"><SPAN style="mso-bookmark: OLE_LINK13"><SPAN 
+  style="mso-bookmark: OLE_LINK14"><B 
+  style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>Orden:</FONT></SPAN></B></SPAN></SPAN></SPAN><FONT size=2><SPAN 
+  style="mso-bookmark: OLE_LINK12"><SPAN style="mso-bookmark: OLE_LINK13"><SPAN 
+  style="mso-bookmark: OLE_LINK14"><SPAN> Se buscan pacientes que ya tienen 
+  órdenes asociadas.</SPAN></SPAN></SPAN></SPAN> Al pulsar en un número de 
+  documento se carga la información del paciente en el panel correspondiente. Se 
+  habilita el botón Editar, Guardar y Deshacer.</FONT><IMG alt="" 
+  src="img/historypatient/historypatient_03.png"></DIV>
+  <LI>
+  <DIV style="MARGIN-BOTTOM: 0pt" DESIGNTIMESP="26854"><FONT size=2>En La imagen 
+  anterior muestra el panel de Paciente habilitado para editar, y en el 
+  diagnóstico permanente aparece el ícono de adición.</FONT> </DIV></LI></UL>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>11. Controles de 
+búsqueda.</FONT></SPAN></B><SPAN><BR><FONT size=2>Como se explicó anteriormente, 
+en cada fichero se filtran por unos criterios, por ejemplo en el fichero de 
+Historia, los controles de búsqueda son tipo y número de documento según la 
+llave de configuración.</FONT></SPAN></P><SPAN><O:P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><B 
+style="mso-bidi-font-weight: normal"><SPAN><FONT size=2>12. Grilla de 
+historias.</FONT></SPAN></B><SPAN><BR><FONT size=2>Es donde aparece el listado 
+de pacientes con el tipo de documento (Depende de llave de configuración), 
+historia (Se consulta por este campo), paciente (Nombres y apellidos), fecha de 
+nacimiento, sexo y número de orden en caso que aplique.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><SPAN><FONT size=2><STRONG>13. 
+Botón Nuevo.</STRONG><BR>Al pulsarlo se habilitan los controles de Tipo y Número 
+de&nbsp;documento o historia, si la llave de configuración de tipo de doumento 
+está desactivada, éste no aparece y slo se habilita el número de historia, si la 
+llave de configuración de historia automática está activada, slo se habilitarán 
+los nombres, apellidos y fecha de nacimiento del paciente. El botón Editar se 
+deshabilita, el botón adicionar del diagnostico permanente 
+aparece.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><SPAN><FONT size=2><STRONG>14. 
+Botón Editar.</STRONG><BR>Se habilita cuando se encuentra un paciente, al 
+pulsarlo se habilitan todos los contrles del panel de paciente, pero si la llave 
+de configuración de historia automática está activada, el número de historia no 
+se habilita, el botón adicionar del diagnostico permanente aparece indicando que 
+se pueden adicionar más disgnosticos o editar los que ya 
+están.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><SPAN><FONT size=2><STRONG>15. 
+Botón Guardar.</STRONG><BR>Acá se almacena toda la información requerida del 
+paciente, si los campos marcados con asterisco rojo no se gestionan, la hisotria 
+no podrá guardarse validando los datos requeridos. En este botón se crea un 
+nuevo paciente con o sin diagnósticos permanentes o se edita una historia 
+consultada teniendo en cuenta que se pueden adiconar o editar 
+diagnósticos.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><SPAN><FONT size=2><STRONG>16. 
+Botón Deshacer.</STRONG><BR>Si se está creando una historia, limpia todos los 
+controles del panel de paciente, el panel de búsqueda donde están los filtros 
+permanecen iguales; si la historia se está modificando, pues se deshacen todos 
+los cambos hechos por el usuario observando como se reestablecen los datos 
+inicialmente consultados.</FONT></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 10pt"><SPAN><FONT size=2><STRONG>17. 
+Botón Cancelar.</STRONG><BR>Limpia todo el formulario y lo deja en su estado 
+inicial.</FONT> <O:P></O:P></SPAN></P></O:P></SPAN></SPAN></BODY></HTML>

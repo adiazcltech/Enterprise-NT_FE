@@ -1,0 +1,17 @@
+<div>
+   	<img  class="image-clean" width="{{fileImage.width}}" height="{{fileImage.height}}" ng-src="data:{{fileImage.files.filetype}};base64,{{fileImage.files.base64}}">
+    
+</div>
+<div>
+	<div ng-show="!fileImage.disabled" class="fileUpload btn btn-primary" ng-style="fileImage.styleButton">
+	    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+	    <input type="file" ng-model="fileImage.files" name="files" parser="fileImage.resizeImage" class="upload" accept="image/*" base-sixty-four-input>
+	</div>
+	<div ng-show="fileImage.disabled" ng-disabled="true" class="fileUpload btn btn-primary" ng-style="fileImage.styleButton">
+	    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 
+	</div>
+	<div  class="has-error">
+		<span class="help-block" ng-show="fileImage.typeIncorrect">{{'0177' | translate}}</span>
+	</div>
+</div>
+

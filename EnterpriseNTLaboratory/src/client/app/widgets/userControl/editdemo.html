@@ -1,0 +1,147 @@
+<loadpage view="editdemo.loadingdata"></loadpage>
+<div id="modal_editdemo" class="uk-modal uk-modal-card-fullscreen" aria-hidden="true">
+    <loadpage view="editdemo.loading"></loadpage>
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-deep-purple-300">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span class="margin-icon-modal">
+                    <i class="material-icons md-color-light-blue-50 md-33">how_to_reg</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'1618' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content uk-grid uk-margin-small-top" style="height: calc(100% - 141px);padding: 23px;"
+                pdk-next-input-on-enter>
+                <div class="uk-width-1-2" style="padding-left: 20px; height: 100%">
+                    <orderfield type="'H'" statecontrol="editdemo.patientDemosDisabled"
+                        values="editdemo.patientDemosValues" data="editdemo.demosAll[0]"
+                        selectedpatientid="editdemo.selectedPatientId" listenerdate="editdemo.eventSelectDate"
+                        patientphoto="editdemo.patientPhoto" loadpatientsearch="editdemo.loadPatient(patient)"
+                        viewsearch="false" viewphoto="editdemo.viewphoto" opensearch="editdemo.openSearch"
+                        depen="editdemo.demoalldepen"></orderfield>
+
+                </div>
+                <div class="uk-width-1-2 order-entry-order-padding" style="padding-left: 15px; height: 100%">
+                    <orderfield type="'O'" statecontrol="editdemo.orderDemosDisabled" values="editdemo.orderDemosValues"
+                        listener="editdemo.orderSearchEvent" data="editdemo.demosAll[1]"
+                        listenerdate="editdemo.eventSelectDate" patientPhoto="editdemo.patientPhoto"
+                        listorder="editdemo.ordersday" depen="editdemo.demoalldepen"></orderfield>
+                </div>
+            </div>
+            <div class="md-fab-wrapper md-fab-in-card" style="bottom: 6px;">
+                <button type="button" class="md-fab  md-fab-small md-bg-deep-purple-300"
+                    ng-click="editdemo.eventSave()">
+                    <i class="material-icons md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                        title="{{'0007' | translate}}">&#xE161;</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="logErrorTest" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;" bg-close="false"
+    modal="false">
+    <div class="uk-modal-dialog" style="{{editdemo.dimensions}}">
+        <div class="uk-modal-header md-bg-red-A700" style="border-bottom: 0px;"
+            ng-class="{'md-bg-red-A700' : editdemo.numError !== '0', 'md-bg-yellow-700': editdemo.numError === '0'}">
+            <h3 class="uk-modal-title">{{editdemo.messageNotTittle}}</h3>
+        </div>
+        <div class="uk-form-row" style="height: calc(100% - 65px);position: relative;">
+            <form class="form" name="myForm">
+                <div class="uk-form-row">
+                    <div class="uk-grid uk-container-center" ng-if="editdemo.numError !== '6'">
+                        <div class="uk-width-3-10" style="width: 20%; padding-left: 10px">
+                            <i class="material-icons md-color-red-A700"
+                                ng-class="{'md-color-red-A700' : editdemo.numError !== '0', 'md-color-yellow-700': editdemo.numError === '0'}"
+                                style="font-size: 64px">warning</i>
+                        </div>
+                        <div class="uk-width-7-10" style="margin-top: 3%; padding-left: 10px">
+                            <label style="white-space: normal;">{{editdemo.messageNotSave}}</label>
+                        </div>
+                    </div>
+                    <div class="uk-grid uk-container-center" ng-if="editdemo.numError === '6'">
+                        <div class="uk-width-3-10" style="width: 10%;padding-left: 10px;">
+                            <i class="material-icons md-color-red-A700" style="font-size: 32px;">warning</i>
+                        </div>
+                        <div class="uk-width-7-10" style="margin-top: 2%;padding-left: 10px;">
+                            <label style="white-space: normal;" class="ng-binding">{{'0331' | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="uk-form-row" ng-if="editdemo.numError === '6'" style="margin-top: -4px">
+                        <table class="uk-table  uk-table-small uk-table-middle tablescrollable" style="font-size: 11px">
+                            <tbody class="tbodyscrollable"
+                                style="height: 200px; border-color: #ddd;border-style: solid;border-width: 1px; overflow-y: scroll;">
+                                <tr class="uk-grid" data-ng-repeat="Test in editdemo.listError"
+                                    style="margin-left: 0px; margin-top: 3px">
+                                    <td class="uk-width-1-1" data-ng-bind="Test.test"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close">{{'0329' |
+                translate}}</button>
+        </div>
+    </div>
+</div>
+<div id="editmodal" class="uk-modal" tabindex="1" aria-hidden="false" bg-close="false" modal="false">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header md-bg-orange-600" style="border-bottom: 0px" ng-if="editdemo.listMotives.length>0">
+            <h3 class="uk-modal-title">
+                {{'1517' | translate}} : {{editdemo.order}}
+            </h3>
+        </div>
+        <div class="uk-form-row">
+            <form class="form" name="myForm" ng-if="editdemo.listMotives.length>0">
+                <div class="uk-form-row">
+                    <div class="uk-modal-content">{{'0113' | translate}}:</div>
+                    <select class="md-input"
+                        ng-options="obj as obj.name for obj in editdemo.listMotives track by obj.id"
+                        data-ng-model="editdemo.motive" class="form-control"></select>
+                </div>
+                <div class="uk-form-row">
+                    <div class="uk-form-row">
+                        <label>{{'0332' | translate}}:</label>
+                        <div class="md-input-wrapper">
+                            <textarea cols="30" rows="4" data-ng-model="editdemo.Comment" class="md-input no_autosize"
+                                style="margin: 0px -10.5px 0px 0px; width: 564px; height: 121px"></textarea><span
+                                class="md-input-bar"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form class="form" name="myForm" ng-if="editdemo.listMotives.length==0">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-3-10">
+                        <img src="images/iconinfo.png" height="90" width="90" />
+                    </div>
+                    <div class="uk-width-7-10" style="margin-top: 3%">
+                        <span>{{'0732' | translate}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right" ng-if="editdemo.listMotives.length>0">
+            <button type="button" ng-click="editdemo.motiveeditsave()"
+                class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light"
+                ng-class="{'disabled': (editdemo.motive.id === -1 || editdemo.Comment === ''),'md-bg-orange-600': (editdemo.motive.id !== -1 && editdemo.Comment !== '')}">
+                {{'0007' | translate}}
+            </button>
+            <button type="button" class="uk-modal-close md-btn md-btn-flat uk-modal-close"
+                ng-click="editdemo.Comment=''; editdemo.motive.id=-1">
+                {{'0008' | translate}}
+            </button>
+        </div>
+    </div>
+</div>
+<modalexceptions openmodal="editdemo.ShowPopupErrorinterview" detailerror="editdemo.Errorinterview"
+    idcontrol="'modaleditdemo'"></modalexceptions>

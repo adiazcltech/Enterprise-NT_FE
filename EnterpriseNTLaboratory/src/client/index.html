@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head class="header">
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+
+        .ng-hide {
+            display: none !important;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+    <title>EnterpriseNT</title>
+
+    <link rel="stylesheet" href="stimulsoft/css/stimulsoft.designer.office2013.whiteblue.css">
+    <link rel="stylesheet" href="stimulsoft/css/stimulsoft.viewer.office2013.whiteblue.css">
+
+    <link rel="stylesheet" href="assets/css/card-normalize.css">
+    <link rel="stylesheet" href="assets/css/card-style.css">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,
+      minimum-scale=1, user-scalable=no" />
+    <base href="/">
+
+    <!-- build:css styles/lib.css -->
+    <link rel="stylesheet" href="/bower_components/material-design-icons/iconfont/material-icons.css" />
+    <link rel="stylesheet" href="/bower_components/kendo-ui/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="/bower_components/kendo-ui/styles/kendo.material.min.css" />
+
+
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/datatables.net-dt/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="/bower_components/angular-datatables/dist/css/angular-datatables.css" />
+    <link rel="stylesheet" href="/bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/bower_components/spectrum/spectrum.css" />
+    <link rel="stylesheet" href="/bower_components/intro.js/introjs.css" />
+    <link rel="stylesheet" href="/bower_components/uikit/css/uikit.min.css" />
+    <link rel="stylesheet" href="/bower_components/angular-dragula/dist/dragula.css" />
+    <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.css" />
+    <link rel="stylesheet" href="/bower_components/chartist/dist/chartist.css" />
+    <link rel="stylesheet" href="/bower_components/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="/bower_components/selectize/dist/css/selectize.css" />
+    <link rel="stylesheet" href="/bower_components/switchery/dist/switchery.css" />
+    <link rel="stylesheet" href="/bower_components/Waves/dist/waves.min.css" />
+    <link rel="stylesheet" href="/bower_components/angular-notification-icons/dist/angular-notification-icons.css" />
+    <link rel="stylesheet" href="/bower_components/ng-tags-input/ng-tags-input.css" />
+    <link rel="stylesheet" href="/bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="/bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="/bower_components/angular-dialog-service/dist/dialogs.css" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="/bower_components/angular-tree-control/css/tree-control.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="/bower_components/kendo-ui/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="/bower_components/kendo-ui/styles/kendo.material.min.css" />
+    <!-- build:css styles/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/.tmp/styles.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+
+
+
+</head>
+
+<body style="padding-top: 0px" class="disable_transitions sidebar_main_open
+    sidebar_main_swipe">
+
+
+    <div ng-include="'app/layout/shell.html'" style="height: 100%">
+        <!-- common functions -->
+        <script src="assets/js/common.min.js"></script>
+        <!-- altair common functions/helpers -->
+        <script src="assets/js/altair_admin_common.js"></script>
+
+
+        <!-- Echart -->
+        <script src="assets/js/smooth-scrollbar.js"></script>
+        <script src="assets/js/overscroll.js"></script>
+        <script src="assets/js/math.min.js"></script>
+        <script src="assets/js/echarts-all-3.js"></script>
+        <script src="assets/js/ecStat.min.js"></script>
+        <script src="assets/js/dataTool.min.js"></script>
+        <script src="assets/js/china.js"></script>
+        <script src="assets/js/world.js"></script>
+        <script src="assets/js/bmap.min.js"></script>
+        <script src="assets/skins/lodash/lodash.js"></script>
+        <script src="assets/js/tata-js/dist/tata.js"></script>
+        <script src="assets/js/flipclock.js"></script>
+        <script src="stimulsoft/scripts/stimulsoft.reports.js"></script>
+        <script src="stimulsoft/scripts/stimulsoft.viewer.js"></script>
+        <script src="stimulsoft/scripts/stimulsoft.designer.js"></script>        
+        <script src="http://localhost:5001/socket.io/socket.io.js"></script>
+    </div>
+
+    <!-- build:js js/lib.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="/bower_components/angular-datatables/dist/angular-datatables.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="/bower_components/angular-datatables/dist/plugins/select/angular-datatables.select.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/spectrum/spectrum.js"></script>
+    <script src="/bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
+    <script src="/bower_components/intro.js/intro.js"></script>
+    <script src="/bower_components/angular-intro.js/build/angular-intro.min.js"></script>
+    <script src="/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="/bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="/bower_components/file-saver/FileSaver.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/uikit/js/uikit.min.js"></script>
+    <script src="/bower_components/velocity/velocity.js"></script>
+    <script src="/bower_components/velocity/velocity.ui.js"></script>
+    <script src="/bower_components/angular-velocity/angular-velocity.min.js"></script>
+    <script src="/bower_components/jquery-bez/jquery.bez.min.js"></script>
+    <script src="/bower_components/angular-dragula/dist/angular-dragula.js"></script>
+    <script src="/bower_components/angular-echarts/dist/angular-echarts.min.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="/bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
+    <script src="/bower_components/ng-idle/angular-idle.js"></script>
+    <script src="/bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="/bower_components/autosize/dist/autosize.js"></script>
+    <script src="/bower_components/chartist/dist/chartist.js"></script>
+    <script src="/bower_components/clndr/clndr.min.js"></script>
+    <script src="/bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="/bower_components/countUp.js/dist/countUp.min.js"></script>
+    <script src="/bower_components/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="/bower_components/iCheck/icheck.min.js"></script>
+    <script src="/bower_components/jquery.scrollTo/jquery.scrollTo.js"></script>
+    <script src="/bower_components/kineticjs/kinetic.js"></script>
+    <script src="/bower_components/enjoyhint/enjoyhint.js"></script>
+    <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="/bower_components/sifter/sifter.js"></script>
+    <script src="/bower_components/microplugin/src/microplugin.js"></script>
+    <script src="/bower_components/selectize/dist/js/selectize.js"></script>
+    <script src="/bower_components/transitionize/dist/transitionize.js"></script>
+    <script src="/bower_components/switchery/dist/switchery.js"></script>
+    <script src="/bower_components/Waves/dist/waves.min.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <script src="/bower_components/angular-charts/dist/angular-charts.js"></script>
+    <script src="/bower_components/ui-switchery/src/js/ui.switchery.js"></script>
+    <script src="/bower_components/angular-selectize2/dist/angular-selectize.js"></script>
+    <script src="/bower_components/chart.js/dist/Chart.js"></script>
+    <script src="/bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="/bower_components/angular-notification-icons/dist/angular-notification-icons.js"></script>
+    <script src="/bower_components/angular-svg-round-progressbar/build/roundProgress.js"></script>
+    <script src="/bower_components/ng-tags-input/ng-tags-input.js"></script>
+    <script src="/bower_components/angular-websocket/dist/angular-websocket.js"></script>
+    <script src="/bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script src="/bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="/bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="/bower_components/humanize-duration/humanize-duration.js"></script>
+    <script src="/bower_components/angular-timer/dist/angular-timer.js"></script>
+    <script src="/bower_components/angular-base64-download/base64-download.js"></script>
+    <script src="/bower_components/angular-click-outside/clickoutside.directive.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-dialog-service/dist/dialogs.js"></script>
+    <script src="/bower_components/angular-dialog-service/dist/dialogs-default-translations.js"></script>
+    <script src="/bower_components/angular-lz-string/angular-lz-string.js"></script>
+    <script src="/bower_components/angular-recursion/angular-recursion.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <script src="/bower_components/peity/jquery.peity.js"></script>
+    <script src="/bower_components/angular-vs-repeat/dist/angular-vs-repeat.min.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="/bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="/bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+    <script src="/bower_components/angular-tree-control/angular-tree-control.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+   
+
+    <script src="/bower_components/moment/locale/es.js"></script>
+    <script src="/bower_components/moment/locale/de.js"></script>
+    <script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+
+    <!-- uikit functions -->
+    <script src="assets/js/tinymce/tinymce.min.js"></script>
+    <script src="assets/js/angular-ui-tinymce/dist/tinymce.min.js"></script>
+    <script src="assets/js/jszip/dist/jszip.min.js"></script>
+    <script src="assets/js/angular-socket-io/socket.js"></script>
+    <script src="assets/js/uikit_custom.min.js"></script>
+    <script src="assets/js/pdf-lib.min.js"></script>
+    <script src="assets/js/RecordRTC/RecordRTC.js"></script>
+    <!-- build:js js/app.js -->
+    <!-- inject:js -->
+    <script src="/src/client/app/modules/app.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/blocks/router/router.module.js"></script>
+    <script src="/src/client/app/blocks/settings/settings.module.js"></script>
+    <script src="/src/client/app/core/core.module.js"></script>
+    <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/layout/sidebar.module.js"></script>
+    <script src="/src/client/app/modules/account/account.module.js"></script>
+    <script src="/src/client/app/modules/account/dashboard/dashboard.module.js"></script>
+    <script src="/src/client/app/modules/account/login/login.module.js"></script>
+    <script src="/src/client/app/modules/account/userprofile/userprofile.module.js"></script>
+    <script src="/src/client/app/modules/audit/audit.module.js"></script>
+    <script src="/src/client/app/modules/audit/auditinvoice/auditinvoice.module.js"></script>
+    <script src="/src/client/app/modules/audit/auditmaster/auditmaster.module.js"></script>
+    <script src="/src/client/app/modules/audit/auditorder/auditorder.module.js"></script>
+    <script src="/src/client/app/modules/audit/audituser/audituser.module.js"></script>
+    <script src="/src/client/app/modules/audit/traceability/traceability.module.js"></script>
+    <script src="/src/client/app/modules/billing/billing.module.js"></script>
+    <script src="/src/client/app/modules/billing/cashreport/cashreport.module.js"></script>
+    <script src="/src/client/app/modules/billing/changeprices/changeprices.module.js"></script>
+    <script src="/src/client/app/modules/billing/consultrips/consultrips.module.js"></script>
+    <script src="/src/client/app/modules/billing/creditnote/creditnote.module.js"></script>
+    <script src="/src/client/app/modules/billing/generateinvoice/generateinvoice.module.js"></script>
+    <script src="/src/client/app/modules/billing/laterpayment/laterpayment.module.js"></script>
+    <script src="/src/client/app/modules/billing/printinvoice/printinvoice.module.js"></script>
+    <script src="/src/client/app/modules/billing/recalculated/recalculated.module.js"></script>
+    <script src="/src/client/app/modules/indicators/earlywarning/earlywarning.module.js"></script>
+    <script src="/src/client/app/modules/indicators/histogram/histogram.module.js"></script>
+    <script src="/src/client/app/modules/indicators/indicators.module.js"></script>
+    <script src="/src/client/app/modules/indicators/indicators/indicators.module.js"></script>
+    <script src="/src/client/app/modules/indicators/otherreports/otherreports.module.js"></script>
+    <script src="/src/client/app/modules/microbiology/checkmicrobiology/checkmicrobiology.module.js"></script>
+    <script src="/src/client/app/modules/microbiology/growtmicrobiology/growtmicrobiology.module.js"></script>
+    <script src="/src/client/app/modules/microbiology/microbiology.module.js"></script>
+    <script src="/src/client/app/modules/microbiology/microbiologyReading/microbiologyReading.module.js"></script>
+    <script src="/src/client/app/modules/microbiology/planoWhonet/planoWhonet.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/activationorder/activationorder.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/listed/listed.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/medicalappointment/medicalappointment.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/orderEntry/orderentry.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/ordermanagement.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/orderswithouthistory/orderswithouthistory.module.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/restartcounter/restartcounter.module.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/cut/cut.module.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/histotechnology.module.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/inclusioncenter/inclusioncenter.module.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/tissueprocessor/tissueprocessor.module.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/description/description.module.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/macroscopy.module.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/transcription/transcription.module.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/meetingpathologists/meetingpathologists.module.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/microscopy.module.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/sheetmanagement/sheetmanagement.module.js"></script>
+    <script src="/src/client/app/modules/pathology/pathology.module.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/activationsamples/activationsamples.module.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/sampleentry/sampleentry.module.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/samplereception.module.js"></script>
+    <script src="/src/client/app/modules/pathology/tools/barcodepathology/barcodepathology.module.js"></script>
+    <script src="/src/client/app/modules/pathology/tools/toolspathology.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historyassignment/historyassignment.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historypatient/historypatient.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historyreassignment/historyreassignment.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/inconsistency/inconsistency.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/patientmanagement.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/unlockorderhistory/unlockorderhistory.module.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/webquerymanagement/webquerymanagement.module.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/controldeliveryreports/controldeliveryreports.module.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/informedconsent/informedconsent.module.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/patientconsultation/patientconsultation.module.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/queries/queries.module.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/reports/reports.module.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/reportsandconsultations.module.js"></script>
+    <script src="/src/client/app/modules/result/recordresultbyrank/recordresultbyrank.module.js"></script>
+    <script src="/src/client/app/modules/result/restartmiddleware/restartmiddleware.module.js"></script>
+    <script src="/src/client/app/modules/result/result.module.js"></script>
+    <script src="/src/client/app/modules/result/resultsentry/resultsentry.module.js"></script>
+    <script src="/src/client/app/modules/result/reviewofresults/reviewofresults.module.js"></script>
+    <script src="/src/client/app/modules/result/sendEmailAutomaticResult/sendEmailAutomaticResult.module.js"></script>
+    <script src="/src/client/app/modules/result/worklist/worklist.module.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/completeverify/completeverify.module.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/phlebotomistake/phlebotomistake.module.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/samplesmanagement.module.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/simpleverification/simpleverification.module.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/tuberack/tuberack.module.js"></script>
+    <script src="/src/client/app/modules/stadistics/destinationsample/destinationsample.module.js"></script>
+    <script src="/src/client/app/modules/stadistics/generalstadistics/generalstadistics.module.js"></script>
+    <script src="/src/client/app/modules/stadistics/specialstadistics/specialstadistics.module.js"></script>
+    <script src="/src/client/app/modules/stadistics/stadistics.module.js"></script>
+    <script src="/src/client/app/modules/stadistics/statisticswithprices/statisticswithprices.module.js"></script>
+    <script src="/src/client/app/modules/tools/barcodeedit/barcodeedit.module.js"></script>
+    <script src="/src/client/app/modules/tools/cubicleassignment/cubicleassignment.module.js"></script>
+    <script src="/src/client/app/modules/tools/deletespecial/deletespecial.module.js"></script>
+    <script src="/src/client/app/modules/tools/exception/exception.module.js"></script>
+    <script src="/src/client/app/modules/tools/reportedit/reportedit.module.js"></script>
+    <script src="/src/client/app/modules/tools/sectionviewer/sectionviewer.module.js"></script>
+    <script src="/src/client/app/modules/tools/tools.module.js"></script>
+    <script src="/src/client/app/modules/transplants/cytotoxicantibodies/cytotoxicantibodies.module.js"></script>
+    <script src="/src/client/app/modules/transplants/donor/donor.module.js"></script>
+    <script src="/src/client/app/modules/transplants/participants/participants.module.js"></script>
+    <script src="/src/client/app/modules/transplants/receptionsamples/receptionsamples.module.js"></script>
+    <script src="/src/client/app/modules/transplants/reporteditransplants/reporteditransplants.module.js"></script>
+    <script src="/src/client/app/modules/transplants/reportmanagement/reportmanagement.module.js"></script>
+    <script src="/src/client/app/modules/transplants/reportvisor/reportvisor.module.js"></script>
+    <script src="/src/client/app/modules/transplants/selection/selection.module.js"></script>
+    <script src="/src/client/app/modules/transplants/transplants.module.js"></script>
+    <script src="/src/client/app/widgets/widgets.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
+    <script src="/src/client/app/blocks/settings/settings.js"></script>
+    <script src="/src/client/app/core/auth/auth.interceptor.config.js"></script>
+    <script src="/src/client/app/core/auth/auth.interceptor.js"></script>
+    <script src="/src/client/app/core/auth/auth.service.js"></script>
+    <script src="/src/client/app/core/config.js"></script>
+    <script src="/src/client/app/core/constants.js"></script>
+    <script src="/src/client/app/core/core.route.js"></script>
+    <script src="/src/client/app/core/dataservice.js"></script>
+    <script src="/src/client/app/dataservice/analytical/resultsentryDS.js"></script>
+    <script src="/src/client/app/dataservice/audit/addprincipal/auditsmasterDS.js"></script>
+    <script src="/src/client/app/dataservice/audit/addprincipal/auditsorderDS.js"></script>
+    <script src="/src/client/app/dataservice/audit/addrate/addrate.js"></script>
+    <script src="/src/client/app/dataservice/audit/addrateone/addrateone.js"></script>
+    <script src="/src/client/app/dataservice/audit/addtest/addtest.js"></script>
+    <script src="/src/client/app/dataservice/audit/addtestone/addtestone.js"></script>
+    <script src="/src/client/app/dataservice/audit/addtestwo/addtestwo.js"></script>
+    <script src="/src/client/app/dataservice/audit/Generalauditone/addconfig.js"></script>
+    <script src="/src/client/app/dataservice/audit/Generalauditone/addconfigone.js"></script>
+    <script src="/src/client/app/dataservice/audit/Generaudit/addobjectuser.js"></script>
+    <script src="/src/client/app/dataservice/audit/Generaudit/addopportunity.js"></script>
+    <script src="/src/client/app/dataservice/audit/rips/ripsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/bankDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/cardDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/customerDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/feescheduleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/paymenttypesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/priceassigmentDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/rateDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/billing/receiversDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/agegroupsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/branchDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/demographicsItemDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/documenttypesDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/ordertypeDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/raceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/demographics/serviceDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/areaDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/commentDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/diagnosticDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/laboratoryDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/literalresultDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/sampleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/testDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/test/worksheetsDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/destinationDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/motiveDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/traceability/refrigeratorDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/user/authenticationsessionDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/user/roleDS.js"></script>
+    <script src="/src/client/app/dataservice/Configuration/user/userDS.js"></script>
+    <script src="/src/client/app/dataservice/General/alertDS.js"></script>
+    <script src="/src/client/app/dataservice/General/commentsDS.js"></script>
+    <script src="/src/client/app/dataservice/General/ConfigurationDS.js"></script>
+    <script src="/src/client/app/dataservice/General/listDS.js"></script>
+    <script src="/src/client/app/dataservice/General/moduleDS.js"></script>
+    <script src="/src/client/app/dataservice/General/shortcutsDS.js"></script>
+    <script src="/src/client/app/dataservice/General/TribunalDS.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/calculatorage.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/common.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/convertnumberliteral.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/indexeddb.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/labelaudit.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/labelauditone.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/listreportsfile.js"></script>
+    <script src="/src/client/app/dataservice/Generalfunction/reportadicional.js"></script>
+    <script src="/src/client/app/dataservice/Listed/listedLaboratoryDS.js"></script>
+    <script src="/src/client/app/dataservice/Listed/listedOrderDS.js"></script>
+    <script src="/src/client/app/dataservice/Listed/listedSampleDS.js"></script>
+    <script src="/src/client/app/dataservice/Listed/printBarcodeDS.js"></script>
+    <script src="/src/client/app/dataservice/microbiology/antibioticDS.js"></script>
+    <script src="/src/client/app/dataservice/microbiology/mediaculturesDS.js"></script>
+    <script src="/src/client/app/dataservice/microbiology/microbiologyDS.js"></script>
+    <script src="/src/client/app/dataservice/microbiology/microorganismDS.js"></script>
+    <script src="/src/client/app/dataservice/microbiology/proceduresDS.js"></script>
+    <script src="/src/client/app/dataservice/microbiology/repeatsDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/common/chartpathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/histotechnology/processingtimeDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/macroscopy/audioDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/macroscopy/macroscopyDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/macroscopy/studyTypeDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/macroscopy/templateDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/caseDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/caseteDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/containerPathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/fixativeDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/organDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/pathologistDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/protocolDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/scheduleDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/recepction/specimenDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/reports/barcodepathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/pathology/reports/reportPathologyDS.js"></script>
+    <script src="/src/client/app/dataservice/Postanalitic/rangeresult/rangeresultDS.js"></script>
+    <script src="/src/client/app/dataservice/Postanalitic/resultstemplate/resultstemplateDS.js"></script>
+    <script src="/src/client/app/dataservice/Postanalitic/reviewofresult/reviewofresultDS.js"></script>
+    <script src="/src/client/app/dataservice/Postanalitic/worklist/worklistDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/appointmentDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/cashboxDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/inconsistenciesDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/orderDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/orderentryDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/orderinterviewDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/patientDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/sampletrackingsDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/sigaDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/specialdeletesDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/unlockorderhistoryDS.js"></script>
+    <script src="/src/client/app/dataservice/Preanalitic/webqueryDS.js"></script>
+    <script src="/src/client/app/dataservice/reportsandconsultations/deliveryofresultDS.js"></script>
+    <script src="/src/client/app/dataservice/reportsandconsultations/integrationconsentDS.js"></script>
+    <script src="/src/client/app/dataservice/reportsandconsultations/queriesDS.js"></script>
+    <script src="/src/client/app/dataservice/reportsandconsultations/reportsDS.js"></script>
+    <script src="/src/client/app/dataservice/stadistics/indicatorsDS.js"></script>
+    <script src="/src/client/app/dataservice/stadistics/stadisticsDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/barcodeDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/cubicleDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/disponsalcertificatesDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/exceptionDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/middlewareDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/phlebotomistakeDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/rackDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/securityDS.js"></script>
+    <script src="/src/client/app/dataservice/tools/socket.js"></script>
+    <script src="/src/client/app/dataservice/transplants/cytotoxicantibodiesDS.js"></script>
+    <script src="/src/client/app/dataservice/transplants/donorDS.js"></script>
+    <script src="/src/client/app/dataservice/transplants/recepctionDS.js"></script>
+    <script src="/src/client/app/dataservice/transplants/reportransDS.js"></script>
+    <script src="/src/client/app/dataservice/transplants/selectionDS.js"></script>
+    <script src="/src/client/app/dataservice/widgets/listaudit.js"></script>
+    <script src="/src/client/app/dataservice/widgets/widgetsDS.js"></script>
+    <script src="/src/client/app/layout/ht-sidebar.directive.js"></script>
+    <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
+    <script src="/src/client/app/layout/shell.controller.js"></script>
+    <script src="/src/client/app/layout/sidebar.controller.js"></script>
+    <script src="/src/client/app/modules/account/dashboard/dashboard.controller.js"></script>
+    <script src="/src/client/app/modules/account/dashboard/dashboard.router.js"></script>
+    <script src="/src/client/app/modules/account/login/login.controller.js"></script>
+    <script src="/src/client/app/modules/account/login/login.router.js"></script>
+    <script src="/src/client/app/modules/account/userprofile/userprofile.router.js"></script>
+    <script src="/src/client/app/modules/account/userprofile/userprofileController.js"></script>
+    <script src="/src/client/app/modules/audit/auditinvoice/auditinvoice.controller.js"></script>
+    <script src="/src/client/app/modules/audit/auditinvoice/auditinvoice.router.js"></script>
+    <script src="/src/client/app/modules/audit/auditmaster/auditmaster.controller.js"></script>
+    <script src="/src/client/app/modules/audit/auditmaster/auditmaster.router.js"></script>
+    <script src="/src/client/app/modules/audit/auditorder/auditorder.controller.js"></script>
+    <script src="/src/client/app/modules/audit/auditorder/auditorder.router.js"></script>
+    <script src="/src/client/app/modules/audit/audituser/audituser.controller.js"></script>
+    <script src="/src/client/app/modules/audit/audituser/audituser.router.js"></script>
+    <script src="/src/client/app/modules/audit/traceability/traceability.controller.js"></script>
+    <script src="/src/client/app/modules/audit/traceability/traceability.router.js"></script>
+    <script src="/src/client/app/modules/billing/cashreport/cashreport.controller.js"></script>
+    <script src="/src/client/app/modules/billing/cashreport/cashreport.router.js"></script>
+    <script src="/src/client/app/modules/billing/changeprices/changeprices.controller.js"></script>
+    <script src="/src/client/app/modules/billing/changeprices/changeprices.router.js"></script>
+    <script src="/src/client/app/modules/billing/consultrips/consultrips.controller.js"></script>
+    <script src="/src/client/app/modules/billing/consultrips/consultrips.router.js"></script>
+    <script src="/src/client/app/modules/billing/creditnote/creditnote.controller.js"></script>
+    <script src="/src/client/app/modules/billing/creditnote/creditnote.router.js"></script>
+    <script src="/src/client/app/modules/billing/generateinvoice/generateinvoice.controller.js"></script>
+    <script src="/src/client/app/modules/billing/generateinvoice/generateinvoice.router.js"></script>
+    <script src="/src/client/app/modules/billing/laterpayment/laterpayment.controller.js"></script>
+    <script src="/src/client/app/modules/billing/laterpayment/laterpayment.router.js"></script>
+    <script src="/src/client/app/modules/billing/printinvoice/printinvoice.controller.js"></script>
+    <script src="/src/client/app/modules/billing/printinvoice/printinvoice.router.js"></script>
+    <script src="/src/client/app/modules/billing/recalculated/recalculated.controller.js"></script>
+    <script src="/src/client/app/modules/billing/recalculated/recalculated.router.js"></script>
+    <script src="/src/client/app/modules/indicators/earlywarning/earlywarning.controller.js"></script>
+    <script src="/src/client/app/modules/indicators/earlywarning/earlywarning.router.js"></script>
+    <script src="/src/client/app/modules/indicators/histogram/histogram.controller.js"></script>
+    <script src="/src/client/app/modules/indicators/histogram/histogram.router.js"></script>
+    <script src="/src/client/app/modules/indicators/indicators/indicators.controller.js"></script>
+    <script src="/src/client/app/modules/indicators/indicators/indicators.router.js"></script>
+    <script src="/src/client/app/modules/indicators/otherreports/otherreports.controller.js"></script>
+    <script src="/src/client/app/modules/indicators/otherreports/otherreports.router.js"></script>
+    <script src="/src/client/app/modules/microbiology/checkmicrobiology/checkmicrobiology.controller.js"></script>
+    <script src="/src/client/app/modules/microbiology/checkmicrobiology/checkmicrobiology.router.js"></script>
+    <script src="/src/client/app/modules/microbiology/growtmicrobiology/growtmicrobiology.controller.js"></script>
+    <script src="/src/client/app/modules/microbiology/growtmicrobiology/growtmicrobiology.router.js"></script>
+    <script src="/src/client/app/modules/microbiology/microbiologyReading/microbiologyReading.controller.js"></script>
+    <script src="/src/client/app/modules/microbiology/microbiologyReading/microbiologyReading.router.js"></script>
+    <script src="/src/client/app/modules/microbiology/planoWhonet/planoWhonet.controller.js"></script>
+    <script src="/src/client/app/modules/microbiology/planoWhonet/planoWhonet.router.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/activationorder/activationorder.controller.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/activationorder/activationorder.router.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/listed/listed.controller.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/listed/listed.router.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/medicalappointment/medicalappointment.controller.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/medicalappointment/medicalappointment.router.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/orderEntry/orderentry.controller.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/orderEntry/orderentry.router.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/orderswithouthistory/orderswithouthistory.controller.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/orderswithouthistory/orderswithouthistory.router.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/restartcounter/restartcounter.controller.js"></script>
+    <script src="/src/client/app/modules/ordermanagement/restartcounter/restartcounter.router.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/cut/cut.router.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/cut/cutController.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/inclusioncenter/inclusioncenter.router.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/inclusioncenter/inclusioncenterController.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/tissueprocessor/tissueprocessor.router.js"></script>
+    <script src="/src/client/app/modules/pathology/histotechnology/tissueprocessor/tissueprocessorController.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/description/description.router.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/description/descriptionController.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/transcription/transcription.router.js"></script>
+    <script src="/src/client/app/modules/pathology/macroscopy/transcription/transcriptionController.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/meetingpathologists/meetingpathologists.router.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/meetingpathologists/meetingpathologistsController.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/sheetmanagement/sheetmanagement.router.js"></script>
+    <script src="/src/client/app/modules/pathology/microscopy/sheetmanagement/sheetmanagementController.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/activationsamples/activationsamples.router.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/activationsamples/activationsamplesController.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/sampleentry/sampleentry.router.js"></script>
+    <script src="/src/client/app/modules/pathology/samplereception/sampleentry/sampleentryController.js"></script>
+    <script src="/src/client/app/modules/pathology/tools/barcodepathology/barcodepathology.router.js"></script>
+    <script src="/src/client/app/modules/pathology/tools/barcodepathology/barcodepathologyController.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historyassignment/historyassignment.controller.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historyassignment/historyassignment.router.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historypatient/historypatient.controller.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historypatient/historypatient.router.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historyreassignment/historyreassignment.controller.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/historyreassignment/historyreassignment.router.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/inconsistency/inconsistency.controller.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/inconsistency/inconsistency.router.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/unlockorderhistory/unlockorderhistory.controller.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/unlockorderhistory/unlockorderhistory.router.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/webquerymanagement/webquerymanagement.controller.js"></script>
+    <script src="/src/client/app/modules/patientmanagement/webquerymanagement/webquerymanagement.router.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/controldeliveryreports/controldeliveryreports.controller.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/controldeliveryreports/controldeliveryreports.router.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/informedconsent/informedconsent.controller.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/informedconsent/informedconsent.router.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/patientconsultation/patientconsultation.controller.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/patientconsultation/patientconsultation.router.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/queries/queries.controller.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/queries/queries.router.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/reports/reports.controller.js"></script>
+    <script src="/src/client/app/modules/reportsandconsultations/reports/reports.router.js"></script>
+    <script src="/src/client/app/modules/result/recordresultbyrank/recordresultbyrank.controller.js"></script>
+    <script src="/src/client/app/modules/result/recordresultbyrank/recordresultbyrank.router.js"></script>
+    <script src="/src/client/app/modules/result/restartmiddleware/restartmiddleware.controller.js"></script>
+    <script src="/src/client/app/modules/result/restartmiddleware/restartmiddleware.router.js"></script>
+    <script src="/src/client/app/modules/result/resultsentry/resultsentry.controller.js"></script>
+    <script src="/src/client/app/modules/result/resultsentry/resultsentry.router.js"></script>
+    <script src="/src/client/app/modules/result/reviewofresults/reviewofresults.controller.js"></script>
+    <script src="/src/client/app/modules/result/reviewofresults/reviewofresults.router.js"></script>
+    <script src="/src/client/app/modules/result/sendEmailAutomaticResult/sendEmailAutomaticResult.controller.js"></script>
+    <script src="/src/client/app/modules/result/sendEmailAutomaticResult/sendEmailAutomaticResult.router.js"></script>
+    <script src="/src/client/app/modules/result/worklist/worklist.controller.js"></script>
+    <script src="/src/client/app/modules/result/worklist/worklist.router.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/completeverify/completeverify.controller.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/completeverify/completeverify.router.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/phlebotomistake/phlebotomistake.controller.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/phlebotomistake/phlebotomistake.router.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/simpleverification/simpleverification.controller.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/simpleverification/simpleverification.router.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/tuberack/tuberack.controller.js"></script>
+    <script src="/src/client/app/modules/samplesmanagement/tuberack/tuberack.router.js"></script>
+    <script src="/src/client/app/modules/stadistics/destinationsample/destinationsample.controller.js"></script>
+    <script src="/src/client/app/modules/stadistics/destinationsample/destinationsample.router.js"></script>
+    <script src="/src/client/app/modules/stadistics/generalstadistics/generalstadistics.controller.js"></script>
+    <script src="/src/client/app/modules/stadistics/generalstadistics/generalstadistics.router.js"></script>
+    <script src="/src/client/app/modules/stadistics/specialstadistics/specialstadistics.controller.js"></script>
+    <script src="/src/client/app/modules/stadistics/specialstadistics/specialstadistics.router.js"></script>
+    <script src="/src/client/app/modules/stadistics/statisticswithprices/statisticswithprices.controller.js"></script>
+    <script src="/src/client/app/modules/stadistics/statisticswithprices/statisticswithprices.router.js"></script>
+    <script src="/src/client/app/modules/tools/barcodeedit/barcodeedit.controller.js"></script>
+    <script src="/src/client/app/modules/tools/barcodeedit/barcodeedit.router.js"></script>
+    <script src="/src/client/app/modules/tools/cubicleassignment/cubicleassignment.controller.js"></script>
+    <script src="/src/client/app/modules/tools/cubicleassignment/cubicleassignment.router.js"></script>
+    <script src="/src/client/app/modules/tools/deletespecial/deletespecial.controller.js"></script>
+    <script src="/src/client/app/modules/tools/deletespecial/deletespecial.router.js"></script>
+    <script src="/src/client/app/modules/tools/exception/exception.controller.js"></script>
+    <script src="/src/client/app/modules/tools/exception/exception.router.js"></script>
+    <script src="/src/client/app/modules/tools/reportedit/reportedit.controller.js"></script>
+    <script src="/src/client/app/modules/tools/reportedit/reportedit.router.js"></script>
+    <script src="/src/client/app/modules/tools/sectionviewer/sectionviewer.controller.js"></script>
+    <script src="/src/client/app/modules/tools/sectionviewer/sectionviewer.router.js"></script>
+    <script src="/src/client/app/modules/transplants/cytotoxicantibodies/cytotoxicantibodies.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/cytotoxicantibodies/cytotoxicantibodies.router.js"></script>
+    <script src="/src/client/app/modules/transplants/donor/donor.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/donor/donor.router.js"></script>
+    <script src="/src/client/app/modules/transplants/participants/participants.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/participants/participants.router.js"></script>
+    <script src="/src/client/app/modules/transplants/receptionsamples/receptionsamples.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/receptionsamples/receptionsamples.router.js"></script>
+    <script src="/src/client/app/modules/transplants/reporteditransplants/reporteditransplants.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/reporteditransplants/reporteditransplants.router.js"></script>
+    <script src="/src/client/app/modules/transplants/reportmanagement/reportmanagement.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/reportmanagement/reportmanagement.router.js"></script>
+    <script src="/src/client/app/modules/transplants/reportvisor/reportvisor.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/reportvisor/reportvisor.router.js"></script>
+    <script src="/src/client/app/modules/transplants/selection/selection.controller.js"></script>
+    <script src="/src/client/app/modules/transplants/selection/selection.router.js"></script>
+    <script src="/src/client/app/widgets/generalControl/angular-selectize.js"></script>
+    <script src="/src/client/app/widgets/generalControl/angular-switchery.js"></script>
+    <script src="/src/client/app/widgets/generalControl/fullpage-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/hotkeys-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/icheck.directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/loadcombobox-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/loadcomboboxrecepcion-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/loadpage-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/multi-combobox-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/multiselect-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/nextInputOnEnter.directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/ngMask.directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/ngplus-overlay.js"></script>
+    <script src="/src/client/app/widgets/generalControl/sangucomplete-directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/scrollToTop.directive.js"></script>
+    <script src="/src/client/app/widgets/generalControl/template-directive.js"></script>
+    <script src="/src/client/app/widgets/pathology/case-filter.js"></script>
+    <script src="/src/client/app/widgets/pathology/casedailysearch.directive.js"></script>
+    <script src="/src/client/app/widgets/pathology/casedetail.directive.js"></script>
+    <script src="/src/client/app/widgets/pathology/caseinfo.directive.js"></script>
+    <script src="/src/client/app/widgets/pathology/files.directive.js"></script>
+    <script src="/src/client/app/widgets/pathology/schedule.directive.js"></script>
+    <script src="/src/client/app/widgets/pathology/study-filter.js"></script>
+    <script src="/src/client/app/widgets/userControl/angular-tree-widget.js"></script>
+    <script src="/src/client/app/widgets/userControl/appointmentdailysearch.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/appointmentsearch.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/attachment.js"></script>
+    <script src="/src/client/app/widgets/userControl/automaticshift.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/card-commentmicrobiology.js"></script>
+    <script src="/src/client/app/widgets/userControl/card-commentorder.js"></script>
+    <script src="/src/client/app/widgets/userControl/card-commentordermodal.js"></script>
+    <script src="/src/client/app/widgets/userControl/card-order.js"></script>
+    <script src="/src/client/app/widgets/userControl/card-ordersample.js"></script>
+    <script src="/src/client/app/widgets/userControl/card-patient.js"></script>
+    <script src="/src/client/app/widgets/userControl/cashbox.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/coded-comment.js"></script>
+    <script src="/src/client/app/widgets/userControl/demographics.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/dependencedemo.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/editdemo.js"></script>
+    <script src="/src/client/app/widgets/userControl/entry-informationtest.js"></script>
+    <script src="/src/client/app/widgets/userControl/eventloadexcel.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/filter-areatest.js"></script>
+    <script src="/src/client/app/widgets/userControl/filter-demographic.js"></script>
+    <script src="/src/client/app/widgets/userControl/filter-laboratory.js"></script>
+    <script src="/src/client/app/widgets/userControl/filter-packlisted.js"></script>
+    <script src="/src/client/app/widgets/userControl/filter-printreports.js"></script>
+    <script src="/src/client/app/widgets/userControl/grouping-stadistics.js"></script>
+    <script src="/src/client/app/widgets/userControl/interview.js"></script>
+    <script src="/src/client/app/widgets/userControl/interviewdestiny.js"></script>
+    <script src="/src/client/app/widgets/userControl/listtest.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/loadreport.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modal-sampledelayed.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modaladdremovetest.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalbarcode.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalexceptions.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalinformation.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalpostponement.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalpostponementest.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalreject.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalrepeat.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalrepitition.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalresultsdelayed.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalresultstemplate.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalretake.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalsampledelayed.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/modalsensitivities.js"></script>
+    <script src="/src/client/app/widgets/userControl/modaltask.js"></script>
+    <script src="/src/client/app/widgets/userControl/modaltaskmicrobiology.js"></script>
+    <script src="/src/client/app/widgets/userControl/order-filter.js"></script>
+    <script src="/src/client/app/widgets/userControl/order-interview.js"></script>
+    <script src="/src/client/app/widgets/userControl/order-sample.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderdailysearch.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderentry-dashboard.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderfield.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderinconsistencysearch.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderinconsistenspacient.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderinfo.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/orderresult.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/ordersearch.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/ordersearchrecall.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/patient.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/patientresult.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/patientsearch.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/profileinfo.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/quote.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/rack-disposalcertificates.js"></script>
+    <script src="/src/client/app/widgets/userControl/reportview.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/requirement.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-header.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-modalrepitition.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-orderinconsistency.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-orderstate.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-reportend.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-reportfinal.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-reportpreliminary.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-sort.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testblock.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testcomment.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testedit.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testgraph.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testhistory.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testnote.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-testrepetition.js"></script>
+    <script src="/src/client/app/widgets/userControl/results-warnings.js"></script>
+    <script src="/src/client/app/widgets/userControl/resultscellularcounters.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/transferservicies.directive.js"></script>
+    <script src="/src/client/app/widgets/userControl/validateresult.directive.js"></script>
+    <!-- endinject -->
+    <script src="/src/client/kendo/kendo.core.min.js"></script>
+    <script src="/src/client/kendo/kendo.color.min.js"></script>
+    <script src="/src/client/kendo/kendo.data.min.js"></script>
+    <script src="/src/client/kendo/kendo.calendar.min.js"></script>
+    <script src="/src/client/kendo/kendo.popup.min.js"></script>
+    <script src="/src/client/kendo/kendo.datepicker.min.js"></script>
+    <script src="/src/client/kendo/kendo.timepicker.min.js"></script>
+    <script src="/src/client/kendo/kendo.datetimepicker.min.js"></script>
+    <script src="/src/client/kendo/kendo.list.min.js"></script>
+    <script src="/src/client/kendo/kendo.userevents.min.js"></script>
+    <script src="/src/client/kendo/kendo.menu.min.js"></script>
+    <script src="/src/client/kendo/kendo.combobox.min.js"></script>
+    <script src="/src/client/kendo/kendo.dropdownlist.min.js"></script>
+    <script src="/src/client/kendo/kendo.maskedtextbox.min.js"></script>
+    <script src="/src/client/kendo/kendo.numerictextbox.min.js"></script>
+    <script src="/src/client/kendo/kendo.multiselect.min.js"></script>
+    <script src="/src/client/kendo/kendo.angular.min.js"></script>
+    <script src="/src/client/kendo/cultures/kendo.culture.en-US.min.js"></script>
+    <script src="/src/client/kendo/cultures/kendo.culture.es-ES.min.js"></script>
+    <script src="/src/client/kendo/kendo.dateinput.min.js"></script>
+    <script src="/src/client/kendo/ng-webworker.js"></script>
+
+
+    <script src="/src/client/kendo/letter.js"></script>
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</body>
+
+</html>

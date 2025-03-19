@@ -1,0 +1,111 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner">
+        <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-1-1 fullheight">
+                <div class="md-card fullheight" style="margin-bottom: 5px">
+                    <div class="md-card-content uk-grid fullheight">
+                        <div class="uk-width-1-1">
+                            <fieldset class="fieldset" style="padding: 25px;">
+                                <div class="uk-grid">
+                                    <div class="uk-width-3-10">
+                                        
+                                        <span class="icheck-inline">
+                                            <input type="radio" name="typereport" id="typefiltercodensade" icheck
+                                                ng-model="vm.typereport" value="1" />
+                                            <label for="radio_demo_inline_1"
+                                                class="inline-label">{{'0945' | translate}}</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input type="radio" name="typereport" id="typefilterdetallado" icheck
+                                                ng-model="vm.typereport" value="2" />
+                                            <label for="radio_demo_inline_2"
+                                                class="inline-label">{{'0946' | translate}}</label>
+                                        </span>
+                                    </div>
+                                    <div class="uk-width-4-10" ng-if="vm.typereport==='2'">
+                                        <input kendo-time-picker k-rebind="vm.date" k-interval="5" k-format="'HH:mm'"
+                                            k-ng-model="vm.date" k-on-change="vm.startChange()" style="width: 100%;" />
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+                <div class="md-card uk-animation-scale-up uk-animation-40 fullheight">
+                    <div style="padding-top: 5px" class="md-card-content fullheight">
+                        <div class="uk-grid fullheight">
+                            <div class="uk-width-1-1" style="float: right">
+                                <button style="float: right" type="button"
+                                    ng-disabled="vm.typereport==='2'&& vm.date === null"
+                                    class="md-fab md-fab-small md-bg-purple-A700"
+                                    ng-class="{'md-bg-blue-grey-100' : vm.typereport==='2'&& vm.date === null}"
+                                    ng-click="vm.getsave()">
+                                    <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}"
+                                        title="Reiniciar contador">autorenew</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirmation" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-2-10" style="padding-left: 17px;">
+                        <img src="images/Question.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-8-10" style="margin-top: 3%;">
+                        <span class="uk-text-justify"><strong>{{'0333' | translate}}:</strong> <br> </span>
+                        <span class="uk-text-justify">{{'0947' | translate}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light"
+                data-uk-modal="{target:'#advertencie'}">
+                {{'0219' | translate}}
+            </button>
+            <button type="button" class="uk-modal-close md-btn md-btn-flat">{{'0220' | translate}}</button>
+        </div>
+    </div>
+</div>
+<div id="advertencie" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-2-10" style="padding-left: 17px;">
+                        <img src="images/Question.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-8-10" style="margin-top: 3%;">
+                        <span class="uk-text-justify"><strong>{{'0347' | translate}}:</strong> <br> </span>
+                        <span class="uk-text-justify">{{'0947' | translate}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary  md-btn-wave-light waves-effect waves-button waves-light"
+                ng-click="vm.restartsequencemanually()">
+                {{'0219' | translate}}
+            </button>
+            <button type="button" class="uk-modal-close md-btn md-btn-flat">{{'0220' | translate}}</button>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

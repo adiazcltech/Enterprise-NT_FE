@@ -1,0 +1,1086 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror
+  openerrormodal="vm.ShowPopupError"
+  detailerror="vm.Error"
+></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class="col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0290' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class="col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span
+            class="question-style glyphicon glyphicon-question-sign"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/profil/profil.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"
+          ></span>
+        </div>
+      </div>
+      <div
+        class="panel-body general-container panel-padding panel-scroll contentscroll"
+      >
+        <div
+          class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel-padding"
+          style="height: 100%"
+        >
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input
+                      data-ng-model="vm.search"
+                      class="form-control"
+                      type="text"
+                      placeholder="{{'0015' | translate}}"
+                    />
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span
+                      style="margin-top: 10px"
+                      class="badge"
+                      data-ng-bind="vm.filtered.length"
+                    ></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-6">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.codename; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() "
+                        >
+                          <i
+                            ng-if="!vm.sortReverse && vm.sortType != vm.codename"
+                            class="glyphicon glyphicon-sort-by-alphabet"
+                          ></i>
+                          <i
+                            ng-if="vm.sortReverse && vm.sortType != vm.codename"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType == vm.codename && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType == vm.codename && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"
+                          ></i>
+                          <span
+                            ng-show="vm.sortType == vm.codename && !vm.sortReverse"
+                          ></span>
+                          <span
+                            ng-show="vm.sortType == vm.codename && vm.sortReverse"
+                          ></span>
+                        </a>
+                        {{'0011' | translate}}
+                      </th>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.testType; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() "
+                        >
+                          <i
+                            ng-if="!vm.sortReverse && vm.sortType != vm.testType"
+                            class="glyphicon glyphicon-sort-by-alphabet"
+                          ></i>
+                          <i
+                            ng-if="vm.sortReverse && vm.sortType != vm.testType"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType == vm.testType && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType == vm.testType && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"
+                          ></i>
+                          <span
+                            ng-show="vm.sortType == vm.testType && !vm.sortReverse"
+                          ></span>
+                          <span
+                            ng-show="vm.sortType == vm.testType && vm.sortReverse"
+                          ></span> </a
+                        >{{'0473' | translate}}
+                      </th>
+                      <th class="col-md-3">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() "
+                        >
+                          <i
+                            ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet"
+                          ></i>
+                          <i
+                            ng-if="vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType == vm.state && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType == vm.state && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"
+                          ></i>
+                          <span
+                            ng-show="vm.sortType == vm.state && !vm.sortReverse"
+                          ></span>
+                          <span
+                            ng-show="vm.sortType == vm.state && vm.sortReverse"
+                          ></span> </a
+                        >{{'0014' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll">
+                    <tr
+                      class="row-list"
+                      data-ng-repeat="Profil in vm.filtered = ((vm.data | filter: {codename:vm.search} )| orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getId(Profil.id,$index,Form)"
+                      ng-class="{info: Profil.id == vm.selected, danger: Profil.state == 0 }"
+                    >
+                      <td class="col-md-6" data-ng-bind="Profil.codename"></td>
+                      <td class="col-md-3 text-center">
+                        <i
+                          ng-if="Profil.testType == 2"
+                          class="glyphicon glyphicon-ok green"
+                        ></i>
+                      </td>
+                      <td class="col-md-3 text-center">
+                        <i
+                          ng-if="Profil.state == true"
+                          class="glyphicon glyphicon-ok green"
+                        ></i>
+                        <i
+                          ng-if="Profil.state == false"
+                          class="glyphicon glyphicon-ban-circle red"
+                        ></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel-padding"
+          style="height: 100%"
+        >
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div
+                class="panel-body panel-form contentscroll"
+                style="overflow: auto"
+              >
+                <form name="Form" id="Form" class="form-horizontal panel-body">
+                  <div class="form-group form-group-sm">
+                    <label class="col-md-2 text-right"
+                      >{{'0018' | translate}}:</label
+                    >
+                    <div
+                      class="col-md-2 has-feedback"
+                      ng-class="{'has-error': Form.code.$invalid && Form.code.$touched||vm.Repeat }"
+                    >
+                      <input
+                        class="form-control"
+                        maxlength="10"
+                        data-ng-model="vm.Detail.code"
+                        ng-required="true"
+                        ng-disabled="vm.isDisabled"
+                        name="code"
+                        id="code"
+                        class="form-control"
+                        type="text"
+                        ng-focus="vm.Repeat = false"
+                      />
+                      <span
+                        ng-if="Form.code.$invalid && Form.code.$touched ||vm.Repeat"
+                        class="glyphicon glyphicon-remove form-control-feedback"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        ng-if="Form.code.$invalid && Form.code.$touched"
+                        class="help-block"
+                        >{{'0016' | translate}}</span
+                      >
+                      <span ng-if="vm.Repeat" class="help-block"
+                        >{{'0038' | translate}}</span
+                      >
+                    </div>
+                    <label class="col-md-1 text-right"
+                      >{{'0011' | translate}}:</label
+                    >
+                    <div
+                      class="col-md-7 has-feedback"
+                      ng-class="{'has-error': Form.name.$invalid && Form.name.$touched||vm.Repeatname }"
+                    >
+                      <input
+                        class="form-control"
+                        maxlength="150"
+                        data-ng-model="vm.Detail.name"
+                        ng-required="true"
+                        ng-disabled="vm.isDisabled"
+                        name="name"
+                        id="name"
+                        class="form-control"
+                        type="text"
+                        ng-focus="vm.Repeatname = false"
+                      />
+                      <span
+                        ng-if="Form.name.$invalid && Form.name.$touched ||vm.Repeatname"
+                        class="glyphicon glyphicon-remove form-control-feedback"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        ng-if="Form.name.$invalid && Form.name.$touched"
+                        class="help-block"
+                        >{{'0016' | translate}}</span
+                      >
+                      <span ng-if="vm.Repeatname" class="help-block"
+                        >{{'0038' | translate}}</span
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="col-md-2 text-right"
+                      >{{'0019' | translate}}:</label
+                    >
+                    <div
+                      class="col-md-2 has-feedback"
+                      ng-class="{'has-error': Form.abbr.$invalid && Form.abbr.$touched||vm.Repeatabbr }"
+                    >
+                      <input
+                        class="form-control"
+                        maxlength="10"
+                        data-ng-model="vm.Detail.abbr"
+                        ng-required="true"
+                        ng-disabled="vm.isDisabled"
+                        name="abbr"
+                        id="abbr"
+                        class="form-control"
+                        type="text"
+                        ng-focus="vm.Repeatabbr = false"
+                      />
+                      <span
+                        ng-if="Form.abbr.$invalid && Form.abbr.$touched ||vm.Repeatabbr"
+                        class="glyphicon glyphicon-remove form-control-feedback"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        ng-if="Form.abbr.$invalid && Form.abbr.$touched"
+                        class="help-block"
+                        >{{'0016' | translate}}</span
+                      >
+                      <span ng-if="vm.Repeatabbr" class="help-block"
+                        >{{'0038' | translate}}</span
+                      >
+                    </div>
+                    <label class="col-md-1 text-right"
+                      >{{'0221' | translate}}:</label
+                    >
+                    <div class="col-md-3">
+                      <select
+                        ng-options="obj.id as obj.name for obj in vm.ListGender"
+                        data-ng-model="vm.Detail.gender.id"
+                        class="form-control"
+                        ng-required="true"
+                        ng-disabled="vm.isDisabled"
+                      ></select>
+                    </div>
+                    <label class="col-md-1 text-right"
+                      >{{'0289' | translate}}:</label
+                    >
+                    <div class="col-md-3">
+                      <select
+                        ng-options="obj.id as obj.name for obj in vm.Lislevel"
+                        data-ng-model="vm.Detail.level.id"
+                        class="form-control"
+                        ng-disabled="vm.isDisabled"
+                      ></select>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="col-md-2 text-right"
+                      >{{'0473' | translate}}:</label
+                    >
+                    <div class="col-md-2 text-left">
+                      <toggle
+                        ng-model="vm.Detail.Pq"
+                        on="{{'0068' | translate}}"
+                        off="{{'0492' | translate}}"
+                        ng-disabled="vm.isDisabled"
+                        ng-change="vm.Detail.area.id = null;vm.changePQ()"
+                        size="btn-sm"
+                      >
+                      </toggle>
+                    </div>
+                    <label class="col-md-1 text-right" ng-if="!vm.Detail.Pq"
+                      >{{'0037' | translate}}:</label
+                    >
+                    <div
+                      class="col-md-7"
+                      ng-if="!vm.Detail.Pq"
+                      ng-class="{'has-error': vm.Area }"
+                    >
+                      <select
+                        ng-options="obj.id as obj.name for obj in vm.dataarea"
+                        data-ng-model="vm.Detail.area.id"
+                        class="form-control"
+                        ng-change="vm.changePQ()"
+                        ng-disabled="vm.isDisabled"
+                      ></select>
+                      <span ng-if="vm.Area" class="help-block"
+                        >{{'0016' | translate}}</span
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="col-md-2 text-right"
+                      >{{'0014' | translate}}:</label
+                    >
+                    <div class="col-md-5">
+                      <toggle
+                        ng-model="vm.Detail.state"
+                        on="{{'0068' | translate}}"
+                        off="{{'0492' | translate}}"
+                        ng-disabled="vm.isDisabledState"
+                        ng-change="vm.changeState()"
+                        size="btn-sm"
+                      ></toggle>
+                    </div>
+                  </div>
+                  <modalstate
+                    openstatemodal="vm.ShowPopupState"
+                    detailstate="vm.Detail.state"
+                  ></modalstate>
+                  <uib-accordion close-others="oneAtATime"> </uib-accordion>
+                  <uib-accordion close-others="true">
+                    <div
+                      uib-accordion-group
+                      class="panel panel-primary panel-padding"
+                      is-open="vm.characteristics"
+                    >
+                      <uib-accordion-heading>
+                        <div class="panel-heading">
+                          <h4 class="panel-title panel-third">
+                            <i
+                              class="pull-right glyphicon"
+                              ng-class="{'glyphicon-chevron-down': vm.characteristics, 'glyphicon-chevron-right': !vm.characteristics}"
+                            ></i>
+                            {{'0419' | translate}}
+                          </h4>
+                        </div>
+                      </uib-accordion-heading>
+                      <div
+                        class="form-group form-group-sm"
+                        style="padding-left: 10px"
+                      >
+                        <label
+                          class="col-lg-2 col-md-2 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 18.666667%;
+                          "
+                        >
+                          {{'0489' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-left"
+                          style="width: 11.666667%; padding-left: 12px"
+                        >
+                          <toggle
+                            ng-model="vm.Detail.dependentExam"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-change="vm.changedependentExam()"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm"
+                          ></toggle>
+                        </div>
+                        <label
+                          class="col-md-1 text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 20.666667%;
+                          "
+                          >{{'0052' | translate}}:</label
+                        >
+                        <div
+                          class="col-md-7"
+                          ng-class="{'has-error': vm.Requeriddatasample }"
+                          style="width: 48.333333%"
+                        >
+                          <select
+                            name="datasample"
+                            id="datasample"
+                            ng-options="obj.id as obj.name for obj in vm.datasample"
+                            data-ng-model="vm.Detail.sample.id"
+                            class="form-control"
+                            ng-change="vm.changesample()"
+                            ng-requerid="true"
+                            ng-disabled="!vm.Detail.dependentExam || vm.isDisabled"
+                          ></select>
+                          <span
+                            ng-if="vm.Requeriddatasample"
+                            class="glyphicon glyphicon-remove form-control-feedback"
+                            aria-hidden="true"
+                          ></span>
+                          <span ng-if="vm.Requeriddatasample" class="help-block"
+                            >{{'0016' | translate}}</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="form-group form-group-sm"
+                        style="padding-left: 10px"
+                      >
+                        <label
+                          class="col-lg-2 col-md-2 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 18.666667%;
+                          "
+                          >{{'0458' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-left"
+                          style="width: 11.666667%; padding-left: 12px"
+                        >
+                          <toggle
+                            ng-model="vm.Detail.showInQuery"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm"
+                          ></toggle>
+                        </div>
+                        <label
+                          class="col-lg-3 col-md-3 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 20.666667%;
+                          "
+                        >
+                          {{'0490' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-right"
+                          style="width: 11.666667%"
+                        >
+                          <toggle
+                            ng-model="vm.Detail.excludeAnalytes"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm"
+                          ></toggle>
+                        </div>
+                        <label
+                          class="col-lg-3 col-md-3 label-pading text-right"
+                          style="
+                            padding-left: 0px;
+                            width: 22.666667%;
+                            padding-right: 0px;
+                          "
+                          >{{'0439' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-right"
+                          style="width: 13.666667%"
+                        >
+                          <toggle
+                            ng-model="vm.Detail.showEntry"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm"
+                          ></toggle>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group form-group-sm"
+                        style="padding-left: 10px"
+                      >
+                        <label
+                          class="col-lg-3 col-md-3 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 18.666667%;
+                          "
+                          >{{'0306' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-left"
+                          style="width: 11.666667%; padding-left: 12px"
+                        >
+                          <toggle
+                            ng-model="vm.Detail.billing"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-change="vm.changemultiplyBy()"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm"
+                          ></toggle>
+                        </div>
+                        <label
+                          class="col-lg-3 col-md-3 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 20.666667%;
+                          "
+                          >{{'0435' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-left"
+                          style="width: 11.666667%"
+                        >
+                          <number-input
+                            ng-model="vm.Detail.multiplyBy"
+                            max="9999999999"
+                            min="1"
+                            step="1"
+                            start="1"
+                            disabledecimal="true"
+                            decimalplaces="1"
+                            disable="vm.isDisabledmultiplyBy"
+                          ></number-input>
+                        </div>
+                        <label
+                          class="col-lg-2 col-md-2 label-pading text-right"
+                          style="
+                            padding-left: 0px;
+                            width: 22.666667%;
+                            padding-right: 0px;
+                          "
+                          >{{'0433' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-right"
+                          style="width: 13.666667%"
+                        >
+                          <toggle
+                            ng-model="vm.Detail.statistics"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-change="vm.changemultiplyBy()"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm"
+                          ></toggle>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group form-group-sm"
+                        style="padding-left: 10px"
+                      >
+                        <label
+                          class="col-lg-2 col-md-2 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 18.666667%;
+                          "
+                          >{{'0436' | translate}}:</label
+                        >
+                        <div class="col-lg-6 col-md-6 text-left" ng-style="{ width: !vm.Detail.Pq ? '44%' : '80.5%' }">
+                          <input
+                            class="form-control"
+                            maxlength="150"
+                            ng-model="vm.Detail.statisticalTitle"
+                            ng-disabled="vm.isDisabled"
+                            type="text"
+                          />
+                        </div>
+                        <label class="col-lg-2 col-md-2 label-pading text-right"
+                          style=" padding-left: 0px; width: 22.666667%;padding-right: 0px;" ng-if="!vm.Detail.Pq" >
+                          {{'1371' | translate}}:</label>
+                        <div class="col-lg-1 col-md-1 text-right" style="width: 13.666667%" ng-if="!vm.Detail.Pq" >
+                          <toggle
+                            ng-model="vm.Detail.eventNotification"
+                            on="{{'0068' | translate}}"
+                            off="{{'0492' | translate}}"
+                            ng-disabled="vm.isDisabled"
+                            size="btn-sm">
+                          </toggle>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group form-group-sm"
+                        style="padding-left: 10px"
+                      >
+                        <label
+                          class="col-lg-2 col-md-2 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 18.666667%;
+                          "
+                          >{{'0488' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-3 col-md-3 text-left"
+                          style="width: 44%"
+                        >
+                          <select
+                            ng-options="obj.id as obj.name for obj in vm.listprintOnReport"
+                            data-ng-model="vm.Detail.printOnReport"
+                            class="form-control"
+                            ng-required="true"
+                            ng-disabled="vm.isDisabled"
+                          ></select>
+                        </div>
+                        <label
+                          class="col-lg-2 col-md-2 label-pading text-right"
+                          style="
+                            padding-left: 0px;
+                            width: 22.666667%;
+                            padding-right: 0px;
+                          "
+                          >{{'0428' | translate}}:</label
+                        >
+                        <div
+                          class="col-lg-1 col-md-1 text-right"
+                          style="padding-left: 22px; width: 13.666667%"
+                        >
+                          <number-input
+                            ng-model="vm.Detail.deliveryDays"
+                            max="9999999999"
+                            min="1"
+                            step="1"
+                            start="1"
+                            disabledecimal="true"
+                            decimalplaces="1"
+                            disable="vm.isDisabled"
+                          ></number-input>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group form-group-sm"
+                        style="padding-left: 10px; margin-bottom: 0px"
+                      >
+                        <label
+                          class="col-lg-3 col-md-3 label-pading text-right"
+                          style="
+                            padding-right: 0px;
+                            padding-left: 0px;
+                            width: 18.666667%;
+                          "
+                          >{{'0301' | translate}}:</label
+                        >
+                        <div class="col-md-4" style="width: 80.5%">
+                          <div
+                            multiselect
+                            disable="vm.isDisabled"
+                            list="vm.listProcessingDays"
+                            ng-model="vm.Detail.Days"
+                          ></div>
+                          <span ng-if="vm.Detail.Days == ''" class="help-block"
+                            >{{'0016' | translate}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <span ng-if="vm.Requeriddatasample" class="help-block"
+                      >{{'1157' | translate}}</span
+                    >
+                    <div
+                      uib-accordion-group
+                      class="panel panel-primary panel-padding"
+                      is-open="vm.acoodionTests"
+                    >
+                      <uib-accordion-heading>
+                        <div class="panel-heading">
+                          <h4 class="panel-title panel-third">
+                            <i
+                              class="pull-right glyphicon"
+                              ng-class="{'glyphicon-chevron-down': vm.acoodionTests, 'glyphicon-chevron-right': !vm.acoodionTests}"
+                            ></i>
+                            {{'0475' | translate}}
+                          </h4>
+                        </div>
+                      </uib-accordion-heading>
+                      <div class="form-group-sm">
+                        <div class="input-group">
+                          <input
+                            data-ng-model="vm.search9"
+                            ng-disabled="vm.isDisabled"
+                            class="form-control"
+                            type="text"
+                            placeholder="{{'0015' | translate}}"
+                          />
+                          <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-search"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-8" style="padding: 5px">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType1 =  vm.codetest; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() "
+                        >
+                          <i
+                            ng-if="!vm.sortReverse1 && vm.sortType1 != vm.codetest"
+                            class="glyphicon glyphicon-sort-by-alphabet"
+                          ></i>
+                          <i
+                            ng-if="vm.sortReverse1 && vm.sortType1 != vm.codetest"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType1 == vm.codetest && !vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-bottom"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType1 == vm.codetest && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"
+                          ></i>
+                          <span
+                            ng-show="vm.sortType1 == vm.codetest && !vm.sortReverse1"
+                          ></span>
+                          <span
+                            ng-show="vm.sortType1 == vm.codetest && vm.sortReverse1"
+                          ></span>
+                        </a>
+                        {{'0018' | translate}}
+                      </div>
+                      <div class="col-md-2" style="padding: 5px">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType1 =  vm.nametest; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() "
+                        >
+                          <i
+                            ng-if="!vm.sortReverse1 && vm.sortType1 != vm.nametest"
+                            class="glyphicon glyphicon-sort-by-alphabet"
+                          ></i>
+                          <i
+                            ng-if="vm.sortReverse1 && vm.sortType1 != vm.nametest"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType1 == vm.nametest && !vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-bottom"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType1 == vm.nametest && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"
+                          ></i>
+                          <span
+                            ng-show="vm.sortType1 == vm.nametest && !vm.sortReverse1"
+                          ></span>
+                          <span
+                            ng-show="vm.sortType1 == vm.nametest && vm.sortReverse1"
+                          ></span>
+                        </a>
+                        {{'0052' | translate}}
+                      </div>
+                      <div class="col-md-2 text-right" style="padding: 5px">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType1 =  vm.selectedtest; vm.sortReverse1 = !vm.sortReverse1; $event.stopPropagation() "
+                        >
+                          <i
+                            ng-if="!vm.sortReverse1 && vm.sortType1 != vm.selectedtest"
+                            class="glyphicon glyphicon-sort-by-alphabet"
+                          ></i>
+                          <i
+                            ng-if="vm.sortReverse1 && vm.sortType1 != vm.selectedtest"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType1 == vm.selectedtest && !vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-bottom"
+                          ></i>
+                          <i
+                            ng-if="vm.sortType1 == vm.selectedtest && vm.sortReverse1"
+                            class="glyphicon glyphicon-triangle-top"
+                          ></i>
+                          <span
+                            ng-show="vm.sortType1 == vm.selectedtest && !vm.sortReverse1"
+                          ></span>
+                          <span
+                            ng-show="vm.sortType1 == vm.selectedtest && vm.sortReverse1"
+                          ></span> </a
+                        >{{'0456' | translate}}
+                      </div>
+                      <div
+                        vs-repeat
+                        data-scroll-to-top="vm.filteredTest.length"
+                        style="
+                          width: 100%;
+                          height: 150px;
+                          overflow: auto;
+                          border-top: 2px solid #dfd9d9;
+                        "
+                        class="contentscroll"
+                      >
+                        <div
+                          class="uk-grid"
+                          style="
+                            width: 100%;
+                            padding: 5px;
+                            border-top: 1px solid #e5dada;
+                          "
+                          data-ng-repeat="test in vm.filteredTest = ((vm.datatest | filter: {search:vm.search9} )| orderBy:vm.sortType1:vm.sortReverse1)"
+                        >
+                          <div
+                            class="col-md-8 text-hidetable"
+                            style="padding-left: 0px"
+                          >
+                            {{test.code}} - {{test.name}}
+                          </div>
+                          <div class="col-md-3 text-hidetable">
+                            {{test.sample.name}}
+                          </div>
+                          <checkboxnt
+                            value="test.selected"
+                            model="test.selected"
+                            disable=" vm.isDisabled"
+                          ></checkboxnt>
+                        </div>
+                      </div>
+                    </div>
+                    <span ng-if="vm.testassociate" class="help-block"
+                      >{{'0461' | translate}}</span
+                    >
+                    <span ng-if="vm.testassociateone" class="help-block"
+                      >{{'0506' | translate}}</span
+                    >
+
+                    <span ng-if="vm.Requeridtestsample" class="help-block"
+                      >{{'1175' | translate}}</span
+                    >
+                    <div
+                      uib-accordion-group
+                      class="panel panel-primary panel-padding"
+                      is-open="vm.Requirements"
+                    >
+                      <uib-accordion-heading>
+                        <div class="panel-heading">
+                          <h4 class="panel-title panel-third">
+                            <i
+                              class="pull-right glyphicon"
+                              ng-class="{'glyphicon-chevron-down': vm.Requirements, 'glyphicon-chevron-right': !vm.Requirements}"
+                            ></i>
+                            {{'0448' | translate}}
+                          </h4>
+                        </div>
+                      </uib-accordion-heading>
+                      <div class="form-group-sm">
+                        <div class="input-group">
+                          <input
+                            data-ng-model="vm.search2"
+                            ng-disabled="vm.isDisabled"
+                            class="form-control"
+                            type="text"
+                            placeholder="{{'0015' | translate}}"
+                          />
+                          <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-search"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="uk-grid">
+                        <div class="col-md-10" style="padding: 5px">
+                          <a
+                            ng-click="$event.stopPropagation(); vm.sortType2 =  vm.codequirement; vm.sortReverse2 = !vm.sortReverse2; $event.stopPropagation() "
+                          >
+                            <i
+                              ng-if="!vm.sortReverse2 && vm.sortType2 != vm.codequirement"
+                              class="glyphicon glyphicon-sort-by-alphabet"
+                            ></i>
+                            <i
+                              ng-if="vm.sortReverse2 && vm.sortType2 != vm.codequirement"
+                              class="glyphicon glyphicon-sort-by-alphabet-alt"
+                            ></i>
+                            <i
+                              ng-if="vm.sortType2 == vm.codequirement && !vm.sortReverse2"
+                              class="glyphicon glyphicon-triangle-bottom"
+                            ></i>
+                            <i
+                              ng-if="vm.sortType2 == vm.codequirement && vm.sortReverse2"
+                              class="glyphicon glyphicon-triangle-top"
+                            ></i>
+                            <span
+                              ng-show="vm.sortType2 == vm.codequirement && !vm.sortReverse2"
+                            ></span>
+                            <span
+                              ng-show="vm.sortType2 == vm.codequirement && vm.sortReverse2"
+                            ></span>
+                          </a>
+                          {{'0051' | translate}}
+                        </div>
+                        <div
+                          class="col-md-2 text-left"
+                          style="padding: 5px 31px 5px 5px"
+                        >
+                          <a
+                            ng-click="$event.stopPropagation(); vm.sortType2 =  vm.selectedrequirement; vm.sortReverse2 = !vm.sortReverse2; $event.stopPropagation() "
+                          >
+                            <i
+                              ng-if="!vm.sortReverse2 && vm.sortType2 != vm.selectedrequirement"
+                              class="glyphicon glyphicon-sort-by-alphabet"
+                            ></i>
+                            <i
+                              ng-if="vm.sortReverse2 && vm.sortType2 != vm.selectedrequirement"
+                              class="glyphicon glyphicon-sort-by-alphabet-alt"
+                            ></i>
+                            <i
+                              ng-if="vm.sortType2 == vm.selectedrequirement && !vm.sortReverse2"
+                              class="glyphicon glyphicon-triangle-bottom"
+                            ></i>
+                            <i
+                              ng-if="vm.sortType2 == vm.selectedrequirement && vm.sortReverse2"
+                              class="glyphicon glyphicon-triangle-top"
+                            ></i>
+                            <span
+                              ng-show="vm.sortType2 == vm.selectedrequirement && !vm.sortReverse2"
+                            ></span>
+                            <span
+                              ng-show="vm.sortType2 == vm.selectedrequirement && vm.sortReverse2"
+                            ></span> </a
+                          >{{'0456' | translate}}
+                        </div>
+                      </div>
+                      <div
+                        style="
+                          width: 100%;
+                          height: 150px;
+                          overflow: auto;
+                          border-top: 2px solid #dfd9d9;
+                        "
+                        class="contentscroll"
+                      >
+                        <div
+                          class="uk-grid"
+                          style="
+                            width: 100%;
+                            padding: 5px;
+                            border-top: 1px solid #e5dada;
+                          "
+                          data-ng-repeat="requirement in vm.filted = ((vm.datalistrequirement | filter: vm.search2 )| orderBy:vm.sortType2:vm.sortReverse2)"
+                        >
+                          <div class="col-md-11 text-hidetable">
+                            {{requirement.code}}
+                          </div>
+                          <checkboxnt
+                            value="requirement.selected"
+                            model="requirement.selected"
+                            disable=" vm.isDisabled"
+                          ></checkboxnt>
+                        </div>
+                      </div>
+                    </div>
+                  </uib-accordion>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button
+                    type="button"
+                    class="btn btn-success button-list"
+                    ng-click="vm.New(Form)"
+                    ng-disabled="vm.isDisabledAdd"
+                  >
+                    <span
+                      class="glyphicon glyphicon-plus"
+                      aria-hidden="true"
+                    ></span>
+                    {{'0005' | translate}}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning button-list"
+                    ng-click="vm.Edit()"
+                    ng-disabled="vm.isDisabledEdit"
+                  >
+                    <span
+                      class="glyphicon glyphicon-pencil"
+                      aria-hidden="true"
+                    ></span
+                    >{{'0006' | translate}}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary button-list"
+                    ng-click="vm.save(Form)"
+                    ng-disabled="!Form.$valid || vm.isDisabledSave  || vm.Detail.processingDays  == ''"
+                  >
+                    <span
+                      class="glyphicon glyphicon-floppy-disk"
+                      aria-hidden="true"
+                    >
+                    </span
+                    >{{'0007' | translate}}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-info button-list"
+                    ng-click="vm.cancel(Form)"
+                    ng-disabled="vm.isDisabledCancel"
+                  >
+                    <span
+                      class="glyphicon glyphicon-remove"
+                      aria-hidden="true"
+                    ></span
+                    >{{'0008' | translate}}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-violet button-list"
+                    ng-click="vm.generateFile()"
+                  >
+                    <span
+                      class="glyphicon glyphicon-print"
+                      aria-hidden="true"
+                    ></span
+                    >{{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="Requeridoprofil.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5 col-md-offset-3">
+                                <a ng-click="close('test')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/Test.png">
+                                    <h6 class="text-center"> {{'0402' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

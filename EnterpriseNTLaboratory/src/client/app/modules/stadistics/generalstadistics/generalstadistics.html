@@ -1,0 +1,225 @@
+<style>
+    /*    .k-block, .k-draghandle, .k-grid-header,
+    .k-grouping-header, .k-header, .k-pager-wrap,
+    .k-treemap-tile, html .km-pane-wrapper .k-header {
+        background-color: #e6e6e6 !important;
+    }*/
+
+    span.k-picker-wrap,
+    span.k-state-default,
+    span.k-state-default:hover,
+    span.k-state-default:focus {
+        padding: 0px !important;
+        height: 30px !important;
+        border-style: none;
+        background-color: #fff !important;
+    }
+
+    span.md-input-bar {
+        display: none;
+    }
+
+
+    span>div.md-input-wrapper {
+        top: -43px;
+        width: 101% !important;
+        padding-top: 3px;
+        margin-top: 3px;
+    }
+
+    span.k-widget,
+    span.k-datepicker,
+    span.k-header {
+        padding-bottom: 0px;
+        margin-top: 8px !important;
+    }
+
+    span.k-select {
+        margin-top: -2px;
+    }
+
+    span.k-select>span.uk-input-group-icon:before,
+    span.uk-icon-calendar:before {
+        color: #727272;
+    }
+
+    .k-input {
+        background-color: transparent;
+        padding-bottom: 0px;
+        margin-top: -6px;
+        width: 113%;
+    }
+
+    .k-block,
+    .k-draghandle,
+    .k-grid-header,
+    .k-grouping-header,
+    .k-header,
+    .k-pager-wrap,
+    .k-treemap-tile,
+    html .km-pane-wrapper .k-header {
+        background-color: #2196f3;
+    }
+
+    td.k-calendar,
+    td.k-today {
+        background-color: #2196f3 !important;
+    }
+
+    .k-calendar td {
+        border-radius: 50%;
+        border-style: none !important;
+    }
+
+    .k-calendar td.k-state-focused,
+    .k-calendar td.k-state-selected.k-state-focused {
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    .k-calendar td.k-state-selected {
+        background-color: #CCC;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    div.k-footer>a.k-link,
+    a.k-nav-today {
+        color: #2196f3 !important;
+    }
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner">
+        <div style="height: calc(100% - 58px)" class="uk-grid" data-uk-grid-margin>
+            <div style="height:75%" class="uk-width-1-1">
+                <div class="md-card" style="margin-bottom: 5px">
+                    <div class="md-card-content uk-grid uk-grid-small">
+                        <div class="uk-width-4-10">
+                            <fieldset class="fieldset" style="height: 63px; padding-top: 9px">
+                                <orderfilter rangeinit="vm.dateInit" rangeend="vm.dateEnd" typefilter="vm.filterRange"
+                                    isopenreport="vm.isOpenReport" typeview='2'></orderfilter>
+                            </fieldset>
+                        </div>
+                        <div class="uk-width-6-10">
+                            <fieldset class="fieldset" style="height: 63px; padding-top: 9px">
+                                <div class="uk-grid" style="margin-top: 3px">
+                                    <div class="uk-width-1-4">
+                                        <div class="uk-form-row md-input-wrapper md-input-filled">
+                                            <label style="padding-left: 2px">{{'0430' | translate}}:</label>
+                                            <select class="md-input" charset="utf-8"
+                                                ng-options="obj.id as obj.name for obj in vm.listsearchby"
+                                                data-ng-model="vm.searchby" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-4">
+                                        <div class="uk-form-row md-input-wrapper md-input-filled">
+                                            <label style="padding-left: 2px">{{'0161' | translate}}:</label>
+                                            <select class="md-input" charset="utf-8"
+                                                ng-options="obj.id as obj.name for obj in vm.listtypereport"
+                                                ng-disabled="vm.statetypereport" data-ng-model="vm.typereport"
+                                                class="form-control" ng-change="vm.changetypereport()"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-width-1-4">
+                                        <div class="uk-form-row md-input-wrapper md-input-filled">
+                                            <label style="padding-left: 2px">{{'0431' | translate}}:</label>
+                                            <select class="md-input" charset="utf-8"
+                                                ng-options="obj.id as obj.name for obj in vm.liststatetest"
+                                                data-ng-model="vm.statetest" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-4">
+                                        <div class="uk-form-row md-input-wrapper md-input-filled">
+                                            <label style="padding-left: 2px">{{'0088' | translate}}:</label>
+                                            <select class="md-input" charset="utf-8"
+                                                ng-options="obj as obj.name for obj in vm.listordertype track by obj.id"
+                                                data-ng-model="vm.itemordertype" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <groupingstatistics numbergroups="vm.numbergroup" groupsvalue="vm.listgroup" enabledgroupfirt="vm.enabledgroupfirt"
+                    controlvalid="vm.controlvalidgroups" enabledagegroups="true" removetest="vm.removetest"></groupingstatistics>
+            </div>
+        </div>
+        <!-- <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+            <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+                <div style="height: 100%; padding-top: 5px" class="md-card-content">
+                    <div class="uk-grid" style="height: 100%">
+                        <div class="uk-width-1-1" style="float: right">
+
+                            <button style="float: right" ng-show="vm.report === true" type="button" ng-disabled="true"
+                                class="md-fab md-fab-small md-bg-purple-A700"
+                                ng-class="{'md-bg-blue-grey-100' : false}">
+                                <i style="color: white" class="uk-icon-refresh uk-icon-spin"
+                                    data-uk-tooltip="{pos:'top'}" title="{{'0158' | translate}}"></i>
+                            </button>
+                            <button style="float: right" ng-show="vm.report === false" type="button"
+                                ng-disabled="!vm.isopenreport || !vm.controlvalidgroups"
+                                class="md-fab md-fab-small md-bg-purple-A700"
+                                ng-class="{'md-bg-blue-grey-100' : !vm.isopenreport || !vm.controlvalidgroups}"
+                                ng-click="vm.report = true; vm.loaddata()">
+                                <i style="color: white" class="material-icons"
+                                    title="{{'0158' | translate}}">&#xE8AD;</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="uk-width-1-1">
+          <button style="float: right; margin-left: 5px" type="button" class="md-fab md-fab-small md-bg-red-A700"
+            ng-click="vm.report = true; vm.loaddata('pdf')"
+            ng-disabled="!vm.isopenreport || !vm.controlvalidgroups"
+            ng-class="{'md-bg-blue-grey-100' : !vm.isopenreport || !vm.controlvalidgroups }">
+            <i class="uk-icon-file-pdf-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar pdf"></i>
+          </button>
+          <button style="float: right" type="button" class="md-fab md-fab-small md-bg-green-A700"
+            ng-click="vm.report = true; vm.loaddata('xls')"
+            ng-disabled="!vm.isopenreport || !vm.controlvalidgroups"
+            ng-class="{'md-bg-blue-grey-100' : !vm.isopenreport || !vm.controlvalidgroups }">
+            <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}"
+              title="Descargar excel"></i>
+          </button>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false">
+    <div class="uk-modal-dialog message">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-body" style="height: 100px; top: 0px">
+            <div style="width: 20%; float: left">
+                <img class="img-responsive" src="images/iconinfo.png">
+            </div>
+            <div class="messageText">
+                <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalprogress" class="uk-modal" data-uk-modal>
+  <div class="uk-modal-dialog">
+    <div class="uk-progress  uk-active" style="margin-bottom: 3px">
+      <div class="uk-progress-bar" style="width: {{vm.porcent}}%;"></div>
+    </div>
+    <div class="uk-width-1-1 uk-text-center uk-text-bold uk-text-small">
+      Generando reporte ....
+    </div>
+  </div>
+</div>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

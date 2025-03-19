@@ -1,0 +1,325 @@
+<style>
+  .uk-table td,
+  .uk-table th {
+    padding: 4px 8px;
+  }
+
+  .uk-table thead th,
+  .uk-table tfoot td,
+  .uk-table tfoot th {
+    font-style: normal;
+    font-weight: 400;
+    color: #727272;
+    font-size: 11px;
+  }
+
+  .uk-table td {
+    border-bottom-color: #e0e0e0;
+    font-size: 11px;
+  }
+
+  .theadscrollable {
+    display: inline-block;
+    width: 100%;
+    height: 26px;
+  }
+
+  .uk-table tr th.small_col,
+  .uk-table tr td.small_col {
+    width: 15%;
+  }
+
+  .uk-accordion-title {
+    background: rgba(153, 153, 153, 0.2);
+    border-radius: 0;
+    border: none;
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 1px 5px 5px 5px;
+    position: relative;
+  }
+
+  .uk-accordion-title:after {
+    content: "\e313";
+    font-family: "Material Icons";
+    font-size: 11px;
+    position: absolute;
+    top: 0px;
+    right: 8px;
+    display: block;
+    color: #727272;
+    transition: -webkit-transform 280ms;
+    transition: transform 280ms;
+  }
+
+  .tbodyscrollable {
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+    margin-top: 18px;
+    margin-top: 0px;
+  }
+
+  .uk-accordion-content {
+    padding: 0px;
+  }
+  .md-tree-image {
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 50%;
+  }
+</style>
+<loadreport
+  pathreport="vm.pathreport"
+  datareport="vm.datareport"
+  variables="vm.variables"
+  openmodal="vm.openreport"
+></loadreport>
+<modalexceptions
+  openmodal="vm.ShowPopupError"
+  detailerror="vm.Error"
+></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner">
+    <div style="height: 79px" class="uk-grid">
+      <div style="height: 100%" class="uk-width-1-1">
+        <div class="md-card" style="height: 100%">
+          <div
+            style="height: 90%; padding: 10px 0px 0px 10px"
+            class="md-card-content"
+          >
+            <div class="uk-width-1-1">
+              <div class="uk-width-1-1">
+                <div class="uk-grid">
+                  <div
+                    ng-class="{'uk-width-2-10' :  vm.typeresport.id===2,'uk-width-3-10' :  vm.typeresport.id!==2}"
+                    style="padding-top: 4px"
+                  >
+                    <label style="top: -6px; font-size: 12px"
+                      >{{'0387' | translate}}:</label
+                    >
+                    <select
+                      class="md-input"
+                      ng-options="obj.id as obj.name for obj in vm.typeresport"
+                      data-ng-model="vm.typeresport.id"
+                      ng-change="vm.changefilter()"
+                    ></select>
+                  </div>
+                  <div
+                    class="uk-width-6-10"
+                    ng-show="vm.typeresport.id==3"
+                  >
+                    <orderfilter
+                      rangeinit="vm.rangeInit"
+                      rangeend="vm.rangeEnd"
+                      isopenreport="vm.isOpenReport"
+                      typeview="2"
+                    ></orderfilter>
+                  </div>
+                  <div
+                    class="uk-width-7-10 uk-grid"
+                    ng-show="vm.typeresport.id==2"
+                  >
+                    <!-- nombre1 -->
+                    <div class="uk-width-1-4">
+                      <label>{{'0236' | translate}}</label>
+                      <input
+                        type="text"
+                        class="md-input label-fixed"
+                        data-ng-model="vm.firstName"
+                        ng-keypress="vm.keyselectpatientid($event)"
+                        md-input
+                      />
+                    </div>
+                    <!-- nombre2 -->
+                    <div
+                      class="uk-width-1-4"
+                      ng-show="vm.typeresport.id==2"
+                    >
+                      <label>{{'0237' | translate}}</label>
+                      <input
+                        type="text"
+                        class="md-input label-fixed"
+                        data-ng-model="vm.secondName"
+                        ng-keypress="vm.keyselectpatientid($event)"
+                        md-input
+                      />
+                    </div>
+                    <!-- apellido1 -->
+                    <div
+                      class="uk-width-1-4"
+                      ng-show="vm.typeresport.id==2"
+                    >
+                      <label>{{'0234' | translate}}</label>
+                      <input
+                        type="text"
+                        class="md-input label-fixed"
+                        data-ng-model="vm.firstSurname"
+                        ng-keypress="vm.keyselectpatientid($event)"
+                        md-input
+                      />
+                    </div>
+                    <!-- apellido2 -->
+                    <div
+                      class="uk-width-1-4"
+                      ng-show="vm.typeresport.id==2"
+                    >
+                      <label>{{'0235' | translate}}</label>
+                      <input
+                        type="text"
+                        class="md-input label-fixed"
+                        data-ng-model="vm.secondSurname"
+                        ng-keypress="vm.keyselectpatientid($event)"
+                        md-input
+                      />
+                    </div>
+                  </div>
+
+                  <!--   numero de la orden -->
+                  <div
+                    class="uk-width-3-10"
+                    style="padding-top: 4px"
+                    ng-show="vm.typeresport.id==4"
+                  >
+                    <label style="top: -6px; font-size: 12px"
+                      >{{'0072' | translate}}</label
+                    >
+                    <select
+                      class="md-input"
+                      ng-options="obj.id as obj.name for obj in vm.listYear"
+                      data-ng-model="vm.listYear.id"
+                      ng-change="vm.disable()"
+                    ></select>
+                  </div>
+                  <div
+                    class="uk-width-3-10"
+                    ng-show="vm.typeresport.id==4"
+                    style="padding-top: 4px"
+                  >
+                    <label>{{'0110' | translate}}</label>
+                    <input
+                      id="numberordersearch"
+                      class="md-input label-fixed"
+                      type="text"
+                      ng-model="vm.codeordernumberorden"
+                      ng-keypress="vm.keyselect($event)"
+                      maxlength="{{vm.cantdigit}}"
+                      md-input
+                    />
+                  </div>
+                  <!--demografico -->
+                  <div
+                    class="uk-width-3-10"
+                    ng-show="vm.typeresport.id==5"
+                    style="padding-top: 4px"
+                  >
+                    <label>{{'0083' | translate}}</label>
+                    <select
+                      class="md-input"
+                      ng-options="obj as obj.name for obj in vm.lisdemografic track by obj.id"
+                      data-ng-model="vm.demografic"
+                      ng-change="vm.getDemographicsItems()"
+                    ></select>
+                  </div>
+                  <div
+                    class="uk-width-3-10"
+                    ng-show="vm.typeresport.id==5 &&  vm.demografic.encoded"
+                    style="padding-top: 4px"
+                  >
+                    <label>{{'0412' | translate}}</label>
+                    <select
+                      class="md-input"
+                      ng-options="obj.id as obj.name for obj in vm.lisdemograficitems"
+                      data-ng-model="vm.lisdemograficitems.id"
+                      ng-change="vm.disable()"
+                    ></select>
+                  </div>
+                  <div
+                    class="uk-width-3-10"
+                    ng-show="vm.typeresport.id==5 &&  !vm.demografic.encoded "
+                    style="padding-top: 4px"
+                  >
+                    <label>{{'0412' | translate}}</label>
+                    <input
+                      class="md-input label-fixed"
+                      type="text"
+                      ng-model="vm.demograficdesencored"
+                      ng-keypress="vm.keyselectpatientid($event)"
+                    />
+                  </div>
+
+                  <div
+                    class="uk-width-1-10"
+                    style="margin-top: 18px; padding-left: 8px"
+                  >
+                    <md-checkbox
+                      ng-model="vm.outstandingBalance"
+                      aria-label="Checkbox 1"
+                      class="md-primary"
+                      style="font-size: 12px"
+                    >
+                      Saldo pendiente
+                    </md-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="md-card md-card-hover"
+      style="height: calc(100% - 90px); margin-top: 11px"
+    >
+      <div class="md-card-content" style="height: 100%; padding: 0px">
+        <table
+          class="uk-table uk-table-small uk-table-middle tablescrollable"
+          style="height: 100%; margin-bottom: 0px"
+        >
+          <thead style="display: inline-block; width: 100%; height: 8%">
+            <tr
+              class="uk-grid"
+              style="margin-left: 0px; background-color: #eee"
+            >
+              <th class="uk-width-1-1">
+                <a
+                  ng-click="$event.stopPropagation(); vm.sortType = 'orderNumber'; sortReverse = !sortReverse; $event.stopPropagation() "
+                >
+                  <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                  <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                  <span
+                    ng-show="vm.sortType == 'orderNumber' && !sortReverse"
+                  ></span>
+                  <span
+                    ng-show="vm.sortType == 'orderNumber' && sortReverse"
+                  ></span> </a
+                >{{'0110' | translate}}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="tbodyscrollable vs-repeat-custom-scroll">
+            <tr
+              ng-repeat="Order in vm.filtered= ( vm.ListOrder | filter: vm.search | orderBy:vm.sortType:sortReverse)"
+              ng-class="{selected: Order.orderNumber ==  vm.selected}"
+              data-ng-click="vm.getDetail(Order.orderNumber)"
+              class="uk-grid"
+              style="margin-left: 0px; margin-top: 0px"
+            >
+              <td class="uk-width-1-1">{{Order.orderNumber}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

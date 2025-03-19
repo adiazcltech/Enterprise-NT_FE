@@ -1,0 +1,235 @@
+<style type="text/css">
+  .texareadanger {
+    border: 1px solid #da211e !important;
+  }
+
+  .divcontrolunit {
+    border: 1px solid #ddd;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    background-color: #eee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+
+</style>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<modalreport openmodal="vm.open"></modalreport>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0010' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/unit/unit.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                        </a> {{'0010' | translate}}
+                      </th>
+                      <th class="col-lg-4 col-md-3 col-sm-4 col-xs-4" style="white-space: nowrap">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.international; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.international"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.international"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.international && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.international && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.international && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.international && vm.sortReverse"></span>
+                        </a> {{'0012' | translate}}
+                      </th>
+                      <th class="col-lg-4 col-md-3 col-sm-4 col-xs-4">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.conversionFactor; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.conversionFactor"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.conversionFactor"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.conversionFactor && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.conversionFactor && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.conversionFactor && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.conversionFactor && vm.sortReverse"></span>
+                        </a> {{'0013' | translate}}
+                      </th>
+                      <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != vm.state"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == vm.state && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == vm.state && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == vm.state && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == vm.state && vm.sortReverse"></span>
+                        </a>{{'0014' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll">
+                    <tr class="row-list"
+                      data-ng-repeat="Unit in vm.filtered =((vm.dataUnit | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getUnitId(Unit.id,$index,UnitForm)"
+                      ng-class="{info: Unit.id == vm.selected, danger: Unit.state == 0 }">
+                      <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2"
+                        style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis"
+                        ng-bind-html="Unit.name | trust"></td>
+                      <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+                        style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis"
+                        ng-bind-html="Unit.international | trust"></td>
+                      <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4" data-ng-bind="Unit.conversionFactor"></td>
+                      <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                        <i ng-if="Unit.state == true" class="glyphicon glyphicon-ok green"></i>
+                        <i ng-if="Unit.state == false" class="glyphicon glyphicon-ban-circle red"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form contentscroll" style="overflow:auto">
+                <form name="UnitForm" id="UnitForm" class="form-horizontal panel-body">
+                  <div class="form-group form-group-sm has-feedback">
+                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">{{'0010' | translate}}:</label>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                      <div ng-show="!vm.isDisabledCon" style="border: 1px solid #ddd; border-radius: 4px; padding: 3px"
+                        ng-class="{'texareadanger': vm.validcontrolunit||vm.Repeat||UnitForm.name.$invalid && UnitForm.name.$touched}">
+                        <textarea ng-change="vm.validatedtextunit()" ng-required="true" name="name" id="name"
+                          ui-tinymce="vm.tinymceOptions" ng-model="vm.unitDetail.name"></textarea>
+                      </div>
+                      <div class="divcontrolunit" ng-if="vm.isDisabledCon" ng-bind-html="vm.unitDetail.name | trust">
+                      </div>
+                      <span ng-if="UnitForm.name.$invalid && UnitForm.name.$touched"
+                        class="help-block ">{{'0016' | translate}}</span>
+                      <span ng-if="vm.validcontrolunit" class="help-block ">{{'0989' | translate}}</span>
+                      <span ng-if="vm.Repeat" class="help-block ">{{'0038' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback">
+                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">{{'0012' | translate}}:</label>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                      <div ng-show="!vm.isDisabledCon" style="border: 1px solid #ddd; border-radius: 4px; padding: 3px"
+                        ng-class="{'texareadanger': vm.validcontrol}">
+                        <textarea ng-change="vm.validatedtext()" ng-disabled="vm.isDisabledCon"
+                          ui-tinymce="vm.tinymceOptions" ng-model="vm.unitDetail.international"></textarea>
+                      </div>
+                      <div class="divcontrolunit" ng-if="vm.isDisabledCon"
+                        ng-bind-html="vm.unitDetail.international | trust">
+                      </div>
+                      <span ng-if="vm.validcontrol" class="help-block ">{{'0989' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': UnitForm.conversionFactor.$invalid && UnitForm.conversionFactor.$touched}">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                      <label>{{'0013' | translate}}</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="width: 108px; padding-right: 10px">
+                      <number-input ng-model="vm.unitDetail.conversionFactor" max="99999999" min="1" step="0.001"
+                        start="1" disabledecimal="false" decimalplaces="1" disable="vm.isDisabledCon">
+                      </number-input>
+
+                      <span ng-if="UnitForm.conversionFactor.$invalid && UnitForm.conversionFactor.$touched"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="UnitForm.conversionFactor.$invalid && UnitForm.conversionFactor.$touched"
+                        class="help-block ">{{'0041' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback">
+                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">{{'0014' | translate}}:</label>
+                    <div class="col-lg-3 col-md-1 col-sm-3 col-xs-12">
+                      <toggle ng-model="vm.unitDetail.state" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                        ng-disabled="vm.isDisabledState" size="btn-sm" ng-change="vm.changeState()"></toggle>
+                    </div>
+                  </div>
+                  <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.unitDetail.state"></modalstate>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class=" btn btn-success button-list" ng-click="vm.NewUnit(UnitForm)"
+                    ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'0005' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-warning button-list" ng-click="vm.EditUnit()"
+                    ng-disabled="vm.isDisabledEdit">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-primary button-list" ng-click="vm.saveUnit(UnitForm)"
+                    ng-disabled="!UnitForm.$valid || vm.validcontrol ||vm.isDisabledSave||vm.validcontrolunit">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" ng-click="vm.cancelUnit(UnitForm)"
+                    ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                    ng-disabled="vm.isDisabledPrint">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+<style>
+    .select-requerid {
+        border-bottom: 1px solid #f30043;
+    }
+</style>
+<ui-select id="{{loadcombobox.identification}}" tabindex="{{loadcombobox.tabindex}}"
+    ng-model="loadcombobox.item.selected" class="orderentrytab" ng-disabled="loadcombobox.disabled" theme="select2"
+    on-select="loadcombobox.changelist($item)" ng-class="{'select-requerid' : loadcombobox.requerid}"
+    style="width: 100%; max-width: 100%">
+
+    <ui-select-match style="width: 100%; max-width: 100%"
+        placeholder="{{loadcombobox.placeholder}}">{{$select.selected[loadcombobox.fieldCode]}}
+        {{$select.selected[loadcombobox.fieldName]}}
+    </ui-select-match>
+
+    <ui-select-choices repeat="item in loadcombobox.list" refresh="loadcombobox.fetch($select,$event)"
+        refresh-delay="100" position="auto">
+        <span ng-bind-html="item[loadcombobox.fieldCode] | highlight: $select.search"></span>
+        <span ng-bind-html="item[loadcombobox.fieldName] | highlight: $select.search"></span>
+        <div ng-if="$index === $select.items.length - 1  && loadcombobox.list.length > 49">
+            <button ng-if="$index < loadcombobox.listorigin.length - 1 " class="md-btn md-btn-primary md-btn-mini"
+                style="width: 100%; margin-top: 5px; font-size: 12px !important"
+                ng-click="loadcombobox.fetch($select,$event);">
+                {{'0606' | translate}} ({{$index + 1}} / {{loadcombobox.listorigin.length}})
+            </button>
+        </div>
+    </ui-select-choices>
+
+</ui-select>

@@ -1,0 +1,144 @@
+<modalerror openerrormodal="vm.ShowPopupError" detailError="vm.Error"></modalerror>
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<section class="row general-container">
+  <div class="panel panel-primary panel-principal">
+    <div class="panel-heading row">
+      <div class="col-md-4 text-left">
+        <strong id="titleTask" class="panel-title text-left title-bar">{{'0316' | translate | uppercase}}</strong>
+      </div>
+      <div class="col-md-8 text-right" style="padding-top: 5px;">
+        <strong ng-bind="vm.usuario" class="text-right"></strong>
+        <span class="panel-title glyphicon glyphicon-question-sign question-style" data-toggle="tooltip"
+          data-placement="bottom" title="Ctrl + B"
+          onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/task/task.htm','','width=1200,height=600,left=50,top=50,toolbar=yes');"></span>
+      </div>
+    </div>
+    <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+      <div class="col-md-6 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container">
+              <div>
+                <div class="input-group right-bar">
+                  <input data-ng-model="vm.search" class="form-control" type="text"
+                    placeholder="{{'0015' | translate}}">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </div>
+                </div>
+                <div class="number-bage">
+                  <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                </div>
+              </div>
+              <table class="table table-list table-hover ">
+                <thead>
+                  <tr>
+                    <th class="col-md-10">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                      </a> {{'0044' | translate}}
+                    </th>
+                    <th class="col-md-2" style="white-space: nowrap">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.state; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.state"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.state"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.state && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.state && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.state && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.state && vm.sortReverse"></span>
+                      </a> {{'0014' | translate}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tbody-list contentscroll" style="width: 94%">
+                  <tr class="row-list"
+                    data-ng-repeat="Task in vm.filtered =(vm.dataTask | filter: vm.search) | orderBy:vm.sortType:vm.sortReverse"
+                    data-ng-click="vm.getTaskId(Task.id, $index, TaskForm)"
+                    ng-class="{info: Task.id == vm.selected, danger: Task.state == 0 }">
+                    <td class="col-md-10" data-ng-bind="Task.description"></td>
+                    <td class="col-md-2 text-center">
+                      <i ng-if="Task.state == true" class="glyphicon glyphicon-ok green"></i>
+                      <i ng-if="Task.state == false" class="glyphicon glyphicon-ban-circle red"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container panel-padding panel-scroll contentscroll "
+              style="height: calc(100% - 55px);">
+              <form name="TaskForm" id="TaskForm" class="form-horizontal panel-body">
+                <div class="form-group form-group-sm">
+                  <div class="form-group" style="margin-top: 7px">
+                    <label class="col-sm-3 text-right">{{'0044' | translate}}:</label>
+                    <div class="col-sm-9 text-left form-group has-feedback"
+                      ng-class="{'has-error': TaskForm.description.$invalid && TaskForm.description.$touched || vm.descriptionReapeat }">
+                      <input id="description" name="description" data-ng-model="vm.taskDetail.description"
+                        maxlength="60" ng-disabled="vm.isDisabled" ng-required="true" class="form-control" type="text"
+                        ng-focus="vm.descriptionReapeat = false">
+                      <span
+                        ng-if="TaskForm.description.$invalid && TaskForm.description.$touched || vm.descriptionReapeat"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="TaskForm.description.$invalid && TaskForm.description.$touched"
+                        class="help-block">{{'0016' | translate}}</span>
+                      <span ng-if="vm.descriptionReapeat" class="help-block">{{'0038' | translate}}</span>
+                    </div>
+                    <label class="col-md-3 text-right ">{{'0014' | translate}}:</label>
+                    <div class="col-md-9 text-left  form-group">
+                      <toggle ng-model="vm.taskDetail.state" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                        ng-disabled="vm.isDisabledState" ng-change="vm.changeState()" size="btn-sm"></toggle>
+                      <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.taskDetail.state"></modalstate>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="panel-footer general-container" style="height: 55px;">
+              <button type="button" class=" btn btn-success button-list" ng-click="vm.NewTask(TaskForm)"
+                ng-disabled="vm.isDisabledAdd">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{'0005' | translate}}</button>
+              <button type="button" class="btn btn-warning button-list" ng-click="vm.EditTask()"
+                ng-disabled="vm.isDisabledEdit">
+                <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+              </button>
+              <button type="button" class="btn btn-primary button-list" ng-click="vm.saveTask(TaskForm)"
+                ng-disabled="TaskForm.$invalid || vm.isDisabledSave">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+              </button>
+              <button type="button" class="btn btn-info  button-list" ng-click="vm.cancelTask(TaskForm)"
+                ng-disabled="vm.isDisabledCancel">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+              </button>
+              <button class="btn btn-violet button-list" ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint"
+                type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-print"></span>{{'0009' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<modalerror openerrormodal="vm.ShowPopupError" detailError="vm.Error"></modalerror>

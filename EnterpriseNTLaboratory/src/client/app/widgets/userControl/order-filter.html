@@ -1,0 +1,111 @@
+<style>
+  .md-button.md-icon-button {
+    float: right !important;
+  }
+
+  .md-button.md-icon-button {
+    display: inline-block !important;
+    margin: 0 0px !important;
+    width: 24px !important;
+    padding: 0px 0px 13px 0px !important;
+  }
+
+  .md-datepicker-input-container {
+    min-width: calc(100% - 70px) !important;
+    margin-top: 5px !important;
+  }
+
+  .md-datepicker-calendar-pane {
+    width: 340px;
+    z-index: 10000;
+  }
+</style>
+<div ng-if="orderfilter.typeview === undefined" style="width: 310px; float: left; margin-right: 30px; margin-top: 3px">
+  <div class="uk-form-row md-input-wrapper md-input-filled">
+    <label style="padding-left: 2px">{{'0071' | translate}}: {{orderfilter.labelMaxDays}}
+    </label>
+    <p style="margin-left: 7px; font-size: 13px !important">
+      <input type="radio" name="typefilter" id="typefilternumber" icheck ng-model="orderfilter.typefilter" value="1"
+        ng-change="orderfilter.changetypefilter(1)" />
+      <label style="margin-right: 20px" for="typefilternumber" class="inline-label">{{'0061' | translate}}</label>
+      <input type="radio" name="typefilter" id="typefilterdate" icheck ng-model="orderfilter.typefilter" value="0"
+        ng-change="orderfilter.changetypefilter(0)" />
+      <label ng-if="orderfilter.typelabel === 1" for="typefilterdate" class="inline-label">{{'0062' |
+        translate}}</label>
+      <label ng-if="orderfilter.typelabel === 2" for="typefilterdate" class="inline-label">{{'0189' |
+        translate}}</label>
+    </p>
+  </div>
+</div>
+<div style="float: left;  margin-top: 3px" ng-style="{'width' :
+                                        orderfilter.typeview === 1 ? '100%': 'calc(100% - 350px)'}"
+  ng-if="orderfilter.typefilter === '1' || orderfilter.typeview === 1">
+  <div class="uk-grid">
+    <div class="uk-width-1-3">
+      <label>{{'0072' | translate}}</label>
+      <select md-input label-fixed class="md-input label-fixed" charset="utf-8"
+        ng-options="obj.id as obj.name for obj in orderfilter.listYear" data-ng-model="orderfilter.listYear.id"
+        ng-change="orderfilter.changeage()" style="font-size: 13px !important"></select>
+    </div>
+    <div class="uk-width-1-3">
+      <label>{{'0073' | translate}}</label>
+      <input md-input label-fixed class="md-input label-fixed" type="text" ng-model="orderfilter.entryInit"
+        ng-keypress="orderfilter.getOrderComplete($event, 1)" ng-blur="orderfilter.getOrderComplete(undefined, 1)"
+        maxlength="{{orderfilter.cantdigit}}" style="font-size: 13px !important" />
+    </div>
+    <div class="uk-width-1-3">
+      <label>{{'0074' | translate}}</label>
+      <input md-input label-fixed class="md-input label-fixed" id="orderend" type="text" ng-model="orderfilter.entryEnd"
+        ng-keypress="orderfilter.getOrderComplete($event, 2)" ng-required="true"
+        ng-blur="orderfilter.getOrderComplete(undefined, 2)" maxlength="{{orderfilter.cantdigit}}"
+        style="font-size: 13px !important" />
+    </div>
+  </div>
+</div>
+<div style="float: left; margin-top: 3px" ng-style="{'width' :
+                                        orderfilter.typeview === 2 ? '100%': 'calc(100% - 350px)'}"
+  ng-if="orderfilter.typefilter === '0' || orderfilter.typeview === 2">
+  <form name="myForm" class="uk-grid uk-grid-small uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-width-1-2 ">
+      <div flex-gt-xs>
+        <h6 style="margin: -1px 0px -2px 15px;">{{'0075' | translate}}</h6>
+        <md-datepicker ng-model="orderfilter.dateInit" name="dateField" md-min-date="orderfilter.minDateinit"
+          ng-change="orderfilter.changeDatePicker(1)" md-open-on-focus ng-blur="orderfilter.focusdateInit()"
+          md-placeholder="Enter date" md-max-date="orderfilter.maxDate" ng-required="true"
+          md-is-open="orderfilter.isOpen1">
+        </md-datepicker>
+        <div ng-messages="myForm.dateField.$error">
+          <div ng-message="required" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'0060' | translate}}</div>
+          <div ng-message="valid" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1478' | translate}}</div>
+          <div ng-message="mindate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1479' | translate}}{{orderfilter.minDateinit | date:'dd/MM/yyyy'}}</div>
+          <div ng-message="maxdate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1480' | translate}}{{orderfilter.maxDate | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-width-1-2">
+      <div flex-gt-xs>
+        <h6 style="margin: -1px 0px -2px 15px;">{{'0076' | translate}}</h6>
+        <md-datepicker ng-model="orderfilter.dateEnd" name="dateField1" ng-change="orderfilter.changeDatePicker(2)"
+          md-placeholder="Enter date" ng-blur="orderfilter.focusdateend()" md-open-on-focus
+          md-max-date="orderfilter.maxDate" md-min-date="orderfilter.minDateinit" md-is-open="orderfilter.isOpen2"
+          ng-required="true">
+        </md-datepicker>
+        <div ng-messages="myForm.dateField1.$error">
+          <div ng-message="required" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'0060' | translate}}</div>
+          <div ng-message="valid" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1478' | translate}}</div>
+          <div ng-message="mindate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1479' | translate}}{{orderfilter.minDateinit | date:'dd/MM/yyyy'}}</div>
+          <div ng-message="maxdate" style="font-size: 10px !important;margin-left: 12px;color: red;">
+            {{'1480' | translate}} {{orderfilter.maxDate | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div ng-class="orderfilter.validateddate(!myForm.$invalid)"></div>
+</div>

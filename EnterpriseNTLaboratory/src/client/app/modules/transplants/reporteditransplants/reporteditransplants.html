@@ -1,0 +1,105 @@
+<style>
+    .tree-node-ico.tree-node-expanded {
+        background-image: url(../../images/folder.png) !important;
+        height: 24px;
+        width: 24px;
+        margin-right: -4px;
+        background-position-y: 2px;
+        background-position-x: 2px;
+    }
+
+    .tree-node-ico.tree-node-collapsed {
+        background-image: url(../../images/folder-closed_1.png) !important;
+        height: 24px;
+        width: 24px;
+        margin-right: -4px;
+        background-position-y: 2px;
+        background-position-x: 2px;
+    }
+
+    .md-tree-image {
+        width: auto !important;
+        height: auto !important;
+        border-style: none;
+        border-radius: 0 !important;
+    }
+
+    .node-name {
+        margin-left: -4px !important;
+        display: inline-grid;
+        margin-top: -7px;
+        vertical-align: text-top;
+    }
+
+    .treenode-cltech {
+        height: calc(100% - 48px);
+        overflow: auto;
+        margin-left: 0px;
+        overflow-x: auto;
+    }
+
+    audio,
+    canvas,
+    img,
+    svg,
+    video {
+        max-width: initial !important;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    treenode ul li {
+        margin-right: 5px;
+        margin-top: -2px !important;
+        padding-left: -16px;
+    }
+
+
+
+
+</style>
+
+<loadpage view="vm.loadingReport"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content" style="overflow: hidden;">
+    <div id="page_content_inner" style="padding: 0px 10px 0px; height: 96%;">
+        <div class="uk-grid" style="height: 100%">
+            <div class="uk-width-1-1" style="height: 100%">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-content uk-grid" style="height: 100%;">
+                        <div class="uk-width-1-4" style="width: 23.5%;height: 98%;">
+                            <div class="md-card md-card-hover uk-animation-fade" style="height: 97%">
+                                <div style="height: 96%;padding: 5px" class="md-card-content">
+                                    <div class="uk-input-group" style="padding-left: 0px;">
+                                        <label>{{'0154' | translate}}</label>
+                                        <input type="text" class="md-input" ng-model="vm.options5.filter.name" md-input>
+                                        <span class="uk-input-group-addon" style="padding: 0 0px;">
+                                            <i class="material-icons md-24">&#xE8B6;</i>
+                                        </span>
+                                    </div>
+                                    <div class="tree-container treenode-cltech">
+                                        <div style="margin-left: -22px">
+                                            <tree nodes="vm.basicTree" options="vm.options5"></tree>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="uk-width-3-4" style="padding: 0px !important">
+                            <div id="designerContent" class="md-card md-card-hover uk-animation-fade"
+                                style="height: 95.2%; width: 103%; overflow-y: auto;"> </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>
+
+<script type="text/javascript" src="http://js.stimulsoft.com/zip/zip.js?v=20170227"></script>

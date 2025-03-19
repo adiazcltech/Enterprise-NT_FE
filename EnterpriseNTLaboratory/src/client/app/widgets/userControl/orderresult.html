@@ -1,0 +1,78 @@
+<style>
+    .order-result-padding-search {
+        padding-top: 5px;
+    }
+
+    .order-result-uppercase {
+        text-transform: uppercase;
+    }
+
+    .order-result-table-row {
+        margin-top: 10px !important;
+    }
+
+    .order-result-table-container {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: 410px !important;
+        max-height: 410px !important;
+    }
+
+    .order-result-filter-margin {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .order-result-filter-padding {
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }    
+</style>
+
+<div id="order-result" class="uk-modal" aria-hidden="true">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <div class="uk-modal-header md-bg-cyan-400" style="border-bottom: 0px;">
+            <h3 class="uk-modal-title ">{{'0424' | translate}}</h3>
+        </div>
+        <div class="uk-modal-body">            
+            <div class="uk-form-row order-result-table-row">
+                <div class="uk-overflow-container order-result-table-container">
+                    <table class="uk-table uk-table-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="uk-text-center">{{'0110' | translate}}</th>
+                                <th hidden>Document Type Id</th>
+                                <th class="uk-text-center" ng-if="order-result.showDocumentType">{{'0233' | translate}}</th>
+                                <th hidden>Patient Id</th>
+                                <th class="uk-text-center">{{'0117' | translate}}</th>
+                                <th class="uk-text-center">{{'0398' | translate}}</th>
+                                <th class="uk-text-center">{{'0120' | translate}}</th>
+                                <th class="uk-text-center">{{'0426' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in order-result.orders">
+                                <td class="uk-text-center">
+                                    <a href="#" ng-click="order-result.selectOrder(order.order)">{{order.order}}</a>
+                                </td>
+                                <td hidden>{{order.documentTypeId}}</td>
+                                <td class="uk-text-center" ng-if="order-result.showDocumentType">{{order.documentType.toUpperCase()}}</td>
+                                <td hidden>{{order.patientIdDB}}</td>
+                                <td class="uk-text-center">{{order.patientId}}</td>
+                                <td class="uk-text-center">{{order.lastName.toUpperCase() + ' ' + (order.surName === null || order.surName === '' ? '' : order.surName.toUpperCase()
+                                    + ' ') + order.name1.toUpperCase() + ' ' + ((order.name1 === null || order.name2 === '' ? '' : order.name2.toUpperCase()))}}</td>
+                                <td class="uk-text-center">{{order.birthday}}</td>
+                                <td class="uk-text-center">{{order.sex}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="uk-modal-close md-btn md-btn-flat">
+                {{'0425' | translate}}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+<style>
+  .title-accordion-sample {
+    padding: 0 10px;
+    font-size: 12px;
+    background: #049be5;
+    color: white;
+    font-weight: bold;
+  }
+  .title-accordion-sample:after {
+    top: 1px !important;
+    color: #ffffff !important;
+}
+</style>
+
+<modalexceptions openmodal="casedetail.ShowPopupError" detailerror="casedetail.Error"></modalexceptions>
+
+<div class="md-card md-card-hover uk-animation-fade">
+  <div class="md-card-content contentscroll" style="height: calc(100vh - 415px);overflow: auto;border-bottom: none;padding: 15px;">
+
+    <div class="uk-grid">
+      <div class="uk-width-2-10" style="width: 40%;">
+        <div class="md-card" ng-if="casedetail.case">
+          <div class="md-card-toolbar" style="height: auto;padding: 0px;">
+              <div class="uk-text-bold uk-text-center" style="background-color: #1976d2; color: white;font-size: 11px;padding: 5px 10px;">
+                  {{ '3160' | translate}}
+                  <span class="uk-badge uk-badge-primary">{{ casedetail.case.specimens.length }}</span>
+              </div>
+          </div>
+          <div class="md-card-content" style="padding: 1px 1px 5px 1px; overflow-y: hidden">
+              <div class="uk-grid uk-grid-small" style="height: 100%">
+                  <div class="uk-width-1-1 contentscroll" vs-repeat="{latch : casedetail.case.specimens, size: 20}" style="max-height: calc(100vh - 390px);min-height: calc(100vh - 630px);overflow-y: auto;">
+                      <div style="margin-top: 5px" class="md-card uk-width-1-1" ng-repeat="obj in casedetail.case.specimens">
+                          <div class="md-card-content" style="padding: 3px 0px;">
+                              <div class="uk-grid uk-grid-small" style="place-content: center;">
+                                  <div class="uk-width-1-1 uk-text-bold uk-text-center" style="font-size: 11px">
+                                      <div class="uk-grid uk-grid-small">
+                                          <div class="uk-width-1-1">
+                                              <a ng-click="casedetail.infoSample(obj)">{{ obj.name }}</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="uk-width-7-10" ng-if="casedetail.sample" style="padding-left: 10px;width: 60%;">
+
+        <div>
+
+          <div class="uk-input-group" style="padding: 0px 2px 0px 10px;">
+            <span class="uk-input-group-addon">
+                <img class="md-list-addon-icon material-icons md-22" ng-src="images/pathology/samplereception/specimen.png">
+            </span>
+            <div class="md-input-wrapper md-input-filled">
+                <label style="top: -10px; font-size: 11px;">{{ '3119' | translate }}: </label>
+                <label style="top: 1px;font-size: 11px;font-weight: bold;">{{ casedetail.sample.name }}</label>
+            </div>
+          </div>
+
+          <div class="uk-input-group" style="padding: 0px 2px 0px 10px;">
+            <span class="uk-input-group-addon">
+                <img class="md-list-addon-icon material-icons md-22" style="margin-top: 7px;" ng-src="images/pathology/samplereception/organ.png">
+            </span>
+            <div class="md-input-wrapper md-input-filled">
+                <label style="top: -5px; font-size: 11px;">{{ '3120' | translate }}: </label>
+                <label style="top: 5px;font-size: 11px;font-weight: bold;">{{ casedetail.sample.organ.name }}</label>
+            </div>
+          </div>
+
+          <div class="uk-input-group" style="padding: 0px 2px 0px 10px;" ng-if="casedetail.sample.subSample !== 0">
+            <span class="uk-input-group-addon">
+                <img class="md-list-addon-icon material-icons md-22" style="margin-top: 7px;" ng-src="images/pathology/samplereception/study.png">
+            </span>
+            <div class="md-input-wrapper md-input-filled">
+                <label style="top: -5px; font-size: 11px;">{{ '0460' | translate }}: </label>
+                <label style="top: 5px;font-size: 11px;font-weight: bold;">{{ casedetail.sample.subSampleName }}</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div ng-if="casedetail.case" class="uk-accordion" data-uk-accordion accordion-section-open="" style="padding: 15px 10px;">
+          <div class="uk-accordion-title title-accordion-sample" ng-repeat-start="sub in casedetail.sample.samples">
+            <label style="font-size: 11px;">{{'0111' | translate}}# {{ $index + 1 }}</label>
+            <label class="uk-badge uk-badge-primary" style="border-radius: 5px;font-size: 11px;float: right;padding: 1px 5px;margin-top: 4px;background: white;color: black;margin-right: 20px;">{{ sub.quantity }}</label>
+          </div>
+          <div class="uk-accordion-content" style="padding: 0px 0px 5px" ng-repeat-end>
+
+            <div class="uk-grid">
+
+              <div class="uk-width-1-2">
+                <div class="uk-input-group" style="padding: 5px 2px 0px 10px;">
+                  <div class="md-input-wrapper md-input-filled" style="padding-top: 5px;">
+                      <label style="top: -4px;font-size: 11px;left: 0px;">{{ '3122' | translate }}: </label>
+                      <label style="font-size: 11px;font-weight: bold;position: initial;">{{ sub.container.name }}</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="uk-width-1-2">
+                <div class="uk-input-group" style="padding: 5px 2px 0px 10px;">
+                  <div class="md-input-wrapper md-input-filled" style="padding-top: 5px;">
+                      <label style="top: -4px;font-size: 11px;left: 0px;">{{ '3144' | translate }}: </label>
+                      <label style="font-size: 11px;font-weight: bold;position: initial;">{{ sub.fixative.name }}</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="uk-grid" style="margin-top: 0px;">
+              <div class="uk-width-1-2" ng-repeat="casete in sub.casetes">
+                <div class="md-card" style="margin-top: 5px;border-left: 3px solid;margin-bottom: 5px;" ng-style="{'border-color': casete.casete.colour}">
+                  <div class="md-card-content" style="padding: 2px 10px;height: 25px;">
+                    <div class="uk-grid" style="margin-top: -4px;">
+                      <div class="uk-width-1-2" style="height: 11px;">
+                        <label style="top: 0px;font-size: 11px;font-weight: bold;">
+                          {{ casete.consecutive }}
+                        </label>
+                      </div>
+                      <div class="uk-width-1-2"  style="height: 11px;">
+                        <label class="uk uk-badge" style="font-size: 10px;padding: 0px 5px;border-radius: 5px;">
+                          {{ casete.quantity }}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="uk-grid" style="margin-top: 2px;">
+                      <div class="uk-width-1-1">
+                        <label style="font-size: 10px;font-weight: 500;">
+                          {{ casete.casete.name }}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

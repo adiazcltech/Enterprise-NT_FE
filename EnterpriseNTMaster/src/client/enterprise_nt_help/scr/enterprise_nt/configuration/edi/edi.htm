@@ -1,0 +1,839 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Protocolo EDI</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+
+
+
+<style>
+html,div { margin: 0; padding: 0;}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	overflow: auto;
+	height: 100%;
+}
+
+#winchm_template_button{
+	float: right;
+	width: 93px;
+	top: 7px;
+	position: relative;
+	text-align: right;
+	right: 5px;
+	height: auto;
+}
+
+#winchm_template_top{
+	padding: 0px;
+	margin: 0px;
+	border-bottom: 1px solid #9B9B9B;
+	background-color: #B1CEFE;
+}
+
+#winchm_template_navigation{
+	margin: 0px;
+	padding-top: 7px;
+	padding-left: 7px;
+	padding-bottom: 3px;
+	padding-right: 0px;
+	font-size: 8.5pt;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #585858;
+}
+
+#winchm_template_title{
+	margin: 0px;
+	padding-top: 4px;
+	padding-left: 7px;
+	padding-bottom: 7px;
+	padding-right: 0px;
+	font-size: 18px; 
+	font-family: Verdana, Geneva, sans-serif;
+	color: #363636;
+}
+
+#winchm_template_content{
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	width: auto  !important;
+	width: 100%;
+}
+
+#winchm_template_footer{
+	border-width: 1px;
+	border-color: #B1CEFE;
+	border-top-style: solid;
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	padding-top: 7px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 8.5pt;
+	color: #696969;
+	width: auto;
+	text-align: left;
+}
+
+
+#winchm_template_container{
+	margin: 0px;
+	padding: 0px;
+	position: static;
+	padding-bottom: 3px;
+	overflow: auto;
+	background-color: #FFFFFF;
+}
+
+
+@media print
+{
+#winchm_template_container{
+	position: static;	
+	margin: 0px;
+	padding: 5px;
+	
+	width: auto;
+	height: auto;
+	overflow: auto;
+}
+#winchm_template_button{
+visibility:hidden;
+}
+}
+
+#winchm_template_navigation A:link	{text-decoration: none; color:#004080}
+#winchm_template_navigation A:visited  {text-decoration: none; color: #004080}
+#winchm_template_navigation A:active {text-decoration: none; color: #004080 }
+#winchm_template_navigation A:hover {text-decoration: none;color: #0080FF}
+
+A:link	{text-decoration: underline; color:#0033CC}
+A:visited  {text-decoration: underline; color: #0033CC}
+A:active {text-decoration: underline; color: #0033CC }
+A:hover {text-decoration: underline;color: #FF0000;}
+</style>
+<script type="text/javascript">
+function isMobile(){
+Agent = window.navigator.userAgent;
+if (Agent.indexOf("iPhone")>=1 || Agent.indexOf("iPad")>=1 || Agent.indexOf("iPod")>=1 || Agent.indexOf("Android")>=1){
+return true;
+}else{
+return false;	
+}
+
+}
+function d_onresize(){
+if (window.navigator.userAgent.indexOf("MSIE")>=1){
+document.getElementById('winchm_template_container').style.pixelWidth = document.body.offsetWidth - 3;
+document.getElementById('winchm_template_container').style.pixelHeight = document.body.offsetHeight - document.getElementById('winchm_template_top').offsetHeight - 4;
+}
+document.getElementById('winchm_template_container').style.top = document.getElementById('winchm_template_top').offsetHeight + 'px';
+}
+
+function d_onbeforeprint(){
+document.getElementById('winchm_template_container').style.width = 'auto';
+document.getElementById('winchm_template_container').style.height = 'auto';
+}
+
+function d_onafterprint(){
+d_onresize();
+}
+
+if(!isMobile()){
+
+window.onload = d_onresize;
+window.onresize = d_onresize;
+window.onbeforeprint = d_onbeforeprint;
+window.onafterprint = d_onafterprint;
+
+document.write("<style>\n");
+document.write("body {overflow: hidden;}\n");
+document.write("#winchm_template_container {position: absolute;overflow: auto;top : 0px;right: 0px;bottom: 0px;left: 0px;}\n");
+document.write("</style>\n");
+}
+
+</script>
+</head>
+
+<body><script language="JavaScript" type="text/JavaScript">
+function syn(){
+if(parent.nav.tree){
+ if(parent.nav.tree.loaded){
+  parent.nav.tree.selectNode(69);
+ }else{
+  setTimeout("syn()",500);
+}
+  }else{
+  setTimeout("syn()",500);
+  }}
+if(parent!=self){
+  setTimeout("syn()",100);
+}else{
+  parent.location.href = "../../../../index.htm?page=enterprise_nt/configuration/edi/edi.htm";
+}
+originalOnload = window.onload;
+if(originalOnload==null){
+window.onload = function(){parent.contentLoaded = true;};
+}else{
+window.onload = function(){originalOnload();parent.contentLoaded = true;};
+}
+</script> 
+
+
+<div id="winchm_template_top">
+	<div id="winchm_template_button"><A href="../process/process.htm" title="Previous topic"><img id="winchm_template_prev" alt="Previous topic" src="../../../template2/btn_prev_n.png" border="0"></a><A href="../test/test.htm" title="Next topic"><img id="winchm_template_next" alt="Next topic" src="../../../template2/btn_next_n.png" border="0"></a></div>
+	<div id="winchm_template_navigation">Help &gt; 
+Configuracion &gt; </div>
+	<div id="winchm_template_title">Protocolo EDI</div>
+</div>
+<div id="winchm_template_container">
+	<div id="winchm_template_content">
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt"><SPAN 
+lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'>      Formulario que define&nbsp;los datos 
+de la Facturacon EDI, las cuales se asocian 
+a las tarifas.</SPAN></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" align=center><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'> 
+</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial'>A continuación, se muestra una ventana típica con sus 
+partes:</SPAN></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" align=center><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial'><IMG style="HEIGHT: 396px; WIDTH: 791px" alt="" src="../../img/edi.jpg" width=1451 height=797></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt"></SPAN></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" 
+align=center><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial'><o:p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</O:P></SPAN></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" 
+align=center><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraphCxSpFirst 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; TEXT-INDENT: -18pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.&nbsp;</SPAN></SPAN></B><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Cuadro de texto de búsqueda.<o:p></O:P></SPAN></B></P>
+<P class=MsoListParagraphCxSpLast 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Se escribe o se introduce un valor alfa-numérico para filtrar 
+elementos de la lista de datos de&nbsp;Faturación EDI. El filtro se da de 
+manera dinámica; a medida que se vaya digitando un valor, la lista va mostrando 
+las filas coincidentes con las columnas visibles. </SPAN></P>
+<P class=MsoListParagraphCxSpLast 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore"> 
+</SPAN></SPAN></B>&nbsp;</P>
+<P class=MsoListParagraph 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: -18pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT face="">&nbsp;</FONT></STRONG><FONT face="Arial"><FONT size=2><STRONG>2</STRONG><STRONG>.</STRONG> </FONT></FONT> </SPAN><STRONG><FONT size=2 face="Arial">Cantidad.</FONT> 
+</STRONG><IMG alt="" src="../../img/counter.jpg" align=absMiddle > <o:p></O:P></SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>    Este control muestra la cantidad 
+de datos de la facturación EDI&nbsp;visualizados en la lista de datos. Su valor cambia a medida 
+que se vayan filtrando valores en el cuadro de búsqueda.</SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'></SPAN>&nbsp;</P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'><o:p></O:P></SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; TEXT-INDENT: -18pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><A name=OLE_LINK11></A><A 
+name=OLE_LINK10></A><A name=OLE_LINK33></A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT size=2 face="Arial"> <STRONG>3.</STRONG> </FONT> <A name=OLE_LINK32><SPAN style="mso-bookmark: OLE_LINK33"><SPAN style="mso-bookmark: OLE_LINK10"><SPAN style="mso-bookmark: OLE_LINK11"><SPAN><STRONG><FONT face="Arial"><FONT size=2>Fecha de última actualización - 
+Usuario.</FONT></FONT>   
+  </STRONG></SPAN></SPAN></SPAN></SPAN></A><SPAN 
+style="mso-bookmark: OLE_LINK32"><SPAN 
+style="mso-bookmark: OLE_LINK33"><SPAN 
+style="mso-bookmark: OLE_LINK10"><SPAN 
+style="mso-bookmark: OLE_LINK11"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'><SPAN style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK10"><SPAN 
+style="mso-bookmark: OLE_LINK11"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'><o:p></O:P></SPAN></SPAN></SPAN></P>
+<P class=MsoNormal 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN style="mso-bookmark: OLE_LINK10"><SPAN style="mso-bookmark: OLE_LINK11"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Aquí se muestra la fecha y el usuario que modificó los datos de 
+la facturación EDI&nbsp; seleccionado. Por defecto no aparece visible, solo cuando 
+se selecciona una fila de la lista.</SPAN></SPAN></SPAN></P>
+<P class=MsoNormal style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 10pt" 
+align=center><BR style="mso-ignore: vglayout" clear=all></P>
+<P class=MsoListParagraph 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; TEXT-INDENT: -18pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT size=2 face="Arial">&nbsp;</FONT></STRONG><FONT face="Arial"><FONT size=2><STRONG>4.</STRONG><STRONG>&nbsp;</STRONG> </FONT></FONT> </SPAN><STRONG><FONT size=2 face="Arial">Botón 
+ayuda.</FONT> 
+</STRONG><IMG alt="" src="../../img/help.jpg" align=absMiddle > <o:p></O:P></SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Aquí</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'> </SPAN><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>se despliega el manual de cada página.</SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><B><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></SPAN></B><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; LINE-HEIGHT: 115%; mso-bidi-font-family: Arial'> </SPAN></SPAN></P></SPAN>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore">
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><STRONG>5.</STRONG><STRONG> </STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Código de reclamación.</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></B></SPAN></SPAN><SPAN><SPAN 
+style="mso-list: Ignore"><FONT size=2 face="Arial"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica el prefijo pertenenciente a las diferentes 
+aseguradoras.<o:p></O:P></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ </FONT></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN 
+style="mso-list: Ignore"></SPAN></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN 
+style="mso-list: Ignore"></SPAN></SPAN><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial">6.&nbsp; </FONT></STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Tipo de reclamación.</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><o:p></O:P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'> campo de selección que indica si&nbsp;envía&nbsp;la 
+factura electrónica <SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>: <o:p></O:P></SPAN></P>
+<P class=MsoListParagraphCxSpFirst 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -18pt; mso-list: l1 level3 lfo1; mso-add-space: auto"><FONT face="Arial"><SPAN 
+lang=ES-CO 
+style="FONT-SIZE: 10pt; FONT-FAMILY: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold"><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;·<SPAN 
+style='FONT: 7pt "Times New Roman"'><FONT size=2>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Original</SPAN></FONT></SPAN></SPAN></SPAN></FONT></P>
+<P class=MsoListParagraphCxSpMiddle 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -18pt; mso-list: l1 level3 lfo1; mso-add-space: auto"><FONT face="Arial"><SPAN 
+lang=ES-CO 
+style="FONT-SIZE: 10pt; FONT-FAMILY: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold"><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;·<SPAN 
+style='FONT: 7pt "Times New Roman"'><FONT size=2>&nbsp;&nbsp;&nbsp;&nbsp;</FONT></SPAN></SPAN></SPAN><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Corregido</SPAN></FONT></P>
+<P class=MsoListParagraphCxSpLast 
+style="MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -18pt; mso-list: l1 level3 lfo1; mso-add-space: auto"><FONT face="Arial"><SPAN 
+lang=ES-CO 
+style="FONT-SIZE: 10pt; FONT-FAMILY: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold"><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></SPAN></FONT><FONT face="Arial"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><FONT face=Symbol>&nbsp; ·</FONT><SPAN 
+style='FONT: 7pt "Times New Roman"'><FONT size=2>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Reemplazo o vacio.<o:p></O:P></SPAN><o:p></O:P></SPAN></FONT></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+<P class=MsoListParagraphCxSpLast 
+style="MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -18pt; mso-list: l1 level3 lfo1; mso-add-space: auto">&nbsp;</P></SPAN>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG>7.</STRONG><STRONG><FONT size=2 face="Arial">&nbsp;Formato miembro  </FONT></STRONG></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>  </SPAN></SPAN></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Es un campo alfa-numérico que sirve para elaborar una 
+máscara de entrada. Se puede dejar vacío.</SPAN>         
+      </P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><FONT size=2 face="Arial" >      La cantidad de caracteres escritos, sera la 
+cantidad de caracteres&nbsp;que se aceptaran en donde se 
+aplique la mascara,&nbsp;ejemplo:</FONT>         
+      </P>
+<P align=center ><TABLE style="BORDER-COLLAPSE: 
+collapse" borderColor         =#000000 cellSpacing=0 cellPadding=2 width="40%" border=1><TR>
+<TD ><P align=center 
+><FONT size=2 face ="Arial" >&nbsp;9999</FONT></P></TD>
+<TD >
+<FONT size=2 face="Arial" >solo se aceptaran&nbsp;4 caracteres en el campo donde 
+      se aplique la mascara.</FONT>&nbsp;</TD>         
+</TR> 
+</TABLE></P><P align=left 
+><FONT size=2 face="Arial">los caracteres permitidos y que seran utlies para construir 
+la mascara son los siguientes</FONT></P>
+<P ><TABLE style="BORDER-COLLAPSE: 
+collapse" borderColor       =#000000 cellSpacing=0 cellPadding=2 width="100%" border=1><TR>
+<TD ><P align=center>*</P></TD><TD><FONT size=2 face="Arial" >&nbsp;Cualquier caracter individual</FONT></TD></TR><TR><TD>    <P align=center>
+<FONT size=2 face="Arial" >w</FONT></P></TD><TD>&nbsp;
+<FONT size=2 face="Arial" >Cualquier palabra (letra, número, guión 
+    bajo)</FONT>          
+             
+              
+       </TD></TR><TR><TD><P align=center >
+<FONT size=2 face="Arial" >W</FONT> 
+</P></TD><TD><FONT size=2 face="Arial" >&nbsp;Cualquier caracter que no sea numero o letra 
+      </FONT></TD></TR><TR><TD><P align=center ><FONT size=2 face="Arial" >d </FONT></P></TD><TD><FONT size=2 face="Arial" >&nbsp;Cualquier numero</FONT></TD></TR><TR><TD><P align=center > <FONT size=2 face="Arial" >D</FONT></P></TD>
+<TD ><FONT size=2 face="Arial" >         
+                
+     &nbsp;Cualquier caracter que no numero</FONT></TD> 
+</TR>
+<TR ><TD>
+<P align=center 
+><FONT size=2 face="Arial" >s</FONT></P></TD><TD>
+<FONT size=2 face="Arial" >&nbsp;Solo acepta espacio en blanco</FONT></TD></TR><TR><TD>
+<P align=center 
+><FONT size=2 face="Arial" >S</FONT></P></TD><TD><FONT size=2 face="Arial" >&nbsp;Cualquier caracter que no sea espacio en 
+      blanco</FONT></TD></TR><TR> <TD>&nbsp;</TD> <TD >&nbsp;</TD> </TR></TABLE></P><FONT size=2 ><P ><FONT size=2 face="Arial">Los caracteres numericos permitidos y que seran utiles para 
+construir la mascara son los siguientes:</FONT></P><P><TABLE style="BORDER-COLLAPSE: collapse" borderColor=#000000 cellSpacing=0 
+cellPadding=2 width="100%" border=1><TR><TD><P 
+align=center ><FONT face="Arial">&nbsp;<FONT size=2 >9</FONT></FONT></P>     
+</TD><TD><FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor a 9</FONT></TD></TR><TR><TD><P 
+align=center ><FONT size=2 face="Arial" >&nbsp;8</FONT></P></TD><TD><FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor 
+      a&nbsp;8&nbsp;</FONT></TD></TR>
+<TR ><TD><P align=center ><FONT size=2 face="Arial" >             
+           
+      &nbsp;7</FONT></P></TD>
+<TD ><FONT size=2 face ="Arial" >&nbsp;Solo numeros iguales o menor a 7</FONT></TD></TR>
+<TR ><TD><P align=center ><FONT size=2 face="Arial" >&nbsp;6</FONT> </P></TD><TD><FONT face="Arial" size=2>&nbsp;Solo numeros iguales o menor a 6</FONT></TD></TR><TR><TD><P align=center><FONT size=2 face="Arial" >&nbsp;5 
+</FONT></P></TD><TD><FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor a 5</FONT> 
+</TD> </TR> <TR>
+<TD ><P align=center><FONT size=2 face="Arial" >&nbsp;4 </FONT></P></TD><TD>
+<FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor a 4</FONT>      </TD></TR><TR><TD><P align=center ><FONT size=2 face="Arial" >&nbsp;3</FONT> </P></TD><TD><FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor a 3</FONT></TD></TR><TR><TD>
+<P align=center 
+><FONT size=2 face="Arial" >&nbsp;2</FONT></P> </TD><TD>
+<FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor a 2</FONT></TD></TR><TR><TD><P align=center 
+><FONT size=2 face="Arial" >&nbsp;1</FONT></P></TD>
+<TD ><FONT size=2 face="Arial" >&nbsp;Solo numeros iguales o menor a 1</FONT></TD></TR><TR><TD><P align=center><FONT size=2 face="Arial" >&nbsp;0</FONT> </P></TD><TD>
+<FONT face="Arial" ><FONT size=2 >          &nbsp;Solo numeros 
+      iguales 0</FONT></FONT>  </TD></TR>   
+  </TABLE></P><P ><FONT face="Arial">Los 
+caracteres especiales permitidos y que seran utiles para construir la mascara 
+son los siguientes:</FONT></P><P ><TABLE style="BORDER-COLLAPSE: collapse" borderColor=#000000 cellSpacing=0 
+cellPadding=2 width="100%" border=1><TR><TD><P align=center 
+>       
+<FONT size=2 face="Arial" >A</FONT></P> 
+ </TD>
+<TD ><FONT size=2 face="Arial" >Cualquier palabra del alfabeto en mayuscula&nbsp;SIN 
+      acentos</FONT></TD></TR><TR>
+<TD ><P align=center><FONT size=2 face="Arial" >a</FONT></P></TD><TD><FONT size=2 face="Arial" >Cualquier palabra del alfabeto en minisculas&nbsp;SIN 
+      acentos</FONT></TD></TR><TR><TD><P 
+align=center ><FONT size=2 face="Arial" >  Z</FONT></P> </TD>
+<TD ><FONT size=2 face="Arial" >Cualquier palabra del alfabeto en mayuscula&nbsp;CON 
+      acentos</FONT></TD></TR><TR>       
+  <TD ><P align=center> <FONT size=2 face="Arial" >z</FONT></P></TD>
+<TD ><FONT face="Arial" size=2>Cualquier palabra del alfabeto en minisculas&nbsp;CON 
+      acentos</FONT>&nbsp;</TD></TR><TR><TD>  <P 
+align=center    ><FONT size=2 face="Arial" >@</FONT></P></TD><TD>
+<FONT size=2 face="Arial" >Cualquier palabra del alfabeto&nbsp;SIN 
+      acentos</FONT>&nbsp;</TD></TR><TR><TD><P align=center > <FONT size=2 face ="Arial" >#</FONT></P></TD><TD><FONT size=2 face="Arial" >Cualquier palabra del alfabeto&nbsp;CON 
+      acentos</FONT>&nbsp;</TD></TR>
+<TR ><TD><P 
+align=center 
+><FONT size=2 face="Arial" >&nbsp;%</FONT></P></TD><TD><FONT size=2 face="Arial" >Cualquiere numero o palabra con acento del 
+      alfabeto</FONT></TD></TR></TABLE></P><P ><FONT face="Arial" >Ejemplos de mascaras validas</FONT> </P><UL ><LI>  <DIV><FONT face="Arial" >
+<STRONG > 
+              99999999:</STRONG>Aceptara 
+  8 digitos en total, todos los digitos tendran que ser numericos menores o 
+  iguales a 9</FONT></DIV>
+<LI ><DIV><FONT face="Arial"><STRONG>9988664:</STRONG> Aceptara 7 
+  digitos en total, todos los digitos tendran que ser numericos, los dos 
+  primeros digitos tendran que ser menores o iguales o 9, los dos siguientes 
+  tendran que ser menores o iguales a 8, los dos siguientes tendran que ser 
+  menores o iguales a 6 y el ultimo solo aceptara digitos menores o iguales a 
+  4.&nbsp;&nbsp;</FONT></DIV><LI><DIV >
+<FONT face="Arial" ><STRONG>AAA@@@</STRONG>: aceptara 6 
+  caracteres en total, todos los caracteres tendran que pertenecer al alfabeto, 
+  los tres primeros deberan estar en mayuscula y no tener ningun&nbsp;acento, 
+  los tres siguientes podran ser cualquier palabra que no contenga 
+  acentos.&nbsp;</FONT>   </DIV></LI> </UL></FONT></SPAN>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'></SPAN>&nbsp;</P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG>8.</STRONG><STRONG><FONT size=2 face="Arial">  </FONT></STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Tipo de transacción</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>  </SPAN></B></SPAN></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica si el archivo que se envía inicialmente con las 
+primeras facturas es de prueba, al ser aceptado por el receptor, se genera como 
+producción .            
+             <o:p></O:P></SPAN></P>            
+             <o:p></O:P></SPAN>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></SPAN></B></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore">9. 
+</SPAN></SPAN></B><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Identificación&nbsp;pagador</SPAN></B></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></B><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN style="mso-spacerun: yes"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'><SPAN style="mso-bookmark: OLE_LINK18"><SPAN style="mso-bookmark: OLE_LINK19"><SPAN style="mso-bookmark: OLE_LINK17"><SPAN lang=es-419 mso-ansi-language: 
+mso-bidi-font-family: Arial; mso-bidi-font-weight: bold; 
+#580A; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??>Este 
+campo</SPAN></SPAN></SPAN></SPAN><SPAN style="mso-bookmark: OLE_LINK18"> <SPAN style="mso-bookmark: OLE_LINK19"><SPAN style="mso-bookmark: OLE_LINK17"><SPAN lang=ES mso-ansi-language: 
+mso-bidi-font-family: Arial; mso-bidi-font-weight: bold; 
+ES; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??>indica&nbsp;el identificador del pagador, 
+es</SPAN></SPAN></SPAN></SPAN><SPAN style="mso-bookmark: OLE_LINK18"><SPAN style="mso-bookmark: OLE_LINK19"><SPAN style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: 
+Arial; mso-bidi-font-weight: bold; mso-bidi-font-size: 
+Arial?,sans-serif; 11.0pt??> un campo alfa-numérico que acepta mayúsculas y 
+minúsculas, lo máximo son 60 caracteres.</SPAN></SPAN></SPAN></SPAN> 
+</SPAN></SPAN></SPAN></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN style="mso-spacerun: yes"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES; mso-bidi-font-weight: bold'><SPAN style="mso-bookmark: OLE_LINK18"><SPAN style="mso-bookmark: OLE_LINK19"><SPAN style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: 
+Arial; mso-bidi-font-weight: bold; mso-bidi-font-size: 
+Arial?,sans-serif; 11.0pt??>        
+     </SPAN></SPAN></SPAN></SPAN> 
+</SPAN></SPAN></SPAN></SPAN></SPAN><STRONG><FONT size=2 face="Arial">  </FONT></STRONG>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><STRONG><FONT size=2 face="Arial"> 10. </FONT></STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Receptor.</SPAN></B></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'> Indica&nbsp; el código pertenenciente a la compañia recolectora de 
+las facturas.</SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>          
+ </SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><STRONG> 11. </STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Aplicar elegilibilidad.</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></B><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica&nbsp; si se debe verificar el paciente ingresado con 
+esta tarifa, en un sistema central para proveder con la creación de la 
+orden.<SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>&nbsp;</SPAN></SPAN></SPAN></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>         
+             
+<SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'></SPAN></SPAN></SPAN></SPAN></SPAN><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial"> </FONT></STRONG></SPAN></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial">12.&nbsp; </FONT></STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Asignar beneficios.</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><o:p></O:P><o:p></O:P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'> Indica si a los pacientesn creados con la tarifa se le 
+aplican beneficios o no.</SPAN>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto">
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto">
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto">
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"> 
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'></SPAN> 
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial"> </FONT></STRONG></SPAN></SPAN>&nbsp;</P><SPAN><SPAN style="mso-list: Ignore">
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial">13.&nbsp; Reclamación 
+por </FONT></STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'> .</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><o:p></O:P><o:p></O:P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'> Indica si se envía cuando la orden esta completa o cuando 
+tenga exámenes validados</SPAN>            
+   .</SPAN></P></SPAN></SPAN>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG></STRONG></SPAN></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial"> 14. </FONT></STRONG><B 
+style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>ID de intercambio(ISA06)</SPAN></B></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica el&nbsp;id de Intercambio del Remitente, es<SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><SPAN 
+style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: Arial; mso-bidi-font-weight: 
+bold; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??> un campo alfa-numérico 
+que acepta mayúsculas y minúsculas, lo máximo son 60 
+caracteres.</SPAN></SPAN></SPAN></SPAN><o:p></O:P></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><STRONG><SPAN style="mso-list: Ignore">  
+</SPAN></STRONG></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN><STRONG><SPAN style="mso-list: Ignore"> 15.&nbsp;Código de 
+ envio 
+</SPAN></STRONG><STRONG>   
+&nbsp;(GS02).</STRONG></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica La aplicación&nbsp; que envía el código, es<SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><SPAN 
+style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: Arial; mso-bidi-font-weight: 
+bold; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??> un campo alfa-numérico 
+que acepta mayúsculas y minúsculas, lo máximo son 60 
+caracteres.</SPAN></SPAN></SPAN></SPAN></SPAN>&nbsp;&nbsp;&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><STRONG><FONT size=2 face="Arial">  </FONT></STRONG>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><STRONG><FONT size=2 face="Arial"> 16. </FONT></STRONG><SPAN><STRONG>ID calificador 
+(ISA07)</STRONG><STRONG>.<o:p></O:P></STRONG></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica el id Calificador&nbsp;de intercambio,es<SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><SPAN 
+style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: Arial; mso-bidi-font-weight: 
+bold; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??> un campo alfa-numérico 
+que acepta mayúsculas y minúsculas, lo máximo son 60 
+caracteres.</SPAN></SPAN></SPAN></SPAN></SPAN></P><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><STRONG> &nbsp; </STRONG></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><STRONG> 17. Id laboratorio&nbsp;( </STRONG><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><STRONG>  
+NM109).</STRONG></SPAN></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica el id del remitente del laboratorio, es<SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><SPAN 
+style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: Arial; mso-bidi-font-weight: 
+bold; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??> un campo alfa-numérico 
+que acepta mayúsculas y minúsculas, lo máximo son 60 
+caracteres</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>       <SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><SPAN 
+style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: Arial; mso-bidi-font-weight: 
+bold; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??>    
+         
+</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>       <SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><SPAN 
+style="mso-bookmark: OLE_LINK17"><SPAN lang=ES-CO mso-bidi-font-family: Arial; mso-bidi-font-weight: 
+bold; mso-bidi-font-size: Arial?,sans-serif; 11.0pt??>    
+         
+</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial">18. </FONT></STRONG><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><STRONG>Archivo de 
+salida.</STRONG></SPAN></SPAN></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></SPAN></SPAN></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica&nbsp;el nombre que llevara el archivo generado para 
+el protocolo de facturació</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>n EDI.</SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'> </SPAN><SPAN><SPAN style="mso-list: Ignore"><FONT size=2 face="Arial"><SPAN><SPAN 
+style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial"> </FONT></STRONG></SPAN></SPAN></FONT></SPAN></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><FONT size=2 face="Arial"><SPAN><SPAN 
+style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial">19. </FONT></STRONG><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><STRONG>Consecutivo.</STRONG></SPAN></SPAN></SPAN></SPAN></FONT></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><FONT size=2 face="Arial"><SPAN><SPAN 
+style="mso-list: Ignore"><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></SPAN></SPAN></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Campo calculado, el cual controla la numeración de la 
+facturación del Archivo EDI.</SPAN></FONT></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><FONT size=2 face="Arial"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>         
+   </SPAN></FONT></SPAN></SPAN>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><FONT size=2 face="Arial"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>         
+   </SPAN></FONT></SPAN></SPAN><SPAN><SPAN style="mso-list: Ignore"><STRONG><FONT size=2 face="Arial">20. </FONT></STRONG><SPAN><SPAN style="mso-spacerun: yes"><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><STRONG>Aplicar a tipo de 
+pagador</STRONG></SPAN></SPAN></SPAN></SPAN></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-INDENT: 0cm; mso-list: l2 level2 lfo3; mso-add-space: auto; tab-stops: 1.0cm"><SPAN><SPAN style="mso-list: Ignore"><SPAN><SPAN style="mso-spacerun: yes"><SPAN 
+lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></SPAN></SPAN></SPAN></SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica si se&nbsp;aplica esta tarifa a los tipos de pagador aseguradora 
+del estado o aseguradora privada únicamente.<o:p></O:P></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore">  
+</SPAN></SPAN></B>&nbsp;</P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"'><SPAN style="mso-list: Ignore"> 21. 
+</SPAN></SPAN></B><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Firma del proveedor en archivo.</SPAN></B></P>
+<P class=MsoListParagraph 
+style="TEXT-ALIGN: justify; MARGIN: 0cm 0cm 0pt 21.3pt; LINE-HEIGHT: normal; TEXT-INDENT: -21pt; mso-list: l2 level2 lfo3; mso-add-space: auto"><B style="mso-bidi-font-weight: normal"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN></B><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'>Indica que laboratorio es el prestador y manda los datos del laboratorio 
+en el archivode faturación EDI&nbsp;.</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-bidi-font-weight: bold'><o:p></SPAN></SPAN></SPAN></SPAN></SPAN><SPAN style="mso-bookmark: OLE_LINK17"><SPAN style="mso-bookmark: OLE_LINK18"><SPAN style="mso-bookmark: OLE_LINK19"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>      
+</SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN>&nbsp;</P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><A name=OLE_LINK17><SPAN 
+style="mso-bookmark: OLE_LINK18"><SPAN 
+style="mso-bookmark: OLE_LINK19"><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore">22.<SPAN style='FONT: 7pt "Times New Roman"'>&nbsp;&nbsp; </SPAN></SPAN></SPAN></B><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Botón editar.<o:p></O:P></SPAN></B></SPAN></SPAN></A></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN style="mso-bookmark: OLE_LINK17"><SPAN style="mso-bookmark: OLE_LINK18"><SPAN style="mso-bookmark: OLE_LINK19"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>Este botón permite editar los datos del protocolo edi seleccionado de la 
+lista de datos y es habilitado cuando se selecciona de la lista. Se cargan los 
+datos en las cajas de texto y al pulsar el botón <B 
+style="mso-bidi-font-weight: normal">Editar</B>, se 
+habilitan todos los controles del formulario. Se habilitan los botones <B 
+style="mso-bidi-font-weight: normal">Guardar</B> y <B 
+style="mso-bidi-font-weight: normal">Cancelar</B>, y se 
+deshabilita el botón <B style="mso-bidi-font-weight: normal">Imprimir.</B></SPAN></SPAN></SPAN></SPAN></P></SPAN>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN>&nbsp;</P></SPAN></SPAN></SPAN></SPAN>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt 42.55pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN style="mso-bookmark: OLE_LINK17"><SPAN style="mso-bookmark: OLE_LINK18"><SPAN style="mso-bookmark: OLE_LINK19"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></SPAN></SPAN></SPAN></P><SPAN 
+style="mso-bookmark: OLE_LINK19"></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK18"></SPAN><SPAN 
+style="mso-bookmark: OLE_LINK17"></SPAN>
+<P class=MsoListParagraph 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; TEXT-INDENT: -21pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 23.<SPAN 
+style='FONT: 7pt "Times New Roman"'>&nbsp;&nbsp; 
+</SPAN></SPAN></SPAN></B><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Botón guardar.<o:p></O:P></SPAN></B></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>  Este botón permite guardar &nbsp;los datos del protocolo 
+edi. Al pulsarlo se deshabilitan los botones <B 
+style="mso-bidi-font-weight: normal">Editar</B>, <B 
+style="mso-bidi-font-weight: normal">Cancelar</B> y el 
+propio botón, y se habilitan los botones <B style="mso-bidi-font-weight: normal">Nuevo</B> e <B style="mso-bidi-font-weight: normal">Imprimir</B>.</SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p>&nbsp;</SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'></SPAN>&nbsp;</P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraph 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; TEXT-INDENT: -21pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24.<SPAN 
+style='FONT: 7pt "Times New Roman"'>&nbsp;&nbsp; 
+</SPAN></SPAN></SPAN></B><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Botón cancelar.<o:p></O:P></SPAN></B></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Este botón cancela, devuelve y </SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>deshabilita</SPAN><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'> las cajas de texto incluido el interruptor del estado. 
+Deshabilita los botones <B style="mso-bidi-font-weight: normal">Editar</B> y <B style="mso-bidi-font-weight: normal">Guardar, </B>y habilita el botones<B 
+style="mso-bidi-font-weight: normal"> Imprimir </B></SPAN><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>.</SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'></SPAN>&nbsp;</P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'></O:P></SPAN></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'><o:p></O:P></SPAN></P>
+<P class=MsoListParagraph 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; TEXT-INDENT: -21pt; mso-list: l0 level1 lfo1; mso-pagination: none; mso-layout-grid-align: none; mso-add-space: auto"><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 25.<SPAN 
+style='FONT: 7pt "Times New Roman"'>&nbsp;&nbsp; 
+</SPAN></SPAN></SPAN></B><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Botón reporte<o:p></O:P></SPAN></B></P>
+<P class=MsoNormal 
+style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-pagination: none; mso-layout-grid-align: none"><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial; mso-ansi-language: ES'>Este botón </SPAN><SPAN lang=ES-CO 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-bidi-font-family: Arial'>  abre una ventana donde se muestra el reporte de 
+las tarifas con su tipo de pagador que se encuentran en la lista 
+de datos. las opciones para guardar ya sea en PDF o en Excel.</SPAN><B><SPAN lang=ES 
+style='FONT-SIZE: 10pt; FONT-FAMILY: "Arial",sans-serif; mso-fareast-font-family: "Arial"; mso-bidi-font-family: "Arial"; mso-ansi-language: ES'><SPAN style="mso-list: Ignore">&nbsp;&nbsp;</SPAN></SPAN></B></SPAN></P></O:P><BR><font color="#FF0000" size="1" face="Arial">This document is created with WinCHM trial version. (The registered version will not show this message!)</font></div>	
+	<div id="winchm_template_footer">     
+   Copyright © 2017. CLTech Colombia All rights reserved.</div>
+</div>
+
+</body>
+</html>

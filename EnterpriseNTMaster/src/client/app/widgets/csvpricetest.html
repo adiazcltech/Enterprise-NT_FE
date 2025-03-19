@@ -1,0 +1,108 @@
+<!-- 
+<div ng-if="!csvtojson.disabled && csvtojson.classbutton" class="fileImport btn btn-primary button-list">
+  <span aria-hidden="true" class="fa fa-cloud-upload"></span> {{'0392' | translate}}
+  <input type="file" ng-model="image" class="import" onchange="angular.element(this).scope().filecsv(); " />
+</div> -->
+
+
+                     
+<form id="FormStar" class="input-group fileImport" style="width: 100%; background-color: transparent;">
+  
+  <input data-ng-model="csvpricetest.filename" ng-disabled="true" class="form-control" type="text" style="height: 30px;" >
+  <div class="input-group-addon panel-padding" style="border-style: none; background-color: transparent; ">
+    <div class="fileImport btn btn-info btn-short" style="width: 40px">
+      <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 
+      <input id="fileStar" type="file" ng-model="image" class="import" onchange="angular.element(this).scope().filecsv(); "/>
+
+    </div>
+  </div>
+</form>
+                      
+
+<script type="text/ng-template" id="validationFormat.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+   <div ng-if="!showdatainvalid" class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-body" style="height: 100px">
+       <div style="width: 30%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div style="width: 70%; float: left">
+        <label ng-show="!correctImport && !errorFile" style="margin-top: 30px;margin-left: 10px">{{'0177' | translate}}</label>
+        <label ng-show="correctImport && !errorFile" style="margin-top: 20px;margin-left: 10px">se han insertado {{quantitydata}} {{'0344' | translate}} {{quantityOrigin}} registros</label>
+        <label ng-show="errorFile" style="margin-top: 20px;margin-left: 10px">{{'0478' | translate}}</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+    </div>
+  </div>  
+</div>
+
+<div ng-if="showdatainvalid" class="modal-dialog modal-lg" style="width: 700px">
+  <div class="modal-content">
+    <div class="modal-header modal-header-danger" ng-hide="vm.print">                
+      <h4 class="modal-tittle text-center" id="myModallabel">{{'0100' | translate}}</h4>
+    </div>
+    <div class="modal-body" style="height: 400px">
+     <div>
+       <label  style="margin-left: 10px">{{'0479' | translate}}</label>
+     </div>
+     <table class="table table-hover table-sm table-list" style="height: 300px">
+      <thead>
+        <tr>
+          <th class="col-md-3">
+            <a ng-click="$event.stopPropagation(); vm.sortType = 'code'; sortReverse = !sortReverse; $event.stopPropagation() ">
+              <i ng-if="!sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></i>
+              <i ng-if="sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+              <span ng-show="vm.sortType == 'code' && !sortReverse"></span>
+              <span ng-show="vm.sortType == 'code' && sortReverse"></span>
+            </a> {{'0482' | translate}}
+          </th>
+          <th class="col-md-2">
+            <a ng-click="$event.stopPropagation(); vm.sortType = 'name'; sortReverse = !sortReverse; $event.stopPropagation() ">
+              <i ng-if="!sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></i>
+              <i ng-if="sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+              <span ng-show="vm.sortType == 'name' && !sortReverse"></span>
+              <span ng-show="vm.sortType == 'name' && sortReverse"></span>
+            </a> {{'0481' | translate}}
+          </th>
+          <th class="col-md-4">
+            <a ng-click="$event.stopPropagation(); vm.sortType = 'name'; sortReverse = !sortReverse; $event.stopPropagation() ">
+              <i ng-if="!sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></i>
+              <i ng-if="sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+              <span ng-show="vm.sortType == 'name' && !sortReverse"></span>
+              <span ng-show="vm.sortType == 'name' && sortReverse"></span>
+            </a> {{'0480' | translate}}
+          </th>
+          <th class="col-md-3">
+            <a ng-click="$event.stopPropagation(); vm.sortType = 'type'; sortReverse = !sortReverse; $event.stopPropagation() ">
+              <i ng-if="!sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></i>
+              <i ng-if="sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+              <span ng-show="vm.sortType == 'type' && !sortReverse"></span>
+              <span ng-show="vm.sortType == 'type' && sortReverse"></span>
+            </a> {{'0035' | translate}}
+          </th>
+        </tr>
+      </thead>
+      <tbody class="tbody-list" style="width: 97%; height: calc(100% - 9rem)">
+        <tr class="row-list" data-ng-repeat="list in listdata">
+          <td class="col-md-3" data-ng-bind="list.value"></td>
+          <td class="col-md-2" data-ng-bind="list.name"></td>
+          <td class="col-md-4" data-ng-bind="list.data"></td>
+          <td class="col-md-3" data-ng-bind="list.error"></td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+  </div>
+</div>  
+</div>
+
+</div>
+</script>

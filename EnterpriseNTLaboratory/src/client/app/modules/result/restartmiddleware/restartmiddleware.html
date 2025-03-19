@@ -1,0 +1,102 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content">
+    <div id="page_content_inner">
+        <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-1-1" style="height: 123px">
+                <div class="md-card fullheight" style="margin-bottom: 5px">
+                    <div class="md-card-content uk-grid fullheight">
+                        <div class="uk-width-1-1 fullheight">
+                          <!--   <fieldset class="fieldset" style="height: 58px; padding-top: 15px"> -->
+                                <orderfilter rangeinit="vm.rangeInit"
+                                    rangeend="vm.rangeEnd"
+                                    typefilter="vm.filterRange"
+                                    isopenreport="vm.disabled"></orderfilter>
+                            <!-- </fieldset> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-1" style="height: calc(100% - 132px);margin-top: 5px;">
+                <div class="md-card md-card-hover fullheight uk-animation-fade" style="margin-bottom: 5px;margin-top: 5px;" ng-show="vm.data.length !== 0">
+                    <div class="md-card  md-card-hover fullheight">
+                        <div class="md-card-content fullheight" style="padding: 0px;">
+                            <div class="uk-grid uk-flex uk-flex-middle div-head">
+                                <div class="uk-width-1-10 uk-text-center uk-table-middle small_col" style="width: 5%; padding-left: 2px;">
+                                </div>
+                                <div class="uk-width-1-10 uk-text-bold ">
+                                    Còdigo
+                                </div>
+                                <div class="uk-width-4-10 uk-text-bold">
+                                    laboratorio
+                                </div>
+                                <div class="uk-width-4-10 uk-text-bold">
+                                    URL
+                                </div>
+                            </div>
+                            <div class="div-conttable" style="height: calc(100% - 40px)">
+                                <div ng-repeat="section in vm.data" class="uk-grid uk-flex  uk-flex-middle div-table" style="margin-top: 0px">
+                                    <div class="uk-width-1-10 uk-text-center uk-table-middle small_col" style="width: 5%; padding-left: 2px;">
+                                        <input type="checkbox" icheck ng-model="section.selected" class="check_row" table-check-row>
+                                    </div>
+                                    <div class="uk-width-1-10">{{section.code}}</div>
+                                    <div class="uk-width-4-10 uk-text-truncate">
+                                        {{section.name}}
+                                    </div>
+                                    <div class="uk-width-4-10 uk-text-truncate">
+                                        {{section.url}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-card  md-card-hover fullheight" style="margin-bottom: 5px;margin-top: 5px;" ng-show="vm.data.length === 0">
+                <div class="md-card-content fullheight">
+                    <div class="uk-grid fullheight ">
+                        <div class="uk-width-1-1 uk-flex uk-flex-center uk-flex-middle">
+                            <img class="img-responsive" style="height: 90px; width: 90px;" src="images/database.png">
+                        </div>
+                        <div class="uk-width-1-1 uk-text-center">
+                            <h3>Comuniquese con el administrador no existen laboratorios configurados para el middleware </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+                    <div class="md-card uk-animation-scale-up uk-animation-40 fullheight">
+                        <div style="padding-top: 5px" class="md-card-content fullheight">
+                            <div class="uk-grid fullheight">
+                                <div class="uk-width-1-1" style="float: right">
+                                    <button style="float: right" type="button" ng-disabled="!vm.disabled || ((vm.data | filter:{ selected: true}).length === 0 )" class="md-fab md-fab-small md-fab-success" ng-class="{'md-bg-blue-grey-100' : !vm.disabled || ((vm.data | filter:{ selected: true}).length === 0 )}" ng-click=" vm.save()">
+                                        <i class="material-icons md-color-grey-50" data-uk-tooltip="{pos:'top'}" title="Reenvio al middleware">&#xE065;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalinformative" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll; min-height: 300px">
+    <div class="uk-modal-dialog">
+        <div class="uk-overflow-container" style="margin-top: 0px">
+            <div ng- class="uk-overflow-container" style="margin-top: 0px">
+                <div style="width: 54px; float: left;">
+                    <img class="img-responsive" src="images/iconinfo.png">
+                </div>
+                <div class="uk-text-center" style="margin-top: 10px">
+                    {{ '1878' | translate }} : {{vm.quantity}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

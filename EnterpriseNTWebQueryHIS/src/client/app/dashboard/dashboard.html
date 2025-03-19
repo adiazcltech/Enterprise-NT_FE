@@ -1,0 +1,865 @@
+<style>
+  .classpanic {
+    text-decoration: underline;
+  }
+
+  .referenceabove {
+    color: #f00808;
+    font-weight: 700;
+  }
+
+  md-tabs.md-default-theme md-ink-bar,
+  md-tabs md-ink-bar {
+    color: rgb(82 185 233);
+    background: rgb(82 185 233);
+  }
+
+  md-tabs.md-default-theme .md-tab.md-active,
+  md-tabs .md-tab.md-active,
+  md-tabs.md-default-theme .md-tab.md-active md-icon,
+  md-tabs .md-tab.md-active md-icon,
+  md-tabs.md-default-theme .md-tab.md-focused,
+  md-tabs .md-tab.md-focused,
+  md-tabs.md-default-theme .md-tab.md-focused md-icon,
+  md-tabs .md-tab.md-focused md-icon {
+    color: rgb(82 185 233);
+  }
+
+  md-tabs.md-dynamic-height md-tabs-content-wrapper {
+    min-height: 0;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    overflow: visible;
+    height: calc(100% - 43px);
+  }
+
+  md-tabs[md-border-bottom] md-tabs-wrapper {
+    border-width: 0 0 1px;
+    border-style: solid;
+    height: 50px;
+  }
+
+  md-tabs {
+    display: block;
+    margin: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    height: 100%;
+  }
+
+  md-tab-content.md-no-scroll {
+    bottom: auto;
+    overflow: hidden;
+    height: 100%;
+  }
+
+</style>
+<section id="dashboard-view" class="mainbar">
+  <section style="height: 100%;padding: 10px;">
+    <div class="container" style="height: 100%" ng-show="vm.view">
+      <md-tabs md-dynamic-height md-border-bottom style="height: 100%;">
+        <md-tab label="{{'0949' | translate}}">
+          <md-content class="md-padding" style="height: 100%">
+            <div class="col-md-2" style="height: 100%;padding-left:
+                0px;padding-right: 5px;">
+              <div class="panel-list" style="height: 100%;">
+                <div class="panel md-card general-container" style="height: 100%;">
+                  <div class="panel-body general-container" style="height:
+                      100%;padding: 0px;">
+                    <table class="table table-condensed table-list">
+                      <thead>
+                        <tr>
+                          <th class="col-md-12" style="padding: 5px 4px 3px;">
+                            <a ng-click="$event.stopPropagation(); vm.sortType= 'code';
+                                sortReverse= !sortReverse; $event.stopPropagation()">
+                              <i class="glyphicon glyphicon-sort-by-alphabet" ng-if="!sortReverse">
+                              </i>
+                              <i class="glyphicon glyphicon-sort-by-alphabet-alt" ng-if="sortReverse">
+                              </i>
+                              <span ng-show="vm.sortType == 'code' && !sortReverse">
+                              </span>
+                              <span ng-show="vm.sortType == 'code' && sortReverse">
+                              </span>
+                            </a>
+                            {{'0947' | translate}}
+                            <input type="search" name="nombre" placeholder="buscar" data-ng-model="vm.search1">
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody-list contentscroll" style="height: calc(100%
+                          - 4rem);width: calc(100% - 23px);">
+                        <tr class="row-list" data-ng-repeat="p in vm.filtered= (( vm.dataorder | filter:{ orderNumber:vm.search1 })|
+                            orderBy:vm.sortType:sortReverse)"
+                          data-ng-click="$event.stopPropagation();vm.printreport(p)"
+                          ng-class="{'info': p.orderNumber == vm.selectedOrder}">
+                          <td class="col-md-12">
+                            {{p.orderNumber}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-10" style="height: 100%;padding-left:
+                0px;padding-right: 5px;" id="contentpdf">
+              <iframe id="pdf" style="width: 100%; height: 100%;    background-color: rgb(82 86 89)"></iframe>
+            </div>
+          </md-content>
+        </md-tab>
+        <md-tab label="{{'0948' | translate}}">
+          <md-content class="md-padding" style="height: 100%">
+            <div class="col-md-5" style="height: calc(100% - 291px);padding-left:
+                0px;padding-right: 5px;">
+              <div class="panel-list" style="height: 100%;">
+                <div class="panel md-card general-container" style="height: 100%;">
+                  <div class="panel-body general-container" style="height:
+                      100%;padding: 0px;">
+                    <table class="table table-condensed table-list">
+                      <thead>
+                        <tr>
+                          <th class="col-md-12" style="padding: 0px 4px 3px;">
+                            <a ng-click="$event.stopPropagation(); vm.sortType= 'code';
+                                sortReverse= !sortReverse; $event.stopPropagation()">
+                              <i class="glyphicon glyphicon-sort-by-alphabet" ng-if="!sortReverse">
+                              </i>
+                              <i class="glyphicon glyphicon-sort-by-alphabet-alt" ng-if="sortReverse">
+                              </i>
+                              <span ng-show="vm.sortType == 'code' && !sortReverse">
+                              </span>
+                              <span ng-show="vm.sortType == 'code' && sortReverse">
+                              </span>
+                            </a>
+                            {{'0002' | translate}}
+                            <input type="search" name="nombre" placeholder="buscar" data-ng-model="vm.search">
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody-list contentscroll" style="height: calc(100%
+                          - 4rem);width: calc(100% - 23px);">
+                        <tr class="row-list" data-ng-click="vm.getId(vm.datatest.id,p.id)" data-ng-repeat="p in vm.filtered= (( vm.selectedtest |
+                            filter:{ search:vm.search })|
+                            orderBy:vm.sortType:sortReverse)" ng-class="{'info': p.id == vm.selected}">
+                          <td class="col-md-12">
+                            <img ng-if="p.testType===0" style="width: 21px; height:
+                                21px" src="images/test.png" data-toggle="tooltip" title="{{'0003' | translate}}">
+                            <img ng-if="p.testType===1" style="width: 21px; height:
+                                21px" src="images/profile.png" data-toggle="tooltip" title="{{'0004' | translate}}">
+                            <img ng-if="p.testType===2" style="width: 21px; height:
+                                21px" src="images/package.png" data-toggle="tooltip" title="{{'0005' | translate}}">
+                            {{p.name}}
+                            <span class="badge stylenumeric" ng-if="p.resultType===1" data-toggle="tooltip"
+                              title="{{'0006' | translate}}">#</span>
+                            <span class="badge styletext" ng-if="p.resultType===2" data-toggle="tooltip"
+                              title="{{'0007' | translate}}">T</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 contentscroll" style="height: calc(100% - 291px);padding-left: 0px;padding-right:
+                0px;margin-top: 8px;overflow: auto;">            
+                  <div style=" width: {{vm.sizetable}}; margin: auto;">
+                  <table ng-if="vm.selected!==-1" rz-table rz-mode="vm.tableMode" rz-model="vm.table"
+                    rz-profile="vm.profile" class="ui single line unstackable selectable fixed compact
+                  torrent table" id="myTable" style="font-size: 12px">
+                    <thead>
+                      <tr>
+                        <th id="colName">
+                          {{'0008' | translate}}
+                        </th>
+                        <th id="colStatus">
+                          {{'0009' | translate}}
+                        </th>
+                        <th id="colNotes" ng-show="vm.resulttest[0]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[0].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[0].testId,vm.resulttest[0].resultType)">
+                          {{vm.resulttest[0].abbr}}
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[0].resultType===1 &&
+                          vm.resulttest.length>
+                          1" data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[0].resultType===2 &&
+                          vm.resulttest.length>1" data-toggle="tooltip" title="{{'0007' | translate}}">T</span>
+                        </th>
+                        <th id="colMore" ng-show="vm.resulttest[1]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[1].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[1].testId,vm.resulttest[1].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[1].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[1].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[1].abbr}}
+                        </th>
+                        <th id="colEvenMore" ng-show="vm.resulttest[2]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[2].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[2].testId,vm.resulttest[2].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[2].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[2].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[2].abbr}}
+                        </th>
+                        <th id="colEvenMore1" ng-show="vm.resulttest[3]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[3].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[3].testId,vm.resulttest[3].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[3].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[3].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[3].abbr}}
+                        </th>
+                        <th id="colEvenMore2" ng-show="vm.resulttest[4]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[4].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[4].testId,vm.resulttest[4].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[4].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[4].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[4].abbr}}
+                        </th>
+                        <th id="colEvenMore3" ng-show="vm.resulttest[5]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[5].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[5].testId,vm.resulttest[5].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[5].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[5].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[5].abbr}}
+                        </th>
+                        <th id="colEvenMore4" ng-show="vm.resulttest[6]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[6].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[6].testId,vm.resulttest[6].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[6].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[6].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[6].abbr}}
+                        </th>
+                        <th id="colEvenMore5" ng-show="vm.resulttest[7]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[7].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[7].testId,vm.resulttest[7].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[7].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[7].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[7].abbr}}
+                        </th>
+                        <th id="colEvenMore6" ng-show="vm.resulttest[8]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[8].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[8].testId,vm.resulttest[8].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[8].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[8].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[8].abbr}}
+                        </th>
+                        <th id="colEvenMore7" ng-show="vm.resulttest[9]!==undefined"
+                          ng-class="{'stylehead': vm.select1 === vm.resulttest[9].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[9].testId,vm.resulttest[9].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[9].resultType===1" data-toggle="tooltip"
+                            title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[9].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[9].abbr}}
+                        </th>
+                        <th id="colEvenMore8" ng-show="vm.resulttest[10]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[10].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[10].testId,vm.resulttest[10].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[10].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[10].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[10].abbr}}
+                        </th>
+                        <th id="colEvenMore9" ng-show="vm.resulttest[11]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[11].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[11].testId,vm.resulttest[11].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[11].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[11].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[11].abbr}}
+                        </th>
+                        <th id="colEvenMore10" ng-show="vm.resulttest[12]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[12].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[12].testId,vm.resulttest[12].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[12].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[12].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[12].abbr}}
+                        </th>
+                        <th id="colEvenMore11" ng-show="vm.resulttest[13]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[13].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[13].testId,vm.resulttest[13].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[13].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[13].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[13].abbr}}
+                        </th>
+                        <th id="colEvenMore12" ng-show="vm.resulttest[14]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[14].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[14].testId,vm.resulttest[14].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[14].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[14].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[14].abbr}}
+                        </th>
+                        <th id="colEvenMore13" ng-show="vm.resulttest[15]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[15].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[15].testId,vm.resulttest[15].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[15].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[15].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[15].abbr}}
+                        </th>
+                        <th id="colEvenMore14" ng-show="vm.resulttest[16]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[16].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[16].testId,vm.resulttest[16].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[16].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[16].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[16].abbr}}
+                        </th>
+                        <th id="colEvenMore15" ng-show="vm.resulttest[17]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[17].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[17].testId,vm.resulttest[17].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[17].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[17].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[17].abbr}}
+                        </th>
+                        <th id="colEvenMore16" ng-show="vm.resulttest[18]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[18].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[18].testId,vm.resulttest[18].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[18].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[18].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[18].abbr}}
+                        </th>
+                        <th id="colEvenMore17" ng-show="vm.resulttest[19]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[19].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[19].testId,vm.resulttest[19].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[19].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[19].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[19].abbr}}
+                        </th>
+                        <th id="colEvenMore18" ng-show="vm.resulttest[20]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[20].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[20].testId,vm.resulttest[20].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[20].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[20].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[20].abbr}}
+                        </th>
+                        <th id="colEvenMore19" ng-show="vm.resulttest[21]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[21].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[21].testId,vm.resulttest[21].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[21].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[21].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[21].abbr}}
+                        </th>
+                        <th id="colEvenMore20" ng-show="vm.resulttest[22]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[22].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[22].testId,vm.resulttest[22].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[22].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[22].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[22].abbr}}
+                        </th>
+                        <th id="colEvenMore21" ng-show="vm.resulttest[23]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[23].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[23].testId,vm.resulttest[23].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[23].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[23].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[23].abbr}}
+                        </th>
+                        <th id="colEvenMore22" ng-show="vm.resulttest[24]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[24].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[24].testId,vm.resulttest[24].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[24].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[24].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[24].abbr}}
+                        </th>
+                        <th id="colEvenMore23" ng-show="vm.resulttest[25]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[25].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[25].testId,vm.resulttest[25].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[25].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[25].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[25].abbr}}
+                        </th>
+                        <th id="colEvenMore24" ng-show="vm.resulttest[26]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[26].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[26].testId,vm.resulttest[26].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[26].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[26].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[26].abbr}}
+                        </th>
+                        <th id="colEvenMore25" ng-show="vm.resulttest[27]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[27].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[27].testId,vm.resulttest[27].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[27].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[27].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[27].abbr}}
+                        </th>
+                        <th id="colEvenMore26" ng-show="vm.resulttest[28]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[28].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[28].testId,vm.resulttest[28].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[28].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[28].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[28].abbr}}
+                        </th>
+                        <th id="colEvenMore27" ng-show="vm.resulttest[29]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[29].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[29].testId,vm.resulttest[29].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[29].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[29].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[29].abbr}}
+                        </th>
+                        <th id="colEvenMore28" ng-show="vm.resulttest[30]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[30].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[30].testId,vm.resulttest[30].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[30].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[30].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[30].abbr}}
+                        </th>
+                        <th id="colEvenMore29" ng-show="vm.resulttest[31]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[31].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[31].testId,vm.resulttest[31].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[31].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[31].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[31].abbr}}
+                        </th>
+                        <th id="colEvenMore30" ng-show="vm.resulttest[32]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[32].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[32].testId,vm.resulttest[32].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[32].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[32].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[32].abbr}}
+                        </th>
+                        <th id="colEvenMore31" ng-show="vm.resulttest[33]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[33].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[33].testId,vm.resulttest[33].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[33].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[33].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[33].abbr}}
+                        </th>
+                        <th id="colEvenMore32" ng-show="vm.resulttest[34]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[34].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[34].testId,vm.resulttest[34].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[34].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[34].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[34].abbr}}
+                        </th>
+                        <th id="colEvenMore33" ng-show="vm.resulttest[35]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[35].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[35].testId,vm.resulttest[35].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[35].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[35].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[35].abbr}}
+                        </th>
+                        <th id="colEvenMore34" ng-show="vm.resulttest[36]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[36].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[36].testId,vm.resulttest[36].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[36].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[36].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[36].abbr}}
+                        </th>
+                        <th id="colEvenMore35" ng-show="vm.resulttest[37]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[37].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[37].testId,vm.resulttest[37].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[37].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[37].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[37].abbr}}
+                        </th>
+                        <th id="colEvenMore36" ng-show="vm.resulttest[38]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[38].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[38].testId,vm.resulttest[38].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[38].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[38].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[38].abbr}}
+                        </th>
+                        <th id="colEvenMore37" ng-show="vm.resulttest[39]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[39].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[39].testId,vm.resulttest[39].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[39].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[39].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[39].abbr}}
+                        </th>
+                        <th id="colEvenMore38" ng-show="vm.resulttest[40]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[40].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[40].testId,vm.resulttest[40].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[40].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[40].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[40].abbr}}
+                        </th>
+                        <th id="colEvenMore39" ng-show="vm.resulttest[41]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[41].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[41].testId,vm.resulttest[41].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[41].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[41].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[41].abbr}}
+                        </th>
+                        <th id="colEvenMore40" ng-show="vm.resulttest[42]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[42].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[42].testId,vm.resulttest[42].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[42].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[42].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[42].abbr}}
+                        </th>
+                        <th id="colEvenMore41" ng-show="vm.resulttest[43]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[43].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[43].testId,vm.resulttest[43].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[43].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[43].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[43].abbr}}
+                        </th>
+                        <th id="colEvenMore42" ng-show="vm.resulttest[44]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[44].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[44].testId,vm.resulttest[44].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[44].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[44].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[44].abbr}}
+                        </th>
+                        <th id="colEvenMore43" ng-show="vm.resulttest[45]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[45].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[45].testId,vm.resulttest[45].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[45].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[45].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[45].abbr}}
+                        </th>
+                        <th id="colEvenMore44" ng-show="vm.resulttest[46]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[46].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[46].testId,vm.resulttest[46].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[46].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[46].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[46].abbr}}
+                        </th>
+                        <th id="colEvenMore45" ng-show="vm.resulttest[47]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[47].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[47].testId,vm.resulttest[47].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[47].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[47].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[47].abbr}}
+                        </th>
+                        <th id="colEvenMore46" ng-show="vm.resulttest[48]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[48].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[48].testId,vm.resulttest[48].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[48].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[48].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[48].abbr}}
+                        </th>
+                        <th id="colEvenMore47" ng-show="vm.resulttest[49]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[49].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[49].testId,vm.resulttest[49].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[49].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[49].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[49].abbr}}
+                        </th>
+                        <th id="colEvenMore48" ng-show="vm.resulttest[50]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[50].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[50].testId,vm.resulttest[50].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[50].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[50].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[50].abbr}}
+                        </th>
+                        <th id="colEvenMore49" ng-show="vm.resulttest[51]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[51].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[51].testId,vm.resulttest[51].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[51].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[51].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[51].abbr}}
+                        </th>
+                        <th id="colEvenMore50" ng-show="vm.resulttest[52]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[52].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[52].testId,vm.resulttest[52].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[52].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[52].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[52].abbr}}
+                        </th>
+                        <th id="colEvenMore51" ng-show="vm.resulttest[53]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[53].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[53].testId,vm.resulttest[53].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[53].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[53].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[53].abbr}}
+                        </th>
+                        <th id="colEvenMore52" ng-show="vm.resulttest[54]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[54].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[54].testId,vm.resulttest[54].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[54].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[54].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[54].abbr}}
+                        </th>
+                        <th id="colEvenMore53" ng-show="vm.resulttest[55]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[55].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[55].testId,vm.resulttest[55].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[55].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[55].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[55].abbr}}
+                        </th>
+                        <th id="colEvenMore54" ng-show="vm.resulttest[56]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[56].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[56].testId,vm.resulttest[56].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[56].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[56].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[56].abbr}}
+                        </th>
+                        <th id="colEvenMore55" ng-show="vm.resulttest[57]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[57].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[57].testId,vm.resulttest[57].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[57].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[57].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[57].abbr}}
+                        </th>
+                        <th id="colEvenMore56" ng-show="vm.resulttest[58]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[58].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[58].testId,vm.resulttest[58].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[58].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[58].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[58].abbr}}
+                        </th>
+                        <th id="colEvenMore57" ng-show="vm.resulttest[59]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[59].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[59].testId,vm.resulttest[59].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[59].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[59].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[59].abbr}}
+                        </th>
+                        <th id="colEvenMore58" ng-show="vm.resulttest[60]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[60].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[60].testId,vm.resulttest[60].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[60].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[60].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[60].abbr}}
+                        </th>
+                        <th id="colEvenMore59" ng-show="vm.resulttest[61]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[61].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[61].testId,vm.resulttest[61].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[61].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[61].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[61].abbr}}
+                        </th>
+                        <th id="colEvenMore60" ng-show="vm.resulttest[62]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[62].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[62].testId,vm.resulttest[62].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[62].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[62].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[62].abbr}}
+                        </th>
+                        <th id="colEvenMore61" ng-show="vm.resulttest[63]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[63].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[63].testId,vm.resulttest[63].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[63].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[63].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[63].abbr}}
+                        </th>
+                        <th id="colEvenMore62" ng-show="vm.resulttest[64]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[64].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[64].testId,vm.resulttest[64].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[64].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[64].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[64].abbr}}
+                        </th>
+                        <th id="colEvenMore63" ng-show="vm.resulttest[65]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[65].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[66].testId,vm.resulttest[65].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[65].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[65].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[65].abbr}}
+                        </th>
+                        <th id="colEvenMore64" ng-show="vm.resulttest[66]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[66].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[66].testId,vm.resulttest[66].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[66].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[66].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[66].abbr}}
+                        </th>
+                        <th id="colEvenMore65" ng-show="vm.resulttest[67]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[67].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[67].testId,vm.resulttest[67].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[67].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[67].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[67].abbr}}
+                        </th>
+                        <th id="colEvenMore66" ng-show="vm.resulttest[68]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[68].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[68].testId,vm.resulttest[68].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[68].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[68].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[68].abbr}}
+                        </th>
+                        <th id="colEvenMore67" ng-show="vm.resulttest[69]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[69].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[69].testId,vm.resulttest[69].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[69].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[69].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[69].abbr}}
+                        </th>
+                        <th id="colEvenMore68" ng-show="vm.resulttest[70]!==undefined" ng-class="{'stylehead': vm.select1 ===
+                        vm.resulttest[70].testId}"
+                          ng-click="vm.datatestelect(vm.resulttest[70].testId,vm.resulttest[70].resultType)">
+                          <span class="badge stylenumeric" ng-if="vm.resulttest[70].resultType===1"
+                            data-toggle="tooltip" title="{{'0006' | translate}}">#</span>
+                          <span class="badge styletext" ng-if="vm.resulttest[70].resultType===2" data-toggle="tooltip"
+                            title="{{'0007' | translate}}">T</span>
+                          {{vm.resulttest[70].abbr}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody vs-repeat data-scroll-to-top="vm.filtered.length" style="height: calc(100% - 32px);">
+                      <tr ng-repeat="item in vm.resuldetail">
+                        <td>
+                          <img style="width: 21px; height: 21px" src="images/file.png" data-toggle="tooltip"
+                            title="{{'0010' | translate}}"
+                            ng-click="$event.stopPropagation();vm.orderTests=item.result; vm.selectedOrder=item.order;vm.openreportpreliminary=true;vm.type=2">
+                          {{item.order}}
+                        </td>
+                        <td>{{item.date | date: 'dd/MM/yyyy , h:mm:ss a'}}</td>
+                        <td ng-repeat="results in item.result"
+                          ng-class="{'info' :
+                        vm.select1 === results.testId,'classpanic' :results.pathology > 4,'referenceabove' :results.pathology > 2}"
+                          ng-click="vm.datatestelect(results.testId,results.resultType)">
+                          {{results.result}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+             </div>             
+    </div>
+    <div class="col-md-12" style="margin-top: 15px;padding-left:
+                0px;padding-right: 0px;" ng-if="vm.viewstadistic">
+      <echart class="md-card" style="height:250px; width: 99%" data="vm.datageneral" options="vm.optionsgeneral">
+      </echart>
+    </div>
+    </md-content>
+    </md-tab>
+    </md-tabs>
+    </div>
+    <div class="container" style="height: 100%" ng-show="vm.view1">
+      <div class="jumbotron text-center" style="height: 100%;">
+        <h1>{{vm.menssageInvalid}}</h1>
+        <img src="images/user.png">
+        <p>Comuniquese con el administrador</p>
+      </div>
+    </div>
+  </section>
+</section>
+<resultreportpreliminary openreport="vm.openreportpreliminary" pathreport="vm.user.pathReport" order="vm.selectedOrder"
+  tests="vm.orderTests" type="vm.type" listreports="vm.listreports">
+</resultreportpreliminary>

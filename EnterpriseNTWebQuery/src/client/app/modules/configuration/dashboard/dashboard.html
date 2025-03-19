@@ -1,0 +1,551 @@
+<style type="text/css">
+  #page_content_inner {
+    padding: 9px 9px;
+  }
+
+  .uk-table thead th,
+  .uk-table tfoot td,
+  .uk-table tfoot th {
+    font-weight: 700;
+  }
+
+  .orderfield-uppercase {
+    text-transform: uppercase;
+  }
+
+  .viewpatient {
+    height: calc(100% - 13px);
+  }
+
+  .inviewpatient {
+    height: calc(100% - 177px)
+  }
+
+  .inhistorypatient {
+    height: calc(100% - -27px);
+  }
+
+  .historypatient {
+    height: calc(100% - 43px);
+  }
+
+  @media screen and (max-width: 667px) {
+    .hide-div {
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 667px) {
+    .view-div {
+      display: none !important;
+    }
+  }
+
+
+
+  .measureButtons {
+    height: 90px
+  }
+
+  .measureButtons>div {
+    margin-top: 5px;
+    margin-left: 4px
+  }
+
+  .viewfooter {
+    height: calc(100% - 130px);
+  }
+
+  .inviewfooter {
+    height: calc(100% - 55px);
+  }
+
+  body {
+    background-color: #fff !important;
+  }
+
+  .measureButtons>div>span {
+    font-size: 9px;
+    text-align: center;
+    width: 60px;
+    max-height: 40px;
+    line-height: 10px;
+    margin-top: 6px;
+  }
+
+  button {
+    margin-left: 5px
+  }
+
+  md-nav-bar.md-default-theme md-nav-ink-bar,
+  md-nav-bar md-nav-ink-bar {
+    color: rgb(63 81 181);
+    background: #3f51b5;
+  }
+
+  .md-button.md-default-theme.md-accent,
+  .md-button.md-accent {
+    color: rgb(63, 81, 181);
+  }
+
+  .dropdownToolbarButton{
+   display:none !important;
+  }
+
+  body.md-default-theme, body, html.md-default-theme, html {
+    background-color: rgb(250,250,250);
+}
+</style>
+
+<loadpage view="vm.loading"></loadpage>
+<div id="page_content" class="hide-div" style="margin-left: 0px;height: 95%;"
+  ng-if="vm.getpathReport!==''&&vm.getpathReport!==null">
+  <div id="page_content_inner" style="height: 100%;background: white;">
+    <div class="uk-grid"
+      ng-class="{'historypatient': vm.Historico || vm.HistoricoGrafica || vm.HistoricoCombinado ,'inhistorypatient':  !vm.Historico && !vm.HistoricoGrafica && !vm.HistoricoCombinado }">
+      <div class="uk-width-1-1" ng-if="vm.viewpatient">
+        <div class="md-card  md-card-hover ">
+          <div class="md-card-content" style="padding: 0px;">
+            <md-content class="md-padding">
+              <md-nav-bar md-selected-nav-item="vm.currentNavItem" nav-bar-aria-label="navigation links">
+                <md-nav-item md-nav-click="vm.viewsmall=1;vm.viewpdf=true;vm.clearcontrol()" name="page1">
+                  {{'0106' | translate}}
+                </md-nav-item>
+                <md-nav-item md-nav-click="vm.viewsmall=2;vm.viewpdf=true;vm.clearcontrol()" ng-if="vm.viewpatient"
+                  name="page2">
+                  {{'0107' | translate}}
+                </md-nav-item>
+                <md-nav-item md-nav-click="vm.viewsmall=3;vm.viewpdf=true;vm.clearcontrol()" ng-if="vm.viewpatient"
+                  name="page3">
+                  {{'0076' | translate}}
+                </md-nav-item>
+                <md-nav-item md-nav-click="vm.viewsmall=4;vm.viewpdf=true;vm.clearcontrol()" ng-if="vm.BusquedaOrden"
+                  name="page4">
+                  {{'0108' | translate}}
+                </md-nav-item>
+              </md-nav-bar>
+              <span>{{vm.status}}</span>
+              <div class="ext-content">
+                <div class="uk-width-1-1 uk-flex uk-flex-center uk-margin-top" ng-if="vm.viewsmall===1"
+                  style="padding: 2px;margin: 18px 0;">
+                  <form class="uk-form-stacked ng-pristine ng-valid">
+                    <input kendo-date-picker k-ng-model="vm.dateseach" style="width: 100%;" id="kUI_datepicker_a"
+                      k-format="'{{vm.formatDate}}'" max="vm.max" k-on-change="vm.viewpdf=true;vm.getseachdate()" />
+                    <span class="uk-form-help-block uk-text-danger" ng-if="vm.message"
+                      style="padding: 0px;margin-top: 3px;font-size: 11px;">
+                      {{'0109' | translate}}</span>
+                  </form>
+                </div>
+
+                <div class="uk-grid" ng-if="vm.viewsmall===2 && vm.viewpatient">
+                  <div class="uk-width-4-10" style="padding-top: 4px;"
+                    ng-show="vm.typedocument  &&  !vm.historyautomatic">
+                    <label style="top: -6px; font-size: 12px;">{{'0110' | translate}}</label>
+                    <select class="md-input" ng-options="obj.id as obj.name for obj in vm.documentType"
+                      data-ng-model="vm.documentType.id" class="form-control"
+                      ng-change="vm.viewpdf=true;vm.getseachtype()"></select>
+                  </div>
+                  <div class="uk-width-3-10" style="padding-top: 21px;">
+                    <label>{{'0107' | translate}}</label>
+                    <input type="text" class="md-input label-fixed" data-ng-model="vm.record"
+                      ng-keypress="vm.viewpdf=true;vm.keyselectpatientid($event)" md-input />
+                  </div>
+                  <div class="uk-width-3-10" style="margin-top: 3px;">
+                    <label style="top: -6px; font-size: 12px;">{{'0113' | translate}}</label>
+                    <select class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                      data-ng-model="vm.listYearhistory.id"
+                      ng-change="vm.viewpdf=true;vm.keyselectpatientid()"></select>
+                  </div>
+                </div>
+
+                <div class="uk-grid" ng-if="vm.viewsmall===3 && vm.viewpatient">
+                  <div class="uk-width-2-10" style="padding-top: 21px;">
+                    <label>{{'0111' | translate}} 1</label>
+                    <input type="text" class="md-input label-fixed orderfield-uppercase" data-ng-model="vm.lastname"
+                      ng-keypress="vm.viewpdf=true;vm.keyselectname($event)" md-input />
+                  </div>
+                  <div class="uk-width-2-10" style="padding-top: 21px;">
+                    <label>{{'0111' | translate}} 2</label>
+                    <input type="text" class="md-input label-fixed orderfield-uppercase" data-ng-model="vm.surName"
+                      ng-keypress="vm.viewpdf=true;vm.keyselectname($event)" md-input />
+                  </div>
+                  <div class="uk-width-2-10" style="padding-top: 21px;">
+                    <label>{{'0112' | translate}} 1</label>
+                    <input type="text" class="md-input label-fixed orderfield-uppercase" data-ng-model="vm.name1"
+                      ng-keypress="vm.viewpdf=true;vm.keyselectname($event)" md-input />
+                  </div>
+                  <div class="uk-width-2-10" style="padding-top: 21px;">
+                    <label>{{'0112' | translate}} 2</label>
+                    <input type="text" class="md-input label-fixed orderfield-uppercase" data-ng-model="vm.name2"
+                      ng-keypress="vm.viewpdf=true;vm.keyselectname($event)" md-input />
+                  </div>
+                  <div class="uk-width-2-10" style="margin-top: 3px;">
+                    <label style="top: -6px; font-size: 12px;">{{'0113' | translate}}</label>
+                    <select class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                      data-ng-model="vm.listYearname.id" ng-change="vm.viewpdf=true;vm.keyselectname()"></select>
+                  </div>
+                </div>
+
+                <div class="uk-grid" ng-if="vm.viewsmall===4 && vm.BusquedaOrden">
+                  <div class="uk-width-2-10" style="padding-top: 4px;"></div>
+                  <div class="uk-width-3-10" style="padding-top: 4px;">
+                    <label style="top: -6px; font-size: 12px;">{{'0113' | translate}}</label>
+                    <select class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                      data-ng-model="vm.listYearorder.id" ng-change="vm.viewpdf=true;vm.getOrderComplete()"></select>
+                  </div>
+                  <div class="uk-width-4-10" style="padding-top: 21px;">
+                    <label>{{'0108' | translate}}</label>
+                    <input type="text" class="md-input label-fixed orderfield-uppercase" data-ng-model="vm.numberorden"
+                      ng-keypress="vm.viewpdf=true;vm.getOrderComplete($event)" maxlength="{{vm.cantdigit}}" md-input />
+                  </div>
+                </div>
+
+              </div>
+            </md-content>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-3-10" ng-class="{'inviewpatient': vm.viewpatient ,'viewpatient': !vm.viewpatient }">
+        <div class="md-card md-card-hover" style="height: 100%;">
+          <div class="md-card-content" style="height: 100%;padding: 0px;">
+            <table class="uk-table  uk-table-small uk-table-middle tablescrollable" style="height: 100%;">
+              <thead style=" display: inline-block;width: 100%;height: 39px;">
+                <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                  <th class="uk-width-3-10 uk-text-center">
+                    {{'0108' | translate}}
+                  </th>
+                  <th class="uk-width-7-10">
+                    {{'0076' | translate}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="tbodyscrollable contentscroll" ng-if="vm.order.length!==0" vs-repeat
+                data-scroll-to-top='vm.filtered1.length'
+                style="margin-top: 0px;height: calc(100% + -39px);width: 100% !important;overflow-y: scroll;font-size: 12px;">
+                <tr class="uk-grid" ng-repeat="order in vm.filtered1= (vm.order)"
+                  ng-class="{'md-bg-light-blue-100': order.order == vm.selectedOrder}"
+                  style="margin-left: 0px;margin-top: 0px;height: 33px;">
+                  <td class="uk-text-right uk-width-3-10 uk-text-truncate"
+                    ng-click="vm.viewpdf=true;vm.getselectorder(order,0)">
+                    <a href="#">{{order.order}}</a>
+                  </td>
+                  <td class="uk-width-7-10 uk-text-truncate">{{order.name1}} {{order.name2}} {{order.lastName}} {{order.surName}}
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-7-10" style="padding-left: 15px;"
+        ng-class="{'inviewpatient': vm.viewpatient ,'viewpatient': !vm.viewpatient }">
+        <div class="md-card md-card-hover" style="height: 100%;">
+          <div class="md-card-content" style="height: 100%;padding: 0px;">
+            <div class="md-card-content uk-padding-small" style="padding: 0px;height: 100%">
+              <div class="uk-grid-width-large-1-1" style="height: 100%;padding-left: 0px;" id="contentpdf">
+               <iframe id="pdf" style="width: 100%; height: 100%; background-color: rgb(82 86 89)"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer id="footer" class="hide-div" style="margin-left: 0px"
+  ng-if="vm.Historico || vm.HistoricoGrafica || vm.HistoricoCombinado">
+  <div class="uk-clearfix" style="padding-bottom: 10px; padding-top: 10px">
+    <div class="uk-float-right">
+      <div class="uk-width-large-1-1">
+        <div class="uk-float-right">
+          <button ng-show="vm.currentTestTmp.length===0" ng-disabled="vm.selectedOrder===''"
+            ng-class="{'md-bg-blue-grey-100' :vm.selectedOrder===''}"
+            class="md-fab md-fab-small md-fab-wave-light waves-effect rs-button-margin rs-button-margin-left waves-light"
+            ng-click="vm.openresulthistory = true" style="background: {{vm.Color}}">
+            <i class="uk-icon-history md-color-blue-grey-50" title="{{'0050' | translate}}"
+              data-uk-tooltip="{pos:'top-left', delay: 3000}"></i>
+          </button>
+          <button ng-show="vm.currentTestTmp.length!==0" ng-disabled="vm.selectedOrder===''"
+            ng-class="{'md-bg-blue-grey-100' :vm.selectedOrder===''}"
+            class="md-fab md-fab-small md-fab-wave-light waves-effect rs-button-margin rs-button-margin-left waves-light"
+            ng-click="vm.openresulthistory = true" style="background: {{vm.Color}}">
+            <i class="uk-icon-history md-color-blue-grey-50" title="{{'0050' | translate}}"
+              data-uk-tooltip="{pos:'top-left', delay: 3000}"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="page_content" class="view-div" style="margin-left: 0px;height: 95%;"
+  ng-if="vm.getpathReport!==''&&vm.getpathReport!==null">
+  <div id="page_content_inner" class="view-div" style="height: 100%;background: white;">
+    <div class="uk-grid uk-grid-width-1-1  uk-margin-top-remove" style="height: 100%;" ng-if="vm.order.length!==0"
+      data-uk-grid-margin>
+      <div style="height: 55px;">
+        <div class="md-card" style="height: 100%;">
+          <div class="md-card-content" style="padding-bottom: 2px;padding-top:7px; padding-left: 10px">
+            <div class="uk-input-group">
+              <span class="uk-input-group-addon" style="min-width: 28px; padding: 10px; padding-left: 0px">
+                <img class="md-list-addon-icon material-icons md-22" ng-src="images/search.png">
+              </span>
+              <div class="md-input-wrapper md-input-filled">
+                <label style="top: -6px; font-size: 12px;">{{ '0205' | translate }}: </label>
+                <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove"
+                  ng-model="vm.searchorder" md-input="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-small-1-1" style="margin-top: 10px;margin-bottom: 70px;"
+        ng-class="{'viewfooter' :vm.Historico || vm.HistoricoGrafica || vm.HistoricoCombinado ||vm.viewpatient,'inviewfooter':!(vm.Historico || vm.HistoricoGrafica || vm.HistoricoCombinado ||vm.viewpatient)}">
+        <div class="md-card contentscroll" style="height: 100%;overflow-y: scroll;">
+          <div class="md-card-content" style="height: 100%;padding: 0px;font-size: 12px;">
+            <ul class="md-list md-list-addon" ng-if="vm.order.length!==0" vs-repeat
+              data-scroll-to-top='vm.filtered.length'>
+              <li ng-repeat="order in vm.filtered= ( vm.order | filter: vm.searchorder)"
+                ng-class="{'md-bg-light-blue-100': order.order == vm.selectedOrder}"
+                ng-click="vm.getselectordermini(order)">
+                <div class="md-list-addon-element" ng-click="vm.getselectorder(order,1)">
+                  <img style="width: 21px; height: 21px" src="images/file.png">
+                  <h6 class="uk-text-bold" style="margin-top: 0px;font-size: 9px;">{{ '0207' | translate }}</h6>
+                </div>
+                <div class="md-list-content">
+                  <span class="md-list-heading">{{order.order}}</span>
+                  <span class="uk-text-small uk-text-muted">{{order.name1}} {{order.name2}} {{order.lastName}} {{order.surName}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-grid uk-margin-top-remove"
+      ng-class="{'uk-grid-width-1-3' :!vm.BusquedaOrden,'uk-grid-width-1-4' :vm.BusquedaOrden}" style="height: 100%;"
+      data-uk-button-radio="{target:'.md-btn'}" ng-if="vm.order.length===0 && vm.viewpatient" data-uk-grid-margin>
+      <div style="height: 79px;padding-left: 22px;">
+        <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===1}"
+          ng-click="vm.viewpdf=false;vm.viewsmall=1;vm.clearcontrol();vm.currentNavItem='page1'"
+          style="padding: 2px 6px">
+          <img class="md-list-addon-icon material-icons md-24" ng-src="images/age.png" />
+          <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0106' | translate}}</h6>
+        </button>
+      </div>
+      <div style="height: 79px;padding-left: 19px;" ng-if="vm.viewpatient">
+        <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===2}"
+          style="padding: 2px 6px"
+          ng-click="vm.viewpdf=false;vm.viewsmall=2;vm.clearcontrol();vm.currentNavItem='page2'">
+          <img class="md-list-addon-icon material-icons md-24" ng-src="images/config/interview.png" />
+          <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0107' | translate}}</h6>
+        </button>
+      </div>
+      <div style="height: 79px;padding-left: 16px;" ng-if="vm.viewpatient">
+        <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===3}"
+          style="padding: 2px 6px"
+          ng-click="vm.viewpdf=false;vm.viewsmall=3;vm.clearcontrol();vm.currentNavItem='page3'">
+          <img class="md-list-addon-icon material-icons md-24" ng-src="images/history.png" />
+          <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0076' | translate}}</h6>
+        </button>
+      </div>
+      <div style="height: 79px;padding-left: 15px;" ng-if="vm.BusquedaOrden">
+        <button class="md-btn  md-btn-large md-btn-block md-btn-icon" ng-class="{'uk-active' : vm.viewsmall===4}"
+          style="padding: 2px 6px"
+          ng-click="vm.viewpdf=false;vm.viewsmall=4;vm.clearcontrol();vm.currentNavItem='page4'">
+          <img class="md-list-addon-icon material-icons md-24" ng-src="images/demo.png" />
+          <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0108' | translate}}</h6>
+        </button>
+      </div>
+      <div class="uk-width-small-1-1" style="height: calc(100% - 75px);margin-top: 10px;padding-left: 22px;">
+        <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+          <div class="md-card-content" style="height: 90%;">
+            <div class="uk-width-1-1 uk-flex uk-flex-center" ng-if="vm.viewsmall===1"
+              style="height: 100%;font-size: 12px;">
+              <form class="uk-form-stacked ng-pristine ng-valid">
+                <label for="kUI_datepicker_a" class="uk-form-label">{{'0208' | translate}}</label>
+                <input kendo-date-picker k-ng-model="vm.dateseach" style="width: 100%;" id="kUI_datepicker_a"
+                  k-format="'{{vm.formatDate}}'" max="vm.max" k-on-change="vm.viewpdf=false;vm.getseachdate()" />
+              </form>
+            </div>
+            <div class="uk-grid uk-grid-width-1-1" ng-if="vm.viewsmall===2 && vm.viewpatient" style="font-size: 12px;">
+              <div ng-show="vm.typedocument  &&  !vm.historyautomatic" class="uk-margin">
+                <label style="font-size: 12px;">{{'0110' | translate}}</label>
+                <select style="font-size: 12px;" class="md-input"
+                  ng-options="obj.id as obj.name for obj in vm.documentType" data-ng-model="vm.documentType.id"
+                  class="form-control" ng-change="vm.viewpdf=false;vm.getseachtype()"></select>
+              </div>
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0107' | translate}}</label>
+                <input style="font-size: 12px;" type="text" class="md-input label-fixed" data-ng-model="vm.record"
+                  ng-keypress="vm.viewpdf=false;vm.keyselectpatientid($event)" md-input />
+              </div>
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0113' | translate}}</label>
+                <select style="font-size: 12px;" class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                  data-ng-model="vm.listYearhistory.id" ng-change="vm.viewpdf=false;vm.keyselectpatientid()"></select>
+              </div>
+            </div>
+            <div class="uk-grid uk-grid-width-1-1" ng-if="vm.viewsmall===3 && vm.viewpatient" style="font-size: 12px;">
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0111' | translate}} 1</label>
+                <input style="font-size: 12px;" type="text" class="md-input label-fixed orderfield-uppercase"
+                  data-ng-model="vm.lastname" ng-keypress="vm.viewpdf=false;vm.keyselectname($event)" md-input />
+              </div>
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0111' | translate}} 2</label>
+                <input style="font-size: 12px;" type="text" class="md-input label-fixed orderfield-uppercase"
+                  data-ng-model="vm.surName" ng-keypress="vm.viewpdf=false;vm.keyselectname($event)" md-input />
+              </div>
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0112' | translate}} 1</label>
+                <input style="font-size: 12px;" type="text" class="md-input label-fixed orderfield-uppercase"
+                  data-ng-model="vm.name1" ng-keypress="vm.viewpdf=false;vm.keyselectname($event)" md-input />
+              </div>
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0112' | translate}} 2</label>
+                <input style="font-size: 12px;" type="text" class="md-input label-fixed orderfield-uppercase"
+                  data-ng-model="vm.name2" ng-keypress="vm.viewpdf=false;vm.keyselectname($event)" md-input />
+              </div>
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0113' | translate}}</label>
+                <select style="font-size: 12px;" class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                  data-ng-model="vm.listYearname.id" ng-change="vm.viewpdf=false;vm.keyselectname()"></select>
+              </div>
+            </div>
+            <div class="uk-grid uk-grid-width-1-1" ng-if="vm.viewsmall===4 && vm.BusquedaOrden"
+              style="font-size: 12px;">
+              <div class="uk-margin">
+                <label style="font-size: 12px;">{{'0113' | translate}}</label>
+                <select style="font-size: 12px;" class="md-input" ng-options="obj.id as obj.name for obj in vm.listYear"
+                  data-ng-model="vm.listYearorder.id" ng-change="vm.viewpdf=false;vm.getOrderComplete()"></select>
+              </div>
+              <div class="uk-margin">
+                <label>{{'0108' | translate}}</label>
+                <input style="font-size: 12px;" class="md-input label-fixed " type="text" ng-model="vm.numberorden"
+                  ng-keypress="vm.viewpdf=false;vm.getOrderComplete($event)" maxlength="{{vm.cantdigit}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer id="footer" class="view-div" style="margin-left: 0px;height: 71px;"
+  ng-if="vm.Historico || vm.HistoricoGrafica || vm.HistoricoCombinado ||vm.viewpatient">
+  <div class="uk-flex uk-flex-center measureButtons">
+    <div class="uk-flex uk-flex-column" ng-if="vm.viewpatient && vm.order.length!==0">
+      <button type="button" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+        ng-click="vm.order=[];vm.viewpdf=false;vm.viewsmall=1;vm.clearcontrol()">
+        <i class="material-icons">filter_list</i>
+      </button>
+      <span>{{'0206' | translate | trim}} </span>
+    </div>
+    <div class="uk-flex uk-flex-column" ng-if="vm.viewpatient && vm.order.length===0">
+      <button type="button" class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+        ng-click="vm.searchsmall()">
+        <i class="material-icons">search</i>
+      </button>
+      <span>{{'0205' | translate | trim}} </span>
+    </div>
+    <div class="uk-flex uk-flex-column"
+      ng-show="vm.currentTestTmp.length===0  && vm.Historico  || vm.HistoricoGrafica && vm.currentTestTmp.length===0  || vm.HistoricoCombinado && vm.currentTestTmp.length===0">
+      <button type="button" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light"
+        ng-disabled="vm.selectedOrder===''" ng-class="{'md-bg-blue-grey-100' :vm.selectedOrder===''}"
+        ng-click="vm.openresulthistory = true" style="background: {{vm.Color}}">
+        <i class="uk-icon-history md-color-blue-grey-50" title="{{'0050' | translate}}"></i>
+      </button>
+      <span>{{'0050' | translate | trim}} </span>
+    </div>
+    <div class="uk-flex uk-flex-column"
+      ng-show="vm.currentTestTmp.length!==0  && vm.Historico  || vm.HistoricoGrafica && vm.currentTestTmp.length!==0  || vm.HistoricoCombinado && vm.currentTestTmp.length!==0">
+      <button type="button" class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light"
+        ng-disabled="vm.selectedOrder===''" ng-class="{'md-bg-blue-grey-100' :vm.selectedOrder===''}"
+        ng-click="vm.openresulthistory = true" style="background: {{vm.Color}}">
+        <i class="uk-icon-history md-color-blue-grey-50" title="{{'0050' | translate}}"></i>
+      </button>
+      <span>{{'0050' | translate | trim}} </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<div id="logNoDataPreliminary" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+  <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+    <button type="button" class="uk-modal-close uk-close fontsmall"></button>
+    <div class="uk-modal-body" style="height: 75px; top: 0px">
+      <!-- <div style="width: 18%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div> -->
+      <div class="messageText fontsmall">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0174' | translate}}</label>
+      </div>
+    </div>
+    <div class="uk-modal-footer">
+    </div>
+  </div>
+</div>
+<div id="modalvalidatedpath" class="uk-modal" aria-hidden="true" bg-close="false"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog" style="width: 450px; height: 140px;">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 75px; top: 0px">
+      <div style="width: 18%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText fontsmall">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0195' | translate}}</label>
+      </div>
+    </div>
+    <div class="uk-modal-footer">
+    </div>
+  </div>
+</div>
+
+<div id="report" class="uk-modal uk-modal-card-fullscreen view-div" aria-hidden="true">
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar" style="background-color: #494949 !important;">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons  md-color-grey-50 uk-modal-close" data-uk-tooltip="{pos:'top'}"
+              title="{{'0213'| translate}}" style="margin: 0px;">&#xE5CD;</i>
+          </div>
+        </div>
+        <h3 class="md-card-toolbar-heading-text md-color-grey-50">
+         Reporte de la orden Nº {{vm.selectedOrder}}
+        </h3>
+      </div>
+      <div class="md-card-content" style="padding: 0px;">
+        <div class="md-card md-card-hover" style="height: 100%;">
+          <div class="md-card-content" style="height: 100%;padding: 0px;">
+            <div class="md-card-content uk-padding-small" style="padding: 0px;height: 100%">
+              <div class="uk-grid-width-large-1-1" style="height: 100%;padding-left: 0px;" id="contentpdfsmall">
+                <pdfjs-viewer data="vm.data"></pdfjs-viewer>
+                <!-- <iframe id="pdfsmall" style="width: 100%; height: 100%; background-color: rgb(82 86 89)"></iframe> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<resultstesthistory openmodal="vm.openresulthistory" tests="vm.currentTestTmp" patientid="vm.patient"
+  photopatient="vm.photopatient" patientname="vm.patientname"></resultstesthistory>
+<resultreportpreliminary openreport="vm.openreportpreliminary" order="vm.selectedOrder" tests="vm.dataorder"
+  listreports="vm.listreports" demographictemplate="vm.demographicTemplate" type="vm.typeprint" blob="vm.data"
+  referencedemographic="vm.referenceDemographic" namedemographic="vm.nameDemographic" idiome="vm.lisIdiome">
+</resultreportpreliminary>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

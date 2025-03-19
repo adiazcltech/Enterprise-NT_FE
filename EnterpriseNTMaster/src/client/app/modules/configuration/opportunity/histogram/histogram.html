@@ -1,0 +1,216 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar">
+            {{'0865' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/histogram/histogram.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll" style="padding: 0px">
+        <div class="col-md-5 panel-padding" style="height: 99%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top: 10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table id="tableArea" class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-2">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'name'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'name' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'name' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'name' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'name' && vm.sortReverse"></span>
+                        </a>{{'0011' | translate}}
+                      </th>
+
+                      <th class="col-md-2" style="padding-right: 0px;padding-left: 0px">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'minimum'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'minimum'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'minimum'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'minimum' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'minimum' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'minimum' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'minimum' && vm.sortReverse"></span>
+                        </a>{{'0345' | translate}}
+                      </th>
+                      <th class="col-md-2 " style="padding-right: 0px;padding-left: 0px">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'maximum'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'maximum'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'maximum'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'maximum' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'maximum' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'maximum' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'maximum' && vm.sortReverse"></span>
+                        </a>{{'0346' | translate}}
+                      </th>
+                      <th class="col-md-2">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'state'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'state'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'state'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'state' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <i ng-if="vm.sortType == 'state' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <span ng-show="vm.sortType == 'state' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'state' && vm.sortReverse"></span>
+                        </a> {{'0014' | translate}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll">
+                    <tr class="row-list"
+                      data-ng-repeat="Branch in vm.filtered = ((vm.data | filter: vm.search) |  orderBy:vm.sortType:vm.sortReverse)"
+                      data-ng-click="vm.getById(Branch.id,$index,Form)"
+                      ng-class="{info: $index == vm.selected, danger: Branch.state == 0 }">
+                      <td class="col-md-2" data-ng-bind="Branch.name"></td>
+                      <td class="col-md-2" data-ng-bind="Branch.minimum"></td>
+                      <td class="col-md-2" data-ng-bind="Branch.maximum"></td>
+                      <td class="col-md-2 text-center">
+                        <i ng-if="Branch.state == 1" class="glyphicon glyphicon-ok green">
+                        </i>
+                        <i ng-if="Branch.state == 0" class="glyphicon glyphicon-ban-circle red"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 panel-padding" style="height: 99%; ">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form " style="overflow: auto">
+                <form name="Form" id="Form" class="form-horizontal panel-body panel-padding" style="margin-top: 30px">
+                  <div style="display: none">
+                    <div>
+                      <input data-ng-model="vm.detail.id"></input>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error':Form.name.$invalid && Form.name.$touched || vm.nameRepeat}">
+                    <div class="col-sm-3 text-right">
+                      <label>{{'0011' | translate}}:</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input data-ng-model="vm.detail.name" maxlength="60" ng-disabled="vm.isDisabled"
+                        ng-required="true" name="name" id="name" class="form-control" type="text"
+                        ng-focus="vm.nameRepeat = false">
+
+                      <span ng-if="Form.name.$invalid && Form.name.$touched || vm.nameRepeat"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="Form.name.$error.required && Form.name.$touched"
+                        class="help-block">{{'0016' | translate}}</span>
+                      <span ng-if="vm.nameRepeat  && Form.name.$touched"
+                        class="help-block ">{{'0038' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error':vm.showInvalidRangeminimum || vm.showInvalidRange  || vm.showInvalidMaxCero }">
+                    <label class="col-sm-3 text-right">{{'0078' | translate}}:</label>
+                    <div class="col-sm-2" style="padding-right: 0px">
+                      <number-input ng-model="vm.detail.minimum" min="0" max="999999999" step="1" start="0"
+                        disabledecimal="true" decimalplaces="0" disable="vm.isDisabled"></number-input>
+                    </div>
+                    <label class="col-sm-4 text-right"
+                      style="padding-right: 0px; padding-left: 0px">{{'0079' | translate}}:</label>
+                    <div class="col-sm-2">
+                      <number-input ng-model="vm.detail.maximum" min="0" max="999999999" step="1" start="0"
+                        disabledecimal="true" decimalplaces="0" disable="vm.isDisabled"></number-input>
+                    </div>
+
+                    <div class="col-sm-8 col-md-offset-3 text-left">
+                      <span ng-if="vm.showInvalidRangeminimum" class="help-block ">{{'0119' | translate}}</span>
+                    </div>
+                    <div class="col-sm-8 col-md-offset-3 text-left">
+                      <span ng-if="vm.showInvalidRange" class="help-block ">{{'0868' | translate}}</span>
+                    </div>
+                    <div class="col-sm-8 col-md-offset-3 text-left">
+                      <!-- col-sm-10 col-md-offset-2 text-center -->
+                      <span ng-if="vm.showInvalidMaxCero" class="help-block ">{{'0328' | translate}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback" ng-class="{'has-error': Form.keyCode.$touched}">
+                    <label class="col-md-3 text-right">{{'0014' | translate}}:</label>
+                    <div class="col-md-3">
+                      <toggle ng-model="vm.detail.state" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                        ng-disabled="vm.isDisabledState" ng-change="vm.changeState()" size="btn-sm"></toggle>
+                    </div>
+                  </div>
+                </form>
+                <modalstate openstatemodal="vm.ShowPopupState" detailstate="vm.detail.state"></modalstate>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <button type="button" class=" btn btn-success button-list" ng-click="vm.add(Form)"
+                    ng-disabled="vm.isDisabledAdd">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{'0005' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-warning  button-list" ng-click="vm.edit()"
+                    ng-disabled="vm.isDisabledEdit">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                  </button>
+                  <button type="submit" class="btn btn-primary  button-list" ng-click="vm.save(Form)"
+                    ng-disabled="!Form.$valid || vm.isDisabledSave">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-info button-list" ng-click="vm.cancel(Form)"
+                    ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()"
+                    ng-disabled="vm.isDisabledPrint">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

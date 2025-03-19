@@ -1,0 +1,68 @@
+<div class="fieldset">
+  <div class="row" style="padding: 0px 10px 0px 0px;">
+    <div class="col-md-3" style="max-width: 25%;padding-right: 0;">
+      <legend style="margin-bottom: 0px;">Filtrar por demográficos:</legend>
+    </div>
+    <div class="col-md-4" style="padding-left: 0px;margin-top: -7px;">
+      <button id="btnAdd{{id}}" type="button" *ngIf="!demostatic"
+        class="btn-min md-btn-success md-btn-wave-light waves-effect waves-button waves-light"
+        (click)="addFilterDemographic(false)" [disabled]="isAdd" style="margin-right: 5px;">
+        <i class="material-icons">add</i>
+      </button>
+      <button id="btnRemove{{id}}" type="button" *ngIf="!demostatic"
+        class="btn-min md-btn-danger md-btn-wave-light waves-effect waves-button waves-light"
+        (click)="removeFilterDemographic()" [disabled]="demos.length == 0"
+        [ngClass]="{'md-bg-blue-grey-100': demos.length == 0}">
+        <i class="material-icons">&#xE14C;</i>
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!demostatic" class="row"
+    style="max-height: 95px;overflow: auto;">
+    <div formArrayName="demos" class="col-md-12">
+      <div *ngFor="let demo of demos.controls; let i = index">
+        <div [formGroup]="demo" class="row" style="padding: 0;margin-bottom: 5px;">
+          <div class="col-md-3">
+            <ng-select [items]="demo.value.demographics" bindLabel="name" bindValue="id" formControlName="value"
+              [hideSelected]="true" [clearable]="false" appendTo="body" placeholder="Seleccione" class="demo">
+            </ng-select>
+          </div>
+          <div class="col-md-9" *ngIf="demo.value.value && demo.value.encoded">
+            <ng-select [items]="demo.value.items" [addTag]="true" (add)="addTagFn($event, demo)" [hideSelected]="true" multiple="true" bindLabel="name"
+              [clearable]="false" (change)="validTag(demo)" appendTo="body"
+              placeholder="Seleccione"  formControlName="valueItems">
+              <ng-template ng-multi-label-tmp let-items="items">
+                <div class="ng-value" *ngFor="let item of items"
+                  [ngClass]="{'tag-item-add': item.id === 0 || !demo.value.all, 'tag-item-subtranct': item.id > 0 && demo.value.all}">
+                  <div class="left-panel" style="width: 18px;">
+                    <span class="material-icons md-color-blue-500" style="margin-top: -1px;margin-left: 2px;">{{item.icon}}</span>
+                  </div>
+                  <div class="right-panel" style="padding-left: 0px;margin-top: -6px;">
+                    <span class="ng-value-label"> {{item.name}}</span>
+                    <span class="ng-value-icon right" (click)="removeTag(item, demo)" aria-hidden="true"
+                      style="font-size: 11px;font-weight: bold;color: #585858;">×</span>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+                <div class="row" [ngClass]="{'autocomplete-add': !demo.value.all, 'autocomplete-subtranct': demo.value.all}">
+                  <div class="left-panel" style="height: 18px;width: 18px;">
+                    <span class="material-icons md-color-blue-500">{{item.icon}}</span>
+                  </div>
+                  <div class="right-panel" style="padding-left: 4px;margin-top: -4px;height: 18px;">
+                    <span style="font-size: 11px;">{{item.name}}</span>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-select>
+          </div>
+
+          <div class="col-md-9" *ngIf="demo.value.value && !demo.value.encoded && demo.value.id !== 110">
+            <input type="text" formControlName="text" class="form-control" aria-describedby="basic-addon1">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

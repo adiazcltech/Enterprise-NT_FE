@@ -1,0 +1,117 @@
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<loadpage view="vm.loadingdata"></loadpage>
+<div id="page_content">
+  <div id="page_content_inner">
+    <div class="uk-grid uk-container-center" style="height: 100%;" data-uk-grid-margin>
+      <div class="uk-width-large-1-1" style="height: 100%;">
+        <div class="md-card" style="height: 106px;">
+          <div class="md-card-content">
+            <div class="uk-grid" data-uk-grid-margin>
+              <div class="uk-width-large-1-1">
+                <div class="uk-form-row">
+                  <div class="uk-input-group" style="padding: 0px 0px;">
+                    <span class="uk-input-group-addon">
+                      <img class="md-list-addon-icon material-icons md-24" src="images/url.png" />
+                    </span>
+                    <label>URL </label>
+                    <form name="Formurl">
+                      <input type="url" name="url" id="url" class="md-input" ng-model="vm.dataconfigurl"
+                        ng-class="{'md-input-danger':Formurl.url.$error.url || Formurl.url.$invalid && Formurl.url.$touched}"
+                        ng-required="true" md-input />
+                      <span class="uk-form-help-block uk-text-danger" ng-show="Formurl.input.$error.url"
+                        style="padding: 0px;margin-top: 3px;font-size: 11px;">{{'0078' | translate}}</span>
+                      <span class="uk-form-help-block uk-text-danger"
+                        ng-show="Formurl.url.$invalid && Formurl.url.$touched"
+                        style="padding: 0px;margin-top: 3px;font-size: 11px;">{{'0060' | translate}}</span>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-grid uk-grid-medium" style="height: calc(100% - 133px);">
+          <div class="uk-width-large-1-2" style="height: 100%;">
+            <div class="md-card" style="height: 100%;">
+              <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                  {{'1531' | translate}}
+                </h3>
+              </div>
+              <div class="md-card-content large-padding contentscroll" style="height: calc(100% - 63px);
+              overflow: auto;padding: 15px 0px 0px 14px;">
+               <form name="Formpatient" id="Formpatient">           
+                <div class="uk-form-row" ng-repeat="item in vm.listdemographicpatient">
+                  <div class="uk-grid uk-grid-medium">
+                    <div class="uk-width-large-6-10">
+                      <label>{{item.name}}{{item.requerid?'*':''}}</label>
+                      <input  id="{{'demopatient' + item.key }}" name="{{'demopatient' + item.key }}"  type="text" class="md-input" ng-model="item.value" 
+                      ng-class="{'md-input-danger':Formpatient.{{'demopatient' + item.key }}.$invalid && Formpatient.{{'demopatient' + item.key}}.$touched}"                     
+                      ng-required="item.requerid" md-input />   
+                      <span class="uk-form-help-block uk-text-danger label-error" ng-show="Formpatient.{{'demopatient'+item.key}}.$invalid && Formpatient.{{'demopatient'+item.key}}.$touched" style="padding: 0px; margin-top: 0px;">{{ '0060' | translate }}</span>                  
+                    </div>
+                    <div class="uk-width-large-4-10">
+                      <md-input-container>
+                        <md-checkbox class="md-primary" ng-model="item.valuedefault">
+                          {{'1043' | translate}}
+                        </md-checkbox>
+                      </md-input-container>
+                    </div>
+                  </div>
+                </div>
+               </form>   
+              </div>
+            </div>
+          </div>
+          <div class="uk-width-large-1-2" style="height: 100%;">
+            <div class="md-card" style="height: 100%;">
+              <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                  {{'1532' | translate}}
+                </h3>
+              </div>
+              <div class="md-card-content large-padding contentscroll" style="height: calc(100% - 63px);
+              overflow: auto;padding: 15px 0px 0px 14px;">
+               <form name="Formorder" id="Formorder">           
+                <div class="uk-form-row" ng-repeat="item in vm.listdemographicorder">
+                  <div class="uk-grid uk-grid-medium">
+                    <div class="uk-width-large-6-10">
+                      <label>{{item.name}}{{item.requerid?'*':''}}</label>
+                      <input  id="{{'demo' + item.key }}" name="{{'demo' + item.key }}"  type="text" class="md-input" ng-model="item.value" 
+                      ng-class="{'md-input-danger':Formorder.{{'demo' + item.key }}.$invalid && Formorder.{{'demo' + item.key}}.$touched}"                     
+                      ng-required="item.requerid" md-input />   
+                      <span class="uk-form-help-block uk-text-danger label-error" ng-show="Formorder.{{'demo'+item.key}}.$invalid && Formorder.{{'demo'+item.key}}.$touched" style="padding: 0px; margin-top: 0px;">{{ '0060' | translate }}</span>                  
+                    </div>
+                    <div class="uk-width-large-4-10">
+                      <md-input-container>
+                        <md-checkbox class="md-primary" ng-model="item.valuedefault">
+                          {{'1043' | translate}}
+                        </md-checkbox>
+                      </md-input-container>
+                    </div>
+                  </div>
+                </div>
+               </form>   
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md-fab-wrapper">
+        <button type="button" ng-disabled="vm.disableSave" class="md-fab md-fab-small md-fab-primary"
+          ng-class="{'md-bg-blue-grey-100' : !Formurl.$valid}" ng-click="vm.save(Formurl,Formpatient,Formorder)"><i class="material-icons"
+            data-uk-tooltip="{pos:'top'}" title="{{'0007' | translate}}">&#xE161;</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.min.js"></script>
+<script src="assets/js/custom/uikit_fileinput.js"></script>

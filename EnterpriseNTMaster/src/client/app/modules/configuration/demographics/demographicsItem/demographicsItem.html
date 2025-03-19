@@ -1,0 +1,425 @@
+<style type="text/css">
+  .popover {
+    color: #222424 !important;
+  }
+
+  .origin {
+    border-radius: 4px;
+    padding: 3px 5px 3px;
+    color: white;
+    font-family: arial;
+    font-weight: bold;
+  }
+
+  .origin-order {
+    background-color: #5ea22b;
+  }
+
+  .origin-history {
+    background-color: #1589db;
+  }
+
+  tooltip tip {
+    border-radius: 5px;
+    background: rgba(51, 122, 183, 0.9);
+    width: 300px !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+  }
+
+  .selectDemo-O {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #5ea22b;
+  }
+
+  .selectDemo-H {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #1589db;
+  }
+
+  .link-O {
+    font-weight: bold;
+    color: #5ea22b;
+  }
+
+  .link-H {
+    font-weight: bold;
+    color: #1589db;
+  }
+
+  .link-O:hover {
+    color: #548a2b;
+  }
+
+  .link-H:hover {
+    color: #2373ab;
+  }
+</style>
+<loadpage view="vm.loadingdata">
+</loadpage>
+<modalreport openmodal="vm.open">
+</modalreport>
+<modalerror detailerror="vm.Error" openerrormodal="vm.ShowPopupError">
+</modalerror>
+<section class="row general-container" ng-mousemove="vm.getChangeDemo()">
+  <div class="panel panel-primary panel-principal">
+    <div class="panel-heading row">
+      <div class="col-md-4 text-left">
+        <strong class="panel-title text-left title-bar">
+          {{'0082' | translate | uppercase}}
+        </strong>
+      </div>
+      <div class="col-md-8 text-right" style="padding-top: 5px;">
+        <strong class="text-right" ng-bind="vm.usuario">
+        </strong>
+        <h3 class="panel-title glyphicon glyphicon-question-sign question-style" data-placement="bottom"
+          data-toggle="tooltip"
+          onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/demographicitem/demographicitem.htm','','width=1200,height=600,left=50,top=50,toolbar=yes');"
+          title="Ctrl + B"></h3>
+      </div>
+    </div>
+    <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+      <div class="col-md-6 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container">
+              <div>
+                <div class="input-group right-bar">
+                  <input class="form-control" data-ng-model="vm.search" placeholder="{{'0015' | translate}}"
+                    type="text">
+                  <div class="input-group-addon">
+                    <i class="glyphicon glyphicon-search">
+                    </i>
+                  </div>
+                </div>
+                <div class="number-bage">
+                  <span class="badge" data-ng-bind="vm.filtered.length" style="margin-top:10px">
+                  </span>
+                </div>
+              </div>
+              <table class="table table-list table-hover ">
+                <thead>
+                  <tr>
+                    <th class="col-md-9">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.name; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.name"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.name && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.name && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.name && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.name && vm.sortReverse"></span>
+                      </a>
+                      {{'0577' | translate}}
+                    </th>
+                    <th class="col-md-3 text-center" style="white-space: nowrap">
+                      <a
+                        ng-click="$event.stopPropagation(); vm.sortType =  vm.originorder; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                        <i ng-if="!vm.sortReverse && vm.sortType != vm.originorder"
+                          class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        <i ng-if="vm.sortReverse && vm.sortType != vm.originorder"
+                          class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                        <i ng-if="vm.sortType == vm.originorder && !vm.sortReverse "
+                          class="glyphicon glyphicon-triangle-bottom"></i>
+                        <i ng-if="vm.sortType == vm.originorder && vm.sortReverse"
+                          class="glyphicon glyphicon-triangle-top"></i>
+                        <span ng-show="vm.sortType == vm.originorder && !vm.sortReverse"></span>
+                        <span ng-show="vm.sortType == vm.originorder && vm.sortReverse"></span>
+                      </a>
+                      {{'0059' | translate}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tbody-list contentscroll" data-scroll-to-top='vm.filtered.length'>
+                  <tr class="row-list"
+                    data-ng-repeat-start="DemographicsPather in vm.filtered = (vm.totalDemoDecodeds | filter: {name:vm.search}) | orderBy:vm.sortType:vm.sortReverse"
+                    ng-class="{'selectDemo-O': DemographicsPather.id == vm.selectedPather && DemographicsPather.origin === 'O', 'selectDemo-H': DemographicsPather.id == vm.selectedPather && DemographicsPather.origin === 'H'}"
+                    ng-click="vm.getSelectedDemo(DemographicsPather.id, DemographicsPather.name, DemographicsPather.origin)">
+                    <td class="col-md-1 text-right">
+                      <a popover-placement="right" uib-popover="{{'0006' | translate}}" popover-trigger="'mouseenter'"
+                        class="glyphicon glyphicon-pencil " target="_blank"
+                        ng-click="vm.editdemographics(DemographicsPather.id, DemographicsPather.origin)"
+                        style="color: orange; cursor: pointer; margin-right: 10px" ng-click="vm.changeFormDemo = true">
+                      </a>
+                      <i ng-if="DemographicsPather.open === 1 && DemographicsPather.items.length > 0"
+                        ng-click="DemographicsPather.open = 0" class="fa fa-minus-square"></i>
+                      <i ng-if="DemographicsPather.open === 0 && DemographicsPather.items.length > 0"
+                        ng-click="DemographicsPather.open = 1" class="fa fa-plus-square"></i>
+                      <i ng-if="DemographicsPather.items.length === 0" class="fa fa-sticky-note-o"></i>
+                    </td>
+                    <td class="col-md-8" data-ng-bind="DemographicsPather.name"></td>
+                    <td class="col-md-2 text-center">
+                      <span popover-placement="left" uib-popover="{{'0061' | translate}}" popover-trigger="'mouseenter'"
+                        ng-if="DemographicsPather.origin === 'O'" style="width: 20px; height: 20px"
+                        class="origin origin-order" data-ng-bind="DemographicsPather.origin"></span>
+                      <span popover-placement="left" uib-popover="{{'0070' | translate}}" popover-trigger="'mouseenter'"
+                        ng-if="DemographicsPather.origin === 'H'" style="width: 20px; height: 20px"
+                        class="origin origin-history" data-ng-bind="DemographicsPather.origin"></span>
+                    </td>
+
+                  </tr>
+                  <tr class="row-list"
+                    data-ng-click="vm.getDemographicsItemsId(DemographicsItems.id, $index, DemographicsItemsForm)"
+                    data-ng-repeat="DemographicsItems in DemographicsPather.items | orderBy:sortType:sortReverse"
+                    ng-class="{info: DemographicsItems.id == vm.selected }" ng-if="DemographicsPather.open === 1"
+                    ng-style="{color: DemographicsItems.state == 0 ? '#DF013A' : 'black'}">
+                    <td class="col-md-2 text-right">
+                      <i class="fa fa-clipboard"
+                        ng-style="{color: DemographicsItems.state == 0 ? '#DF013A' : 'grey'}"></i>
+                    </td>
+                    <td class="col-md-1 text-center" data-ng-bind="DemographicsItems.code"></td>
+                    <td class="col-md-8" data-ng-bind="DemographicsItems.name"></td>
+                    <td class="col-md-1 text-center">
+                      <i class="glyphicon glyphicon-ok green" ng-if="DemographicsItems.state == true">
+                      </i>
+                      <i class="glyphicon glyphicon-ban-circle red" ng-if="DemographicsItems.state == false"
+                        style="font-weight: bold;">
+                      </i>
+                    </td>
+                  </tr>
+                  <tr data-ng-repeat-end=""></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 panel-padding" style="height: 100%">
+        <div class="panel-list">
+          <div class="panel panel-primary general-container">
+            <div class="panel-body general-container panel-padding panel-scroll contentscroll"
+              style="height: calc(100% - 55px)">
+              <form class="form-horizontal panel-body " id="DemographicsItemsForm" name="DemographicsItemsForm">
+                <div class="form-group form-group-sm text-left">
+                  <label class="col-md-3 text-right">
+                    {{'0059' | translate}}:
+                  </label>
+                  <label class="col-md-9 text-left" style="font-weight: bold">{{vm.origin}}</label>
+                </div>
+                <div class="form-group form-group-sm text-left"
+                  ng-class="{'has-error':DemographicsItemsForm.DemoEncoded.$invalid && DemographicsItemsForm.DemoEncoded.$touched}">
+                  <label class="col-md-3 text-right">
+                    {{'0577' | translate}}:
+                  </label>
+                  <div class="col-md-9">
+                    <a target="_blank" href="/demographic/{{vm.selectedPather}}/{{vm.originDemo}}" class="text-left"
+                      ng-class="{'link-H': vm.originDemo === 'H', 'link-O':vm.originDemo === 'O' }"
+                      ng-click="vm.changeFormDemo = true">
+                      <u popover-placement="right" uib-popover="{{'0006' | translate}}" popover-trigger="'mouseenter'"
+                        ng-click="vm.changeFormDemo = true">{{vm.nameDemo}}</u>
+                    </a>
+                  </div>
+                </div>
+                <fieldset style="padding-top: 10px">
+                  <legend style="width: auto; font-size: 13px; padding-left: 5px; padding-right: 5px;">
+                    {{'0084' | translate}}</legend>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': DemographicsItemsForm.code.$invalid && DemographicsItemsForm.code.$touched||vm.codeRepeat }">
+                    <label class="col-md-3 text-right">
+                      {{'0018' | translate}}:
+                    </label>
+                    <div class="col-md-3">
+                      <input class="form-control" data-ng-model="vm.demographicsItemsDetail.code" id="code"
+                        maxlength="10" name="code" ng-disabled="vm.isDisabled" ng-focus="vm.codeRepeat = false"
+                        ng-required="true" type="text">
+                      <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback"
+                        ng-if="DemographicsItemsForm.code.$invalid && DemographicsItemsForm.code.$touched ||vm.codeRepeat">
+                      </span>
+                      <span class="help-block "
+                        ng-if="DemographicsItemsForm.code.$invalid && DemographicsItemsForm.code.$touched">
+                        {{'0016' | translate}}
+                      </span>
+                      <span class="help-block " ng-if="vm.codeRepeat">
+                        {{'0038' | translate}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': DemographicsItemsForm.name.$invalid && DemographicsItemsForm.name.$touched||vm.nameRepeat }">
+                    <label class="col-md-3 text-right">
+                      {{'0011' | translate}}:
+                    </label>
+                    <div class="col-md-9">
+                      <input class="form-control" data-ng-model="vm.demographicsItemsDetail.name" id="name"
+                        maxlength="60" name="name" ng-disabled="vm.isDisabled" ng-focus="vm.nameRepeat = false"
+                        ng-required="true" type="text">
+                      <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback"
+                        ng-if="DemographicsItemsForm.name.$invalid && DemographicsItemsForm.name.$touched ||vm.nameRepeat">
+                      </span>
+                      <span class="help-block "
+                        ng-if="DemographicsItemsForm.name.$invalid && DemographicsItemsForm.name.$touched">
+                        {{'0016' | translate}}
+                      </span>
+                      <span class="help-block " ng-if="vm.nameRepeat">
+                        {{'0038' | translate}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': DemographicsItemsForm.demographicsItems.$invalid && DemographicsItemsForm.demographicsItems.$touched }">
+                    <label class="col-sm-3 text-right">
+                      {{'0083' | translate}}:
+                    </label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" data-ng-model="vm.demographicsItemsDetail.description"
+                        id="demographicsItems" name="demographicsItems" ng-disabled="vm.isDisabled"
+                        style="height: 120px;" type="text"></textarea>
+                    </div>
+                  </div>
+
+                <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error':DemographicsItemsForm.email.$error.email}">
+                    <div class="col-sm-3 text-right">
+                      <label>
+                        {{'0086' | translate}}:
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" data-ng-model="vm.demographicsItemsDetail.email" id="email"
+                        name="email" ng-disabled="vm.isDisabled" type="email" />
+                      <span class="help-block" ng-if="DemographicsItemsForm.email.$error.email">
+                        {{'0088' | translate}}
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- notificacion de resultados -->
+                  <div class="form-group form-group-sm has-feedback" ng-if="vm.resultNotByDemo">
+                    <div class="col-sm-3 text-right">
+                      <label>
+                        {{'1376' | translate}}:
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" data-ng-model="vm.demographicsItemsDetail.emailNotificationResult" id="emailNotificationResult"
+                      name="emailNotificationResult" ng-disabled="vm.isDisabled" type="text" />
+                    </div>
+                  </div>
+
+                  <!-- notificacion de retoma -->
+                  <div class="form-group form-group-sm has-feedback" ng-if="vm.resultNotByDemo">
+                    <div class="col-sm-3 text-right">
+                      <label>
+                        {{'1377' | translate}}:
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" data-ng-model="vm.demographicsItemsDetail.emailNotificationRetake" id="emailNotificationRetake"
+                        name="emailNotificationRetake" ng-disabled="vm.isDisabled" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm text-left">
+                    <label class="col-md-3 text-right">
+                      {{'0367' | translate}}:
+                    </label>
+                    <div class="col-md-1">
+                      <toggle ng-model="vm.demographicsItemsDetail.defaultItem" on="{{'0068' | translate}}"
+                        off="{{'0492' | translate}}" ng-disabled="vm.isDisabled" size="btn-md"></toggle>
+                    </div>
+                    <label class="col-md-6 text-right" style="width: 47.666667%">
+                      {{'0014' | translate}}:
+                    </label>
+                    <div class="col-md-1 text-left ">
+                      <toggle ng-model="vm.demographicsItemsDetail.state" on="{{'0068' | translate}}"
+                        off="{{'0492' | translate}}" ng-disabled="vm.isDisabledState" ng-change="vm.changeState()"
+                        size="btn-md"></toggle>
+                    </div>
+                  </div>
+                </fieldset>
+
+              </form>
+              <modalstate detailstate="vm.demographicsItemsDetail.state" openstatemodal="vm.ShowPopupState">
+              </modalstate>
+            </div>
+            <div class="panel-footer general-container">
+              <button class=" btn btn-success button-list" ng-click="vm.NewDemographicsItems(DemographicsItemsForm)"
+                ng-disabled="vm.isDisabledAdd || vm.selectedPather === -1" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-plus">
+                </span>
+                {{'0005' | translate}}
+              </button>
+              <button class="btn btn-warning button-list" ng-click="vm.EditDemographicsItems()"
+                ng-disabled="vm.isDisabledEdit || vm.demographicsItemsDetail.length === 0" type="button">
+                <span aria-hidden="true" class=" glyphicon glyphicon-pencil">
+                </span>
+                {{'0006' | translate}}
+              </button>
+              <button class="btn btn-primary button-list" ng-click="vm.saveDemographicsItems(DemographicsItemsForm)"
+                ng-disabled="!DemographicsItemsForm.$valid || vm.isDisabledSave" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-floppy-disk">
+                </span>
+                {{'0007' | translate}}
+              </button>
+              <button class="btn btn-info button-list" ng-click="vm.cancelDemographicsItems(DemographicsItemsForm)"
+                ng-disabled="vm.isDisabledCancel" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-remove">
+                </span>
+                {{'0008' | translate}}
+              </button>
+              <button class="btn btn-violet button-list" ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint"
+                type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-print">
+                </span>
+                {{'0009' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script id="Requerido.html" type="text/ng-template">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5 col-md-offset-3">
+                                <a ng-click="close('demographic')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/Demograficos.png">
+                                    <h6 class="text-center">{{'0069' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="Advertence.html">
+  <div class="modal fade" id="modal" tabindex="1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" style="height: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 500px">
+
+                    <div class="modal-body" style="height: 110px">
+                        <div style="width: 18%; float: left">
+                            <img class="img-responsive" src="images/iconinfo.png">
+                        </div>
+                        <div style="width: 80%; float: left; padding-top: 20px;">
+                            <label style="margin-top: 10px;margin-left: 10px">{{'1023' | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{'0022' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

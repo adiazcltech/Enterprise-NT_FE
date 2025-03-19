@@ -1,0 +1,143 @@
+<modalexceptions id="headererror" openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div ng-controller="SidebarController as vm">
+  <div class="header" ng-show="vm.menu" style="padding-top: 20px; padding-right: 10px">
+    <header id="header_main" ng-class="{'marginheader': vm.principalmenu === true}">
+      <div class="header_main_content uk-animation-slide-bottom">
+        <nav class="uk-navbar">
+          <div ng-if="vm.idpage !== 200" data-uk-tooltip="{pos:'bottom'}" class="uk-float-left uk-hidden-small ng-scope"
+            style="margin-top: 11px;">
+            <a ng-href="/dashboard" class="top_menu_toggle" href="/dashboard">
+              <i style="font-size: 31px !important" class="material-icons md-24 md-light">view_module</i></a>
+          </div>
+          <div class="uk-float-left uk-hidden-small" style="color:#f5f5f5;margin: 0px 15px;">
+            <ul class="md-list">
+              <li style="padding: 4px 4px;" ng-class="{'marginmenu': vm.idpage === 200}">
+                <div class="md-list-content">
+                  <span class="md-list-heading"> {{vm.NamePage | uppercase}}</span>
+                  <span class="uk-text-small" style="color: #f5f5f5;">{{ vm.branchname}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="uk-navbar-flip">
+            <ul class="uk-navbar-nav user_actions">
+              <!---------AGENTE DE IMPRESIÓN----------->
+              <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}" class="">
+                <a href="#" class="user_action_icon">
+                  <div class="printadvertence" ng-if="vm.seriallabel === ''">
+                    A
+                  </div>
+                  <div style="position: relative;">
+                    <i class="material-icons md-24 md-light">print</i>
+                  </div>
+                </a>
+                <div class="uk-dropdown uk-dropdown-xlarge">
+                  <div class="md-card-content">
+                    <ul class="uk-tab uk-tab-grid"
+                      data-uk-tab="{connect:'#header_downloads',animation:'slide-horizontal'}">
+                      <li class="uk-width-1-1 uk-active"><a href="#"
+                          class="js-uk-prevent uk-text-small">{{'1068' | translate}}</a></li>
+                    </ul>
+                    <ul id="header_downloads" class="uk-switcher uk-margin">
+                      <li>
+                        <ul class="md-list md-list-addon">
+                          <li>
+                            <div class="md-list-addon-element">
+                              <img ng-if="vm.seriallabel === ''" class="md-list-addon-icon"
+                                ng-src="images/alerts/browser.png" />
+                              <img ng-if="vm.seriallabel !== ''" class="md-list-addon-icon"
+                                ng-src="images/printer.png" />
+                            </div>
+                            <div class="md-list-content">
+                              <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-4-5" style="padding-left: 17px">
+                                  <span class="md-list-heading">{{'1069' | translate}}</span>
+                                  <span ng-if="vm.seriallabel !== ''"
+                                    class="uk-text-small uk-text-muted">{{vm.serialPrint}}</span>
+                                  <span ng-if="vm.seriallabel === ''" class="uk-text-small uk-text-muted">
+                                    {{'1070' | translate | uppercase}} </span>
+                                </div>
+                                <div class="uk-width-1-5">
+                                  <button ng-click="vm.openmodalSerial()"
+                                    class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light">
+                                    <i class="uk-icon-pencil"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="md-list-addon-element">
+                              <img class="md-list-addon-icon" ng-src="images/alerts/printer.png" />
+                            </div>
+                            <div class="md-list-content">
+                              <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-4-5">
+                                  <span class="md-list-heading">{{'1071' | translate}}</span>
+                                  <span class="uk-text-small uk-text-muted">Debe descargar, descomprimir los archivos y
+                                    ejecutar el .jar
+                                </div>
+                                <div class="uk-width-1-5" style="padding-left: 5px">
+                                  <a target="_self" href="./donwloads/EnterpriseNT-ClientPrint.rar"
+                                    download="EnterpriseNT-ClientPrint.rar"
+                                    class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light">
+                                    <i class="uk-icon-arrow-down"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <!--   <li>
+                <a data-uk-tooltip="{pos:'bottom'}" title="{{'0667' | translate}}" class="user_action_icon"
+                  ng-click="vm.openhelp()"><i style="font-size: 24px; color: #ffffff !important; padding-top: 10px"
+                    class="md-color-blue-grey-50 uk-icon-question"></i></a>
+              </li> -->
+              <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                <a href="#" class="user_action_image"><img class="md-user-image" ng-src="{{vm.photo}}" alt="" /></a>
+                <div class="uk-dropdown uk-dropdown-small" style="overflow: auto">
+                  <ul class="uk-nav js-uk-prevent" ng-if="vm.viewconfig">
+                    <li><a ng-href="/config">{{'0992' | translate}}</a></li>
+                  </ul>
+                  <ul class="uk-nav js-uk-prevent">
+                    <li><a ng-click="vm.closesocket()">{{'0066' | translate}}</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="uk-modal" id="modaleditserial" tabindex="1" aria-hidden="false">
+        <div class="uk-modal-dialog">
+          <div class="uk-modal-header md-bg-red-700" style="border-bottom: 1px solid #d32f2f">
+            <h2 class="uk-modal-title">{{ '1069' | translate }}</h2>
+          </div>
+          <div class="uk-width-1-1">
+            <input type="text" class="md-input" ng-model="vm.serialPrint" md-input>
+          </div>
+          <div class="uk-overflow-container" style="margin-top: 0px">
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+            <button ng-disabled="vm.serialPrint === ''" class="md-btn md-bg-red-700 md-color-light-green-50"
+              ng-class="{'md-bg-grey-300' : vm.serialPrint === ''}" type="button"
+              ng-click="vm.updateSerial()">{{ '0246' | translate }}</button>
+            <button class="md-btn md-btn-default uk-modal-close" type="button">{{ '0008' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

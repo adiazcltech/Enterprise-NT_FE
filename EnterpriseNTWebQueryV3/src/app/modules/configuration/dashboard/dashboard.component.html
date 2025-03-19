@@ -1,0 +1,1845 @@
+<app-loader [loader]="false"></app-loader>
+<app-preliminary></app-preliminary>
+<app-reportzip></app-reportzip>
+
+<!-- modal que indica que la sesion se cerrara -->
+<div class="modal fade in" [ngStyle]="{'display':displayIdle}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="margin-bottom: 0px;">{{'0286'|translate}}</h4>
+      </div>
+      <div class="modal-body" style="text-align: -webkit-center;">
+        <img class="img-responsive" src="assets/images/idle.png" style="margin-bottom: 10px;">
+        <span style="font-size: 15px;font-weight: bold;">{{'0287' | translate}} {{countdown}} {{'0288' |
+          translate}}...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid main-container" style="height: 100%;">
+  <nav class="navbar navbar-default" *ngIf="Bannerview===''"
+    [ngStyle]="{'background-color' : color,'border-color': '#ffffff'}" style="margin-bottom: 0;">
+    <img class="img-responsive" src="{{logoview}}" *ngIf="logoview!==''" style="height: 48px !important;">
+    <div class="navbar-header" *ngIf="logoview===''">
+      <a class="navbar-brand" style="margin-bottom: 8px;">{{Title}}</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" style="position: absolute;top: 0px;right: 24px;">
+      <li *ngIf="administrator" class="hidden-xs" style="margin-right: 5px;">
+        <button [ngStyle]="{'background-color' : color,'border-color': color}" class="btn btn-success navbar-btn"
+          (click)="getConfiguration('block')" type="button">
+          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="hidden-xs" style="margin-right: 5px;">
+        <button class="btn btn-success navbar-btn" [ngStyle]="{'background-color' : color,'border-color': color}"
+          (click)="getprofiluser()" type="button">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="hidden-xs">
+        <button class="btn btn-danger navbar-btn" (click)="closed()" type="button">
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+        </button>
+      </li>
+    </ul>
+    <span class="hidden-sm hidden-md hidden-lg" style="position: absolute;top: 0px;right: 0px;">
+      <button [matMenuTriggerFor]="menu" class="btn btn-success navbar-btn"
+        [ngStyle]="{'background-color' : color,'border-color': color}" type="button">
+        <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+      </button>
+      <mat-menu #menu="matMenu" class="navbar-btn" [ngStyle]="{'background-color' : color,'border-color': color}"
+        style="width: 98%;">
+        <button class="btn btn-default" (click)="getConfiguration('block')"
+          style="width: 100%;border-color: transparent;">
+          <span>{{'0009' | translate}}</span>
+        </button>
+        <button class="btn btn-default" (click)="getprofiluser()" style="width: 100%;border-color: transparent;">
+          <span>{{'0283' | translate }}</span>
+        </button>
+        <button class="btn btn-default" (click)="closed()" style="width: 100%;border-color: transparent;">
+          <span>{{'0284' | translate }}</span>
+        </button>
+      </mat-menu>
+    </span>
+  </nav>
+  <nav class="navbar" *ngIf="Bannerview !==''" style="margin-bottom: 0;">
+    <img class="img-responsive clase" src="{{Bannerview}}">
+    <ul class="nav navbar-nav navbar-right" style="position: absolute;top: 5px;right: 5px;">
+      <li *ngIf="administrator" class="hidden-xs" style="margin-right: 5px;">
+        <button [ngStyle]="{'background-color' : color,'border-color': color}" class="btn btn-success navbar-btn"
+          (click)="getConfiguration('block')" type="button">
+          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="hidden-xs" style="margin-right: 5px;">
+        <button class="btn btn-success navbar-btn" [ngStyle]="{'background-color' : color,'border-color': color}"
+          (click)="getprofiluser()" type="button">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="hidden-xs">
+        <button class="btn btn-danger navbar-btn" (click)="closed()" type="button">
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+        </button>
+      </li>
+    </ul>
+    <span class="hidden-sm hidden-md hidden-lg" style="position: absolute;top: 0px;right: 0px;">
+      <button [matMenuTriggerFor]="menu" class="btn btn-success navbar-btn"
+        [ngStyle]="{'background-color' : color,'border-color': color}" type="button">
+        <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+      </button>
+      <mat-menu #menu="matMenu" class="navbar-btn" [ngStyle]="{'background-color' : color,'border-color': color}"
+        style="width: 98%;">
+        <button class="btn btn-default" (click)="getConfiguration('block')"
+          style="width: 100%;border-color: transparent;">
+          <span>{{'0009' | translate}}</span>
+        </button>
+        <button class="btn btn-default" (click)="getprofiluser()" style="width: 100%;border-color: transparent;">
+          <span>{{'0283' | translate }}</span>
+        </button>
+        <button class="btn btn-default" (click)="closed()" style="width: 100%;border-color: transparent;">
+          <span>{{'0284' | translate }}</span>
+        </button>
+      </mat-menu>
+    </span>
+  </nav>
+
+  <!--tamaño celular -->
+  <div class="row hidden-sm hidden-md hidden-lg" [ngClass]="{'inpatientview': !viewpatient,'patienview': viewpatient}"
+    *ngIf="order.length!==0 && dataorder.length===0">
+    <div class="col-xs-12" style="height: 100%;">
+      <div>
+        <div class="input-group right-bar">
+          <input [(ngModel)]="searchorder" class="form-control" type="text" placeholder="{{'0205' | translate}}">
+          <div class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12"
+        style="margin-top: 10px;margin-bottom: 70px;height: calc(100% - 79px);padding-right: 0px;padding-left: 0px;">
+        <div class="md-card contentscroll" style="height: 100%;overflow-y: scroll;">
+          <div class="md-card-content" style="height: 100%;padding: 0px;font-size: 12px;">
+            <ul class="md-list md-list-addon" *ngIf="order.length!==0" style="padding-left: 5px;list-style-type: none;">
+              <cdk-virtual-scroll-viewport appendOnly itemSize="{{order.length}}" class="example-viewport"
+                style="height: 300px;">
+                <li *cdkVirtualFor="let item of order | filter: searchorder" class="example-item"
+                  [ngClass]="{'info': item.order === selectedOrder}" (click)="getselectordermini(item)"
+                  style="border-bottom: 1px solid rgba(0,0,0,.12);">
+                  <div class="md-list-addon-element" (click)="getselectorder(item,1)">
+                    <img style="width: 21px; height: 21px" src="assets/images/evaluation.png">
+                    <h6 class="uk-text-bold" style="margin: 0px;font-size: 9px;">{{'0255'| translate}}</h6>
+                  </div>
+                  <div class="md-list-content" style="display: inline-grid;margin-left: 10px;">
+                    <span class="md-list-heading">{{item.order}}</span>
+                    <span class="uk-text-small uk-text-muted">{{item.name1}} {{item.name2}} {{item.lastName}}
+                      {{item.surName}}</span>
+                  </div>
+                </li>
+              </cdk-virtual-scroll-viewport>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="view-div" style="margin-left: 8px;height: 71px;" *ngIf="viewpatient">
+      <div class="col-xs-12">
+        <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+          <div class="md-card-content measureButtons" style="height: 100%;">
+            <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;">
+              <button type="button" style="border-radius: 38%;"
+                [ngStyle]="{'background-color' : color,'border-color': color}"
+                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                (click)="order=[];viewpdf=false;viewsmall=1;dataorder = [];">
+                <i class="glyphicon glyphicon-filter"></i>
+              </button>
+              <span class="text-center">{{'0206' | translate}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="row hidden-sm hidden-md hidden-lg" style="height: calc(100% - 178px)" *ngIf="dataorder.length!==0">
+    <div class="panel-group" *ngFor="let key of Object.keys(orderTests)" id="tbl-results-xs" role="tablist"
+      aria-multiselectable="true">
+      <cdk-accordion class="example-accordion">
+        <cdk-accordion-item *ngFor="let obj of orderTests[key]; let index = index;" #accordionItem="cdkAccordionItem"
+          class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            {{obj.testId}} {{obj.testName}}
+            <span class="example-accordion-item-description">
+              Click para {{ accordionItem.expanded ? 'cerrar' : 'abrir' }}
+            </span>
+          </div>
+          <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+            <table class="table table-condensed table-bordered">
+              <tbody>
+                <tr>
+                  <td class="col-xs-5">{{'0115'|translate}}</td>
+                  <td class="col-xs-7">{{obj.result}}</td>
+                </tr>
+                <tr>
+                  <td class="col-xs-5">{{'0117'|translate}}</td>
+                  <td class="col-xs-7">{{obj.refInterval}}</td>
+                </tr>
+                <tr>
+                  <td class="col-xs-5"> {{'0116'|translate}}</td>
+                  <td class="col-xs-7" ng-bind-html="obj.unit | trust"></td>
+                </tr>
+                <tr>
+                  <td class="col-xs-5">{{'0225'|translate}}</td>
+                  <td class="col-xs-7">
+                    <button class="btn col-xs-12 btn-xs btn-success"
+                      *ngIf="obj.pathology !== 5 && obj.pathology !== 6 && obj.pathology !== 2 && obj.pathology !== 3">
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="obj.pathology === 2 || obj.pathology === 5" class="btn col-xs-12 btn-xs btn-warning">
+                      <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="obj.pathology === 3 || obj.pathology === 6" class="btn col-xs-12 btn-xs btn-warning">
+                      <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-xs-5">Comentario</td>
+                  <td class="col-xs-7">
+                    <button (click)="viewcoment(obj)" *ngIf="obj.hasComment" class="btn btn-info col-sm-12 btn-xs">
+                      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                    </button>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </div>
+
+    <footer id="footer" class="view-div" style="margin-left: 8px;height: 71px;">
+      <div class="col-xs-12">
+        <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+          <div class="md-card-content measureButtons" style="height: 100%;">
+            <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;">
+              <button type="button" style="border-radius: 38%;"
+                [ngStyle]="{'background-color' : color,'border-color': color}"
+                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                (click)="dataorder = [];searchsmall()" style="margin-left: 10px;">
+                <i class="glyphicon glyphicon-arrow-left"></i>
+              </button>
+              <span class="text-center">{{'0285'| translate}}</span>
+            </div>
+            <div class="col-xs-2 text-center" style="padding-right: 12px;padding-left: 0px;float: right;"
+              *ngIf="viewpatient">
+              <button type="button" style="border-radius: 38%;"
+                [ngStyle]="{'background-color' : color,'border-color': color}"
+                class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
+                (click)="order=[];viewpdf=false;viewsmall=1;dataorder = [];">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+              <span class="text-center">{{'0205' | translate}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="row hidden-sm hidden-md hidden-lg" style="height: calc(100% - 75px)" *ngIf="order.length===0">
+    <form [formGroup]="form" class="form-inline col-xs-12" autocomplete="off" (ngSubmit)="searchsmall()">
+      <div class="btn-group col-xs-12" style="padding: 5px;">
+        <div [ngClass]="{'col-xs-3': BusquedaOrden,'col-xs-4': !BusquedaOrden}" *ngIf="viewpatient">
+          <button class="md-btn  md-btn-large md-btn-block md-btn-icon" [ngClass]="{'uk-active' : viewsmall===1}"
+            (click)="changeTabResponsive(1)" style="padding: 2px 6px">
+            <img class="md-list-addon-icon material-icons md-24" src="assets/images/age.png"
+              style="margin-top: 10px;" />
+            <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0106' | translate}}</h6>
+          </button>
+        </div>
+        <div [ngClass]="{'col-xs-3': BusquedaOrden,'col-xs-4': !BusquedaOrden}" *ngIf="viewpatient">
+          <button class="md-btn  md-btn-large md-btn-block md-btn-icon" [ngClass]="{'uk-active' : viewsmall===2}"
+            style="padding: 2px 6px" (click)="changeTabResponsive(2)">
+            <img class="md-list-addon-icon material-icons md-24" src="assets/images/interview.png"
+              style="margin-top: 10px;" />
+            <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0107' | translate}}</h6>
+          </button>
+        </div>
+        <div *ngIf="viewpatient" [ngClass]="{'col-xs-3': BusquedaOrden,'col-xs-4': !BusquedaOrden}">
+          <button class="md-btn md-btn-large md-btn-block md-btn-icon" [ngClass]="{'uk-active' : viewsmall===3}"
+            style="padding: 2px 6px" (click)="changeTabResponsive(3)">
+            <img class="md-list-addon-icon material-icons md-24" src="assets/images/history.png"
+              style="margin-top: 10px;" />
+            <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0076' | translate}}</h6>
+          </button>
+        </div>
+        <div [ngClass]="{'col-xs-3': BusquedaOrden,'col-xs-4': !BusquedaOrden}" *ngIf="BusquedaOrden && viewpatient">
+          <button class="md-btn  md-btn-large md-btn-block md-btn-icon" [ngClass]="{'uk-active' : viewsmall===4}"
+            style="padding: 2px 6px" (click)="changeTabResponsive(4)">
+            <img class="md-list-addon-icon material-icons md-24" src="assets/images/demo.png"
+              style="margin-top: 10px;" />
+            <h6 class="uk-text-bold" style="margin-top: 0px;">{{'0108' | translate}}</h6>
+          </button>
+        </div>
+      </div>
+      <div class="col-xs-12" style="height: calc(100% - 239px);margin-top: 10px;padding-left: 22px;margin-bottom: 10px;"
+        *ngIf="order.length===0">
+        <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+          <div class="md-card-content" style="height: 100%;" *ngIf="viewpatient && order.length===0">
+            <div class="row" style="margin-bottom: 10px" *ngIf="viewsmall===1">
+              <div class="form-group" *ngIf="!FiltroRangoFecha" style="margin-bottom: 0px;">
+                <label id="lbl-date" for="txt-date" class="control-label" style="margin-bottom: 0px;">{{'0208' |
+                  translate}}</label>
+                <div class="input-group help-block" style="display: flex;align-items: center;">
+                  <input matInput [matDatepicker]="picker" formControlName="dateseach" class="form-control"
+                    [max]="maxDate">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker color="primary"></mat-datepicker>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="FiltroRangoFecha" style="margin-bottom: 0px;">
+                <label id="lbl-date" for="txt-date" class="control-label" style="margin-bottom: 0px;">{{'0256' |
+                  translate}}</label>
+                <div class="input-group help-block" style="display: flex;align-items: center;">
+                  <input matInput [matDatepicker]="pickerinit" formControlName="dateseachinit" class="form-control"
+                    [max]="maxDate">
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerinit"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerinit color="primary"></mat-datepicker>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="FiltroRangoFecha" style="margin-bottom: 0px;">
+                <label id="lbl-date" for="txt-date" class="control-label" style="margin-bottom: 0px;">{{'0257' |
+                  translate}}</label>
+                <div class="input-group help-block" style="display: flex;align-items: center;">
+                  <input matInput [matDatepicker]="pickerend" formControlName="dateseachend" class="form-control"
+                    [max]="maxDate">
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerend"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerend color="primary"></mat-datepicker>
+                </div>
+              </div>
+              <div class="form-group">
+                <label id="lbl-date" for="txt-date" class="control-label" style="margin-bottom: 0px;">Area</label>
+                <select class="form-control" formControlName="area">
+                  <option [value]="item.id" *ngFor="let item of listArea">{{ item.name }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row" *ngIf="viewsmall===2 && viewpatient">
+              <div class="form-group" *ngIf="typeDocument">
+                <label id="lbl-patient-section" class="control-label">{{'0110' | translate}}</label>
+                <select class="form-control" formControlName="documentType">
+                  <option [value]="item.id" *ngFor="let item of documentType">{{ item.name }}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-patient-id" for="txt-patient-id" class="control-label">{{'0107' | translate}}</label>
+                <input type="text" formControlName="record" maxlength="10" class="form-control focus"
+                  placeholder="{{'0001' | translate}}" (keydown.enter)="keyselectpatientid()">
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-order" for="txt-order" class="control-label">{{'0113' | translate}}</label>
+                <select class="form-control" required formControlName="year">
+                  <option [value]="item.id" *ngFor="let item of listYear">{{ item.name }}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-date" for="txt-date" class="control-label">Area</label>
+                <select class="form-control" formControlName="area">
+                  <option [value]="item.id" *ngFor="let item of listArea">{{ item.name }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row" *ngIf="viewsmall===3 && viewpatient">
+              <div class="form-group">
+                <label for="txt-patient-last-name" class="control-label">{{'0111' | translate}}1</label>
+                <input type="text" formControlName="lastname" class="form-control orderfield-uppercase">
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-patient-name" class="control-label">{{'0111'| translate}} 2</label>
+                <input type="text" formControlName="surname" class="form-control orderfield-uppercase">
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-patient-last-name" class="control-label">{{'0112' | translate}} 1</label>
+                <input type="text" formControlName="name1" class="form-control orderfield-uppercase">
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-patient-name" class="control-label">{{'0112' | translate}} 2</label>
+                <input type="text" formControlName="name2" class="form-control orderfield-uppercase">
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-order" for="txt-order" class="control-label">{{'0113' | translate}}</label>
+                <select class="form-control" required formControlName="year">
+                  <option [value]="item.id" *ngFor="let item of listYear">{{ item.name }}</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="row" style="margin-bottom: 10px;margin-top: 15px;margin-right: 0px; margin-left: 0px;"
+              *ngIf="viewsmall===4 && BusquedaOrden">
+              <div class="form-group">
+                <label id="lbl-order" for="txt-order" class="control-label">{{'0113' | translate}}</label>
+                <select class="form-control" required formControlName="year">
+                  <option [value]="item.id" *ngFor="let item of listYear">{{ item.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label id="lbl-order" for="txt-order" class="control-label">{{'0108' | translate}}</label>
+                <input type="text" formControlName="order" maxlength="{{cantdigit}}" class="form-control focus">
+              </div>
+
+              <div class="form-group">
+                <label id="lbl-date" for="txt-date" class="control-label">Area</label>
+                <select class="form-control" formControlName="area">
+                  <option [value]="item.id" *ngFor="let item of listArea">{{ item.name }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="md-card-content" style="height: 100%;" *ngIf="viewpatient && order.length!==0"></div>
+        </div>
+      </div>
+      <footer id="footer" class="view-div" style="margin-left: 8px;height: 71px;">
+        <div class="col-xs-12">
+          <div class="md-card contentscroll" style="height: 100%;overflow: auto;">
+            <div class="md-card-content measureButtons" style="height: 100%;">
+              <div class="col-xs-2 text-center" *ngIf="viewpatient && order.length===0"
+                style="padding-right: 12px;padding-left: 0px;float: right;">
+                <button type="submit" style="border-radius: 38%;"
+                  [ngStyle]="{'background-color' : color,'border-color': color}"
+                  class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+                <span class="text-center">{{'0205' | translate}} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </form>
+  </div>
+
+  <!-- Fila para el tab de busquedas -->
+  <div class="row hidden-xs">
+    <div class="col-md-12">
+      <!-- Nav Tabs -->
+      <!-- Tab panes -->
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="5000ms"
+        (selectedTabChange)="selectedTabsFilter($event)">
+        <mat-tab label="{{'0271'| translate}}" *ngIf="!viewpatient">
+
+          <div class="row" style="margin-top: 15px;">
+            <div class="col-xs-12">
+              <button id="btn-search-my-visits" (click)="refreshpatient()"
+                class="btn btn-default col-xs-12 col-sm-5 col-md-4 col-lg-3" type="button"
+                style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+                {{'0272'| translate}}</button>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="{{'0106' | translate}}" *ngIf="viewpatient" (click)="listArea.id=0">
+          <div>
+            <div class="row col-md-12">
+              <form [formGroup]="form" class="form-horizontal" autocomplete="off" (ngSubmit)="getseachdate()">
+                <div class="col-md-3" *ngIf="!FiltroRangoFecha" style="padding: 0px 40px 0 0;">
+                  <div class="form-group" style="display: flex;margin-top: 5px;align-items: center;">
+                    <label id="lbl-date" for="txt-date" class="control-label" style="margin: 0 7px 0 15px;">{{'0106' |
+                      translate}}</label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateseach" class="form-control"
+                      [max]="maxDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker color="primary"></mat-datepicker>
+                  </div>
+                </div>
+                <div class="col-md-3" *ngIf="FiltroRangoFecha" style="padding: 0px 40px 0 0;">
+                  <div class="form-group" style="display: flex;margin-top: 5px;align-items: center;">
+                    <label id="lbl-date" for="txt-date" class="control-label" style="margin: 0 7px 0 15px;">{{'0256' |
+                      translate}}</label>
+                    <input matInput [matDatepicker]="pickerinit" formControlName="dateseachinit" class="form-control"
+                      [max]="maxDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerinit"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerinit color="primary"></mat-datepicker>
+                  </div>
+                </div>
+                <div class="col-md-3" *ngIf="FiltroRangoFecha" style="padding: 0px 40px 0 0;">
+                  <div class="form-group" style="display: flex;margin-top: 5px;align-items: center;">
+                    <label id="lbl-date" for="txt-date" class="control-label" style="margin-right: 7px;">{{'0257' |
+                      translate}}</label>
+                    <input matInput [matDatepicker]="pickerend" formControlName="dateseachend" class="form-control"
+                      [max]="maxDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerend"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerend color="primary"></mat-datepicker>
+                  </div>
+                </div>
+                <div class="col-md-3" style="padding: 0px 40px 0 0;">
+                  <div class="form-group" style="display: flex;margin-top: 10px;">
+                    <label id="lbl-date" for="txt-date" class="control-label" style="margin-right: 8px;">Area</label>
+                    <div class="input-group help-block">
+                      <select class="form-control" required formControlName="area">
+                        <option [value]="item.id" *ngFor="let item of listArea">{{ item.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <button id="btn-search-date" class="btn btn-primary hidden-xs" type="submit"
+                  [ngStyle]="{'background-color' : color,'border-color': color}" style="margin: 10px 0;">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+                <!-- <button *ngIf="EmpaquetarOrdenesCliente" id="btn-search-date" class="btn btn-primary hidden-xs"
+                  type="button" ng-click="vm.openreportzip = true"
+                  style="background-color: rgb(130 73 193);border-color:rgb(130 73 193)">
+                  <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                </button> -->
+              </form>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="{{'0107' | translate}}" *ngIf="viewpatient" (click)="listArea.id=0">
+
+          <div class="row col-md-12">
+            <form [formGroup]="form" class="form-horizontal" autocomplete="off" (ngSubmit)="keyselectpatientid()">
+
+              <div class="col-md-3" *ngIf="typeDocument">
+                <div class="form-group" style="display: flex;margin-top: 10px;">
+                  <label id="lbl-date" for="txt-date" class="control-label" style="margin-right: 5px;">{{'0110' |
+                    translate}}</label>
+                  <div class="input-group help-block">
+                    <select class="form-control" required formControlName="documentType">
+                      <option [value]="item.id" *ngFor="let item of documentType">{{ item.name }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding-right: 0;">
+                <div class="form-group" style="display: flex;margin: 10px 10px 0 0;">
+                  <label id="lbl-patient-id" for="txt-patient-id" class="control-label"
+                    style="margin-right: 8px;">{{'0107' | translate}}</label>
+                  <div class="input-group" style="width: 100%;">
+                    <input type="text" formControlName="record" maxlength="10" class="form-control focus"
+                      placeholder="{{'0001' | translate}}" (keydown.enter)="keyselectpatientid()">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-1" style="padding-left: 0;">
+                <div class="form-group" style="display: flex;margin: 10px 10px 0 0;">
+                  <select class="form-control" required formControlName="year">
+                    <option [value]="item.id" *ngFor="let item of listYear">{{ item.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding: 0px 40px 0 0;">
+                <div class="form-group" style="display: flex;margin-top: 10px;">
+                  <label id="lbl-date" for="txt-date" class="control-label" style="margin-right: 8px;">Area</label>
+                  <div class="input-group help-block">
+                    <select class="form-control" required formControlName="area">
+                      <option [value]="item.id" *ngFor="let item of listArea">{{ item.name }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button id="btn-search-patient-id" class="btn btn-primary hidden-xs" type="submit"
+                [ngStyle]="{'background-color' : color,'border-color': color}" style="margin: 10px 0;">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+
+            </form>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="{{'0076' | translate}}" *ngIf="viewpatient" (click)="listArea.id=0">
+
+          <div class="row col-md-12">
+
+            <form [formGroup]="form" class="form-horizontal" autocomplete="off" (ngSubmit)="keyselectname()">
+
+              <div class="col-md-2">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label for="txt-patient-last-name" class="control-label" style="margin-right: 7px;width: 100px;">
+                    {{'0111' | translate}} 1
+                  </label>
+                  <div class="input-group" style="width: 100%;">
+                    <input type="text" formControlName="lastname" class="form-control orderfield-uppercase">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label for="txt-patient-last-name" class="control-label" style="margin-right: 7px;width: 100px;">
+                    {{'0111' | translate}} 2
+                  </label>
+                  <div class="input-group" style="width: 100%;">
+                    <input type="text" formControlName="surname" class="form-control orderfield-uppercase">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label for="txt-patient-last-name" class="control-label" style="margin-right: 7px;width: 100px;">
+                    {{'0112' | translate}} 1
+                  </label>
+                  <div class="input-group" style="width: 100%;">
+                    <input type="text" formControlName="name1" class="form-control orderfield-uppercase">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2" style="padding-right: 0;">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label for="txt-patient-last-name" class="control-label" style="margin-right: 7px;width: 100px;">
+                    {{'0112' | translate}} 2
+                  </label>
+                  <div class="input-group" style="width: 100%;">
+                    <input type="text" formControlName="name2" class="form-control orderfield-uppercase">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-1" style="padding-left: 20px;">
+                <div class="form-group" style="display: flex;margin: 5px 0 0 0;">
+                  <select class="form-control" required formControlName="year" style="width: 80px;">
+                    <option [value]="item.id" *ngFor="let item of listYear">{{ item.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <button id="btn-search-patient" class="btn btn-primary hidden-xs" type="submit"
+                [ngStyle]="{'background-color' : color,'border-color': color}" style="margin: 5px 0;">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+
+            </form>
+
+          </div>
+        </mat-tab>
+
+        <mat-tab label="{{'0108' | translate}}" *ngIf="viewpatient && BusquedaOrden" (click)="listArea.id=0">
+
+          <div class="row col-md-12">
+
+            <form [formGroup]="form" class="form-horizontal" autocomplete="off" (ngSubmit)="getOrderComplete()">
+
+              <div class="col-md-2" style="padding-right: 0px;">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label id="lbl-order" for="txt-order" class="control-label" style="margin-right: 7px;">
+                    {{'0113' | translate}}
+                  </label>
+                  <select class="form-control" required formControlName="year" style="width: 80px;">
+                    <option [value]="item.id" *ngFor="let item of listYear">{{ item.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2" style="padding-left: 0px;">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label id="lbl-order" for="txt-order" class="control-label" style="margin-right: 7px;">
+                    {{'0108' | translate}}
+                  </label>
+                  <input type="text" formControlName="order" maxlength="{{cantdigit}}" class="form-control focus">
+                </div>
+              </div>
+
+              <div class="col-md-2" style="padding-left: 40px;">
+                <div class="form-group" style="display: flex;margin-top: 5px;">
+                  <label id="lbl-date" for="txt-date" class="control-label" style="margin-right: 8px;">Area</label>
+                  <div class="input-group help-block">
+                    <select class="form-control" required formControlName="area">
+                      <option [value]="item.id" *ngFor="let item of listArea">{{ item.name }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button id="btn-search-order" class="btn btn-primary hidden-xs" type="submit"
+                [ngStyle]="{'background-color' : color,'border-color': color}" style="margin: 5px 0px 0px 20px;">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+            </form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+  </div>
+
+  <div class="row hidden-xs">
+    <!-- Fila para las columnas de ordenes -->
+    <div id="div-orders" class="col-xs-12 col-sm-4 col-md-4 col-lg-3" style="padding-right: 0px">
+      <div class="tablescroll">
+        <table class="tablescroll_head" cellspacing="0" style="width: 450px;">
+          <thead id="tbl-orders-head">
+            <tr style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+              <th class="hidden header" style="width: 0px; padding-top: 5px; padding-bottom: 5px;"></th>
+              <th class="hidden header" style="width: 0px; padding-top: 5px; padding-bottom: 5px;"></th>
+              <th class="col-xs-2 header" [ngStyle]="{'background-color' : color}"
+                style="width: 65px; padding-top: 5px; padding-bottom: 5px;font-weight: 400;">{{'0108' | translate}}</th>
+              <th class="col-xs-10 header" [ngStyle]="{'background-color' : color}"
+                style="width: 365px; padding-top: 5px; padding-bottom: 5px;font-weight: 400;">
+                <div class="visible-md visible-lg">{{'0076' | translate}}</div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+        <div class="tablescroll_wrapper contentscroll" style="height: 621px; overflow: hidden auto;">
+          <table id="tbl-orders" class="table table-condensed table-hover tablescroll_body"
+            style="margin-bottom: 0px; width: 450px;">
+            <tbody id="tbl-orders-body" *ngIf="order.length!==0">
+              <tr *ngFor="let item of order" [ngClass]="{'info': selectedOrder===item.order}">
+                <td class="hidden">33062</td>
+                <td class="hidden">123456</td>
+                <td (click)="getselectorder(item)" class="col-xs-2">
+                  <a>{{item.order}}</a>
+                </td>
+                <td class="col-xs-10" style="text-transform: capitalize;">
+                  {{item.name1}} {{item.name2}} {{item.lastName}} {{item.surName}}
+                </td>
+                <td class="hidden">-1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="div-results" class="col-xs-12 col-sm-8 col-md-8 col-lg-9"
+      style="height: 669px; overflow-y: auto;padding-left: 0px;">
+      <div class="row btn-bar">
+        <div class="col-sm-12">
+          <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group" *ngIf="viewpreliminar">
+              <button id="btn-report" class="btn btn-info col-sm-12" type="button" (click)="preliminary()">
+                <span class="glyphicon glyphicon-file visible-sm" aria-hidden="true"></span>
+                <span id="inf-pre" class="visible-md visible-lg">{{'0190' | translate}}</span>
+              </button>
+            </div>
+            <div class="btn-group" role="group">
+              <button id="btn-report-final" class="btn btn-primary col-sm-12" type="button"
+                (click)="download = '';end()">
+                <span class="glyphicon glyphicon-folder-close visible-sm" aria-hidden="true"></span>
+                <span id="inf-fin" class="visible-md visible-lg">{{'0221' | translate}}</span>
+              </button>
+            </div>
+            <div class="btn-group" role="group" *ngIf="HistoricoGrafica">
+              <button id="btn-historical-graph" (click)="GraphicHistory()" class="btn btn-success col-sm-12"
+                type="button">
+                <span class="glyphicon glyphicon-signal visible-sm" aria-hidden="true"></span>
+                <span id="his-graf" class="visible-md visible-lg">{{'0222' | translate}}</span>
+              </button>
+            </div>
+            <div class="btn-group" role="group" *ngIf="Historico">
+              <button id="btn-historical-data" (click)="GraphicHistorydata()" class="btn btn-danger col-sm-12"
+                type="button">
+                <span class="glyphicon glyphicon-book visible-sm" aria-hidden="true"></span>
+                <span id="his-dat" class="visible-md visible-lg">{{'0223' | translate}}</span>
+              </button>
+            </div>
+            <div class="btn-group" role="group" *ngIf="HistoricoCombinado">
+              <button id="btn-historical-condensed" (click)="GraphicHistorycodense()" class="btn btn-warning col-sm-12"
+                type="button">
+                <span class="glyphicon glyphicon-list-alt visible-sm" aria-hidden="true"></span>
+                <span id="his-cond" class="visible-md visible-lg">{{'0224' | translate}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row hidden-xs">
+        <div class="col-sm-12">
+          <div id="div-header-results">
+            <table id="tbl-results" class="table table-condensed table-hover table-bordered"
+              style="margin-bottom: 0px;">
+              <thead>
+                <tr style="background-color: rgb(112, 150, 222); color: rgb(255, 255, 255);">
+                  <th class="hidden"></th>
+                  <th class="hidden"></th>
+                  <th class="hidden"></th>
+                  <th class="hidden"></th>
+                  <th class="text-center col-sm-1" [ngStyle]="{'background-color' : color}" style="width: 2%;font-weight: 500;"></th>
+                  <th class="text-center col-sm-1" [ngStyle]="{'background-color' : color}" style="font-weight: 500;">
+                    {{'0114'|translate}}
+                  </th>
+                  <th class="text-center col-sm-2" [ngStyle]="{'background-color' : color}" style="font-weight: 500;">
+                    {{'0115'|translate}}
+                  </th>
+                  <th class="text-center col-sm-2" [ngStyle]="{'background-color' : color}" style="font-weight: 500;">
+                    {{'0117'|translate}}</th>
+                  <th class="text-center col-md-1" [ngStyle]="{'background-color' : color}" style="font-weight: 500;">
+                    {{'0116'|translate}}
+                  </th>
+                  <th class="text-center col-md-1" [ngStyle]="{'background-color' : color}" style="font-weight: 500;">
+                    {{'0225' | translate}}</th>
+                  <th class="text-center hidden-xs hidden-sm col-md-1" [ngStyle]="{'background-color' : color}"
+                    style="font-weight: 500;width: 14%">
+                    {{'0226'|translate}}</th>
+                  <th class="text-center hidden-xs hidden-sm col-md-1" *ngIf="HistoricoGrafica"
+                    [ngStyle]="{'background-color' : color}" style="font-weight: 500;">Hist G</th>
+                  <th class="text-center hidden-xs hidden-sm col-md-1" *ngIf="Historico"
+                    [ngStyle]="{'background-color' : color}" style="font-weight: 500;">Hist D</th>
+                  <th class="text-center hidden-xs hidden-sm col-md-1" *ngIf="HistoricoCombinado"
+                    [ngStyle]="{'background-color' : color}" style="font-weight: 500;">Rep</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div id="div-results-content">
+            <table class="table table-condensed table-hover table-bordered">
+              <tbody id="tbl-results-body" *ngFor="let key of Object.keys(orderTests)" style="font-size: 11px;">
+                <tr style="background-color: rgb(88, 124, 186); color: white;">
+                  <td colspan="14">
+                    <div class="col-sm-1" style="padding: 0;">
+                      <div class="form-check">
+                        <input class="form-check-input select-test" type="checkbox" style="margin: 0;" (change)="selectArea( key, $event )">
+                      </div>
+                    </div>
+                    <div class="col-no-padding-right" style="text-align: center;"
+                      [ngClass]="{'col-sm-8': Historico,'col-sm-9': !Historico}">
+                      {{key}}
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" *ngIf="HistoricoGrafica">
+                      <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                        (click)="orderTests[key].printgallarea = !orderTests[key].printgallarea; selectallarea(key,null,orderTests[key],1)"
+                        [ngClass]="{'btn-success': orderTests[key].printgallarea}">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" *ngIf="Historico">
+                      <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                        (click)="orderTests[key].printdallarea = !orderTests[key].printdallarea; selectallarea(key,null,orderTests[key],2)"
+                        [ngClass]="{'btn-danger': orderTests[key].printdallarea}">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" *ngIf="HistoricoCombinado">
+                      <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                        (click)="orderTests[key].printcallarea = !orderTests[key].printcallarea; selectallarea(key,null,orderTests[key],3)"
+                        [ngClass]="{'btn-warning': orderTests[key].printcallarea}">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngFor="let obj of orderTests[key]" [ngClass]="{'success': obj.state >= 4}">
+                  <td colspan="14" *ngIf="obj.viewprofil" style="background-color: rgb(224, 238, 33);">
+                    <div class="col-sm-1" style="padding: 0;">
+                      <div class="form-check">
+                        <input class="form-check-input select-test" type="checkbox" style="margin: 0;" [(ngModel)]="obj.select" (change)="selectProfile( obj, key,  $event )">
+                      </div>
+                    </div>
+                    <div class="col-no-padding-right" [ngClass]="{'col-sm-8': Historico,'col-sm-9': !Historico}">
+                      {{obj.profileName}}
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" *ngIf="HistoricoGrafica">
+                      <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                        (click)="obj.printgall = !obj.printgall; selectall(obj,obj.printgall,orderTests[key],1)"
+                        [ngClass]="{'btn-success': obj.printgall}">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" *ngIf="Historico">
+                      <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                        (click)="obj.printdall = !obj.printdall; selectall(obj,obj.printdall,orderTests[key],2)"
+                        [ngClass]="{'btn-danger': obj.printdall}">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="hidden-xs hidden-sm col-md-1 col-no-padding-right" *ngIf="HistoricoCombinado">
+                      <button type="button" class="btn btn-default col-sm-12 btn-xs"
+                        (click)="obj.printcall = !obj.printcall; selectall(obj,obj.printcall,orderTests[key],3)"
+                        [ngClass]="{'btn-warning': obj.printcall}">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                  </td>
+                  <td *ngIf="!obj.viewprofil" class="col-sm-1 td-check">
+                    <div class="form-check">
+                      <input class="form-check-input select-test" type="checkbox" value="" [(ngModel)]="obj.select" (change)="selectTest( obj, $event )">
+                    </div>
+                  </td>
+                  <td *ngIf="!obj.viewprofil" class="col-sm-1">{{obj.abbreviation}}</td>
+                  <td *ngIf="!obj.viewprofil" class="tooltipstered col-sm-2">{{obj.result}}</td>
+                  <td *ngIf="!obj.viewprofil" class="text-center col-sm-2">{{obj.refInterval}}</td>
+                  <td *ngIf="!obj.viewprofil" class="text-center col-md-1" ng-bind-html="obj.unit | trust"></td>
+                  <td *ngIf="!obj.viewprofil" class="col-md-1">
+                    <button class="btn col-xs-12 btn-xs btn-success" style="margin: 0;"
+                      *ngIf="obj.pathology !== 5 && obj.pathology !== 6 && obj.pathology !== 2 && obj.pathology !== 3">
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="obj.pathology === 2 || obj.pathology === 5" class="btn col-xs-12 btn-xs btn-warning" style="margin: 0;">
+                      <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="obj.pathology === 3 || obj.pathology === 6" class="btn col-xs-12 btn-xs btn-warning" style="margin: 0;">
+                      <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                  <td *ngIf="!obj.viewprofil" class="hidden-xs hidden-sm col-md-1" style="width: 14%">
+                    <div class="col-sm-6 col-no-padding-right" *ngIf="obj.state >= 4">
+                      <button (click)="viewcoment(obj)" *ngIf="obj.hasComment" class="btn btn-info col-sm-12 btn-xs" style="margin: 0;">
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="col-sm-6 col-no-padding-left" *ngIf="obj.hasAntibiogram">
+                      <button (click)="viewantibiogramt(obj)" class="btn btn-info col-sm-12 btn-xs" style="margin: 0;">
+                        <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                  </td>
+                  <td *ngIf="!obj.viewprofil && HistoricoGrafica" class="hidden-xs hidden-sm col-md-1">
+                    <button type="button" class="btn btn-default col-sm-12 btn-xs" *ngIf="obj.resultType===1"
+                      (click)="obj.printg = !obj.printg" [ngClass]="{'btn-success': obj.printg}" data-toggle="tooltip"
+                      data-placement="top" title="{{'0273'| translate}}" style="margin: 0;">
+                      <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                  <td *ngIf="!obj.viewprofil  && Historico" class="hidden-xs hidden-sm col-md-1">
+                    <button type="button" class="btn btn-default col-sm-12 btn-xs" (click)="obj.printd = !obj.printd"
+                      [ngClass]="{'btn-danger': obj.printd}" data-toggle="tooltip" data-placement="top"
+                      title="{{'0274'| translate}}" style="margin: 0;">
+                      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                  <td *ngIf="!obj.viewprofil  && HistoricoCombinado" class="hidden-xs hidden-sm col-md-1">
+                    <button type="button" class="btn btn-default col-sm-12 btn-xs" *ngIf="obj.resultType===1"
+                      (click)="obj.printc = !obj.printc" [ngClass]="{'btn-warning': obj.printc}" data-toggle="tooltip"
+                      data-placement="top" title="{{'0275'| translate}}" style="margin: 0;">
+                      <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="hidden-xs">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h5></h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h6 class="uk-text-small uk-text-bold" style="margin : 0px">
+          {{Information}}
+        </h6>
+        <h6 *ngIf="Information2 !== ''" class="uk-text-small uk-text-bold" style="margin : 0px">
+          {{Information2}}
+        </h6>
+        <a style="font-size: 12px;" *ngIf="URL !== ''" href="{{URL}}">{{URL}}</a>
+      </div>
+    </div>
+    <hr style="margin-top: 7px;margin-bottom: 0px;">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <a href="http://www.cltech.net">
+          <img src="assets/images/powered.png" alt="Powered by CLTech" width="200px">
+        </a>
+        <br>
+        <a (click)="viewtermsandConditions()">{{'0013'|translate}}</a>
+        <br>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+
+<!-- modal de configuracion -->
+<div class="modal fade in" [ngStyle]="{'display':displayConfiguration}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form [formGroup]="formData" class="mt-1" autocomplete="off" (ngSubmit)="submitData()">
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="closeCofiguration()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{'0009'|translate}}</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="5000ms"
+              (selectedTabChange)="selectedTabsConfiguration($event)">
+              <mat-tab label="{{'0010'|translate}}">
+
+                <div class="col-md-12" style="margin-top: 8px;">
+                  <div class="col-sm-12 contentscroll" style="height: 380px;overflow: auto;">
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-name">
+                        {{'0047'|translate}}
+                      </label>
+                      <div class="col-sm-10 col-md-10">
+                        <input type="text" formControlName="name" class="form-control input-md" maxlength="64"
+                          aria-describedby="txt-client-name-help">
+                        <span class="blocklabel" style="margin-bottom: 3px;">
+                          {{'0048'|translate}}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-logo">Logo</label>
+                      <div class="col-sm-4 col-md-4">
+                        <div class="input-group">
+                          <input type="text" formControlName="logo" class="form-control input-md" maxlength="64"
+                            aria-describedby="txt-client-logo-help">
+                          <span class="input-group-btn">
+                            <span class="uk-form-file" style="position: relative;display: inline-block; overflow: hidden;vertical-align: middle;
+                            border-collapse: separate;list-style: none;">
+                              <input type="file" style="height: 50px;padding-left: 0px !important;position: absolute;top: 0;z-index: 1;
+                                width: 100%;opacity: 0;cursor: pointer;left: 0;" formControlName="temporal"
+                                (change)="onTemporalSelected($event)" name="file_upload-select1" base-sixty-four-input
+                                multiple accept="image/jpg, image/jpeg, image/png" minnum="2" #temporal>
+                              <button class="btn btn-primary" id="btn-client-file" type="button"
+                                [ngStyle]="{'background-color' : color,'border-color': color}"
+                                (click)="temporal.click()">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                              </button>
+                            </span>
+                            <button class="btn btn-danger" id="btn-client-delete-logo" (click)="removeTemporal()"
+                              [disabled]="logo===''" type="button" delete="0">
+                              <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                            </button>
+                          </span>
+                        </div>
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0041' | translate}}</span>
+                      </div>
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-logo"
+                        style="text-align: right;">Banner</label>
+                      <div class="col-sm-4 col-md-4">
+                        <div class="input-group">
+                          <input class="form-control" id="txt-client-logo" type="text" formControlName="banner"
+                            aria-describedby="txt-client-logo-help" maxlength="64">
+                          <span class="input-group-btn">
+                            <span class="uk-form-file"
+                              style="position: relative;display: inline-block;overflow: hidden;vertical-align: middle;border-collapse: separate;list-style: none;">
+                              <input type="file" style="height: 50px;padding-left: 0px !important;
+                              position: absolute;top: 0;z-index: 1;width: 100%;opacity: 0;cursor: pointer;left: 0;"
+                                formControlName="temporal1" (change)="onTemporal1Selected($event)"
+                                name="file_upload-select1" base-sixty-four-input multiple
+                                accept="image/jpg, image/jpeg, image/png" minnum="2" #temporal1>
+                              <button class="btn btn-primary" id="btn-client-file" type="button"
+                                [ngStyle]="{'background-color' : color,'border-color': color}"
+                                (click)="temporal1.click()">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                              </button>
+                            </span>
+                            <button class="btn btn-danger" id="btn-client-delete-logo" (click)="removeTemporal1()"
+                              [disabled]="Banner===''" type="button" delete="0">
+                              <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                            </button>
+                          </span>
+                        </div>
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0041'|translate}}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-color">Color</label>
+                      <div class="col-sm-10 col-md-10">
+                        <div class="input-group colorpicker-element">
+                          <input type="text" formControlName="color" class="form-control" type="text"
+                            aria-describedby="txt-client-name-help" [(colorPicker)]="color">
+                        </div>
+                        <span class="blocklabel" style="margin-bottom: 3px;">
+                          {{'0046'|translate}}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-info">
+                        {{'0049'|translate}}
+                      </label>
+                      <div class="col-sm-10 col-md-10">
+                        <input class="form-control" formControlName="information" id="txt-client-info" type="text"
+                          aria-describedby="txt-client-info-help" maxlength="64">
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0045'|translate}}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label"
+                        for="txt-client-additionalInfo">{{'0042'|translate}}</label>
+                      <div class="col-sm-10 col-md-10">
+                        <input class="form-control" formControlName="informationAditional"
+                          id="txt-client-additionalInfo" type="text" aria-describedby="txt-client-additionalInfo-help"
+                          maxlength="64">
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0045'|translate}}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-url">URL</label>
+                      <div class="col-sm-10 col-md-10"><input class="form-control" id="txt-client-url" type="text"
+                          formControlName="url" aria-describedby="txt-client-url-help" placeholder="http://"
+                          maxlength="64">
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0044'|translate}}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;"><label class="col-sm-2 col-md-2 control-label"
+                        for="txt-client-url">Url Servicios LIS</label>
+                      <div class="col-sm-10 col-md-10"><input class="form-control" id="txt-client-url" type="text"
+                          formControlName="urlLis" aria-describedby="txt-client-url-help" placeholder="C:"
+                          maxlength="64">
+                        <span class="blocklabel" style="margin-bottom: 3px;">PATH para consultar los servicios del
+                          LIS</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-url">URL api de seguridad</label>
+                      <div class="col-sm-10 col-md-10">
+                        <input class="form-control" id="txt-client-url" type="text" formControlName="urlSecurity"
+                          aria-describedby="txt-client-url-help" placeholder="http://" maxlength="64">
+                        <span class="blocklabel" style="margin-bottom: 3px;">PATH para consultar los URL api de
+                          seguridad</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-2 col-md-2 control-label" for="txt-client-url">{{'0193' | translate}}</label>
+                      <div class="col-sm-10 col-md-10"><input class="form-control" id="txt-client-url" type="text"
+                          formControlName="urlReports" aria-describedby="txt-client-url-help" placeholder="C:"
+                          maxlength="128">
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0194' | translate}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </mat-tab>
+              <mat-tab label="{{'0011'|translate}}">
+
+                <div style="margin-top: 8px;">
+                  <div class="col-sm-12 contentscroll" style="height: 380px;overflow: auto;">
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-historical-data" style="margin-top: 7px;">
+                        {{'0050'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('history').setValue($event)"
+                          [status]="formData.get('history').value" [id]="'history'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0051'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-historical-graph"
+                        style="margin-top: 7px;">
+                        {{'0052'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('graphicHistory').setValue($event)"
+                          [status]="formData.get('graphicHistory').value" [id]="'graphicHistory'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0053'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-historical-condensed">
+                        {{'0054'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('historicalCondensed').setValue($event)"
+                          [status]="formData.get('historicalCondensed').value" [id]="'historicalCondensed'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0055'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-login-captcha">
+                        {{'0056'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('loginCaptcha').setValue($event)"
+                          [status]="formData.get('loginCaptcha').value" [id]="'loginCaptcha'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0057'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-change-password">
+                        {{'0058'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('changePassword').setValue($event)"
+                          [status]="formData.get('changePassword').value" [id]="'changePassword'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">
+                        {{'0059'|translate}}
+                      </span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-outstanding-balance"
+                        style="margin-top: 7px;">
+                        {{'0060'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('outstandingBalance').setValue($event)"
+                          [status]="formData.get('outstandingBalance').value" [id]="'outstandingBalance'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0061'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-order-search">
+                        {{'0062'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('orderSearch').setValue($event)"
+                          [status]="formData.get('orderSearch').value" [id]="'orderSearch'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0063'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-show-confidencials">
+                        {{'0064'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('showConfidencials').setValue($event)"
+                          [status]="formData.get('showConfidencials').value" [id]="'showConfidencials'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0065'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-show-confidencials">
+                        {{'0234'|translate}}
+                      </label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('resultsAuto').setValue($event)"
+                          [status]="formData.get('resultsAuto').value" [id]="'resultsAuto'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0235'|translate}}</span>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label class="col-sm-3 col-md-2 control-label"
+                        style="padding: 1px;margin-top: 5px;">{{'0066'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="padding-left: 5px;">
+                        <div>
+                          <mat-button-toggle-group formControlName="pacic">
+                            <mat-button-toggle value="0"
+                              style="background-color: #337ab7; color: white ">{{'0067'|translate}}</mat-button-toggle>
+                            <mat-button-toggle value="1"
+                              style="background-color: #337ab7; color: white ">{{'0068'|translate}}</mat-button-toggle>
+                            <mat-button-toggle value="2"
+                              style="background-color: #337ab7; color: white ">{{'0069'|translate}}</mat-button-toggle>
+                          </mat-button-toggle-group>
+                        </div>
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0070'|translate}}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" id="show-result-div" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label">{{'0071'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10">
+                        <div>
+                          <mat-button-toggle-group formControlName="showResults">
+                            <mat-button-toggle value="5"
+                              style="background-color: #337ab7; color: white ">{{'0072'|translate}}</mat-button-toggle>
+                            <mat-button-toggle value="0"
+                              style="background-color: #337ab7; color: white ">{{'0073'|translate}}</mat-button-toggle>
+                          </mat-button-toggle-group>
+                        </div>
+                        <span class="blocklabel" style="margin-bottom: 3px;">{{'0074'|translate}}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-show-confidencials">
+                        {{'0260' | translate}}
+                      </label>
+                      <div class="col-sm-8 col-md-9">
+                        <app-toggle (changed)="formData.get('filterByDates').setValue($event)"
+                          [status]="formData.get('filterByDates').value" [id]="'filterByDates'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 20px;">{{'0235'|translate}}</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0px;">
+                      <label class="col-sm-3 col-md-2 control-label" for="chk-show-confidencials">{{'0261' |
+                        translate}}</label>
+                      <div class="col-sm-9 col-md-10">
+                        <app-toggle (changed)="formData.get('sendCustomer').setValue($event)"
+                          [status]="formData.get('sendCustomer').value" [id]="'sendCustomer'">
+                        </app-toggle>
+                      </div>
+                      <span class="blocklabel" style="margin-left: 15px;">{{'0235'|translate}}</span>
+                    </div>
+
+                  </div>
+                </div>
+
+              </mat-tab>
+              <mat-tab label="{{'0012'|translate}}">
+
+                <div class="col-md-12" style="margin-top: 8px;">
+                  <div class="col-sm-12">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="hidden">id</th>
+                          <th class="hidden">user-type</th>
+                          <th class="hidden">image</th>
+                          <th class="col-sm-3 text-center">Type</th>
+                          <th class="col-sm-4 text-center">Message</th>
+                          <th class="col-sm-1 text-center">{{'0080'|translate}}</th>
+                          <th class="col-sm-2 text-center">Picture</th>
+                          <th class="col-sm-1 text-center">Visible</th>
+                          <th class="col-sm-1 text-center">{{ '0248' | translate }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr formArrayName="userTypes" *ngFor="let user of getUserTypes.controls; let i = index">
+                          <td class="col-sm-3" *ngIf="!(user.value.type===5 && !viewdemogra)">
+                            {{user.value.type===1? Doctor:''}}
+                            {{user.value.type===2? Patient:''}}
+                            {{user.value.type===3? Customer:''}}
+                            {{user.value.type===4? Laboratory:''}}
+                            {{user.value.type===5? demoname.name:''}}
+                            {{user.value.type===6? Rate:''}}
+                          </td>
+                          <td class="col-sm-3" [formGroupName]="i" *ngIf="!(user.value.type===5 && !viewdemogra)">
+                            <input class="form-control" formControlName="message" type="text">
+                          </td>
+                          <td class="col-sm-1" [formGroupName]="i" *ngIf="!(user.value.type===5 && !viewdemogra)">
+                            <input class="form-control" formControlName="quantityOrder" type="text">
+                          </td>
+                          <td class="col-sm-4" [formGroupName]="i" style="display: flex;" *ngIf="!(user.value.type===5 && !viewdemogra)">
+                            <span class="uk-form-file"
+                              style="position: relative;display: inline-block;vertical-align: middle;border-collapse: separate;list-style: none;">
+                              <input type="file" style="height: 50px;padding-left: 0px !important;position: absolute;top: 0;z-index: 1;
+                              width: 100%;opacity: 0;cursor: pointer;left: 0;" formControlName="imagelogo"
+                                (change)="onPhotoSelected(user, $event)" name="file_upload-select1"
+                                base-sixty-four-input multiple accept="image/jpg, image/jpeg, image/png" maxsize="100"
+                                minnum="2" #photo>
+                              <button class="btn btn-primary col-md-offset-1" type="button" id="btn-patient-file"
+                                (click)="photo.click()">
+                                <span class="glyphicon glyphicon-option-horizontal"></span>
+                              </button>
+                            </span>
+                            <button class="btn btn-primary col-md-offset-1" type="button" (click)="viewphoto(user)"
+                              [disabled]="user.value.image ===''">
+                              <span class="glyphicon glyphicon-zoom-in"></span>
+                            </button>
+                            <button class="btn btn-danger col-md-offset-1" (click)="removePhotoUser(user)"
+                              [disabled]="user.value.image ===''" id="btn-client-delete-user-image" type="button"
+                              delete="0">
+                              <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                            </button>
+                          </td>
+                          <td class="col-sm-1" [formGroupName]="i" *ngIf="!(user.value.type===5 && !viewdemogra)">
+                            <mat-checkbox formControlName="visible" [color]="'primary'"
+                              (click)="selectVisible(user)"></mat-checkbox>
+                          </td>
+                          <td class="col-sm-1" [formGroupName]="i" *ngIf="!(user.value.type===5 && !viewdemogra)">
+                            <div class="col-sm-12" style="display: flex;place-content: center;">
+                              <mat-checkbox formControlName="confidential" [color]="'primary'"></mat-checkbox>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </mat-tab>
+              <mat-tab label="{{'0013'|translate}}">
+                <quill-editor formControlName="termsConditions" [style]="{'height':'250px'}"
+                  [modules]="editorOptions"></quill-editor>
+              </mat-tab>
+              <mat-tab label="{{'0014'|translate}}">
+
+                <div style="margin-top: 8px;">
+                  <div class="col-sm-12 contentscroll" style="height: 380px;overflow: auto;">
+
+                    <div class="form-group" id="show-result-div">
+                      <label class="col-sm-3 col-md-2 control-label">{{'0263'| translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <mat-button-toggle-group formControlName="server">
+                          <mat-button-toggle value="OUTLOOK"
+                            style="background-color: #337ab7; color: white ">OUTLOOK</mat-button-toggle>
+                          <mat-button-toggle value="OTRO"
+                            style="background-color: #337ab7; color: white ">OTRO</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-2 control-label" for="txt-client-name">Protocolo</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <input class="form-control" formControlName="protocol" type="text" maxlength="64">
+                      </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="formData.get('server').value ==='OTRO'">
+                      <label class="col-sm-3 col-md-2 control-label" for="txt-client-name">{{'0264'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <input class="form-control" formControlName="port" type="text" maxlength="64">
+                      </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="formData.get('server').value ==='OTRO'">
+                      <label class="col-sm-3 col-md-2 control-label">{{'0265'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <mat-button-toggle-group formControlName="encryption">
+                          <mat-button-toggle value="TLS"
+                            style="background-color: #337ab7; color: white ">TLS</mat-button-toggle>
+                          <mat-button-toggle value="SSL"
+                            style="background-color: #337ab7; color: white ">SSL</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="formData.get('server').value ==='OTRO'">
+                      <label class="col-sm-3 col-md-2 control-label">{{'0266'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <mat-button-toggle-group formControlName="securityProtocol">
+                          <mat-button-toggle value="smtp"
+                            style="background-color: #337ab7; color: white ">SMTP</mat-button-toggle>
+                          <mat-button-toggle value="smtps"
+                            style="background-color: #337ab7; color: white ">SMTPS</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-2 control-label">{{'0267'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <input class="form-control" formControlName="email" type="text" maxlength="64">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-3 col-md-2 control-label">{{'0002'|translate}}</label>
+                      <div class="btn-group col-sm-9 col-md-10" style="margin-bottom: 15px;">
+                        <input class="form-control" formControlName="passwordEmail" type="password">
+                      </div>
+                    </div>
+
+                    <quill-editor formControlName="body" [style]="{'height':'250px'}">
+                      <div quill-editor-toolbar>
+                        <span class="ql-formats">
+                          <button type="button" [title]="'Agregar Usuario'" (click)="addToBody('user')">
+                            <span class="glyphicon glyphicon-user"></span>
+                          </button>
+                          <button type="button" [title]="'Agregar Link'" (click)="addToBody('link')">
+                            <span class="glyphicon glyphicon-link"></span>
+                          </button>
+                          <button type="button" [title]="'Agregar Fecha'" (click)="addToBody('date')">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </button>
+                          <button type="button" [title]="'Agregar Laboratorio'" (click)="addToBody('lab')">
+                            <span class="glyphicon glyphicon-home"></span>
+                          </button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-bold"></button>
+                          <button type="button" class="ql-italic"></button>
+                          <button type="button" class="ql-underline"></button>
+                          <button type="button" class="ql-strike"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-blockquote"></button>
+                          <button type="button" class="ql-code-block"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-header" value="1"></button>
+                          <button type="button" class="ql-header" value="2"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-list" value="ordered"></button>
+                          <button type="button" class="ql-list" value="bullet"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-script" value="sub"></button>
+                          <button type="button" class="ql-script" value="super"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-indent" value="-1"></button>
+                          <button type="button" class="ql-indent" value="+1"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-direction" value="rtl"></button>
+                        </span>
+                        <select class="ql-size">
+                          <option value="small"></option>
+                          <option selected="selected"></option>
+                          <option value="large"></option>
+                          <option value="huge"></option>
+                        </select>
+                        <select class="ql-header">
+                          <option value="1"></option>
+                          <option value="2"></option>
+                          <option value="3"></option>
+                          <option value="4"></option>
+                          <option value="5"></option>
+                          <option value="6"></option>
+                          <option selected="selected"></option>
+                        </select>
+                        <select class="ql-font">
+                          <option selected="selected"></option>
+                          <option value="serif"></option>
+                          <option value="monospace"></option>
+                        </select>
+                        <select class="ql-align">
+                          <option selected="selected"></option>
+                          <option value="center"></option>
+                          <option value="right"></option>
+                          <option value="justify"></option>
+                        </select>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-clean"></button>
+                        </span>
+                        <span class="ql-formats">
+                          <button type="button" class="ql-link"></button>
+                          <button type="button" class="ql-image"></button>
+                        </span>
+                      </div>
+                    </quill-editor>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit" [ngStyle]="{'background-color' : color,'border-color': color}">
+            {{'0007' | translate}}
+          </button>
+          <button class="btn btn-default" data-dismiss="modal" type="button" (click)="closeCofiguration()">
+            {{'0008' | translate}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- modal ver la imagen de perfil-->
+<div class="modal fade in" [ngStyle]="{'display':displayImageProfile}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="closeImageProfile()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{'0227'|translate}}</h4>
+      </div>
+      <div class="modal-body">
+        <img class="center-block img-circle" src="data:image/jpeg;base64,{{imageprofil}}" width="200px" height="200px"
+          alt="">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" type="button"
+          (click)="closeImageProfile()">{{'0216'|translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para visualizar cambio de contraseña-->
+<div class="modal fade in" [ngStyle]="{'display':displayChangePassword}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="formChange" class="form-horizontal" autocomplete="off" (ngSubmit)="submitChange()">
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="closeChangePassword()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="text-center"><strong>{{'0058' | translate}} {{user.userName|uppercase}}</strong></h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group" style="display: flex;align-items: center;">
+            <label class="col-md-4 text-right">
+              {{'0241' | translate}}:
+            </label>
+            <div class="col-sm-8"
+              [ngClass]="{'has-error': submittedChange && formChange.get('oldpassword').hasError('required') }">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </span>
+                <input type="password" formControlName="oldpassword" class="form-control" required
+                  placeholder="{{'0241' | translate}}">
+              </div>
+            </div>
+          </div>
+          <span class="help-block" *ngIf="errorpasword" style="padding: 0 0 0 40px;margin: 0 0 15px 0;">
+            {{'0162' | translate}}
+          </span>
+
+          <div class="form-group" style="display: flex;align-items: center;">
+            <label class="col-md-4 text-right">
+              {{'0103' | translate}}:
+            </label>
+            <div class="col-sm-8"
+              [ngClass]="{'has-error': submittedChange && formChange.get('newPassword').hasError('required') }">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </span>
+                <input type="password" formControlName="newPassword" class="form-control" required
+                  placeholder="{{'0103' | translate}}">
+              </div>
+            </div>
+          </div>
+
+          <span *ngIf="viewvalited" class="help-block" style="padding: 0 0 0 40px;margin: 0 0 15px 0;">{{'0154' |
+            translate}}</span>
+
+          <div class="col-sm-12" style="margin-top: 5px;" *ngIf="keySecurityPolitics">
+            <mat-password-strength #passwordComponent [password]="formChange.get('newPassword').value" [min]="10"
+              [max]="20" [customValidator]="patternPassword">
+            </mat-password-strength>
+            <mat-password-strength-info lowerCaseCriteriaMsg="{{'0159' | translate}}"
+              upperCaseCriteriaMsg="{{'0158' | translate}}" digitsCriteriaMsg="{{'0160' | translate}}"
+              specialCharsCriteriaMsg="{{'0161' | translate}}"
+              minCharsCriteriaMsg="{{'0156' | translate}} 10 {{'0157' | translate}}"
+              customCharsCriteriaMsg="{{'0252' | translate}}" [passwordComponent]="passwordComponent">
+            </mat-password-strength-info>
+          </div>
+
+          <div class="form-group" style="display: flex;align-items: center;">
+            <label class="col-md-4 text-right">
+              {{'0167' | translate}}:
+            </label>
+            <div class="col-sm-8"
+              [ngClass]="{'has-error': submittedChange && formChange.get('reNewPassword').hasError('required') }">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                </span>
+                <input type="password" formControlName="reNewPassword" class="form-control" required
+                  placeholder="{{'0104' | translate}}">
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-danger" *ngIf="formChange.hasError('notSame')">
+            <strong>{{ '0100' | translate }}</strong>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" type="submit" [disabled]="!formChange.valid">
+            {{'0140' | translate}}
+          </button>
+          <button class="btn btn-default" data-dismiss="modal" type="button"
+            (click)="closeChangePassword()">{{'0216'|translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- modal ver comentario -->
+<div class="modal fade in" [ngStyle]="{'display':displayComment}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="closeComment()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{'0231'|translate}} {{test}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <p style="background-color: #eee;opacity: 1;height: auto;max-height: 350px;overflow: auto;"
+              class="form-control contentscroll" rows="10" [innerHTML]="comment">
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" type="button"
+          (click)="closeComment()">{{'0216'|translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal ver antibiograma -->
+<div class="modal fade in" [ngStyle]="{'display':displayAntibiogram}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="closeAntibiogram()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{'0228'|translate}}</h4>
+      </div>
+      <div class="modal-body" style="height: 450px; overflow: auto; margin-left: 10px;">
+        <cdk-accordion class="example-accordion" style="max-width: 100%;">
+          <cdk-accordion-item *ngFor="let sensitive of sensitive; let index = index;" #accordionAnt="cdkAccordionItem"
+            class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+            [attr.aria-expanded]="accordionAnt.expanded" [attr.aria-controls]="'accordion-body-' + index">
+            <div class="example-accordion-item-header" (click)="accordionAnt.toggle()">
+              {{sensitive.name}}
+              <span class="example-accordion-item-description">
+                Click para {{ accordionAnt.expanded ? 'cerrar' : 'abrir' }}
+              </span>
+            </div>
+            <div class="example-accordion-item-body" role="region" [style.display]="accordionAnt.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+              <p style="background-color: #eee;opacity: 1;height: 63px; overflow-y: scroll;" class="form-control"
+                [innerHTML]="sensitive.comment">
+              </p>
+              <div style="height: auto; width: auto; overflow: auto;">
+                <table class="table table-hover table-sm reflow" id="table-" colspan="1">
+                  <thead>
+                    <tr bgcolor="#1995dc" class="text-white">
+                      <th style="font-weight: 500;">{{'0229'|translate}}</th>
+                      <th style="font-weight: 500;">{{'0230'|translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let result of sensitive.resultsMicrobiology">
+                    <tr>
+                      <td>{{result.nameAntibiotic}}</td>
+                      <td>{{result.cmi}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" type="button"
+          (click)="closeAntibiogram()">{{'0216'|translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para visualizar teminos y condiciones-->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayConditions}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'0013' | translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeConditions()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow: auto;height: 328px;">
+        <div [innerHtml]="TermsConditions"></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-default" (click)="closeConditions()" data-dismiss="modal"
+          type="button">{{'0008' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para visualizar graficas-->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayCharts}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="margin: 0px;">{{'0222'|translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeCharts()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow: auto;height: 328px;">
+        <div *ngFor="let graph of listgraphics" class="row">
+          <label style="margin-left: 10px;">{{graph.name}}</label>
+          <div id="chart-0">
+            <div echarts [options]="graph.options" class="demo-chart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-default" (click)="closeCharts()" data-dismiss="modal"
+          type="button">{{'0008' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal de historial data -->
+<div class="modal" role="dialog" [ngStyle]="{'display':displayChartData}" data-keyboard="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="margin: 0px;">{{'0223'|translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeChartsData()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow: auto;height: 400px;">
+        <div class="row" *ngFor="let data of listgraphics" style="margin-bottom: 10px;">
+          <label style="margin-left: 12px;">{{data.name}}</label>
+          <div style="height: 220px; overflow: auto; margin-left: 10px;">
+            <table class="table table-hover table-sm reflow" id="table-0" colspan="1">
+              <thead>
+                <tr bgcolor="#1995dc" class="text-white">
+                  <th class="text-center">#</th>
+                  <th>{{'0185'|translate}}</th>
+                  <th>{{'0108'|translate}}</th>
+                  <th>{{'0115'|translate}}</th>
+                  <th>{{'0231'|translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let result of data.testdetail; let i = index">
+                  <th class="text-center">{{i+1}}</th>
+                  <td>{{result.datevalid}}</td>
+                  <td>{{result.order}}</td>
+                  <td>{{result.result}}</td>
+                  <td [innerHTML]="result.comment"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" (click)="closeChartsData()" data-dismiss="modal" type="button">{{'0008' |
+          translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

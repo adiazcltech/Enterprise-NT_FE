@@ -1,0 +1,289 @@
+<style>
+    .uk-text-ocultar {
+        color: '#ffff !important';
+    }
+
+    .md-image-timeline {
+        width: 25px !important;
+        height: 25px !important;
+        margin-top: 4px;
+    }
+    .automatic {
+      background: #2196f3;
+    }
+    .manually {
+      background: #673ab7;
+    }
+</style>
+<loadpage view="modalinformation.loading"></loadpage>
+<div class="uk-modal uk-modal-card-fullscreen" id="informationmodal">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar md-bg-blue-A100">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="modalinformation.closemodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block;">
+                    <i class="material-icons md-color-light-blue-50" style="font-size: 33px;">&#xE88F;</i>
+                </span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0747'| translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid" style="height: 100%;">
+                    <div ng-class="{'uk-width-1-4': modalinformation.viewprint,'uk-width-1-3': !modalinformation.viewprint}"
+                        style="height: 100%;padding-left: 27px;">
+                        <div style="min-height: 24%; height: 24%; margin-bottom: 10px">
+                            <cardorder order="modalinformation.order"
+                                typeordercode="modalinformation.patient.typeordercode"
+                                typeordercolor="modalinformation.patient.typeordercolor"
+                                testcode="modalinformation.testcode" testname="modalinformation.testname"></cardorder>
+                        </div>
+                        <div style="min-height: 24%; height: 24%; margin-bottom: 10px">
+                            <cardpatient patientname="modalinformation.patient.name" orderdemo="modalinformation.orderdemo"
+                                patientdocument="modalinformation.patient.document"
+                                patientage="modalinformation.patient.age"
+                                patientgender="modalinformation.patient.gender"
+                                photopatient="modalinformation.photopatient" patientid="modalinformation.patient.id" orderpatient="modalinformation.order">
+                            </cardpatient>                            
+                        </div>
+                        <div style="min-height: 48%; height: 48%; margin-bottom: 10px">
+                            <div class="md-card md-card-hover" style="height: 100%">
+                                <div class="md-card-toolbar">
+                                    <div class="md-card-toolbar-actions">
+                                        <span class="uk-text-small uk-text-muted"> {{modalinformation.usercomment}}
+                                            <img ng-if="modalinformation.photo === ''"
+                                                class="md-user-image md-list-addon-avatar" ng-src="images/user1.png"
+                                                alt="" />
+                                            <img class="md-card-head-avatar"
+                                                style="width: 32px; height: 32px;margin-top: 0px;"
+                                                ng-src="data:image/jpeg;base64,{{modalinformation.photo}}"
+                                                ng-if="modalinformation.photo !== ''" />
+                                        </span>
+                                    </div>
+                                    <h3 class="md-card-toolbar-heading-text">
+                                        {{'0114' | translate}}
+                                    </h3>
+                                </div>
+                                <div class="md-card-content"
+                                    style="height: calc(100% - 84px);overflow: auto;width: 90%;padding: 8px;"
+                                    ng-bind-html="modalinformation.comment | trust">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-class="{'uk-width-1-4': modalinformation.viewprint,'uk-width-1-3': !modalinformation.viewprint}"
+                        style="min-height: 100%">
+                        <h3 class="heading_a uk-margin-bottom"> {{'0627' | translate}}</h3>
+                        <div class="timeline">
+                            <div ng-repeat="s in modalinformation.auditSample  | orderBy:'date'" class="timeline_item">
+                                <div class="timeline_icon ng-if=" s.information=='-1'"">
+                                    <img class="md-image-timeline" ng-src="images/microbiology/commentReject.png"
+                                        alt="" />
+                                </div>
+                                <div class="timeline_icon" ng-if="s.information=='0'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/sampleReject.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='1'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/blood-testverification.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='2'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/blood-testordering1.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='3'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/take.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='4'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/barcode-scanner.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='6'"><img class="md-image-timeline"
+                                        ng-src="images/test/fridge.png" alt="" /></div>
+                                <div class="timeline_date" style="width: 67px;font-size: 12px;line-height: 15px">
+                                    <span>{{s.dateformat}}</span>
+                                </div>
+                                <div class="timeline_content">
+                                    <div class="timeline_content_addon" style="margin-top: 0px; min-height: 60px">
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <img class="md-user-image md-list-addon-avatar"
+                                                        ng-src="images/user1.png" alt="" />
+                                                </div>
+                                                <div class="md-list-content">
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='-1'">
+                                                        {{'0413'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='0'">
+                                                        {{'0128'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='1'">
+                                                        {{'3126'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='2'">
+                                                        {{'1014'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='3'">
+                                                        {{'1540'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='4'">
+                                                        {{'0116'|
+                                                        translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='6'">
+                                                        {{'3236'|
+                                                        translate}}</span>
+                                                    <span class="md-list-heading">{{s.name1}} {{s.name2}} {{s.lastName}}
+                                                        {{s.surName}}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div ng-class="{'uk-width-1-4': modalinformation.viewprint,'uk-width-1-3': !modalinformation.viewprint}"
+                        style="min-height: 100%">
+
+                        <h3 class="heading_a uk-margin-bottom">{{'0749'| translate}}</h3>
+                        <div class="timeline">
+                            <div ng-repeat="s in modalinformation.auditTest | orderBy:'date'" class="timeline_item">
+                                <div class="timeline_icon" ng-if="s.information=='0'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/result.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='1'"><img class="md-image-timeline"
+                                        ng-src="images/test/tube.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='2'"><img class="md-image-timeline"
+                                        ng-src="images/order/demo.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='3'"><img class="md-image-timeline"
+                                        ng-src="images/test/automaticresult.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='4'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/validated.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='5'"><img class="md-image-timeline"
+                                        ng-src="images/microbiology/printer.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='6'"><img class="md-image-timeline"
+                                        ng-src="images/test/resulttest.png" alt="" /></div>
+                                <div class="timeline_icon" ng-if="s.information=='DOI'"><img class="md-image-timeline" 
+                                        ng-src="images/microbiology/edit.png" alt="" /></div>    
+                                <div class="timeline_icon" ng-if="s.information=='DOD'">
+                                    <i class="material-icons">&#xE5CD;</i>
+                                </div>
+                                <div class="timeline_date" style="width: 67px;font-size: 12px;line-height: 15px">
+                                    <span>{{s.dateformat}}</span>
+                                </div>
+                                <div class="timeline_content">
+                                    <div class="timeline_content_addon" style="margin-top: 0px; min-height: 60px">
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <img class="md-user-image md-list-addon-avatar"
+                                                        ng-src="images/user1.png" alt="" />
+                                                </div>
+                                                <div class="md-list-content" style="display: inline-grid;">
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='0'">
+                                                        {{'1014'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='1'">
+                                                        {{'0355'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='2' && s.action == 'U' && s.result == ''">
+                                                        {{'0019'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='2' && (s.action == 'UR' || s.action == 'U') && s.result != ''">
+                                                        {{'1879'| translate}}</span>
+                                                    <span class="md-list-heading"
+                                                        ng-if="(s.information=='2' || s.information=='0') && (s.action == 'UR' || s.action == 'U') && s.result != ''">
+                                                        {{'3241'| translate}} : {{s.result}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='3'">
+                                                        {{'0555'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='4'">
+                                                        {{'0751'|
+                                                        translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='5'">
+                                                        {{'1231'|
+                                                        translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='6'">
+                                                        {{'3661'|
+                                                        translate}}</span>                                                    
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='DOI'">
+                                                        {{'3659'| translate}}</span>
+                                                    <span class="uk-text-small uk-text-muted"
+                                                        ng-if="s.information=='DOD'">
+                                                        {{'3660'| translate}}</span> 
+                                                    <span class="uk-badge uk-badge-info manually" style="float: left;padding: 1px 5px;border-radius: 5px;justify-self: left;"
+                                                      ng-if="s.delivery == 60 && s.comment === '0'">{{ '0945' | translate }}
+                                                    </span>
+                                                    <span class="uk-badge uk-badge-info automatic" style="float: left;padding: 1px 5px;border-radius: 5px;justify-self: left;"
+                                                      ng-if="s.delivery == 60 && s.comment === '1'">{{ '0765' | translate }}
+                                                    </span>                                                                                                     
+                                                    <span class="md-list-heading" style="display: contents;">{{s.name1}} {{s.name2}} {{s.lastName}}{{s.surName}}</span>
+                                                    <span class="md-list-heading" ng-if="s.delivery == 60 && s.receivesPerson" style="font-size: 11px;font-weight: 400;">{{s.receivesPerson}}</span>
+                                                    {{s.information == 'DOI' ? s.nameattachment:''}}
+                                                    {{s.information == 'DOD' ? s.nameattachment:''}}  
+                                                    <strong ng-if="s.information == 'DOD'">Motivo: </strong>{{s.information == 'DOD'? s.comment:''}}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-4" style="min-height: 100%" ng-if="modalinformation.viewprint">
+                        <h3 class="heading_a uk-margin-bottom">{{'1641'| translate}}</h3>
+                        <div class="timeline" ng-repeat="print in modalinformation.listinformation.deliveryTypes">
+                            <!--ingreso de la prueba  -->
+                            <div class="timeline_item">
+                                <div class="timeline_icon">
+                                    <img class="md-image-timeline" ng-if="print.idprint===59"
+                                        ng-src="images/print/printer.png" alt="" />
+                                    <img class="md-image-timeline" ng-if="print.idprint===60"
+                                        ng-src="images/print/email.png" alt="" />
+                                    <img class="md-image-timeline" ng-if="print.idprint===62"
+                                        ng-src="images/print/world-wide-web.png" alt="" />
+                                    <img class="md-image-timeline" ng-if="print.idprint===61"
+                                        ng-src="images/print/mobile.png" alt="" />
+                                </div>
+                                <div class="timeline_date" style="width: 67px;font-size: 12px;line-height: 15px">
+                                    <span>{{print.updateDate}}</span>
+                                </div>
+                                <div class="timeline_content">
+                                    <div class="timeline_content_addon" style="margin-top: 0px; min-height: 60px">
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <img ng-if="print.photo === ''"
+                                                        class="md-user-image md-list-addon-avatar"
+                                                        ng-src="images/user1.png" alt="" />
+                                                    <img class="md-user-image md-list-addon-avatar"
+                                                        ng-if="print.photo !== ''"
+                                                        ng-src="data:image/jpeg;base64,{{print.photo}}" alt="" />
+                                                </div>
+                                                <div class="md-list-content" style="display: inline-grid;">
+                                                    <span class="uk-text-small uk-text-muted">{{print.nameprint}}</span>
+                                                    <span class="uk-badge uk-badge-info" style="float: left;padding: 1px 5px;border-radius: 5px;justify-self: left;"
+                                                      ng-if="print.typeDelivery && print.typeDelivery !== null"
+                                                      ng-class="{'manually': print.idTypeDelivery === '0', 'automatic': print.idTypeDelivery === '1'}">{{ print.typeDelivery }}</span>
+                                                    <span class="md-list-heading" style="display: contents;">{{print.username}}</span>
+                                                    <span class="md-list-heading" style="font-size: 11px;font-weight: 400;" ng-if="print.typeDelivery && print.userFullName">{{print.userFullName}}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<modalexceptions idcontrol="'modalinformation'" openmodal="modalinformation.ShowPopupError"
+    detailerror="modalinformation.Error"></modalexceptions>

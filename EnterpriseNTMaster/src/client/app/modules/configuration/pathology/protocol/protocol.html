@@ -1,0 +1,375 @@
+<style type="text/css">
+    .line-separate {
+        background-color: #e5e5e5;
+        height: 2px;
+        width: 100%;
+        display: block;
+    }
+
+    .disabled-form {
+        background-color: #999999;
+    }
+
+    .add {
+        background-color: #4caf50;
+    }
+
+    .remove {
+        background-color: #f44336;
+    }
+</style>
+
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+    <div class="row general-container">
+        <div class="panel panel-primary panel-principal">
+            <div class="panel-heading row">
+                <div class=" col-md-4 panel-title">
+                    <strong class="panel-title text-left title-bar">
+                        {{'3076' | translate |uppercase}}
+                    </strong>
+                </div>
+                <div class=" col-md-8 text-right" style="padding-top: 5px">
+                    <strong ng-bind="vm.usuario"></strong>
+                    <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                        data-placement="bottom" title="Ctrl + B"
+                        onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/protocol/protocol.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+                </div>
+            </div>
+            <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+                <div class="col-md-5 panel-padding" style="height: 99%">
+                    <div class="panel-list">
+                        <div class="panel panel-primary general-container">
+                            <div class="panel-body general-container">
+                                <div>
+                                    <div class="input-group right-bar">
+                                        <input data-ng-model="vm.search" class="form-control" type="text"
+                                            placeholder="{{'0015' | translate}}">
+                                        <div class="input-group-addon">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </div>
+                                    </div>
+                                    <div class="number-bage">
+                                        <span style="margin-top: 10px" class="badge"
+                                            data-ng-bind="vm.filtered.length"></span>
+                                    </div>
+                                </div>
+                                <table id="tableArea" class="table table-list">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-6">
+                                                <a
+                                                    ng-click="$event.stopPropagation(); vm.sortType =  vm.sample; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                                                    <i ng-if="!vm.sortReverse && vm.sortType != vm.sample"
+                                                        class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                    <i ng-if="vm.sortReverse && vm.sortType != vm.sample"
+                                                        class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                    <i ng-if="vm.sortType == vm.sample && !vm.sortReverse "
+                                                        class="glyphicon glyphicon-triangle-bottom"></i>
+                                                    <i ng-if="vm.sortType == vm.sample && vm.sortReverse"
+                                                        class="glyphicon glyphicon-triangle-top"></i>
+                                                    <span ng-show="vm.sortType == vm.sample && !vm.sortReverse"></span>
+                                                    <span ng-show="vm.sortType == vm.sample && vm.sortReverse"></span>
+                                                </a>{{'0052' | translate}}
+                                            </th>
+                                            <th class="col-md-6">
+                                              <a
+                                                  ng-click="$event.stopPropagation(); vm.sortType =  vm.organ; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                                                  <i ng-if="!vm.sortReverse && vm.sortType != vm.organ"
+                                                      class="glyphicon glyphicon-sort-by-alphabet"></i>
+                                                  <i ng-if="vm.sortReverse && vm.sortType != vm.organ"
+                                                      class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                                                  <i ng-if="vm.sortType == vm.organ && !vm.sortReverse "
+                                                      class="glyphicon glyphicon-triangle-bottom"></i>
+                                                  <i ng-if="vm.sortType == vm.organ && vm.sortReverse"
+                                                      class="glyphicon glyphicon-triangle-top"></i>
+                                                  <span ng-show="vm.sortType == vm.organ && !vm.sortReverse"></span>
+                                                  <span ng-show="vm.sortType == vm.organ && vm.sortReverse"></span>
+                                              </a>{{'3018' | translate}}
+                                          </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody-list contentscroll">
+                                        <tr class="row-list"
+                                            data-ng-repeat="protocol in vm.filtered =((vm.dataProtocols | filter: vm.search )| orderBy:vm.sortType:vm.sortReverse)"
+                                            data-ng-click="vm.getProtocolById(protocol.id,$index,ProtocolForm)"
+                                            ng-class="{info: protocol.id == vm.selected}">
+                                            <td class="col-md-6" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis"
+                                              ng-bind-html="protocol.specimen.name | trust">
+                                            </td>
+                                            <td class="col-md-6" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis"
+                                              ng-bind-html="protocol.organ.name | trust">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 panel-padding" style="height: 99%">
+                    <div class="panel-list">
+                        <div class="panel panel-primary general-container">
+                            <div class="panel-body panel-form contentscroll" style="overflow: auto">
+                                <form name="ProtocolForm" id="ProtocolForm" class="form-horizontal panel-body"
+                                    style="width: 95%;">
+                                    <div style="display: none">
+                                        <div>
+                                            <input data-ng-model="vm.protocolDetail.id">
+                                        </div>
+                                    </div>
+
+                                    <!--Espécimen-->
+                                    <div class="form-group form-group-sm"
+                                        ng-class="{'has-error':ProtocolForm.specimen.$invalid && ProtocolForm.specimen.$touched || vm.specimenRepeat}">
+                                        <div class="col-sm-3 text-right">
+                                            <label>{{'0052' | translate}}:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select charset="utf-8"
+                                                ng-options="obj.id as obj.name for obj in vm.listSpecimens track by obj.id"
+                                                name="specimen" id="specimen" data-ng-model="vm.protocolDetail.specimen"
+                                                ng-required="true" class="form-control"
+                                                ng-disabled="vm.isDisabled" ng-change="vm.selectSpecimen()"></select>
+                                            <span
+                                                ng-if="ProtocolForm.specimen.$invalid && ProtocolForm.specimen.$touched || vm.specimenRepeat"
+                                                class="glyphicon glyphicon-remove form-control-feedback"
+                                                aria-hidden="true" style="margin-right: -10px;"></span>
+                                            <span
+                                                ng-if="ProtocolForm.specimen.$error.required && ProtocolForm.specimen.$touched"
+                                                class="help-block">{{'0016' | translate}}</span>
+                                            <span ng-if="vm.specimenRepeat" class="help-block ">{{'3080' |
+                                                translate}}</span>
+                                        </div>
+                                    </div>
+
+                                    <!--Organos-->
+                                    <div class="form-group form-group-sm"
+                                        ng-class="{'has-error':ProtocolForm.organ.$invalid && ProtocolForm.organ.$touched}">
+                                        <div class="col-sm-3 text-right">
+                                            <label>{{'3073' | translate}}:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select charset="utf-8"
+                                                ng-options="obj as obj.name for obj in vm.listOrgans track by obj.id"
+                                                name="organ" id="organ" data-ng-model="vm.protocolDetail.organ"
+                                                ng-required="true" class="form-control"
+                                                ng-disabled="vm.isDisabled"></select>
+                                            <span
+                                                ng-if="ProtocolForm.organ.$invalid && ProtocolForm.organ.$touched"
+                                                class="glyphicon glyphicon-remove form-control-feedback"
+                                                aria-hidden="true" style="margin-right: -10px;"></span>
+                                            <span
+                                                ng-if="ProtocolForm.organ.$error.required && ProtocolForm.organ.$touched"
+                                                class="help-block">{{'0016' | translate}}</span>
+                                        </div>
+                                    </div>
+
+                                    <!--Casete-->
+                                    <div class="form-group form-group-sm"
+                                        ng-class="{'has-error':ProtocolForm.casete.$invalid && ProtocolForm.casete.$touched}">
+                                        <div class="col-sm-3 text-right">
+                                            <label>{{'3061' | translate}}:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select charset="utf-8"
+                                                ng-options="obj as obj.name for obj in vm.listCasetes track by obj.id"
+                                                data-ng-model="vm.protocolDetail.casete" class="form-control"
+                                                ng-required="true" ng-disabled="vm.isDisabled"></select>
+                                        </div>
+                                    </div>
+
+                                    <!--Cantidad-->
+                                    <div class="form-group form-group-sm has-feedback"
+                                        ng-class="{'has-error':ProtocolForm.quantity.$invalid && ProtocolForm.quantity.$touched}">
+                                        <div class="col-sm-3 text-right">
+                                            <label>{{'0053' | translate}}:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input data-ng-model="vm.protocolDetail.quantity" maxlength="2"
+                                                ng-disabled="vm.isDisabled" ng-required="true" name="quantity"
+                                                id="quantity" class="form-control" type="text">
+                                            <span
+                                                ng-if="ProtocolForm.quantity.$invalid && ProtocolForm.quantity.$touched"
+                                                class="glyphicon glyphicon-remove form-control-feedback"
+                                                aria-hidden="true"></span>
+                                            <span
+                                                ng-if="ProtocolForm.quantity.$error.required && ProtocolForm.quantity.$touched"
+                                                class="help-block">{{'0016' | translate}}</span>
+                                        </div>
+                                    </div>
+
+                                    <!--Horas de procesamiento-->
+                                    <div class="form-group form-group-sm has-feedback"
+                                        ng-class="{'has-error':ProtocolForm.processingHours.$invalid && ProtocolForm.processingHours.$touched}">
+                                        <div class="col-sm-3 text-right">
+                                            <label>{{'3116' | translate}}:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input data-ng-model="vm.protocolDetail.processingHours" maxlength="2"
+                                                ng-disabled="vm.isDisabled" ng-required="true" name="processingHours"
+                                                id="processingHours" class="form-control" type="text">
+                                            <span
+                                                ng-if="ProtocolForm.processingHours.$invalid && ProtocolForm.processingHours.$touched"
+                                                class="glyphicon glyphicon-remove form-control-feedback"
+                                                aria-hidden="true"></span>
+                                            <span
+                                                ng-if="ProtocolForm.processingHours.$error.required && ProtocolForm.processingHours.$touched"
+                                                class="help-block">{{'0016' | translate}}</span>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="row">
+
+                                        <div class="col-md-12"
+                                            style="background-color: #337ab7;padding: 10px;color: white;">
+                                            <label class="col-md-3" style="margin:0">{{'3070' | translate}}</label>
+                                        </div>
+
+                                        <div class="col-md-12" ng-repeat="section in vm.protocolDetail.sheets"
+                                            style="border: 1px solid #dadada;border-top: none;padding-left: 0px;">
+                                            <div class="row col-md-11">
+                                                <div class="col-md-6" ng-repeat="input in section" on-last-repeat>
+
+                                                    <div class="form-group form-group-sm" ng-if="input.type == 'text'"
+                                                        style="margin-top: 10px;">
+                                                        <div style="text-align: end;">
+                                                            <label class="col-md-4">{{ input.label }}:</label>
+                                                        </div>
+                                                        <div class="col-md-8" style="padding: 0;">
+                                                            <input ng-model="input.value" ng-required="true"
+                                                                class="form-control" type="{{ input.type }}"
+                                                                ng-disabled="vm.isDisabled" maxlength="2">
+                                                        </div>
+                                                        <span ng-if="input.value === '' || !input.value"
+                                                            class="help-block"
+                                                            style="margin-left: 25px;font-weight: bold;">{{'0016' |
+                                                            translate}}</span>
+                                                    </div>
+
+                                                    <div class="form-group form-group-sm"
+                                                        ng-if="input.type == 'selectize'" style="margin-top: 10px;">
+                                                        <div class="col-sm-4"
+                                                            style="text-align: end;padding-left: 10px;">
+                                                            <label>{{ input.label }}:</label>
+                                                        </div>
+                                                        <div class="col-md-8" style="padding: 0;">
+                                                            <select charset="utf-8"
+                                                                ng-options="obj as obj.name for obj in input.data track by obj.id"
+                                                                data-ng-model="input.value" class="form-control"
+                                                                ng-required="input.required"
+                                                                ng-disabled="vm.isDisabled"></select>
+                                                        </div>
+                                                        <span ng-if="input.value === '' || !input.value"
+                                                            class="help-block"
+                                                            style="margin-left: 10px;font-weight: bold;">{{'0016' |
+                                                            translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div style="margin-top: 4px;display: flex;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="vm.cloneSection($event, $index)" ng-if="$last"
+                                                        ng-class="{'disabled-form': vm.isDisabled, 'add': !vm.isDisabled }"
+                                                        style="color: white;padding: 2px 6px;border-radius: 5px;margin: 7px;">
+                                                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="vm.deleteSection($event,$index)"
+                                                        ng-if="vm.protocolDetail.sheets.length > 1"
+                                                        ng-class="{'disabled-form': vm.isDisabled, 'remove': !vm.isDisabled }"
+                                                        style="color: white;padding: 2px 6px;border-radius: 5px;margin: 7px;">
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="help-block" ng-if="vm.colorationsRepeat">{{'3071' |
+                                            translate}}</span>
+                                    </div> -->
+                                </form>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="container" style="width: 100%">
+
+                                    <button type="button" class=" btn btn-success button-list"
+                                        ng-click="vm.addProtocol(ProtocolForm)" ng-disabled="vm.isDisabledAdd">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{'0005' |
+                                        translate}}
+                                    </button>
+
+                                    <button type="button" class="btn btn-warning  button-list"
+                                        ng-click="vm.editProtocol()" ng-disabled="vm.isDisabledEdit">
+                                        <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' |
+                                        translate}}
+                                    </button>
+
+                                    <button type="submit" class="btn btn-primary  button-list"
+                                        ng-click="vm.saveProtocol(ProtocolForm)"
+                                        ng-disabled="!ProtocolForm.$valid || vm.isDisabledSave || vm.colorationsRepeat">
+                                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007'
+                                        | translate}}
+                                    </button>
+
+                                    <button type="button" class="btn btn-info button-list"
+                                        ng-click="vm.cancelProtocol(ProtocolForm)" ng-disabled="vm.isDisabledCancel">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' |
+                                        translate}}
+                                    </button>
+
+                                    <button type="button" class="btn btn-violet button-list"
+                                        ng-click="vm.generateFile()" ng-disabled="vm.isDisabledPrint">
+                                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' |
+                                        translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/ng-template" id="Requeridprotocol.html">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static">
+          <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                  <div class="modal-header modal-header-prymary">
+                      <h4 class="modal-title" align="justify">
+                          {{'0171' | translate}}
+                      </h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="row">
+                          <div class="col-md-12 ">
+
+                              <div class="col-md-4" ng-class="{'col-md-offset-2': (listSpecimens > 0 || listColorations > 0) && !(listSpecimens > 0 && listColorations > 0), 'col-md-offset-4': listSpecimens > 0 && listColorations > 0}" ng-hide="listCasetes > 0">
+                                  <a ng-click="close('casete')" class="thumbnail" data-dismiss="modal">
+                                      <img src="images/area.png">
+                                      <h6 class="text-center"> {{'3061' | translate}}</h6>
+                                  </a>
+                              </div>
+                              <div class="col-md-4" ng-hide="listSpecimens > 0" ng-class="{'col-md-offset-2': listCasetes > 0 && !( listCasetes > 0 && listColorations > 0),'col-md-offset-4': listCasetes > 0 && listColorations > 0}">
+                                <a ng-click="close('sample')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/sample.png">
+                                    <h6 class="text-center"> {{'0052' | translate}}</h6>
+                                </a>
+                            </div>
+                            <div class="col-md-4" ng-hide="listColorations > 0"  ng-class="{'col-md-offset-4': listSpecimens > 0 && listCasetes > 0}">
+                                <a ng-click="close('coloration')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/literalresult.png">
+                                    <h6 class="text-center"> {{'3063' | translate}}</h6>
+                                </a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </script>

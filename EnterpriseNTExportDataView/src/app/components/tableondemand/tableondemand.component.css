@@ -1,0 +1,164 @@
+table{
+    margin:auto;
+
+    overflow:hidden;
+    background-color:var(--white);
+    border-radius:10px;
+    position:relative;
+    border-collapse:collapse;
+    z-index:1;
+    color:var(--gray);
+    white-space:nowrap;
+    max-width: 90vw;
+  display: block;
+  overflow-x: auto;
+}
+.table-details{
+    margin-left: 0;
+    width: min-content;
+}
+.detail-content{
+    margin :1rem
+}
+.more-details{
+    text-align: start;
+}
+tbody tr:not(:last-child){
+    border-bottom:0.13rem solid rgba(1,1,1,0.2);
+}
+thead th {
+    border: none;
+}
+th, td{
+    padding:0.4rem;
+    gap:10px;
+    position:relative;
+    cursor:default;
+    min-width: 11rem;
+    text-align: center;
+}
+
+td:last-child:hover a{
+    color:var(--black);
+}
+tr td:last-child, tr td:nth-last-child(2), tr td:nth-last-child(3), tr td:nth-last-child(4), tr td:nth-last-child(6), tr td:nth-last-child(7), tr td:nth-last-child(8), tr td:nth-last-child(9){
+    text-align:center;
+}
+
+tr {
+    background-color: #fafcff  !important;
+}
+
+tr:hover{
+    background-color:#ebebeb !important;
+}
+.row-details{
+    background-color:#ebebeb !important;
+}
+
+/* td:last-child:hover:after{
+    content:"Project";
+    position:absolute;
+    width:fit-content;
+    left:-10%;
+    top:-40%;
+    transform:translate(0%, 50%);
+    font-size:12px;
+    color:var(--lite);
+    background-color:var(--dark);
+    box-shadow: rgba(255, 255, 255, 0) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius:5px;
+    padding:2px 4px;
+    z-index:9;
+} */
+th{
+    background-color:var(--dark);
+    color:var(--lite);
+    font-weight:500;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:2;
+    border-radius:10px 10px 0 0;
+   
+}
+td {
+    word-wrap: break-word;  /* Permite la división de palabras largas */
+    overflow: hidden;       /* Oculta el texto que se desborda */
+    text-overflow: ellipsis; /* Añade "..." si el texto es demasiado largo */
+    white-space: normal;    /* Permite saltos de línea automáticos */
+    width: 150px;           /* Ajusta el ancho según el diseño deseado */
+    padding: 8px;
+}
+@media (max-width:720px){
+    main{
+        background:var(--primary);
+    }
+    
+    table{
+        background-color:transparent;
+    }
+    .table-details{
+        margin-left: auto;
+    }
+   
+    .table-details tr{
+        display: block;
+        width: fit-content;
+    }
+    .table-details td{
+        display: block;
+        width: 22rem;
+        text-align: right;
+    }
+    main{
+        overflow-y:auto;
+        height:100%;
+    }
+    
+    table thead{
+        display:none;
+    }
+    
+    table td{
+        width:100%;
+        display:block;
+        text-align:right;
+    }
+    
+    table td:not(:last-child){
+        border-bottom:1px solid rgba(1,1,1,0.2);
+    }
+    
+    table td:before{
+        content:attr(data-label);
+        z-index:1;
+        float:left;
+        color:var(--black);
+    }
+    
+    tr{
+        border-radius:5px;
+        display:block;
+        margin:0.5rem 0;
+        width: 26rem;
+    }
+    
+    tbody tr{
+        border-bottom:none;
+    }
+    
+    tr td{
+        text-align:right !important;
+    }
+    
+    td:last-child:hover:after{
+        left:auto;
+        right:10%;
+        transform:translate(50%, 50%);
+    }
+    
+    th, td{
+        padding:0.5rem 1rem;
+    }
+}

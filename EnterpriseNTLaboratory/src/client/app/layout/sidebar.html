@@ -1,0 +1,2059 @@
+<style type="text/css">
+    .angucomplete-dropdown {
+        border-color: #ececec;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 2px;
+        width: 100%;
+        padding: 6px;
+        cursor: pointer;
+        z-index: 9999;
+        position: absolute;
+        margin-top: -6px;
+        background-color: #ffffff;
+    }
+
+    .select2-container .select2-choice .select2-arrow b {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: url(images/arrow.png) no-repeat 0 1px !important;
+    }
+
+    .marginmenu {
+        margin-top: 2px !important;
+    }
+
+    .angucomplete-description {
+        line-height: 16px;
+        color: #757575;
+    }
+
+    .angucomplete-searching {
+        color: #ffffff;
+        font-size: 14px;
+    }
+
+    .angucomplete-selected-row {
+        background: #b5d2fb;
+        color: #ffffff;
+    }
+
+    .angucomplete-selected-row,
+    angucomplete-row:hover {
+        background-color: #b5d2fb !important;
+        color: #fff;
+    }
+
+    #pagesearchmenu_dropdown {
+        overflow-y: auto;
+        max-height: 80vh;
+    }
+
+    .searchpage {
+        position: relative;
+        padding: 2px 46px 0 40px;
+        margin: 5px 0;
+    }
+
+    .angular-notifications-icon {
+        top: 7px;
+    }
+
+    .angular-notifications-icon>div {
+        margin-top: -14px;
+    }
+
+    .turn-lis {
+        min-width: 398px !important;
+        top: 45px !important;
+        left: -62px !important;
+    }
+
+    .point-care-siga {
+        height: 32px;
+        min-height: 32px !important;
+        font-size: 12px !important
+    }
+
+    .printadvertence {
+        font-size: 11px;
+        background-color: #ff8628;
+        border-radius: 50%;
+        position: absolute;
+        height: 20px;
+        line-height: 22px;
+        /* float: right; */
+        margin-left: 11px;
+        width: 37%;
+        top: 12px;
+        z-index: 10;
+    }
+
+    .marginheader {
+        margin-left: 0px !important;
+    }
+
+    @media only screen and (max-width:959px) {
+        .gridmenu {
+            height: calc(21%) !important;
+        }
+
+        .title-card-menu {
+            font-size: 21px !important;
+        }
+
+        .labellists {
+            font-size: 12px;
+        }
+    }
+
+    @media only screen and (max-width: 959px) and (min-width: 5px) {
+        .inviewmenu {
+            display: none;
+        }
+    }
+
+    @media (min-width: 960px){
+        .uk-hidden-large {
+            display: block!important;
+        }
+        .inviewmenu {
+            display: none;
+        }
+    }
+    @media (min-width:1080px){
+        .inviewmenu {
+            display: none;
+        }
+        .uk-visible-small {
+            display:none!important}
+        .uk-visible-medium{
+            display:none!important}
+            .uk-hidden-large{
+                display:none!important}
+    }
+
+    @media (min-width:768px) and (max-width:1080px){
+        .inviewmenu {
+            display: none;
+        }
+        .uk-visible-small {
+            display:none!important
+            }
+        .uk-visible-large {
+            display:inline-block!important
+            }
+        .uk-hidden-medium{
+            display:none!important
+            }
+    }
+    
+</style>
+<modalexceptions id="headererror" openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div ng-controller="SidebarController as vm">
+    <div class="header uk-visible-large" ng-show="vm.menu" style="padding-top: 20px; padding-right: 10px">
+        <!--  {{vm.menu}}  -->
+        <header id="header_main" ng-class="{'marginheader': vm.principalmenu === true}">
+            <div class="header_main_content uk-animation-slide-bottom" ng-if="vm.mainSearch">
+                <nav class="uk-navbar">
+                    <div ng-if="vm.idpage !== 200" data-uk-tooltip="{pos:'bottom'}" title="{{'1111' | translate}}"
+                        class="uk-float-left uk-visible-large" style="margin-top:11px">
+                        <a ng-href="/dashboard" class="top_menu_toggle">
+                            <i style="font-size: 31px !important" class="material-icons md-24 md-light">
+                                view_module
+                            </i>
+                        </a>
+                    </div>
+                    <div id="menu_top_dropdown" class="uk-float-left uk-visible-large">
+                        <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+                            <a data-uk-tooltip="{pos:'bottom'}" title="{{'1112' | translate}}" href="#"
+                                class="top_menu_toggle">
+                                <i class="material-icons md-24">folder_special</i>
+                            </a>
+                            <div class="uk-dropdown uk-dropdown-width-2">
+                                <div class="uk-grid uk-dropdown-grid">
+                                    <!--Accesos directos principales  -->
+                                    <div ng-if="vm.listAcces.length === 0" class="uk-dropdown-grid uk-child-width-2"
+                                        uk-grid class="md-card-content" style="padding-left:68px">
+                                        <div class="uk-grid uk-width-1-2 uk-container-center">
+                                            <i class="uk-child-width-auto material-icons md-48"
+                                                style="padding-left: 70px">&#xE611;</i>
+                                        </div>
+                                        <div class="uk-grid uk-width-1-2 uk-container-center">
+                                            <span class="uk-text-small uk-text-muted">{{'0063' | translate}}</span>
+                                        </div>
+                                    </div>
+                                    <div ng-if="vm.listAcces.length > 0" class="uk-width-1-1">
+                                        <div ng-if="vm.listAcces.length > 0"
+                                            class="uk-grid uk-grid-width-medium-1-3 uk-margin-bottom uk-text-center">
+                                            <!--accesos directos Gestión de ordenes-->
+                                            <!--ingreso de ordenes-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 210 }).length > 0" href="/orderentry"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/orderentry.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0011' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--listados-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 212 }).length > 0" href="/listed"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/list.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0015' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Creación de ordenes sin historia-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 213 }).length > 0"
+                                                href="/orderswithouthistory" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/orderswithouthistory.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0252' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Activación de ordenes-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 214 }).length > 0"
+                                                href="/activationorder" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/activationorder.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0045' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Reiniciar contador-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 215 }).length > 0"
+                                                href="/restartcounter" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/tools/rotate.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0951' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--citas-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 306 }).length > 0"
+                                                href="/medicalappointment" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/Laboratoryorders/medical-appointment.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0012' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos Gestión de paciente-->
+                                            <!--Historia Clinica-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 216 }).length > 0"
+                                                href="/historypatient" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/historypatient.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0017' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Asignación de historia-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 217 }).length > 0"
+                                                href="/historyassignment" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/historyassignment.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0016' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Reasignación de historia-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 218 }).length > 0"
+                                                href="/historyreassignment" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/historyreassignment.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0044' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Inconsistencia-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 219 }).length > 0"
+                                                href="/inconsistency" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/inconsistency.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0051' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Desbloqueo de historia/Orden-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 220 }).length > 0"
+                                                href="/unlockorderhistory" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/unlockorderhistory.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0055' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Toma de muestra-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 307 }).length > 0"
+                                                href="/phlebotomistake" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/orderentry.png">
+                                                <i class="material-icons md-36 md-color-cyan-600">&#xE879;</i>
+                                                <span class="uk-text-muted uk-display-block">Toma de muestra</span>
+                                            </a>
+                                            <!--accesos directos Gestión de muestras-->
+                                            <!--Entrada de muestra-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 211 }).length > 0 && vm.trazability === '2'"
+                                                href="/simpleverification" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/entrysample.png">
+                                                <i class="material-icons md-36 md-color-cyan-600">&#xE879;</i>
+                                                <span class="uk-text-muted uk-display-block">{{'0014' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Verificación completa-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 211 }).length > 0 && vm.trazability === '3'"
+                                                href="/completeverify" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/entrysample.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0247' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Almacen de muestra-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 243 }).length > 0" href="/tuberack"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/tools/Samplewarehouse.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0043' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--trazabilidad-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 251 }).length > 0"
+                                                href="/traceability" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/audit/audit.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0046' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--remisiones-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 252 }).length > 0"
+                                                    href="/remission" class="uk-margin-top uk-dropdown-close">
+                                                    <img class="material-icons md-36" ng-src="images/Menu/audit/send.png">
+                                                    <span class="uk-text-muted uk-display-block">{{'1024' |
+                                                        translate}}</span>
+                                            </a>
+                                            <!-- accessos directo de resultado -->
+                                            <!--registro de Resultado-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 221 }).length > 0"
+                                                href="/resultsentry" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Result/resultsentry.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0019' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--registro de Resultado por lote-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 222 }).length > 0"
+                                                href="/recordresultbyrank" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Result/recordresultbyrank.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0021' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Revisión de resultados-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 223 }).length > 0"
+                                                href="/reviewofresults" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Result/reviewofresults.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0023' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Hojas de trabajo-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 224 }).length > 0" href="/worklist"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Result/worklist.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0018' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Reenvio al middleware-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 225 }).length > 0"
+                                                href="/restartmiddleware" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/tools/TestAnalyzer.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1133' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos Informes y consultas -->
+                                            <!--Informes-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 229 }).length > 0" href="/reports"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/consultation/reports.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0031' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Control entrega de informes-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 230 }).length > 0"
+                                                href="/controldeliveryreports" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/consultation/controldeliveryreports.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0032' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Consultas-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 231 }).length > 0" href="/queries"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/consultation/queries.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0033' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Consulta de paciente-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 232 }).length > 0"
+                                                href="/patientconsultation" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/consultation/patientconsultation.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0322' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Consentimiento informado-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 249 }).length > 0"
+                                                href="/informedconsent" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/consultation/informedconsent.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1503' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos Auditoria -->
+                                            <!--auditoria de ordenes-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 233 }).length > 0" href="/auditorder"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/audit/order.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0926' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--auditoria de maestros -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 234 }).length > 0" href="/auditmaster"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/audit/master.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0927' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--auditoria de usuarios -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 235 }).length > 0" href="/audituser"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/audit/user.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0928' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--auditoria de la factura -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 507 }).length > 0"
+                                                href="/auditinvoice" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/audit/bill.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1735' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos Estadisticas -->
+                                            <!--Estadisticas -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 236 }).length > 0"
+                                                href="/generalstadistics" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/generalstadistics.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0029' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Estadisticas especiales -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 237 }).length > 0"
+                                                href="/specialstadistics" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/specialstadistics.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0034' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Estadisticas con precios -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 238 }).length > 0"
+                                                href="/statisticswithprices" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/statisticswithprices.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0035' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Muestras en destinos -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 239 }).length > 0"
+                                                href="/destinationsample" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/destinationsample.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0041' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos Indicadores -->
+                                            <!--Alerta temprana -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 240 }).length > 0"
+                                                href="/earlywarning" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/earlywarning.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0036' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Indicadores -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 241 }).length > 0" href="/indicators"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/indicators.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0037' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Histograma -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 242 }).length > 0" href="/histogram"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/histogram.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0038' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Reporte Adicionales -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 305 }).length > 0"
+                                                href="/otherreports" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/form.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1724' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- accesos directos utilidades -->
+                                            <!--Visor de succesos -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 244 }).length > 0" href="/exception"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/tools/Eventviewer.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0047' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Visor de sesiones -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 245 }).length > 0"
+                                                href="/sectionviewer" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/tools/Entrylog.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0933' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Borrados especiales -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 246 }).length > 0"
+                                                href="/deletespecial" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/Laboratoryorders/deletespecial.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0050' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Editor de informes -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 247 }).length > 0" href="/reportedit"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/tools/ReportEdit.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0782' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Editor de código de barras -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 248 }).length > 0" href="/barcodeedit"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/tools/ReportEdit.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0935' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos facturación-->
+                                            <!--Generar Factura -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 501 }).length > 0"
+                                                href="/generateinvoice" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/principal/generateinvoice.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1564' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Notas credito -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 502 }).length > 0" href="/creditnote"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/principal/nota_credito.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1576' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Recalculo -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 503 }).length > 0"
+                                                href="/recalculated" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/principal/recalculo.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1603' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Reporte de caja -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 504 }).length > 0" href="/cashreport"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/principal/cashreport.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1604' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Reimprimir factura -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 505 }).length > 0"
+                                                href="/printinvoice" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/principal/printinvoice.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1605' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--RIPS -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 505 }).length > 0" href="/consultrips"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/principal/rips.png">
+                                                <span class="uk-text-muted uk-display-block">{{'1606' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--accesos directos Microbiologia-->
+                                            <!--Verificación de microbiologia -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 301 }).length > 0"
+                                                href="/checkmicrobiology" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/microbiology/checkmicrobiology.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0024' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Siembra de microbiologia -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 304 }).length > 0 && vm.growtmicrobiology === 'True'"
+                                                href="/growtmicrobiology" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/microbiology/growtmicrobiology.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0025' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Lectura de microbiologia -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 302 }).length > 0"
+                                                href="/microbiologyReading" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/microbiology/microbiologyReading.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0026' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!--Plano de whonet -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 303 }).length > 0" href="/planoWhonet"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/Menu/statistics/planoWhonet.png">
+                                                <span class="uk-text-muted uk-display-block">{{'0039' |
+                                                    translate}}</span>
+                                            </a>
+                                             <!-- Receptores -->
+                                             <a ng-if="(vm.listAcces|filter:{ id : 601 }).length > 0"
+                                                href="/receptionsamples" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/transplants/receptor.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3316' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- participantes -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 602 }).length > 0"
+                                                href="/participants" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/transplants/body-scan.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3074' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- donantes -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 603 }).length > 0" href="/donor"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/transplants/assessment.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3318' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- Anticuerpos citotoxicos -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 604 }).length > 0"
+                                                href="/cytotoxicantibodies" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/transplants/3.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3319' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- seleccion -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 608 }).length > 0" href="/selection"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/transplants/file.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3320' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- editor de reportes -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 605 }).length > 0"
+                                                href="/reporteditransplants" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/transplants/clipboard.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3321' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- gestion de reportes -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 606 }).length > 0"
+                                                href="/reportmanagement" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/transplants/document.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3322' |
+                                                    translate}}</span>
+                                            </a>
+                                            <!-- historico de reportes -->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 607 }).length > 0" href="/reportvisor"
+                                                class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36"
+                                                    ng-src="images/transplants/dialysisdate.png">
+                                                <span class="uk-text-muted uk-display-block">{{'3323' |
+                                                    translate}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--Accesos directos principales end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-float-left uk-visible-large" style="color:#f5f5f5;margin: 0px 15px;">
+                        <!-- <strong>
+                            {{vm.NamePage | uppercase}}
+                        </strong> -->
+                        <ul class="md-list">
+                            <li style="padding: 4px 4px;" ng-class="{'marginmenu': vm.idpage === 200}">
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">
+                                        {{vm.NamePage | uppercase}}
+                                        <span data-uk-tooltip="{pos:'bottom'}" title="{{'0059' | translate}}"
+                                            ng-if="vm.idpage !== 200 && (vm.listAcces|filter:{ id : vm.idpage }).length > 0"
+                                            ng-click="vm.deleteShortcuts()" class="menu_icon" style="cursor:pointer">
+                                            <i class="material-icons md-24 md-color-yellow-600"
+                                                style="vertical-align: -6px;">&#xE838;</i>
+                                        </span>
+                                        <span data-uk-tooltip="{pos:'bottom'}" title="{{'0059' | translate}}"
+                                            ng-if="vm.idpage !== 200 && (vm.listAcces|filter:{ id : vm.idpage }).length === 0"
+                                            ng-click="vm.insertShortcuts()" class="menu_icon" style="cursor:pointer">
+                                            <i class="material-icons md-24 md-color-yellow-600"
+                                                style="vertical-align: -6px;">&#xE83A;</i>
+                                        </span>
+                                    </span>
+                                    <span class="uk-text-small" style="color: #f5f5f5;">{{ vm.branchname}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-flip">
+                        <ul class="uk-navbar-nav user_actions">
+                            <div ng-if="vm.turnSiga !== undefined" class="uk-button-dropdown"
+                                data-uk-dropdown="{mode:'click',pos:'bottom-center',preventflip:true}"
+                                style="float: left;">
+                                <button
+                                    style="height: 48px; font-family: 'Open Sans', sans-serif; font-weight: normal; background-color: rgba(0, 0, 0, 0.2);color: white; padding: 5px; padding-top: 0px;cursor: pointer;margin-right: 1px; border:1px"
+                                    ng-style="{'background' :
+                                        vm.stateTurnSiga === 2 ? '#ffa001': vm.stateTurnSiga === 1  ? 'rgb(124, 179, 66)' : 'rgba(0, 0, 0, 0.2)'}">
+                                    <div class="uk-flex uk-flex-center uk-flex-middle uk-float-left"
+                                        style=" width: auto">
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1-1 uk-text-center uk-text-small uk-text-meta">
+                                                {{'0886' | translate}}
+                                            </div>
+                                            <div style="font-size: 24px"
+                                                class="uk-width-1-1 uk-text-center uk-text-bold">
+                                                {{vm.turnSiga}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div ng-if="vm.integrationSiga && ((vm.listpagepermission|filter:{ id : 210 }).length > 0 || (vm.listpagepermission|filter:{ id : 211 }).length > 0)"
+                                class="uk-button-dropdown"
+                                data-uk-dropdown="{mode:'click',pos:'bottom-center',preventflip:true}"
+                                style="float: left;">
+
+                                <button
+                                    style="height: 48px; font-family: 'Open Sans', sans-serif; font-weight: normal; background-color: rgba(0, 0, 0, 0.2);color: white; padding: 5px; padding-top: 0px;cursor: pointer;margin-right: 40px; border:1px"
+                                    ng-style="{'background' :
+                                        vm.stateTurnSiga === 2 ? '#ffa001': vm.stateTurnSiga === 1  ? 'rgb(124, 179, 66)' : 'rgba(0, 0, 0, 0.2)'}">
+                                    <div class="uk-flex uk-flex-center uk-flex-middle uk-float-left"
+                                        style=" width: auto">
+                                        <div class="uk-grid">
+                                            <div class="uk-text-center"
+                                                style="margin: 11px;font-size: 25px; width: auto;float: left;">
+                                                <timer start-time="vm.time">{{hhours}}:{{mminutes}}</timer>
+                                            </div>
+                                            <div ng-if="vm.stateTurnSiga === 0" class="uk-text-center"
+                                                style="padding-left: 1px;margin: 13px">
+                                                <i class="material-icons md-24 md-light">play_circle_filled</i>
+                                                {{'0871' | translate}}
+                                            </div>
+                                            <div ng-if="vm.stateTurnSiga === 1" class="uk-text-center"
+                                                style="padding-left: 1px;margin: 13px">
+                                                <i class="material-icons md-24 md-light">rotate_right</i>
+                                                {{'0872' | translate}}
+                                            </div>
+                                            <div ng-if="vm.stateTurnSiga === 2" class="uk-text-center"
+                                                style="padding-left: 1px;margin: 13px">
+                                                <i class="material-icons md-24 md-light">pause_circle_filled</i>
+                                                {{'0873' | translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <div class="turn-lis uk-dropdown ">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1 uk-margin-top"
+                                            ng-if="vm.stateTurnSiga === 0 && ((vm.idpage === 210 && vm.serviceEntrySiga !== '') || (vm.idpage === 211 && vm.serviceVerificationSiga !== ''))">
+                                            <label>{{'0875' | translate}}</label>
+                                            <angucomplete-alt id="pointSiga" pause="100"
+                                                selected-object="vm.pointSigaSelected" local-data="vm.listPointSiga"
+                                                search-fields="name" title-field="name" minlength="0"
+                                                input-changed="vm.inputChanged"
+                                                input-class="point-care-siga md-input " />
+                                        </div>
+                                        <div class="uk-width-1-1 uk-margin-top"
+                                            ng-if="vm.stateTurnSiga === 0 && (vm.idpage !== 210 && vm.idpage !== 211) ">
+                                            <label>{{'1019' | translate}}</label>
+                                        </div>
+                                        <div class="uk-width-1-1 uk-margin-top"
+                                            ng-if="vm.stateTurnSiga === 0 && vm.idpage === 210 && vm.serviceEntrySiga === ''">
+                                            <label>{{'1020' | translate}}</label>
+                                        </div>
+                                        <div class="uk-width-1-1 uk-margin-top"
+                                            ng-if="vm.stateTurnSiga === 0 && vm.idpage == 211 && vm.serviceVerificationSiga === ''">
+                                            <label>{{'1021' | translate}}</label>
+                                        </div>
+                                        <div class="uk-width-1-1 uk-animation-slide-right"
+                                            ng-show="vm.stateTurnSiga !== 0 && !vm.showMotiveBreak">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <img class="material-icons md-24"
+                                                            ng-src="images/Menu/siga/module.png">
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading">{{'0874' | translate}}</span>
+                                                        <span ng-if="vm.turnfilter === 1"
+                                                            class="uk-text-small uk-text-muted">
+                                                            {{'0011' | translate}}
+                                                        </span>
+                                                        <a href="/orderentry" class="uk-text-small"
+                                                            ng-if="vm.turnfilter === 1 && vm.idpage !== 210">
+                                                            Ir al
+                                                            modulo
+                                                        </a>
+                                                        <span ng-if="vm.turnfilter === 2"
+                                                            class="uk-text-small uk-text-muted">{{'0014' |
+                                                            translate}}</span>
+                                                        <a href="/simpleverification" class="uk-text-small"
+                                                            ng-if="vm.turnfilter === 2 && vm.idpage !== 211 && vm.trazability === '2'">
+                                                            Ir al
+                                                            modulo
+                                                        </a>
+                                                        <a href="/completeverify" class="uk-text-small"
+                                                            ng-if="vm.turnfilter === 2 && vm.idpage !== 211 && vm.trazability === '3'">
+                                                            Ir al
+                                                            modulo
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <img class="material-icons md-24"
+                                                            ng-src="images/Menu/siga/ticket.png">
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading">{{'0875' | translate}}</span>
+                                                        <span
+                                                            class="uk-text-small uk-text-muted">{{vm.pointNameSiga}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-1-1 uk-margin-top" ng-if="vm.showMotiveBreak">
+                                            <label>{{'0876' | translate}}</label>
+                                            <angucomplete-alt id="reasonBreakSiga" pause="100"
+                                                selected-object="vm.reasonBreakSelected" local-data="vm.listReasonBreak"
+                                                search-fields="name" title-field="name" minlength="0"
+                                                input-changed="vm.inputChanged1"
+                                                input-class="point-care-siga md-input " />
+                                        </div>
+                                        <div class="uk-grid uk-flex uk-flex-center" style="width: 100%">
+                                            <div ng-show="vm.stateTurnSiga !== 1 && ((vm.idpage === 210 && vm.serviceEntrySiga !== '') || (vm.idpage === 211 && vm.serviceVerificationSiga !== ''))"
+                                                class=" uk-margin-top uk-text-right uk-animation-slide-bottom">
+                                                <button class="md-btn md-btn-success md-btn-mini md-btn-icon"
+                                                    ng-click="vm.startAttentionSiga()"
+                                                    ng-disabled="vm.pointSigaSelected.originalObject === undefined"
+                                                    ng-class="{'disabled': vm.pointSigaSelected.originalObject === undefined}">
+                                                    <i class="uk-icon-play-circle"></i>
+                                                    {{'0877' | translate}}
+                                                </button>
+                                            </div>
+                                            <div ng-show="vm.stateTurnSiga === 1"
+                                                class=" uk-margin-top uk-text-right uk-animation-slide-bottom">
+                                                <button class="md-btn md-btn-warning md-btn-mini md-btn-icon"
+                                                    ng-click=" vm.resetAttentionSiga()"
+                                                    ng-disabled="vm.showMotiveBreak && vm.reasonBreakSelected.originalObject === undefined"
+                                                    ng-class="{'disabled': vm.showMotiveBreak && vm.reasonBreakSelected.originalObject === undefined}">
+                                                    <i class="uk-icon-pause-circle"></i>
+                                                    {{'0878' | translate}}
+                                                </button>
+                                            </div>
+                                            <div ng-show="vm.stateTurnSiga !== 0 && !vm.showMotiveBreak"
+                                                class=" uk-margin-top uk-text-right uk-animation-slide-bottom">
+                                                <button
+                                                    class="md-btn md-btn-danger md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                                                    ng-click="vm.stopAttentionSiga()">
+                                                    <i class="uk-icon-stop-circle"></i>
+                                                    {{'0879' | translate}}
+                                                </button>
+                                            </div>
+                                            <div ng-show="vm.showMotiveBreak"
+                                                class=" uk-margin-top uk-text-right uk-animation-slide-bottom">
+                                                <button
+                                                    class="md-btn md-btn-danger md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                                                    ng-click="vm.showMotiveBreak = false">
+                                                    <i class="uk-icon-close"></i>
+                                                    {{'0008' | translate}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <li>
+                                <a href="#" id="full_screen_toggle" ng-click="vm.toggleFullScreen()" class="user_action_icon uk-visible-large">
+                                    <i class="material-icons md-24 md-light">&#xE5D0;</i>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="main_search_btn" class="user_action_icon" ng-click="vm.opensearch()">
+                                    <i class="material-icons md-24 md-light">&#xE8B6;</i>
+                                </a>
+                            </li>
+                            <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                                <a href="#" class="user_action_icon">
+                                    <notification-icon count="vm.alertcant">
+                                        <i class="material-icons md-24 md-light">&#xE7F4;</i>
+                                    </notification-icon>
+                                </a>
+                                <div class="uk-dropdown uk-dropdown-xlarge">
+                                    <div ng-if="vm.alertcant > 0" class="md-card-content">
+                                        <ul class="uk-tab uk-tab-grid"
+                                            data-uk-tab="{connect:'#header_alerts',animation:'slide-horizontal'}">
+                                            <li class="uk-width-2-2 uk-active">
+                                                <a class="js-uk-prevent uk-text-small">{{'0064' | translate}}</a>
+                                            </li>
+                                        </ul>
+                                        <ul id="header_alerts" class="uk-switcher uk-margin">
+                                            <li>
+                                                <ul class="md-list md-list-addon">
+                                                    <li data-ng-repeat="alert in vm.Alerts">
+                                                        <div class="md-list-addon-element"
+                                                            ng-if="alert.type === 3 && alert.cant !== 0">
+                                                            <span
+                                                                class="md-user-letters md-bg-red-500 md-color-white">OR</span>
+                                                        </div>
+                                                        <div class="md-list-addon-element"
+                                                            ng-if="alert.type === undefined">
+                                                            <i
+                                                                class="md-list-addon-icon material-icons uk-text-danger">&#xE001;</i>
+                                                        </div>
+                                                        <div class="md-list-addon-element" ng-if="alert.type === 1">
+                                                            <img class="md-list-addon-icon"
+                                                                ng-src="images/alerts/browser.png">
+                                                        </div>
+                                                        <div class="md-list-addon-element" ng-if="alert.type === 2">
+                                                            <img class="md-list-addon-icon"
+                                                                ng-src="images/alerts/alarm.png">
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <span class="md-list-heading"
+                                                                ng-if="alert.type === 3 && alert.cant !== 0"
+                                                                ng-click="vm.takeorders()">
+                                                                <a class="ng-binding">{{'1518' | translate}}</a>
+                                                            </span>
+                                                            <span class="uk-text-small uk-text-muted ng-binding"
+                                                                ng-if="alert.type === 3 && alert.cant !== 0">
+                                                                {{'1519' | translate}}
+                                                                {{alert.cant}}
+                                                                {{alert.cant === 1? '1521' :1520 | translate}}.
+                                                            </span>
+                                                            <a ng-if="alert.type === 2"
+                                                                ng-click="vm.selectorder(alert.name)"
+                                                                class="md-list-heading" data-ng-bind="alert.name"></a>
+                                                            <span ng-if="alert.type === 2"
+                                                                class="uk-text-small uk-text-muted"
+                                                                ng-bind-html="alert.description | trust"></span>
+                                                            <span ng-if="alert.type === 1" class="md-list-heading"
+                                                                data-ng-bind="alert.name"></span>
+                                                            <span ng-if="alert.type === 1"
+                                                                class="uk-text-small uk-text-muted uk-text-justify"
+                                                                data-ng-bind="alert.description"></span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="uk-dropdown-grid uk-child-width-1-2" uk-grid ng-if="vm.alertcant === 0">
+                                        <div class="uk-grid uk-width-1-2 uk-container-center">
+                                            <i class="uk-child-width-auto material-icons md-48">&#xE7F6;</i>
+                                        </div>
+                                        <div class="uk-grid uk-width-1-2 uk-container-center"
+                                            style="padding-left: 10px">
+                                            <span class="uk-text-small uk-text-muted">{{'0065' | translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                       
+                            <!---------AGENTE DE IMPRESIÓN----------->
+                            <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}" class="">
+                                <a href="#" class="user_action_icon">
+                                    <div class="printadvertence" ng-if="vm.seriallabel === ''">A</div>
+                                    <div style="position: relative;">
+                                        <i class="material-icons md-24 md-light">print</i>
+                                    </div>
+                                </a>
+                                <div class="uk-dropdown uk-dropdown-xlarge">
+                                    <div class="md-card-content">
+                                        <ul class="uk-tab uk-tab-grid"
+                                            data-uk-tab="{connect:'#header_downloads',animation:'slide-horizontal'}">
+                                            <li class="uk-width-1-1 uk-active">
+                                                <a href="#" class="js-uk-prevent uk-text-small">
+                                                    {{'1068' | translate}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul id="header_downloads" class="uk-switcher uk-margin">
+                                            <li>
+                                                <ul class="md-list md-list-addon">
+                                                    <li>
+                                                        <div class="md-list-addon-element">
+                                                            <img ng-if="vm.seriallabel === ''"
+                                                                class="md-list-addon-icon"
+                                                                ng-src="images/alerts/browser.png">
+                                                            <img ng-if="vm.seriallabel !== ''"
+                                                                class="md-list-addon-icon" ng-src="images/printer.png">
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <div class="uk-grid uk-grid-small">
+                                                                <div class="uk-width-4-5" style="padding-left: 17px">
+                                                                    <span class="md-list-heading">{{'1069' |
+                                                                        translate}}</span>
+                                                                    <span ng-if="vm.seriallabel !== ''"
+                                                                        class="uk-text-small uk-text-muted">{{vm.serialPrint}}</span>
+                                                                    <span ng-if="vm.seriallabel === ''"
+                                                                        class="uk-text-small uk-text-muted">
+                                                                        {{'1070' | translate | uppercase}}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="uk-width-1-5">
+                                                                    <button ng-click="vm.openmodalSerial()"
+                                                                        class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light">
+                                                                        <i class="uk-icon-pencil"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="md-list-addon-element">
+                                                            <img class="md-list-addon-icon"
+                                                                ng-src="images/alerts/printer.png">
+                                                        </div>
+                                                        <div class="md-list-content">
+                                                            <div class="uk-grid uk-grid-small">
+                                                                <div class="uk-width-4-5">
+                                                                    <span class="md-list-heading">{{'1071' |
+                                                                        translate}}</span>
+                                                                    <span class="uk-text-small uk-text-muted">
+                                                                        Debe
+                                                                        descargar, descomprimir los archivos y
+                                                                        ejecutar el .jar
+                                                                </div>
+                                                                <div class="uk-width-1-5" style="padding-left: 5px">
+                                                                    <a target="_self"
+                                                                        href="./donwloads/EnterpriseNT-ClientPrint.rar"
+                                                                        download="EnterpriseNT-ClientPrint.rar"
+                                                                        class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light">
+                                                                        <i class="uk-icon-arrow-down"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li ng-if="vm.idpage !== 200">
+                                <a data-uk-tooltip="{pos:'bottom'}" title="{{'0667' | translate}}"
+                                    class="user_action_icon" ng-click="vm.openhelp()">
+                                    <i style="font-size: 24px; color: #ffffff !important; padding-top: 10px"
+                                        class="md-color-blue-grey-50 uk-icon-question"></i>
+                                </a>
+                            </li>
+                            <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                                <a href="#" class="user_action_image"
+                                    style="text-align: center;padding: 0;line-height: 35px !important">
+                                    <img class="md-user-image" ng-src="{{vm.photo}}" alt="" >
+                                    <div style="line-height: 10px;font-size: 12px;text-transform: capitalize;">{{
+                                        vm.userAuth.name }} {{ vm.userAuth.lastName }}</div>
+                                </a>
+                                <div class="uk-dropdown uk-dropdown-small" style="overflow: auto">
+                                    <ul class="uk-nav js-uk-prevent">
+                                        <li>
+                                            <a ng-click="vm.openversion()">{{'1763' | translate}}</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="uk-nav js-uk-prevent">
+                                        <li>
+                                            <a ng-href="/userprofile">{{'0150' | translate}}</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="uk-nav js-uk-prevent">
+                                        <li>
+                                            <a ng-click="vm.closesocket()">{{'0066' | translate}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="searchpage uk-animation-slide-bottom" ng-show="!vm.mainSearch">
+                <i class="md-icon header_main_search_close material-icons md-color-green-50"
+                    ng-click="vm.mainSearch=true">&#xE5CD;</i>
+                <div angucomplete-alt id="pagesearchmenu" placeholder="" input-class="header_main_search_input"
+                    pause="20" selected-object="vm.page" local-data="vm.search" search-fields="name,father"
+                    title-field="name" maxlength="60" description-field="father" image-field="image" minlength="1"
+                    match-class="highlight" clear-selected="true" focus-first="true" override-suggestions="true"
+                    style="font-size: 16px !important"></div>
+                <button class="header_main_search_btn uk-button-link">
+                    <i class="md-icon material-icons md-color-green-50">&#xE8B6;</i>
+                </button>
+            </div>
+            <div class="uk-modal" id="modaleditserial" tabindex="1" aria-hidden="false">
+                <div class="uk-modal-dialog">
+                    <div class="uk-modal-header md-bg-red-700" style="border-bottom: 1px solid #d32f2f">
+                        <h2 class="uk-modal-title">{{ '1069' | translate }}</h2>
+                    </div>
+                    <div class="uk-width-1-1">
+                        <input type="text" class="md-input" ng-model="vm.serialPrint" md-input>
+                    </div>
+                    <div class="uk-overflow-container" style="margin-top: 0px"></div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button ng-disabled="vm.serialPrint === ''" class="md-btn md-bg-red-700 md-color-light-green-50"
+                            ng-class="{'md-bg-grey-300' : vm.serialPrint === ''}" type="button"
+                            ng-click="vm.updateSerial()">{{ '0246' | translate }}</button>
+                        <button class="md-btn md-btn-default uk-modal-close" type="button">{{ '0008' | translate
+                            }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-modal" id="viewserial" tabindex="1" aria-hidden="false">
+                <div class="uk-modal-dialog">
+                    <div class="uk-modal-header" style="border-bottom: 1px solid #00b0ff;">
+                        <h2 class="uk-modal-title">{{ '1763' | translate }}</h2>
+                    </div>
+                    <div class="uk-width-1-1">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <img class="material-icons md-24" ng-src="images/versionbackend.png">
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{ '1764' | translate }}</span>
+                                    <span class="uk-text-small uk-text-muted">{{vm.version.backend}}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <img class="material-icons md-24" ng-src="images/versionfrontend.png">
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{ '1765' | translate }}</span>
+                                    <span class="uk-text-small uk-text-muted">{{vm.version.frontend}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-overflow-container" style="margin-top: 0px"></div>
+                </div>
+            </div>
+        </header>
+        <!-- main header end -->
+    </div>
+    <!-- tamaño celular -->
+    <div class="header uk-hidden-large" ng-show="vm.menu" style="padding-top: 20px; padding-right: 10px;">
+        <header id="header_main" ng-class="{'marginheader': vm.principalmenu === true}">
+            <div class="header_main_content uk-animation-slide-bottom" ng-if="vm.mainSearch">
+                <nav class="uk-navbar">
+                    <div ng-if="vm.idpage !== 200" data-uk-tooltip="{pos:'bottom'}" title="{{'1111' | translate}}"
+                        class="uk-float-left" style="margin-top:11px">
+                        <a ng-href="/dashboard" class="top_menu_toggle">
+                            <i style="font-size: 31px !important" class="material-icons md-24 md-light">
+                                view_module
+                            </i>
+                        </a>
+                    </div>
+                    <div class="uk-float-left" style="color:#f5f5f5;margin: 0px 15px;margin-left: 51px;">
+                        <ul class="md-list">
+                            <li ng-class="{'marginmenu': vm.idpage === 200}">
+                                <div class="md-list-content">
+                                    <span class="md-list-heading" style="font-size: 11px !important">
+                                        {{vm.NamePage | uppercase}}
+                                    </span>
+                                    <span class="uk-text-small" style="color: #f5f5f5;font-size: 10px !important;">{{
+                                        vm.branchname}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-float-right" style="margin-top:11px">
+                        <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" data-uk-dropdown>
+                            <a class="user_action_image" style="margin-top: 5px;">
+                                <img class="md-user-image" ng-src="{{vm.photo}}" alt="">
+                            </a>
+                            <!-- This is the dropdown -->
+                            <div class="uk-dropdown uk-dropdown-small">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li>
+                                        <a ng-href="/userprofile">{{'0150' | translate}}</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="vm.closesocket()">{{'0066' | translate}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- main header end -->
+        <!-- Menu principal -->
+        <aside id="sidebar_main" ng-click="vm.mainSearch=true" ng-class="{'inviewmenu':vm.idpage != 200}">
+            <div class="sidebar_main_header">
+                <div class="sidebar_logo">
+                    <a class="sSidebar_hide sidebar_logo_large">
+                        <img class="logo_regular" src="images/logo.png" alt="" height="150" width="300">
+                        <img class="logo_light" src="images/logo.png" alt="" height="15" width="71">
+                    </a>
+                    <a class="sSidebar_show sidebar_logo_small">
+                        <img class="logo_regular" src="images/logo_NT.png" alt="" height="70" width="70">
+                        <img class="logo_light" src="images/logo_NT.png" alt="" height="32" width="32">
+                    </a>
+                </div>
+            </div>
+            <div class="menu_section">
+                <ul>
+                    <!--Ordenes de laboratorio-->
+                    <li title="{{'1109' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 201 }).length === 0) }">
+                        <a>
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/Laboratoryorders.png">
+                            </span>
+                            <span class="menu_title">{{'1109' | translate}}</span>
+                        </a>
+                        <ul style="height: auto !important">
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 210 }).length === 0) }">
+                                <a ng-href="/orderentry">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/orderentry.png">
+                                    </span>
+                                    <span>{{'0011' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 212 }).length === 0) }">
+                                <a ng-href="/listed">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/list.png">
+                                    </span>
+                                    <span class="labellists">{{'0015' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 213 }).length === 0) }">
+                                <a href="/orderswithouthistory">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/orderswithouthistory.png">
+                                    </span>
+                                    <span class="labellists">{{'1514' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 214 }).length === 0) }">
+                                <a ng-href="/activationorder">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/activationorder.png">
+                                    </span>
+                                    <span class="labellists">{{'0045' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 215 }).length === 0) }">
+                                <a ng-href="/restartcounter">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/tools/rotate.png">
+                                    </span>
+                                    <span class="labellists">{{'0951' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 306 }).length === 0) }">
+                                <a ng-href="/medicalappointment">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/medical-appointment.png">
+                                    </span>
+                                    <span class="labellists">{{'0012' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Ordenes de laboratorio end-->
+                    <!--gestion paciente-->
+                    <li title="{{'1110' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 202 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/gestionpatient.png">
+                            </span>
+                            <span class="menu_title">{{'1110' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 216 }).length === 0) }">
+                                <a href="/historypatient">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/historypatient.png">
+                                    </span>
+                                    <span>{{'0017' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 217 }).length === 0) }">
+                                <a href="/historyassignment">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/historyassignment.png">
+                                    </span>
+                                    <span>{{'0016' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 218 }).length === 0) }">
+                                <a href="/historyreassignment">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/historyreassignment.png">
+                                    </span>
+                                    <span>{{'0044' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 219 }).length === 0) }">
+                                <a ng-href="/inconsistency">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/inconsistency.png">
+                                    </span>
+                                    <span>{{'0051' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 220 }).length === 0) }">
+                                <a ng-href="/unlockorderhistory" style="padding: 8px 0px 8px 72px;">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/unlockorderhistory.png">
+                                    </span>
+                                    <span>{{'0055' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--gestion paciente end -->
+                    <!--gestion de muestra-->
+                    <li title="{{'1438' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 204 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/samplegestion.png">
+                            </span>
+                            <span class="menu_title">{{'1438' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li
+                            ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 307 }).length === 0) }">
+                            <a ng-href="/phlebotomistake">
+                                <span class="menu_icon">
+                                    <img class="menu_icon material-icons md-22"
+                                        ng-src="images/Menu/Laboratoryorders/orderentry.png">
+                                </span>
+                                <span>Toma de muestra</span>
+                            </a>
+                            </li>
+                            <li ng-if="vm.trazability === '2'"
+                                ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 211 }).length === 0) }">
+                                <a ng-href="/simpleverification">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/entrysample.png">
+                                    </span>
+                                    <span>{{'0014' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-if="vm.trazability === '3'"
+                                ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 211 }).length === 0) }">
+                                <a ng-href="/completeverify">
+                                    <span class="menu_icon">
+                                        <img class="menu_icon material-icons md-22"
+                                            ng-src="images/Menu/Laboratoryorders/entrysample.png">
+                                    </span>
+                                    <span>{{'0247' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 243 }).length === 0) }">
+                                <a ng-href="/tuberack">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/tools/Samplewarehouse.png">
+                                    </span>
+                                    <span>{{'0043' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 251 }).length === 0) }">
+                                <a ng-href="/traceability">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/audit/audit.png">
+                                    </span>
+                                    <span>{{'0046' | translate}}</span>
+                                </a>
+                            </li>                      
+                        </ul>
+                    </li>
+                    <!--gestion de muestra end -->
+                    <!--gestión de resultados -->
+                    <li title="{{'0027' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 203 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/result.png">
+                            </span>
+                            <span class="menu_title">{{'0027' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 221 }).length === 0) }">
+                                <a ng-href="/resultsentry" style="padding: 8px 0px 8px 72px;">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/Result/resultsentry.png">
+                                    </span>
+                                    <span>{{'0019' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 222 }).length === 0) }">
+                                <a ng-href="/recordresultbyrank" style="padding: 8px 0px 8px 69px;">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/Result/recordresultbyrank.png">
+                                    </span>
+                                    <span>{{'0021' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 223 }).length === 0) }">
+                                <a ng-href="/reviewofresults">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/Result/reviewofresults.png">
+                                    </span>
+                                    <span>{{'0023' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 224 }).length === 0) }">
+                                <a ng-href="/worklist">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/Result/worklist.png">
+                                    </span>
+                                    <span>{{'0018' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 225 }).length === 0) }">
+                                <a ng-href="/restartmiddleware">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/tools/TestAnalyzer.png">
+                                    </span>
+                                    <span>{{'1133' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Resultados end -->
+                    <!--Informes y consultas -->
+                    <li title="{{'0028' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 205 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/consultation.png">
+                            </span>
+                            <span class="menu_title">{{'0028' | translate}}</span>
+                        </a>
+                        <ul>
+
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 229 }).length === 0) }">
+                                <a ng-href="/reports">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/consultation/reports.png">
+                                    </span>
+                                    <span>{{'0031' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 230 }).length === 0) }">
+                                <a ng-href="/controldeliveryreports">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/consultation/controldeliveryreports.png">
+                                    </span>
+                                    <span>{{'0032' | translate}}</span>
+                                </a>
+                            </li>
+
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 231 }).length === 0) }">
+                                <a ng-href="/queries">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/consultation/queries.png">
+                                    </span>
+                                    <span>{{'0033' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 232 }).length === 0) }">
+                                <a ng-href="/patientconsultation">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/consultation/patientconsultation.png">
+                                    </span>
+                                    <span>{{'0322' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 249 }).length === 0) }">
+                                <a ng-href="/informedconsent">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/consultation/informedconsent.png">
+                                    </span>
+                                    <span>{{'1503' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Informes y consultas end -->
+                    <!--auditoria -->
+                    <li title="{{'0925' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 206 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/audit.png">
+                            </span>
+                            <span class="menu_title">{{'0925' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 233 }).length === 0) }">
+                                <a ng-href="/auditorder">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/audit/order.png">
+                                    </span>
+                                    <span>{{'0926' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 234 }).length === 0) }">
+                                <a ng-href="/auditmaster">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/audit/master.png">
+                                    </span>
+                                    <span>{{'0927' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 235 }).length === 0) }">
+                                <a ng-href="/audituser">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/audit/user.png">
+                                    </span>
+                                    <span>{{'0928' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 507 }).length === 0) }">
+                                <a ng-href="/auditinvoice">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/audit/user.png">
+                                    </span>
+                                    <span>{{'1735' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--auditoria end -->
+                    <!--Estadisticas -->
+                    <li title="{{'0029' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 207 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/statistics.png">
+                            </span>
+                            <span class="menu_title">{{'0029' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 236 }).length === 0) }">
+                                <a ng-href="/generalstadistics">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/statistics/generalstadistics.png">
+                                    </span>
+                                    <span>{{'0029' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 237 }).length === 0) }">
+                                <a ng-href="/specialstadistics">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/statistics/specialstadistics.png">
+                                    </span>
+                                    <span>{{'0034' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 238 }).length === 0) }">
+                                <a ng-href="/statisticswithprices md-22">
+                                    <span class="menu_icon">
+                                        <img class="material-icons"
+                                            ng-src="images/Menu/statistics/statisticswithprices.png">
+                                    </span>
+                                    <span>{{'0035' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-if="vm.trazability === '3'"
+                                ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 239 }).length === 0) }">
+                                <a ng-href="/destinationsample">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/statistics/destinationsample.png">
+                                    </span>
+                                    <span>{{'0041' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Estadisticas end-->
+                    <!--Indicadores -->
+                    <li title="{{'0037' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 208 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/indicator.png">
+                            </span>
+                            <span class="menu_title">{{'0037' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 240 }).length === 0) }">
+                                <a ng-href="/earlywarning">
+                                    <span class="menu_icon">
+                                        <img class="material-icons" ng-src="images/Menu/statistics/earlywarning.png">
+                                    </span>
+                                    <span>{{'0036' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 241 }).length === 0) }">
+                                <a ng-href="/indicators">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/statistics/indicators.png">
+                                    </span>
+                                    <span>{{'0037' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 242 }).length === 0) }">
+                                <a ng-href="/histogram">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/statistics/histogram.png">
+                                    </span>
+                                    <span>{{'0038' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 305 }).length === 0) }">
+                                <a ng-href="/otherreports">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/form.png">
+                                    </span>
+                                    <span>{{'1724' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Indicadores end-->
+                    <!-- utilidades -->
+                    <li title="{{'0030' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 209 }).length === 0) }">
+                        <a>
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/tools.png">
+                            </span>
+                            <span class="menu_title">{{'0030' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 244 }).length === 0) }">
+                                <a ng-href="/exception">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/tools/Eventviewer.png">
+                                    </span>
+                                    <span>{{'0047' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 245 }).length === 0) }">
+                                <a ng-href="/sectionviewer">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/tools/Entrylog.png">
+                                    </span>
+                                    <span>{{'0933' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 246 }).length === 0) }">
+                                <a ng-href="/deletespecial">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/tools/deletespecial.png">
+                                    </span>
+                                    <span>{{'0050' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 250 }).length === 0) }">
+                                <a ng-href="/cubicleassignment">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/tools/turno.png">
+                                    </span>
+                                    <span>Asignación de cubiculos</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 247 }).length === 0) }">
+                                <a ng-href="/reportedit">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/tools/ReportEdit.png">
+                                    </span>
+                                    <span>{{'0782' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 248 }).length === 0) }">
+                                <a ng-href="/barcodeedit">
+                                    <span class="menu_icon md-22">
+                                        <img class="material-icons" ng-src="images/Menu/tools/barcode-512.png">
+                                    </span>
+                                    <span>{{'0935' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- utilidades end -->
+                    <!--Facturacion-->
+                    <li title="{{'1283' | translate}}" ng-if="vm.FAC">
+                        <a href="#">
+                            <span class="menu_icon"> 
+                                <img class="material-icons md-22" ng-src="images/billing/subtotal.png">
+                            </span>
+                            <span class="menu_title">{{'1283' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 501 }).length === 0) }">
+                                <a ng-href="/generateinvoice" style="padding: 8px 0px 8px 72px;">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/debit-card.png">
+                                    </span>
+                                    <span>{{'1564' | translate}}</span>
+                                    <span ng-if="(vm.listAcces|filter:{ id : 501 }).length > 0" class="menu_icon">
+                                        <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 502 }).length === 0) }">
+                                <a ng-href="/creditnote">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/copayment.png">
+                                    </span>
+                                    <span>{{'1576' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 508 }).length === 0) }">
+                                <a ng-href="/recalculated">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/discount.png">
+                                    </span>
+                                    <span>{{'1598' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 509 }).length === 0) }">
+                                <a ng-href="/changeprices">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/total.png">
+                                    </span>
+                                    <span>{{'1872' | translate}}</span>
+                                </a>
+                            </li>
+
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 504 }).length === 0) }">
+                                <a ng-href="/cashreport">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/fee.png">
+                                    </span>
+                                    <span>{{'1599' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 505 }).length === 0) }">
+                                <a ng-href="/printinvoice">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/installments.png">
+                                    </span>
+                                    <span>{{'1600' | translate}}</span>
+                                </a>
+                            </li>                          
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 506 }).length === 0) }">
+                                <a ng-href="/consultrips">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/billing/tax.png">
+                                    </span>
+                                    <span>RIPS</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Microbiologia-->
+                    <li title="{{'0225' | translate}}"
+                        ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 301 }).length === 0) }">
+                        <a href="#">
+                            <span class="menu_icon">
+                                <img class="material-icons md-22" ng-src="images/Menu/mainicons/microbiology.png">
+                            </span>
+                            <span class="menu_title">{{'0225' | translate}}</span>
+                        </a>
+                        <ul>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 301 }).length === 0) }">
+                                <a ng-href="/checkmicrobiology" style="padding: 8px 0px 8px 72px;">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/microbiology/checkmicrobiology.png">
+                                    </span>
+                                    <span>{{'0024' | translate}}</span>
+                                    <span ng-if="(vm.listAcces|filter:{ id : 216 }).length > 0" class="menu_icon">
+                                        <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li ng-if="vm.growtmicrobiology === 'True'"
+                                ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 304 }).length === 0) }">
+                                <a ng-href="/growtmicrobiology">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/microbiology/growtmicrobiology.png">
+                                    </span>
+                                    <span>{{'0025' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 302 }).length === 0) }">
+                                <a ng-href="/microbiologyReading">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22"
+                                            ng-src="images/Menu/microbiology/microbiologyReading.png">
+                                    </span>
+                                    <span>{{'0026' | translate}}</span>
+                                </a>
+                            </li>
+                            <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 303 }).length === 0) }">
+                                <a ng-href="/planoWhonet">
+                                    <span class="menu_icon">
+                                        <img class="material-icons md-22" ng-src="images/Menu/statistics/planoWhonet.png">
+                                    </span>
+                                    <span>{{'0039' | translate}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                     <!--Patolologia-->
+                     <li title="{{'0323' | translate}}"
+                     ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 401 }).length === 0) }">
+                     <a>
+                         <span class="menu_icon">
+                             <img class="material-icons md-22" ng-src="images/Menu/mainicons/Laboratoryorders.png">
+                         </span>
+                         <span class="menu_title">{{'0323' | translate}}</span>
+                     </a>
+                     <ul style="height: auto !important">
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 410 }).length === 0) }">
+                             <a ng-href="/sampleentry">
+                                 <span class="menu_icon md-22">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/reception.png">
+                                 </span>
+                                 <span>{{'3104' | translate}}</span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 411 }).length === 0) }">
+                             <a ng-href="/activationsamples">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/activationsamples.png">
+                                 </span>
+                                 <span class="labellists">{{'3142' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Descripciones-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 420 }).length === 0) }">
+                             <a href="/description">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/recording.png">
+                                 </span>
+                                 <span class="labellists">{{'3182' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Transcripciones-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 421 }).length === 0) }">
+                             <a ng-href="/transcription">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/transcription.png">
+                                 </span>
+                                 <span class="labellists">{{'3183' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Procesador de tejidos-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 430 }).length === 0) }">
+                             <a ng-href="/tissueprocessor">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/tissueProcessor.png">
+                                 </span>
+                                 <span class="labellists">{{'3010' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Central de inclusion-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 431 }).length === 0) }">
+                             <a ng-href="/transcription">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/centralInclusion.png">
+                                 </span>
+                                 <span class="labellists">{{'3011' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Corte-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 432 }).length === 0) }">
+                             <a ng-href="/transcription">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/cut.png">
+                                 </span>
+                                 <span class="labellists">{{'3210' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Coloracion-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 433 }).length === 0) }">
+                             <a ng-href="/transcription">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/coloration.png">
+                                 </span>
+                                 <span class="labellists">{{'3057' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Gestion de laminas-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 410 }).length === 0) }">
+                             <a ng-href="/sheetmanagement">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/microscopy.png">
+                                 </span>
+                                 <span class="labellists">{{'3027' | translate}}</span>
+                             </a>
+                         </li>
+                         <!--Junta de patologos-->
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 411 }).length === 0) }">
+                             <a ng-href="/meetingpathologists">
+                                 <span class="menu_icon">
+                                     <img class="menu_icon material-icons md-22"
+                                         ng-src="images/Menu/pathology/junta.png">
+                                 </span>
+                                 <span class="labellists">{{'3071' | translate}}</span>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+                 <!--trasplantes-->
+                 <li title="{{'3315' | translate}}"
+                     ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 600 }).length === 0) }">
+                     <a href="#">
+                         <span class="menu_icon">
+                             <img class="material-icons md-22" ng-src="images/transplants/organ-donation.png">
+                         </span>
+                         <span class="menu_title">{{'3315' | translate}}</span>
+                     </a>
+                     <ul>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 601 }).length === 0) }">
+                             <a ng-href="/receptionsamples" style="padding: 8px 0px 8px 72px;">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/receptor.png">
+                                 </span>
+                                 <span>{{'3316' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 601 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 602 }).length === 0) }">
+                             <a ng-href="/participants">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/body-scan.png">
+                                 </span>
+                                 <span>{{'3074' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 602 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 603 }).length === 0) }">
+                             <a ng-href="/donor">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/assessment.png">
+                                 </span>
+                                 <span>{{'3318' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 603 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 604 }).length === 0) }">
+                             <a ng-href="/cytotoxicantibodies">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/3.png">
+                                 </span>
+                                 <span>{{'3319' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 604 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 605 }).length === 0) }">
+                             <a ng-href="/reporteditransplants">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/clipboard.png">
+                                 </span>
+                                 <span>{{'3321' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 605 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 606 }).length === 0) }">
+                             <a ng-href="/reportmanagement">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/document.png">
+                                 </span>
+                                 <span>{{'3322' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 606 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                         <li ng-class="{'li-disabled': ((vm.listpagepermission|filter:{ id : 607 }).length === 0) }">
+                             <a ng-href="/reportvisor">
+                                 <span class="menu_icon">
+                                     <img class="material-icons md-22" ng-src="images/transplants/dialysisdate.png">
+                                 </span>
+                                 <span>{{'3323' | translate}}</span>
+                                 <span ng-if="(vm.listAcces|filter:{ id : 607 }).length > 0" class="menu_icon">
+                                     <i class="material-icons md-color-yellow-600">&#xE838;</i>
+                                 </span>
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Menu principal end -->
+    </div>
+</div>
+<!-- common functions -->
+<script src=" assets/js/common.min.js "></script>
+<!-- uikit functions -->
+<script src=" assets/js/uikit_custom.min.js "></script>
+<!-- altair common functions/helpers -->
+<script src=" assets/js/altair_admin_common.js "></script>

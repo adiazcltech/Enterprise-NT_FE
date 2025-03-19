@@ -1,0 +1,199 @@
+<style>
+  .k-block,
+  .k-draghandle,
+  .k-grid-header,
+  .k-grouping-header,
+  .k-header,
+  .k-pager-wrap,
+  .k-treemap-tile,
+  html .km-pane-wrapper .k-header {
+    background-color: #e6e6e6 !important;
+  }
+
+  .md-fab.md-fab-minismall {
+    width: 30px;
+    height: 30px;
+  }
+
+  .md-fab.md-fab-minismall>i {
+    line-height: 30px
+  }
+
+</style>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden; height: 97%">
+    <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+      <div style="height:100%" class="uk-width-1-1">
+        <div class="md-card" style="margin-bottom: 5px ;height: 100%; overflow-y: auto">
+          <div class="md-card-content uk-grid" style="height: calc(100% - 45px)">
+            <div class="uk-width-4-6">
+
+              <div class="uk-width-1-1">
+                <fieldset class="fieldset" style="height: 58px; padding-top: 15px">
+                  <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                    isopenreport="vm.isOpenReport" typeview="1"></orderfilter>
+                </fieldset>
+              </div>
+            </div>
+            <div class="uk-width-2-6" style="padding-left: 10px">
+              <fieldset class="fieldset" style="height: 58px; padding-top: 15px">
+                <div class="uk-form-row md-input-wrapper md-input-filled">
+                  <label style="padding-left: 2px">{{'0546' | translate}}:</label>
+                  <p style="margin-left: 7px">
+                    <input type="radio" name="typefilter" id="typefiltergeneral" icheck ng-model="vm.typefilter"
+                      value="2" />
+                    <label style="margin-right: 20px" for="typefiltergeneral"
+                      class="inline-label">{{'0189' | translate}}</label>
+                    <input type="radio" name="typefilter" id="typefilterdemographics" icheck ng-model="vm.typefilter"
+                      value="1" />
+                    <label for="typefilterdemographics" class="inline-label">{{'0062' | translate}}</label>
+                  </p>
+                </div>
+              </fieldset>
+            </div>
+            <div class="uk-width-1-1">
+              <filterareatest confidential="vm.confidential" numfilterareatest="vm.numFilterAreaTest"
+                listareas="vm.listAreas" listtests="vm.listTests">
+              </filterareatest>
+            </div>
+            <div class="uk-width-1-1" style="height: calc(100% - 242px)">
+              <fieldset class="fieldset" style="height: 92%; min-height: 150px">
+                <legend>{{'0241' | translate}}</legend>
+                <div class="uk-grid" style="height: 100%">
+                  <div class="uk-width-1-10" style="width: 6%">
+                    <button style="margin-left: 18px; margin-top: 10px" type="button"
+                      class="md-fab md-fab-minismall md-bg-light-blue-600"
+                      ng-class="{'md-bg-blue-grey-100' : !vm.allcheckservice}" ng-click="vm.selectallservice(groupid)">
+                      <i class="material-icons md-color-indigo-50 md-24" data-uk-tooltip="{pos:'top'}"
+                        title=" {{'0353' | translate}} ">&#xE065;</i>
+                    </button>
+                  </div>
+                  <div class="uk-width-3-10">
+                    <ui-select ng-model="vm.item.selected" theme="select2" ng-disabled="false" style="width: 100%;"
+                      title="Seleccione un servicio" on-select="vm.additemslist($item)">
+                      <ui-select-match placeholder="Items">{{$select.selected.code}}. {{$select.selected.name}}
+                      </ui-select-match>
+                      <ui-select-choices
+                        repeat="item in vm.listservice | filter: {code:$select.search} || {name:$select.search}">
+                        <small ng-bind-html="item.code | highlight: $select.search"></small>.
+                        <span ng-bind-html="item.name | highlight: $select.search"></span>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                  <div class="uk-width-6-10" style="height: 100%">
+                    <div class="uk-overflow-container" style="height: 100% margin-top: 20px">
+                      <table class="uk-table">
+                        <tbody>
+                          <tr ng-repeat="item in vm.listselect">
+                            <td style="width: calc(100% - 25px);">{{item.code}} {{item.name}}</td>
+                            <td style="width: 25px">
+                              <i ng-if="vm.allcheckservice" class="material-icons md-24 md-color-red-600">&#xE15C;</i>
+                              <i ng-if="!vm.allcheckservice"
+                                class="material-icons md-24 md-color-light-green-500">&#xE90A;</i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-width-1-1 " style="height: 63px; margin-top: 10px">
+      <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+        <div style="height: 100%; padding-top: 5px" class="md-card-content">
+          <div class="uk-grid" style="height: 100%">
+            <div class="uk-width-1-1" style="float: right">
+              <button style="float: right" ng-show="vm.report === true" type="button" ng-disabled="true"
+                class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : false}">
+                <i style="color: white" class="uk-icon-refresh uk-icon-spin" data-uk-tooltip="{pos:'top'}"
+                  title="Imprimir"></i>
+
+              </button>
+              <button style="float: right" ng-show="vm.report === false" type="button" ng-disabled="!vm.isOpenReport"
+                class="md-fab md-fab-small md-bg-purple-A700" ng-class="{'md-bg-blue-grey-100' : !vm.isOpenReport  }"
+                ng-click="vm.report = true; vm.getindicatorshistogram()">
+                <i style="color: white" class="material-icons">&#xE8AD;</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="Requerid" bg-close="false" aria-hidden="true">
+  <loadpage view="vm.loading"></loadpage>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">
+        Este módulo debe configurar histogramas comuniquese con el administrador para que los configure
+      </h3>
+    </div>
+    <div class="uk-modal-body">
+      <div
+        class="uk-grid uk-grid-width-small-1-3 uk-grid-width-small-1-2 uk-grid-small uk-flex uk-flex-center uk-flex-middle"
+        data-uk-grid-margin>
+        <div ng-click="vm.requerid('dashboard')">
+          <div class="md-card md-card-hover md-card-overlay">
+            <div class="md-card-content uk-flex uk-flex-center uk-flex-middle">
+              <img ng-src="images/Menu/statistics/histogram.png" />
+            </div>
+            <div class="md-card-overlay-content">
+              <div class="uk-clearfix md-card-overlay-header">
+                <h3 class="uk-text-bold uk-text-truncate">
+                  volver al menu
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modalinformative" class="uk-modal" aria-hidden="true"
+  style="display: none; overflow-y: scroll; min-height: 300px">
+  <div class="uk-modal-dialog">
+
+    <div class="uk-overflow-container" style="margin-top: 0px">
+      <div ng- class="uk-overflow-container" style="margin-top: 0px">
+        <div style="width: 54px; float: left;">
+          <img class="img-responsive" src="images/iconinfo.png">
+        </div>
+        <div class="uk-text-center" style="margin-top: 10px">
+          {{'0547' | translate}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false">
+  <div class="uk-modal-dialog message">
+    <button type="button" class="uk-modal-close uk-close"></button>
+    <div class="uk-modal-body" style="height: 100px; top: 0px">
+      <div style="width: 20%; float: left">
+        <img class="img-responsive" src="images/iconinfo.png">
+      </div>
+      <div class="messageText">
+        <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<loadreport pathreport="vm.pathreport" datareport="vm.datareport" variables="vm.variables" openmodal="vm.openreport">
+</loadreport>
+
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

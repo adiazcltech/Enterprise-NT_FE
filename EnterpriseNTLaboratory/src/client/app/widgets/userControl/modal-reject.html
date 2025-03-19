@@ -1,0 +1,73 @@
+<div id="rejectmodalerror" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog">
+        <div class="uk-form-row">
+            <form class="form" name="myForm">
+                <div class="uk-grid uk-container-center">
+                    <div class="uk-width-3-10">
+                        <img src="images/iconinfo.png" height="90" width="90">
+                    </div>
+                    <div class="uk-width-7-10" style="margin-top: 3%;">
+                        <span>{{'0115' | translate}}</span>
+                    </div>
+                </div>
+                <div class="uk-overflow-container"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="rejectmodal" class="uk-modal uk-modal-card-fullscreen">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar  md-bg-orange-700">
+                <div class="md-card-toolbar-actions">
+                    <div>
+                        <i class="md-icon material-icons  md-color-blue-50" data-uk-tooltip="{pos:'top'}"
+                            title="{{'0329'| translate}}" ng-click="modalreject.closerejectmodal()">&#xE5CD;</i>
+                    </div>
+                </div>
+                <span style="float: left; margin: 8px 8px 0 0; display: block; line-height: 32px"><i
+                        class="material-icons md-color-indigo-50 md-24">&#xE043;</i></span>
+                <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+                    {{'0121' | translate}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-form-row">
+                    <form class="form" name="myForm">
+                        <div class="uk-form-row">
+                            <div class="uk-modal-content">{{'0113' | translate}}:</div>
+                            <select class="md-input"
+                                ng-options="obj as obj.name for obj in modalreject.Listmotive track by obj.id"
+                                data-ng-model="modalreject.motive" class="form-control"></select>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-row">
+                                <label>{{'0114' | translate}}:</label>
+                                <div class="md-input-wrapper">
+                                    <textarea cols="30" rows="4" data-ng-model="modalreject.Comment"
+                                        class="md-input no_autosize"
+                                        style="margin: 0px -10.5px 0px 0px; width: 564px; height: 121px;"></textarea><span
+                                        class="md-input-bar "></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="uk-flex uk-flex-right"
+                    style="position: fixed; bottom: 0; right: 0; left: 0; background: transparent; padding: 25px 21px; line-height: 48px;">
+
+                    <!-- guardar -->
+                    <button type="button" ng-disabled="modalreject.motive.id === -1 || modalreject.Comment === ''"
+                        class="md-fab md-fab-small md-fab-wave-light waves-light rs-button-margin waves-effect md-bg-orange-700 uk-modal-close"
+                        ng-class="{'md-bg-blue-grey-100' : modalreject.motive.id === -1 || modalreject.Comment === ''}"
+                        ng-click="modalreject.Save()">
+                        <i class="material-icons md-color-light-blue-50" title="{{'0007' | translate}}"
+                            data-uk-tooltip="{pos:'top-left', delay: 3000}">&#xE161;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

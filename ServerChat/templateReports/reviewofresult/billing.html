@@ -1,0 +1,161 @@
+
+<style type="text/css">
+  .headertable{
+	font-style: normal;
+    font-weight: bold;
+    font-size: 8px;
+	border-bottom: 1px solid #000000;
+	font-family: Arial;
+  }
+  .headerorder {
+    line-height: 0.17in; 
+	font-style:normal;
+	font-weight:bold;
+	font-size:8pt;
+	color:#000000;
+	font-family: Arial;
+  }
+  .headertest {
+   	line-height: 0.10in; 
+	font-style:normal;
+	font-size:8px;
+	color:#000000;
+	font-family: Arial;
+  }
+  
+	.wrap2{ 
+	  width:100px;
+	  white-space: pre-wrap;      /* CSS3 */   
+	  white-space: -moz-pre-wrap; /* Firefox */    
+	  white-space: -pre-wrap;     /* Opera <7 */   
+	  white-space: -o-pre-wrap;   /* Opera 7 */    
+	  word-wrap: break-word;      /* IE */
+	}
+  
+</style>
+
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+		{{#each variables}}
+		<table style="width: 100%">
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000;text-align:center">
+					ANÁLISIS Y DIAGNÓSTICO EN LABORATORIO SAS
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000;text-align:center">
+					Código de  Habilitación:1100133699
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000;text-align:center">
+					Nit:901192075-3
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000">
+					Estado de las Ordenes: {{this.typeFilter}}
+				</td>
+			</tr>
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000">
+					Fecha Impresión {{this.date}} 
+				</td>
+		    </tr>
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000">
+					Impreso Por {{this.username}}
+				</td>
+		    </tr>
+			<tr>
+				<td style="font-style:normal;font-size:5pt;font-family:Arial;color:#000000">
+					Rango inicial: {{this.rangeInit}},  Rango final: {{this.rangeEnd}}
+				</td>
+		    </tr>
+		</table>
+		{{/each}}
+		<table>
+		 
+		  
+		
+		{{#each this}}
+			{{#each this}}
+				{{#ifCond @key "!=" 0}}
+				<tr >
+					<td style="font-style:normal;font-weight:bold;font-size:5pt;font-family:Arial;color:#000000" >{{@key}}</td>
+				</tr>
+				<tr>
+					<td class="headertable" style="width: 1.5in;">F.SOLICITUD</td>
+					<td class="headertable" style="width: 1.5in;">D F.CHECKIN</td>
+					<td class="headertable" style="width: 1.5in;">F.VALIDACIÓN</td>
+					<td class="headertable" style="width: 1in;">LETRA</td>
+					<td class="headertable" style="width: 1in;">ID. ATENCIÓN</td>
+					<td class="headertable" style="width: 1in;">ORDEN</td>
+					<td class="headertable" style="width: 2in;">INSTITUCIÓN</td>
+					<td class="headertable" style="width: 2in;">AREA</td>
+					<td class="headertable" style="width: 0.5in;">CUPS</td>
+					<td class="headertable" style="width: 3in;">PRUEBA</td>
+					<td class="headertable" style="width: 1in;">RESULTADO</td>
+					<td class="headertable" style="width: 1in;">EPS</td>
+					<td class="headertable" style="width: 2in;">HISTORIA</td>
+					<td class="headertable" style="width: 3in;">PACIENTE</td>
+					<td class="headertable" style="width: 1in;">DEPARTAMENTO</td>
+					<td class="headertable" style="width: 1in;">FECHA DE NACIMIENTO</td>
+					<td class="headertable" style="width: 1in;">EDAD</td>
+					<td class="headertable" style="width: 1in;">GÉNERO</td>
+					<td class="headertable" style="width: 1in;">TIPO DE ATENCIÓN</td>
+					<td class="headertable" style="width: 1in;">CARGO</td>
+					<td class="headertable" style="width: 1in;">CANAL</td>
+					<td class="headertable" style="width: 1in;">CLIENTE</td>
+					<td class="headertable" style="width: 1in;">TARIFA</td>
+					<td class="headertable" style="width: 1in;">PRECIO SERVICIO</td>
+					<td class="headertable" style="width: 1in;">PRECIO PACIENTE</td>
+					<td class="headertable" style="width: 1in;">PRECIO CLIENTE</td>
+				</tr>
+					{{#each this}}
+						{{#each tests}}
+							<tr>
+								<td class="headertest" style="width: 1.5in;">{{entryDate}}</td>
+								<td class="headertest" style="width: 1.5in;">{{verificationDate}}</td>
+								<td class="headertest" style="width: 1.5in;">{{resultDate}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_11_value}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_12_value}}</td>
+								<td class="headertest" style="width: 1in;">{{../orderNumber}}</td>
+								<td class="headertest" style="width: 2in;">{{laboratory.name}}</td>
+								<td class="headertest" style="width: 2in;">{{area.name}}</td>
+								<td class="headertest" style="width: 0.5in;">{{code}}</td>
+								<td class="headertest" style="width: 3in;">{{name}}</td>
+								<td class="headertest" style="width: 1in;">{{result.result}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_3_codifiedCode}} {{../demo_3_value}}</td>
+								<td class="headertest" style="width: 2in;">{{../patient.documentType.abbr}} {{../patient.patientId}}</td>
+								<td class="headertest" style="width: 3in;">{{../patient.name1}} {{../patient.name2}} {{../patient.lastName}} {{../patient.surName}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_6_value}}</td>
+								<td class="headertest" style="width: 1in;">{{../patient.birthdaydate}}</td>
+								<td class="headertest" style="width: 1in;">{{../patient.birthday}}</td>
+								<td class="headertest" style="width: 1in;">{{../patient.sexabbr}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_8_value}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_4_value}}</td>
+								<td class="headertest" style="width: 1in;">{{../demo_1_value}}</td>
+								<td class="headertest" style="width: 1in;">{{../account.name}}</td>
+								<td class="headertest" style="width: 1in;">{{../rate.name}}</td>
+								<td class="headertest" style="width: 1in;">${{testPrice.servicePrice}}</td>
+								<td class="headertest" style="width: 1in;">${{testPrice.patientPrice}}</td>
+								<td class="headertest" style="width: 1in;">${{testPrice.insurancePrice}}</td>
+						   </tr>
+						{{/each}}
+					{{/each}}
+				{{/ifCond}}
+			{{/each}}
+		{{/each}}		
+
+		  
+		</table>  
+  </body>
+</html>

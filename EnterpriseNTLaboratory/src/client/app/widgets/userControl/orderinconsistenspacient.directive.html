@@ -1,0 +1,336 @@
+
+<loadpage view="orderinconsistenspacient.loading"></loadpage>
+<div  id="orderinconsistenspacient" class="uk-modal uk-modal-card-fullscreen"  aria-hidden="true">
+<loadpage view="orderinconsistenspacient.loading"></loadpage>
+  <div class="uk-modal-dialog uk-modal-dialog-blank">
+    <div class="md-card uk-height-viewport">
+      <div class="md-card-toolbar md-bg-blue-900">
+        <div class="md-card-toolbar-actions">
+          <div>
+            <i class="md-icon material-icons md-color-blue-50 uk-modal-close"
+              data-uk-tooltip="{pos:'top'}"
+              title="{{'0329'| translate}}"
+              style="margin: 0px"
+              >&#xE5CD;</i>
+          </div>
+        </div>
+        <span class="margin-icon-modal">
+          <i class="material-icons md-color-light-blue-50 md-33">&#xE916;</i>
+        </span>
+        <h3 class="md-card-toolbar-heading-text md-color-blue-50">
+            {{'2053' | translate}}
+        </h3>
+      </div>
+      <div class="md-card-content">
+        <div class="uk-grid uk-flex uk-flex-center" style="height: 100%">
+            <div class="uk-width-5-10" style="height: 70px;">
+                <div class="md-card">
+                    <div class="md-card-content" style="height: 100%;padding: 5px; width: 100%;">
+                        <div class="uk-grid" style="margin-left: 0px;">
+                            <div class="uk-width-9-10" style="padding-left: 0px;width: calc(100% - 103px);">
+                                <orderfilter rangeinit="orderinconsistenspacient.rangeInit" rangeend="orderinconsistenspacient.rangeEnd"
+                                    isopenreport="orderinconsistenspacient.isOpenReport" typeview="2"></orderfilter>        
+                            </div>
+                            <div class="uk-width-1-10 uk-flex uk-flex-middle" style="width: 46px;padding-left: 1px;">
+                                <div class="uk-float-left">
+                                    <div style="display: inline-block;">
+                                        <button type="button" class="md-fab md-fab-xsmall md-fab md-fab-primary md-bg-blue-900"
+                                            ng-click="orderinconsistenspacient.searchpatient()">
+                                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                                title="{{'0154'| translate}}">&#xE8B6;</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-10 uk-flex uk-flex-middle" style="width: 46px;padding-left: 1px;">
+                                <div class="uk-float-left">
+                                    <div style="display: inline-block;">
+                                        <button type="button" class="md-fab md-fab-xsmall md-fab md-fab-primary md-bg-green-A700"
+                                        ng-class="{'md-bg-blue-grey-100':orderinconsistenspacient.patient.length === 0 }" 
+                                        ng-click="orderinconsistenspacient.loadData()">
+                                        <i class="uk-icon-file-excel-o md-color-light-blue-50" data-uk-tooltip="{pos:'top'}" title="Exportar datos"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid uk-width-1-1"  style="height: calc(100% - 90px);">
+                <div class="uk-width-2-10" style="height: 100%;margin-top: 11px;">
+                    <div class="md-card  md-card-hover" style="height: 100%;">
+                        <div class="md-card-content" style="height: 100%;padding: 0px;">
+                            <table class="uk-table  uk-table-small uk-table-middle tablescrollable"
+                                style="height: 100%;    margin-bottom: 0px;">
+                                <thead style=" display: inline-block;width: 100%;height: 37px;">
+                                    <tr class="uk-grid" style="margin-left: 0px;background-color: #eee;">
+                                        <th class="uk-width-1-1">
+                                            <a
+                                                ng-click="$event.stopPropagation(); vm.sortType = 'patientId'; sortReverse = !sortReverse; $event.stopPropagation() ">
+                                                <i ng-if="!sortReverse" class="uk-icon-sort-alpha-asc"></i>
+                                                <i ng-if="sortReverse" class="uk-icon-sort-alpha-desc"></i>
+                                                <span ng-show="vm.sortType == 'patientId' && !sortReverse"></span>
+                                                <span ng-show="vm.sortType == 'patientId' && sortReverse"></span>
+                                            </a>{{'0398' | translate}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyscrollable vs-repeat-custom-scroll contentscroll" style="margin-top: 0px;height: calc(100% - 35px);">
+                                    <tr ng-repeat="Patient in orderinconsistenspacient.patient | orderBy:vm.sortType:sortReverse"
+                                        ng-class="{selected: Patient.patientId ==  orderinconsistenspacient.selected}"
+                                        data-ng-click="orderinconsistenspacient.getDetail(Patient)" class="uk-grid"
+                                        style="margin-left: 0px;margin-top: 0px;">
+                                        <td class="uk-width-1-1">{{Patient.documentType.abbr}} {{Patient.patientId}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-4-10" style="height: 100%;padding-left: 13px;margin-top: 11px;"   ng-if="orderinconsistenspacient.tribunal.length!==0">
+                    <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-toolbar">
+                        <h3 class="md-card-toolbar-heading-text">
+                            <strong> {{'2029' | translate}}</strong>
+                        </h3>
+                    </div>
+                    <div class="md-card-content contentscroll" style="padding: 12px;height: calc(100% - 72px);overflow: auto">        
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                        ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.documentType.id!== orderinconsistenspacient.lis.documentType.id,'uk-text-muted': orderinconsistenspacient.tribunal.documentType.id=== orderinconsistenspacient.lis.documentType.id}">
+                                        {{'0833' | translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.documentType.name}}</span>
+
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.documentType" 
+                                    ng-change="orderinconsistenspacient.selectlis.documentType=!orderinconsistenspacient.selecttri.documentType" class="md-primary"
+                                    aria-label="Fi"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.patientId !== orderinconsistenspacient.lis.patientId,'uk-text-muted': orderinconsistenspacient.tribunal.patientId === orderinconsistenspacient.lis.patientId}">
+                                    {{'0132'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.patientId}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.patientId" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selectlis.patientId = !orderinconsistenspacient.selecttri.patientId" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.name1 !== orderinconsistenspacient.lis.name1,'uk-text-muted': orderinconsistenspacient.tribunal.name1 === orderinconsistenspacient.lis.name1}">
+                                    {{'0236' | translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.name1===''?orderinconsistenspacient.nofound:orderinconsistenspacient.tribunal.name1}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.name1" aria-label="Fi"
+                                    ng-change="orderinconsistenspacient.selectlis.name1 = !orderinconsistenspacient.selecttri.name1" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.name2 !== orderinconsistenspacient.lis.name2,'uk-text-muted': orderinconsistenspacient.tribunal.name2 === orderinconsistenspacient.lis.name2}">
+                                    {{'0237' | translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.name2===''?orderinconsistenspacient.nofound:orderinconsistenspacient.tribunal.name2}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.name2" aria-label="Fi"
+                                    ng-change="orderinconsistenspacient.selectlis.name2=!orderinconsistenspacient.selecttri.name2" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.lastName !== orderinconsistenspacient.lis.lastName,'uk-text-muted': orderinconsistenspacient.tribunal.lastName === orderinconsistenspacient.lis.lastName}">
+                                    {{'0234' | translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.lastName===''?orderinconsistenspacient.nofound:orderinconsistenspacient.tribunal.lastName}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.lastName" aria-label="Fi"
+                                    ng-change="orderinconsistenspacient.selectlis.lastName = !orderinconsistenspacient.selecttri.lastName" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.surName !== orderinconsistenspacient.lis.surName,'uk-text-muted': orderinconsistenspacient.tribunal.surName === orderinconsistenspacient.lis.surName}">
+                                    {{'0235' | translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.surName===''? orderinconsistenspacient.nofound:orderinconsistenspacient.tribunal.surName}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.surName" aria-label="Fi"
+                                    ng-change="orderinconsistenspacient.selectlis.surName = !orderinconsistenspacient.selecttri.surName" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.birthday !== orderinconsistenspacient.lis.birthday,'uk-text-muted': orderinconsistenspacient.tribunal.birthday === orderinconsistenspacient.lis.birthday}">
+                                    {{'0976' | translate}}</span>
+                                    <span class="md-list-heading">
+                                        {{orderinconsistenspacient.tribunal.birthday===''? orderinconsistenspacient.nofound:orderinconsistenspacient.tribunal.birthday| date:'dd/MM/yyyy'}}
+                                     </span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.birthday" aria-label="Fi"
+                                    ng-change="orderinconsistenspacient.selectlis.birthday = !orderinconsistenspacient.selecttri.birthday" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.sex.name !== orderinconsistenspacient.lis.sex.esCo,'uk-text-muted': orderinconsistenspacient.tribunal.sex.name === orderinconsistenspacient.lis.sex.esCo}">
+                                    {{'0124' | translate}} </span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.tribunal.sex===undefined?orderinconsistenspacient.nofound:orderinconsistenspacient.tribunal.sex.name |uppercase}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selecttri.sex" aria-label="Fi"
+                                    ng-change="orderinconsistenspacient.selectlis.sex = !orderinconsistenspacient.selecttri.sex" class="md-primary"></md-checkbox>
+                                </div>
+                            </li>                        
+                        </ul>                   
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-4-10" style="height: 100%;padding-left: 13px;margin-top: 11px;"
+            ng-if="orderinconsistenspacient.tribunal.length!==0">
+                <div class="md-card  md-card-hover" style="height: 100%;">
+                    <div class="md-card-toolbar">
+                        <h3 class="md-card-toolbar-heading-text">
+                            <strong>{{'0298'| translate}}</strong>                            
+                        </h3>
+                        <div class="md-card-toolbar-actions" style="padding-top: 6px;">
+                            <strong class="uk-text-small">{{'1540'| translate}}</strong>   
+                            <h3 class="uk-text-small uk-text-muted" style="margin-top: 0px;margin-bottom: 0px;">                                  
+                                   {{orderinconsistenspacient.orderNumber}}
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="md-card-content contentscroll" style="padding: 12px;height: calc(100% - 72px);overflow: auto;">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-content">
+                                    
+                                    <span class="uk-text-small"
+                                        ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.documentType.id!== orderinconsistenspacient.lis.documentType.id,'uk-text-muted': orderinconsistenspacient.tribunal.documentType.id=== orderinconsistenspacient.lis.documentType.id}">
+                                        {{'0833'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.documentType.name}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                   
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.documentType" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.documentType = !orderinconsistenspacient.selectlis.documentType">
+                                  </md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.patientId !== orderinconsistenspacient.lis.patientId,'uk-text-muted': orderinconsistenspacient.tribunal.patientId === orderinconsistenspacient.lis.patientId}">
+                                    {{'0132'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.patientId}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.patientId" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.patientId = !orderinconsistenspacient.selectlis.patientId"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.name1 !== orderinconsistenspacient.lis.name1,'uk-text-muted': orderinconsistenspacient.tribunal.name1 === orderinconsistenspacient.lis.name1}">
+                                    {{'0236'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.name1===''?orderinconsistenspacient.nofound:orderinconsistenspacient.lis.name1}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.name1" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.name1 = !orderinconsistenspacient.selectlis.name1"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                              
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.name2 !== orderinconsistenspacient.lis.name2,'uk-text-muted': orderinconsistenspacient.tribunal.name2 === orderinconsistenspacient.lis.name2}">
+                                    {{'0237'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.name2===''?orderinconsistenspacient.nofound:orderinconsistenspacient.lis.name2}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.name2" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.name2 = !orderinconsistenspacient.selectlis.name2"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                                
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.lastName !== orderinconsistenspacient.lis.lastName,'uk-text-muted': orderinconsistenspacient.tribunal.lastName === orderinconsistenspacient.lis.lastName}">
+                                    {{'0234'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.lastName===''?orderinconsistenspacient.nofound:orderinconsistenspacient.lis.lastName}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.lastName" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.lastName = !orderinconsistenspacient.selectlis.lastName"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.surName !== orderinconsistenspacient.lis.surName,'uk-text-muted': orderinconsistenspacient.tribunal.surName === orderinconsistenspacient.lis.surName}">
+                                    {{'0235'| translate}}</span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.surName===''?orderinconsistenspacient.nofound:orderinconsistenspacient.lis.surName}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.surName" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.surName = !orderinconsistenspacient.selectlis.surName"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                           
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.birthday !== orderinconsistenspacient.lis.birthday,'uk-text-muted': orderinconsistenspacient.tribunal.birthday === orderinconsistenspacient.lis.birthday}">
+                                    {{'0976'| translate}}</span>
+                                    <span class="md-list-heading">
+                                        {{orderinconsistenspacient.lis.birthday===''?orderinconsistenspacient.nofound:orderinconsistenspacient.lis.birthday | date:'dd/MM/yyyy'}}
+                                    </span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.birthday" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.birthday = !orderinconsistenspacient.selectlis.birthday"></md-checkbox>
+                                </div>
+                            </li>
+                            <li>                             
+                                <div class="md-list-content">
+                                    <span class="uk-text-small"
+                                    ng-class="{'md-color-red-400 uk-text-bold': orderinconsistenspacient.tribunal.sex.name !== orderinconsistenspacient.lis.sex.esCo,'uk-text-muted': orderinconsistenspacient.tribunal.sex.name === orderinconsistenspacient.lis.sex.esCo}">
+                                    {{'0124'| translate}} </span>
+                                    <span class="md-list-heading">{{orderinconsistenspacient.lis.sex.esCo|uppercase}}</span>
+                                </div>
+                                <div class="md-list-addon-element">
+                                    <md-checkbox ng-model="orderinconsistenspacient.selectlis.sex" aria-label="Fi" class="md-primary"
+                                    ng-change="orderinconsistenspacient.selecttri.sex = !orderinconsistenspacient.selectlis.sex"></md-checkbox>
+                                </div>
+                            </li>                        
+                        </ul>                    
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>        
+    <div class="md-fab-wrapper md-fab-speed-dial"  ng-if="orderinconsistenspacient.tribunal.length!==0">       
+        <button type="button" class="md-fab md-fab-small md-fab-success md-bg-blue-900">
+            <i class="material-icons" data-uk-tooltip="{pos:'top'}" ng-click="orderinconsistenspacient.save(2)"
+                title="{{'0296' | translate}}">&#xE876;</i>
+        </button>      
+    </div>
+      </div>
+    </div>
+  </div>
+</div>

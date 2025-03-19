@@ -1,0 +1,191 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalreport openmodal="vm.open"></modalreport>
+<modalerror openerrormodal="vm.ShowPopupError" detailerror="vm.Error"></modalerror>
+<section class="general-container">
+  <div class="row general-container">
+    <div class="panel panel-primary panel-principal">
+      <div class="panel-heading row">
+        <div class=" col-md-4 panel-title">
+          <strong class="panel-title text-left title-bar" style="width: 121% !important;">
+            {{'0972' | translate |uppercase}}
+          </strong>
+        </div>
+        <div class=" col-md-8 text-right" style="padding-top: 5px">
+          <strong ng-bind="vm.usuario"></strong>
+          <span class="question-style glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+            title="Ctrl + B"
+            onclick="javascript:window.open('/enterprise_nt_help/index.htm?page=enterprise_nt/configuration/middleware/middleware.htm','','width=1100,height=600,left=50,top=50,toolbar=yes');"></span>
+        </div>
+      </div>
+      <div class="panel-body general-container panel-padding panel-scroll contentscroll">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body general-container">
+                <div>
+                  <div class="input-group right-bar">
+                    <input data-ng-model="vm.search" class="form-control" type="text"
+                      placeholder="{{'0015' | translate}}">
+                    <div class="input-group-addon">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </div>
+                  </div>
+                  <div class="number-bage">
+                    <span style="margin-top:10px" class="badge" data-ng-bind="vm.filtered.length"></span>
+                  </div>
+                </div>
+                <table class="table table-list">
+                  <thead>
+                    <tr>
+                      <th class="col-md-5">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'codeName'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'codeName'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'codeName'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'codeName' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'codeName' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'codeName' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'codeName' && vm.sortReverse"></span>
+                        </a> {{'0204' | translate}}
+                      </th>
+                      <th class="col-md-7">
+                        <a
+                          ng-click="$event.stopPropagation(); vm.sortType = 'url'; vm.sortReverse = !vm.sortReverse; $event.stopPropagation() ">
+                          <i ng-if="!vm.sortReverse && vm.sortType != 'url'"
+                            class="glyphicon glyphicon-sort-by-alphabet"></i>
+                          <i ng-if="vm.sortReverse && vm.sortType != 'url'"
+                            class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
+                          <i ng-if="vm.sortType == 'url' && !vm.sortReverse "
+                            class="glyphicon glyphicon-triangle-bottom"></i>
+                          <i ng-if="vm.sortType == 'url' && vm.sortReverse"
+                            class="glyphicon glyphicon-triangle-top"></i>
+                          <span ng-show="vm.sortType == 'url' && !vm.sortReverse"></span>
+                          <span ng-show="vm.sortType == 'url' && vm.sortReverse"></span>
+                        </a>URL
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-list contentscroll">
+                    <tr class="row-list"
+                      data-ng-repeat="middleware in vm.filtered = (vm.data | filter: {codeName: vm.search} )| orderBy:vm.sortType:vm.sortReverse "
+                      data-ng-click="vm.getId(middleware.id,$index,Form)"
+                      ng-class="{info: middleware.id == vm.selected, danger: middleware.state == 0}">
+                      <td class="col-md-5" data-ng-bind="middleware.codeName"></td>
+                      <td class="col-md-7" data-ng-bind="middleware.url"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel-padding" style="height: 100%">
+          <div class="panel-list">
+            <div class="panel panel-primary general-container">
+              <div class="panel-body panel-form" style="overflow:auto">
+                <form name="Form" id="Form" class="form-horizontal panel-body" style="padding-left: 0px;">
+                  <div class="form-group form-group-sm has-feedback"
+                    ng-class="{'has-error': Form.urlMiddleware.$error.url || vm.urlrequerid}">
+                    <label class="col-lg-2 col-md-2 text-right" style="">URL:</label>
+                    <div class="col-lg-7 col-md-7" style="float: left;">
+                      <input type="url" id="urlMiddleware" name="urlMiddleware" class="form-control" maxlength="60"
+                        data-ng-model="vm.Detail.url" ng-disabled="vm.isDisabled" class="form-control" type="text"
+                        ng-change="vm.isDisabledSave = true;">
+                      <span ng-if="Form.urlMiddleware.$error.url || vm.urlrequerid"
+                        class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span ng-if="Form.urlMiddleware.$error.url" class="help-block ">{{'0951' | translate}}</span>
+                      <span ng-if="vm.urlrequerid && vm.Detail.url==''" class="help-block">{{'0016' | translate}}</span>
+                      <span ng-if="vm.urlrequerid && vm.Detail.url!==''"
+                        class="help-block">{{'0966' | translate}}</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3" style="float: left;">
+                      <button type="button" class="btn btn-primary button-list"
+                        ng-click="vm.testConnection(vm.Detail.url, vm.Detail.id)" ng-disabled="vm.isDisabled"
+                        style="width: 100%">
+                        {{'0967' | translate}}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
+                    <fieldset style="width: 90%; float: right; height: 70px; padding-top: 10px;">
+                      <legend style="width: 125px; white-space: nowrap; padding-left: 5px;">
+                        {{'0973' | translate}}:
+                      </legend>
+                      <label class="col-lg-3 col-md-3 text-right"
+                        style="white-space: nowrap;">{{'0666' | translate}}:</label>
+                      <div class="col-lg-3 col-md-3">
+                        <toggle ng-model="vm.Detail.entry" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                          ng-disabled="vm.isDisabled" ng-change="vm.changeTypeSendOrder('entry')" size="btn-sm">
+                        </toggle>
+                      </div>
+                      <label class="col-lg-4 col-md-4 text-right"
+                        style="white-space: nowrap;">{{'0799' | translate}}:</label>
+                      <div class="col-lg-2 col-md-2">
+                        <toggle ng-model="vm.Detail.check" on="{{'0068' | translate}}" off="{{'0492' | translate}}"
+                          ng-disabled="vm.isDisabled" ng-change="vm.changeTypeSendOrder('check')" size="btn-sm">
+                        </toggle>
+                      </div>
+                      <modalmessage openstatemodal="vm.ShowPopupMesssge" message="vm.message"></modalmessage>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="container" style="width: 100%">
+                  <!-- <button type="button" class=" btn btn-success button-list" ng-click="vm.New(Form)" ng-disabled="true">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'0005' | translate}}
+                                    </button> -->
+                  <button type="button" style="width: calc(100% / 3 - 4px)" class="btn btn-warning button-list"
+                    ng-click="vm.Edit()" ng-disabled="vm.isDisabledEdit">
+                    <span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span>{{'0006' | translate}}
+                  </button>
+                  <button type="button" style="width: calc(100% / 3 - 4px)" class="btn btn-primary button-list"
+                    ng-click="vm.save(Form)" ng-disabled="vm.isDisabledSave || vm.urlrequerid">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>{{'0007' | translate}}
+                  </button>
+                  <button type="button" style="width: calc(100% / 3 - 4px)" class="btn btn-info button-list"
+                    ng-click="vm.cancel(Form)" ng-disabled="vm.isDisabledCancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{{'0008' | translate}}
+                  </button>
+                  <!--  <button type="button" class="btn btn-violet button-list" ng-click="vm.generateFile()" ng-disabled="true">
+                                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>{{'0009' | translate}}
+                                    </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/ng-template" id="Requerido.html">
+  <div class="modal fade" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header modal-header-prymary">
+                    <h4 class="modal-title" align="justify">
+                        {{'0171' | translate}}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5 col-md-offset-3">
+                                <a ng-click="close('No')" class="thumbnail" data-dismiss="modal">
+                                    <img src="images/Recipiente.png">
+                                    <h6 class="text-center"> {{'0204' | translate}}</h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

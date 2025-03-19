@@ -1,0 +1,132 @@
+<loadpage view="vm.loadingdata"></loadpage>
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error"></modalexceptions>
+<div id="page_content">
+  <div id="page_content_inner" style="overflow: hidden">
+    <div style="height: calc(100% - 75px)" class="uk-grid" data-uk-grid-margin>
+      <div style="height:100%" class="uk-width-1-1">
+        <div class="md-card" style="margin-bottom: 5px ;height: 105px">
+          <div class="md-card-content uk-grid uk-grid-small">
+            <div class="uk-width-5-10">
+              <fieldset class="fieldset uk-grid" style="height: 58px;padding: 12px 15px 1px 0px;margin-left: 0px;">
+                <div class="uk-width-1-2">
+                  <label style="top: -6px; font-size: 12px;">{{'0085' | translate}}</label>
+                  <select class="md-input" ng-options="obj.id as obj.name for obj in vm.customer"
+                    data-ng-model="vm.datacustomer" ng-change="vm.getrate()"></select>
+                </div>
+                <div class="uk-width-1-2">
+                  <label style="top: -6px; font-size: 12px;">{{'0087' | translate}}</label>
+                  <select class="md-input" ng-options="obj.id as obj.name for obj in vm.rate"
+                    data-ng-model="vm.datarate" ng-change="vm.disable()"></select>
+                </div>
+              </fieldset>
+            </div>
+            <div class="uk-width-5-10">
+              <fieldset class="fieldset" style="height: 58px;padding: 12px 15px 1px 23px;">
+                <orderfilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" typefilter="vm.filterRange"
+                  isopenreport="vm.isOpenReport" typeview="2" rangedays="7">
+                </orderfilter>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="uk-width-1-1" style="margin-top: 10px;height: calc(100% - 116px)"
+          ng-if="vm.datasearch.length!==0">
+          <div class="md-card md-card-hover" style="height: 100%;">
+            <div class="md-card-content" style="height: 100%;padding: 0px;">
+              <div class="md-card-content fullheight" style="padding: 0px;">
+                <div class="uk-grid div-head" style="height: 39px;">
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="vm.sortType = 'orderId'; vm.sortReverse = !vm.sortReverse">
+                    <resultssort sortvalue="'orderId'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                    </resultssort>{{'3107' | translate}}
+                  </div>
+                  <div style="padding-left: 10px;" class="uk-width-2-10"
+                    ng-click="vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse">
+                    <resultssort sortvalue="'name'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                    </resultssort>{{'0459' | translate}}
+                  </div>
+                  <div class="uk-width-2-10" style="padding-left: 10px;"
+                    ng-click="vm.sortType = 'patientPrice'; vm.sortReverse = !vm.sortReverse">
+                    <resultssort sortvalue="'patientPrice'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                    </resultssort>{{'0455' | translate}}
+                  </div>
+                  <div class="uk-width-4-10" style="padding-left: 10px;"
+                    ng-click="vm.sortType = 'insurancePrice'; vm.sortReverse = !vm.sortReverse">
+                    <resultssort sortvalue="'insurancePrice'" sorttype="vm.sortType" sortreverse="vm.sortReverse">
+                    </resultssort>{{'0456' | translate}}
+                  </div>
+                </div>
+                <div class="vs-repeat-custom-scroll contentscroll" style="height: calc(100% - 40px);">
+                  <div ng-repeat="invoice in vm.datasearch | orderBy:vm.sortType:vm.sortReverse"
+                    class="uk-grid div-table" style="margin-top: 0px;height: auto !important;">
+                    <div class="uk-width-2-10">{{invoice.orderId}}</div>
+                    <div class="uk-width-2-10">{{invoice.name}}</div>
+                    <div class="uk-width-2-10">{{invoice.patientPrice | currency : vm.simbolmoney : vm.decimal}}</div>
+                    <div class="uk-width-4-10">{{invoice.insurancePrice | currency : vm.simbolmoney : vm.decimal}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-1-1 " style="height: 58px; margin-top: 10px">
+        <div style="height: 100%;" class="md-card uk-animation-scale-up uk-animation-40">
+          <div style="height: 100%; padding-top: 5px" class="md-card-content">
+            <div class="uk-grid" style="height: 100%">
+              <div class="uk-width-1-1" style="float: right">
+                <button style="float: right; margin-left: 10px" type="button" data-uk-tooltip="{pos:'top'}"
+                  title="{{'1598' | translate}}"
+                  class="md-fab md-fab-small md-fab-success md-fab-wave-light waves-effect waves-light md-bg-light-blue-A700"
+                  ng-disabled="vm.datacustomer===undefined|| vm.datarate===undefined"
+                  ng-class="{'md-bg-blue-grey-100' : vm.datacustomer===undefined|| vm.datarate===undefined}"
+                  ng-click="vm.print()">
+                  <i class="material-icons md-24 no_margin">&#xE227;</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal-error" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ vm.dataerror}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ventana modal para suando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{'0962' | translate}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.js"></script>

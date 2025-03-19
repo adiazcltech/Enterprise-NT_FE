@@ -1,0 +1,6 @@
+FECHA DE SOLICITUD;FECHA DE VERIFICACIÓN;FECHA DE VALIDACIÓN;NÚMERO DE ORDEN; SEDE;LLAVE_INTERFAZ;SERVICIOS;CAMA;PRUEBA;AREA;DIAGNOSTICO;VERIFICACIÓN - RESULTADO;RESULTADO - VALIDACIÓN
+{{#each orders}}
+{{#each results}}
+{{opportunityTimes.entryDate}};{{opportunityTimes.verifyDate}};{{opportunityTimes.validDate}};{{../orderNumber}};{{../branchName}};{{../demo_10_value}};{{../serviceName}};{{../demo_6_value}};{{name}};{{sectionName}};{{../demo_8_value}};{{opportunityTimes.resultElapsedTime}};{{opportunityTimes.validElapsedTime}}
+{{/each}}
+{{/each}}

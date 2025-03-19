@@ -1,0 +1,101 @@
+<!-- <div class="uk-modal" id="modalReport" tabindex="1" aria-hidden="false" >
+  <div class="uk-modal-dialog" style="width: 900px">
+    <div class="uk-grid uk-container-center">
+      <div class="uk-width-1-1" style="padding-left: 0px">
+        <div id="viewerContent" style="height: 500px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false" >
+  <div class="uk-modal-dialog">
+    <div class="uk-grid uk-container-center">
+      <div class="uk-width-1-1" style="padding-left: 0px">
+        <div style="width: 20%; float: left">
+            <img class="img-responsive" src="images/iconinfo.png">
+        </div>
+        <div style="padding-top: 7%;">
+            <label style="margin-top: 20px; margin-left: 5px">{{'0152' | translate}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<style type="text/css">
+
+    .report {
+        height: auto;
+        width: 61%;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        overflow-x: hidden;
+    }
+
+    .message{
+      height: auto;
+      top: 10px !important; 
+      width: 35%;
+    }
+    .messageText {
+        width: 280px;
+        float: left;
+        padding-top: 5%;
+        white-space: nowrap;
+    }
+
+    .md-bg-blue-grey-100{
+        cursor: default;
+    }
+
+    .vertical-report{
+        width: 65%;
+        border-radius: 5px;
+        height: 95%;
+        min-width: 832px;
+
+    }
+
+    .horizontal-report{
+        width: 91%;
+        border-radius: 5px;
+        height: 95%;
+        min-width: 1000px;
+    }
+
+    .labelmessageText{
+        margin-top: 20px;
+        margin-left: 5px;
+        font-size: 14px;
+        line-height: 40px;
+    }
+</style>
+
+<div class="uk-modal" id="modalReport" tabindex="1" aria-hidden="false" >
+   <div class="uk-modal-dialog report " ng-class="{'vertical-report': loadreport.orientation === 'vertical', 'horizontal-report': loadreport.orientation === 'horizontal' } ">
+     <div class="uk-modal-body" style="height: 100%" >
+        <div id="viewerContent" style="height: 100%" ></div>
+        <div id="designerContent"> </div>
+     </div>                
+  </div>
+</div> 
+<div class="uk-modal" id="modalReportError" tabindex="1" aria-hidden="false" >
+  <div class="uk-modal-dialog message" >
+      <button type="button" class="uk-modal-close uk-close" ng-class="{'disabled':  vm.ButonReject}"></button>          
+      <div class="uk-modal-body" style="height: 100px; top: 0px">
+         <div style="width: 20%; float: left">
+              <img class="img-responsive" src="images/iconinfo.png">
+          </div>
+          <div class="messageText">
+              <label class="labelmessageText">{{'0152' | translate}}</label>
+          </div>
+      </div>
+      <div class="uk-modal-footer">
+      </div>
+  </div>
+</div>

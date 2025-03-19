@@ -1,0 +1,127 @@
+/* login page */
+
+@font-face {
+  font-family: Microgramma;
+  src: url("../assets/fonts/Microgramma D Extended Bold.otf")
+}
+
+@font-face {
+  font-family: MicrogrammaMedium;
+  src: url("../assets/fonts/Microgramma D Extended Medium.otf")
+}
+
+@font-face {
+  font-family: rubiklight;
+  src: url("../assets/fonts/Rubik-Light.ttf")
+}
+
+@font-face {
+  font-family: rubikitalic;
+  src: url("../assets/fonts/Rubik-Italic.ttf")
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #000 !important;
+}
+
+.button-banner {
+    margin-top: 20%
+}
+
+.content-banner
+{
+    text-align: center; 
+    width: 100%;
+}
+
+.content-banner-login {
+    height: 100%; 
+    width: 364px; 
+    float: left;
+}
+
+.content-user-login {
+    width: calc(~"100% - 364px"); 
+    height: 100%; 
+    float: left; 
+    background-color: #fafafa;
+}
+
+
+.image-banner-login {
+    position: relative; 
+    display: block;
+    height: 100%; 
+    width: 100%;  
+}
+
+.text-banner-login {
+    width: 90%; 
+    position: absolute; 
+    z-index: 10; 
+    padding-left: 5%;
+}
+
+.text_banner_tittle {
+    color: white;
+    font-size: 39.83pt;
+    font-family: Microgramma;
+    width: 100%;
+    padding-top: 10%
+}
+.text_banner_subtittle {
+    color: white;
+    font-size: 22.83pt;
+    font-family: MicrogrammaMedium;
+    width: 100%;
+}
+
+.text_banner_description {
+    color: white;
+    font-size: 24pt;
+    font-family: rubiklight;
+    width: 100%;
+    line-height: 35px;
+}
+
+.text_banner_information {
+    color: white;
+    font-size: 15pt;
+    font-family: rubikitalic;
+    width: 100%;
+    line-height: 25px;
+    padding-top: 7%;
+}
+
+.login_page {
+    font-size: 15px;
+    padding: 105px 0px 33px 70px;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100%;
+    @media @screen_medium_max {
+        padding: 24px;
+    }
+    &_wrapper {
+        width: 360px;
+        max-width: 100%;
+        margin: 0 auto;
+        transition: all 280ms @md_easing;
+    }
+    .user_avatar {
+        width: 80px;
+        height: 80px;
+        display: inline-block;
+        text-align: center;
+        border-radius: 50%;
+        background-color: white;
+    }
+    .login_heading {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+}

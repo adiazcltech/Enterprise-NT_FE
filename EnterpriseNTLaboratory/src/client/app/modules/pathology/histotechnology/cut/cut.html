@@ -1,0 +1,437 @@
+<style>
+  .filters {
+    height: 100%;
+    border-style: solid;
+    border-top: 0;
+    border-bottom: 0px;
+    border-left: 0px;
+    padding-right: 15px;
+    padding-left: 35px;
+    margin-right: 0px;
+    border-color: #d6d3d6;
+  }
+
+  .casete_header {
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .colour_casete {
+    float: right;
+    margin-right: 0px;
+    position: relative;
+    margin-top: 5px;
+  }
+
+  .thumbnail-casete {
+    width: 18px !important;
+    height: 18px !important;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0 100%);
+  }
+
+  .level-casete {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    float: right;
+  }
+
+  .organ-r {
+    color: black;
+    font-size: 12px;
+    margin: 4px 20px 0px;
+    float: right;
+  }
+
+  .img-cut {
+    width: 25%;
+    margin-top: -10px;
+    float: inline-end;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+
+  .h-15 {
+    height: 15px;
+  }
+
+  .h-20 {
+    height: 20px;
+  }
+
+  .badge-block {
+    float: right;
+    margin-top: 1px;
+    border-radius: 5px;
+    background: #1976d2;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .targetactive {
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 5px #3131315c, 0 3px 0 #eee, 0px 3px 10px rgb(0 0 0 / 40%), inset 0px 0px 3px rgb(255 255 255 / 20%), inset 0 -2px 10px rgb(0 0 0 / 20%);
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0px -1px 0px rgb(0 0 0 / 20%);
+  }
+
+  .targetactive .md-card-toolbar-heading-text {
+    font-weight: bold;
+  }
+
+  .block {
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    margin: 4px 0px;
+  }
+
+  .d-block {
+    font-size: 12px;
+  }
+</style>
+
+<modalexceptions openmodal="vm.ShowPopupError" detailerror="vm.Error" id="modalerrorresultentry"></modalexceptions>
+<loadpage view="vm.loading" class="p-absolute"></loadpage>
+
+<div id="page_content" style="overflow: hidden;">
+  <div id="page_content_inner" style="padding: 1px 13px 0px;">
+    <div class="uk-grid">
+
+      <div class="uk-width-2-10 filters">
+
+        <button ng-click="vm.modalfilter()" ng-click="vm.timefilter = null"
+          style="width: 100%; height: 134px; text-align: left;" class="md-btn">
+          <ul class="md-list md-list-addon" style="margin-left: 16px; margin-top: 8px">
+            <li style="margin-left: 0px">
+              <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-3px">
+                <img src="images/pathology/macroscopy/date.png">
+              </div>
+              <div class="md-list-content" style="padding-left: 22px;">
+                <span style="float: left; margin-right: 3%" class="uk-text-small uk-text-muted">{{
+                  vm.filterinfo.textinit }}:</span>
+                <span class="uk-text-truncate uk-text-small">{{ vm.filterinfo.valueinit }} </span>
+                <span style="float: left; margin-right: 8%"
+                  class=" uk-text-small uk-text-muted">{{vm.filterinfo.textend}}:</span>
+                <span class="uk-text-truncate uk-text-small">{{vm.filterinfo.valueend}}</span>
+              </div>
+            </li>
+            <li style="margin-left: 0px;padding-bottom: 0px;">
+              <div class="md-list-addon-element" style="left: -15px; width: 27px; top:-7px">
+                <img src="images/pathology/macroscopy/studies.png">
+              </div>
+              <div class="md-list-content" style="padding-left: 22px;">
+                <span class=" uk-text-small uk-text-muted">{{'3176' | translate}}</span>
+                <span class="md-list-heading uk-text-small uk-text-truncate">{{ vm.filterinfo.valuefilterstudies
+                  }}</span>
+              </div>
+            </li>
+          </ul>
+        </button>
+
+        <div class="md-card" style="min-height: 36px;margin-top: 5px;">
+          <div class="md-card-content" style="padding-bottom: 7px;padding-top: 5px;">
+            <div class="uk-input-group">
+              <span class="uk-input-group-addon" style="min-width: 20px;padding: 10px;padding-left: 0px;">
+                <img class="md-list-addon-icon material-icons md-22" ng-src="images/inconsistency/order.png">
+              </span>
+              <div class="md-input-wrapper md-input-filled">
+                <label style="top: -6px; font-size: 12px;">{{ '3172' | translate }}: </label>
+                <input type="text" class="filter-history-order md-input label-fixed uk-padding-remove"
+                  style="padding-left: 4px !important;min-height: 35px;" ng-model="vm.searchcase"
+                  ng-keypress="vm.autocomplenumbercase($event)" maxlength="{{vm.maxcantdigit}}" md-input="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md-card" style="margin-top: 5px;">
+          <div class="md-card-content" style="padding-bottom: 7px;padding-top: 4px;">
+            <div class="uk-input-group">
+              <span class="uk-input-group-addon" style="min-width: 22px;padding: 10px;padding-left: 0;">
+                <img class="md-list-addon-icon material-icons md-22" ng-src="images/search.png">
+              </span>
+              <div class="md-input-wrapper md-input-filled">
+                <label style="top: -6px; font-size: 12px;"
+                  ng-class="{'labeldisabled' : !vm.dataBlocks || vm.dataBlocks.length === 0,'labelenabled' : vm.dataBlocks || vm.dataBlocks.length !== 0}">{{
+                  '0640' | translate }}:</label>
+                <input name="search_order" type="text"
+                  class="md-input label-fixed uk-padding-remove filter-history-order"
+                  style="padding-left: 4px !important;" ng-disabled="!vm.dataBlocks || vm.dataBlocks.length === 0"
+                  ng-model="vm.searchFilter" md-input="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md-card" style="height: calc(100vh - 335px);margin-top: 10px;">
+          <div class="md-card-toolbar" style="height: auto;padding: 0px;">
+            <div class="uk-text-bold uk-text-center" style="background-color: #1976d2; color: white">
+              {{ '3177' | translate}}
+              <span class="uk-badge uk-badge-primary">{{ vm.dataCases.length }} </span>
+            </div>
+          </div>
+          <div class="md-card-content" style="padding: 1px 1px 5px 1px; overflow-y: hidden">
+            <div class="uk-grid uk-grid-small" style="height: 100%">
+              <div class="uk-width-1-1 contentscroll" style="height: calc(100vh - 205px);overflow-y: auto;">
+                <div style="margin-top: 5px" class="md-card uk-width-1-1" ng-repeat="obj in vm.dataCases">
+                  <div class="md-card-content" style="padding: 0px 0 0 10px">
+                    <div class="uk-grid uk-grid-small" style="place-content: center;">
+                      <div class="uk-width-8-10 uk-text-bold uk-text-center" style="font-size: 15px">
+                        <div class="uk-grid uk-grid-small">
+                          <div class="uk-width-7-10">
+                            <a ng-click="vm.selectCase(obj);">{{ obj.studyType.code }}{{
+                              obj.idCase.toString().substring(3) }}</a>
+                          </div>
+                          <div class="uk-width-1-10" style="margin-top: -1px">
+                            <i style="cursor: pointer;" class="material-icons" ng-click="collapsed = !collapsed">{{
+                              collapsed === false ? 'add_circle' : 'remove_circle' }}</i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="uk-width-1-1" ng-if="collapsed">
+                        <div class="uk-grid uk-grid-small">
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '0110' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{ obj.idOrder }}
+                          </div>
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '3112' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{obj.patientId}}
+                          </div>
+                          <div class="uk-width-3-10 uk-text-bold uk-text-small uk-text-right">
+                            {{ '3109' | translate }}:
+                          </div>
+                          <div class="uk-width-7-10 uk-text-small uk-text-truncate">
+                            {{obj.lastName}} {{obj.surName}} {{obj.name1}} {{obj.name2}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="uk-width-8-10" style="padding-left: 20px;" ng-if="vm.dataBlocks.length">
+
+        <div class="uk-grid">
+
+          <div class="uk-width-3-10">
+            <div class="md-card" style="height: calc(100vh - 64px);overflow: auto;">
+              <div class="md-card-content" style="padding: 10px;">
+
+                <div class="scrum_column_heading_wrapper">
+                  <div class="scrum_column_heading">
+                    <span ng-if="vm.casePat" style="font-size: 16px;">{{ '3301' | translate }} - <strong>{{
+                        vm.casePat.studyType.code }}{{ vm.casePat.idCase.toString().substring(3) }}</strong></span>
+                    <span ng-if="vm.dataBlocks.length" class="uk-badge uk-badge-primary badge-block">{{
+                      vm.dataBlocks.length }}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div ng-repeat="block in vm.dataBlocks" class="block" ng-class="{'targetactive': block.active}"
+                    ng-click="vm.selectBlock(block);">
+                    <div class="scrum_task" style="border: none;padding: 5px;background: transparent;">
+                      <div class="casete_header">
+                        <div class="uk-grid">
+                          <div class="uk-width-1-2 h-20" style="margin-top: 2px;">
+                            <div style="height: 15px;display: flex;">
+                              <label
+                                style="font-size: 17px;color: black;font-weight: 500;height: 15px;margin-left: 5px;">{{
+                                block.studyType.code }}{{ block.number }}</label>
+                            </div>
+                          </div>
+                          <div class="uk-width-1-2 h-20">
+                            <div style="height: 22px;">
+                              <div class="user_heading_avatar colour_casete">
+                                <div class="thumbnail thumbnail-casete"
+                                  ng-style='{ "background-color": "{{ block.casete.colour }}" }'></div>
+                              </div>
+                              <div style="margin-top: 0;">
+                                <span class="level-casete">{{ block.completeConsecutive }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="h-20 uk-width-1-2">
+                            <label style="color: black;font-size: 12px;margin: 0 5px;">{{ block.initialsPatient
+                              }}</label>
+                          </div>
+                          <div class="h-20 uk-width-1-2">
+                            <label class="organ-r">{{ block.organ.code }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="uk-width-7-10" ng-if="vm.blockSelected">
+            <div class="md-card" style="height: calc(100vh - 64px);overflow: auto;">
+              <div class="md-card-content" style="padding: 10px;font-size: 16px;">
+                <label>{{ '3307' | translate }}</label>
+                <div>
+                  <div class="uk-grid">
+                    <div class="uk-width-1-4">
+                      <div class="d-block">
+                        <strong>{{ '3038' | translate }}:</strong>
+                        <label>{{ vm.blockSelected.studyType.code }}{{ vm.blockSelected.idCase.toString().substring(3)
+                          }}</label>
+                      </div>
+                    </div>
+                    <div class="uk-width-1-4">
+                      <div class="d-block">
+                        <strong>{{ '0398' | translate }}:</strong>
+                        <label>{{ vm.blockSelected.name1 }} {{ vm.blockSelected.name2 }} {{ vm.blockSelected.lastName }}
+                          {{ vm.blockSelected.surName }}</label>
+                      </div>
+                    </div>
+
+                    <div class="uk-width-1-4">
+                      <div class="d-block">
+                        <strong>{{ '3034' | translate }}:</strong>
+                        <label>{{ vm.blockSelected.organ.name }}</label>
+                      </div>
+                    </div>
+
+                    <div class="uk-width-1-4">
+                      <div class="d-block">
+                        <div class="user_heading_avatar" style="display: flex;">
+                          <strong>{{ '1259' | translate }}:</strong>
+                          <label style="margin-left: 5px;">{{ vm.blockSelected.completeConsecutive }}</label>
+                          <div class="thumbnail thumbnail-casete" style="margin-top: -2px;"
+                            ng-style='{ "background-color": "{{ vm.blockSelected.casete.colour }}" }'></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="section in vm.blockSelected.form">
+                  <div class="uk-grid uk-width-9-10">
+                    <div class="uk-width-1-2" ng-repeat="input in section" on-last-repeat>
+                      <div class="parsley-row" ng-if="input.type == 'text'">
+                        <span class="uk-text-small uk-text-muted patient-list-content">{{ input.label }}</span>
+                        <input type="{{ input.type }}" ng-model="input.value" class="md-input input-quantity" required
+                          md-input style="border: transparent;border-bottom: 1px solid #e0e0e0;"
+                          ng-disabled="vm.disabled">
+                      </div>
+                      <div class="parsley-row" ng-class="{ 'uk-margin-small-top' : input.position }"
+                        ng-if="input.type == 'selectize'">
+                        <span class="uk-text-small uk-text-muted reception-label">{{ input.label }}</span>
+                        <ui-select ng-model="input.value" theme="select2" style="width: 100%;"
+                          ng-required="input.required" ng-disabled="vm.disabled">
+                          <ui-select-match placeholder="{{input.placeholder}}">
+                            {{$select.selected.name}}
+                          </ui-select-match>
+                          <ui-select-choices class="contentscroll"
+                            repeat="item in input.data | filter: {name:$select.search}">
+                            <span ng-bind-html="item.name | highlight: $select.search"></span>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-10 uk-text-center" style="width: 12%;">
+                    <div class="uk-vertical-align uk-height-1-1">
+                      <div class="uk-vertical-align-middle">
+                        <a href="javascript:void(0)" ng-click="vm.cloneSection($event, $index, specimen)"
+                          ng-class="{'isDisabled': vm.disabledAdd}" ng-if="$last">
+                          <i class="material-icons md-36"
+                            ng-class="{'disabled-form': vm.disabledAdd, 'add': !vm.disabledAdd }">&#xE146;</i>
+                        </a>
+                        <a href="javascript:void(0)" ng-click="vm.deleteSection($event,$index, specimen)"
+                          ng-class="{'isDisabled': vm.disabledAdd}" ng-if="specimen.form.length > 1">
+                          <i class="material-icons md-36"
+                            ng-class="{'disabled-form': vm.disabledAdd, 'remove': !vm.disabledAdd }">&#xE872;</i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ventana modal para el filtro de fechas -->
+<div id="modalfilter-date" class="uk-modal" bg-close="false" aria-hidden="true" style=" min-height: 300px"
+  ng-if="vm.showModalFilter">
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <div class="uk-modal-header">
+      <h3 class="uk-modal-title">
+        <i style="padding-top: 5px; padding-right: 5px" class="material-icons md-color-light-blue-50">&#xE8B6;</i>
+        {{ '0642' | translate }}
+      </h3>
+    </div>
+    <div class="uk-grid">
+      <div class="uk-width-1-1">
+        <casefilter rangeinit="vm.rangeInit" rangeend="vm.rangeEnd" rangeinittemp="vm.rangeinittemp"
+          rangeendtemp="vm.rangeendtemp" typefilter="vm.filterRange" isopenreport="vm.isOpenReport"></casefilter>
+      </div>
+      <div class="uk-width-1-1">
+        <div class="uk-input-group " style="width: 100%">
+          <filterstudytype numfilter="vm.numfilter" liststudies="vm.liststudies" numlist="vm.numlist"
+            state="vm.stateFilters"></filterstudytype>
+        </div>
+      </div>
+    </div>
+    <div class="uk-overflow-container"></div>
+    <div class="uk-modal-footer uk-text-right">
+      <button type="button"
+        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-modal-close"
+        ng-disabled="!vm.isOpenReport || vm.numlist === 0"
+        ng-class="{'md-bg-blue-grey-100':!vm.isOpenReport || vm.numlist === 0}" ng-focus="vm.stateFilters = 1;"
+        ng-click="vm.searchcase = '';vm.setFilter();">{{'0643' | translate}}
+      </button>
+      <button type="button" class="md-btn md-btn-default uk-modal-close" ng-click="vm.loadpreviousfilter();">{{'0008'
+        | translate}}</button>
+    </div>
+  </div>
+</div>
+
+<!-- ventana modal para cuando no se encuentran datos -->
+<div id="nofoundfilter" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <div class="uk-form-row">
+      <form class="form" name="myForm">
+        <div class="uk-grid uk-container-center">
+          <div class="uk-width-2-10" style="padding-left: 17px;">
+            <img src="images/Question.png" height="90" width="90">
+          </div>
+          <div class="uk-width-8-10" style="margin-top: 3%;">
+            <span class="uk-text-justify">{{ '0962' | translate }}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

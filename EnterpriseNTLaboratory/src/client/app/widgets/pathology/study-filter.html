@@ -1,0 +1,91 @@
+<style type="text/css">
+  .tag-item-add {
+    border: 2px solid #2196f3 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+  }
+
+  .tag-item-subtranct {
+    background: #f5dad0 !important;
+    border: 2px solid #ff5c5c !important;
+  }
+
+  .autocomplete-add:hover {
+    color: #1976d2 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-subtranct:hover {
+    color: #d80000 !important;
+    background: #ffece5 !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-add.selected {
+    color: #1976d2 !important;
+    background: rgba(0, 116, 217, 0.1) !important;
+    font-size: 13px;
+  }
+
+  .autocomplete-subtranct.selected {
+    color: #d80000 !important;
+    background: #ffece5 !important;
+    font-size: 13px;
+  }
+
+  .pl-10 {
+    padding-left: 10px;
+  }
+</style>
+
+<fieldset class="fieldset">
+  <legend>{{'3175' | translate}}:</legend>
+  <div class="uk-grid" data-uk-grid-margin="">
+    <div class="uk-width-1-5 radio-check" style="white-space: nowrap; margin-bottom: 5px;">
+
+      <input type="radio" name="fAT{{filter.id}}" id="fAT_1{{filter.id}}" value="0" checked ng-focus="filter.clickfilter(0)"/>
+      <label for="fAT_1{{filter.id}}"  ng-click="filter.clickfilter(0)">{{'0078' | translate}}</label>
+      <br/>
+      <input type="radio" name="fAT{{filter.id}}" id="fAT_2{{filter.id}}" value="1" ng-focus="filter.clickfilter(1)"/>
+      <label for="fAT_2{{filter.id}}"  ng-click="filter.clickfilter(1)">{{'3176' | translate}}</label><br/>
+    </div>
+
+    <div class="uk-width-4-5" ng-show="filter.numFilter > 0" style="width: 80%; padding-top: 0px; padding-left: 25px; padding-bottom: 0px; margin-top: -8px;">
+
+      <tags-input ng-model="filter.filterStudie" min-length="1" add-on-paste="true" key-property="id" display-property="v" class="md-input" placeholder="{{'0385' | translate}}"
+        add-from-autocomplete-only="false" add-on-space="false" add-on-blur="false" text="$tag" template="tag-Template" on-tag-added="filter.validAddTag($tag, filter.filterStudie)"
+        on-tag-removed="filter.validRemoveTag($tag)"
+        tag-class="{'tag-item-add': $tag.v == filter.all || !filter.firstValue, 'tag-item-subtranct': $tag.v != filter.all && filter.firstValue}">
+        <auto-complete source="filter.loadDataFilter($tag)" min-length="1" load-on-focus="true"
+          load-on-empty="true" max-results-to-show="32"
+          match-class="{'autocomplete-add': $tag.v == filter.all || !filter.firstValue, 'autocomplete-subtranct': $tag.v != filter.all && filter.firstValue}"
+          template="autocomplit-Template">
+        </auto-complete>
+      </tags-input>
+
+      <script type="text/ng-template" id="tag-Template">
+        <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+          <div class="left-panel">
+            <span class="material-icons" ng-class="{'md-color-blue-500': $tag.v == filter.all, 'md-color-red-500': $tag.v != filter.all }" >{{data.icon}}</span>
+          </div>
+          <div class="right-panel" style="padding-left: 4px">
+            <span>{{$getDisplayText()}}</span>
+            <span>{{data.name}}</span>
+            <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+          </div>
+        </div>
+      </script>
+
+      <script type="text/ng-template" id="autocomplit-Template">
+          <div class="uk-grid" data-uk-grid-margin="" style="overflow: hidden;">
+            <div class="left-panel">
+              <span class="material-icons" ng-class="{'md-color-red-500': $tag.v != filter.all, 'md-color-blue-500': $tag.v == filter.all  }"  >{{data.icon}}</span>
+            </div class="right-panel" style="padding-left: 4px">
+              <span class="pl-10" ng-bind-html="$highlight($getDisplayText())"></span>
+              <span class="pl-10">{{data.name}}</span>
+            </div>
+        </div>
+      </script>
+    </div>
+  </div>
+</fieldset>

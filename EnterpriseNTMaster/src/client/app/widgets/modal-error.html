@@ -1,0 +1,129 @@
+<div style="display: none">
+    <div>
+    	<input data-ng-model="openerrormodal"></input>  
+    	<input data-ng-model="detailError"></input>  
+    </div>
+</div>
+<script type="text/ng-template" id="Error.html">
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-danger">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-tittle text-center" id="myModallabel">{{'0090' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                        <form name="error" id="error">
+                            <div class="row">
+                                <div class="col-md-3"><strong>{{'0091' | translate}}:</strong></div>
+                                <div class="col-md-9"><h5 data-ng-bind="code"></h5></div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-3"><strong>{{'0092' | translate}}:</strong></div>
+                                <div class="col-md-9"><h5 data-ng-bind="message"></h5></div>
+                            </div>
+
+                             <div class="row">
+                                <div class="col-md-3"><strong>{{'0073' | translate}}:</strong></div>
+                                <div class="col-md-9"><h5 data-ng-bind="url"></h5></div>
+                            </div>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <div class="col-md-12" style="height: 100%">
+                            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span> {{'0074' | translate}}
+                            </button>
+                            <button type="button" ng-click="close('Yes')" class="btn btn-info" data-dismiss="modal" >
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{'0022' | translate}}
+                            </button>
+                            <div class="modal-error">
+                                <div class="collapse" id="collapseExample">
+                                    <div class="well modal-error-collapse">
+                                        <p data-ng-bind="detail" class="text-left"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</script>
+<script type="text/ng-template" id="ErrorBoton.html">
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-danger">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-tittle text-center" id="myModallabel">{{'0090' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                        <form name="error" id="error">
+                            <div class="row">
+                                <div class="col-md-3"><strong>{{'0091' | translate}}:</strong></div>
+                                <div class="col-md-9"><h5 data-ng-bind="code"></h5></div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-3"><strong>{{'0092' | translate}}:</strong></div>
+                                <div class="col-md-9"><h5 data-ng-bind="message"></h5></div>
+                            </div>
+
+                             <div class="row">
+                                <div class="col-md-3"><strong>{{'0073' | translate}}:</strong></div>
+                                <div class="col-md-9"><h5 data-ng-bind="url"></h5></div>
+                            </div>
+                        </form>
+                </div>
+                <div class="modal-footer">
+         
+                </div>
+            </div>
+        </div>
+    </div> 
+</script>
+<script type="text/ng-template" id="seccioncaducado.html">
+    <div class="modal fade">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="img-responsive" src="images/Seguridad.png" width="115" height="115">
+                        </div>
+                        <div  class="col-md-9">
+                            <strong>{{'0217' | translate}}:</strong>
+                        </div>
+                        <div  class="col-md-9">
+                           <h5>{{'0218' | translate}}</h5>
+                        </div>
+                    </div>
+                </div>          
+        </div>
+    </div> 
+</script>
+<script type="text/ng-template" id="seccioncaducadoinactividad.html">
+    <div class="modal fade">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="img-responsive" src="images/Seguridad.png" width="115" height="115">
+                        </div>
+                        <div  class="col-md-9">
+                            <strong>{{'0217' | translate}}:</strong>
+                        </div>
+                        <div  class="col-md-9">
+                           <h5>{{'1020' | translate}}</h5>
+                        </div>
+                    </div>
+                </div>          
+        </div>
+    </div> 
+</script>
+
+
+

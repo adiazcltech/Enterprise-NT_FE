@@ -1,0 +1,6 @@
+Orden;Fecha de ingreso;Tipo documento;Historia; Nombre;Código;Prueba; Resultado;Fecha de validación;Unidad;Comentario;Género; Estado;Fecha de nacimiento; Años; Teléfono; Dirección; Correo; Diagnostico;Precio Servicio
+{{#each orders}}
+{{#each tests}}
+"{{../suborderNumber}}";"{{../createdDate}}";"{{../patient.documentType.name}};{{../patient.patientId}};{{../patient.name1}} {{../patient.name2}} {{../patient.lastName}} {{../patient.surName}};{{code}};{{name}};{{result.result}};{{validationDate}}; {{unit.name}}; {{resultComment.commentformat}}; {{../patient.sexabbr}};{{result.state}};{{../patient.birthdaydate}};{{../patient.birthday}};{{../patient.phone}}; {{../patient.address}};{{../patient.email}};{{../demo_18_value}};{{testPrice.servicePrice}}
+{{/each}}
+{{/each}}

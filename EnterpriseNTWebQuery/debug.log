@@ -1,0 +1,348 @@
+[0607/113758.267:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/113758.267:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/114758.273:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/114758.273:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/114758.275:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/114758.275:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/115258.277:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/115258.277:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/120758.285:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/120758.285:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/121004.995:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/121004.996:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/122005.007:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/122005.007:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/122005.007:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/122005.007:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/122505.017:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/122505.017:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/124005.030:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/124005.030:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/125505.050:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/125505.050:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/131005.057:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/131005.057:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/132505.073:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/132505.073:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/134005.104:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/134005.104:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/135505.115:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/135505.115:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/140429.882:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/140429.882:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/141429.888:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/141429.888:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/141429.889:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/141429.889:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/141929.895:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/141929.895:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/143429.905:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/143429.905:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/144929.917:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/144929.917:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/150429.928:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/150429.928:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/151929.938:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/151929.938:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/153429.949:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/153429.949:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/154929.960:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/154929.960:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/160429.972:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/160429.972:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0607/161929.981:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0607/161929.981:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/071816.008:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/071816.008:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/104514.734:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/104514.734:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/104927.572:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/104927.572:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/112359.271:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/112359.272:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/140736.244:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/140736.263:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/142453.334:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/142453.334:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/142602.987:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/142602.987:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/153714.847:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/153714.847:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/161334.474:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/161334.475:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/162707.287:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/162707.288:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/162853.518:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/162853.518:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0608/163111.624:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0608/163111.625:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/073223.455:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/073223.456:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/082810.469:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/082810.469:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083142.813:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083142.813:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083323.809:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083323.809:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083429.768:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083429.768:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083550.556:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083550.557:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083646.117:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083646.117:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083714.990:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083714.990:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083743.352:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083743.352:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0609/083814.291:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0609/083814.291:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/190351.289:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/190351.289:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/190703.690:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/190703.691:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/191010.912:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/191010.912:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/191304.884:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/191304.884:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/191656.640:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/191656.640:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/192656.647:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/192656.647:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/192656.648:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/192656.648:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/193156.656:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/193156.656:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/193330.673:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/193330.674:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/193427.306:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/193427.307:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/194028.033:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/194028.034:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/194656.665:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/194656.666:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/200114.814:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/200114.814:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/200156.675:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/200156.675:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/200442.933:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/200442.933:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/200756.840:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/200756.841:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/200900.858:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/200900.858:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/201242.827:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/201242.827:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/201656.685:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/201656.685:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/202118.929:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/202118.930:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/203156.694:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/203156.694:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/203655.062:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/203655.062:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/204656.701:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/204656.701:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/205353.993:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/205353.994:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/210156.710:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/210156.710:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/211656.720:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/211656.720:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/213156.729:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/213156.729:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0613/214656.743:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0613/214656.743:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/072606.117:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/072606.117:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/082255.260:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/082255.260:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/083531.280:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/083531.281:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/084409.753:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/084409.754:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/084506.435:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/084506.435:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/085336.159:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/085336.160:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/093520.423:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/093520.424:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/100733.576:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/100733.576:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/101006.563:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/101006.563:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/120006.129:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/120006.129:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/151145.775:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/151145.801:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/154612.135:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/154612.136:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/155416.015:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/155416.015:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/155752.158:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/155752.159:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0614/162530.972:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0614/162530.972:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/074007.568:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/074007.600:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/083657.158:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/083657.158:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/085705.682:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/085705.682:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/101322.581:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/101322.581:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/102834.131:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/102834.132:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/103642.590:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/103642.591:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/105242.107:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/105242.108:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/112110.023:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/112110.024:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/113425.471:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/113425.471:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/113702.758:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/113702.758:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/114251.630:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/114251.631:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/120759.291:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/120759.291:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/121000.005:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/121000.006:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/121153.318:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/121153.319:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/121239.499:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/121239.500:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/134222.429:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/134222.430:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/144053.205:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/144053.205:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/153823.741:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/153823.741:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/154153.906:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/154153.906:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/154503.014:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/154503.014:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/154543.273:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/154543.274:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/154611.111:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/154611.111:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/154741.041:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/154741.042:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0615/161917.570:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0615/161917.570:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/074703.222:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/074703.256:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/075035.031:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/075035.031:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/081602.705:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/081602.705:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/081758.803:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/081758.803:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/082059.507:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/082059.507:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/082403.535:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/082403.536:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/082617.641:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/082617.641:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/082718.103:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/082718.103:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/085308.958:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/085308.958:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/085356.433:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/085356.434:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/085433.981:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/085433.982:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/091317.695:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/091317.697:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/114540.843:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/114540.843:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0616/141836.552:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0616/141836.581:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/072950.421:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/072950.421:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/081918.490:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/081918.490:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/110902.726:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/110902.726:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/111618.224:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/111618.224:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/112618.238:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/112618.238:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/112618.242:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/112618.242:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/113118.243:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/113118.243:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/114618.252:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/114618.252:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/120118.247:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/120118.247:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/121618.243:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/121618.243:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/122743.297:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/122743.297:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/123118.242:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/123118.242:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/123845.620:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/123845.620:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/124618.237:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/124618.237:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/130118.330:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/130118.331:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/131618.759:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/131618.759:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/133118.762:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/133118.762:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/133456.009:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/133456.010:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/134618.765:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/134618.765:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/140118.753:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/140118.753:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0620/140645.880:ERROR:process_info.cc(625)] range at 0x7c43495e00000000, size 0x1e5 fully unreadable
+[0620/140645.880:ERROR:process_info.cc(625)] range at 0x7c4349c400000000, size 0x1e5 fully unreadable
+[0620/140645.880:ERROR:process_info.cc(625)] range at 0x0, size 0x1e5 fully unreadable
+[0620/140646.261:ERROR:file_io.cc(30)] read: expected 112, observed 0
+[0620/140646.261:ERROR:crash_report_database_win.cc(443)] failed to read records
+[0621/085800.691:ERROR:process_info.cc(625)] range at 0x1209495e00000000, size 0x2db fully unreadable
+[0621/085800.707:ERROR:process_info.cc(625)] range at 0x120949c400000000, size 0x2db fully unreadable
+[0621/085800.707:ERROR:process_info.cc(625)] range at 0x0, size 0x2db fully unreadable
+[0621/085850.727:ERROR:process_info.cc(625)] range at 0x23b4495e00000000, size 0x245 fully unreadable
+[0621/085850.727:ERROR:process_info.cc(625)] range at 0x23b449c400000000, size 0x245 fully unreadable
+[0621/085850.727:ERROR:process_info.cc(625)] range at 0x0, size 0x245 fully unreadable
+[0621/085927.031:ERROR:process_info.cc(625)] range at 0xb1c9495e00000000, size 0x1e3 fully unreadable
+[0621/085927.031:ERROR:process_info.cc(625)] range at 0xb1c949c400000000, size 0x1e3 fully unreadable
+[0621/085927.031:ERROR:process_info.cc(625)] range at 0x0, size 0x1e3 fully unreadable
+[0622/113147.095:ERROR:process_info.cc(625)] range at 0x7287496e00000000, size 0x1ec fully unreadable
+[0622/113147.110:ERROR:process_info.cc(625)] range at 0x728749d600000000, size 0x1ec fully unreadable
+[0622/113147.110:ERROR:process_info.cc(625)] range at 0x0, size 0x1ec fully unreadable
+[0623/083732.491:ERROR:process_info.cc(625)] range at 0x7927495c00000000, size 0x1b2 fully unreadable
+[0623/083732.525:ERROR:process_info.cc(625)] range at 0x792749c400000000, size 0x1b2 fully unreadable
+[0623/083732.525:ERROR:process_info.cc(625)] range at 0x0, size 0x1b2 fully unreadable
+[0623/083950.243:ERROR:process_info.cc(625)] range at 0x4a05496c00000000, size 0x1cb fully unreadable
+[0623/083950.244:ERROR:process_info.cc(625)] range at 0x4a0549d400000000, size 0x1cb fully unreadable
+[0623/083950.244:ERROR:process_info.cc(625)] range at 0x0, size 0x1cb fully unreadable
+[0623/084057.305:ERROR:process_info.cc(625)] range at 0xbaeb496c00000000, size 0x1f0 fully unreadable
+[0623/084057.305:ERROR:process_info.cc(625)] range at 0xbaeb49d400000000, size 0x1f0 fully unreadable
+[0623/084057.305:ERROR:process_info.cc(625)] range at 0x0, size 0x1f0 fully unreadable
+[0717/183920.578:ERROR:process_info.cc(631)] range at 0xbd112b0a00000000, size 0x8 fully unreadable
+[0717/183920.600:ERROR:process_info.cc(631)] range at 0xbd112b6c00000000, size 0x8 fully unreadable
+[0717/183920.600:ERROR:process_info.cc(631)] range at 0x0, size 0x8 fully unreadable
+[0815/150251.519:ERROR:process_info.cc(631)] range at 0x19f53d9c00000000, size 0x1e6 fully unreadable
+[0815/150251.628:ERROR:process_info.cc(631)] range at 0x19f53dbc00000000, size 0x1e6 fully unreadable
+[0815/150251.628:ERROR:process_info.cc(631)] range at 0x0, size 0x1e6 fully unreadable
+[0815/152528.662:ERROR:process_info.cc(631)] range at 0x84173d9c00000000, size 0x1e7 fully unreadable
+[0815/152528.663:ERROR:process_info.cc(631)] range at 0x84173dbc00000000, size 0x1e7 fully unreadable
+[0815/152528.663:ERROR:process_info.cc(631)] range at 0x0, size 0x1e7 fully unreadable
+[0815/160718.086:ERROR:process_info.cc(631)] range at 0x6c953d9c00000000, size 0x19b fully unreadable
+[0815/160718.104:ERROR:process_info.cc(631)] range at 0x6c953dbc00000000, size 0x19b fully unreadable
+[0815/160718.104:ERROR:process_info.cc(631)] range at 0x0, size 0x19b fully unreadable
+[0815/161309.106:ERROR:process_info.cc(631)] range at 0x58bf3d9c00000000, size 0x26f fully unreadable
+[0815/161309.107:ERROR:process_info.cc(631)] range at 0x58bf3dbc00000000, size 0x26f fully unreadable
+[0815/161309.107:ERROR:process_info.cc(631)] range at 0x0, size 0x26f fully unreadable
+[1129/110651.528:ERROR:process_info.cc(632)] range at 0x209c4d6c00000000, size 0x1ce fully unreadable
+[1129/110651.563:ERROR:process_info.cc(632)] range at 0x209c4dd400000000, size 0x1ce fully unreadable
+[1129/110651.563:ERROR:process_info.cc(632)] range at 0x0, size 0x1ce fully unreadable
+[1204/073746.951:ERROR:process_info.cc(632)] range at 0x37934d6c00000000, size 0x29e fully unreadable
+[1204/073746.968:ERROR:process_info.cc(632)] range at 0x37934dd200000000, size 0x29e fully unreadable
+[1204/073746.968:ERROR:process_info.cc(632)] range at 0x0, size 0x29e fully unreadable
+[0904/072135.420:ERROR:settings.cc(319)] Settings magic is not 1129342067
