@@ -552,8 +552,18 @@
                                 </md-input-container>
                             </div>
                         </div>
-                        <div class="md-fab-wrapper md-fab-speed-dial" style="bottom: 6px;right: 12px;">
-                            <button type="button" class="md-fab  md-fab-small md-fab md-fab-success"
+                        <div class="md-fab-wrapper" style="bottom: 6px;right: 12px;">
+                            <button type="button" class="md-fab md-fab-smallY md-fab-success"
+                            ng-click="vm.newcitotoxican()">
+                            <i class="material-icons" data-uk-tooltip="{pos:'top'}"
+                                title="{{'3100' | translate}}">&#xE145;</i>
+                           </button>
+                           <button type="button" class="md-fab md-fab-smallY md-fab-primary"
+                           ng-click="vm.savecytotoxicantibodies()">
+                           <i class="material-icons md-color-blue-50" title="{{'0007' | translate}}"
+                           data-uk-tooltip="{pos:'top'}"></i>
+                          </button>
+                          <!--   <button type="button" class="md-fab  md-fab-small md-fab md-fab-success"
                             ng-click="vm.newcitotoxican()">
                             <i class="material-icons" data-uk-tooltip="{pos:'top'}"
                                 title="{{'3100' | translate}}">&#xE145;</i>
@@ -562,9 +572,11 @@
                                 class="md-fab md-fab-small md-fab-primary md-fab-wave-light waves-effect waves-light"
                                 ng-click="vm.savecytotoxicantibodies()">
                                 <i class="material-icons md-color-blue-50" title="{{'0007' | translate}}"
-                                    data-uk-tooltip="{pos:'top'}" data-uk-tooltip="{pos:'top'}"></i>
-                            </button>
+                                    data-uk-tooltip="{pos:'top'}"></i>
+                            </button> -->
                         </div>
+                        
+
                     </div>
                 </div>
             </div>

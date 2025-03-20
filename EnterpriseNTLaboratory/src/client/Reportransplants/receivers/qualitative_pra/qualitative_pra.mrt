@@ -6,8 +6,8 @@
   "ReportFile": "qualitative_pra.mrt",
   "ReportAuthor": "Stimulsoft",
   "ReportDescription": "This sample demonstrates how to create a simple list report.",
-  "ReportCreated": "/Date(1084100340000-0500)/",
-  "ReportChanged": "/Date(1436258952000-0500)/",
+  "ReportCreated": "/Date(1084064340000-0500)/",
+  "ReportChanged": "/Date(1436222952000-0500)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Centimeters",
@@ -7482,7 +7482,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "SANGRE EDTA"
+                "Value": "SUERO"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:0,0,0",

@@ -21,7 +21,6 @@
     "TribunalDS",
     "specialdeletesDS",
     "reportsDS",
-    "reportadicional",
     "$filter",
     "$state",
     "moment",
@@ -33,6 +32,7 @@
     "$scope",
     "resultsentryDS",
     "demographicDS",
+    "documenttypesDS",
   ];
 
   function orderentryController(
@@ -51,7 +51,6 @@
     TribunalDS,
     specialdeletesDS,
     reportsDS,
-    reportadicional,
     $filter,
     $state,
     moment,
@@ -62,7 +61,8 @@
     $hotkey,
     $scope,
     resultsentryDS,
-    demographicDS
+    demographicDS,
+    documenttypesDS
   ) {
     var vm = this;
     vm.loadingdata = true;
@@ -872,11 +872,11 @@
         },
         user: {
           id: auth.id,
-          user:auth.userName,
-          lastName:auth.lastName,
-          name:auth.name
-        }
-      };     
+          user: auth.userName,
+          lastName: auth.lastName,
+          name: auth.name,
+        },
+      };
       return sigaDS.cancelturn(auth.authToken, dataend).then(
         function (data) {
           if (data.status === 200) {
@@ -1282,8 +1282,46 @@
       var patientId = Patient.patientId;
       var patientDemosValues = {};
       vm.patientcoment = "";
-      var documentType =
-        vm.managedocumenttype === true ? Patient.documentType : 1;
+      vm.validateddocument="";
+      if (vm.managedocumenttype) {
+        //0,1 - Cédula Ciudadanía
+        if (
+          Patient.documentType === 0 ||
+          Patient.documentType === 1 ||
+          Patient.documentType === "0" ||
+          Patient.documentType === "1"
+        ) {
+          vm.validateddocument = _.filter(vm.Listdocumentype, function (o) {
+            return o.codeSiga === 1;
+          })[0].id;          
+        }
+        //2 - Tarjeta de Identidad
+        if (Patient.documentType === 2 || Patient.documentType === "2") {
+          vm.validateddocument = _.filter(vm.Listdocumentype, function (o) {
+            return o.codeSiga === 2;
+          })[0].id;
+        }
+        //3 - Cédula Extranjería
+        if (Patient.documentType === 3 || Patient.documentType === "3") {
+          vm.validateddocument = _.filter(vm.Listdocumentype, function (o) {
+            return o.codeSiga === 3;
+          })[0].id;
+        }
+        //4  - Pasaporte
+        if (Patient.documentType === 4 || Patient.documentType === '4') {
+          vm.validateddocument = _.filter(vm.Listdocumentype, function (o) {
+            return o.codeSiga === 4;
+          })[0].id;
+        }
+        //5 - Registro Civil
+        if (Patient.documentType === 5 || Patient.documentType === '5') {
+          vm.validateddocument = _.filter(vm.Listdocumentype, function (o) {
+            return o.codeSiga === 5;
+          })[0].id;
+        }
+      }
+
+      var documentType = vm.managedocumenttype === true ? vm.validateddocument : 1;
       vm.statediagnostic = 3;
       vm.statecomment = 3;
       if (
@@ -1474,14 +1512,11 @@
                 }, 100);
 
                 //0,1 - Cédula Ciudadanía
-                if (
-                  Patient.documentType === "0" ||
-                  Patient.documentType === "1"
-                ) {
+                if (Patient.documentType === 0 || Patient.documentType === 1 || Patient.documentType === '0' || Patient.documentType === '1') {
                   var parientType = $filter("filter")(
                     vm.ItemTypeDocument,
                     function (e) {
-                      return e.code === "1";
+                      return e.id === parseInt(vm.validateddocument);
                     }
                   );
                   if (parientType.length !== 0) {
@@ -1494,11 +1529,11 @@
                   }
                 }
                 //2 - Tarjeta de Identidad
-                if (Patient.documentType === "2") {
+                if (Patient.documentType === 2 || Patient.documentType ==='2') {
                   var parientType = $filter("filter")(
                     vm.ItemTypeDocument,
                     function (e) {
-                      return e.code === "3";
+                      return e.id === parseInt(vm.validateddocument);
                     }
                   );
                   if (parientType.length !== 0) {
@@ -1511,11 +1546,11 @@
                   }
                 }
                 //3 - Cédula Extranjería
-                if (Patient.documentType === "3") {
+                if (Patient.documentType === 3 || Patient.documentType ==='3') {
                   var parientType = $filter("filter")(
                     vm.ItemTypeDocument,
                     function (e) {
-                      return e.code === "2";
+                      return e.id === parseInt(vm.validateddocument);
                     }
                   );
                   if (parientType.length !== 0) {
@@ -1528,11 +1563,11 @@
                   }
                 }
                 //4  - Pasaporte
-                if (Patient.documentType === "4") {
+                if (Patient.documentType === 4 || Patient.documentType ==='4') {
                   var parientType = $filter("filter")(
                     vm.ItemTypeDocument,
                     function (e) {
-                      return e.code === "5";
+                      return e.id === parseInt(vm.validateddocument);
                     }
                   );
                   if (parientType.length !== 0) {
@@ -1545,11 +1580,11 @@
                   }
                 }
                 //5 - Registro Civil
-                if (Patient.documentType === "5") {
+                if (Patient.documentType === 5 || Patient.documentType ==='5') {
                   var parientType = $filter("filter")(
                     vm.ItemTypeDocument,
                     function (e) {
-                      return e.code === "4";
+                      return e.id === parseInt(vm.validateddocument);
                     }
                   );
                   if (parientType.length !== 0) {
@@ -1583,11 +1618,13 @@
                 vm.patientDemosValues[-105] = moment(Patient.birthday).format(
                   vm.formatDate.toUpperCase()
                 );
+                console.log(vm.patientDemosValues[-105])
+                console.log( moment(Patient.birthday).format(vm.formatDate.toUpperCase()))
                 vm.patientDemosValues[-110] = common.getAge(
                   moment(Patient.birthday).format(vm.formatDate.toUpperCase()),
-                  vm.formatDate.toUpperCase(),
-                  vm.staticDemoIds["orderDate"]
+                  vm.formatDate.toUpperCase()
                 );
+                console.log(vm.patientDemosValues[-110])
 
                 if (Patient.sex === 1) {
                   vm.patientDemosValues[-104] = {
@@ -1793,6 +1830,7 @@
                             demographic.idDemographic ==
                             vm.staticDemoIds["birthday"]
                           ) {
+                            demographic.value='1995-04-03 00:00:00'
                             //Si el demografico es la fecha de nacimiento calcula la edad
                             patientDemosValues[vm.staticDemoIds["age"]] =
                               common.getAge(
@@ -3330,7 +3368,7 @@
      * Evento de presionar nuevo
      */
     function eventNew() {
-      vm.externalId = '0';
+      vm.externalId = "0";
       vm.blockbilling = false;
       vm.blockservice = false;
       vm.permissioncancel = false;
@@ -4400,7 +4438,6 @@
         vm.loadingdata = false;
       } else {
         vm.printlabels();
-       
       }
     }
 
@@ -4524,8 +4561,18 @@
     }
     function directImpression() {
       vm.printbarcode.ordersprint[0] = vm.listOrderHead[vm.totalorder];
-      vm.printbarcode.ordersprint[0].samples = _.filter(vm.listOrderHead[vm.totalorder].samples, function(o) { return o.id != 0; }); 
-      vm.printbarcode.ordersprint[0].tests = _.filter(vm.listOrderHead[vm.totalorder].tests, function(o) { return o.sample.id != 0; })
+      vm.printbarcode.ordersprint[0].samples = _.filter(
+        vm.listOrderHead[vm.totalorder].samples,
+        function (o) {
+          return o.id != 0;
+        }
+      );
+      vm.printbarcode.ordersprint[0].tests = _.filter(
+        vm.listOrderHead[vm.totalorder].tests,
+        function (o) {
+          return o.sample.id != 0;
+        }
+      );
 
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       return reportsDS
@@ -4741,7 +4788,7 @@
                       branch: vm.orderDemosValues[vm.staticDemoIds["branch"]],
                       physician:
                         vm.orderDemosValues[vm.staticDemoIds["physician"]],
-                      orderHIS: vm.orderDemosValues[-109]  
+                      orderHIS: vm.orderDemosValues[-109],
                     },
                   ];
 
@@ -6986,12 +7033,33 @@
         vm.showModalSearchRecall = true;
         $rootScope.orderecall = false;
       }
+      if (vm.managedocumenttype) {
+        vm.listdocuments();
+      }
       vm.searchByDate();
       vm.loadDemographicControls();
 
       if (localStorageService.get("ExamenesPorDemografico") === "True") {
         vm.getdemographictest();
       }
+    }
+    vm.listdocuments = listdocuments;
+    function listdocuments() {
+      var auth = localStorageService.get("Enterprise_NT.authorizationData");
+      vm.Listdocumentype = []; //Invoca el metodo del servicio
+      documenttypesDS.getDocumentType(auth.authToken).then(
+        function (data) {
+          if (data.status === 200) {
+            vm.Listdocumentype = data.data;
+          } else {
+            vm.Listdocumentype = [];
+          }
+        },
+        function (error) {
+          vm.Error = error;
+          vm.ShowPopupError = true;
+        }
+      );
     }
     function searchByDate() {
       var date = moment(vm.dateToSearch).format("YYYYMMDD");

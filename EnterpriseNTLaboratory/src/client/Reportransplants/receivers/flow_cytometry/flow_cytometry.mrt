@@ -6,8 +6,8 @@
   "ReportFile": "flow_cytometry.mrt",
   "ReportAuthor": "Stimulsoft",
   "ReportDescription": "This sample demonstrates how to create a simple list report.",
-  "ReportCreated": "/Date(1083884340000-0500)/",
-  "ReportChanged": "/Date(1436042952000-0500)/",
+  "ReportCreated": "/Date(1083848340000-0500)/",
+  "ReportChanged": "/Date(1436006952000-0500)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Centimeters",
@@ -7572,7 +7572,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "SANGRE EDTA"
+                "Value": "SANGRE TOTAL/SUERO"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:0,0,0",

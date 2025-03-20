@@ -865,9 +865,9 @@
                   <!-- checkbox -->
                   <!-- checkbox -->
                   <th style="width: 1%;">
-                    <input type="checkbox" icheck name="namestickerAll" id="stickerAll" ng-model="vm.stickerAll" 
+                    <input type="checkbox" icheck name="namestickerAll" id="stickerAll" ng-model="vm.stickerAll"
                       ng-change="vm.changeChecksticker()" ng-disabled="vm.previewStickersOrder.length===0"
-                      table-check-all />
+                      table-check-all/>
 
                   </th>
                   <th style="width:10%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{'0110'
@@ -888,9 +888,9 @@
                     translate}}</th> -->
                 </tr>
               </thead>
-              <tbody class="tbodyscrollable contentscroll"
+              <tbody vs-repeat class="tbodyscrollable contentscroll"
                 style="max-height:250px;height: calc(100% - 53px);">
-                <tr class="uk-grid" data-ng-repeat="stickers in vm.previewStickersOrder |
+                <tr class="uk-grid" rowspan="stickers.cansamples" data-ng-repeat="stickers in vm.previewStickersOrder |
                   filter: vm.customFilter" style="margin-left: 0px; margin-top: 0px; height: 32px;">
                   <td style="width:1%;" class="uk-text-center">
                     <input type="checkbox" icheck ng-model="stickers.select" class="check_row"
@@ -947,7 +947,7 @@
           md-bg-blue-600 md-color-grey-50" ng-click="vm.printStickrs= true; vm.getProcessPrint()">{{'0246' |
         translate}}</button>
       <button type="button" class="uk-modal-close md-btn md-btn-flat
-          buttonCancel" ng-click="vm.printStickrs= false;vm.stickerAll = false ">{{'0329' | translate}}</button>
+          buttonCancel" ng-click="vm.printStickrs= false">{{'0329' | translate}}</button>
     </div>
   </div>
   

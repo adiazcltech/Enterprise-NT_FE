@@ -6,8 +6,8 @@
   "ReportFile": "immunological_studies_without_haplotypes.mrt",
   "ReportAuthor": "Stimulsoft",
   "ReportDescription": "This sample demonstrates how to create a simple list report.",
-  "ReportCreated": "/Date(1083668340000-0500)/",
-  "ReportChanged": "/Date(1435826952000-0500)/",
+  "ReportCreated": "/Date(1083632340000-0500)/",
+  "ReportChanged": "/Date(1435790952000-0500)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Centimeters",
@@ -8049,7 +8049,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "SANGRE EDTA"
+                "Value": "SANGRE TOTAL (EDTA/ACD)"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:0,0,0",
@@ -9900,7 +9900,7 @@
                 "Value": "Aprobado por:"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Top, Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -9924,7 +9924,7 @@
               "Interaction": {
                 "Ident": "StiInteraction"
               },
-              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -9952,7 +9952,7 @@
                 "Value": "{Variables.labelAnalisty}:"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Top, Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10008,7 +10008,7 @@
                 "Value": "{Variables.analyst}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10036,7 +10036,7 @@
                 "Value": "{Variables.approver}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10064,7 +10064,7 @@
                 "Value": "{Variables.labelAnalisty}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10092,7 +10092,7 @@
                 "Value": "Registro N° {Variables.regiterAnalyst}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10120,7 +10120,7 @@
                 "Value": "Director Técnico(a)"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10148,7 +10148,7 @@
                 "Value": "Registro N° {Variables.regiterApprover}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10176,7 +10176,7 @@
                 "Value": "Laboratorio de inmunología de trasplantes"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10204,7 +10204,7 @@
                 "Value": "Grupo de Inmunología celular e Inmunogénica"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10232,7 +10232,7 @@
                 "Value": "Laboratorio de inmunología de trasplantes"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10260,7 +10260,7 @@
                 "Value": "Grupo de Inmunología celular e Inmunogénica"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -10284,7 +10284,7 @@
               "Interaction": {
                 "Ident": "StiInteraction"
               },
-              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {

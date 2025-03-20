@@ -1019,28 +1019,32 @@
           function (data) {
             if (data.status === 200) {
               data.data.forEach(function (cubicle) {
-                cubicle.namecubicle =  
-                cubicle.name +
-                " - " +
-                cubicle.nameDesignatedPerson +
-                " ( " +
-                cubicle.numberOfAssignedPeople +
-                " ) ";
+                cubicle.namecubicle =
+                  cubicle.name +
+                  " - " +
+                  cubicle.nameDesignatedPerson +
+                  " ( " +
+                  cubicle.numberOfAssignedPeople +
+                  " ) ";
               });
               vm.samplingpoints = data.data;
               if (vm.samplingpoints.length === 0) {
                 logger.info(
-                  "No se encontraron usuarios disponibles consulte con el administrador"
+                  $filter("translate")("3689")
                 );
               } else {
-                vm.samplingpoints =_.orderBy(vm.samplingpoints, ['numberOfAssignedPeople', 'name'], ['asc', 'desc']);
+                vm.samplingpoints = _.orderBy(
+                  vm.samplingpoints,
+                  ["numberOfAssignedPeople", "name"],
+                  ["asc", "desc"]
+                );
                 vm.points = { id: vm.samplingpoints[0].id };
                 vm.loadinappoinment = false;
                 UIkit.modal("#modalConfirmscheduleAppointment").show();
               }
             } else {
               logger.info(
-                "No se encontraron usuarios disponibles consulte con el administrador"
+                $filter("translate")("3689")
               );
             }
           },
@@ -1053,64 +1057,75 @@
         UIkit.modal("#modalConfirmscheduleAppointment").show();
       }
     }
-    vm.ConfirmscheduleAppointmentautomatic = ConfirmscheduleAppointmentautomatic;
+    vm.ConfirmscheduleAppointmentautomatic =
+      ConfirmscheduleAppointmentautomatic;
     function ConfirmscheduleAppointmentautomatic() {
-      vm.loadinappoinment = true;    
-        var auth = localStorageService.get("Enterprise_NT.authorizationData");
-        return appointmentDS.getuseravailable(auth.authToken).then(
-          function (data) {
-            if (data.status === 200) {
-              data.data.forEach(function (cubicle) {
-                cubicle.namecubicle =  
+      vm.loading = true;
+      var auth = localStorageService.get("Enterprise_NT.authorizationData");
+      return appointmentDS.getuseravailable(auth.authToken).then(
+        function (data) {
+          if (data.status === 200) {
+            data.data.forEach(function (cubicle) {
+              cubicle.nameview =
+                cubicle.name + " - " + cubicle.nameDesignatedPerson;
+              cubicle.namecubicle =
                 cubicle.name +
                 " - " +
                 cubicle.nameDesignatedPerson +
                 " ( " +
                 cubicle.numberOfAssignedPeople +
                 " ) ";
-              });
-              vm.samplingpoints = data.data;
-              if (vm.samplingpoints.length === 0) {
-                logger.info(
-                  "No se encontraron usuarios disponibles consulte con el administrador"
-                );
-              } else {
-                vm.samplingpoints =_.orderBy(vm.samplingpoints, ['numberOfAssignedPeople', 'name'], ['asc', 'desc']);
-                var order = vm.orderDemosValues[vm.staticDemoIds["orderDB"]];
-                var auth = localStorageService.get("Enterprise_NT.authorizationData");
-                var asignetakesample = {
-                  'orderNumber': order,
-                  'id': vm.samplingpoints[0].id 
-                };
-                vm.assigneappoinment(asignetakesample);
-                var data = {
-                  orderNumber: order,
-                };
-                appointmentDS.changeappointment(auth.authToken, data).then(
-                  function (data) {
-                    if (data.status === 200) {
-                      vm.loadingmodalscheduleAppointment = false;              //La orden ha sido cancelada
-                      eventUndo();
-                      logger.success( "La cita se asigno " + vm.samplingpoints[0].namecubicle);
-                    }
-                  },
-                  function (error) {
-                    vm.loadingmodalscheduleAppointment = false;
-                    vm.modalError(error);
-                  }
-                );
-              }
-            } else {
+            });
+            vm.samplingpoints = data.data;
+            if (vm.samplingpoints.length === 0) {
               logger.info(
-                "No se encontraron usuarios disponibles consulte con el administrador"
+                $filter("translate")("3689")
+              );
+            } else {
+              vm.samplingpoints = _.orderBy(
+                vm.samplingpoints,
+                ["numberOfAssignedPeople", "name"],
+                ["asc", "desc"]
+              );
+              var order = vm.orderDemosValues[vm.staticDemoIds["orderDB"]];
+              var auth = localStorageService.get(
+                "Enterprise_NT.authorizationData"
+              );
+              var asignetakesample = {
+                orderNumber: order,
+                id: vm.samplingpoints[0].id,
+              };
+              vm.assigneappoinment(asignetakesample);
+              var data = {
+                orderNumber: order,
+              };
+              appointmentDS.changeappointment(auth.authToken, data).then(
+                function (data) {
+                  if (data.status === 200) {
+                    vm.loading = false; //La orden ha sido cancelada
+                    eventUndo();
+                    logger.success(
+                      "La cita se asigno " + vm.samplingpoints[0].nameview
+                    );
+                  }
+                },
+                function (error) {
+                  vm.loading = false;
+                  vm.modalError(error);
+                }
               );
             }
-          },
-          function (error) {
-            vm.modalError(error);
-            vm.loadinappoinment = false;
+          } else {
+            logger.info(
+              $filter("translate")("3689")
+            );
           }
-        );      
+        },
+        function (error) {
+          vm.modalError(error);
+          vm.loadinappoinment = false;
+        }
+      );
     }
     //** Método que trae la lista de ruteros con las jornadas consultadas en la zona y el dia**//
     vm.getAppointment = getAppointment;
@@ -4781,18 +4796,18 @@
       );
     }
 
-    vm.assigneappoinment=assigneappoinment;
+    vm.assigneappoinment = assigneappoinment;
     function assigneappoinment(data) {
-        var auth = localStorageService.get("Enterprise_NT.authorizationData");
-        appointmentDS.NumberOfAssignedPeople(auth.authToken, data).then(
-          function (data) {
-            if (data.status === 200) {
-            }
-          },
-          function (error) {
-            vm.modalError(error);
+      var auth = localStorageService.get("Enterprise_NT.authorizationData");
+      appointmentDS.NumberOfAssignedPeople(auth.authToken, data).then(
+        function (data) {
+          if (data.status === 200) {
           }
-        );
+        },
+        function (error) {
+          vm.modalError(error);
+        }
+      );
     }
 
     function eventScheduleAppointment() {
@@ -4801,8 +4816,8 @@
         var order = vm.orderDemosValues[vm.staticDemoIds["orderDB"]];
         var auth = localStorageService.get("Enterprise_NT.authorizationData");
         var asignetakesample = {
-          'orderNumber': order,
-          'id': vm.points.id
+          orderNumber: order,
+          id: vm.points.id,
         };
         vm.assigneappoinment(asignetakesample);
         var data = {
@@ -4811,7 +4826,7 @@
         appointmentDS.changeappointment(auth.authToken, data).then(
           function (data) {
             if (data.status === 200) {
-              vm.loadingmodalscheduleAppointment = false;              //La orden ha sido cancelada
+              vm.loadingmodalscheduleAppointment = false; //La orden ha sido cancelada
               eventUndo();
               UIkit.modal("#modalConfirmscheduleAppointment").hide();
               logger.success(
@@ -4827,8 +4842,7 @@
             vm.modalError(error);
           }
         );
-      }
-      else if (
+      } else if (
         vm.serviceEntrySiga === 1 &&
         vm.turnfilter &&
         vm.activesigaorder === 1 &&

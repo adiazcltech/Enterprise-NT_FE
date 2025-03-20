@@ -11,9 +11,10 @@
     "moment",
     "$rootScope",
     "$interval",
-    "$scope",
     "phlebotomistakeDS",
-    "userDS"
+    "userDS",
+    "sampletrackingsDS",
+    "$filter"
   ];
 
   /* @ngInject */
@@ -23,45 +24,47 @@
     moment,
     $rootScope,
     $interval,
-    $scope,
     phlebotomistakeDS,
-    userDS
+    userDS,
+    sampletrackingsDS,
+    $filter
   ) {
     var vm = this;
     vm.title = "Login";
     $rootScope.menu = true;
-    $rootScope.NamePage = "Toma de muestra";
+    $rootScope.NamePage = $filter("translate")("0165");
     $rootScope.pageview = 3;
     vm.auth = localStorageService.get("Enterprise_NT.authorizationData");
-    $rootScope.helpReference = "04.dashboard/phlebotomistake.htm";
+    $rootScope.helpReference = "01. LaboratoryOrders/phlebotomistake.htm";
     vm.formatoFecha = localStorageService.get("FormatoFecha");
     vm.date = moment().format(vm.formatoFecha);
-    // vm.dashboardDelay = 15 * 100000;
-
-    // Instantiate a coutdown FlipClock
+    vm.getSampleOrder=getSampleOrder;
+    vm.init = init;
+    vm.getUser=getUser;
+    vm.changuetake = changuetake;
+    vm.iniciarContador = iniciarContador;
+    vm.iniciarContadorTake = iniciarContadorTake;
+    vm.validatedUser = validatedUser;
+    vm.keyselectpatientid = keyselectpatientid;
+    vm.Validatedbutton=Validatedbutton;
+    vm.initContador = initContador;
+    vm.pausarContador = pausarContador;
+    vm.viewdetailorder = viewdetailorder;
+    vm.formatoTiempo = formatoTiempo;
+    vm.formatoTiempoTake = formatoTiempoTake;
+    vm.isAuthenticate = isAuthenticate;
+    vm.changuetakeupdate=changuetakeupdate; 
+    vm.loading=true;
+    
     $(".clock").FlipClock({
       clockFace: "TwentyFourHourClock",
     });
 
-    vm.intervaldashboard = $interval(function () {
-      //vm.getrouterstimer();
-    }, vm.dashboardDelay);
-
-    vm.slickConfig = {
-      enabled: true,
-      autoplay: true,
-      draggable: false,
-      autoplaySpeed: 3000,
-      variableWidth: true,
-      slidesToShow: 5,
-      centerMode: false,
-    };
-
-    vm.contendlistroute = 5;
-    vm.init = init;
-    function init() {
+    //Metodo que inicializa la pagina
+    function init() {      
       vm.getUser();
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
+      vm.points = { id: -1 };
       vm.samplingpoints = [];
       return phlebotomistakeDS.getcubicledisponible(auth.authToken).then(
         function (data) {
@@ -77,8 +80,9 @@
             });
             vm.samplingpoints = data.data;
             if (vm.samplingpoints.length === 0) {
+              vm.loading=false;
               logger.info(
-                "No se encontraron usuarios activos consulte con el administrador"
+                $filter("translate")("3699")
               );
             } else {
               vm.samplingpoints = _.orderBy(
@@ -103,7 +107,12 @@
                   .then(
                     function (data) {
                       if (data.status === 200) {
-                        vm.loadinappoinment = false;
+                        vm.loading=false;
+                        data.data = _.orderBy(
+                          data.data,
+                          ["dateEntryOrder"],
+                          ["asc"]
+                        );
                         data.data.forEach(function (value) {
                           value.patientname =
                             value.name1 +
@@ -243,35 +252,37 @@
                             vm.iniciarContadorTake(value)
                           }                                                   
                         });
-                        vm.loadingdata = false;
+                        vm.loading=false;
                       } else {
+                        vm.loading=false;
                         logger.success(
-                          "No hay datos relacionados a ese usuario"
+                          $filter("translate")("3700")
                         );
                       }
                     },
                     function (error) {
-                      vm.loadingdata = false;
+                      vm.loading=false;
                       vm.modalError(error);
                     }
                   );
               } else {
-                vm.loadinappoinment = false;
+                vm.loading=false;
               }
             }
           } else {
+            vm.loading=false;
             logger.info(
-              "No se encontraron usuarios disponibles consulte con el administrador"
+              $filter("translate")("3699")
             );
           }
         },
         function (error) {
           vm.modalError(error);
-          vm.loadinappoinment = false;
+          vm.loading=false;
         }
       );
-    }
-    vm.getUser=getUser;
+    }   
+    //Metodo para consultar los usuarios del laboratorio
     function getUser() {
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       return userDS.getUserssimple(auth.authToken).then(
@@ -284,9 +295,10 @@
           vm.modalError(error);
         }
       );
-    }
-    vm.changuetake = changuetake;
+    } 
+    //Metodo para validar cuando cambie el select del punto de preparacion de la toma de la muestra  
     function changuetake() {
+      vm.loading=true;
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       vm.work = [];
       return phlebotomistakeDS
@@ -294,7 +306,12 @@
         .then(
           function (data) {
             if (data.status === 200) {
-              vm.loadinappoinment = false;
+              vm.loading = false;
+              data.data = _.orderBy(
+                data.data,
+                ["dateEntryOrder"],
+                ["asc"]
+              );
               data.data.forEach(function (value) {
                 value.patientname =
                   value.name1 +
@@ -434,21 +451,226 @@
                   vm.iniciarContadorTake(value)
                 }                                                   
               });
-              vm.loadingdata = false;
+              vm.loading=false;
             } else {
+              vm.loading = false;
               logger.success(
-                "No hay datos relacionados a ese usuario"
+                $filter("translate")("3700")
               );
             }
           },
           function (error) {
-            vm.loadingdata = false;
+            vm.loading = false;
             vm.modalError(error);
           }
         );
-    }
-
-    vm.iniciarContador = iniciarContador;
+    } 
+    //Metodo para validar cuando se cierra la toma
+    function changuetakeupdate() {     
+      var auth = localStorageService.get("Enterprise_NT.authorizationData");
+      vm.samplingpoints = [];
+      return phlebotomistakeDS.getcubicledisponible(auth.authToken).then(
+        function (data) {
+          if (data.status === 200) {          
+            data.data.forEach(function (cubicle) {
+              cubicle.namecubicle =
+                cubicle.name +
+                " - " +
+                cubicle.nameDesignatedPerson +
+                " ( " +
+                cubicle.numberOfAssignedPeople +
+                " ) ";
+            });
+            vm.samplingpoints = data.data;
+            if (vm.samplingpoints.length === 0) {
+              vm.loading=false;
+              logger.info(
+                $filter("translate")("3699")
+              );
+            } else {
+                vm.points = { id: vm.selectpoint};
+                var auth = localStorageService.get(
+                  "Enterprise_NT.authorizationData"
+                );
+                vm.work = [];
+                return phlebotomistakeDS
+                  .getcubicledisponibleid(auth.authToken, vm.selectpoint)
+                  .then(
+                    function (data) {
+                      if (data.status === 200) {
+                        vm.loading=false;
+                        data.data = _.orderBy(
+                          data.data,
+                          ["dateEntryOrder"],
+                          ["asc"]
+                        );
+                        data.data.forEach(function (value) {
+                          value.patientname =
+                            value.name1 +
+                            " " +
+                            value.name2 +
+                            " " +
+                            value.lastName +
+                            " " +
+                            value.surName;
+                          value.state =
+                            value.dateInitTake === undefined ? 1 : 2;
+                          if (value.state === 1) {
+                            var dateEntryOrder = moment(
+                              value.dateEntryOrder
+                            ).format('YYYY-MM-DD HH:mm:ss');
+                            var fecha1 = moment(
+                              dateEntryOrder,
+                              'YYYY-MM-DD HH:mm:ss'
+                            );
+                            var dateday = moment().format('YYYY-MM-DD HH:mm:ss');
+                            var fecha2 = moment(dateday, 'YYYY-MM-DD HH:mm:ss');
+  
+                            var duracion = moment.duration(fecha2.diff(fecha1));
+                            // Extraer horas, minutos y segundos
+                            var horas = Math.floor(duracion.asHours());
+                            var minutos = duracion.minutes();
+                            var segundos = duracion.seconds();
+  
+                            value.dateEntryOrder = moment(
+                              value.dateEntryOrder
+                            ).format('DD/MM/YYYY HH:mm:ss');
+                            if (segundos === 0) {
+                              value.contadores = {
+                                horas: 0,
+                                minutos: 0,
+                                segundos: 0,
+                                intervalo: null,
+                              };
+                            } else {
+                              value.contadores = {
+                                horas: horas,
+                                minutos: minutos,
+                                segundos: segundos,
+                                intervalo: null,
+                              };
+                            }
+                            value.contadorestake = {
+                              horas: 0,
+                              minutos: 0,
+                              segundos: 0,
+                              intervalo: null,
+                            }
+                          } else {
+                            var dateEntryOrder = moment(
+                              value.dateEntryOrder
+                            ).format('YYYY-MM-DD HH:mm:ss');
+                            var fecha1 = moment(
+                              dateEntryOrder,
+                              'YYYY-MM-DD HH:mm:ss'
+                            );
+                            var dateday = moment().format('YYYY-MM-DD HH:mm:ss');
+                            var fecha2 = moment(dateday, 'YYYY-MM-DD HH:mm:ss');
+  
+                            var duracion = moment.duration(fecha2.diff(fecha1));
+                            // Extraer horas, minutos y segundos
+                            var horas = Math.floor(duracion.asHours());
+                            var minutos = duracion.minutes();
+                            var segundos = duracion.seconds();
+  
+                            value.dateEntryOrder = moment(
+                              value.dateEntryOrder
+                            ).format('DD/MM/YYYY HH:mm:ss');
+                            if (segundos === 0) {
+                              value.contadores = {
+                                horas: 0,
+                                minutos: 0,
+                                segundos: 0,
+                                intervalo: null,
+                              };
+                            } else {
+                              value.contadores = {
+                                horas: horas,
+                                minutos: minutos,
+                                segundos: segundos,
+                                intervalo: null,
+                              };
+                            }
+                            value.contadorestake = {
+                              horas: 0,
+                              minutos: 0,
+                              segundos: 0,
+                              intervalo: null,
+                            }
+                            var dateInitTake = moment(
+                              value.dateInitTake
+                            ).format('YYYY-MM-DD HH:mm:ss');
+                            var fecha1 = moment(
+                              dateInitTake,
+                              'YYYY-MM-DD HH:mm:ss'
+                            );
+  
+                            var dateday = moment().format('YYYY-MM-DD HH:mm:ss');
+                            var fecha2 = moment(dateday, 'YYYY-MM-DD HH:mm:ss');
+  
+                            var duracion = moment.duration(fecha2.diff(fecha1));
+                            // Extraer horas, minutos y segundos
+                            var horas = Math.floor(duracion.asHours());
+                            var minutos = duracion.minutes();
+                            var segundos = duracion.seconds();
+  
+                            value.dateEntryOrder = moment(
+                              value.dateEntryOrder
+                            ).format('DD/MM/YYYY HH:mm:ss');
+                            if (segundos === 0) {
+                              value.contadorestake = {
+                                horas: 0,
+                                minutos: 0,
+                                segundos: 0,
+                                intervalo: null,
+                              };
+                            } else {
+                              value.contadorestake = {
+                                horas: horas,
+                                minutos: minutos,
+                                segundos: segundos,
+                                intervalo: null,
+                              };
+                            }
+                          }                        
+                        });
+                        vm.work = data.data;
+                        vm.work.forEach(function (value) {
+                          if (value.state === 1) {
+                            vm.iniciarContador(value); 
+                          }else{
+                            vm.iniciarContador(value); 
+                            vm.iniciarContadorTake(value)
+                          }                                                   
+                        });
+                        vm.loading=false;
+                      } else {
+                        vm.loading=false;
+                        logger.success(
+                          $filter("translate")("3700")
+                        );
+                      }
+                    },
+                    function (error) {
+                      vm.loading=false;
+                      vm.modalError(error);
+                    }
+                  );              
+            }
+          } else {
+            vm.loading=false;
+            logger.info(
+              $filter("translate")("3699")
+            );
+          }
+        },
+        function (error) {
+          vm.modalError(error);
+          vm.loading=false;
+        }
+      );
+    }  
+    //metodo inicia el contador de la fecha de ingreso
     function iniciarContador(order) {
       if (!order.contadores.intervalo) {
         order.contadores.intervalo = $interval(function () {
@@ -466,8 +688,8 @@
           }
         }, 1000); // 1 segundo
       }
-    }
-    vm.iniciarContadorTake = iniciarContadorTake;
+    } 
+    //metodo inicia el contador de la fecha de toma
     function iniciarContadorTake(order) {
       if (!order.contadorestake.intervalo) {
         order.contadorestake.intervalo = $interval(function () {
@@ -486,22 +708,20 @@
 
         }, 1000); // 1 segundo
       }
-    }
-
-    vm.validatedUser = validatedUser;
+    }    
+    //Metodo que valida cuando de le da enter al boton si el id del usuario existe
     function validatedUser(order) {    
       vm.userValidated=1; 
       vm.datavalidateduser=order;
       vm.name='';
       UIkit.modal('#modalvalidteduser', { bgclose: false, escclose: false, modal: false }).show();
-    }
-
-    vm.keyselectpatientid = keyselectpatientid;
-    function keyselectpatientid($event) {
+    }  
+    //Metodo que valida cuando se da enter al ingresar el flebotomista
+    function keyselectpatientid($event) {      
         var keyCode = $event !== undefined ? $event.which || $event.keyCode : 13;
         if (keyCode === 13) {
           var nameUser = _.toUpper(_.replace(vm.name, /\s+/g, ""));
-          var usuarioenter= _.filter(
+          vm.usuarioenter= _.filter(
             vm.ListUser,
             function (o) {
               return (
@@ -510,48 +730,71 @@
               );
             }
           );          
-          if(usuarioenter.length!==0){
+          if(vm.usuarioenter.length!==0){
             UIkit.modal('#modalvalidteduser').hide();
             vm.userValidated=2;
             vm.pausarContador(vm.datavalidateduser);
             vm.datavalidateduser={};
           }else{
             vm.userValidated=3;
-          }
-        
+          }        
         }
     } 
-
-    vm.initContador = initContador;
+    //Metodo que valida cuando de le da click al boton si el id del usuario existe
+    function Validatedbutton() {
+      var nameUser = _.toUpper(_.replace(vm.name, /\s+/g, ""));
+      vm.usuarioenter= _.filter(
+        vm.ListUser,
+        function (o) {
+          return (
+            _.toUpper(_.replace(o.userName, /\s+/g, "")) ==
+            nameUser
+          );
+        }
+      );          
+      if(vm.usuarioenter.length!==0){
+        UIkit.modal('#modalvalidteduser').hide();
+        vm.userValidated=2;
+        vm.pausarContador(vm.datavalidateduser);
+        vm.datavalidateduser={};
+      }else{
+        vm.userValidated=3;
+      }
+    }   
+    //metodo que inicia la toma de la muestra 
     function initContador(order) {
+      vm.loading=true;
       order.state=2;
+      var auth = localStorageService.get("Enterprise_NT.authorizationData");
       var datainit = {
         datechange: 1, //1 fecha inicio, 2 fecha fin
         orderNumber: order.orderNumber,
         idPoint: vm.points.id,
-      };
-      var auth = localStorageService.get("Enterprise_NT.authorizationData");
+        userInitTake: auth.authToken.id
+      };    
       return phlebotomistakeDS
         .updatephlebotomistake(auth.authToken, datainit)
         .then(
           function (data) {
             if (data.status === 200) {
+              vm.loading=false;
              vm.iniciarContadorTake(order)
             }
           },
           function (error) {
-            vm.loadingdata = false;
+            vm.loading=false;
             vm.modalError(error);
           }
         );
-    }
-
-    vm.pausarContador = pausarContador;
+    }    
+    //metodo para cerrar la toma de la muestra
     function pausarContador(order) {
+      vm.loading=true;
       var datainit = {
         datechange: 2, //1 fecha inicio, 2 fecha fin
         orderNumber: order.orderNumber,
         idPoint: vm.points.id,
+        userEndTake: vm.usuarioenter[0].id
       };
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       return phlebotomistakeDS
@@ -560,160 +803,76 @@
           function (data) {
             if (data.status === 200) {
               vm.selectpoint = vm.points.id;
-              var auth = localStorageService.get(
-                "Enterprise_NT.authorizationData"
-              );
-              vm.samplingpoints = [];
-              return phlebotomistakeDS
-                .getcubicledisponible(auth.authToken)
-                .then(
-                  function (data) {
-                    if (data.status === 200) {
-                      data.data.forEach(function (cubicle) {
-                        cubicle.namecubicle =
-                          cubicle.name +
-                          " - " +
-                          cubicle.nameDesignatedPerson +
-                          " ( " +
-                          cubicle.numberOfAssignedPeople +
-                          " ) ";
-                      });
-                      vm.samplingpoints = data.data;
-                      if (vm.samplingpoints.length === 0) {
-                        logger.info(
-                          "No se encontraron usuarios activos consulte con el administrador"
-                        );
-                      } else {
-                        vm.samplingpoints = _.orderBy(
-                          vm.samplingpoints,
-                          ["numberOfAssignedPeople", "name"],
-                          ["asc", "desc"]
-                        );
-
-                        vm.points = { id: vm.selectpoint };
-                        var auth = localStorageService.get(
-                          "Enterprise_NT.authorizationData"
-                        );
-                        vm.work = [];
-                        return phlebotomistakeDS
-                          .getcubicledisponibleid(
-                            auth.authToken,
-                            vm.selectpoint
-                          )
-                          .then(
-                            function (data) {
-                              if (data.status === 200) {
-                                vm.loadinappoinment = false;
-                                data.data.forEach(function (value) {
-                                  value.patientname =
-                                    value.name1 +
-                                    " " +
-                                    value.name2 +
-                                    " " +
-                                    value.lastName +
-                                    " " +
-                                    value.surName;
-                                  value.state =
-                                    value.dateInitTake === undefined ? 1 : 2;
-                                  if (value.state === 1) {
-                                    var dateEntryOrder = moment(
-                                      value.dateEntryOrder
-                                    ).format('YYYY-MM-DD HH:mm:ss');
-                                    var fecha1 = moment(
-                                      dateEntryOrder,
-                                      "YYYY-MM-DD HH:mm:ss"
-                                    );
-                                  } else {
-                                    var dateInitTake = moment(
-                                      value.dateInitTake
-                                    ).format("YYYY-MM-DD HH:mm:ss");
-                                    var fecha1 = moment(
-                                      dateInitTake,
-                                      "YYYY-MM-DD HH:mm:ss"
-                                    );
-                                  }
-
-                                  var dateday = moment().format(
-                                    "YYYY-MM-DD HH:mm:ss"
-                                  );
-                                  var fecha2 = moment(
-                                    dateday,
-                                    "YYYY-MM-DD HH:mm:ss"
-                                  );
-
-                                  var duracion = moment.duration(
-                                    fecha2.diff(fecha1)
-                                  );
-                                  // Extraer horas, minutos y segundos
-                                  var horas = Math.floor(duracion.asHours());
-                                  var minutos = duracion.minutes();
-                                  var segundos = duracion.seconds();
-
-                                  value.dateEntryOrder = moment(
-                                    value.dateEntryOrder
-                                  ).format('DD/MM/YYYY HH:mm:ss');
-                                  if (segundos === 0) {
-                                    value.contadores = {
-                                      horas: 0,
-                                      minutos: 0,
-                                      segundos: 0,
-                                      intervalo: null,
-                                    };
-                                  } else {
-                                    value.contadores = {
-                                      horas: horas,
-                                      minutos: minutos,
-                                      segundos: segundos,
-                                      intervalo: null,
-                                    };
-                                  }
-                                });
-                                vm.work = data.data;
-                                vm.work.forEach(function (value) {
-                                  vm.iniciarContador(value);
-                                });
-                                vm.loadingdata = false;
-                              } else {
-                                logger.success(
-                                  "No hay datos relacionados a ese usuario"
-                                );
-                              }
-                            },
-                            function (error) {
-                              vm.loadingdata = false;
-                              vm.modalError(error);
-                            }
-                          );
-                      }
-                    } else {
-                      logger.info(
-                        "No se encontraron usuarios disponibles consulte con el administrador"
-                      );
-                    }
-                  },
-                  function (error) {
-                    vm.modalError(error);
-                    vm.loadinappoinment = false;
-                  }
-                );
+              vm.changuetakeupdate();         
+            }else{
+              vm.loading=false;
             }
           },
           function (error) {
-            vm.loadingdata = false;
+            vm.loading=false;
             vm.modalError(error);
           }
-        );
-
-      /* if (order.contadores.intervalo) {
-        $interval.cancel(order.contadores.intervalo);
-        order.contadores.intervalo = null;
-      } */
+        );   
     }
-
-    vm.viewdetailorder = viewdetailorder;
-    function viewdetailorder(order) {}
-
-    vm.formatoTiempo = formatoTiempo;
+    //Metodo para abrir la modal del detalle de la orden   
+    function viewdetailorder(order) {
+      vm.loading=true;
+      vm.orderdetail=order.orderNumber;     
+      vm.getSampleOrder(); 
+    }   
+    //Metodo que consulta las muestras de la orden seleccionada
+    function getSampleOrder() {
+      vm.listSample = [];
+      var auth = localStorageService.get("Enterprise_NT.authorizationData");
+      return sampletrackingsDS.sampleorder(auth.authToken, vm.orderdetail).then(
+        function (data) {
+          if (data.status === 200) {
+            if (data.data.length > 0) {
+              data.data.forEach(function (value, key) {
+                var sampleverific = $filter("filter")(value.sampleTrackings, {
+                  state: 4,
+                });
+                value.tests = $filter("filter")(value.tests, function (e) {
+                  return e.testType === 0;
+                });
+                if (value.qualityFlag === 3 && sampleverific.length > 0) {
+                  var minutes = moment().diff(sampleverific[0].date, "seconds");
+                  var timeline = moment().subtract(
+                    minutes - value.qualityTime * 59,
+                    "seconds"
+                  );
+                  value.time = parseInt(moment(timeline).format("x"));
+                } else if (value.qualityFlag === 2 && sampleverific.length > 0) {
+                  var minutes = moment().diff(sampleverific[0].date, "seconds");
+                  var timeline = moment().add(
+                    value.qualityTime * 59 - minutes,
+                    "seconds"
+                  );
+                  value.time = parseInt(moment(timeline).format("x"));
+                }
+              });
+    
+              vm.listSample = _.orderBy(data.data, ["codesample"], ["asc"]);
+              vm.routeSample = [];
+              vm.Butoninterview = true;
+              vm.Butonbarcode = true;
+              vm.Butondemographics = true;
+              vm.showsample = true;
+              vm.showdestination = false;
+              UIkit.modal("#modaldetailorder").show();
+              vm.loading = false;
+            }else{
+              vm.loading = false;
+            }
+          }           
+        },
+        function (error) {
+          vm.modalError(error);
+          vm.loading = false;
+        }
+      );
+    }    
+    // Metodo para formatear la hora mes dia en el contador de la fecha de ingreso
     function formatoTiempo(contador) {
       return (
         agregarCero(contador.horas) +
@@ -722,11 +881,9 @@
         ":" +
         agregarCero(contador.segundos)
       );
-    }
-
-    vm.formatoTiempoTake = formatoTiempoTake;
-    function formatoTiempoTake(contador) {
-     //vm.wiewoneminut=contador.
+    }    
+    // Metodo para formatear la hora mes dia en el contador de la toma de muestra
+    function formatoTiempoTake(contador) {     
       return (
         agregarCero(contador.horas) +
         ":" +
@@ -735,12 +892,10 @@
         agregarCero(contador.segundos)
       );
     }
-
+    // Metodo para agregar cero a la izquierda del número si es menor a 10
     function agregarCero(num) {
       return num < 10 ? "0" + num : num;
-    }
-
-    vm.isAuthenticate = isAuthenticate;
+    }    
     //Método para evaluar la autenticación
     function isAuthenticate() {
       var auth = localStorageService.get("Enterprise_NT.authorizationData");

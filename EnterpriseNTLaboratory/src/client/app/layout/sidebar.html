@@ -234,6 +234,18 @@
                                                 <span class="uk-text-muted uk-display-block">{{'0012' |
                                                     translate}}</span>
                                             </a>
+                                            <!--Asignación de cubiculos-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 250 }).length > 0"
+                                                href="/cubicleassignment" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/tools/turno.png">
+                                                <span class="uk-text-muted uk-display-block">Asignación de cubiculos</span>
+                                            </a>
+                                            <!--Toma de muestra-->
+                                            <a ng-if="(vm.listAcces|filter:{ id : 307 }).length > 0"
+                                                href="/phlebotomistake" class="uk-margin-top uk-dropdown-close">
+                                                <img class="material-icons md-36" ng-src="images/Menu/Laboratoryorders/orderentry.png">
+                                                <span class="uk-text-muted uk-display-block">Toma de muestra</span>
+                                            </a>
                                             <!--accesos directos Gestión de paciente-->
                                             <!--Historia Clinica-->
                                             <a ng-if="(vm.listAcces|filter:{ id : 216 }).length > 0"
@@ -274,15 +286,7 @@
                                                     ng-src="images/Menu/Laboratoryorders/unlockorderhistory.png">
                                                 <span class="uk-text-muted uk-display-block">{{'0055' |
                                                     translate}}</span>
-                                            </a>
-                                            <!--Toma de muestra-->
-                                            <a ng-if="(vm.listAcces|filter:{ id : 307 }).length > 0"
-                                                href="/phlebotomistake" class="uk-margin-top uk-dropdown-close">
-                                                <img class="material-icons md-36"
-                                                    ng-src="images/Menu/Laboratoryorders/orderentry.png">
-                                                <i class="material-icons md-36 md-color-cyan-600">&#xE879;</i>
-                                                <span class="uk-text-muted uk-display-block">Toma de muestra</span>
-                                            </a>
+                                            </a>                                          
                                             <!--accesos directos Gestión de muestras-->
                                             <!--Entrada de muestra-->
                                             <a ng-if="(vm.listAcces|filter:{ id : 211 }).length > 0 && vm.trazability === '2'"

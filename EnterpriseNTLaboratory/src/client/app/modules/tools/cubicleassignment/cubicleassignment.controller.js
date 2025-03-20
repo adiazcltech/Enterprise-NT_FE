@@ -8,27 +8,27 @@
   cubicleassignmentController.$inject = [
     "cubicleDS",
     "localStorageService",
-    "logger",
-    "$filter",
+    "logger",  
     "$state",
     "$rootScope",
     "userDS",
+    "$filter"
   ];
   function cubicleassignmentController(
     cubicleDS,
     localStorageService,
-    logger,
-    $filter,
+    logger,   
     $state,
     $rootScope,
-    userDS
+    userDS,
+    $filter
   ) {
     var vm = this;
     vm.title = "cubicleassignment";
     $rootScope.menu = true;
     vm.loadingdata = true;
-    $rootScope.helpReference = "01. LaboratoryOrders/cubicleassignment.htm";
-    $rootScope.NamePage = "Asignación de cubiculos de toma de muestras";
+    $rootScope.helpReference = "06.Tools/cubicleassignment.htm";
+    $rootScope.NamePage = $filter('translate')('3680');
     vm.save = save;
     vm.get = get;
     vm.ListOrder = [];
@@ -37,11 +37,12 @@
     vm.isAuthenticate = isAuthenticate;
     vm.validatedActive = validatedActive;
     vm.getUser = getUser;
- 
+    //Muestra modal de errores
     function modalError(error) {
       vm.Error = error;
       vm.ShowPopupError = true;
     }  
+    //Consuta los usuarios
     function getUser() {
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       return userDS.getUserssimple(auth.authToken).then(
@@ -59,6 +60,7 @@
         }
       );
     }
+    //Consulta los cubiculos
     function get() {
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       vm.loadingdata = true;
@@ -85,7 +87,8 @@
           vm.modalError(error);
         }
       );
-    }   
+    }
+    //Valida si un cubiculo se puede desactivar o no   
     function validatedActive(Order) {
       if(!Order.active){
         if(Order.numberOfAssignedPeople === 0) {
@@ -93,12 +96,13 @@
           vm.save(Order)
         }else{
           Order.active=true;
-          logger.info("No se puede desactivar por que tiene usuarios Asignados");
+          logger.info($filter('translate')('3684'));
         }
       }else{
         vm.save(Order);
       }
     }
+    //Guarda los cambios en el cubiculo
     function save(Order) {
       vm.loadingdata = true;
       Order.requeridUser = Order.user.selected === undefined ? true : false;
@@ -112,7 +116,7 @@
             if (data.status === 200) {
               vm.loadingdata = false;
               vm.get();
-              logger.success("Se guardaron los datos satisfactoriamente");
+              logger.success($filter('translate')('3685'));
             }
           },
           function (error) {
@@ -122,6 +126,7 @@
         );
       }
     }
+    //Valida si el usuario esta autenticado para ver el contenido
     function isAuthenticate() {
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
       if (auth === null || auth.token) {

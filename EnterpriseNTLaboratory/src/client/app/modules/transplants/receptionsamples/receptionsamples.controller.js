@@ -791,7 +791,7 @@
             vm.labelhytorico = $filter('translate')('0400');
             vm.newreceptor = $filter('translate')('3325');
 
-            vm.labelcorregido = $filter('translate')('1057');
+            vm.labelcorregido = 'cPRA global';
             vm.labelcalculado = $filter('translate')('3358');
 
             vm.maxDate = new Date();
@@ -1130,6 +1130,42 @@
 
                 vm.Test.receiverPRALuminexAntigeno.classIUnacceptableC = '';
                 vm.Test.receiverPRALuminexAntigeno.classIAcceptableC = '';
+            }
+        }
+
+        vm.chanclaseIantigeno2 = chanclaseIantigeno2;
+        function chanclaseIantigeno2() {
+            if (vm.Test.receiverPRALuminexAntigeno.classII === 'Negativo') {
+                vm.Test.receiverPRALuminexAntigeno.classIIDRB11 = $filter('translate')('3380');
+                vm.Test.receiverPRALuminexAntigeno.classIIDRB12 = $filter('translate')('3381');
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDQA1 = $filter('translate')('3380');
+                vm.Test.receiverPRALuminexAntigeno.classIIDQA2 = $filter('translate')('3381');
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDQB1 = $filter('translate')('3380');
+                vm.Test.receiverPRALuminexAntigeno.classIIDQB2 = $filter('translate')('3381');
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDPA1 = $filter('translate')('3380');
+                vm.Test.receiverPRALuminexAntigeno.classIIDPA2 = $filter('translate')('3381');
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDPB1 = $filter('translate')('3380');
+                vm.Test.receiverPRALuminexAntigeno.classIIDPB2 = $filter('translate')('3381');
+
+            } else {
+                vm.Test.receiverPRALuminexAntigeno.classIIDRB11 = '';
+                vm.Test.receiverPRALuminexAntigeno.classIIDRB12 = '';
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDQA1 = '';
+                vm.Test.receiverPRALuminexAntigeno.classIIDQA2 = '';
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDQB1 = '';
+                vm.Test.receiverPRALuminexAntigeno.classIIDQB2 = '';
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDPA1 = '';
+                vm.Test.receiverPRALuminexAntigeno.classIIDPA2 = '';
+
+                vm.Test.receiverPRALuminexAntigeno.classIIDPB1 = '';
+                vm.Test.receiverPRALuminexAntigeno.classIIDPB2 = '';
             }
         }
 

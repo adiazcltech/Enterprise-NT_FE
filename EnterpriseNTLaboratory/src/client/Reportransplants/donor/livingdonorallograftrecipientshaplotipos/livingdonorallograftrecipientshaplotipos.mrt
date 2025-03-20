@@ -1,13 +1,13 @@
 {
   "ReportVersion": "2019.1.1",
-  "ReportGuid": "c665cb6c8b424e167f2189f0de5d81be",
+  "ReportGuid": "0002bf07d8f9a3174bde17c6a66a6243",
   "ReportName": "Report",
   "ReportAlias": "Areas",
   "ReportFile": "livingdonorallograftrecipientshaplotipos.mrt",
   "ReportAuthor": "Stimulsoft",
   "ReportDescription": "This sample demonstrates how to create a simple list report.",
-  "ReportCreated": "/Date(1085774340000-0500)/",
-  "ReportChanged": "/Date(1437932952000-0500)/",
+  "ReportCreated": "/Date(1085756340000-0500)/",
+  "ReportChanged": "/Date(1437914952000-0500)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Centimeters",
@@ -6180,7 +6180,7 @@
         "2": {
           "Ident": "StiReportTitleBand",
           "Name": "ReportTitleBand1",
-          "ClientRectangle": "0,7.2,19,5.8",
+          "ClientRectangle": "0,7.2,19,3.6",
           "ComponentPlacement": "rt.Page1",
           "Interaction": {
             "Ident": "StiInteraction"
@@ -6356,7 +6356,7 @@
               "Ident": "StiText",
               "Name": "Text114",
               "Guid": "fa58f8a4fb5a56ed8fa72bf8f9738ba0",
-              "ClientRectangle": "0,5,19,0.6",
+              "ClientRectangle": "0,3,19,0.6",
               "ComponentPlacement": "rt.ReportTitleBand1",
               "Interaction": {
                 "Ident": "StiInteraction"
@@ -6375,7 +6375,7 @@
               "Ident": "StiText",
               "Name": "Text115",
               "Guid": "2c731bfe1737cd25a0b752be0fa2d450",
-              "ClientRectangle": "0,4.4,19,0.6",
+              "ClientRectangle": "0,2.4,19,0.6",
               "ComponentPlacement": "rt.ReportTitleBand1",
               "Interaction": {
                 "Ident": "StiInteraction"
@@ -6390,124 +6390,13 @@
               "Brush": "solid:Transparent",
               "TextBrush": "solid:0,0,0",
               "Type": "Expression"
-            },
-            "11": {
-              "Ident": "StiText",
-              "Name": "Text116",
-              "Guid": "f95239ead63bfa690e9b26a389961e4d",
-              "ClientRectangle": "0,3,19,0.6",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "(Método utilizado : Hemoaglutinación en placa)"
-              },
-              "HorAlignment": "Center",
-              "Font": ";10;;",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "12": {
-              "Ident": "StiText",
-              "Name": "Text117",
-              "Guid": "1e5d3031cc8f555b929c7195965dac4a",
-              "ClientRectangle": "0,2.4,19,0.6",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "CLASIFICACIÓN SANGUÍNEA"
-              },
-              "HorAlignment": "Center",
-              "VertAlignment": "Bottom",
-              "Font": "Arial Black;10;;",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "13": {
-              "Ident": "StiText",
-              "Name": "Text118",
-              "Guid": "1fa8fad139825046539e43828500fcbb",
-              "ClientRectangle": "0,3.6,9.6,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "GRUPO SANGUÍNEO:"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "14": {
-              "Ident": "StiText",
-              "Name": "Text119",
-              "Guid": "24b1c8725dd6dd3953d47d1b10eac577",
-              "ClientRectangle": "0,4,9.6,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "RH:"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "15": {
-              "Ident": "StiText",
-              "Name": "Text120",
-              "Guid": "e2394c3dc086de6dc3b2ced11cbee994",
-              "ClientRectangle": "9.6,3.6,9.4,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "{data.bloodgroup}"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "16": {
-              "Ident": "StiText",
-              "Name": "Text121",
-              "Guid": "945ef00474c1c29f14c6a2ec14d2821a",
-              "ClientRectangle": "9.6,4,9.4,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "{data.rh}"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
             }
           }
         },
         "3": {
           "Ident": "StiHeaderBand",
           "Name": "Headerdata_Listorderparticipants",
-          "ClientRectangle": "0,13.8,19,0.6",
+          "ClientRectangle": "0,11.6,19,0.6",
           "ComponentPlacement": "h.ap.Page1",
           "Interaction": {
             "Ident": "StiInteraction"
@@ -6543,7 +6432,7 @@
         "4": {
           "Ident": "StiDataBand",
           "Name": "Datadata2",
-          "ClientRectangle": "0,15.2,19,6.8",
+          "ClientRectangle": "0,13,19,6.8",
           "ComponentPlacement": "d.Page1",
           "Interaction": {
             "Ident": "StiBandInteraction"
@@ -8134,7 +8023,7 @@
         "5": {
           "Ident": "StiDataBand",
           "Name": "DataVariables",
-          "ClientRectangle": "0,22.8,19,5.2",
+          "ClientRectangle": "0,20.6,19,5.2",
           "ComponentPlacement": "d.Page1",
           "Interaction": {
             "Ident": "StiBandInteraction"
@@ -8156,7 +8045,7 @@
                 "Value": "Aprobado por:"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Top, Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8180,7 +8069,7 @@
               "Interaction": {
                 "Ident": "StiInteraction"
               },
-              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8208,7 +8097,7 @@
                 "Value": "{Variables.labelAnalisty}:"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Top, Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8264,7 +8153,7 @@
                 "Value": "{Variables.analyst}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8292,7 +8181,7 @@
                 "Value": "{Variables.approver}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8320,7 +8209,7 @@
                 "Value": "{Variables.labelAnalisty}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8348,7 +8237,7 @@
                 "Value": "Registro N° {Variables.regiterAnalyst}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8376,7 +8265,7 @@
                 "Value": "Director Técnico(a)"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8404,7 +8293,7 @@
                 "Value": "Registro N° {Variables.regiterApprover}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8432,7 +8321,7 @@
                 "Value": "Laboratorio de inmunología de trasplantes"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8460,7 +8349,7 @@
                 "Value": "Grupo de Inmunología celular e Inmunogénica"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8488,7 +8377,7 @@
                 "Value": "Laboratorio de inmunología de trasplantes"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8516,7 +8405,7 @@
                 "Value": "Grupo de Inmunología celular e Inmunogénica"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8540,7 +8429,7 @@
               "Interaction": {
                 "Ident": "StiInteraction"
               },
-              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {

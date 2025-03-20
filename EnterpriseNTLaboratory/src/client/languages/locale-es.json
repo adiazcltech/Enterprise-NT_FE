@@ -2254,14 +2254,14 @@
   "3289": "Listado citas activas",
   "3290": "Listado citas canceladas",
   "3291": "Listado citas reprogramadas",
-  "3292": "Fecha de la cita", 
+  "3292": "Fecha de la cita",
   "3293": "Comprobante",
   "3294": "Horario",
   "3295": "Asignación de cita",
   "3296": "Cancelación de cita",
-  "3297": "Reprogramción de cita", 
-  "3298": "Inicial", 
-  "3299": "Finaliza", 
+  "3297": "Reprogramción de cita",
+  "3298": "Inicial",
+  "3299": "Finaliza",
   "3300": "El cambio de estado se ha realizado satisfactoriamente",
   "3301": "Lista de bloques",
   "3302": "Enviar a corte",
@@ -2451,14 +2451,45 @@
   "3667": "No se ha configurado la llave URL del reporte de tamizaje",
   "3668": "Reporte de tamizaje",
   "3669": "¿Está seguro que desea reservar esta cita?",
-  "3670": "Día que se asigna la reserva", 
+  "3670": "Día que se asigna la reserva",
   "3671": "Horario de atención",
-  "3672": "¿Esta seguro de gestionar esta cita?" ,
+  "3672": "¿Esta seguro de gestionar esta cita?",
   "3673": "Reporte de tamizaje",
   "3674": "Abr. Examen",
   "3675": "Puesto",
   "3676": "Sala",
   "3677": "Cedula",
   "3678": "Cant",
-  "3679": "Seleccione el usuario"
+  "3679": "Seleccione el usuario",
+  "3680": "Asignación de cubículos de toma de muestras",
+  "3681": "Cubículos",
+  "3682": "Cantidad de pacientes asignados",
+  "3683": "Disponible",
+  "3684": "No se puede desactivar porque el cubículo tiene usuarios asignados",
+  "3685": "Se guardaron los datos satisfactoriamente",
+  "3686": "Flebotomista",
+  "3687": "Crear orden de trabajo",
+  "3688": "Crear orden de trabajo automática",
+  "3689": "No se encontraron flebotomistas disponibles consulte con el administrador",
+  "3690": "Ingrese el ID del usuario",
+  "3691": "El flebotomista no se encontró",
+  "3692": "Punto de preparación de la toma de muestra",
+  "3693": "Tiempo de ingreso",
+  "3694": "Tiempo del flebotomista",
+  "3695": "Etiquetas",
+  "3696": "Iniciar toma de muestra ",
+  "3697": "Debe esperar mínimo un minuto para poder cerrar la toma de muestra",
+  "3698": "Cerrar toma de muestra",
+  "3699": "No se encontraron flebotomista activos consulte con el administrador",
+  "3700": "No hay datos relacionados a ese flebotomista"
 }
+
+
+
+
+
+
+
+
+
+

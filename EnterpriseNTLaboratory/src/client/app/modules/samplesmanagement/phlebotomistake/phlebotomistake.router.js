@@ -22,7 +22,7 @@
           controllerAs: 'vm',
           authorize: true,
           title: 'phlebotomistake',
-          idpage: 411
+          idpage: 307
         }
       }
     ];

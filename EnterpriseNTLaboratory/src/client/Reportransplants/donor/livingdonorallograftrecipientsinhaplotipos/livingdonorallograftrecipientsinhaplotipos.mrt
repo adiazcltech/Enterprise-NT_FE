@@ -1,13 +1,13 @@
 {
   "ReportVersion": "2019.1.1",
-  "ReportGuid": "ebddd0820cc3a7beb74633d38d189879",
+  "ReportGuid": "f9a88babd1654cd3dcb50e40d661b45f",
   "ReportName": "Report",
   "ReportAlias": "Areas",
   "ReportFile": "livingdonorallograftrecipientsinhaplotipos.mrt",
   "ReportAuthor": "Stimulsoft",
   "ReportDescription": "This sample demonstrates how to create a simple list report.",
-  "ReportCreated": "/Date(1085936340000-0500)/",
-  "ReportChanged": "/Date(1438094952000-0500)/",
+  "ReportCreated": "/Date(1085918340000-0500)/",
+  "ReportChanged": "/Date(1438076952000-0500)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Centimeters",
@@ -6180,7 +6180,7 @@
         "2": {
           "Ident": "StiReportTitleBand",
           "Name": "ReportTitleBand1",
-          "ClientRectangle": "0,7,19,5.6",
+          "ClientRectangle": "0,7,19,4",
           "ComponentPlacement": "rt.Page1",
           "Interaction": {
             "Ident": "StiInteraction"
@@ -6356,7 +6356,7 @@
               "Ident": "StiText",
               "Name": "Text114",
               "Guid": "00198b3633858b7ee8ca922847d1bbe9",
-              "ClientRectangle": "0,5,19,0.6",
+              "ClientRectangle": "0,3.2,19,0.6",
               "ComponentPlacement": "rt.ReportTitleBand1",
               "Interaction": {
                 "Ident": "StiInteraction"
@@ -6375,7 +6375,7 @@
               "Ident": "StiText",
               "Name": "Text115",
               "Guid": "03453fcab1fff5de426ab8ac5c70bb01",
-              "ClientRectangle": "0,4.4,19,0.6",
+              "ClientRectangle": "0,2.6,19,0.6",
               "ComponentPlacement": "rt.ReportTitleBand1",
               "Interaction": {
                 "Ident": "StiInteraction"
@@ -6390,124 +6390,13 @@
               "Brush": "solid:Transparent",
               "TextBrush": "solid:0,0,0",
               "Type": "Expression"
-            },
-            "11": {
-              "Ident": "StiText",
-              "Name": "Text116",
-              "Guid": "0e3d523a19207d80756b5164d7118c01",
-              "ClientRectangle": "0,3,19,0.6",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "(Método utilizado : Hemoaglutinación en placa)"
-              },
-              "HorAlignment": "Center",
-              "Font": ";10;;",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "12": {
-              "Ident": "StiText",
-              "Name": "Text117",
-              "Guid": "e3588b85a1a0155913c8be5323714d2a",
-              "ClientRectangle": "0,2.4,19,0.6",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "CLASIFICACIÓN SANGUÍNEA"
-              },
-              "HorAlignment": "Center",
-              "VertAlignment": "Bottom",
-              "Font": "Arial Black;10;;",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "13": {
-              "Ident": "StiText",
-              "Name": "Text118",
-              "Guid": "336002ef64eb232ce489ecff9bf0f7fb",
-              "ClientRectangle": "0,3.6,9.6,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "GRUPO SANGUÍNEO:"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "14": {
-              "Ident": "StiText",
-              "Name": "Text119",
-              "Guid": "12f33832d1ccf4e53d430cea65cf4699",
-              "ClientRectangle": "0,4,9.6,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "RH:"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "15": {
-              "Ident": "StiText",
-              "Name": "Text120",
-              "Guid": "d6e017a56f06377c5a5a5b9f0e368abc",
-              "ClientRectangle": "9.6,3.6,9.4,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "{data.bloodgroup}"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
-            },
-            "16": {
-              "Ident": "StiText",
-              "Name": "Text121",
-              "Guid": "95307a43982a6c0cb84219710de8618e",
-              "ClientRectangle": "9.6,4,9.4,0.4",
-              "ComponentPlacement": "rt.ReportTitleBand1",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "{data.rh}"
-              },
-              "VertAlignment": "Center",
-              "Border": ";;;;;;;solid:0,0,0",
-              "Brush": "solid:Transparent",
-              "TextBrush": "solid:0,0,0",
-              "Type": "Expression"
             }
           }
         },
         "3": {
           "Ident": "StiHeaderBand",
           "Name": "Headerdata_Listorderparticipants",
-          "ClientRectangle": "0,13.4,19,0.6",
+          "ClientRectangle": "0,11.8,19,0.6",
           "ComponentPlacement": "h.ap.Page1",
           "Interaction": {
             "Ident": "StiInteraction"
@@ -6543,7 +6432,7 @@
         "4": {
           "Ident": "StiDataBand",
           "Name": "Datadata2",
-          "ClientRectangle": "0,14.8,19,6.8",
+          "ClientRectangle": "0,13.2,19,6.8",
           "ComponentPlacement": "d.Page1",
           "Interaction": {
             "Ident": "StiBandInteraction"
@@ -6823,7 +6712,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.participantes.a1==\"N/A\"&&data.participantes.a2==\"N/A\",\"N/A\",\"*\"+data.participantes.a1+\"*\"+data.participantes.a2)}"
+                "Value": "{IIF(data.participantes.a1==\"N/A\"&&data.participantes.a2==\"N/A\",\"N/A\",\"*\"+data.participantes.a1+\",*\"+data.participantes.a2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -6846,7 +6735,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.participantes.b1==\"N/A\"&&data.participantes.b2==\"N/A\",\"N/A\",\"*\"+data.participantes.b1+\"*\"+data.participantes.b2)}"
+                "Value": "{IIF(data.participantes.b1==\"N/A\"&&data.participantes.b2==\"N/A\",\"N/A\",\"*\"+data.participantes.b1+\",*\"+data.participantes.b2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -6869,7 +6758,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.participantes.c1==\"N/A\"&&data.participantes.c2==\"N/A\",\"N/A\",\"*\"+data.participantes.c1+\"*\"+data.participantes.c2)}"
+                "Value": "{IIF(data.participantes.c1==\"N/A\"&&data.participantes.c2==\"N/A\",\"N/A\",\"*\"+data.participantes.c1+\",*\"+data.participantes.c2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -6892,7 +6781,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.participantes.drb11==\"N/A\"&&data.participantes.drb12==\"N/A\",\"N/A\",\"*\"+data.participantes.drb11+\"*\"+data.participantes.drb12)}"
+                "Value": "{IIF(data.participantes.drb11==\"N/A\"&&data.participantes.drb12==\"N/A\",\"N/A\",\"*\"+data.participantes.drb11+\",*\"+data.participantes.drb12)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -6915,7 +6804,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.participantes.dqa1==\"N/A\"&&data.participantes.dqa2==\"N/A\",\"N/A\",\"*\"+data.participantes.dqa1+\"*\"+data.participantes.dqa2)}"
+                "Value": "{IIF(data.participantes.dqa1==\"N/A\"&&data.participantes.dqa2==\"N/A\",\"N/A\",\"*\"+data.participantes.dqa1+\",*\"+data.participantes.dqa2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -6938,7 +6827,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.participantes.dqb1==\"N/A\"&&data.participantes.dqb2==\"N/A\",\"N/A\",\"*\"+data.participantes.dqb1+\"*\"+data.participantes.dqb2)}"
+                "Value": "{IIF(data.participantes.dqb1==\"N/A\"&&data.participantes.dqb2==\"N/A\",\"N/A\",\"*\"+data.participantes.dqb1+\",*\"+data.participantes.dqb2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7156,7 +7045,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.a1==\"N/A\"&&data.a2==\"N/A\",\"N/A\",\"*\"+data.a1+\"*\"+data.a2)}"
+                "Value": "{IIF(data.a1==\"N/A\"&&data.a2==\"N/A\",\"N/A\",\"*\"+data.a1+\",*\"+data.a2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7179,7 +7068,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.b1==\"N/A\"&&data.b2==\"N/A\",\"N/A\",\"*\"+data.b1+\"*\"+data.b2)}"
+                "Value": "{IIF(data.b1==\"N/A\"&&data.b2==\"N/A\",\"N/A\",\"*\"+data.b1+\",*\"+data.b2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7202,7 +7091,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.c1==\"N/A\"&&data.c2==\"N/A\",\"N/A\",\"*\"+data.c1+\"*\"+data.c2)}"
+                "Value": "{IIF(data.c1==\"N/A\"&&data.c2==\"N/A\",\"N/A\",\"*\"+data.c1+\",*\"+data.c2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7225,7 +7114,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.drb11==\"N/A\"&&data.drb12==\"N/A\",\"N/A\",\"*\"+data.drb11+\"*\"+data.drb12)}"
+                "Value": "{IIF(data.drb11==\"N/A\"&&data.drb12==\"N/A\",\"N/A\",\"*\"+data.drb11+\",*\"+data.drb12)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7248,7 +7137,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.dqa1==\"N/A\"&&data.dqa2==\"N/A\",\"N/A\",\"*\"+data.dqa1+\"*\"+data.dqa2)}"
+                "Value": "{IIF(data.dqa1==\"N/A\"&&data.dqa2==\"N/A\",\"N/A\",\"*\"+data.dqa1+\",*\"+data.dqa2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7271,7 +7160,7 @@
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{IIF(data.dqb1==\"N/A\"&&data.dqb2==\"N/A\",\"N/A\",\"*\"+data.dqb1+\"*\"+data.dqb2)}"
+                "Value": "{IIF(data.dqb1==\"N/A\"&&data.dqb2==\"N/A\",\"N/A\",\"*\"+data.dqb1+\",*\"+data.dqb2)}"
               },
               "HorAlignment": "Center",
               "VertAlignment": "Center",
@@ -7858,7 +7747,7 @@
         "5": {
           "Ident": "StiDataBand",
           "Name": "DataVariables",
-          "ClientRectangle": "0,22.4,19,5.2",
+          "ClientRectangle": "0,20.8,19,5.2",
           "ComponentPlacement": "d.Page1",
           "Interaction": {
             "Ident": "StiBandInteraction"
@@ -7880,7 +7769,7 @@
                 "Value": "Aprobado por:"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Top, Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -7904,7 +7793,7 @@
               "Interaction": {
                 "Ident": "StiInteraction"
               },
-              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -7932,7 +7821,7 @@
                 "Value": "{Variables.labelAnalisty}:"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Top, Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -7988,7 +7877,7 @@
                 "Value": "{Variables.analyst}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8016,7 +7905,7 @@
                 "Value": "{Variables.approver}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8044,7 +7933,7 @@
                 "Value": "{Variables.labelAnalisty}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8072,7 +7961,7 @@
                 "Value": "Registro N° {Variables.regiterAnalyst}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8100,7 +7989,7 @@
                 "Value": "Director Técnico(a)"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8128,7 +8017,7 @@
                 "Value": "Registro N° {Variables.regiterApprover}"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8156,7 +8045,7 @@
                 "Value": "Laboratorio de inmunología de trasplantes"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8184,7 +8073,7 @@
                 "Value": "Grupo de Inmunología celular e Inmunogénica"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8212,7 +8101,7 @@
                 "Value": "Laboratorio de inmunología de trasplantes"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8240,7 +8129,7 @@
                 "Value": "Grupo de Inmunología celular e Inmunogénica"
               },
               "VertAlignment": "Center",
-              "Border": "All;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {
@@ -8264,7 +8153,7 @@
               "Interaction": {
                 "Ident": "StiInteraction"
               },
-              "Border": "Left, Right, Bottom;208,206,206;;;;;;solid:0,0,0",
+              "Border": "Left, Right;208,206,206;;;;;;solid:0,0,0",
               "Brush": "solid:Transparent",
               "TextBrush": "solid:Black",
               "TextOptions": {

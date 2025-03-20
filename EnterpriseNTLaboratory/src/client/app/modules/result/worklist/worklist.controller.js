@@ -387,8 +387,7 @@
               'alltestAbbr': alltestAbbr,
               'alltestAbbrOrder': alltestAbbrOrder,
               'allPositionsOrder': allPositionsOrder,
-              'allRacksOrder': allRacksOrder,
-              'externalId': value.externalId
+              'allRacksOrder': allRacksOrder
             })
 
             if (value.allDemographics.length > 0) {

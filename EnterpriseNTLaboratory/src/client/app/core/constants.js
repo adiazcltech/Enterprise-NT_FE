@@ -6,7 +6,7 @@
     .module('app.core')
     .constant('toastr', toastr)
     .constant('moment', moment)
-    .constant('productVersion', { laboratory: '2.29.53' })
+    .constant('productVersion', { laboratory: '2.29.51' })
     .constant('keyStimulsoft', "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHlGSHqq09KidzkMbeapDJ2X9n4lt4x3mFefYI9Ap5WVzsJz8Q" +
     "pPJ1iw3gG/RMnEVANY5GruVr9xxmmJz9JFD66SDfLoTYbeEqpOrfve8HAtcX9v4nwNDKFcOx2F2Sq5gMdJouw2AEGf" +
     "93sxV7/TCHjXUZN4dNyqEkNZBspV+BAEULEKewMHFj0tT2xv+KFhZrEzGp2FnyWRt0w8iRxTFTUWqdskPj6blNN19p" +

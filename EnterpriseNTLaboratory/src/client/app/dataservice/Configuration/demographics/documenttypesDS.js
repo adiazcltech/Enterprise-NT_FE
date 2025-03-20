@@ -5,11 +5,11 @@
     .module('app.core')
     .factory('documenttypesDS', documenttypesDS);
 
-  documenttypesDS.$inject = ['$http', '$q', 'exception', 'logger','settings'];
+  documenttypesDS.$inject = ['$http','settings'];
   /* @ngInject */
   
   //** Método que define los metodos a usar*/
-  function documenttypesDS($http, $q, exception, logger,settings) {
+  function documenttypesDS($http, settings) {
     var service = {
       getDocumentType: getDocumentType,
       getId: getId,
@@ -82,10 +82,6 @@
         return response;
       });
     }
-
-
-   
-
   }
 })();
 

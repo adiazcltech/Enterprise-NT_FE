@@ -1128,132 +1128,42 @@
 
     function dowload() {
       if (vm.datareport.length > 0) {
-          var labelsreport = JSON.stringify($translate.getTranslationTable());
-          labelsreport = JSON.parse(labelsreport);
-  
-          var parameterReport = {};
-          parameterReport.variables = vm.variables;
-          parameterReport.pathreport = vm.pathreport;
-          parameterReport.labelsreport = labelsreport;
-          parameterReport.type = vm.type;
-  
-          // Dividir datareport en lotes de 10,000 registros
-          var batchSize = 250;
-          var totalBatches = Math.ceil(vm.datareport.length / batchSize);
-  
-          // Mostrar el modal de progreso
-          vm.ind = 1;
-          vm.total = totalBatches;
-          vm.porcent = 0;
+        var labelsreport = JSON.stringify($translate.getTranslationTable());
+        labelsreport = JSON.parse(labelsreport);
+
+        var parameterReport = {};
+        parameterReport.datareport = vm.datareport;
+        parameterReport.variables = vm.variables;
+        parameterReport.pathreport = vm.pathreport;
+        parameterReport.labelsreport = labelsreport;
+        parameterReport.type = vm.type;
+        vm.ind = 1;
+        vm.total = vm.datareport.length / 3;
+        vm.porcent = 0;
+        UIkit.modal("#modalprogress", {
+          bgclose: false,
+          escclose: false,
+          modal: false,
+        }).show();
+        var nIntervId;
+        nIntervId = setInterval(vm.flasheaTexto, 200);
+
+        reportadicional.reportRender(parameterReport).then(function (data) {
           UIkit.modal("#modalprogress", {
-              bgclose: false,
-              escclose: false,
-              modal: false,
-          }).show();
-  
-          // Función para actualizar el progreso
-          var nIntervId = setInterval(vm.flasheaTexto, 200);
-  
-          // Función para enviar un lote al servidor
-          function sendBatch(batchIndex) {
-              return new Promise(function (resolve, reject) {
-                  var start = batchIndex * batchSize;
-                  var end = start + batchSize;
-                  var batchData = vm.datareport.slice(start, end);
-  
-                  // Crear una copia de parameterReport con el lote actual
-                  var batchReport = Object.assign({}, parameterReport, { datareport: batchData });
-  
-                  // Enviar el lote al servidor
-                  reportadicional.reportRender(batchReport)
-                      .then(function (data) {
-                           // Actualizar el progreso
-                           vm.porcent = ((batchIndex + 1) / totalBatches) * 100;
-                           console.log(data);
-                           if (data == true) {
-                               resolve();
-                           }
-                      })
-                      .catch(function (error) {
-                          reject(error);
-                      });
-              });
-          }
-  
-          // Función para enviar todos los lotes en secuencia
-          function sendAllBatches() {
-              var currentBatch = 0;
-  
-              function next() {
-                  if (currentBatch < totalBatches) {
-                      sendBatch(currentBatch)
-                          .then(function () {
-                              currentBatch++;
-                              next(); // Enviar el siguiente lote
-                          })
-                          .catch(function (error) {
-                              throw error; // Detener si hay un error
-                          });
-                  } else {
-                      // Ocultar el modal de progreso cuando todos los lotes se hayan enviado
-                      UIkit.modal("#modalprogress").hide();
-                      vm.porcent = 0;
-                      clearInterval(nIntervId);
-                  }
-              }
-  
-              next(); // Iniciar el envío de lotes
-          }
-  
-          // Iniciar el envío de lotes
-          sendAllBatches();
-  
-          vm.pruebareport = false;
+            bgclose: false,
+            escclose: false,
+            modal: false,
+          }).hide();
+          vm.porcent = 0;
+          clearInterval(nIntervId);
+        });
+
+        vm.pruebareport = false;
       } else {
-          UIkit.modal("#modalReportError").show();
-          vm.pruebareport = false;
+        UIkit.modal("#modalReportError").show();
+        vm.pruebareport = false;
       }
-  }
-
-    // function dowload() {
-    //   if (vm.datareport.length > 0) {
-    //     var labelsreport = JSON.stringify($translate.getTranslationTable());
-    //     labelsreport = JSON.parse(labelsreport);
-    
-    //     var parameterReport = {};
-    //     parameterReport.datareport = vm.datareport;
-    //     parameterReport.variables = vm.variables;
-    //     parameterReport.pathreport = vm.pathreport;
-    //     parameterReport.labelsreport = labelsreport;
-    //     parameterReport.type = vm.type;
-    //     vm.ind = 1;
-    //     vm.total = vm.datareport.length / 3;
-    //     vm.porcent = 0;
-    //     UIkit.modal("#modalprogress", {
-    //       bgclose: false,
-    //       escclose: false,
-    //       modal: false,
-    //     }).show();
-    //     var nIntervId;
-    //     nIntervId = setInterval(vm.flasheaTexto, 200);
-        
-        
-    //     reportadicional.reportRender(parameterReport).then(function (data) {
-    //       UIkit.modal("#modalprogress", {
-    //         bgclose: false,
-    //         escclose: false,
-    //         modal: false,
-    //       }).hide();
-    //       vm.porcent = 0;
-    //       clearInterval(nIntervId);
-    //     });
-
-    //     vm.pruebareport = false;
-    //   } else {
-    //     UIkit.modal("#modalReportError").show();
-    //     vm.pruebareport = false;
-    //   }
-    // }
+    }
 
     function flasheaTexto() {
       vm.ind = vm.ind + 1;

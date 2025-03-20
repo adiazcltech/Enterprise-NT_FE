@@ -444,18 +444,18 @@
                                 selected: institution
                             },
                             'datesamplecollection': null,
-                            'aloT4': 1,
-                            'aloB4': 1,
-                            'aloT20': 1,
-                            'aloB20': 1,
-                            'aloT37': 1,
-                            'aloB37': 1,
-                            'aloDttT4': 1,
-                            'aloDttB4': 1,
-                            'aloDttT20': 1,
-                            'aloDttB20': 1,
-                            'aloDttT37': 1,
-                            'aloDttB37': 1
+                            'aloT4': 0,
+                            'aloB4': 0,
+                            'aloT20': 0,
+                            'aloB20': 0,
+                            'aloT37':  0,
+                            'aloB37':  0,
+                            'aloDttT4':  0,
+                            'aloDttB4':  0,
+                            'aloDttT20':  0,
+                            'aloDttB20':  0,
+                            'aloDttT37':  0,
+                            'aloDttB37':  0
                         }
                         vm.editreceiver(inData);
                     }
@@ -798,6 +798,7 @@
             vm.viewpreliminar = false;
             vm.formatDate = localStorageService.get('FormatoFecha');
             vm.score = [
+                { id: 0, name: 'N/A' },
                 { id: 1, name: 1 },
                 { id: 2, name: 2 },
                 { id: 4, name: 4 },
@@ -1029,18 +1030,18 @@
                 'institutions': {},
                 'receiver': {},
                 'datesamplecollection': null,
-                'aloT4': 1,
-                'aloB4': 1,
-                'aloT20': 1,
-                'aloB20': 1,
-                'aloT37': 1,
-                'aloB37': 1,
-                'aloDttT4': 1,
-                'aloDttB4': 1,
-                'aloDttT20': 1,
-                'aloDttB20': 1,
-                'aloDttT37': 1,
-                'aloDttB37': 1
+                'aloT4': 0,
+                'aloB4': 0,
+                'aloT20': 0,
+                'aloB20': 0,
+                'aloT37': 0,
+                'aloB37': 0,
+                'aloDttT4': 0,
+                'aloDttB4': 0,
+                'aloDttT20': 0,
+                'aloDttB20': 0,
+                'aloDttT37': 0,
+                'aloDttB37': 0
             }
             vm.requeriddonor = false;
             vm.requeridinstistution = false;
@@ -1060,18 +1061,18 @@
             vm.new.receiver = {};
             vm.new.receiverPatient = {};
             vm.new.datesamplecollection = null;
-            vm.new.aloT4 = 1;
-            vm.new.aloB4 = 1;
-            vm.new.aloT20 = 1;
-            vm.new.aloB20 = 1;
-            vm.new.aloT37 = 1;
-            vm.new.aloB37 = 1;
-            vm.new.aloDttT4 = 1;
-            vm.new.aloDttB4 = 1;
-            vm.new.aloDttT20 = 1;
-            vm.new.aloDttB20 = 1;
-            vm.new.aloDttT37 = 1;
-            vm.new.aloDttB37 = 1;        
+            vm.new.aloT4 = 0;
+            vm.new.aloB4 = 0;
+            vm.new.aloT20 = 0;
+            vm.new.aloB20 = 0;
+            vm.new.aloT37 = 0;
+            vm.new.aloB37 = 0;
+            vm.new.aloDttT4 = 0;
+            vm.new.aloDttB4 = 0;
+            vm.new.aloDttT20 = 0;
+            vm.new.aloDttB20 = 0;
+            vm.new.aloDttT37 = 0;
+            vm.new.aloDttB37 = 0;
         vm.requeriddonor = false;
         vm.requeridinstistution = false;
         vm.requeridreceiver = false;

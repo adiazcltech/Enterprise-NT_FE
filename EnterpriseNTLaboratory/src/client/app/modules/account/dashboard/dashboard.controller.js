@@ -336,7 +336,7 @@
           if (data.status === 200) {
             vm.listpagepermission = data.data;
             vm.trazability = localStorageService.get("Trazabilidad");
-            vm.phlebotomistake = localStorageService.get("Manejodepuntodetomamuestra")==='True';
+            vm.takesample = localStorageService.get("Manejodepuntodetomamuestra")==='True';
             vm.growtmicrobiology = localStorageService.get("SiembraMicrobiologia");
             vm.usersNotification = localStorageService.get("notificacionUsuarios");
             vm.FAC = localStorageService.get('FAC') && parseInt(localStorageService.get('Facturacion')) > 0;

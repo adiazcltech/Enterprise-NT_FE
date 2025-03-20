@@ -14,16 +14,16 @@
 
     .factory("settings", function () {
       return {
-      //  serviceUrl: 'http://192.168.1.192:8080/Enterprise_NT_Transplante/api',
-      //serviceUrl: 'http://192.168.1.6:8080/Enterprise_NT_PAT_PG/api',
+       serviceUrl: 'http://192.168.1.192:8080/Enterprise_NT_Transplante/api',
+     // serviceUrl: 'http://192.168.1.6:8080/Enterprise_NT_PAT_PG/api',
 
-        // serviceUrl: 'http://192.168.1.6:8080/Enterprise_NT_marly/api',
-        serviceUrl: 'http://192.168.2.7:9090/Enterprise_NT_DEV/api',
+     // serviceUrl: 'http://192.168.1.6:8080/Enterprise_NT_marly/api',
+     //   serviceUrl: 'http://localhost:8080/Enterprise_NT/api',
         // URL de htpu
-        //serviceUrl: "http://localhost:8080/Enterprise_NT/api",
+     //   serviceUrl: "http://localhost:8080/Enterprise_NT/api",
      
-        serviceUrlSocketIO: "http://localhost:5004",
-        serviceUrlApi: "http://192.168.2.7:5200/api",
+        serviceUrlSocketIO: "http://192.168.2.7:5001",
+        serviceUrlApi: "http://localhost:5200/api",
 
       };
     });

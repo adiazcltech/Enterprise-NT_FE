@@ -130,7 +130,6 @@
     vm.groupPackages = true;
     vm.generateDataRetake = generateDataRetake;
     vm.customFilter = customFilter;
-    vm.stickerAll = false;
 
 
     vm.openExamModal = function (exmabbrString) {
@@ -447,19 +446,21 @@
         if (value.select) {
           vm.canStickersOrder += value.cansticker;
           for (var i = 0; i < vm.listOrderHead.length; i++) {
-            if (vm.listOrderHead[i].order === value.orderNumber && vm.listOrderHead[i].idsample === value.idsample) {
+            if (vm.listOrderHead[i].orderNumber === value.idOrder) {
               vm.listSticker.push(vm.listOrderHead[i]);
               vm.totalCanStickers += value.cansticker;
               break;
             }
           }
           vm.arrayCanStickersOrder.push({
-            order: value.orderNumber,
+            order: value.idOrder,
             cansticker: vm.canStickersOrder + stickerAditionals,
           });
         }
       });
       vm.totalCanStickers += vm.listSticker.length * stickerAditionals;
+      //vm.totalorder = vm.listSticker.length-1;
+
     }
 
     function changeCheckSamples() {
@@ -475,52 +476,32 @@
 
     }
     function changeChecksticker() {
-      var stickerAditionals = vm.printAddLabel ? vm.stickerAditionals : 0;
+      var stickerAditionals = vm.printAddLabel
+        ? vm.stickerAditionals
+        : 0;
       vm.canStickersOrder = 0;
       vm.listSticker = [];
       vm.arrayCanStickersOrder = [];
       vm.totalCanStickers = 0;
-    
-      // Filtrar los elementos visibles en previewStickersOrder
-      var filteredStickers = vm.previewStickersOrder.filter(function (value) {
-        return vm.customFilter(value);
+      vm.previewStickersOrder.forEach(function (value) {
+        vm.canStickersOrder += value.cansticker;
+        value.select = vm.stickerAll;
+        vm.totalCanStickers += value.cansticker;
+        vm.arrayCanStickersOrder.push({
+          order: value.idOrder,
+          cansticker: vm.canStickersOrder + stickerAditionals,
+        });
       });
-    
-      // Recorrer los elementos filtrados
-      filteredStickers.forEach(function (value) {
-        value.select = vm.stickerAll; // Aplicar el estado de stickerAll a los elementos filtrados
-    
-        if (value.select) {
-          vm.canStickersOrder += value.cansticker;
-    
-          // Buscar el elemento correspondiente en listOrderHead
-          for (var i = 0; i < vm.listOrderHead.length; i++) {
-            if (vm.listOrderHead[i].order === value.orderNumber && vm.listOrderHead[i].idsample === value.idsample) {
-              vm.listSticker.push(vm.listOrderHead[i]); // Agregar a listSticker solo si está seleccionado
-              vm.totalCanStickers += value.cansticker;
-              break;
-            }
-          }
-    
-          // Agregar a arrayCanStickersOrder
-          vm.arrayCanStickersOrder.push({
-            order: value.orderNumber,
-            cansticker: vm.canStickersOrder + stickerAditionals,
-          });
-        }
-      });
-      if  (!vm.stickerAll) {
-        // Si no está seleccionado, restar la cantidad de stickers
-        vm.canStickersOrder = 0;
-        // igualar listorderhead a 0
-        vm.listSticker = [];
-        vm.arrayCanStickersOrder = [];
-        vm.totalCanStickers = 0;
-        
+      if (vm.stickerAll) {
+        vm.listSticker = vm.listOrderHead;
+
       }
-      // Añadir stickerAditionals si es necesario
       vm.totalCanStickers += vm.listSticker.length * stickerAditionals;
+      //vm.totalorder = vm.listSticker.length;
+      vm.arrayCanStickersOrder
+
     }
+
     function getArea() {
       auth = localStorageService.get("Enterprise_NT.authorizationData");
       return areaDS.getAreas(auth.authToken).then(function (dataArea) {
@@ -1597,11 +1578,8 @@
               vm.previewStickersOrder = [];
               vm.ind = 1;
               vm.canStickersOrder = 0;
-              vm.stickerAll = false;
               data.data.forEach(function (value, key) {
                 vm.previewStickersOrder.push({
-                  orderNumber: value.order,
-                  idsample: value.idsample,
                   ordersample:value.order + vm.separatorSample + value.codesample,
                   cansticker: value.cansticker,
                   namePatient: value.namePatient,
@@ -1661,7 +1639,6 @@
     }
 
     function directImpression() {
-      if (vm.listSticker !== undefined && vm.listSticker.length > 0) {
       var auth = localStorageService.get("Enterprise_NT.authorizationData");
     
       var printbarcodeheader = {
@@ -1687,24 +1664,22 @@
           if (bodyResponse.status === 200 && bodyResponse.data.length > 0) {
             vm.listSticker[vm.totalorder].printing = bodyResponse.data[0].printing;
     
-            var order = vm.listSticker[vm.totalorder].order;
+            var order = vm.listSticker[vm.totalorder].orderNumber;
             var can = _.filter(vm.arrayCanStickersOrder, function (v) {
               return v.order == order;
             })[0].cansticker;
     
             // Actualizar el progreso
-            if (vm.ind < vm.totalCanStickers) {
+            for (var i = 0; i < can; i++) {
               vm.ind++;
               vm.porcent = Math.round((vm.ind * 100) / vm.totalCanStickers);
             }
-            //}
     
             // Pasar a la siguiente orden si hay más
             vm.totalorder++;
             if (vm.totalorder < vm.listSticker.length) {
               vm.directImpression(); // Llamada recursiva para la siguiente orden
             } else {
-              vm.stickerAll = false;
               // Ocultar el modal de progreso al finalizar
               setTimeout(function () {
                 logger.success(
@@ -1747,14 +1722,6 @@
             }, 1000);
           }
         });
-      }
-      else {
-        UIkit.modal("#modalprogressprint", {
-          bgclose: false,
-          escclose: false,
-          modal: false,
-        }).hide();
-      }
     }
 
     function isAuthenticate() {
