@@ -134,8 +134,7 @@
                                             ng-options="obj.id as obj.name for obj in vm.typeresport"
                                             data-ng-model="vm.typeresport.id" ng-change="vm.changefilter()"></select>
                                     </div>
-                                    <div class="uk-width-4-5" style="padding-top: 4px;"
-                                        ng-show="vm.typeresport.id==0">
+                                    <div class="uk-width-4-5" style="padding-top: 4px;" ng-show="vm.typeresport.id==0">
                                         <div class="uk-input-group">
                                             <span class="uk-input-group-addon">
                                                 <img ng-src="images/search.png" />
@@ -161,8 +160,7 @@
                                         <input type="text" class="md-input label-fixed" data-ng-model="vm.record"
                                             id="txt_patientid" ng-keypress="vm.keyselectpatientid($event)" md-input />
                                     </div>
-                                    <div class="uk-width-1-4" style="padding-top: 4px;"
-                                        ng-show="vm.typeresport.id==1">
+                                    <div class="uk-width-1-4" style="padding-top: 4px;" ng-show="vm.typeresport.id==1">
                                         <label style="top: -6px; font-size: 12px;">{{'3315' | translate}}</label>
                                         <select class="md-input"
                                             ng-options="obj.id as obj.name for obj in vm.listSearchorgan"
@@ -192,8 +190,7 @@
                                             data-ng-model="vm.name2" ng-keypress="vm.keyselectpatientid($event)"
                                             md-input />
                                     </div>
-                                    <div class="uk-width-1-6" style="padding-top: 4px;"
-                                        ng-show="vm.typeresport.id==2">
+                                    <div class="uk-width-1-6" style="padding-top: 4px;" ng-show="vm.typeresport.id==2">
                                         <label style="top: -6px; font-size: 12px;">{{'3315' | translate}}</label>
                                         <select class="md-input"
                                             ng-options="obj.id as obj.name for obj in vm.listSearchorgan"
@@ -962,6 +959,34 @@
                                                 data-ng-model="vm.Test.receiverTestEntry.autoantibodies"></select>
                                         </div>
                                     </div>
+                                    <div class="uk-width-1-3" style="margin-top: 32px;">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img class="md-list-addon-icon material-icons md-24"
+                                                    ng-src="images/transplants/Eritoproyetina.png" />
+                                            </span>
+                                            <label
+                                                class="labelmd-inpu uk-text-truncate uk-text-bold">Eritropoyetina</label>
+                                            <select class="md-input md-inputsm label-fixed"
+                                                ng-options="obj.id as obj.name for obj in vm.Listeritropoyetina"
+                                                data-ng-model="vm.Test.receiverTestEntry.Eritoproyetina"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-3" style="margin-top: 24px;">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <img class="md-list-addon-icon material-icons md-24"
+                                                    ng-src="images/transplants/disease.png" />
+                                            </span>
+                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
+                                                style="color: #727272;font-size: 11px;">Fecha de inicio de la
+                                                diálisis</label>
+                                            <md-datepicker ng-model="vm.Test.receiverTestEntry.dialysisstartdate"
+                                                md-open-on-focus md-is-open="vm.isOpen98"
+                                                class="md-input md-inputsm label-fixed" md-max-date="vm.maxDate">
+                                            </md-datepicker>
+                                        </div>
+                                    </div>
                                     <div class="uk-width-1-1" style="margin-top: 24px;">
                                         <div class="uk-input-group">
                                             <span class="uk-input-group-addon">
@@ -972,8 +997,7 @@
                                             font-size: 12px;">{{'0597' | translate}}</label>
                                             <textarea
                                                 style="width: 100%;height: 90px;border-color: rgb(223, 223, 223);font-size: 11px;"
-                                                placeholder="" class="orderentrytab" tabindex="1009"
-                                                maxlength="4000"
+                                                placeholder="" class="orderentrytab" tabindex="1009" maxlength="4000"
                                                 data-ng-model="vm.Test.receiverTestEntry.observations"></textarea>
                                         </div>
                                     </div>
@@ -1427,875 +1451,121 @@
                         </md-tab>
                         <md-tab label="PRA Luminex - Cuantitativo">
                             <md-content class="md-padding contentscroll" style="padding: 0px;height: 100%;">
-                                <div class="uk-grid uk-grid-small">
-                                    <div class="uk-grid uk-grid-small" style="padding: 10px 0px;"
+                                <div class="uk-grid uk-grid-small" style="height: calc(100% - 66px);">
+                                    <div class="uk-grid uk-grid-small"
                                         ng-class="{'uk-width-1-1' : !vm.viewattachmentsCUANInput,'mediatable' : vm.viewattachmentsCUANInput}">
-                                        <fieldset class="fieldset" style="margin-left: 29px;width: 96%;">
-                                            <legend></legend>
-                                            <div class="uk-width-1-1 uk-grid uk-grid-small">
-                                                <div class="uk-width-5-10 uk-grid uk-grid-small">
-                                                    <div class="uk-width-1-3" style="margin-top: 16px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">{{'0538'
-                                                                | translate}} I</label>
-                                                            <select
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                id="classIPRA" name="classIPRA"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="17"
-                                                                ng-options="obj.id as obj.name for obj in vm.ListClaseI"
-                                                                ng-change="vm.chanclaseIcuanti()"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classI"></select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 10px;">
-                                                        <div class="uk-input-group" style="width: 100%;"
-                                                            ng-if="!vm.disabledcontrolCUAN">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">{{'0827' |
-                                                                translate}}</label>
-                                                            <input kendo-numeric-text-box
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="18"
-                                                                k-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIPercentage"
-                                                                k-min="0" k-max="100" class="inputkendo orderentrytab"
-                                                                maxlength="3" k-format="'n0'" style="width: 100%">
-                                                        </div>
-                                                        <ul class="md-list" ng-if="vm.disabledcontrolCUAN">
-                                                            <li style="padding: 0px;min-height: 35px;    border-bottom: 1px solid;
-                                                            border-color: #e6e6e6;">
-                                                                <div class="md-list-content">
-                                                                    <span
-                                                                        class="md-list-heading uk-text-truncate uk-text-bold"
-                                                                        style="color: #727272;
-                                                                    font-size: 11px;
-                                                                    font-weight: 700;">{{'0827' | translate}}</span>
-                                                                    <span
-                                                                        class="uk-text-small uk-text-muted">{{vm.Test.receiverPRALuminexCuantitativo.classIPercentage}}
-                                                                        %</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 10px;">
-                                                        <div class="uk-input-group" style="width: 100%;"
-                                                            ng-if="!vm.disabledcontrolCUAN">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">{{'3358' |
-                                                                translate}}</label>
-                                                            <input kendo-numeric-text-box
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="19"
-                                                                k-ng-model="vm.Test.receiverPRALuminexCuantitativo.classICorrected"
-                                                                k-min="0" k-max="100" class="inputkendo orderentrytab"
-                                                                maxlength="3" k-format="'n0'" style="width: 100%">
-                                                        </div>
-
-                                                        <ul class="md-list" ng-if="vm.disabledcontrolCUAN">
-                                                            <li
-                                                                style="padding: 0px;min-height: 35px;border-bottom: 1px solid;border-color: #e6e6e6;">
-                                                                <div class="md-list-content">
-                                                                    <span
-                                                                        class="md-list-heading uk-text-truncate uk-text-bold"
-                                                                        style="color: #727272;
-                                                                    font-size: 11px;
-                                                                    font-weight: 700;">{{'3358' | translate}}</span>
-                                                                    <span
-                                                                        class="uk-text-small uk-text-muted">{{vm.Test.receiverPRALuminexCuantitativo.classICorrected}}</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-5-10 uk-grid uk-grid-small">
-                                                    <div class="uk-width-1-1">
-                                                        <div class="md-btn-group"
-                                                            ng-model="vm.Test.receiverPRALuminexCuantitativo.classIType"
-                                                            data-uk-button-radio="{target:'.md-btn'}"
-                                                            style="width: 100%;">
-                                                            <button ng-disabled="vm.disabledcontrolCUAN"
-                                                                ng-click="vm.Test.receiverPRALuminexCuantitativo.classIType = '1'"
-                                                                ng-class="{'uk-active': vm.Test.receiverPRALuminexCuantitativo.classIType === '1','md-bg-blue-grey-100': vm.disabledcontrolCUAN}"
-                                                                class="md-btn md-btn-wave waves-effect md-btn md-btn-primary waves-button "
-                                                                value="1" style="width: 56%">
-                                                                {{'3351' | translate}}</button>
-                                                            <button ng-disabled="vm.disabledcontrolCUAN"
-                                                                ng-click="vm.Test.receiverPRALuminexCuantitativo.classIType = '2'"
-                                                                ng-class="{'uk-active': vm.Test.receiverPRALuminexCuantitativo.classIType === '2','md-bg-blue-grey-100': vm.disabledcontrolCUAN}"
-                                                                class="md-btn md-btn-wave waves-effect md-btn md-btn-primary waves-button"
-                                                                value="2" style="width: 44%">
-                                                                {{'3352' | translate}}</button>
-                                                        </div>
-                                                        <div class="uk-grid uk-grid-small">
-                                                            <div class="uk-width-5-10 uk-text-center">
-                                                                <label
-                                                                    ng-if="vm.Test.receiverPRALuminexCuantitativo.classIType == 1"
-                                                                    class="uk-text-muted uk-text-bold uk-text-small">{{'3353'
-                                                                    | translate}}</label>
-                                                                <label
-                                                                    ng-if="vm.Test.receiverPRALuminexCuantitativo.classIType == 2"
-                                                                    class="uk-text-muted uk-text-bold uk-text-small">{{'3354'
-                                                                    | translate}}</label>
-
-                                                            </div>
-                                                            <div class="uk-width-5-10 uk-text-center">
-                                                                <label
-                                                                    ng-if="vm.Test.receiverPRALuminexCuantitativo.classIType == 1"
-                                                                    class="uk-text-muted uk-text-bold uk-text-small">{{'3355'
-                                                                    | translate}}</label>
-
-                                                                <label
-                                                                    ng-if="vm.Test.receiverPRALuminexCuantitativo.classIType == 2"
-                                                                    class="uk-text-muted uk-text-bold uk-text-small">{{'3356'
-                                                                    | translate}}</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-5-10 uk-grid uk-grid-small"
-                                                    style="margin-top: 0px;">
-                                                    <div class="uk-width-1-1">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;
-                                                    font-size: 12px;">{{'0597' | translate}}</label>
-                                                            <textarea
-                                                                style="width: 99%;height: 100px;border-color: rgb(223, 223, 223);font-size: 11px;"
-                                                                placeholder="" class="orderentrytab" tabindex="20"
-                                                                maxlength="4000"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIObservation"
-                                                                ng-disabled="vm.disabledcontrolCUAN"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-5-10 uk-grid uk-grid-small">
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">A*:</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="21"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIUnacceptableA"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">A*:</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="22"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAcceptableA"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">B*:</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="23"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIUnacceptableB"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">B*:</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="24"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAcceptableB"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">C*:</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="25"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIUnacceptableC"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">C*:</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="26"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAcceptableC"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="uk-width-1-2" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/clipboard.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'0538' |
+                                                    translate}} I</label>
+                                                <select class="md-input md-inputsm label-fixed orderentrytab"
+                                                    id="PRALuminexCualitativo" name="PRALuminexCualitativo"
+                                                    ng-disabled="vm.disabledcontrolCUAN" tabindex="122"
+                                                    ng-options="obj.id as obj.name for obj in vm.ListClase"
+                                                    data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classI"></select>
                                             </div>
-                                        </fieldset>
-                                        <fieldset class="fieldset" style="margin-left: 29px;
-                                        width: 96%;">
-                                            <legend class="uk-text-bold" style="color: #727272;">{{'3357' | translate}}:
-                                            </legend>
-                                            <div class="uk-width-1-1" style="margin-top: 16px;">
-                                                <div class="uk-grid uk-grid-small">
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                ALELO HLA-A*</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="27"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAleloHLAA1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-A* INMUNIZADOR</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="28"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIEpletasHLAAImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-B*</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="29"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAleloHLAB1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                ALELO HLA-A*</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="30"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAleloHLAA2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-A* INMUNIZADOR</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="31"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIEpletasHLAAImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-B*</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="32"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAleloHLAB2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-B* INMUNIZADOR</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="33"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIEpletasHLABImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-C*</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="34"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAleloHLAC1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-C* INMUNIZADOR</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="35"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIEpletasHLACImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-B* INMUNIZADOR</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="36"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIEpletasHLABImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-C*</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="37"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIAleloHLAC2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-C* INMUNIZADOR</label>
-                                                            <input type="text" maxlength="300"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="38"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIEpletasHLACImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="uk-width-1-2" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/clipboard.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'0538' |
+                                                    translate}} II</label>
+                                                <select class="md-input md-inputsm label-fixed orderentrytab"
+                                                    ng-disabled="vm.disabledcontrolCUAN" tabindex="123"
+                                                    ng-options="obj.id as obj.name for obj in vm.ListClase"
+                                                    data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classII"></select>
                                             </div>
-                                        </fieldset>
-                                        <fieldset class="fieldset" style="margin-left: 29px;
-                                        width: 96%;">
-                                            <legend></legend>
-                                            <div class="uk-width-1-1 uk-grid uk-grid-small">
-                                                <div class="uk-width-5-10 uk-grid uk-grid-small"
-                                                    style="margin-top: 15px;">
-                                                    <div class="uk-width-1-3" style="margin-top: 6px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">{{'0538'
-                                                                | translate}} II</label>
-                                                            <select
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="39"
-                                                                ng-options="obj.id as obj.name for obj in vm.ListClaseI"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classII"></select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;"
-                                                            ng-if="!vm.disabledcontrolCUAN">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">{{'0827' |
-                                                                translate}}</label>
-                                                            <input kendo-numeric-text-box
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="40"
-                                                                k-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIPercentage"
-                                                                k-min="0" k-max="100" class="inputkendo orderentrytab"
-                                                                maxlength="3" k-format="'n0'" style="width: 100%">
-                                                        </div>
-                                                        <ul class="md-list" ng-if="vm.disabledcontrolCUAN">
-                                                            <li style="padding: 0px;min-height: 35px;    border-bottom: 1px solid;
-                                                            border-color: #e6e6e6;">
-                                                                <div class="md-list-content">
-                                                                    <span
-                                                                        class="md-list-heading uk-text-truncate uk-text-bold"
-                                                                        style="color: #727272;
-                                                                    font-size: 11px;
-                                                                    font-weight: 700;">{{'0827' | translate}}</span>
-                                                                    <span
-                                                                        class="uk-text-small uk-text-muted">{{vm.Test.receiverPRALuminexCuantitativo.classIIPercentage}}
-                                                                        %</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;"
-                                                            ng-if="!vm.disabledcontrolCUAN">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">{{'3358' |
-                                                                translate}}</label>
-                                                            <input kendo-numeric-text-box
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="41"
-                                                                k-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIICorrected"
-                                                                k-min="0" k-max="100" class="inputkendo orderentrytab"
-                                                                maxlength="3" k-format="'n0'" style="width: 100%">
-                                                        </div>
-                                                        <ul class="md-list" ng-if="vm.disabledcontrolCUAN">
-                                                            <li style="padding: 0px;min-height: 35px;    border-bottom: 1px solid;
-                                                            border-color: #e6e6e6;">
-                                                                <div class="md-list-content">
-                                                                    <span
-                                                                        class="md-list-heading uk-text-truncate uk-text-bold"
-                                                                        style="color: #727272;
-                                                                    font-size: 11px;
-                                                                    font-weight: 700;">{{'3358' | translate}}</span>
-                                                                    <span
-                                                                        class="uk-text-small uk-text-muted">{{vm.Test.receiverPRALuminexCuantitativo.classIICorrected}}</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="uk-width-1-1" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;
-                                                    font-size: 12px;">{{'0597' | translate}}</label>
-                                                            <textarea
-                                                                style="width: 100%;height: 115px;border-color: rgb(223, 223, 223);font-size: 11px;"
-                                                                placeholder="" class="orderentrytab" tabindex="42"
-                                                                maxlength="4000"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIObservation"
-                                                                ng-disabled="vm.disabledcontrolCUAN"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-5-10 uk-grid uk-grid-small"
-                                                    style="margin-top: 15px;">
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DRB1*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="43"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDRB11"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DRB1*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="44"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDRB12"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DQA*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="45"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDQA1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DQA*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="46"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDQA2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DQB*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="47"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDQB1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DQB*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="48"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDQB2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DPA*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="49"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDPA1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DPA*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="50"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDPA2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DPB*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="51"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDPB1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-5-10">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">DPB*:</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="52"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIDPB2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        </div>
+
+
+                                        <div class="uk-width-1-2" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/pie-chart.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold"
+                                                    style="color: #727272;font-size: 11px;">Porcentaje PRA clase I :</label>
+                                                <input kendo-numeric-text-box ng-disabled="vm.disabledcontrolCUAN"
+                                                    tabindex="18"
+                                                    k-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIPercentage"
+                                                    k-min="0" k-max="100" class="inputkendo orderentrytab" maxlength="3"
+                                                    k-format="'n0'" style="width: 100%">
                                             </div>
-                                        </fieldset>
-                                        <fieldset class="fieldset" style="margin-left: 29px;
-                                        width: 96%;">
-                                            <legend class="uk-text-bold" style="color: #727272;">{{'3357' | translate}}:
-                                            </legend>
-                                            <div class="uk-width-1-1" style="margin-top: 16px;">
-                                                <div class="uk-grid uk-grid-small">
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                ALELO HLA-DRB1*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="53"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADRB11"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DRB1* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="54"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADRB1Immunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-DQA*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="55"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADQA1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                ALELO HLA-DRB1*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="56"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADRB12"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DRB1* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="57"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADRB1Immunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-DQA*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                maxlength="300" ng-disabled="vm.disabledcontrolCUAN"
-                                                                tabindex="58"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADQA2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                EPLETAS HLA-DQA* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="59"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADQAImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                ALELO HLA-DQB*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="60"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADQB1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DQB* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="61"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADQBImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DQA* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="62"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADQAImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                ALELO HLA-DQB*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="63"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADQB2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DQB* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="64"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADQBImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div>
-
-                                                   <!--  <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-DPA*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="65"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADPA1"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                  <!--   <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">
-                                                                EPLETAS HLA-DPA* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="66"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADPAImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                  <!--   <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-DPB*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="67"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADPB1"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                  <!--   <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-DPA*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="68"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADPA2"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                 <!--    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DPA* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="69"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADPAImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                   <!--  <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">ALELO
-                                                                HLA-DPB*</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="70"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIAleloHLADPB2"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                   <!--  <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DPB* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="71"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADPBImmunizer1"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3348'
-                                                                | translate}}</label>
-                                                            <md-datepicker
-                                                                ng-model="vm.Test.receiverPRALuminexCuantitativo.datesamplecollection"
-                                                                md-open-on-focus md-is-open="vm.dateHLA1" tabindex="72"
-                                                                ng-disabled="vm.disabledcontrolCUAN"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                md-max-date="vm.maxDate">
-                                                            </md-datepicker>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3349'
-                                                                | translate}}</label>
-                                                            <md-datepicker
-                                                                ng-model="vm.Test.receiverPRALuminexCuantitativo.trialdate"
-                                                                tabindex="73" ng-disabled="vm.disabledcontrolCUAN"
-                                                                md-open-on-focus md-is-open="vm.dateHLA2"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                md-max-date="vm.maxDate">
-                                                            </md-datepicker>
-                                                        </div>
-                                                    </div>
-                                                   <!--  <div class="uk-width-1-3" style="margin-top: 15px;">
-                                                        <div class="uk-input-group" style="width: 100%;">
-                                                            <label
-                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
-                                                                HLA-DPB* INMUNIZADOR</label>
-                                                            <input type="text"
-                                                                class="md-input md-inputsm label-fixed orderentrytab"
-                                                                ng-disabled="vm.disabledcontrolCUAN" tabindex="74"
-                                                                maxlength="300"
-                                                                data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIEpletasHLADPBImmunizer2"
-                                                                md-input />
-                                                        </div>
-                                                    </div> -->
-                                                </div>
+                                        </div>
+                                        <div class="uk-width-1-2" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/pie-chart.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold"
+                                                    style="color: #727272;font-size: 11px;">Porcentaje PRA clase II :</label>
+                                                <input kendo-numeric-text-box ng-disabled="vm.disabledcontrolCUAN"
+                                                    tabindex="18"
+                                                    k-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIIPercentage"
+                                                    k-min="0" k-max="100" class="inputkendo orderentrytab" maxlength="3"
+                                                    k-format="'n0'" style="width: 100%">
                                             </div>
-                                        </fieldset>
+                                        </div>
+
+
+                                        <div class="uk-width-1-1" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/observation.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold" style="color: #727272;
+                                                font-size: 12px;">{{'0597' | translate}}</label>
+                                                <textarea
+                                                    style="width: 100%;height: 100px;border-color: rgb(223, 223, 223);font-size: 11px;"
+                                                    placeholder="" class="orderentrytab" tabindex="124" maxlength="4000"
+                                                    data-ng-model="vm.Test.receiverPRALuminexCuantitativo.classIObservation"
+                                                    ng-disabled="vm.disabledcontrolCUAN"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-2" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/blood-tube.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3348' |
+                                                    translate}}</label>
+                                                <md-datepicker
+                                                    ng-model="vm.Test.receiverPRALuminexCuantitativo.datesamplecollection"
+                                                    md-open-on-focus md-is-open="vm.dateHLA1" tabindex="125"
+                                                    ng-disabled="vm.disabledcontrolCUAN"
+                                                    class="md-input md-inputsm label-fixed orderentrytab"
+                                                    md-max-date="vm.maxDate">
+                                                </md-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-1-2" style="margin-top: 24px;">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <img class="md-list-addon-icon material-icons md-24"
+                                                        ng-src="images/transplants/practice.png" />
+                                                </span>
+                                                <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3349' |
+                                                    translate}}</label>
+                                                <md-datepicker
+                                                    ng-model="vm.Test.receiverPRALuminexCuantitativo.trialdate"
+                                                    md-open-on-focus md-is-open="vm.ispra5" tabindex="126"
+                                                    ng-disabled="vm.disabledcontrolCUAN"
+                                                    class="md-input md-inputsm label-fixed orderentrytab"
+                                                    md-max-date="vm.maxDate">
+                                                </md-datepicker>
+                                            </div>
+                                        </div>
                                         <div class="uk-width-1-1" style="margin-top: 11px;margin-left: 19px;"
                                             ng-if="vm.saveattachmentsCUANInput.filename!==undefined && vm.disablednewCUAN || vm.saveattachmentsCUANInput.filename!==undefined && vm.new">
                                             <div class="md-card md-card-primary"
@@ -2420,7 +1690,8 @@
                                                         <div class="uk-input-group" style="width: 100%;"
                                                             ng-if="!vm.disabledcontrolAN">
                                                             <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">cPRA Clase I</label>
+                                                                style="color: #727272;font-size: 11px;">cPRA Clase
+                                                                I</label>
                                                             <input kendo-numeric-text-box
                                                                 ng-disabled="vm.disabledcontrolAN" tabindex="76"
                                                                 k-ng-model="vm.Test.receiverPRALuminexAntigeno.classIPercentage"
@@ -2447,7 +1718,8 @@
                                                         <div class="uk-input-group" style="width: 100%;"
                                                             ng-if="!vm.disabledcontrolAN">
                                                             <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">cPRA global</label>
+                                                                style="color: #727272;font-size: 11px;">cPRA
+                                                                global</label>
                                                             <input kendo-numeric-text-box
                                                                 ng-disabled="vm.disabledcontrolAN" tabindex="77"
                                                                 k-ng-model="vm.Test.receiverPRALuminexAntigeno.classICorrected"
@@ -2775,7 +2047,8 @@
                                                         <div class="uk-input-group" style="width: 100%;"
                                                             ng-if="!vm.disabledcontrolAN">
                                                             <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">cPRA Clase II</label>
+                                                                style="color: #727272;font-size: 11px;">cPRA Clase
+                                                                II</label>
                                                             <input kendo-numeric-text-box
                                                                 ng-disabled="vm.disabledcontrolAN" tabindex="98"
                                                                 k-ng-model="vm.Test.receiverPRALuminexAntigeno.classIIPercentage"
@@ -2802,7 +2075,8 @@
                                                         <div class="uk-input-group" style="width: 100%;"
                                                             ng-if="!vm.disabledcontrolAN">
                                                             <label class="labelmd-inpu uk-text-truncate uk-text-bold"
-                                                                style="color: #727272;font-size: 11px;">cPRA global</label>
+                                                                style="color: #727272;font-size: 11px;">cPRA
+                                                                global</label>
                                                             <input kendo-numeric-text-box
                                                                 ng-disabled="vm.disabledcontrolAN" tabindex="99"
                                                                 k-ng-model="vm.Test.receiverPRALuminexAntigeno.classIICorrected"
@@ -3098,7 +2372,7 @@
                                                                 md-input />
                                                         </div>
                                                     </div>
-<!-- 
+                                                    <!-- 
                                                     <div class="uk-width-1-3" style="margin-top: 15px;">
                                                         <div class="uk-input-group" style="width: 100%;">
                                                             <label
@@ -3184,7 +2458,7 @@
                                                     </div> -->
 
                                                     <div class="uk-width-1-2" style="margin-top: 15px;">
-                                                       <!--  <div class="uk-input-group" style="width: 100%;">
+                                                        <!--  <div class="uk-input-group" style="width: 100%;">
                                                             <label
                                                                 class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3348'
                                                                 | translate}}</label>
@@ -3201,9 +2475,11 @@
                                                                 <img class="md-list-addon-icon material-icons md-24"
                                                                     ng-src="images/transplants/blood-tube.png" />
                                                             </span>
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3348' |
+                                                            <label
+                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3348'
+                                                                |
                                                                 translate}}</label>
-                                                                <md-datepicker
+                                                            <md-datepicker
                                                                 ng-model="vm.Test.receiverPRALuminexAntigeno.datesamplecollection"
                                                                 md-open-on-focus md-is-open="vm.HLA1" tabindex="130"
                                                                 ng-disabled="vm.disabledcontrolAN"
@@ -3212,9 +2488,9 @@
                                                             </md-datepicker>
                                                         </div>
                                                     </div>
-                                                   
+
                                                     <div class="uk-width-1-2" style="margin-top: 15px;">
-                                                       <!--  <div class="uk-input-group" style="width: 100%;">
+                                                        <!--  <div class="uk-input-group" style="width: 100%;">
                                                             <label
                                                                 class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3349'
                                                                 | translate}}</label>
@@ -3231,9 +2507,11 @@
                                                                 <img class="md-list-addon-icon material-icons md-24"
                                                                     ng-src="images/transplants/practice.png" />
                                                             </span>
-                                                            <label class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3349' |
+                                                            <label
+                                                                class="labelmd-inpu uk-text-truncate uk-text-bold">{{'3349'
+                                                                |
                                                                 translate}}</label>
-                                                                <md-datepicker
+                                                            <md-datepicker
                                                                 ng-model="vm.Test.receiverPRALuminexAntigeno.trialdate"
                                                                 tabindex="131" ng-disabled="vm.disabledcontrolAN"
                                                                 md-open-on-focus md-is-open="vm.HLA2"
@@ -3242,7 +2520,7 @@
                                                             </md-datepicker>
                                                         </div>
                                                     </div>
-                                               <!--      <div class="uk-width-1-3" style="margin-top: 15px;">
+                                                    <!--      <div class="uk-width-1-3" style="margin-top: 15px;">
                                                         <div class="uk-input-group" style="width: 100%;">
                                                             <label
                                                                 class="labelmd-inpu uk-text-truncate uk-text-bold">EPLETAS
@@ -4123,6 +3401,140 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="timeline" ng-if="vm.LististoricalCUAN.length!==0">
+                            <div class="timeline_item" ng-repeat="historica in vm.LististoricalCUAN">
+                                <div class="timeline_icon">
+                                    <img class="md-image-timeline" ng-src="images/transplants/calendar.png" alt="" />
+                                </div>
+                                <div class="timeline_date" style="width: 67px;font-size: 12px;line-height: 15px">
+                                    <span>{{historica.datecreated | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+                                </div>
+                                <div class="timeline_content">
+                                    <div class="timeline_content_addon" style="max-width: 99%;">
+                                        <div class="uk-grid uk-grid-small" style="width: 100%">
+                                            <div class="uk-grid uk-grid-small"
+                                                ng-class="{'uk-width-1-1': historica.attachment.length===0,'uk-width-5-10': historica.attachment.length!==0}">
+                                                <div class="uk-width-1-2">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/1.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'0538'
+                                                                    | translate}} I</span>
+                                                                <span class="md-list-heading uk-text-break">
+                                                                    {{historica.classI}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/pie-chart.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">Porcentaje PRA clase I :</span>
+                                                                <span class="md-list-heading uk-text-break">
+                                                                    {{historica.classIPercentage}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/blood-tube.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3348'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading uk-text-break">
+                                                                    {{historica.datesamplecollection |
+                                                                    date:'dd/MM/yyyy'}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="uk-width-1-2">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/2.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'0538'
+                                                                    | translate}} II</span>
+                                                                <span class="md-list-heading uk-text-break">
+                                                                    {{historica.classII}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/pie-chart.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">Porcentaje PRA clase II :</span>
+                                                                <span class="md-list-heading uk-text-break">
+                                                                    {{historica.classIIPercentage}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/practice.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'3349'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading">
+                                                                    {{historica.trialdate| date:'dd/MM/yyyy'}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="uk-width-1-1" style="box-sizing: border-box;
+                                                border-top: 1px solid rgba(0, 0, 0, 0.12);">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li class="patient-demo-item">
+                                                            <div class="md-list-addon-element patient-addon-element">
+                                                                <img class="md-list-addon-icon material-icons md-22"
+                                                                    ng-src="images/transplants/observation.png" />
+                                                            </div>
+                                                            <div class="md-list-content patient-list-content">
+                                                                <span
+                                                                    class="uk-text-small uk-text-muted patient-list-content">{{'0597'
+                                                                    | translate}}</span>
+                                                                <span class="md-list-heading uk-text-break">
+                                                                    {{historica.observation}}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-5-10" ng-if="historica.attachment.length!==0">
+                                                <embed id="{{historica.id}}"
+                                                    ng-attr-type="{{historica.attachment.fileType}}" scrolling="auto"
+                                                    width="100%" height="100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="timeline" ng-if="vm.LististoricalCIME.length!==0">
                             <div class="timeline_item" ng-repeat="historica in vm.LististoricalCIME">
                                 <div class="timeline_icon">
@@ -4406,8 +3818,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="timeline" ng-if="vm.LististoricalCUAN.length!==0">
-                            <div class="timeline_item" ng-repeat="historica in vm.LististoricalCUAN">
+                        <div class="timeline" ng-if="vm.LististoricalAN.length!==0">
+                            <div class="timeline_item" ng-repeat="historica in vm.LististoricalAN">
                                 <div class="timeline_icon">
                                     <img class="md-image-timeline" ng-src="images/transplants/calendar.png" alt="" />
                                 </div>
@@ -4435,8 +3847,8 @@
                                                                 </li>
                                                                 <li>
                                                                     <div class="md-list-content">
-                                                                        <span
-                                                                            class="uk-text-small uk-text-muted">cPRA Clase I</span>
+                                                                        <span class="uk-text-small uk-text-muted">cPRA
+                                                                            Clase I</span>
                                                                         <span
                                                                             class="md-list-heading">{{historica.classIPercentage}}%</span>
                                                                     </div>
@@ -4702,8 +4114,8 @@
                                                                 </li>
                                                                 <li>
                                                                     <div class="md-list-content">
-                                                                        <span
-                                                                            class="uk-text-small uk-text-muted">cPRA Clase II</span>
+                                                                        <span class="uk-text-small uk-text-muted">cPRA
+                                                                            Clase II</span>
                                                                         <span
                                                                             class="md-list-heading">{{historica.classIIPercentage}}%</span>
                                                                     </div>
@@ -4881,7 +4293,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIEpletasHLADQAImmunizer2}}</span>
                                                                         </div>
                                                                     </li>
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">ALELO
@@ -4890,7 +4302,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIAleloHLADPA1}}</span>
                                                                         </div>
                                                                     </li> -->
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">ALELO
@@ -4899,7 +4311,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIAleloHLADPA2}}</span>
                                                                         </div>
                                                                     </li> -->
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">EPLETAS
@@ -4908,7 +4320,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIEpletasHLADPBImmunizer1}}</span>
                                                                         </div>
                                                                     </li> -->
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">EPLETAS
@@ -4966,7 +4378,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIEpletasHLADPAImmunizer1}}</span>
                                                                         </div>
                                                                     </li> -->
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">EPLETAS
@@ -5033,7 +4445,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIEpletasHLADQBImmunizer2}}</span>
                                                                         </div>
                                                                     </li>
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">ALELO
@@ -5042,7 +4454,7 @@
                                                                                 class="md-list-heading uk-text-break">{{historica.classIIAleloHLADPB1}}</span>
                                                                         </div>
                                                                     </li> -->
-                                                                   <!--  <li>
+                                                                    <!--  <li>
                                                                         <div class="md-list-content">
                                                                             <span
                                                                                 class="uk-text-small uk-text-muted">ALELO

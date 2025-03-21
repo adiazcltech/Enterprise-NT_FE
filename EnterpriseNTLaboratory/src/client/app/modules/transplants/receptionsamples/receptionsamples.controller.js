@@ -387,7 +387,8 @@
                                 item.donorReceiverBasic.birthday = item.donorReceiverBasic.birthday === undefined ? null : moment(item.donorReceiverBasic.birthday).format();
 
                                 item.receiverTransplant.dateTransplant = item.receiverTransplant.dateTransplant === undefined ? null : moment(item.receiverTransplant.dateTransplant).format();
-
+                                
+                                item.receiverTestEntry.dialysisstartdate = item.receiverTestEntry.dialysisstartdate === undefined ? null : moment(item.receiverTestEntry.dialysisstartdate).format();
                                 item.receiverTestEntry.transfusiondate = item.receiverTestEntry.transfusiondate === undefined ? null : moment(item.receiverTestEntry.transfusiondate).format();
                                 item.receiverTestEntry.previoustransplantdate = item.receiverTestEntry.previoustransplantdate === undefined ? null : moment(item.receiverTestEntry.previoustransplantdate).format();
                                 item.receiverTestEntry.dateinclusionwaitinglist = item.receiverTestEntry.dateinclusionwaitinglist === undefined ? null : moment(item.receiverTestEntry.dateinclusionwaitinglist).format();
@@ -862,7 +863,17 @@
                 id: $filter('translate')('3332'),
                 name: $filter('translate')('3332')
             }
-            ]
+            ] 
+            //Lista de Eritropoyetina
+            vm.Listeritropoyetina = [{
+                id: $filter('translate')('0219'),
+                name: $filter('translate')('0219')
+            },
+            {
+                id: $filter('translate')('0220'),
+                name: $filter('translate')('0220')
+            }
+            ] 
 
             vm.typeresport = [
                 {
@@ -1458,6 +1469,7 @@
             if (vm.saveattachmentsCIMEInput.filename !== undefined) {
                 vm.Test.receiverFlowCytometry.attachment = vm.saveattachmentsCIMEInput;
             }
+            vm.Test.receiverTestEntry.dialysisstartdate = vm.Test.receiverTestEntry.dialysisstartdate == null ? null : new Date(moment(vm.Test.receiverTestEntry.dialysisstartdate).format()).getTime();
             vm.Test.receiverTestEntry.transfusiondate = vm.Test.receiverTestEntry.transfusiondate == null ? null : new Date(moment(vm.Test.receiverTestEntry.transfusiondate).format()).getTime();
             vm.Test.receiverTestEntry.previoustransplantdate = vm.Test.receiverTestEntry.previoustransplantdate === null ? null : new Date(moment(vm.Test.receiverTestEntry.previoustransplantdate).format()).getTime();
             vm.Test.receiverTestEntry.dateinclusionwaitinglist = vm.Test.receiverTestEntry.dateinclusionwaitinglist === null ? null : new Date(moment(vm.Test.receiverTestEntry.dateinclusionwaitinglist).format()).getTime();
@@ -2025,9 +2037,9 @@
                                     data.attachment = [];
                                 }
                             });
-                            vm.LististoricalCUAN = listhytoric;
+                            vm.LististoricalAN = listhytoric;
                             setTimeout(function () {
-                                vm.LististoricalCUAN.forEach(function (data) {
+                                vm.LististoricalAN.forEach(function (data) {
                                     if (data.attachment.length !== 0) {
                                         var elemento = document.getElementById(data.id);
                                         elemento.src = data.attachment.base64;
@@ -2216,7 +2228,8 @@
                             attachmentsAN.src = 'data:' + vm.Test.receiverPRALuminexAntigeno.attachment.fileType + ';base64,' + vm.Test.receiverPRALuminexAntigeno.attachment.file;
                             attachmentsAN.type = vm.Test.receiverPRALuminexAntigeno.attachment.fileType;
                         }
-
+                        
+                        vm.Test.receiverTestEntry.dialysisstartdate = vm.Test.receiverTestEntry.dialysisstartdate === undefined ? null : moment(vm.Test.receiverTestEntry.dialysisstartdate).format();
                         vm.Test.receiverTestEntry.transfusiondate = vm.Test.receiverTestEntry.transfusiondate === undefined ? null : moment(vm.Test.receiverTestEntry.transfusiondate).format();
                         vm.Test.receiverTestEntry.previoustransplantdate = vm.Test.receiverTestEntry.previoustransplantdate === undefined ? null : moment(vm.Test.receiverTestEntry.previoustransplantdate).format();
                         vm.Test.receiverTestEntry.dateinclusionwaitinglist = vm.Test.receiverTestEntry.dateinclusionwaitinglist === undefined ? null : moment(vm.Test.receiverTestEntry.dateinclusionwaitinglist).format();
@@ -2325,6 +2338,7 @@
                             vm.Test.receiverPRALuminexAntigeno.attachment = { 'src': '' }
                         }
 
+                        vm.Test.receiverTestEntry.dialysisstartdate = vm.Test.receiverTestEntry.dialysisstartdate === undefined ? null : moment(vm.Test.receiverTestEntry.dialysisstartdate).format(vm.formatDate.toUpperCase());
                         vm.Test.receiverTestEntry.transfusiondate = vm.Test.receiverTestEntry.transfusiondate === undefined ? null : moment(vm.Test.receiverTestEntry.transfusiondate).format(vm.formatDate.toUpperCase());
                         vm.Test.receiverTestEntry.previoustransplantdate = vm.Test.receiverTestEntry.previoustransplantdate === undefined ? null : moment(vm.Test.receiverTestEntry.previoustransplantdate).format(vm.formatDate.toUpperCase());
                         vm.Test.receiverTestEntry.dateinclusionwaitinglist = vm.Test.receiverTestEntry.dateinclusionwaitinglist === undefined ? null : moment(vm.Test.receiverTestEntry.dateinclusionwaitinglist).format(vm.formatDate.toUpperCase());
